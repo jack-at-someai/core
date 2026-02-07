@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Animal Skill Tree — Life Trajectory Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Species Selector (like PoE2 class selector) -->
+  <div class="species-bar" id="speciesBar">
+    <div class="species-bar-inner">
+      <button class="species-btn active" data-species="pig" onclick="selectSpecies('pig')">
+        <span class="species-icon">&#x1F437;</span>
+        <span class="species-name">Swine</span>
+      </button>
+      <button class="species-btn" data-species="cattle" onclick="selectSpecies('cattle')">
+        <span class="species-icon">&#x1F404;</span>
+        <span class="species-name">Cattle</span>
+      </button>
+      <button class="species-btn" data-species="sheep" onclick="selectSpecies('sheep')">
+        <span class="species-icon">&#x1F411;</span>
+        <span class="species-name">Sheep</span>
+      </button>
+      <button class="species-btn" data-species="goat" onclick="selectSpecies('goat')">
+        <span class="species-icon">&#x1F410;</span>
+        <span class="species-name">Goat</span>
+      </button>
+      <button class="species-btn" data-species="horse" onclick="selectSpecies('horse')">
+        <span class="species-icon">&#x1F40E;</span>
+        <span class="species-name">Horse</span>
+      </button>
+    </div>
+    <div class="tree-controls">
+      <button class="control-btn" onclick="resetTree()" title="Reset allocations">&#x21BA; Reset</button>
+      <button class="control-btn" onclick="centerTree()" title="Center view">&#x25CE; Center</button>
+      <span class="point-counter" id="pointCounter">Age: Birth</span>
+    </div>
+  </div>
+
+  <!-- Main Canvas -->
+  <canvas id="treeCanvas"></canvas>
+
+  <!-- Info Panel (like PoE2 node tooltip) -->
+  <div class="info-panel" id="infoPanel">
+    <div class="info-panel-header">
+      <div class="info-panel-icon" id="infoPanelIcon"></div>
+      <div>
+        <h2 id="infoPanelTitle">Select a Node</h2>
+        <p class="info-panel-type" id="infoPanelType"></p>
+      </div>
+    </div>
+    <div class="info-panel-body" id="infoPanelBody">
+      <p class="info-hint">Click any node on the tree to see details and plan your animal's trajectory.</p>
+    </div>
+  </div>
+
+  <!-- Hover Tooltip -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <!-- Legend -->
+  <div class="legend" id="legend">
+    <div class="legend-title">Legend</div>
+    <div class="legend-item"><span class="legend-dot legend-dot-minor"></span> Minor Node</div>
+    <div class="legend-item"><span class="legend-dot legend-dot-notable"></span> Notable</div>
+    <div class="legend-item"><span class="legend-dot legend-dot-keystone"></span> Keystone</div>
+    <div class="legend-item"><span class="legend-line legend-line-allocated"></span> Allocated</div>
+    <div class="legend-item"><span class="legend-line legend-line-available"></span> Available</div>
+    <div class="legend-ring"></span> Age Ring</div>
+  </div>
+
+  <script src="tree-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

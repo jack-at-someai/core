@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ColorHunt Palette Scraper (Utility)</title>
+  <style>
+    body { font-family: monospace; max-width: 800px; margin: 2rem auto; padding: 1rem; }
+    button { padding: 8px 16px; font-size: 14px; cursor: pointer; }
+    textarea { width: 100%; height: 400px; margin-top: 1rem; font-size: 12px; }
+    .status { margin: 1rem 0; padding: 8px; background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>ColorHunt Palette Scraper</h1>
+  <p>This utility fetches popular palettes from ColorHunt and outputs them as a JS array for <code>palettes.js</code>.</p>
+  <p><strong>Note:</strong> Requires a CORS proxy. The app already includes 250 pre-embedded palettes.</p>
+
+  <label>CORS Proxy URL: <input type="text" id="proxy" value="https://corsproxy.io/?" style="width:300px"></label><br><br>
+  <label>Number of palettes: <input type="number" id="count" value="250" min="10" max="500"></label><br><br>
+  <button onclick="startScraping()">Start Scraping</button>
+
+  <div class="status" id="status">Ready.</div>
+  <textarea id="output" readonly placeholder="Output will appear here..."></textarea>
+
+  <script>
+    async function startScraping() {
+      const proxy = document.getElementById('proxy').value;
+      const targetCount = parseInt(document.getElementById('count').value);
+      const status = document.getElementById('status');
+      const output = document.getElementById('output');
+      const palettes = [];
+      let step = 0;
+
+      status.textContent = 'Scraping...';
+
+      while (palettes.length < targetCount) {
+        try {
+          const url = proxy + encodeURIComponent('https://colorhunt.co/php/feed.php');
+          const body = new URLSearchParams({ step: String(step), sort: 'popular', timeframe: 'All time' });
+          const resp = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body.toString()
+          });
+
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          const data = await resp.json();
+          if (!Array.isArray(data) || data.length === 0) break;
+
+          for (const item of data) {
+            if (palettes.length >= targetCount) break;
+            palettes.push({
+              code: item.code,
+              likes: parseInt(item.likes) || 0,
+              date: item.date || '2023-01-01'
+            });
+          }
+
+          status.textContent = `Fetched ${palettes.length} / ${targetCount} palettes (step ${step})...`;
+          step++;
+          await new Promise(r => setTimeout(r, 500)); // rate limit
+        } catch (err) {
+          status.textContent = `Error at step ${step}: ${err.message}. Got ${palettes.length} palettes.`;
+          break;
+        }
+      }
+
+      palettes.sort((a, b) => b.likes - a.likes);
+
+      const js = `const PALETTES = [\n${palettes.map(p =>
+        `  { code: "${p.code}", likes: ${p.likes}, date: "${p.date}" }`
+      ).join(',\n')}\n];\n`;
+
+      output.value = js;
+      status.textContent = `Done! ${palettes.length} palettes scraped. Copy the output into palettes.js.`;
+    }
+  </script>
+</body>
+</html>
