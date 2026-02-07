@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Na⁺/K⁺ ATPase — 3D Structural Visualization</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#060a14;color:#dde;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;height:100vh}
+#app{display:flex;height:100vh}
+#viewport{flex:1;position:relative;min-width:0}
+#viewport canvas{display:block}
+#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:#060a14;z-index:100;font-size:1.1rem;color:#4d96ff;transition:opacity .6s}
+#loading.hide{opacity:0;pointer-events:none}
+.panel{width:300px;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;
+  background:#0a0f1a;border-left:1px solid #151e30;flex-shrink:0}
+.card{background:#0d1320;border:1px solid #1a2438;border-radius:8px;padding:10px 12px}
+.card h2{font-size:.7rem;text-transform:uppercase;letter-spacing:1.4px;color:#4d96ff;margin-bottom:5px}
+.card p,.card li{font-size:.74rem;line-height:1.45;color:#8899aa}
+.card ul{padding-left:14px}.card li{margin-bottom:2px}
+.step-indicator{display:flex;gap:4px;margin-bottom:6px}
+.step-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:700;background:#141e30;border:2px solid #253050;color:#445;
+  transition:all .3s;cursor:pointer}
+.step-dot.active{background:#4d96ff;border-color:#4d96ff;color:#fff;box-shadow:0 0 8px rgba(77,150,255,.5)}
+.step-desc{font-size:.74rem;min-height:56px;color:#b0bcc8;line-height:1.4}
+.controls{display:flex;gap:5px;flex-wrap:wrap}
+.controls button{flex:1;min-width:70px;padding:6px;border-radius:6px;border:1px solid #253050;
+  background:#141e30;color:#a0b0c0;font-size:.68rem;cursor:pointer;transition:all .2s}
+.controls button:hover{background:#1e2e50;border-color:#4d96ff}
+.controls button.on{background:#4d96ff;color:#fff;border-color:#4d96ff}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:.65rem;color:#7888}
+.legend-swatch{width:10px;height:10px;border-radius:50%}
+.stoich{text-align:center;font-size:.8rem;padding:3px 0;color:#ffd93d;font-weight:600}
+.toggle-row{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+.toggle-row label{display:flex;align-items:center;gap:3px;font-size:.65rem;color:#7888;cursor:pointer}
+.toggle-row input{accent-color:#4d96ff;width:13px;height:13px}
+</style>
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+</head>
+<body>
+<div id="app">
+  <div id="viewport">
+    <div id="loading">Loading Three.js...</div>
+  </div>
+  <div class="panel">
+    <div class="card">
+      <h2>Pump Cycle</h2>
+      <div class="step-indicator" id="stepDots"></div>
+      <div class="step-desc" id="stepDesc"></div>
+      <div class="controls">
+        <button onclick="window.prevStep()">◀ Prev</button>
+        <button id="btnAuto" onclick="window.toggleAuto()">▶ Auto</button>
+        <button onclick="window.nextStep()">Next ▶</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stoich">3 Na⁺ out · 2 K⁺ in · 1 ATP → ADP + Pᵢ</div>
+      <p style="text-align:center;font-size:.65rem;color:#556">Electrogenic: net +1 charge per cycle</p>
+    </div>
+    <div class="card">
+      <h2>3D Controls</h2>
+      <div class="toggle-row">
+        <label><input type="checkbox" id="chkAutoRotate" checked onchange="window.setAutoRotate(this.checked)"> Auto-rotate</label>
+        <label><input type="checkbox" id="chkRibbons" checked onchange="window.toggleRibbons(this.checked)"> Helix ribbons</label>
+      </div>
+      <div class="toggle-row">
+        <label><input type="checkbox" id="chkLabels" checked onchange="window.toggleLabels(this.checked)"> Labels</label>
+        <label><input type="checkbox" id="chkHydration" checked onchange="window.toggleHydration(this.checked)"> Hydration</label>
+        <label><input type="checkbox" id="chkFXYD" checked onchange="window.toggleFXYD(this.checked)"> FXYD</label>
+      </div>
+      <p style="margin-top:5px;font-size:.62rem;color:#556">Left-drag: rotate · Right-drag: pan · Scroll: zoom</p>
+    </div>
+    <div class="card">
+      <h2>Legend</h2>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-swatch" style="background:#ff6b6b"></div>Na⁺</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#6bcb77"></div>K⁺</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#ffd93d"></div>ATP</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#4488dd"></div>α TM1-10</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#aa66dd"></div>β subunit</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#dd8833"></div>FXYD</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#2255aa"></div>A / N / P</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:#c8a55a"></div>Lipid bilayer</div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Key Residues</h2>
+      <ul>
+        <li><b>Asp-369</b> — phosphorylation site (P domain)</li>
+        <li><b>Glu-327</b> (TM4) — Na⁺ site I</li>
+        <li><b>Asp-804/808</b> (TM6) — Na⁺ site II</li>
+        <li><b>Glu-779</b> — Na⁺ site III (selective)</li>
+        <li><b>Thr-772, Ser-775</b> (TM5) — K⁺ binding</li>
+        <li><b>TGES motif</b> (A domain) — dephosphorylation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Structure</h2>
+      <ul>
+        <li>α: ~1023 aa, 10 TM helices, A/N/P domains</li>
+        <li>β: ~300 aa, 1 TM helix, glycosylated ecto-domain</li>
+        <li>FXYD: ~60-90 aa, 1 TM helix, modulator</li>
+        <li>PDB: 3WGU · 3WGV · 7WYT</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+// ══════════════════════════════════════════════════════════════════
+// SETUP
+// ══════════════════════════════════════════════════════════════════
+const viewport = document.getElementById('viewport');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x060a14);
+scene.fog = new THREE.FogExp2(0x060a14, 0.018);
+
+const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 120);
+camera.position.set(10, 7, 14);
+
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:false});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+viewport.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.6;
+controls.target.set(0, -0.5, 0);
+controls.minDistance = 5;
+controls.maxDistance = 40;
+
+function resize(){
+  const w = viewport.clientWidth, h = viewport.clientHeight;
+  camera.aspect = w/h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── Lighting ─────────────────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0x334466, 0.7));
+const hemi = new THREE.HemisphereLight(0x8899cc, 0x223344, 0.5);
+scene.add(hemi);
+
+const sun = new THREE.DirectionalLight(0xffeedd, 1.4);
+sun.position.set(6, 10, 8);
+sun.castShadow = true;
+sun.shadow.mapSize.set(1024,1024);
+sun.shadow.camera.near = 1; sun.shadow.camera.far = 30;
+sun.shadow.camera.left = -10; sun.shadow.camera.right = 10;
+sun.shadow.camera.top = 10; sun.shadow.camera.bottom = -10;
+scene.add(sun);
+
+const fill = new THREE.DirectionalLight(0x6688ff, 0.35);
+fill.position.set(-5, -4, -6);
+scene.add(fill);
+
+const rim = new THREE.DirectionalLight(0xff8844, 0.2);
+rim.position.set(-3, 2, -8);
+scene.add(rim);
+
+// ══════════════════════════════════════════════════════════════════
+// CONSTANTS & MATERIALS
+// ══════════════════════════════════════════════════════════════════
+const MEM_Y = 0;         // membrane center
+const MEM_HALF = 2;      // half-thickness (top at +2, bottom at -2)
+const MEM_TOP = MEM_Y + MEM_HALF;
+const MEM_BOT = MEM_Y - MEM_HALF;
+const HELIX_EXTEND = 0.8; // how far helices extend beyond membrane
+const HELIX_TOP = MEM_TOP + HELIX_EXTEND;
+const HELIX_BOT = MEM_BOT - HELIX_EXTEND;
+const HELIX_H = HELIX_TOP - HELIX_BOT;
+
+// TM helix layout (x, z positions — arranged in a ring based on crystal structure)
+const TM_DATA = [
+  {id:'TM1', x:-2.1, z:-0.6, r:0.28, color:0x2266bb},
+  {id:'TM2', x:-1.5, z: 0.8, r:0.28, color:0x2870cc},
+  {id:'TM3', x:-0.9, z:-0.9, r:0.30, color:0x3080dd},
+  {id:'TM4', x:-0.2, z: 0.4, r:0.32, color:0x3888dd},  // core — Glu-327
+  {id:'TM5', x: 0.5, z:-0.3, r:0.32, color:0x4090ee},  // core — Thr-772
+  {id:'TM6', x: 0.3, z: 1.0, r:0.32, color:0x3888dd},  // core — Asp-804
+  {id:'TM7', x: 1.2, z:-0.8, r:0.30, color:0x3080dd},
+  {id:'TM8', x: 1.8, z: 0.5, r:0.28, color:0x2870cc},
+  {id:'TM9', x: 2.3, z:-0.4, r:0.25, color:0x2266bb},
+  {id:'TM10',x: 2.6, z: 0.7, r:0.25, color:0x1e5eaa},
+];
+const BETA_TM = {id:'β-TM', x:3.1, z:0.0, r:0.28, color:0x9955cc};
+const FXYD_TM = {id:'FXYD', x:-2.8, z:0.3, r:0.22, color:0xdd7722};
+
+const matAlpha = (c) => new THREE.MeshPhongMaterial({
+  color:c, specular:0x334466, shininess:60, transparent:false
+});
+const matBeta = new THREE.MeshPhongMaterial({color:0x9955cc, specular:0x442266, shininess:50});
+const matFxyd = new THREE.MeshPhongMaterial({color:0xdd7722, specular:0x553311, shininess:40});
+const matRibbon = new THREE.MeshPhongMaterial({
+  color:0xaaccff, specular:0x4466aa, shininess:80, transparent:true, opacity:0.45, side:THREE.DoubleSide
+});
+const matRibbonBeta = new THREE.MeshPhongMaterial({
+  color:0xccaaff, specular:0x6633aa, shininess:80, transparent:true, opacity:0.45, side:THREE.DoubleSide
+});
+const matRibbonFxyd = new THREE.MeshPhongMaterial({
+  color:0xffcc88, specular:0x664411, shininess:80, transparent:true, opacity:0.45, side:THREE.DoubleSide
+});
+
+const matMemPlane = new THREE.MeshPhongMaterial({
+  color:0xb08840, transparent:true, opacity:0.18, side:THREE.DoubleSide, depthWrite:false
+});
+const matLipidHead = new THREE.MeshPhongMaterial({color:0xd4a84a, specular:0x886622, shininess:60});
+const matLipidTail = new THREE.MeshBasicMaterial({color:0x8a7030, transparent:true, opacity:0.3});
+const matNa = new THREE.MeshPhongMaterial({color:0xff6b6b, emissive:0xff2222, emissiveIntensity:0.5, specular:0xffffff, shininess:100});
+const matK  = new THREE.MeshPhongMaterial({color:0x6bcb77, emissive:0x22aa33, emissiveIntensity:0.5, specular:0xffffff, shininess:100});
+const matATP = new THREE.MeshPhongMaterial({color:0xffd93d, emissive:0xaa8800, emissiveIntensity:0.4, specular:0xffffff, shininess:80});
+const matDomain = (c) => new THREE.MeshPhongMaterial({color:c, specular:0x223366, shininess:40});
+const matDomainGlow = new THREE.MeshPhongMaterial({color:0xcc8800, emissive:0x996600, emissiveIntensity:0.4, specular:0xffaa00, shininess:60});
+const matGlyco = new THREE.MeshPhongMaterial({color:0xddbbff, emissive:0x442266, emissiveIntensity:0.15});
+const matWater = new THREE.MeshPhongMaterial({color:0x6699ff, transparent:true, opacity:0.35});
+const matLoop = new THREE.MeshBasicMaterial({color:0x3366aa, transparent:true, opacity:0.25});
+const matStalk = new THREE.MeshBasicMaterial({color:0x2244aa, transparent:true, opacity:0.2});
+
+// Shared geometries
+const geoSphere = new THREE.SphereGeometry(1, 20, 16);
+const geoCyl = new THREE.CylinderGeometry(1, 1, 1, 16);
+const geoSmallSphere = new THREE.SphereGeometry(1, 10, 8);
+
+// ══════════════════════════════════════════════════════════════════
+// PROTEIN CONSTRUCTION
+// ══════════════════════════════════════════════════════════════════
+const proteinGroup = new THREE.Group();
+scene.add(proteinGroup);
+
+const helixMeshes = [];   // {mesh, ribbon, data, basePos, radialDir, tangentDir}
+const ribbonMeshes = [];
+const labelSprites = [];
+const fxydGroup = new THREE.Group();
+
+// ── Create TM Helix ─────────────────────────────────────────────
+function createHelix(data, mat, ribbonMat, parent){
+  const g = new THREE.Group();
+  // Cylinder
+  const cyl = new THREE.Mesh(geoCyl, mat);
+  cyl.scale.set(data.r, HELIX_H, data.r);
+  cyl.position.set(0, (HELIX_TOP+HELIX_BOT)/2, 0);
+  cyl.castShadow = true;
+  g.add(cyl);
+
+  // Top cap
+  const cap = new THREE.Mesh(geoSphere, mat);
+  cap.scale.set(data.r, data.r*0.35, data.r);
+  cap.position.set(0, HELIX_TOP, 0);
+  g.add(cap);
+
+  // Helical ribbon
+  const ribbon = createHelicalRibbon(0, 0, HELIX_BOT+0.2, HELIX_TOP-0.2, data.r*1.15, 7, ribbonMat);
+  g.add(ribbon);
+  ribbonMeshes.push(ribbon);
+
+  g.position.set(data.x, 0, data.z);
+  parent.add(g);
+
+  // Compute radial and tangent vectors for conformational animation
+  const radial = new THREE.Vector3(data.x, 0, data.z).normalize();
+  const tangent = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), radial).normalize();
+
+  const entry = {group:g, data, basePos:new THREE.Vector3(data.x,0,data.z), radial, tangent,
+    baseRot:new THREE.Euler(0,0,0)};
+  helixMeshes.push(entry);
+
+  // Label sprite
+  const label = makeLabel(data.id, '#aaccff');
+  label.position.set(0, HELIX_TOP + 0.6, 0);
+  g.add(label);
+  labelSprites.push(label);
+
+  return entry;
+}
+
+function createHelicalRibbon(cx, cz, yBot, yTop, radius, turns, mat){
+  const pts = [];
+  const segs = turns * 24;
+  for(let i=0;i<=segs;i++){
+    const t = i/segs;
+    const angle = t * turns * Math.PI * 2;
+    const y = yBot + t*(yTop-yBot);
+    pts.push(new THREE.Vector3(cx + Math.cos(angle)*radius, y, cz + Math.sin(angle)*radius));
+  }
+  const curve = new THREE.CatmullRomCurve3(pts);
+  const tubeGeo = new THREE.TubeGeometry(curve, segs*2, 0.055, 6, false);
+  return new THREE.Mesh(tubeGeo, mat);
+}
+
+// Create all α TM helices
+for(const tm of TM_DATA){
+  createHelix(tm, matAlpha(tm.color), matRibbon, proteinGroup);
+}
+
+// β TM helix
+createHelix(BETA_TM, matBeta, matRibbonBeta, proteinGroup);
+
+// FXYD TM helix
+const fxydEntry = createHelix(FXYD_TM, matFxyd, matRibbonFxyd, fxydGroup);
+proteinGroup.add(fxydGroup);
+
+// ── β Extracellular Domain ──────────────────────────────────────
+const betaExtraGroup = new THREE.Group();
+betaExtraGroup.position.set(BETA_TM.x + 0.8, MEM_TOP + 4.5, BETA_TM.z);
+
+// Main body (ellipsoid)
+const betaBody = new THREE.Mesh(geoSphere, matBeta);
+betaBody.scale.set(1.4, 2.0, 1.2);
+betaBody.castShadow = true;
+betaExtraGroup.add(betaBody);
+
+// Glycosylation chains
+const glycoPositions = [
+  [0.8, 1.2, 0.5], [-0.6, 1.5, -0.3], [0.2, -0.8, 0.9],
+  [1.0, 0.0, -0.5], [-0.9, -0.5, 0.6]
+];
+for(const gp of glycoPositions){
+  // Sugar chain (3 spheres connected)
+  for(let s=0;s<3;s++){
+    const sugar = new THREE.Mesh(geoSmallSphere, matGlyco);
+    const dir = new THREE.Vector3(...gp).normalize();
+    const pos = new THREE.Vector3(...gp).add(dir.clone().multiplyScalar(0.5+s*0.4));
+    sugar.scale.setScalar(0.12);
+    sugar.position.copy(pos);
+    betaExtraGroup.add(sugar);
+  }
+}
+
+// Stalk connecting to TM
+const stalkCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(BETA_TM.x+0.8, MEM_TOP+2.5, BETA_TM.z),
+  new THREE.Vector3(BETA_TM.x+0.3, MEM_TOP+1.2, BETA_TM.z),
+  new THREE.Vector3(BETA_TM.x, MEM_TOP+0.3, BETA_TM.z),
+]);
+const stalkGeo = new THREE.TubeGeometry(stalkCurve, 12, 0.18, 8, false);
+const stalkMesh = new THREE.Mesh(stalkGeo, new THREE.MeshPhongMaterial({color:0x7744aa, transparent:true, opacity:0.5}));
+proteinGroup.add(stalkMesh);
+
+// Label
+const betaLabel = makeLabel('β subunit', '#ccaaff');
+betaLabel.position.set(0, 2.5, 0);
+betaExtraGroup.add(betaLabel);
+labelSprites.push(betaLabel);
+
+proteinGroup.add(betaExtraGroup);
+
+// ── Cytoplasmic Domains (A, N, P) ───────────────────────────────
+const domainsGroup = new THREE.Group();
+proteinGroup.add(domainsGroup);
+
+function createDomain(x, y, z, sx, sy, sz, color, name, sublabel){
+  const g = new THREE.Group();
+  const mesh = new THREE.Mesh(geoSphere, matDomain(color));
+  mesh.scale.set(sx, sy, sz);
+  mesh.castShadow = true;
+  g.add(mesh);
+  const lbl = makeLabel(name, '#aabbdd');
+  lbl.position.set(0, sy+0.3, 0);
+  g.add(lbl);
+  labelSprites.push(lbl);
+  if(sublabel){
+    const sub = makeLabel(sublabel, '#778899', 0.6);
+    sub.position.set(0, -sy-0.3, 0);
+    g.add(sub);
+    labelSprites.push(sub);
+  }
+  g.position.set(x, y, z);
+  domainsGroup.add(g);
+  return {group:g, mesh};
+}
+
+const domainA = createDomain(-2.0, MEM_BOT-3.5, 0.0, 1.2, 0.7, 0.9, 0x1e4488, 'A domain', 'TGES');
+const domainP = createDomain( 1.0, MEM_BOT-3.0, 0.5, 1.3, 0.8, 1.0, 0x1e4488, 'P domain', 'Asp-369');
+const domainN = createDomain( 0.0, MEM_BOT-5.0, 0.0, 1.5, 0.9, 1.1, 0x1e4488, 'N domain', 'ATP bind');
+
+// Stalks from helices to domains
+function createStalk(points){
+  const curve = new THREE.CatmullRomCurve3(points);
+  const geo = new THREE.TubeGeometry(curve, 16, 0.1, 6, false);
+  const m = new THREE.Mesh(geo, matStalk);
+  proteinGroup.add(m);
+  return m;
+}
+
+createStalk([
+  new THREE.Vector3(TM_DATA[1].x, HELIX_BOT, TM_DATA[1].z),
+  new THREE.Vector3(-1.5, MEM_BOT-1.5, 0.3),
+  new THREE.Vector3(-2.0, MEM_BOT-3.5, 0.0),
+]);
+createStalk([
+  new THREE.Vector3(TM_DATA[4].x, HELIX_BOT, TM_DATA[4].z),
+  new THREE.Vector3(0.8, MEM_BOT-1.5, 0.3),
+  new THREE.Vector3(1.0, MEM_BOT-3.0, 0.5),
+]);
+createStalk([
+  new THREE.Vector3(TM_DATA[3].x, HELIX_BOT, TM_DATA[3].z),
+  new THREE.Vector3(0.0, MEM_BOT-2.5, 0.0),
+  new THREE.Vector3(0.0, MEM_BOT-5.0, 0.0),
+]);
+
+// ── Extracellular & Cytoplasmic Loops ───────────────────────────
+function createLoop(tmA, tmB, yLevel, upward){
+  const dy = upward ? 0.8 : -0.8;
+  const pts = [
+    new THREE.Vector3(tmA.x, yLevel, tmA.z),
+    new THREE.Vector3((tmA.x+tmB.x)/2, yLevel+dy, (tmA.z+tmB.z)/2),
+    new THREE.Vector3(tmB.x, yLevel, tmB.z),
+  ];
+  const curve = new THREE.CatmullRomCurve3(pts);
+  const geo = new THREE.TubeGeometry(curve, 12, 0.06, 6, false);
+  const m = new THREE.Mesh(geo, matLoop);
+  proteinGroup.add(m);
+}
+
+// Extracellular loops (top)
+for(let i=0;i<TM_DATA.length-1;i+=2){
+  createLoop(TM_DATA[i], TM_DATA[i+1], HELIX_TOP, true);
+}
+// Cytoplasmic loops (bottom)
+for(let i=1;i<TM_DATA.length-1;i+=2){
+  createLoop(TM_DATA[i], TM_DATA[i+1], HELIX_BOT, false);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// MEMBRANE
+// ══════════════════════════════════════════════════════════════════
+const membraneGroup = new THREE.Group();
+scene.add(membraneGroup);
+
+// Two translucent planes (upper and lower leaflet)
+const ringGeo = new THREE.RingGeometry(3.5, 12, 48, 1);
+ringGeo.rotateX(-Math.PI/2);
+const upperLeaflet = new THREE.Mesh(ringGeo, matMemPlane.clone());
+upperLeaflet.position.y = MEM_TOP;
+upperLeaflet.receiveShadow = true;
+membraneGroup.add(upperLeaflet);
+
+const lowerLeaflet = new THREE.Mesh(ringGeo, matMemPlane.clone());
+lowerLeaflet.position.y = MEM_BOT;
+lowerLeaflet.receiveShadow = true;
+membraneGroup.add(lowerLeaflet);
+
+// Hydrophobic core (semi-transparent cylinder)
+const coreGeo = new THREE.CylinderGeometry(12, 12, MEM_HALF*2, 48, 1, true);
+const coreMat = new THREE.MeshBasicMaterial({color:0x554422, transparent:true, opacity:0.06, side:THREE.DoubleSide, depthWrite:false});
+const core = new THREE.Mesh(coreGeo, coreMat);
+core.position.y = MEM_Y;
+membraneGroup.add(core);
+
+// ── Individual Phospholipid Molecules ────────────────────────────
+const lipidHeadGeo = new THREE.SphereGeometry(0.18, 8, 6);
+const lipidTailGeo = new THREE.CylinderGeometry(0.03, 0.03, 1.6, 4);
+
+function createLipid(x, z, upper){
+  const g = new THREE.Group();
+  const headY = upper ? MEM_TOP + 0.1 : MEM_BOT - 0.1;
+  const tailDir = upper ? -1 : 1;
+
+  // Head
+  const head = new THREE.Mesh(lipidHeadGeo, matLipidHead);
+  head.position.set(0, headY, 0);
+  g.add(head);
+
+  // Two tails
+  for(let t=-1;t<=1;t+=2){
+    const tail = new THREE.Mesh(lipidTailGeo, matLipidTail);
+    tail.position.set(t*0.06, headY + tailDir*0.9, 0);
+    tail.rotation.z = t * 0.05;
+    g.add(tail);
+  }
+
+  g.position.set(x, 0, z);
+  // Random Y rotation for variety
+  g.rotation.y = Math.random() * Math.PI * 2;
+  membraneGroup.add(g);
+  return g;
+}
+
+// Scatter lipids in a ring
+const lipidMeshes = [];
+for(let ring=4; ring<=11; ring+=0.8){
+  const count = Math.floor(ring * 3.5);
+  for(let i=0;i<count;i++){
+    const angle = (i/count)*Math.PI*2 + Math.random()*0.1;
+    const r = ring + (Math.random()-0.5)*0.4;
+    const x = Math.cos(angle)*r, z = Math.sin(angle)*r;
+    // Skip near protein center
+    const distToCenter = Math.sqrt(x*x + z*z);
+    if(distToCenter < 3.8) continue;
+    lipidMeshes.push(createLipid(x, z, true));
+    lipidMeshes.push(createLipid(x, z, false));
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// IONS & ATP
+// ══════════════════════════════════════════════════════════════════
+const ionGroup = new THREE.Group();
+scene.add(ionGroup);
+
+const naIons = [], kIons = [];
+const hydrationGroups = [];
+
+function createIon(type){
+  const isNa = type === 'na';
+  const g = new THREE.Group();
+  const mesh = new THREE.Mesh(geoSphere, isNa ? matNa.clone() : matK.clone());
+  mesh.scale.setScalar(isNa ? 0.25 : 0.32);
+  mesh.castShadow = true;
+  g.add(mesh);
+
+  // Point light for glow
+  const light = new THREE.PointLight(isNa ? 0xff4444 : 0x44cc55, 0.8, 3);
+  g.add(light);
+
+  // Label
+  const lbl = makeLabel(isNa ? 'Na⁺' : 'K⁺', isNa ? '#ff8888' : '#88dd99', 0.4);
+  lbl.position.y = isNa ? 0.4 : 0.5;
+  g.add(lbl);
+
+  // Hydration shell
+  const hydGroup = new THREE.Group();
+  const nWater = isNa ? 5 : 6;
+  for(let i=0;i<nWater;i++){
+    const w = new THREE.Mesh(geoSmallSphere, matWater);
+    w.scale.setScalar(0.08);
+    hydGroup.add(w);
+  }
+  g.add(hydGroup);
+  hydrationGroups.push(hydGroup);
+
+  g.visible = false;
+  ionGroup.add(g);
+  return g;
+}
+
+for(let i=0;i<3;i++) naIons.push(createIon('na'));
+for(let i=0;i<2;i++) kIons.push(createIon('k'));
+
+// ATP molecule
+const atpGroup = new THREE.Group();
+atpGroup.visible = false;
+scene.add(atpGroup);
+
+// Adenine base (icosahedron for organic ring look)
+const adenine = new THREE.Mesh(new THREE.IcosahedronGeometry(0.3, 0), matATP);
+adenine.position.set(-0.3, 0, 0);
+atpGroup.add(adenine);
+// Ribose
+const ribose = new THREE.Mesh(geoSmallSphere, matATP.clone());
+ribose.material.color.set(0xeec030);
+ribose.scale.setScalar(0.18);
+ribose.position.set(0, 0, 0);
+atpGroup.add(ribose);
+// Phosphate groups (3 spheres in a line)
+const phosphates = [];
+for(let i=0;i<3;i++){
+  const p = new THREE.Mesh(geoSmallSphere, matATP.clone());
+  p.material.emissive.set(i===2 ? 0xffaa00 : 0x886600);
+  p.scale.setScalar(0.15);
+  p.position.set(0.35 + i*0.35, 0, 0);
+  atpGroup.add(p);
+  phosphates.push(p);
+}
+// ATP glow
+const atpLight = new THREE.PointLight(0xffcc00, 0.6, 3);
+atpGroup.add(atpLight);
+// ATP label
+const atpLabel = makeLabel('ATP', '#ffdd66', 0.5);
+atpLabel.position.y = 0.5;
+atpGroup.add(atpLabel);
+
+// Pi (inorganic phosphate - released)
+const piGroup = new THREE.Group();
+piGroup.visible = false;
+const piMesh = new THREE.Mesh(geoSphere, matATP.clone());
+piMesh.scale.setScalar(0.2);
+piGroup.add(piMesh);
+const piLabel = makeLabel('Pᵢ', '#ffdd66', 0.4);
+piLabel.position.y = 0.35;
+piGroup.add(piLabel);
+piGroup.add(new THREE.PointLight(0xffaa00, 0.3, 2));
+scene.add(piGroup);
+
+// ══════════════════════════════════════════════════════════════════
+// SPRITE LABEL HELPER
+// ══════════════════════════════════════════════════════════════════
+function makeLabel(text, color='#ffffff', scale=0.8){
+  const canvas = document.createElement('canvas');
+  const size = 512;
+  canvas.width = size; canvas.height = 128;
+  const c = canvas.getContext('2d');
+  c.font = 'bold 48px "Segoe UI", sans-serif';
+  c.textAlign = 'center';
+  c.textBaseline = 'middle';
+  // Shadow
+  c.fillStyle = 'rgba(0,0,0,0.7)';
+  c.fillText(text, size/2+2, 66);
+  c.fillStyle = color;
+  c.fillText(text, size/2, 64);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.minFilter = THREE.LinearFilter;
+  const mat = new THREE.SpriteMaterial({map:tex, transparent:true, depthTest:false, depthWrite:false});
+  const sprite = new THREE.Sprite(mat);
+  const aspect = size/128;
+  sprite.scale.set(scale*aspect*0.3, scale*0.3, 1);
+  return sprite;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// STEP / ANIMATION SYSTEM
+// ══════════════════════════════════════════════════════════════════
+const STEPS = [
+  {title:"E1 — 3 Na⁺ bind from cytoplasm",
+   desc:"E1 conformation: TM helices open toward cytoplasm. Na⁺ ions coordinate with Glu-327 (site I), Asp-804/808 (site II), Glu-779 (site III).",
+   phase:"e1_bind_na"},
+  {title:"ATP binds → phosphorylation (E1-P)",
+   desc:"ATP docks into N domain. γ-phosphate transfers to Asp-369 (P domain), forming acyl-phosphate. ADP released.",
+   phase:"phosphorylation"},
+  {title:"E1-P → E2-P conformational switch",
+   desc:"A domain rotates ~120°. TM1-TM4 rearrange: cytoplasmic gate closes, extracellular gate opens. Na⁺ affinity collapses.",
+   phase:"conf_change"},
+  {title:"3 Na⁺ released extracellularly",
+   desc:"Binding affinity drops >100×. Three Na⁺ dissociate through extracellular vestibule. K⁺ sites now exposed.",
+   phase:"release_na"},
+  {title:"2 K⁺ bind from outside (E2-P)",
+   desc:"K⁺ coordinates with Thr-772, Ser-775 (TM5), Asp-804/808 (TM6). K⁺ binding triggers extracellular gate closure.",
+   phase:"bind_k"},
+  {title:"Dephosphorylation → E1 — 2 K⁺ released inside",
+   desc:"TGES motif (A domain) hydrolyses acyl-phosphate. Pump relaxes to E1, K⁺ affinity drops, 2 K⁺ released into cytoplasm.",
+   phase:"release_k"}
+];
+
+let step = 0, anim = 0, autoPlay = false, clock = new THREE.Clock();
+
+// Build step dots
+const dotsEl = document.getElementById('stepDots');
+STEPS.forEach((_,i)=>{
+  const d = document.createElement('div');
+  d.className='step-dot'; d.textContent=i+1;
+  d.onclick=()=>goStep(i); dotsEl.appendChild(d);
+});
+
+function goStep(i){step=i;anim=0;updateUI();}
+window.nextStep=()=>{step=(step+1)%STEPS.length;anim=0;updateUI();};
+window.prevStep=()=>{step=(step-1+STEPS.length)%STEPS.length;anim=0;updateUI();};
+window.toggleAuto=()=>{
+  autoPlay=!autoPlay;
+  document.getElementById('btnAuto').textContent=autoPlay?'⏸ Pause':'▶ Auto';
+  document.getElementById('btnAuto').classList.toggle('on',autoPlay);
+};
+function updateUI(){
+  document.querySelectorAll('.step-dot').forEach((d,i)=>d.classList.toggle('active',i===step));
+  document.getElementById('stepDesc').innerHTML=`<b>${STEPS[step].title}</b><br>${STEPS[step].desc}`;
+}
+updateUI();
+
+// ── Toggle controls ─────────────────────────────────────────────
+window.setAutoRotate = (v) => { controls.autoRotate = v; };
+window.toggleRibbons = (v) => { ribbonMeshes.forEach(r => r.visible = v); };
+window.toggleLabels = (v) => { labelSprites.forEach(s => s.visible = v); };
+window.toggleHydration = (v) => { hydrationGroups.forEach(g => g.visible = v); };
+window.toggleFXYD = (v) => { fxydGroup.visible = v; };
+
+// ══════════════════════════════════════════════════════════════════
+// ANIMATION
+// ══════════════════════════════════════════════════════════════════
+function lerp(a,b,t){return a+(b-a)*t;}
+function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+function v3lerp(out,a,b,t){out.lerpVectors(a,b,t);return out;}
+
+// Ion position keyframes
+const ION_CHANNEL = new THREE.Vector3(0.2, 0, 0.3); // center of binding site
+const NA_START = [
+  new THREE.Vector3(-1.5, MEM_BOT-5, -0.5),
+  new THREE.Vector3( 0.0, MEM_BOT-6, 0.5),
+  new THREE.Vector3( 1.5, MEM_BOT-5, -0.3),
+];
+const NA_CHAN = [
+  new THREE.Vector3(-0.2, 0.2, 0.0),
+  new THREE.Vector3( 0.3, -0.1, 0.5),
+  new THREE.Vector3( 0.5, 0.0, -0.3),
+];
+const NA_EXIT = [
+  new THREE.Vector3(-1.5, MEM_TOP+5, -1.0),
+  new THREE.Vector3( 0.5, MEM_TOP+6,  0.8),
+  new THREE.Vector3( 2.0, MEM_TOP+5,  0.0),
+];
+const K_START = [
+  new THREE.Vector3( 2.5, MEM_TOP+5,  1.0),
+  new THREE.Vector3(-1.0, MEM_TOP+6, -0.5),
+];
+const K_CHAN = [
+  new THREE.Vector3( 0.3, 0.0, 0.3),
+  new THREE.Vector3(-0.2, -0.1, -0.2),
+];
+const K_EXIT = [
+  new THREE.Vector3( 2.0, MEM_BOT-6, 1.0),
+  new THREE.Vector3(-1.5, MEM_BOT-5, -0.8),
+];
+
+const ATP_IDLE   = new THREE.Vector3(-2.5, MEM_BOT-5.5, 1.0);
+const ATP_DOCK   = new THREE.Vector3( 0.0, MEM_BOT-5.0, 0.0);
+const PI_START   = new THREE.Vector3( 1.0, MEM_BOT-3.0, 0.5);
+const PI_END     = new THREE.Vector3( 3.0, MEM_BOT-6.0, 2.0);
+
+const _v = new THREE.Vector3();
+let globalT = 0;
+
+function animate(){
+  requestAnimationFrame(animate);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  globalT += dt;
+
+  if(autoPlay){
+    anim += dt * 0.25;
+    if(anim >= 1){anim=0; step=(step+1)%STEPS.length; updateUI();}
+  } else {
+    anim = Math.min(anim + dt*0.4, 1);
+  }
+
+  const a = ease(anim);
+  const phase = STEPS[step].phase;
+
+  // ── Conformational state ──────────────────────────────────────
+  let openTop = 0, openBot = 0, phos = false;
+  if(phase==='e1_bind_na')    { openBot=1; }
+  else if(phase==='phosphorylation') { openBot=1; phos=true; }
+  else if(phase==='conf_change')     { openBot=lerp(1,0,a); openTop=lerp(0,1,a); phos=true; }
+  else if(phase==='release_na')      { openTop=1; phos=true; }
+  else if(phase==='bind_k')          { openTop=1; phos=true; }
+  else if(phase==='release_k')       { openTop=lerp(1,0,a); openBot=lerp(0,1,a); phos=a<0.5; }
+
+  // Splay helices
+  const splayAngle = 0.12; // max tilt in radians
+  for(const h of helixMeshes){
+    const topSplay = openTop * splayAngle * (h.data.r / 0.32); // scale by radius
+    const botSplay = openBot * splayAngle * (h.data.r / 0.32);
+    // Net tilt: topSplay tilts tops out (negative rotation around tangent)
+    //           botSplay tilts bottoms out (positive rotation around tangent)
+    const netTilt = botSplay - topSplay;
+    // Apply rotation around tangent axis
+    const axis = h.tangent;
+    h.group.quaternion.setFromAxisAngle(axis, netTilt);
+    // Slight radial displacement
+    const disp = (openTop + openBot) * 0.15;
+    h.group.position.copy(h.basePos).addScaledVector(h.radial, disp);
+  }
+
+  // P domain glow when phosphorylated
+  domainP.mesh.material = phos ? matDomainGlow : matDomain(0x1e4488);
+
+  // A domain rotation
+  const aRotAngle = phos ? 0.4 : 0;
+  domainA.group.rotation.y = aRotAngle;
+
+  // ── Ions ─────────────────────────────────────────────────────
+  // Hide all first
+  naIons.forEach(n=>n.visible=false);
+  kIons.forEach(k=>k.visible=false);
+  atpGroup.visible=false;
+  piGroup.visible=false;
+
+  if(phase==='e1_bind_na'){
+    naIons.forEach((ion,i)=>{
+      ion.visible=true;
+      v3lerp(ion.position, NA_START[i], NA_CHAN[i], a);
+    });
+    atpGroup.visible=true;
+    v3lerp(atpGroup.position, ATP_IDLE, ATP_IDLE.clone().add(new THREE.Vector3(0,0.3,0)), a);
+    atpLabel.material.map.needsUpdate; // keep ATP label
+    phosphates[2].visible = true;
+  }
+  else if(phase==='phosphorylation'){
+    naIons.forEach((ion,i)=>{ion.visible=true;ion.position.copy(NA_CHAN[i]);});
+    atpGroup.visible=true;
+    v3lerp(atpGroup.position, ATP_IDLE, ATP_DOCK, a);
+    if(a > 0.7){
+      phosphates[2].visible = false; // γ-phosphate transferred
+      piGroup.visible=true;
+      const pt = (a-0.7)/0.3;
+      v3lerp(piGroup.position, PI_START, PI_START.clone().add(new THREE.Vector3(0.5,-0.5,0.3)), pt);
+    }
+  }
+  else if(phase==='conf_change'){
+    naIons.forEach((ion,i)=>{
+      ion.visible=true;
+      v3lerp(ion.position, NA_CHAN[i], NA_CHAN[i].clone().add(new THREE.Vector3(0,1.5,0)), a);
+    });
+    atpGroup.visible=true;
+    atpGroup.position.copy(ATP_DOCK);
+    phosphates[2].visible = false;
+  }
+  else if(phase==='release_na'){
+    naIons.forEach((ion,i)=>{
+      ion.visible=true;
+      const raised = NA_CHAN[i].clone().add(new THREE.Vector3(0,1.5,0));
+      v3lerp(ion.position, raised, NA_EXIT[i], a);
+    });
+    atpGroup.visible=true;
+    atpGroup.position.copy(ATP_DOCK);
+    phosphates[2].visible = false;
+  }
+  else if(phase==='bind_k'){
+    kIons.forEach((ion,i)=>{
+      ion.visible=true;
+      v3lerp(ion.position, K_START[i], K_CHAN[i], a);
+    });
+    atpGroup.visible=true;
+    atpGroup.position.copy(ATP_DOCK);
+    phosphates[2].visible = false;
+  }
+  else if(phase==='release_k'){
+    kIons.forEach((ion,i)=>{
+      ion.visible=true;
+      v3lerp(ion.position, K_CHAN[i], K_EXIT[i], a);
+    });
+    piGroup.visible = a < 0.6;
+    if(piGroup.visible){
+      v3lerp(piGroup.position, PI_START, PI_END, a/0.6);
+    }
+    if(a < 0.5){
+      atpGroup.visible=true;
+      atpGroup.position.copy(ATP_DOCK);
+      phosphates[2].visible = false;
+    }
+  }
+
+  // ── Hydration shell animation ──────────────────────────────────
+  for(const ion of [...naIons, ...kIons]){
+    if(!ion.visible) continue;
+    const hyd = ion.children.find(c => c.type==='Group' && c !== ion);
+    // Actually let's iterate children properly
+  }
+  // Animate water molecules in hydration shells
+  const showHyd = document.getElementById('chkHydration').checked;
+  hydrationGroups.forEach((hg, idx)=>{
+    hg.visible = showHyd;
+    if(!showHyd || !hg.parent.visible) return;
+    const isNa = idx < 3;
+    const nW = isNa ? 5 : 6;
+    const baseR = isNa ? 0.4 : 0.5;
+    hg.children.forEach((w, i)=>{
+      const angle = (Math.PI*2/nW)*i + globalT*0.8;
+      const r = baseR + Math.sin(globalT*2+i)*0.05;
+      w.position.set(Math.cos(angle)*r, Math.sin(angle*0.7)*0.1, Math.sin(angle)*r);
+    });
+  });
+
+  // ── Lipid gentle sway ─────────────────────────────────────────
+  // (subtle animation for life)
+  for(let i=0; i<lipidMeshes.length; i++){
+    const lip = lipidMeshes[i];
+    lip.rotation.z = Math.sin(globalT*0.5 + i*0.3) * 0.02;
+  }
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// ── Start ────────────────────────────────────────────────────────
+document.getElementById('loading').classList.add('hide');
+animate();
+</script>
+</body>
+</html>
