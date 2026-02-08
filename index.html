@@ -68,11 +68,61 @@
       letter-spacing: 0.5px;
       font-weight: 500;
     }
+    .abstract {
+      max-width: 800px;
+      margin: 0 auto 48px;
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(16,185,129,0.04) 100%);
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+    }
+    .abstract h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #818cf8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .abstract p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+    .abstract p:last-child { margin-bottom: 0; }
+    .abstract strong { color: #e2e8f0; font-weight: 600; }
+    .abstract .highlight {
+      color: #818cf8;
+      font-weight: 500;
+    }
+    .divider {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      border: none;
+      border-top: 1px solid #1e293b;
+    }
   </style>
 </head>
 <body>
   <h1>Projects</h1>
-  <p class="subtitle">27 interactive web projects</p>
+  <p class="subtitle">Substrate calibration modules for Charlotte</p>
+
+  <div class="abstract">
+    <h2>Abstract</h2>
+    <p>
+      These projects exist to calibrate the best <strong>substrate</strong> to facilitate an artificially intelligent operating system. Each module — whether a game, simulation, visualization, or tool — stress-tests a different facet of the problem space: real-time rendering, graph traversal, state management, algorithmic complexity, human interaction patterns, and domain modeling. They are not portfolio pieces. They are <strong>research instruments</strong>.
+    </p>
+    <p>
+      The ultimate target is <span class="highlight">Charlotte</span> — a graph-native knowledge graph infrastructure where everything is encoded as five primitives (<strong>Node, Metric, Signal, Edge, Protocol</strong>) and time is the primary axis of truth. Charlotte observes reality as it unfolds: identities emit signals on measurable dimensions, relationships form edges, and protocols forecast what should happen next. No schemas, no migrations, no architectural rewrites between domains.
+    </p>
+    <p>
+      The work here accelerates the research and implementation leading to <strong>Draft 1 of Charlotte's knowledge graph infrastructure</strong> — and ultimately our first production version that we plan to iterate into a competitor to <strong>Neo4j, Amazon Neptune, Power BI</strong>, and the rest of the fragmented data tooling landscape. The thesis is simple: nobody offers the full pipeline end-to-end. Charlotte will be the first system that handles <strong>data ingestion to tooling deployment in real time</strong>, for any client, in any domain, without rewiring the architecture. One substrate. Every vertical. Observable reality as a service.
+    </p>
+  </div>
+
+  <hr class="divider">
+
   <div class="grid">
     <a class="card" href="https://jack-at-someai.github.io/na-k-atpase-3d/2048/">
       <span class="icon">🔢</span>
