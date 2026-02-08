@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Substrate — Knowledge Graph Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Toolbar -->
+  <div class="toolbar" id="toolbar">
+    <div class="toolbar-left">
+      <span class="toolbar-brand">SUBSTRATE</span>
+      <div class="toolbar-sep"></div>
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="graph" onclick="setView('graph')">Graph</button>
+        <button class="view-tab" data-view="timeline" onclick="setView('timeline')">Timeline</button>
+        <button class="view-tab" data-view="table" onclick="setView('table')">Table</button>
+      </div>
+    </div>
+    <div class="toolbar-right">
+      <div class="fact-counts" id="factCounts"></div>
+      <div class="toolbar-sep"></div>
+      <button class="tool-btn" onclick="centerGraph()" title="Center view">Center</button>
+      <button class="tool-btn" onclick="togglePhysics()" id="physicsBtn" title="Toggle physics">Physics: ON</button>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-label">Show:</span>
+    <button class="filter-chip active" data-type="NODE" onclick="toggleFilter('NODE')">
+      <span class="chip-dot" style="background:#22d3ee"></span>NODE
+    </button>
+    <button class="filter-chip active" data-type="EDGE" onclick="toggleFilter('EDGE')">
+      <span class="chip-dot" style="background:#94a3b8"></span>EDGE
+    </button>
+    <button class="filter-chip active" data-type="METRIC" onclick="toggleFilter('METRIC')">
+      <span class="chip-dot" style="background:#6366f1"></span>METRIC
+    </button>
+    <button class="filter-chip active" data-type="SIGNAL" onclick="toggleFilter('SIGNAL')">
+      <span class="chip-dot" style="background:#f59e0b"></span>SIGNAL
+    </button>
+    <button class="filter-chip active" data-type="PROTOCOL" onclick="toggleFilter('PROTOCOL')">
+      <span class="chip-dot" style="background:#ec4899"></span>PROTOCOL
+    </button>
+    <div class="toolbar-sep"></div>
+    <span class="filter-label">Category:</span>
+    <div class="category-chips" id="categoryChips"></div>
+  </div>
+
+  <!-- Canvas -->
+  <canvas id="graphCanvas"></canvas>
+
+  <!-- Info Panel -->
+  <div class="info-panel" id="infoPanel">
+    <div class="info-panel-header">
+      <div class="info-panel-badge" id="infoBadge">FACT</div>
+      <div>
+        <h2 id="infoTitle">Substrate</h2>
+        <p class="info-panel-type" id="infoType">Knowledge Graph Explorer</p>
+      </div>
+    </div>
+    <div class="info-panel-body" id="infoBody">
+      <p class="info-hint">Everything is a FACT. Five types, register-based structure, append-only truth.</p>
+      <div class="info-section">
+        <div class="info-section-title">Architecture</div>
+        <div class="arch-row"><span class="arch-dot" style="background:#22d3ee"></span><span>NODE</span><span class="arch-desc">Identity with lifecycle</span></div>
+        <div class="arch-row"><span class="arch-dot" style="background:#94a3b8"></span><span>EDGE</span><span class="arch-desc">Connects nodes</span></div>
+        <div class="arch-row"><span class="arch-dot" style="background:#6366f1"></span><span>METRIC</span><span class="arch-desc">Measurable dimension</span></div>
+        <div class="arch-row"><span class="arch-dot" style="background:#f59e0b"></span><span>SIGNAL</span><span class="arch-desc">Time-indexed observation</span></div>
+        <div class="arch-row"><span class="arch-dot" style="background:#ec4899"></span><span>PROTOCOL</span><span class="arch-desc">Signal forecast</span></div>
+      </div>
+      <p class="info-hint" style="margin-top:12px">Click any node on the graph to inspect its registers.</p>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
