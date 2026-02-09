@@ -102,6 +102,130 @@
       border: none;
       border-top: 1px solid #1e293b;
     }
+    /* Investment Thesis Section */
+    .thesis {
+      max-width: 960px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+    .thesis-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .thesis-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #e2e8f0;
+      margin-bottom: 6px;
+    }
+    .thesis-header .tagline {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media(max-width:700px) {
+      .thesis-grid { grid-template-columns: 1fr; }
+    }
+    .thesis-card {
+      background: #111827;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .thesis-card h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .thesis-card h3.blue { color: #60a5fa; }
+    .thesis-card h3.green { color: #34d399; }
+    .thesis-card h3.amber { color: #fbbf24; }
+    .thesis-card h3.purple { color: #a78bfa; }
+    .thesis-card p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #94a3b8;
+    }
+    .thesis-card strong { color: #e2e8f0; }
+    .thesis-card .val-highlight {
+      font-weight: 500;
+    }
+    .thesis-card .val-highlight.blue { color: #60a5fa; }
+    .thesis-card .val-highlight.green { color: #34d399; }
+    .thesis-card .val-highlight.amber { color: #fbbf24; }
+    .thesis-card .val-highlight.purple { color: #a78bfa; }
+    .thesis-wide {
+      background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(16,185,129,0.06) 50%, rgba(139,92,246,0.06) 100%);
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+    .thesis-wide h3 {
+      font-size: 14px;
+      color: #818cf8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    .thesis-wide p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+    .thesis-wide p:last-child { margin-bottom: 0; }
+    .thesis-wide strong { color: #e2e8f0; }
+    .thesis-wide .hl { color: #818cf8; font-weight: 500; }
+    .thesis-wide .gl { color: #34d399; font-weight: 500; }
+    .thesis-wide .al { color: #fbbf24; font-weight: 500; }
+    .val-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 8px;
+      font-size: 12px;
+    }
+    .val-table th {
+      text-align: left;
+      color: #64748b;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-bottom: 1px solid #1e293b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-size: 10px;
+    }
+    .val-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(30,41,59,0.5);
+      color: #94a3b8;
+    }
+    .val-table td:nth-child(2), .val-table td:nth-child(3) { color: #e2e8f0; font-weight: 600; }
+    .val-table tr:last-child td { border-bottom: none; }
+    .live-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(52,211,153,0.12);
+      color: #34d399;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin-left: 8px;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.2); }
+      50% { box-shadow: 0 0 12px 2px rgba(52,211,153,0.15); }
+    }
   </style>
 </head>
 <body>
@@ -119,6 +243,89 @@
     <p>
       The work here accelerates the research and implementation leading to <strong>Draft 1 of Charlotte's knowledge graph infrastructure</strong> — and ultimately our first production version that we plan to iterate into a competitor to <strong>Neo4j, Amazon Neptune, Power BI</strong>, and the rest of the fragmented data tooling landscape. The thesis is simple: nobody offers the full pipeline end-to-end. Charlotte will be the first system that handles <strong>data ingestion to tooling deployment in real time</strong>, for any client, in any domain, without rewiring the architecture. One substrate. Every vertical. Observable reality as a service.
     </p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="thesis">
+    <div class="thesis-header">
+      <h2>Where We Are Going</h2>
+      <p class="tagline">A hybrid business &amp; research lab &mdash; building the operating system for observable reality</p>
+    </div>
+
+    <div class="thesis-wide">
+      <h3>First Revenue <span class="live-badge">Live Feb 23, 2026</span></h3>
+      <p>
+        The <strong>ServiceIQ contract</strong> goes live February 23, 2026 &mdash; <span class="gl">$1.4M over 2 years</span> for Charlotte-powered industrial equipment intelligence deployed into a $450M-revenue MRO platform across 42 locations. This is not a pilot. It is a production managed service contract written and signed. It validates the unit economics on Day 1: Charlotte's infrastructure cost per client is <strong>$10&ndash;$50/month</strong>. The margin on this contract alone approaches <span class="gl">85%+</span>.
+      </p>
+      <p>
+        The minimum expectation going forward is <strong>doubling each subsequent contract</strong>. Contract 2 targets <span class="al">$2.8M</span>. Contract 3 targets <span class="al">$5.6M</span>. This is not speculation &mdash; each deployment proves the substrate works across a new domain, reduces onboarding cost by 30&ndash;40%, and generates cross-client intelligence that makes the next sale easier and the next contract larger.
+      </p>
+    </div>
+
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <h3 class="blue">The Research Lab</h3>
+        <p>
+          Every project on this page is a <strong>research instrument</strong> &mdash; not a portfolio piece. Each one stress-tests a facet of Charlotte's substrate: graph traversal, temporal modeling, spatial perception, swarm intelligence, domain modeling, signal processing. The lab has produced <strong>12 published research papers</strong> across venues including Nature, IEEE, ACM, NeurIPS, and Cognitive Science. Charlotte is validated across <strong>four domains</strong>: human behavior (LineLeap), biological systems (Sounder/Trogdon showpigs), industrial equipment (ISG), and cultural artifacts (Prier Violins). The production dataset contains <span class="val-highlight blue">27,200 nodes</span> and <span class="val-highlight blue">46,100 edges</span> in a unified registry.
+        </p>
+      </div>
+      <div class="thesis-card">
+        <h3 class="green">The Smart Village</h3>
+        <p>
+          The endgame is a purpose-built <strong>50&ndash;200 acre property</strong> &mdash; a modern Main Street where 20&ndash;40 businesses all run Charlotte as their sole operating system. Coffee shops, restaurants, salons, veterinary clinics, co-working spaces &mdash; every storefront shares <strong>one PoS, one inventory system, one intelligence layer</strong>. No business in the cluster runs separate software. Ingestion of a new operation is a single scan and mirror &mdash; <strong>hours to days</strong> for an organized business. The property is simultaneously a revenue-generating commercial district, a PE demonstration environment, and a blueprint for civilization-scale infrastructure planning.
+        </p>
+      </div>
+      <div class="thesis-card">
+        <h3 class="amber">The Cluster Model</h3>
+        <p>
+          Each village is a self-sustaining <strong>operating system cluster</strong> that can interact with other clusters or operate in complete isolation. Sovereignty is architectural, not political. The network effect is superlinear: every business added makes every other business in the cluster smarter. Cross-cluster intelligence &mdash; foot traffic, supply chain, demand forecasting, labor optimization &mdash; compounds as clusters scale nationally. Imagine <strong>streamlining all semen delivery in the Midwest</strong> for every pig breeder on one Charlotte-powered network. That is one vertical, one region, <span class="val-highlight amber">$20M/year</span>. Now multiply across every vertical Charlotte has already proven it can model.
+        </p>
+      </div>
+      <div class="thesis-card">
+        <h3 class="purple">The PE Thesis</h3>
+        <p>
+          Charlotte eliminates <strong>$770K&ndash;$3.4M/year in integration tax</strong> per portfolio company by replacing 5&ndash;8 disconnected tools with one substrate. Post-acquisition integration drops from 12&ndash;24 months to <strong>hours</strong>. Cross-portfolio intelligence is native, not engineered. Customer acquisition cost is near-zero &mdash; every deployment is a warm introduction through existing PE relationships, not cold outreach. <strong>LTV:CAC exceeds 50:1.</strong> Annual churn is &lt;5% because abandoning Charlotte means abandoning your entire signal history &mdash; append-only, immutable, irreproducible.
+        </p>
+      </div>
+    </div>
+
+    <div class="thesis-wide">
+      <h3>Forecasted Valuation</h3>
+      <p>
+        Grounded in comparable company analysis against <strong>Palantir</strong> ($324B, 48&ndash;96x P/S), <strong>Databricks</strong> ($134B, 28x ARR), <strong>Snowflake</strong> ($75B, 12&ndash;17x), <strong>MongoDB</strong> ($34B), <strong>Toast</strong> ($20B), <strong>Samsara</strong> ($14.5B), and <strong>Neo4j</strong> ($2B) &mdash; Charlotte's valuation trajectory reflects a category-creating infrastructure company with software-grade margins, near-zero CAC, and compounding network effects.
+      </p>
+      <table class="val-table">
+        <tr><th></th><th>Year 5</th><th>Year 10</th><th>Basis</th></tr>
+        <tr>
+          <td>Revenue (ARR)</td>
+          <td style="color:#34d399">$82M &ndash; $108M</td>
+          <td style="color:#34d399">$920M &ndash; $1.2B</td>
+          <td>25&ndash;300 clusters, 900&ndash;11K businesses, 18&ndash;120 PE clients</td>
+        </tr>
+        <tr>
+          <td>Gross Margin</td>
+          <td>74%</td>
+          <td>82%</td>
+          <td>Managed service at software economics (infra cost &lt;$50/mo/client)</td>
+        </tr>
+        <tr>
+          <td style="color:#60a5fa;font-weight:600">Low-End Valuation</td>
+          <td style="color:#60a5fa;font-weight:700">$750M &ndash; $1.5B</td>
+          <td style="color:#60a5fa;font-weight:700">$4B &ndash; $8B</td>
+          <td>15&ndash;25x ARR &middot; Comps: Snowflake, MongoDB, Samsara</td>
+        </tr>
+        <tr>
+          <td style="color:#a78bfa;font-weight:600">High-End Valuation</td>
+          <td style="color:#a78bfa;font-weight:700">$3B &ndash; $6B</td>
+          <td style="color:#a78bfa;font-weight:700">$25B &ndash; $50B</td>
+          <td>30&ndash;50x ARR &middot; Comps: Palantir, Databricks (category creation premium)</td>
+        </tr>
+      </table>
+      <p style="margin-top:14px">
+        <strong>Pre-revenue seed valuation (today):</strong> <span class="hl">$25M&ndash;$50M</span> with PE network access. <span class="hl">$50M&ndash;$100M</span> with signed property LOI. Charlotte's structural moat is not code &mdash; it is <strong>8 years of cross-domain research, 5 architectural innovations no competitor has replicated, and a substrate that treats a pig farm, a moving company, a $450M industrial platform, and a college student's nightlife career as structurally identical problems</strong>. Nobody else is building this because nobody else spent the time understanding that observable reality is one architecture, not fifty vertical products duct-taped together.
+      </p>
+    </div>
   </div>
 
   <hr class="divider">
