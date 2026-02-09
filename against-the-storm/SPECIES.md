@@ -1,0 +1,158 @@
+# Species — The Five Populations
+
+> Each species is a node category with its own signal profile.
+
+---
+
+## Overview
+
+Against the Storm gives you 3 of 5 species per settlement. Each species has:
+
+- **Base resolve** — their starting happiness threshold
+- **Hunger tolerance** — how long they survive without food (in game-minutes)
+- **Break interval** — how often they pause work to eat and fulfill needs
+- **Specializations** — buildings where they produce faster or gain resolve
+- **Complex needs** — services and goods that raise resolve beyond baseline
+- **Firekeeper bonus** — unique bonus when assigned to the Ancient Hearth
+- **Resilience** — resistance to resolve collapse under pressure
+
+You never have all five at once. The constraint of three species per run means every settlement is a different composition problem — different needs, different production advantages, different pressure tolerances.
+
+---
+
+## 1. Beavers
+
+**Role:** Fuel infrastructure and engineering.
+
+| Stat | Value |
+|------|-------|
+| Base Resolve | 10 |
+| Hunger Tolerance | 6 |
+| Break Interval | 2:00 |
+| Resilience | Normal |
+
+**Specializations:** Woodcutter's Camp, Lumber Mill, Cooperage, Mine, Toolshop, Rain Mill
+
+**Complex Needs:**
+- Food: Biscuits, Pickled Goods
+- Housing: Beaver Housing
+- Services: Luxury (Tea Doctor, Library, Market), Education (Guild House, Library, Temple)
+
+**Firekeeper Bonus:** -20% Hearth fuel consumption
+
+**Why they matter:** Beavers solve the fuel problem — the single most critical infrastructure bottleneck at high difficulty. Wood is the primary resource, and beavers turn it into everything else faster than any other species. They are the backbone species for material throughput.
+
+---
+
+## 2. Humans
+
+**Role:** Farming and food production.
+
+| Stat | Value |
+|------|-------|
+| Base Resolve | 15 |
+| Hunger Tolerance | 6 |
+| Break Interval | 2:00 |
+| Resilience | Normal |
+
+**Specializations:** Small Farm, Herb Garden, Bakery, Granary, Brewery, Tavern, Butcher
+
+**Complex Needs:**
+- Food: Pies, Biscuits, Jerky
+- Housing: Human Housing
+- Services: Religion (Library, Market, Temple), Leisure (Guild House, Tavern, Tea Doctor)
+
+**Firekeeper Bonus:** +2 Global Resolve
+
+**Why they matter:** Humans have the highest base resolve (15) and the strongest farming output. They anchor food security. But their high "Demand" rating makes them the hardest species to generate reputation from — their expectations scale with comfort. Reliable but costly to fully satisfy.
+
+---
+
+## 3. Lizards
+
+**Role:** Support, ranching, and hearth-keeping.
+
+| Stat | Value |
+|------|-------|
+| Base Resolve | 5 |
+| Hunger Tolerance | 12 |
+| Break Interval | 1:40 |
+| Resilience | High |
+
+**Specializations:** Trapper's Camp, Smokehouse, Ranch, Furnace, Kiln, Blight Post (double-dip: both specializations overlap in some buildings)
+
+**Complex Needs:**
+- Food: Jerky, Pie, Biscuits, Pickled Goods, Skewers (widest food palette)
+- Housing: Lizard Housing
+- Services: Religion (Library, Market, Temple), Brotherhood (Market, Tavern, Temple)
+
+**Firekeeper Bonus:** +1 Global Resolve
+
+**Why they matter:** Lizards are the survival species. Hunger tolerance of 12 means they last three times longer than Humans without food. High resilience prevents resolve from cratering under pressure. They synergize with the most building types of any species. They don't generate reputation themselves — they keep everyone else alive long enough to generate it.
+
+---
+
+## 4. Harpies
+
+**Role:** Alchemy, clothing, and reputation generation.
+
+| Stat | Value |
+|------|-------|
+| Base Resolve | 5 |
+| Hunger Tolerance | 4 |
+| Break Interval | 1:40 |
+| Resilience | Normal |
+
+**Specializations:** Alchemy buildings, Clothier, Teahouse
+
+**Complex Needs:**
+- Food: Jerky, Biscuits, Skewers
+- Housing: Harpy Housing
+- Services: Bloodthirst, Cleanliness, Education
+- Start with 50 Coats
+
+**Firekeeper Bonus:** Increased break frequency (more service visits)
+
+**Why they matter:** Harpies convert resolve into reputation faster than any other species. Every 2 points of resolve above 15 generates a full reputation point over time. Low base resolve (5) and low hunger tolerance (4) make them fragile — but their reputation conversion rate means a well-served Harpy population can win games that other species cannot. High risk, high yield.
+
+---
+
+## 5. Foxes
+
+**Role:** Scouting, rainwater, and hostility management.
+
+| Stat | Value |
+|------|-------|
+| Base Resolve | 5 |
+| Hunger Tolerance | 3 |
+| Break Interval | 2:00 |
+| Resilience | Low |
+
+**Specializations:** Rainwater gathering, Scouting
+
+**Complex Needs:**
+- Standard food and housing
+- Services: Variable
+
+**Firekeeper Bonus:** -6 Hostility from opened glades
+
+**Why they matter:** Foxes are immune to the resolve penalty from Hostility level — unique among all species. Their firekeeper bonus reduces hostility generated by exploration, which is critical during Storm seasons when Forest Mysteries trigger. Lowest hunger tolerance (3) and low resilience make them the most fragile species in the game, but their hostility immunity creates a strategic niche no other species fills.
+
+---
+
+## Species Composition as System Design
+
+The three-species constraint is the core design decision. Every settlement is a **composition** — not a roster. The question is never "which species is best" but "which three species create a stable system under these specific conditions."
+
+| Composition | Strength | Weakness |
+|-------------|----------|----------|
+| Beaver + Human + Lizard | Fuel + Food + Survival | No reputation conversion edge |
+| Beaver + Human + Harpy | Fuel + Food + Reputation | Fragile under hostility |
+| Beaver + Lizard + Harpy | Fuel + Survival + Reputation | Food production bottleneck |
+| Beaver + Lizard + Fox | Fuel + Survival + Hostility control | No fast reputation path |
+| Human + Lizard + Harpy | Food + Survival + Reputation | Fuel crisis at high difficulty |
+| Human + Lizard + Fox | Food + Survival + Hostility control | Slow reputation, no fuel edge |
+| Human + Harpy + Fox | Food + Reputation + Hostility | Fragile, no fuel or survival edge |
+| Lizard + Harpy + Fox | Survival + Reputation + Hostility | No fuel or food production anchor |
+
+Each row is a different system topology. The game is about reading the topology you've been given and building infrastructure that compensates for its gaps.
