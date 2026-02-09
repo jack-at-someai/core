@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlotte Agent — Trogdon Showpigs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ── Reset & Base ─────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #1a1e1a;
+  --surface: #242824;
+  --surface-variant: #343834;
+  --primary: #2d8a4e;
+  --secondary: #c4a035;
+  --tertiary: #5ba88c;
+  --error: #CE4F51;
+  --text-primary: #FFFFFF;
+  --text-secondary: #a8b0a8;
+  --positive: #5ba88c;
+  --negative: #CE4F51;
+  --accent-yellow: #c4a035;
+
+  /* Glass levels */
+  --glass-subtle-bg: rgba(255,255,255,0.05);
+  --glass-subtle-border: rgba(255,255,255,0.10);
+  --glass-standard-bg: rgba(255,255,255,0.10);
+  --glass-standard-border: rgba(255,255,255,0.20);
+  --glass-frosted-bg: rgba(255,255,255,0.15);
+  --glass-frosted-border: rgba(255,255,255,0.25);
+  --glass-deep-bg: rgba(255,255,255,0.25);
+  --glass-deep-border: rgba(255,255,255,0.30);
+
+  --radius-card: 16px;
+  --radius-btn: 12px;
+  --radius-input: 12px;
+  --radius-chip: 8px;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+}
+
+/* ── Layout Shell ─────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  backdrop-filter: blur(24px);
+  background: var(--glass-standard-bg);
+  border-bottom: 1px solid var(--glass-standard-border);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.header-brand {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(45,138,78,0.6), 0 0 40px rgba(45,138,78,0.3);
+}
+
+.header-venue {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--glass-standard-border);
+  background: var(--glass-subtle-bg);
+  backdrop-filter: blur(12px);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.header-btn:hover {
+  background: var(--glass-standard-bg);
+  color: var(--text-primary);
+}
+
+.header-btn.voice-active {
+  color: var(--tertiary);
+  border-color: var(--tertiary);
+  box-shadow: 0 0 12px rgba(91,168,140,0.4);
+  animation: voicePulseBtn 2s infinite;
+}
+
+@keyframes voicePulseBtn {
+  0%, 100% { box-shadow: 0 0 12px rgba(91,168,140,0.4); }
+  50% { box-shadow: 0 0 24px rgba(91,168,140,0.7); }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--positive);
+  box-shadow: 0 0 8px rgba(91,168,140,0.6);
+  animation: statusPulse 3s infinite;
+}
+
+.status-dot.local { background: var(--accent-yellow); box-shadow: 0 0 8px rgba(196,160,53,0.6); }
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Main Body ────────────────────────────────────────── */
+.main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Left Panel: Dashboard ────────────────────────────── */
+.dashboard {
+  flex: 1;
+  padding: 20px 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-variant) transparent;
+}
+
+.dashboard::-webkit-scrollbar { width: 6px; }
+.dashboard::-webkit-scrollbar-track { background: transparent; }
+.dashboard::-webkit-scrollbar-thumb { background: var(--surface-variant); border-radius: 3px; }
+
+/* ── Glass Card Base ──────────────────────────────────── */
+.glass-card {
+  backdrop-filter: blur(24px);
+  background: var(--glass-standard-bg);
+  border: 1px solid var(--glass-standard-border);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: var(--glass-frosted-bg);
+  border-color: var(--glass-frosted-border);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.glass-card.pulse-update {
+  animation: cardPulse 0.6s ease;
+}
+
+@keyframes cardPulse {
+  0% { border-color: var(--glass-standard-border); box-shadow: none; }
+  30% { border-color: var(--tertiary); box-shadow: 0 0 20px rgba(91,168,140,0.3); }
+  100% { border-color: var(--glass-standard-border); box-shadow: none; }
+}
+
+.card-header {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header i { font-size: 12px; color: var(--primary); }
+
+/* ── Metrics Grid ─────────────────────────────────────── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.metric-card {
+  padding: 18px;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-label i {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.metric-value {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1;
+  margin-bottom: 6px;
+  transition: all 0.4s ease;
+}
+
+.metric-change {
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metric-change.positive { color: var(--positive); }
+.metric-change.negative { color: var(--negative); }
+.metric-change.neutral { color: var(--accent-yellow); }
+
+.metric-change i { font-size: 10px; }
+
+/* ── Gestation Timeline ──────────────────────────────── */
+.gestation-section { margin-bottom: 16px; }
+
+.gestation-container {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+}
+
+.gestation-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.gestation-tooltip {
+  position: absolute;
+  background: var(--glass-deep-bg);
+  backdrop-filter: blur(40px);
+  border: 1px solid var(--glass-frosted-border);
+  border-radius: var(--radius-chip);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+/* ── Upcoming Farrowings Card ────────────────────────── */
+.farrowings-section { margin-bottom: 16px; }
+
+.farrowings-big {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.farrowings-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.farrowing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.farrowing-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-chip);
+  background: var(--glass-subtle-bg);
+  border: 1px solid var(--glass-subtle-border);
+}
+
+.farrowing-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.farrowing-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.farrowing-breed {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.farrowing-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.farrowing-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  min-width: 52px;
+  text-align: center;
+}
+
+.farrowing-badge.urgent { background: rgba(206,79,81,0.2); color: var(--negative); border: 1px solid rgba(206,79,81,0.3); }
+.farrowing-badge.warning { background: rgba(196,160,53,0.2); color: var(--accent-yellow); border: 1px solid rgba(196,160,53,0.3); }
+.farrowing-badge.ok { background: rgba(91,168,140,0.15); color: var(--positive); border: 1px solid rgba(91,168,140,0.25); }
+
+/* ── Protocols Card ───────────────────────────────────── */
+.protocols-section { margin-bottom: 16px; }
+
+.protocol-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.protocol-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.protocol-item:last-child { border-bottom: none; }
+
+.protocol-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.protocol-dot.active { background: var(--tertiary); box-shadow: 0 0 6px rgba(91,168,140,0.5); }
+.protocol-dot.inactive { background: var(--surface-variant); }
+
+.protocol-info { flex: 1; min-width: 0; }
+
+.protocol-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.protocol-trigger {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.protocol-toggle {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--surface-variant);
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+.protocol-toggle.on { background: var(--tertiary); }
+
+.protocol-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.protocol-toggle.on::after { transform: translateX(16px); }
+
+/* ── Signals Feed ─────────────────────────────────────── */
+.signals-section { margin-bottom: 16px; }
+
+.signal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-variant) transparent;
+}
+
+.signal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 4px;
+  border-radius: var(--radius-chip);
+  transition: background 0.2s ease;
+}
+
+.signal-item:hover { background: rgba(255,255,255,0.03); }
+
+.signal-item.new-signal {
+  animation: signalSlideIn 0.4s ease;
+}
+
+@keyframes signalSlideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.signal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.signal-dot.breeding { background: var(--primary); box-shadow: 0 0 6px rgba(45,138,78,0.5); }
+.signal-dot.farrowing { background: var(--accent-yellow); box-shadow: 0 0 6px rgba(196,160,53,0.5); }
+.signal-dot.health { background: var(--tertiary); box-shadow: 0 0 6px rgba(91,168,140,0.5); }
+.signal-dot.sale { background: var(--primary); box-shadow: 0 0 6px rgba(45,138,78,0.5); }
+
+.signal-text {
+  flex: 1;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.signal-time {
+  font-size: 10px;
+  color: var(--surface-variant);
+  flex-shrink: 0;
+  margin-top: 3px;
+  min-width: 55px;
+  text-align: right;
+}
+
+/* ── Right Panel: Chat ────────────────────────────────── */
+.chat-panel {
+  width: 420px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--glass-subtle-border);
+  backdrop-filter: blur(12px);
+  background: var(--glass-subtle-bg);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-variant) transparent;
+}
+
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--surface-variant); border-radius: 2px; }
+
+/* ── Chat Bubbles ─────────────────────────────────────── */
+.msg {
+  max-width: 92%;
+  animation: msgIn 0.35s ease;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.msg.charlotte { align-self: flex-start; }
+.msg.user { align-self: flex-end; }
+.msg.system { align-self: center; }
+
+.msg-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.msg.charlotte .msg-label { color: var(--primary); }
+.msg.charlotte .msg-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 6px rgba(45,138,78,0.6);
+}
+
+.msg.user .msg-label {
+  color: var(--text-secondary);
+  justify-content: flex-end;
+}
+
+.msg-bubble {
+  padding: 12px 16px;
+  border-radius: var(--radius-card);
+  font-size: 13.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.msg.charlotte .msg-bubble {
+  background: rgba(45,138,78,0.15);
+  border: 1px solid rgba(45,138,78,0.25);
+  backdrop-filter: blur(12px);
+}
+
+.msg.user .msg-bubble {
+  background: var(--surface);
+  border: 1px solid var(--glass-subtle-border);
+}
+
+.msg.system .msg-bubble {
+  background: transparent;
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding: 6px 12px;
+}
+
+/* Action cards */
+.msg-action {
+  max-width: 92%;
+  align-self: flex-start;
+  animation: actionIn 0.4s ease;
+}
+
+@keyframes actionIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.action-card {
+  background: var(--glass-subtle-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--tertiary);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(91,168,140,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tertiary);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.action-content { flex: 1; }
+
+.action-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.action-detail {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Thinking indicator */
+.thinking-dots {
+  display: flex;
+  gap: 5px;
+  padding: 4px 0;
+}
+
+.thinking-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+
+.thinking-dots span:nth-child(2) { animation-delay: 0.15s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* ── Quick Action Chips ───────────────────────────────── */
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+
+.quick-actions::-webkit-scrollbar { display: none; }
+
+.chip {
+  white-space: nowrap;
+  padding: 7px 14px;
+  border-radius: var(--radius-chip);
+  border: 1px solid var(--glass-standard-border);
+  background: var(--glass-subtle-bg);
+  backdrop-filter: blur(12px);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.chip:hover {
+  background: var(--glass-standard-bg);
+  border-color: var(--primary);
+  color: var(--text-primary);
+}
+
+/* ── Chat Input ───────────────────────────────────────── */
+.chat-input-area {
+  padding: 14px 20px 16px;
+  flex-shrink: 0;
+}
+
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(24px);
+  background: var(--glass-standard-bg);
+  border: 1px solid var(--glass-standard-border);
+  border-radius: var(--radius-input);
+  padding: 6px 8px;
+  transition: border-color 0.3s ease;
+}
+
+.chat-input-row:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(45,138,78,0.2);
+}
+
+.mic-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mic-btn:hover { color: var(--tertiary); }
+
+.mic-btn.active {
+  color: var(--tertiary);
+}
+
+.mic-btn.active::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 14px;
+  border: 2px solid var(--tertiary);
+  animation: micRing 1.8s ease-in-out infinite;
+}
+
+.mic-btn.active::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 18px;
+  border: 1px solid rgba(91,168,140,0.3);
+  animation: micRing 1.8s ease-in-out infinite 0.3s;
+}
+
+@keyframes micRing {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.chat-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-input::placeholder { color: var(--surface-variant); }
+
+.send-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(45,138,78,0.4);
+}
+
+.send-btn:active { transform: scale(0.96); }
+
+/* ── Footer Status ────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 28px;
+  backdrop-filter: blur(12px);
+  background: var(--glass-subtle-bg);
+  border-top: 1px solid var(--glass-subtle-border);
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.footer-left { display: flex; gap: 6px; }
+.footer-center { opacity: 0.6; }
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Stagger Fade In ──────────────────────────────────── */
+.stagger-in {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: staggerFade 0.5s ease forwards;
+}
+
+@keyframes staggerFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mobile Responsive ────────────────────────────────── */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .dashboard {
+    flex: none;
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+
+  .metrics-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+
+  .metrics-grid::-webkit-scrollbar { display: none; }
+
+  .metrics-grid .glass-card {
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+  .chat-panel {
+    width: 100%;
+    flex: 1;
+    border-left: none;
+    border-top: 1px solid var(--glass-subtle-border);
+  }
+
+  .header { padding: 10px 16px; }
+  .header-brand { font-size: 18px; letter-spacing: 2px; }
+  .header-venue { font-size: 14px; }
+  .dashboard { padding: 14px 16px; }
+}
+
+/* ── Utility ──────────────────────────────────────────── */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <span class="header-brand">Charlotte</span>
+      <span class="header-venue">&middot; Trogdon Showpigs</span>
+    </div>
+    <div class="header-right">
+      <button class="header-btn" id="voiceToggle" title="Toggle voice mode">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+      <button class="header-btn" id="statusBtn" title="Connection status">
+        <i class="fa-solid fa-bolt"></i>
+      </button>
+      <div class="status-dot" id="statusDot"></div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Left: Dashboard -->
+    <div class="dashboard" id="dashboard">
+
+      <!-- Metric Cards -->
+      <div class="metrics-grid">
+        <div class="glass-card metric-card stagger-in" style="animation-delay: 0.1s" id="metricHerd">
+          <div class="metric-label"><i class="fa-solid fa-paw"></i> Active Herd</div>
+          <div class="metric-value" id="valHerd">85</div>
+          <div class="metric-change positive" id="changeHerd"><i class="fa-solid fa-arrow-up"></i> <span>+3 this month</span></div>
+        </div>
+        <div class="glass-card metric-card stagger-in" style="animation-delay: 0.2s" id="metricBred">
+          <div class="metric-label"><i class="fa-solid fa-heart"></i> Sows Bred</div>
+          <div class="metric-value" id="valBred">7</div>
+          <div class="metric-change positive" id="changeBred"><i class="fa-solid fa-arrow-up"></i> <span>+2 this week</span></div>
+        </div>
+        <div class="glass-card metric-card stagger-in" style="animation-delay: 0.3s" id="metricDue">
+          <div class="metric-label"><i class="fa-solid fa-calendar-check"></i> Due This Week</div>
+          <div class="metric-value" id="valDue">1</div>
+          <div class="metric-change neutral" id="changeDue"><i class="fa-solid fa-arrow-right"></i> <span>Bella 19</span></div>
+        </div>
+        <div class="glass-card metric-card stagger-in" style="animation-delay: 0.4s" id="metricLitter">
+          <div class="metric-label"><i class="fa-solid fa-chart-bar"></i> Avg Litter</div>
+          <div class="metric-value" id="valLitter">11.0</div>
+          <div class="metric-change positive" id="changeLitter"><i class="fa-solid fa-arrow-up"></i> <span>+0.3 vs last yr</span></div>
+        </div>
+      </div>
+
+      <!-- Gestation Timeline -->
+      <div class="glass-card gestation-section stagger-in" style="animation-delay: 0.5s">
+        <div class="card-header"><i class="fa-solid fa-chart-gantt"></i> Gestation Timeline</div>
+        <div class="gestation-container" id="gestationContainer">
+          <svg id="gestationSvg" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="gestation-tooltip" id="gestationTooltip"></div>
+        </div>
+      </div>
+
+      <!-- Upcoming Farrowings -->
+      <div class="glass-card farrowings-section stagger-in" style="animation-delay: 0.6s">
+        <div class="card-header"><i class="fa-solid fa-calendar-days"></i> Upcoming Farrowings</div>
+        <div class="farrowings-big" id="farrowingsCount">4</div>
+        <div class="farrowings-sub">sows due within 14 days</div>
+        <div class="farrowing-list" id="farrowingList"></div>
+      </div>
+
+      <!-- Active Protocols -->
+      <div class="glass-card protocols-section stagger-in" style="animation-delay: 0.7s">
+        <div class="card-header"><i class="fa-solid fa-bolt"></i> Active Protocols</div>
+        <div class="protocol-list" id="protocolList"></div>
+      </div>
+
+      <!-- Signal Feed -->
+      <div class="glass-card signals-section stagger-in" style="animation-delay: 0.8s">
+        <div class="card-header"><i class="fa-solid fa-signal"></i> Signal Feed</div>
+        <div class="signal-list" id="signalList"></div>
+      </div>
+
+    </div>
+
+    <!-- Right: Chat -->
+    <div class="chat-panel">
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="quick-actions" id="quickActions">
+        <div class="chip" data-msg="Sows due soon">Sows due soon</div>
+        <div class="chip" data-msg="Herd status">Herd status</div>
+        <div class="chip" data-msg="Record breeding">Record breeding</div>
+        <div class="chip" data-msg="Litter stats">Litter stats</div>
+        <div class="chip" data-msg="Protocols">Protocols</div>
+        <div class="chip" data-msg="Sales report">Sales report</div>
+      </div>
+      <div class="chat-input-area">
+        <div class="chat-input-row">
+          <button class="mic-btn" id="micBtn"><i class="fa-solid fa-microphone"></i></button>
+          <input class="chat-input" id="chatInput" type="text" placeholder="Talk to Charlotte..." autocomplete="off">
+          <button class="send-btn" id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left" id="footerLeft">SUBSTRATE: 186 facts &middot; 5 protocols &middot; 38 signals</div>
+    <div class="footer-center">Charlotte v1.0 &middot; Trogdon Showpigs, Shelby NC</div>
+    <div class="footer-right">
+      <div class="status-dot" style="width:6px;height:6px;"></div>
+      <span id="footerTime"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Charlotte Herd Agent — Frontend Controller
+// GesDate / Trogdon Showpigs
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+(() => {
+'use strict';
+
+// ── State ─────────────────────────────────────────────────
+const state = {
+  voiceMode: false,
+  listening: false,
+  metrics: {
+    herdSize: 85,
+    sowsBred: 7,
+    dueThisWeek: 1,
+    avgLitter: 11.0,
+    herdChange: { val: 3, dir: 'up' },
+    bredChange: { val: 2, dir: 'up' },
+    dueChange: { txt: 'Bella 19' },
+    litterChange: { val: 0.3, dir: 'up' },
+  },
+  gestationData: [
+    { name: 'Lady 42', days: 28, total: 114 },
+    { name: 'Duchess 7', days: 22, total: 114 },
+    { name: 'Bella 19', days: 104, total: 114 },
+    { name: 'Daisy 15', days: 15, total: 114 },
+    { name: 'Pearl 61', days: 95, total: 114 },
+    { name: 'Ruby 22', days: 8, total: 114 },
+    { name: 'Ivy 77', days: 1, total: 114 },
+    { name: 'Luna 90', days: 80, total: 114 },
+  ],
+  upcomingFarrowings: [
+    { name: 'Bella 19', breed: 'Duroc', dueDate: 'Feb 5', daysLeft: -4 },
+    { name: 'Ivy 77', breed: 'Yorkshire', dueDate: 'Feb 8', daysLeft: -1 },
+    { name: 'Pearl 61', breed: 'Yorkshire', dueDate: 'Feb 14', daysLeft: 5 },
+    { name: 'Luna 90', breed: 'Duroc', dueDate: 'Feb 20', daysLeft: 11 },
+  ],
+  protocols: [
+    { name: 'Gestation Protocol (114-day)', trigger: 'Tracks breeding to farrowing', active: true },
+    { name: 'Heat Cycle Detection (21-day)', trigger: 'Monitor days 18-21 for heat signs', active: true },
+    { name: 'Matrix + PG600 Sync', trigger: '25-day synchronized breeding protocol', active: true },
+    { name: 'Farrowing Preparation', trigger: 'Crate prep from day 110', active: true },
+    { name: 'Piglet Processing (Day 1-3)', trigger: 'Teeth, tails, iron, ear notch', active: false },
+  ],
+  signals: [
+    { type: 'health', text: "Bella 19 confirmed bred \u2014 ultrasound positive, 35 days post-service", time: '1 day ago' },
+    { type: 'health', text: "Pearl 61 received FarrowSure Gold B at day 93 of gestation", time: '1 day ago' },
+    { type: 'health', text: "Lady 42 weight check: 485 lbs. Condition score 3.5/5", time: '2 days ago' },
+    { type: 'health', text: "Queen 88 heat cycle day 19 \u2014 no signs yet. Continue monitoring", time: '2 days ago' },
+    { type: 'farrowing', text: "Rosie 33 farrowed: 12 total, 11 alive, 1 stillborn. Sire: Thunder", time: '3 days ago' },
+    { type: 'breeding', text: "Daisy 15 ultrasound at day 28 \u2014 positive, 8+ embryos visible", time: '3 days ago' },
+    { type: 'breeding', text: "Ivy 77 bred to Champion (Hampshire). Natural service", time: '4 days ago' },
+    { type: 'sale', text: "Sold 3 gilts from L-2026-001 to buyer in Gastonia. $850 each", time: '6 days ago' },
+    { type: 'health', text: "Thunder semen collected \u2014 motility 88%, morphology good", time: '7 days ago' },
+    { type: 'breeding', text: "January 2026 batch started Matrix+PG600 protocol. 5 sows", time: '8 days ago' },
+  ],
+  factCount: 186,
+  signalCount: 38,
+  isOnline: false,
+};
+
+// ── DOM Refs ──────────────────────────────────────────────
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+const chatMessages = $('#chatMessages');
+const chatInput = $('#chatInput');
+const sendBtn = $('#sendBtn');
+const micBtn = $('#micBtn');
+const voiceToggle = $('#voiceToggle');
+const statusDot = $('#statusDot');
+
+// ── Utilities ─────────────────────────────────────────────
+function animateValue(el, start, end, duration, formatter) {
+  const startTime = performance.now();
+  const update = (now) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = start + (end - start) * eased;
+    el.textContent = formatter ? formatter(current) : Math.round(current).toString();
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+function pulseCard(el) {
+  el.classList.remove('pulse-update');
+  void el.offsetWidth;
+  el.classList.add('pulse-update');
+}
+
+// ── Render Gestation Timeline ─────────────────────────────
+function renderGestationTimeline() {
+  const svg = $('#gestationSvg');
+  const tooltip = $('#gestationTooltip');
+  const container = $('#gestationContainer');
+  const data = [...state.gestationData].sort((a, b) => b.days - a.days);
+
+  const barHeight = 22;
+  const barGap = 6;
+  const padLeft = 80;
+  const padRight = 16;
+  const padTop = 28;
+  const padBottom = 32;
+  const chartWidth = 500;
+  const chartHeight = padTop + data.length * (barHeight + barGap) + padBottom;
+
+  svg.setAttribute('viewBox', `0 0 ${chartWidth} ${chartHeight}`);
+  container.style.height = chartHeight + 'px';
+
+  const barAreaWidth = chartWidth - padLeft - padRight;
+
+  // Color function based on gestation stage
+  function gestColor(days, total) {
+    const pct = days / total;
+    if (pct >= 1) return '#CE4F51';       // overdue
+    if (pct >= 0.85) return '#c4a035';    // late (gold)
+    if (pct >= 0.4) return '#2d8a4e';     // mid (green)
+    return '#5ba88c';                      // early (sage)
+  }
+
+  function gestLabel(days, total) {
+    const pct = days / total;
+    if (pct >= 1) return 'OVERDUE';
+    if (pct >= 0.85) return 'Late';
+    if (pct >= 0.4) return 'Mid';
+    return 'Early';
+  }
+
+  let svgContent = '';
+
+  // Axis markers
+  const markers = [0, 28, 57, 85, 114];
+  markers.forEach(d => {
+    const x = padLeft + (d / 114) * barAreaWidth;
+    svgContent += `<line x1="${x}" y1="${padTop - 8}" x2="${x}" y2="${chartHeight - padBottom + 6}" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
+    svgContent += `<text x="${x}" y="${chartHeight - padBottom + 20}" text-anchor="middle" fill="#a8b0a8" font-size="9" font-family="Inter, sans-serif">Day ${d}</text>`;
+  });
+
+  // Bars
+  data.forEach((sow, i) => {
+    const y = padTop + i * (barHeight + barGap);
+    const barW = Math.min((sow.days / sow.total), 1.05) * barAreaWidth;
+    const color = gestColor(sow.days, sow.total);
+    const label = gestLabel(sow.days, sow.total);
+
+    // Sow name label
+    svgContent += `<text x="${padLeft - 8}" y="${y + barHeight / 2 + 4}" text-anchor="end" fill="#a8b0a8" font-size="11" font-weight="500" font-family="Inter, sans-serif">${sow.name}</text>`;
+
+    // Bar track (background)
+    svgContent += `<rect x="${padLeft}" y="${y}" width="${barAreaWidth}" height="${barHeight}" rx="4" fill="rgba(255,255,255,0.04)"/>`;
+
+    // Bar fill
+    svgContent += `<rect x="${padLeft}" y="${y}" width="${barW}" height="${barHeight}" rx="4" fill="${color}" opacity="0.85"/>`;
+
+    // Day count inside bar (if wide enough)
+    if (barW > 40) {
+      svgContent += `<text x="${padLeft + barW - 6}" y="${y + barHeight / 2 + 4}" text-anchor="end" fill="white" font-size="10" font-weight="600" font-family="Inter, sans-serif">Day ${sow.days}</text>`;
+    }
+
+    // Hover zone
+    svgContent += `<rect x="${padLeft}" y="${y}" width="${barAreaWidth}" height="${barHeight}" fill="transparent" class="gest-hover" data-idx="${i}" style="cursor:pointer"/>`;
+  });
+
+  svg.innerHTML = svgContent;
+
+  // Tooltip interaction
+  svg.querySelectorAll('.gest-hover').forEach(rect => {
+    rect.addEventListener('mouseenter', () => {
+      const idx = parseInt(rect.dataset.idx);
+      const sow = data[idx];
+      const pct = Math.round((sow.days / sow.total) * 100);
+      const label = gestLabel(sow.days, sow.total);
+      const daysRemaining = sow.total - sow.days;
+      tooltip.innerHTML = `<strong>${sow.name}</strong> &mdash; Day ${sow.days}/${sow.total} (${pct}%) &middot; ${label} &middot; ${daysRemaining > 0 ? daysRemaining + ' days left' : 'OVERDUE'}`;
+      tooltip.style.opacity = '1';
+
+      const svgRect = svg.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const scaleY = svgRect.height / parseFloat(svg.getAttribute('viewBox').split(' ')[3]);
+      const barY = parseFloat(rect.getAttribute('y'));
+      tooltip.style.left = (padLeft + 20) + 'px';
+      tooltip.style.top = (barY * scaleY - 28) + 'px';
+    });
+    rect.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = '0';
+    });
+  });
+}
+
+// ── Render Upcoming Farrowings ────────────────────────────
+function renderFarrowings() {
+  const container = $('#farrowingList');
+  container.innerHTML = '';
+
+  // Count due within 14 days
+  const dueCount = state.upcomingFarrowings.length;
+  $('#farrowingsCount').textContent = dueCount;
+
+  state.upcomingFarrowings.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'farrowing-row';
+
+    let badgeClass, badgeText;
+    if (f.daysLeft < 0) {
+      badgeClass = 'urgent';
+      badgeText = Math.abs(f.daysLeft) + 'd overdue';
+    } else if (f.daysLeft <= 3) {
+      badgeClass = 'urgent';
+      badgeText = f.daysLeft + ' days';
+    } else if (f.daysLeft <= 7) {
+      badgeClass = 'warning';
+      badgeText = f.daysLeft + ' days';
+    } else {
+      badgeClass = 'ok';
+      badgeText = f.daysLeft + ' days';
+    }
+
+    row.innerHTML = `
+      <div class="farrowing-info">
+        <div class="farrowing-name">${f.name}</div>
+        <div class="farrowing-breed">${f.breed}</div>
+      </div>
+      <div class="farrowing-date">${f.dueDate}</div>
+      <div class="farrowing-badge ${badgeClass}">${badgeText}</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+// ── Render Protocols ──────────────────────────────────────
+function renderProtocols() {
+  const container = $('#protocolList');
+  container.innerHTML = '';
+  state.protocols.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'protocol-item';
+    item.innerHTML = `
+      <div class="protocol-dot ${p.active ? 'active' : 'inactive'}"></div>
+      <div class="protocol-info">
+        <div class="protocol-name">${p.name}</div>
+        <div class="protocol-trigger">${p.trigger}</div>
+      </div>
+      <div class="protocol-toggle ${p.active ? 'on' : ''}" data-idx="${i}"></div>
+    `;
+    container.appendChild(item);
+  });
+  container.querySelectorAll('.protocol-toggle').forEach(tog => {
+    tog.addEventListener('click', () => {
+      const idx = parseInt(tog.dataset.idx);
+      state.protocols[idx].active = !state.protocols[idx].active;
+      renderProtocols();
+      updateFooter();
+    });
+  });
+}
+
+// ── Render Signals ────────────────────────────────────────
+function renderSignals(animate) {
+  const container = $('#signalList');
+  container.innerHTML = '';
+  state.signals.slice(0, 10).forEach((s, i) => {
+    const item = document.createElement('div');
+    item.className = 'signal-item' + (animate && i === 0 ? ' new-signal' : '');
+    item.innerHTML = `
+      <div class="signal-dot ${s.type}"></div>
+      <div class="signal-text">${s.text}</div>
+      <div class="signal-time">${s.time}</div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// ── Chat: Add Message ─────────────────────────────────────
+function addMessage(type, content) {
+  const div = document.createElement('div');
+
+  if (type === 'action') {
+    div.className = 'msg-action';
+    div.innerHTML = `
+      <div class="action-card">
+        <div class="action-icon"><i class="fa-solid ${content.icon || 'fa-bolt'}"></i></div>
+        <div class="action-content">
+          <div class="action-title">${content.title}</div>
+          <div class="action-detail">${content.detail}</div>
+        </div>
+      </div>
+    `;
+  } else {
+    div.className = `msg ${type}`;
+    const labelText = type === 'charlotte' ? 'Charlotte' : type === 'user' ? 'You' : '';
+    div.innerHTML = `
+      ${labelText ? `<div class="msg-label">${labelText}</div>` : ''}
+      <div class="msg-bubble">${type === 'system' ? content : ''}</div>
+    `;
+    if (type === 'charlotte') {
+      const bubble = div.querySelector('.msg-bubble');
+      bubble.textContent = '';
+      let i = 0;
+      const speed = 8;
+      const typeChar = () => {
+        if (i < content.length) {
+          bubble.textContent += content[i];
+          i++;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          setTimeout(typeChar, speed);
+        } else {
+          if (state.voiceMode) speakText(content);
+        }
+      };
+      setTimeout(typeChar, 100);
+    } else if (type === 'user') {
+      div.querySelector('.msg-bubble').textContent = content;
+    }
+  }
+
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return div;
+}
+
+function addThinking() {
+  const div = document.createElement('div');
+  div.className = 'msg charlotte';
+  div.id = 'thinkingMsg';
+  div.innerHTML = `
+    <div class="msg-label">Charlotte</div>
+    <div class="msg-bubble">
+      <div class="thinking-dots"><span></span><span></span><span></span></div>
+    </div>
+  `;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return div;
+}
+
+function removeThinking() {
+  const el = $('#thinkingMsg');
+  if (el) el.remove();
+}
+
+// ── Chat: Agent Response Engine ───────────────────────────
+const agentResponses = {
+  "sows due soon": {
+    text: "Here are your upcoming farrowings, Todd:\n\nBella 19 (Duroc) \u2014 Due Feb 5, that's 4 days overdue. She's showing signs of nesting but hasn't started active labor. I'd recommend checking her every 2 hours and having farrowing supplies ready.\n\nIvy 77 (Yorkshire) \u2014 Due Feb 8, 1 day overdue. Bred to Champion (Hampshire). Udder development looks good per last check.\n\nPearl 61 (Yorkshire) \u2014 Due Feb 14, 5 days out. She received her FarrowSure Gold B yesterday. Crate prep protocol triggers at day 110.\n\nLuna 90 (Duroc) \u2014 Due Feb 20, 11 days out. On track, no concerns.\n\nBella 19 is your priority right now. Want me to pull up her full gestation record?",
+    actions: [],
+  },
+  "herd status": {
+    text: "Here's your full herd breakdown, Todd:\n\nTotal head: 85\nBreeding sows: 14 (7 currently bred/gestating)\nOpen sows: 7 (3 in heat cycle monitoring)\nBoars: 3 (Thunder, Champion, King)\nGrowing pigs: 42 (across 4 litters)\nGilts for sale: 8\nRecent weans: 11 (Rosie 33's litter, 3 days old)\n\nHerd health is strong \u2014 no active illness flags. Average body condition score across bred sows is 3.4/5, right in the target range.\n\nThunder's last semen check showed 88% motility. Champion bred Ivy 77 via natural service 4 days ago.\n\nAnything specific you want to dig into?",
+    actions: [],
+  },
+  "record breeding": {
+    text: "To record a breeding, I need a few details:\n\n1. Sow ID (name and number)\n2. Boar / sire used\n3. Service type (natural or AI)\n4. Date of service\n5. Any notes (standing heat confirmed, repeat service, etc.)\n\nFor example: \"Bred Queen 88 to Thunder, natural service, today. Standing heat confirmed day 21.\"\n\nOnce recorded, I'll automatically:\n\u2022 Start the 114-day gestation countdown\n\u2022 Schedule ultrasound check at day 28\n\u2022 Flag FarrowSure Gold B vaccination at day 93\n\u2022 Trigger farrowing crate prep at day 110\n\nGo ahead and give me the details.",
+    actions: [
+      { icon: 'fa-pen-to-square', title: 'Breeding Record Form', detail: 'Ready to capture \u2014 provide sow, sire, date, and service type' },
+    ],
+  },
+  "litter stats": {
+    text: "Here's your recent litter performance:\n\nLast 5 Litters (2025-2026):\n\u2022 Rosie 33 \u00d7 Thunder \u2014 12 total, 11 alive, 1 stillborn (3 days ago)\n\u2022 Gem 14 \u00d7 King \u2014 10 total, 10 alive, 0 stillborn\n\u2022 Lady 42 \u00d7 Champion \u2014 13 total, 12 alive, 1 stillborn\n\u2022 Bonnie 56 \u00d7 Thunder \u2014 11 total, 11 alive, 0 stillborn\n\u2022 Peaches 9 \u00d7 Thunder \u2014 9 total, 8 alive, 1 mummy\n\nAverages:\nTotal born: 11.0 per litter (+0.3 vs last year)\nBorn alive: 10.4 per litter\nStillborn rate: 5.5% (industry avg ~7%)\nPre-wean mortality: 8.2% (strong)\n\nThunder is your top-performing sire with an average of 11.5 total born across 8 litters. Champion is newer but showing promise.",
+    actions: [],
+  },
+  "protocols": {
+    text: "Here's your protocol status:\n\nACTIVE:\n\u2022 Gestation Protocol (114-day) \u2014 Tracking 7 bred sows from service to farrowing. Auto-schedules ultrasounds, vaccinations, and crate prep.\n\u2022 Heat Cycle Detection (21-day) \u2014 Monitoring 3 open sows (Queen 88, Star 44, Fern 12). Flags days 18-21 for standing heat checks.\n\u2022 Matrix + PG600 Sync \u2014 January batch (5 sows) started 8 days ago. Matrix feeding ends day 14, PG600 injection day 18-19.\n\u2022 Farrowing Preparation \u2014 Bella 19 and Ivy 77 flagged. Crate cleaning, heat lamp check, colostrum supplies verified.\n\nINACTIVE:\n\u2022 Piglet Processing (Day 1-3) \u2014 Currently off. Rosie 33's litter at day 3. Toggle on to track teeth clipping, tail docking, iron shots, and ear notching.\n\nWant me to activate piglet processing for Rosie 33's litter?",
+    actions: [],
+  },
+  "sales report": {
+    text: "Here's your sales summary, Todd:\n\nJanuary 2026:\n\u2022 Gilts sold: 6 head \u2014 $5,100 total ($850 avg)\n\u2022 Barrows sold: 8 head \u2014 $4,800 total ($600 avg)\n\u2022 Breeding stock: 1 gilt to repeat buyer in Monroe \u2014 $1,200\n\u2022 Semen sales: 3 collections from Thunder \u2014 $450\nTotal January revenue: $11,550\n\nFebruary (to date):\n\u2022 3 gilts from L-2026-001 sold to buyer in Gastonia \u2014 $2,550\n\nPipeline:\n\u2022 Inquiry from Stanly County breeder for 2 Duroc gilts\n\u2022 Rosie 33's litter (11 alive) available for evaluation at 8 weeks\n\nYour average sale price is up 12% vs same period last year, driven by strong demand for registered Duroc breeding stock.",
+    actions: [],
+  },
+};
+
+function findBestResponse(input) {
+  const lower = input.toLowerCase().trim();
+  if (agentResponses[lower]) return agentResponses[lower];
+
+  const keywords = {
+    'due': 'sows due soon',
+    'farrowing': 'sows due soon',
+    'upcoming': 'sows due soon',
+    'soon': 'sows due soon',
+    'herd': 'herd status',
+    'status': 'herd status',
+    'sows': 'herd status',
+    'head': 'herd status',
+    'breed': 'record breeding',
+    'breeding': 'record breeding',
+    'bred': 'record breeding',
+    'record': 'record breeding',
+    'service': 'record breeding',
+    'litter': 'litter stats',
+    'born': 'litter stats',
+    'piglet': 'litter stats',
+    'stillborn': 'litter stats',
+    'wean': 'litter stats',
+    'protocol': 'protocols',
+    'matrix': 'protocols',
+    'pg600': 'protocols',
+    'gestation': 'protocols',
+    'heat': 'protocols',
+    'sale': 'sales report',
+    'sold': 'sales report',
+    'revenue': 'sales report',
+    'money': 'sales report',
+    'buyer': 'sales report',
+  };
+
+  for (const [kw, key] of Object.entries(keywords)) {
+    if (lower.includes(kw)) return agentResponses[key];
+  }
+
+  return {
+    text: `I understand you're asking about "${input}". Right now I'm running in local demo mode, so I can help with: upcoming farrowings, herd status, recording breedings, litter stats, protocols, and sales reports.\n\nIn production, I'd have full access to every signal in your substrate \u2014 every breeding event, weight check, health observation, and sale in real time. Try asking about one of those topics to see me in action.`,
+    actions: [],
+  };
+}
+
+async function handleSend(text) {
+  if (!text.trim()) return;
+  addMessage('user', text);
+  chatInput.value = '';
+
+  const thinking = addThinking();
+
+  let response;
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text }),
+    });
+    if (res.ok) {
+      response = await res.json();
+      state.isOnline = true;
+      statusDot.classList.remove('local');
+    } else {
+      throw new Error('Not OK');
+    }
+  } catch {
+    state.isOnline = false;
+    statusDot.classList.add('local');
+    response = findBestResponse(text);
+  }
+
+  await new Promise(r => setTimeout(r, 800 + Math.random() * 600));
+  removeThinking();
+
+  addMessage('charlotte', response.text);
+
+  if (response.actions && response.actions.length > 0) {
+    response.actions.forEach((a, i) => {
+      setTimeout(() => addMessage('action', a), 400 + i * 300);
+    });
+  }
+
+  if (response.newSignals) {
+    response.newSignals.forEach(s => state.signals.unshift(s));
+    state.signalCount += response.newSignals.length;
+    setTimeout(() => renderSignals(true), 800);
+  }
+
+  updateFooter();
+
+  try {
+    const mRes = await fetch('/api/metrics');
+    if (mRes.ok) {
+      const mData = await mRes.json();
+      // apply any backend metric updates
+    }
+  } catch { /* local mode */ }
+}
+
+// ── Voice: Speech Recognition ─────────────────────────────
+let recognition = null;
+let speechTimeout = null;
+
+function initSpeechRecognition() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) return null;
+
+  const rec = new SpeechRecognition();
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.lang = 'en-US';
+
+  rec.onresult = (event) => {
+    let transcript = '';
+    let isFinal = false;
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+      if (event.results[i].isFinal) isFinal = true;
+    }
+    chatInput.value = transcript;
+
+    clearTimeout(speechTimeout);
+    if (isFinal) {
+      speechTimeout = setTimeout(() => {
+        if (chatInput.value.trim()) {
+          handleSend(chatInput.value.trim());
+          chatInput.value = '';
+        }
+      }, 1500);
+    }
+  };
+
+  rec.onerror = (e) => {
+    console.warn('Speech recognition error:', e.error);
+    stopListening();
+  };
+
+  rec.onend = () => {
+    if (state.listening) {
+      try { rec.start(); } catch {}
+    }
+  };
+
+  return rec;
+}
+
+function startListening() {
+  if (!recognition) recognition = initSpeechRecognition();
+  if (!recognition) {
+    addMessage('system', 'Speech recognition is not supported in this browser.');
+    return;
+  }
+  state.listening = true;
+  micBtn.classList.add('active');
+  try { recognition.start(); } catch {}
+}
+
+function stopListening() {
+  state.listening = false;
+  micBtn.classList.remove('active');
+  clearTimeout(speechTimeout);
+  if (recognition) {
+    try { recognition.stop(); } catch {}
+  }
+}
+
+// ── Voice: Speech Synthesis ───────────────────────────────
+function speakText(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.95;
+  utterance.pitch = 1.05;
+
+  const voices = window.speechSynthesis.getVoices();
+  const femaleVoice = voices.find(v =>
+    v.name.includes('Samantha') || v.name.includes('Female') ||
+    v.name.includes('Zira') || v.name.includes('Google UK English Female') ||
+    v.name.includes('Karen') || v.name.includes('Victoria') ||
+    v.name.includes('Fiona') || v.name.includes('Moira')
+  );
+  if (femaleVoice) utterance.voice = femaleVoice;
+  window.speechSynthesis.speak(utterance);
+}
+
+// ── Footer Time ───────────────────────────────────────────
+function updateFooter() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  $('#footerTime').textContent = time;
+  $('#footerLeft').innerHTML = `SUBSTRATE: ${state.factCount} facts &middot; ${state.protocols.filter(p => p.active).length} protocols &middot; ${state.signalCount} signals`;
+}
+
+// ── Event Bindings ────────────────────────────────────────
+sendBtn.addEventListener('click', () => handleSend(chatInput.value.trim()));
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    handleSend(chatInput.value.trim());
+  }
+});
+
+micBtn.addEventListener('click', () => {
+  if (state.listening) {
+    stopListening();
+  } else {
+    startListening();
+  }
+});
+
+voiceToggle.addEventListener('click', () => {
+  state.voiceMode = !state.voiceMode;
+  voiceToggle.classList.toggle('voice-active', state.voiceMode);
+  if (state.voiceMode) {
+    startListening();
+  } else {
+    stopListening();
+    window.speechSynthesis && window.speechSynthesis.cancel();
+  }
+});
+
+// Quick action chips
+$$('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    handleSend(chip.dataset.msg);
+  });
+});
+
+// ── Live Simulation ───────────────────────────────────────
+let simInterval = null;
+
+function startSimulation() {
+  const sowNames = ['Lady 42', 'Duchess 7', 'Bella 19', 'Daisy 15', 'Pearl 61', 'Ruby 22', 'Queen 88', 'Star 44', 'Fern 12', 'Gem 14', 'Bonnie 56', 'Peaches 9', 'Rosie 33'];
+  const boarNames = ['Thunder', 'Champion', 'King'];
+
+  function randomSow() { return sowNames[Math.floor(Math.random() * sowNames.length)]; }
+  function randomBoar() { return boarNames[Math.floor(Math.random() * boarNames.length)]; }
+  function randomWeight() { return Math.floor(Math.random() * 80 + 420); }
+  function randomScore() { return (Math.random() * 1.5 + 2.5).toFixed(1); }
+
+  const randomSignals = [
+    { type: 'health', text: () => `${randomSow()} weight check: ${randomWeight()} lbs. Condition score ${randomScore()}/5` },
+    { type: 'health', text: () => `${randomSow()} feed intake normal. Observed at feeder 3x today` },
+    { type: 'health', text: () => `${randomSow()} temperature 101.8\u00b0F \u2014 within normal range` },
+    { type: 'breeding', text: () => `${randomSow()} heat cycle check \u2014 day ${Math.floor(Math.random() * 4 + 18)} observation logged` },
+    { type: 'farrowing', text: () => `${randomSow()} udder development check \u2014 progressing normally` },
+    { type: 'health', text: () => `${randomBoar()} pen cleaned. Hoof condition good` },
+  ];
+
+  simInterval = setInterval(() => {
+    const sig = randomSignals[Math.floor(Math.random() * randomSignals.length)];
+    state.signals.unshift({ type: sig.type, text: sig.text(), time: 'just now' });
+    if (state.signals.length > 20) state.signals.pop();
+    state.signalCount++;
+    renderSignals(true);
+
+    state.factCount++;
+    updateFooter();
+  }, 15000);
+}
+
+// ── Init ──────────────────────────────────────────────────
+function init() {
+  renderGestationTimeline();
+  renderFarrowings();
+  renderProtocols();
+  renderSignals(false);
+  updateFooter();
+
+  setInterval(updateFooter, 30000);
+
+  // Welcome message
+  setTimeout(() => {
+    addMessage('charlotte',
+      "Good morning, Todd. Here's your herd at a glance.\n\n" +
+      "You have 85 head with 7 sows currently bred. Bella 19 is due Feb 5 \u2014 that's 4 days out. I've flagged her for farrowing crate prep per protocol.\n\n" +
+      "Pearl 61 is at day 95 \u2014 FarrowSure Gold B was administered yesterday. On track.\n\n" +
+      "Queen 88 is on heat cycle day 19 with no signs yet. I'll keep monitoring through day 21.\n\n" +
+      "What would you like to do?"
+    );
+  }, 600);
+
+  // Check backend
+  fetch('/api/substrate').then(r => {
+    if (r.ok) {
+      state.isOnline = true;
+      statusDot.classList.remove('local');
+    }
+  }).catch(() => {
+    state.isOnline = false;
+    statusDot.classList.add('local');
+  });
+
+  // Preload voices
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
+
+  // Start simulation
+  startSimulation();
+}
+
+init();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1414 @@
+[
+  {
+    ":ID": "DATE:1-26-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-26-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-26",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:1-27-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-27-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-27",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:1-28-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-28-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-28",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:1-29-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-29-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-29",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:1-30-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-30-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-30",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:1-31-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-31-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-31",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-1-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-1-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-01",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-2-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-2-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-02",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:2-3-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-3-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-03",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-4-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-4-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-04",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-5-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-5-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-05",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:2-6-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-06",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:2-7-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-07",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-8-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-8-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-08",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-9-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-09",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:2-10-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-10-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-10",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-11-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-11-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-11",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-12-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-12-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-12",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:2-13-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-13-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-13",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:2-14-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-14-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-14",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-15-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-15-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-15",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-16-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-16-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-16",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:2-17-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-17-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-17",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-18-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-18-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-18",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-19-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-19-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-19",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:2-20-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-20-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-20",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:2-21-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-21-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-21",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-22-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-22-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-22",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-23-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-23-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-23",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "operation-trogdon-showpigs",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "OPERATION",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Trogdon Showpigs",
+      "location": "Shelby, NC",
+      "owner": "Todd Trogdon",
+      "herd_size": 85,
+      "operation_type": "show_pig",
+      "established": 2014
+    }
+  },
+  {
+    ":ID": "person-todd-trogdon",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PERSON",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Todd Trogdon",
+      "role": "owner"
+    }
+  },
+  {
+    ":ID": "edge-todd-owns-trogdon",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "person-todd-trogdon",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "OWNS",
+    "P3": null
+  },
+  {
+    ":ID": "sow-lady-42",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Lady 42",
+      "breed": "Yorkshire",
+      "dob": "2022-03-15",
+      "status": "bred",
+      "due_date": "2026-01-12"
+    }
+  },
+  {
+    ":ID": "edge-sow-lady-42-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-lady-42",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-duchess-7",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Duchess 7",
+      "breed": "Hampshire",
+      "dob": "2021-09-20",
+      "status": "bred",
+      "due_date": "2026-01-18"
+    }
+  },
+  {
+    ":ID": "edge-sow-duchess-7-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-duchess-7",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-bella-19",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Bella 19",
+      "breed": "Duroc",
+      "dob": "2023-01-08",
+      "status": "gestating",
+      "due_date": "2026-02-05"
+    }
+  },
+  {
+    ":ID": "edge-sow-bella-19-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-bella-19",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-rosie-33",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Rosie 33",
+      "breed": "Yorkshire",
+      "dob": "2022-06-11",
+      "status": "farrowed"
+    }
+  },
+  {
+    ":ID": "edge-sow-rosie-33-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-rosie-33",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-queen-88",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Queen 88",
+      "breed": "Berkshire",
+      "dob": "2021-04-22",
+      "status": "open"
+    }
+  },
+  {
+    ":ID": "edge-sow-queen-88-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-queen-88",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-daisy-15",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Daisy 15",
+      "breed": "Hampshire",
+      "dob": "2023-05-03",
+      "status": "bred",
+      "due_date": "2026-01-25"
+    }
+  },
+  {
+    ":ID": "edge-sow-daisy-15-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-daisy-15",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-pearl-61",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Pearl 61",
+      "breed": "Yorkshire",
+      "dob": "2022-11-30",
+      "status": "gestating",
+      "due_date": "2026-02-14"
+    }
+  },
+  {
+    ":ID": "edge-sow-pearl-61-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-pearl-61",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-stella-44",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Stella 44",
+      "breed": "Duroc",
+      "dob": "2023-03-17",
+      "status": "open"
+    }
+  },
+  {
+    ":ID": "edge-sow-stella-44-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-stella-44",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-ruby-22",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Ruby 22",
+      "breed": "Berkshire",
+      "dob": "2021-12-05",
+      "status": "bred",
+      "due_date": "2026-02-01"
+    }
+  },
+  {
+    ":ID": "edge-sow-ruby-22-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-ruby-22",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-grace-56",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Grace 56",
+      "breed": "Hampshire",
+      "dob": "2022-08-19",
+      "status": "lactating"
+    }
+  },
+  {
+    ":ID": "edge-sow-grace-56-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-grace-56",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-ivy-77",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Ivy 77",
+      "breed": "Yorkshire",
+      "dob": "2023-07-14",
+      "status": "bred",
+      "due_date": "2026-02-08"
+    }
+  },
+  {
+    ":ID": "edge-sow-ivy-77-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-ivy-77",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "sow-luna-90",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SOW",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Luna 90",
+      "breed": "Duroc",
+      "dob": "2022-02-28",
+      "status": "gestating",
+      "due_date": "2026-02-20"
+    }
+  },
+  {
+    ":ID": "edge-sow-luna-90-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-luna-90",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "boar-thunder-1",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "BOAR",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Thunder",
+      "breed": "Duroc",
+      "status": "proven",
+      "litter_count": 42
+    }
+  },
+  {
+    ":ID": "edge-boar-thunder-1-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-thunder-1",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "boar-champion-3",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "BOAR",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Champion",
+      "breed": "Hampshire",
+      "status": "proven",
+      "litter_count": 38
+    }
+  },
+  {
+    ":ID": "edge-boar-champion-3-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-champion-3",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "boar-titan-5",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "BOAR",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Titan",
+      "breed": "Yorkshire",
+      "status": "young",
+      "litter_count": 12
+    }
+  },
+  {
+    ":ID": "edge-boar-titan-5-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-titan-5",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "boar-ace-8",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "BOAR",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Ace",
+      "breed": "Berkshire",
+      "status": "proven",
+      "litter_count": 29
+    }
+  },
+  {
+    ":ID": "edge-boar-ace-8-member-of",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-ace-8",
+    "P1": "operation-trogdon-showpigs",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "litter-2026-001",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "LITTER",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "litter_id": "L-2026-001",
+      "dam_id": "sow-rosie-33",
+      "sire_id": "boar-thunder-1",
+      "farrowed_date": "2026-01-05",
+      "born_total": 12,
+      "born_alive": 11,
+      "stillborn": 1,
+      "mummies": 0,
+      "gilts": 6,
+      "boars": 5
+    }
+  },
+  {
+    ":ID": "edge-rosie-33-parent-litter-2026-001",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-rosie-33",
+    "P1": "litter-2026-001",
+    "P2": "PARENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-thunder-1-parent-litter-2026-001",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-thunder-1",
+    "P1": "litter-2026-001",
+    "P2": "PARENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "litter-2026-002",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "LITTER",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "litter_id": "L-2026-002",
+      "dam_id": "sow-grace-56",
+      "sire_id": "boar-champion-3",
+      "farrowed_date": "2026-01-20",
+      "born_total": 10,
+      "born_alive": 9,
+      "stillborn": 1,
+      "mummies": 0,
+      "gilts": 5,
+      "boars": 4
+    }
+  },
+  {
+    ":ID": "edge-grace-56-parent-litter-2026-002",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-grace-56",
+    "P1": "litter-2026-002",
+    "P2": "PARENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-champion-3-parent-litter-2026-002",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-champion-3",
+    "P1": "litter-2026-002",
+    "P2": "PARENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "litter-2025-089",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "LITTER",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "litter_id": "L-2025-089",
+      "dam_id": "sow-queen-88",
+      "sire_id": "boar-ace-8",
+      "farrowed_date": "2025-12-15",
+      "born_total": 14,
+      "born_alive": 13,
+      "stillborn": 0,
+      "mummies": 1,
+      "gilts": 7,
+      "boars": 6
+    }
+  },
+  {
+    ":ID": "edge-queen-88-parent-litter-2025-089",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-queen-88",
+    "P1": "litter-2025-089",
+    "P2": "PARENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-ace-8-parent-litter-2025-089",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "boar-ace-8",
+    "P1": "litter-2025-089",
+    "P2": "PARENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "bg-january-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "BREEDING_GROUP",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "January 2026 Batch",
+      "protocol": "MATRIX_PG600",
+      "member_count": 5
+    }
+  },
+  {
+    ":ID": "edge-lady-42-in-bg-january-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-lady-42",
+    "P1": "bg-january-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-duchess-7-in-bg-january-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-duchess-7",
+    "P1": "bg-january-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-daisy-15-in-bg-january-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-daisy-15",
+    "P1": "bg-january-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-ruby-22-in-bg-january-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-ruby-22",
+    "P1": "bg-january-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-ivy-77-in-bg-january-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-ivy-77",
+    "P1": "bg-january-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "bg-february-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "BREEDING_GROUP",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "February 2026 Batch",
+      "protocol": "NATURAL",
+      "member_count": 3
+    }
+  },
+  {
+    ":ID": "edge-bella-19-in-bg-february-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-bella-19",
+    "P1": "bg-february-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-pearl-61-in-bg-february-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-pearl-61",
+    "P1": "bg-february-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "edge-luna-90-in-bg-february-2026",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "sow-luna-90",
+    "P1": "bg-february-2026",
+    "P2": "MEMBER_OF",
+    "P3": null
+  },
+  {
+    ":ID": "metric-herd-size",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Active Herd Size",
+    "P3": {
+      "current": 85,
+      "unit": "head"
+    }
+  },
+  {
+    ":ID": "metric-sows-bred",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Sows Currently Bred",
+    "P3": {
+      "current": 7,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-sows-gestating",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Sows Gestating",
+    "P3": {
+      "current": 3,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-sows-open",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Sows Open",
+    "P3": {
+      "current": 2,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-due-this-week",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Due This Week",
+    "P3": {
+      "current": 1,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-due-next-week",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Due Next Week",
+    "P3": {
+      "current": 2,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-avg-litter-size",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Avg Litter Size (Born Alive)",
+    "P3": {
+      "current": 11.0,
+      "unit": "piglets"
+    }
+  },
+  {
+    ":ID": "metric-avg-born-total",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Avg Born Total",
+    "P3": {
+      "current": 12.0,
+      "unit": "piglets"
+    }
+  },
+  {
+    ":ID": "metric-stillborn-rate",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Stillborn Rate",
+    "P3": {
+      "current": 5.6,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-preweaning-mortality",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Pre-Weaning Mortality",
+    "P3": {
+      "current": 8.2,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-conception-rate",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Conception Rate (30-day)",
+    "P3": {
+      "current": 87.5,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-farrowing-rate",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Farrowing Rate",
+    "P3": {
+      "current": 82.0,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-pigs-weaned-per-sow",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Pigs Weaned Per Sow Per Year",
+    "P3": {
+      "current": 22.4,
+      "unit": "piglets"
+    }
+  },
+  {
+    ":ID": "metric-feed-conversion",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Feed Conversion Ratio",
+    "P3": {
+      "current": 2.8,
+      "unit": "ratio"
+    }
+  },
+  {
+    ":ID": "metric-gestation-length-avg",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Avg Gestation Length",
+    "P3": {
+      "current": 114.2,
+      "unit": "days"
+    }
+  },
+  {
+    ":ID": "metric-piglets-sold-mtd",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Piglets Sold MTD",
+    "P3": {
+      "current": 18,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-revenue-mtd",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Revenue MTD",
+    "P3": {
+      "current": 14400,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-avg-sale-price",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "NUMBER",
+    "P2": "Avg Sale Price",
+    "P3": {
+      "current": 800,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "sig-001",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-8-2026",
+    "P0": "sow-bella-19",
+    "P1": "breeding_confirmation",
+    "P2": null,
+    "P3": {
+      "description": "Bella 19 confirmed bred -- ultrasound positive, 35 days post-service.",
+      "ts": "2026-02-08T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-002",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "sow-rosie-33",
+    "P1": "farrowing_event",
+    "P2": null,
+    "P3": {
+      "description": "Rosie 33 farrowed: 12 total, 11 alive, 1 stillborn. Sire: Thunder.",
+      "ts": "2026-02-06T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-003",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-4-2026",
+    "P0": "sow-ivy-77",
+    "P1": "heat_detected",
+    "P2": null,
+    "P3": {
+      "description": "Ivy 77 showing heat signs -- standing reflex positive, appetite reduced.",
+      "ts": "2026-02-04T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-004",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-5-2026",
+    "P0": "sow-ivy-77",
+    "P1": "breeding_event",
+    "P2": null,
+    "P3": {
+      "description": "Ivy 77 bred to Champion (Hampshire). Natural service, good cover.",
+      "ts": "2026-02-05T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-005",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-1-2026",
+    "P0": "bg-january-2026",
+    "P1": "protocol_started",
+    "P2": null,
+    "P3": {
+      "description": "January 2026 breeding group started Matrix+PG600 protocol. 5 sows enrolled.",
+      "ts": "2026-02-01T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-006",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "sow-lady-42",
+    "P1": "weight_check",
+    "P2": null,
+    "P3": {
+      "description": "Lady 42 weight check: 485 lbs. Condition score 3.5/5. On target.",
+      "ts": "2026-02-07T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-007",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-3-2026",
+    "P0": "litter-2026-001",
+    "P1": "piglet_sale",
+    "P2": null,
+    "P3": {
+      "description": "Sold 3 gilts from L-2026-001 to buyer in Gastonia. $850 each.",
+      "ts": "2026-02-03T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-008",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-8-2026",
+    "P0": "sow-pearl-61",
+    "P1": "vaccination",
+    "P2": null,
+    "P3": {
+      "description": "Pearl 61 received FarrowSure Gold B at day 93 of gestation.",
+      "ts": "2026-02-08T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-009",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "sow-queen-88",
+    "P1": "heat_cycle_check",
+    "P2": null,
+    "P3": {
+      "description": "Queen 88 heat cycle day 19 -- no signs yet. Continue monitoring.",
+      "ts": "2026-02-07T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-010",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-5-2026",
+    "P0": "operation-trogdon-showpigs",
+    "P1": "feed_delivery",
+    "P2": null,
+    "P3": {
+      "description": "Feed delivery: 2 tons Purina Sow & Pig Complete. Bin at 85%.",
+      "ts": "2026-02-05T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-011",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-2-2026",
+    "P0": "boar-thunder-1",
+    "P1": "semen_collection",
+    "P2": null,
+    "P3": {
+      "description": "Thunder semen collected -- motility 88%, morphology good. Stored 4 doses.",
+      "ts": "2026-02-02T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "sig-012",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "sow-daisy-15",
+    "P1": "ultrasound",
+    "P2": null,
+    "P3": {
+      "description": "Daisy 15 ultrasound at day 28 -- positive for pregnancy. 8+ embryos visible.",
+      "ts": "2026-02-06T14:20:57.094028"
+    }
+  },
+  {
+    ":ID": "proto-gestation-114",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Gestation Protocol (114-day)",
+    "P2": "Track gestation from breeding to farrowing. Day 0: breeding. Day 21: confirm bred. Day 90: move to farrowing. Day 110: watch for signs. Day 114: expected farrowing.",
+    "P3": {
+      "duration": 114,
+      "checkpoints": [
+        21,
+        90,
+        110,
+        114
+      ]
+    }
+  },
+  {
+    ":ID": "proto-heat-cycle-21",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Heat Cycle Detection (21-day)",
+    "P2": "Monitor for heat signs on days 18-21 of cycle. Check standing reflex, vulva swelling, appetite changes, discharge.",
+    "P3": {
+      "duration": 21,
+      "detection_window": [
+        18,
+        21
+      ]
+    }
+  },
+  {
+    ":ID": "proto-matrix-pg600",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Matrix + PG600 Synchronization",
+    "P2": "Day 0-13: Matrix feeding (daily oral supplement). Day 14: stop Matrix. Day 15: PG600 injection. Day 18-25: heat detection window.",
+    "P3": {
+      "duration": 25,
+      "matrix_days": [
+        0,
+        13
+      ],
+      "pg600_day": 15,
+      "heat_window": [
+        18,
+        25
+      ]
+    }
+  },
+  {
+    ":ID": "proto-farrowing-prep",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Farrowing Preparation",
+    "P2": "Day 110: move to farrowing crate. Clean and disinfect. Heat lamp ready. Day 112: reduce feed 25%. Day 113: watch for nesting behavior.",
+    "P3": {
+      "start_day": 110,
+      "feed_reduction_day": 112
+    }
+  },
+  {
+    ":ID": "proto-piglet-processing",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Piglet Processing (Day 1-3)",
+    "P2": "Day 1: clip needle teeth, dock tails, iron injection. Day 2: ear notch. Day 3: weigh and record. Males: castrate by day 5 if not kept intact.",
+    "P3": {
+      "processing_window": [
+        1,
+        3
+      ],
+      "castration_deadline": 5
+    }
+  }
+]
