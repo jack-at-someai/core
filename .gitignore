@@ -40,3 +40,11 @@ charlotte/docs/people/donald_almquist_assets/
 
 # Large JSON observation data (knowledge graph .md and .json ARE tracked)
 charlotte/docs/artifacts/JOURNEY_OBSERVATIONS.json
+
+# Confidential business data — raw source files (visualizations ARE tracked)
+industrial-service-group/*.pdf
+industrial-service-group/*.csv
+industrial-service-group/*.xlsx
+top-tier-moving/*.jsonl
+violins/*.xlsx
+violins/*.docx
