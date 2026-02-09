@@ -50,3 +50,7 @@ top-tier-moving/*.json
 violins/*.xlsx
 violins/*.docx
 violins/*.json
+sounder/Filament Resources/
+sounder/Sounder/
+sounder/*.pdf
+sounder/sounder_scripts/
