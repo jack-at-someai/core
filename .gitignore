@@ -30,3 +30,7 @@ assets/JOURNEY/**/*.avi
 assets/JOURNEY/**/*.mkv
 assets/JOURNEY/**/*.m4v
 assets/GRANDAD_BOOK/
+assets/_thumbs/
+
+# Large JSON observation data (knowledge graph .md and .json ARE tracked)
+charlotte/docs/artifacts/JOURNEY_OBSERVATIONS.json
