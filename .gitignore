@@ -15,3 +15,18 @@
 # OS files
 .DS_Store
 Thumbs.db
+
+# Media assets (too large for git — metadata files are tracked)
+assets/JOURNEY/**/*.jpg
+assets/JOURNEY/**/*.jpeg
+assets/JOURNEY/**/*.png
+assets/JOURNEY/**/*.gif
+assets/JOURNEY/**/*.webp
+assets/JOURNEY/**/*.heic
+assets/JOURNEY/**/*.heif
+assets/JOURNEY/**/*.mp4
+assets/JOURNEY/**/*.mov
+assets/JOURNEY/**/*.avi
+assets/JOURNEY/**/*.mkv
+assets/JOURNEY/**/*.m4v
+assets/GRANDAD_BOOK/
