@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Tier Moving — Charlotte Substrate</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0b1120;color:#e2e8f0;min-height:100vh;overflow-x:hidden}
+::selection{background:#3b82f6;color:#fff}
+
+/* Header */
+.header{text-align:center;padding:40px 24px 20px;background:linear-gradient(180deg,#0f1a2e 0%,#0b1120 100%)}
+.header h1{font-size:32px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .sub{color:#64748b;font-size:14px;margin-top:6px}
+.header .sub span{color:#94a3b8}
+
+/* Company Dashboard */
+.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:1400px;margin:24px auto;padding:0 24px}
+.stat-card{background:#111827;border:1px solid #1e293b;border-radius:12px;padding:16px;text-align:center}
+.stat-card .val{font-size:24px;font-weight:700;color:#60a5fa}
+.stat-card .val.green{color:#34d399}
+.stat-card .val.amber{color:#fbbf24}
+.stat-card .val.purple{color:#a78bfa}
+.stat-card .label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px}
+
+/* Year Revenue Chart */
+.year-chart{max-width:1400px;margin:24px auto;padding:0 24px}
+.year-chart h3{font-size:14px;color:#94a3b8;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.year-bars{display:flex;gap:8px;align-items:flex-end;height:120px;padding:12px 0}
+.year-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.year-bar{width:100%;border-radius:6px 6px 0 0;min-height:4px;transition:all 300ms ease}
+.year-bar.billed{background:linear-gradient(180deg,#3b82f6,#1d4ed8)}
+.year-bar.collected{background:linear-gradient(180deg,#34d399,#059669)}
+.year-label{font-size:11px;color:#64748b}
+.year-val{font-size:10px;color:#94a3b8}
+
+/* Charlotte Substrate Panel */
+.substrate-panel{max-width:1400px;margin:24px auto;padding:0 24px}
+.substrate-box{background:linear-gradient(135deg,rgba(99,102,241,0.06),rgba(16,185,129,0.04));border:1px solid #1e293b;border-radius:16px;padding:24px}
+.substrate-box h3{font-size:14px;color:#818cf8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+.substrate-box p{font-size:13px;line-height:1.6;color:#94a3b8;margin-bottom:8px}
+.substrate-box strong{color:#e2e8f0}
+.fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:16px}
+.fact{background:#0f1629;border:1px solid #1e293b;border-radius:8px;padding:12px;font-family:'Cascadia Code','Fira Code',monospace;font-size:11px}
+.fact .type{color:#818cf8;font-weight:700}
+.fact .reg{color:#64748b}
+.fact .val{color:#34d399}
+
+/* Controls */
+.controls{max-width:1400px;margin:24px auto 16px;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.controls input{background:#111827;border:1px solid #1e293b;border-radius:8px;padding:10px 14px;color:#e2e8f0;font-size:14px;flex:1;min-width:200px;outline:none}
+.controls input:focus{border-color:#3b82f6}
+.controls select{background:#111827;border:1px solid #1e293b;border-radius:8px;padding:10px 14px;color:#e2e8f0;font-size:13px;outline:none;cursor:pointer}
+.controls .count{color:#64748b;font-size:13px;white-space:nowrap}
+
+/* Baseball Cards Grid */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;max-width:1400px;margin:0 auto 40px;padding:0 24px}
+
+/* Baseball Card */
+.card{background:#111827;border:1px solid #1e293b;border-radius:16px;overflow:hidden;transition:all 300ms ease;cursor:pointer;position:relative}
+.card:hover{border-color:#334155;transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.4)}
+.card.expanded{grid-column:span 2;grid-row:span 2}
+.card-top{display:flex;align-items:center;gap:14px;padding:16px 16px 12px}
+.avatar{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex-shrink:0;position:relative;overflow:hidden}
+.avatar::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent)}
+.card-info h2{font-size:16px;font-weight:700;letter-spacing:-0.3px}
+.card-info .role{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px}
+.card-info .tier{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;margin-top:3px}
+.tier.mvp{background:rgba(251,191,36,0.15);color:#fbbf24}
+.tier.allstar{background:rgba(139,92,246,0.15);color:#a78bfa}
+.tier.starter{background:rgba(59,130,246,0.15);color:#60a5fa}
+.tier.rookie{background:rgba(52,211,153,0.15);color:#34d399}
+.tier.bench{background:rgba(100,116,139,0.15);color:#94a3b8}
+
+/* Stats Grid */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1e293b;margin:0 16px;border-radius:8px;overflow:hidden}
+.stat{background:#0f1629;padding:10px 8px;text-align:center}
+.stat .num{font-size:16px;font-weight:700;color:#60a5fa}
+.stat .num.green{color:#34d399}
+.stat .num.amber{color:#fbbf24}
+.stat .num.red{color:#f87171}
+.stat .lbl{font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:0.3px;margin-top:2px}
+
+/* Year Sparkline on Card */
+.card-years{display:flex;gap:3px;align-items:flex-end;height:32px;padding:12px 16px 4px}
+.card-year-bar{flex:1;border-radius:3px 3px 0 0;min-height:2px;background:linear-gradient(180deg,#3b82f6,#1d4ed8);position:relative}
+.card-year-bar:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1e293b;color:#e2e8f0;padding:2px 6px;border-radius:4px;font-size:9px;white-space:nowrap;z-index:10}
+.card-year-labels{display:flex;gap:3px;padding:0 16px 12px}
+.card-year-labels span{flex:1;text-align:center;font-size:9px;color:#475569}
+
+/* Detail Panel (expanded) */
+.detail{display:none;padding:0 16px 16px}
+.card.expanded .detail{display:block}
+.detail h4{font-size:11px;color:#818cf8;text-transform:uppercase;letter-spacing:0.5px;margin:8px 0 6px}
+.detail .state-tags{display:flex;flex-wrap:wrap;gap:3px}
+.detail .state-tag{font-size:9px;padding:2px 6px;background:#1e293b;border-radius:3px;color:#94a3b8}
+.detail .fact-row{font-family:'Cascadia Code','Fira Code',monospace;font-size:10px;color:#64748b;padding:3px 0;border-bottom:1px solid #1e293b}
+.detail .fact-row .ftype{color:#818cf8;font-weight:700}
+.detail .fact-row .fval{color:#34d399}
+
+/* Collection Rate Bar */
+.coll-bar-wrap{padding:0 16px 12px}
+.coll-bar-bg{height:6px;background:#1e293b;border-radius:3px;overflow:hidden}
+.coll-bar{height:100%;border-radius:3px;transition:width 600ms ease}
+
+/* Footer */
+.footer{text-align:center;padding:32px;color:#334155;font-size:11px}
+.footer a{color:#818cf8;text-decoration:none}
+
+@media(max-width:700px){
+  .cards-grid{grid-template-columns:1fr}
+  .card.expanded{grid-column:span 1;grid-row:span 1}
+  .dashboard{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Top Tier Moving</h1>
+  <div class="sub">Charlotte Substrate — <span>10,606 jobs &middot; 98 crew members &middot; Nov 2021 – May 2025</span></div>
+</div>
+
+<div class="dashboard" id="dashboard"></div>
+<div class="year-chart">
+  <h3>Revenue by Year</h3>
+  <div id="yearChart" class="year-bars"></div>
+</div>
+
+<div class="substrate-panel">
+  <div class="substrate-box">
+    <h3>Charlotte Substrate Encoding</h3>
+    <p>Every moving job maps to Charlotte's five primitives. A <strong>crew member</strong> is a NODE. A <strong>job</strong> is a SIGNAL on that node's METRIC dimensions. <strong>Routes</strong> are EDGEs between city NODEs. <strong>Targets</strong> (revenue goals, collection benchmarks) are PROTOCOLs.</p>
+    <div class="fact-grid">
+      <div class="fact"><span class="type">NODE</span> <span class="reg">P0:</span><span class="val">SAMUEL_HENRIK</span> <span class="reg">TYPE:</span><span class="val">CREW</span> <span class="reg">TIER:</span><span class="val">MVP</span></div>
+      <div class="fact"><span class="type">METRIC</span> <span class="reg">P0:</span><span class="val">REVENUE</span> <span class="reg">UNIT:</span><span class="val">USD</span> <span class="reg">DIR:</span><span class="val">UP_GOOD</span></div>
+      <div class="fact"><span class="type">SIGNAL</span> <span class="reg">P0:</span><span class="val">SAMUEL_HENRIK</span> <span class="reg">METRIC:</span><span class="val">REVENUE</span> <span class="reg">VAL:</span><span class="val">$2,379,557</span></div>
+      <div class="fact"><span class="type">EDGE</span> <span class="reg">P0:</span><span class="val">SAN_JOSE</span> <span class="reg">→</span> <span class="val">BOTHELL</span> <span class="reg">VIA:</span><span class="val">CAMERON_BRADY</span></div>
+      <div class="fact"><span class="type">PROTOCOL</span> <span class="reg">P0:</span><span class="val">COLLECTION_TARGET</span> <span class="reg">GOAL:</span><span class="val">≥90%</span> <span class="reg">STATUS:</span><span class="val">ACTIVE</span></div>
+      <div class="fact"><span class="type">SIGNAL</span> <span class="reg">P0:</span><span class="val">COMPANY</span> <span class="reg">METRIC:</span><span class="val">WEIGHT_MOVED</span> <span class="reg">VAL:</span><span class="val">24.2M lbs</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search crew members...">
+  <select id="sortBy">
+    <option value="bal">Sort: Revenue</option>
+    <option value="jobs">Sort: Jobs</option>
+    <option value="coll_rate">Sort: Collection Rate</option>
+    <option value="avg_bal">Sort: Avg Job Size</option>
+    <option value="vol">Sort: Volume Moved</option>
+    <option value="states">Sort: State Coverage</option>
+  </select>
+  <select id="tierFilter">
+    <option value="all">All Tiers</option>
+    <option value="mvp">MVP</option>
+    <option value="allstar">All-Star</option>
+    <option value="starter">Starter</option>
+    <option value="rookie">Rookie</option>
+  </select>
+  <span class="count" id="cardCount"></span>
+</div>
+
+<div class="cards-grid" id="cardsGrid"></div>
+
+<div class="footer">
+  Charlotte Substrate &middot; Five Primitives &middot; Observable Reality as Infrastructure<br>
+  <a href="https://jack-at-someai.github.io/core/">SomeAI Research Lab</a>
+</div>
+
+<script>
+const DATA = {"company":{"total_jobs":10606,"total_bal":14439247,"total_pay":10928937,"total_vol":5439153,"total_wt":24254695,"states":52,"cities":3675,"years":{"2021":{"jobs":2991,"bal":1353268,"pay":166586},"2022":{"jobs":1523,"bal":3714670,"pay":2308490},"2023":{"jobs":1803,"bal":4353446,"pay":3445158},"2024":{"jobs":2121,"bal":3612489,"pay":3406402},"2025":{"jobs":2168,"bal":1405374,"pay":1602301}}},"employees":[{"name":"SAMUEL_HENRIK","jobs":824,"bal":2379557,"pay":1703184,"vol":588712,"wt":4120984,"avg_bal":2888,"avg_vol":714,"coll_rate":71.6,"min_bal":0,"max_bal":30662,"states":50,"cities":981,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2022":{"j":261,"b":874084,"p":539816,"v":189667,"w":1327669},"2023":{"j":255,"b":823547,"p":600659,"v":204679,"w":1432753},"2024":{"j":222,"b":511183,"p":417267,"v":141488,"w":990416},"2025":{"j":86,"b":170743,"p":145442,"v":52878,"w":370146}}},{"name":"RICKY_PHIL","jobs":515,"bal":1194247,"pay":1030954,"vol":302324,"wt":2116268,"avg_bal":2319,"avg_vol":587,"coll_rate":86.3,"min_bal":300,"max_bal":14792,"states":50,"cities":722,"state_list":["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2022":{"j":98,"b":228479,"p":180812,"v":53569,"w":374983},"2023":{"j":225,"b":541222,"p":437366,"v":134416,"w":940912},"2024":{"j":191,"b":422850,"p":409026,"v":113427,"w":793989},"2025":{"j":1,"b":1696,"p":3750,"v":912,"w":6384}}},{"name":"EDWIN_TEDDY","jobs":337,"bal":846689,"pay":750205,"vol":238121,"wt":1666425,"avg_bal":2512,"avg_vol":707,"coll_rate":88.6,"min_bal":0,"max_bal":10905,"states":49,"cities":532,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2022":{"j":28,"b":60300,"p":42850,"v":14813,"w":103691},"2023":{"j":190,"b":579363,"p":491708,"v":155572,"w":1088582},"2024":{"j":82,"b":139872,"p":139786,"v":45033,"w":315231},"2025":{"j":37,"b":67154,"p":75861,"v":22703,"w":158921}}},{"name":"TONY_ANTHONY","jobs":305,"bal":715475,"pay":642804,"vol":194220,"wt":1359540,"avg_bal":2346,"avg_vol":637,"coll_rate":89.8,"min_bal":-120,"max_bal":16377,"states":47,"cities":471,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2023":{"j":220,"b":562328,"p":452577,"v":145793,"w":1020551},"2024":{"j":1,"b":2944,"p":2173,"v":929,"w":6503},"2025":{"j":84,"b":150203,"p":188054,"v":47498,"w":332486}}},{"name":"COURTNEY_B","jobs":758,"bal":705645,"pay":346632,"vol":119780,"wt":838460,"avg_bal":931,"avg_vol":158,"coll_rate":49.1,"min_bal":-14560,"max_bal":14804,"states":43,"cities":252,"state_list":["AL","AR","AZ","CA","CO","CT","DC","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","NH","NJ","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","WA","WI","WV","WY"],"years":{"2021":{"j":419,"b":141766,"p":10597,"v":3819,"w":26733},"2022":{"j":335,"b":541880,"p":314625,"v":110035,"w":770245},"2023":{"j":4,"b":21999,"p":21410,"v":5926,"w":41482}}},{"name":"BILL_TEETER","jobs":234,"bal":653171,"pay":518545,"vol":169109,"wt":1183763,"avg_bal":2791,"avg_vol":723,"coll_rate":79.4,"min_bal":853,"max_bal":17669,"states":47,"cities":378,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","MI","MN","MO","MS","MT","NC","ND","NE","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2023":{"j":177,"b":508169,"p":396538,"v":129486,"w":906402},"2024":{"j":57,"b":145002,"p":122007,"v":39623,"w":277361}}},{"name":"CAMERON_BRADY","jobs":201,"bal":651425,"pay":438961,"vol":150568,"wt":1053976,"avg_bal":3241,"avg_vol":749,"coll_rate":67.4,"min_bal":755,"max_bal":13996,"states":48,"cities":332,"state_list":["AL","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2021":{"j":14,"b":45924,"p":24805,"v":10398,"w":72786},"2022":{"j":157,"b":545708,"p":342864,"v":120193,"w":841351},"2025":{"j":30,"b":59793,"p":71292,"v":19977,"w":139839}}},{"name":"BRANDON_BRANDON","jobs":311,"bal":636556,"pay":605067,"vol":183207,"wt":1282449,"avg_bal":2047,"avg_vol":589,"coll_rate":95.1,"min_bal":450,"max_bal":13063,"states":49,"cities":453,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2023":{"j":31,"b":68170,"p":53988,"v":19037,"w":133259},"2024":{"j":277,"b":560301,"p":542645,"v":160587,"w":1124109},"2025":{"j":3,"b":8085,"p":8434,"v":3583,"w":25081}}},{"name":"JON_JON","jobs":243,"bal":630183,"pay":508382,"vol":170131,"wt":1190917,"avg_bal":2593,"avg_vol":700,"coll_rate":80.7,"min_bal":579,"max_bal":23837,"states":49,"cities":395,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2022":{"j":38,"b":125746,"p":87710,"v":30037,"w":210259},"2023":{"j":159,"b":430458,"p":335721,"v":114775,"w":803425},"2024":{"j":37,"b":57194,"p":59881,"v":19301,"w":135107},"2025":{"j":9,"b":16785,"p":25070,"v":6018,"w":42126}}},{"name":"LEROY_SMITH","jobs":499,"bal":469560,"pay":110186,"vol":39611,"wt":277277,"avg_bal":941,"avg_vol":79,"coll_rate":23.5,"min_bal":-7463,"max_bal":10566,"states":35,"cities":105,"state_list":["AL","AR","AZ","CA","CO","CT","FL","GA","IA","ID","IL","IN","KY","LA","MA","MD","MI","MN","MO","NC","NE","NJ","NM","NV","NY","OH","OR","PA","SD","TN","TX","UT","VT","WA","WI"],"years":{"2021":{"j":434,"b":311592,"p":23192,"v":8163,"w":57141},"2022":{"j":65,"b":157968,"p":86994,"v":31448,"w":220136}}},{"name":"BILL_WILLIAM","jobs":219,"bal":433159,"pay":481590,"vol":127244,"wt":890708,"avg_bal":1978,"avg_vol":581,"coll_rate":111.2,"min_bal":-462,"max_bal":12278,"states":44,"cities":355,"state_list":["AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","MI","MN","MO","MS","MT","NC","ND","NE","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","TN","TX","UT","VA","WA","WI","WV","WY"],"years":{"2024":{"j":128,"b":282198,"p":289432,"v":77143,"w":540001},"2025":{"j":91,"b":150961,"p":192158,"v":50101,"w":350707}}},{"name":"BRITTANY_C","jobs":721,"bal":398924,"pay":59247,"vol":18640,"wt":130480,"avg_bal":553,"avg_vol":26,"coll_rate":14.9,"min_bal":-16645,"max_bal":16445,"states":25,"cities":57,"state_list":["AZ","CA","CO","FL","IL","LA","MA","MD","MI","MO","MS","NC","NE","NJ","NY","OH","OK","OR","PA","RI","SD","TN","TX","UT","WA"],"years":{"2021":{"j":687,"b":346809,"p":29847,"v":8147,"w":57029},"2022":{"j":34,"b":52115,"p":29400,"v":10493,"w":73451}}},{"name":"BLAKE_TOM","jobs":194,"bal":365986,"pay":355434,"vol":97505,"wt":682535,"avg_bal":1887,"avg_vol":503,"coll_rate":97.1,"min_bal":0,"max_bal":10998,"states":47,"cities":313,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","WA","WI","WV"],"years":{"2024":{"j":189,"b":355753,"p":336568,"v":94396,"w":660772},"2025":{"j":5,"b":10233,"p":18866,"v":3109,"w":21763}}},{"name":"BRIAN_KING","jobs":87,"bal":330214,"pay":190664,"vol":66030,"wt":462210,"avg_bal":3796,"avg_vol":759,"coll_rate":57.7,"min_bal":1365,"max_bal":21251,"states":42,"cities":154,"state_list":["AL","AR","AZ","CA","CO","CT","FL","GA","IA","IL","IN","KS","KY","LA","MA","ME","MI","MN","MS","MT","NC","ND","NE","NH","NJ","NV","NY","OH","OK","OR","PA","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2022":{"j":86,"b":328494,"p":189360,"v":65722,"w":460054},"2023":{"j":1,"b":1720,"p":1304,"v":308,"w":2156}}},{"name":"MATTHEW_BRODY","jobs":210,"bal":276259,"pay":162851,"vol":49213,"wt":344491,"avg_bal":1316,"avg_vol":234,"coll_rate":58.9,"min_bal":-4000,"max_bal":9082,"states":34,"cities":127,"state_list":["AL","AR","AZ","CA","CO","FL","GA","IA","ID","IL","IN","KS","KY","LA","MI","MO","MS","NC","NE","NJ","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","VT","WA","WI"],"years":{"2021":{"j":120,"b":66407,"p":13086,"v":4367,"w":30569},"2022":{"j":35,"b":55739,"p":22550,"v":6906,"w":48342},"2023":{"j":36,"b":82087,"p":62410,"v":19915,"w":139405},"2024":{"j":19,"b":72026,"p":64805,"v":18025,"w":126175}}},{"name":"GAVIN_GAVIN","jobs":93,"bal":251178,"pay":194897,"vol":63503,"wt":444521,"avg_bal":2701,"avg_vol":683,"coll_rate":77.6,"min_bal":1242,"max_bal":10525,"states":40,"cities":160,"state_list":["AL","AR","AZ","CA","CO","CT","DE","FL","GA","ID","IL","IN","KS","LA","MA","MD","ME","MI","MN","MO","MS","NC","NE","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TX","UT","VA","VT","WA","WI"],"years":{"2023":{"j":93,"b":251178,"p":194897,"v":63503,"w":444521}}},{"name":"STEVEN_SAL","jobs":111,"bal":244435,"pay":254510,"vol":67808,"wt":474656,"avg_bal":2202,"avg_vol":611,"coll_rate":104.1,"min_bal":822,"max_bal":11501,"states":47,"cities":195,"state_list":["00000","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","VT","WA","WI","WV"],"years":{"2024":{"j":110,"b":242845,"p":252346,"v":67065,"w":469455},"2025":{"j":1,"b":1590,"p":2164,"v":743,"w":5201}}},{"name":"SCOTT_SCOTT","jobs":135,"bal":236255,"pay":272185,"vol":82055,"wt":574385,"avg_bal":1750,"avg_vol":608,"coll_rate":115.2,"min_bal":65,"max_bal":8000,"states":44,"cities":237,"state_list":["AL","AR","AZ","CA","CO","CT","DC","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","NC","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","TN","TX","UT","VA","WA","WI","WV","WY"],"years":{"2024":{"j":96,"b":148036,"p":158376,"v":47619,"w":333333},"2025":{"j":39,"b":88219,"p":113809,"v":34436,"w":241052}}},{"name":"ALEC_NADJARI","jobs":242,"bal":215819,"pay":100247,"vol":37231,"wt":260617,"avg_bal":892,"avg_vol":154,"coll_rate":46.4,"min_bal":-4535,"max_bal":8000,"states":32,"cities":94,"state_list":["AL","AR","AZ","CA","CO","DE","FL","GA","IA","IL","IN","KY","LA","MA","MD","ME","MI","MN","MO","NC","NJ","NM","NY","OR","PA","TN","TX","UT","VA","WA","WI","WV"],"years":{"2021":{"j":187,"b":89769,"p":12569,"v":5097,"w":35679},"2022":{"j":32,"b":66028,"p":45198,"v":15834,"w":110838},"2023":{"j":12,"b":39665,"p":23849,"v":9531,"w":66717},"2024":{"j":8,"b":11417,"p":15831,"v":3577,"w":25039},"2025":{"j":3,"b":8940,"p":2800,"v":3192,"w":22344}}},{"name":"RACHEL_LEEANN","jobs":110,"bal":186557,"pay":196163,"vol":63755,"wt":446285,"avg_bal":1696,"avg_vol":580,"coll_rate":105.1,"min_bal":457,"max_bal":6025,"states":37,"cities":196,"state_list":["AL","AZ","CA","CO","CT","FL","GA","ID","IL","IN","KS","LA","MA","ME","MI","MN","MO","MS","MT","NC","NE","NJ","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","VT","WA","WI"],"years":{"2024":{"j":65,"b":111261,"p":111191,"v":37529,"w":262703},"2025":{"j":45,"b":75296,"p":84972,"v":26226,"w":183582}}},{"name":"BURNIE_BURNIE","jobs":120,"bal":183117,"pay":212000,"vol":62223,"wt":435561,"avg_bal":1526,"avg_vol":519,"coll_rate":115.8,"min_bal":744,"max_bal":8530,"states":42,"cities":213,"state_list":["AL","AR","AZ","CA","CO","FL","GA","IA","ID","IL","IN","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","PA","RI","SC","TN","TX","UT","VA","VT","WA","WI","WV"],"years":{"2024":{"j":5,"b":4956,"p":3926,"v":1057,"w":7399},"2025":{"j":115,"b":178161,"p":208074,"v":61166,"w":428162}}},{"name":"JOSH_PILLING","jobs":107,"bal":169658,"pay":172018,"vol":55865,"wt":391055,"avg_bal":1586,"avg_vol":522,"coll_rate":101.4,"min_bal":401,"max_bal":5419,"states":44,"cities":191,"state_list":["AL","AZ","CA","CO","CT","DE","FL","GA","IA","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI"],"years":{"2024":{"j":18,"b":27999,"p":25654,"v":9506,"w":66542},"2025":{"j":89,"b":141659,"p":146364,"v":46359,"w":324513}}},{"name":"THOMAS_THOMAS","jobs":76,"bal":160997,"pay":154451,"vol":45124,"wt":315868,"avg_bal":2118,"avg_vol":594,"coll_rate":95.9,"min_bal":928,"max_bal":7183,"states":40,"cities":139,"state_list":["AL","AZ","CA","CO","FL","GA","IA","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","NC","ND","NE","NJ","NM","NV","NY","OH","OK","OR","PA","SC","SD","TX","UT","VA","VT","WA","WI","WV","WY"],"years":{"2023":{"j":10,"b":26217,"p":24460,"v":6360,"w":44520},"2024":{"j":44,"b":93824,"p":80058,"v":25229,"w":176603},"2025":{"j":22,"b":40956,"p":49933,"v":13535,"w":94745}}},{"name":"CHRIS_CHRIS","jobs":50,"bal":153917,"pay":95100,"vol":34254,"wt":239778,"avg_bal":3078,"avg_vol":685,"coll_rate":61.8,"min_bal":1320,"max_bal":9910,"states":33,"cities":92,"state_list":["AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","MD","MI","MO","NC","ND","NJ","NM","NY","OH","OR","PA","SC","TN","TX","UT","VA","WA","WI","WY"],"years":{"2022":{"j":49,"b":150436,"p":91855,"v":33610,"w":235270},"2023":{"j":1,"b":3481,"p":3245,"v":644,"w":4508}}},{"name":"JOSEPH_M","jobs":53,"bal":142585,"pay":113494,"vol":35523,"wt":248661,"avg_bal":2690,"avg_vol":670,"coll_rate":79.6,"min_bal":1254,"max_bal":8554,"states":33,"cities":94,"state_list":["AR","AZ","CA","CO","FL","GA","ID","IL","IN","LA","MA","MD","MI","MN","MT","NC","ND","NJ","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","WA","WI","WV"],"years":{"2023":{"j":53,"b":142585,"p":113494,"v":35523,"w":248661}}},{"name":"TRAE_J","jobs":245,"bal":139420,"pay":24765,"vol":7907,"wt":55347,"avg_bal":569,"avg_vol":32,"coll_rate":17.8,"min_bal":-2851,"max_bal":3839,"states":19,"cities":31,"state_list":["AZ","CA","CO","FL","GA","IA","ID","IN","MA","MD","ME","MI","NC","NY","SC","TX","VA","WA","WI"],"years":{"2021":{"j":242,"b":133299,"p":21154,"v":6327,"w":44289},"2022":{"j":3,"b":6121,"p":3611,"v":1580,"w":11058}}},{"name":"CLARK_PRESTON","jobs":42,"bal":124588,"pay":118145,"vol":29560,"wt":206920,"avg_bal":2966,"avg_vol":704,"coll_rate":94.8,"min_bal":1009,"max_bal":13656,"states":28,"cities":80,"state_list":["AL","AR","AZ","CA","CO","DE","FL","GA","IA","IL","IN","KY","MA","MI","MN","NC","NY","OH","OR","PA","SC","TN","TX","UT","VA","WA","WI","WV"],"years":{"2023":{"j":18,"b":50712,"p":44605,"v":12675,"w":88725},"2024":{"j":24,"b":73876,"p":73540,"v":16885,"w":118195}}},{"name":"KYLE_ANDREWS","jobs":72,"bal":124555,"pay":93679,"vol":33194,"wt":232358,"avg_bal":1730,"avg_vol":461,"coll_rate":75.2,"min_bal":885,"max_bal":7701,"states":34,"cities":125,"state_list":["AL","AR","AZ","CA","CO","FL","GA","IL","KS","KY","LA","MA","MD","MI","MN","MO","NC","ND","NH","NJ","NM","NV","NY","OR","PA","RI","SC","SD","TN","TX","VA","WA","WI","WV"],"years":{"2023":{"j":23,"b":29691,"p":21496,"v":8774,"w":61418},"2024":{"j":49,"b":94864,"p":72183,"v":24420,"w":170940}}},{"name":"SHAWN_SHAWN","jobs":53,"bal":104515,"pay":96806,"vol":27303,"wt":191121,"avg_bal":1972,"avg_vol":515,"coll_rate":92.6,"min_bal":1021,"max_bal":7836,"states":33,"cities":95,"state_list":["AR","AZ","CA","CO","DC","FL","GA","IA","IL","KY","LA","MA","MD","MI","MO","NC","NH","NJ","NM","NV","NY","OH","OK","PA","RI","SC","TN","TX","UT","VA","WA","WI","WY"],"years":{"2023":{"j":39,"b":72947,"p":69902,"v":18715,"w":131005},"2024":{"j":14,"b":31568,"p":26904,"v":8588,"w":60116}}},{"name":"JOSH_MARKS","jobs":60,"bal":98901,"pay":114502,"vol":33049,"wt":231343,"avg_bal":1648,"avg_vol":551,"coll_rate":115.8,"min_bal":785,"max_bal":6642,"states":35,"cities":109,"state_list":["AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","LA","MA","MI","MN","MO","MT","NC","ND","NE","NV","NY","OH","OR","SC","TN","TX","UT","VA","WA","WI"],"years":{"2025":{"j":60,"b":98901,"p":114502,"v":33049,"w":231343}}},{"name":"AUTUMN_A","jobs":24,"bal":96401,"pay":55542,"vol":19718,"wt":138026,"avg_bal":4017,"avg_vol":822,"coll_rate":57.6,"min_bal":1363,"max_bal":9088,"states":20,"cities":44,"state_list":["AZ","CA","CO","FL","GA","IL","KS","MA","MD","MI","MT","NC","NV","NY","OH","OK","OR","TN","TX","WA"],"years":{"2022":{"j":24,"b":96401,"p":55542,"v":19718,"w":138026}}},{"name":"JORDON_HUNTER","jobs":44,"bal":77141,"pay":86123,"vol":25349,"wt":177443,"avg_bal":1753,"avg_vol":576,"coll_rate":111.6,"min_bal":751,"max_bal":10134,"states":35,"cities":84,"state_list":["AL","AZ","CA","CO","CT","DC","FL","GA","ID","IL","KS","KY","LA","MD","ME","MI","MN","MS","MT","NC","NE","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","VA","VT","WA","WY"],"years":{"2025":{"j":44,"b":77141,"p":86123,"v":25349,"w":177443}}},{"name":"JOSHUA_B","jobs":439,"bal":71472,"pay":18523,"vol":6560,"wt":45920,"avg_bal":163,"avg_vol":15,"coll_rate":25.9,"min_bal":-3775,"max_bal":4741,"states":15,"cities":26,"state_list":["CA","CO","FL","IL","MD","ME","MI","NC","NV","NY","OH","TN","TX","WA","WI"],"years":{"2021":{"j":438,"b":70181,"p":17513,"v":6274,"w":43918},"2022":{"j":1,"b":1291,"p":1010,"v":286,"w":2002}}},{"name":"NICK_POULTON","jobs":45,"bal":67056,"pay":58523,"vol":22177,"wt":155239,"avg_bal":1490,"avg_vol":493,"coll_rate":87.3,"min_bal":700,"max_bal":5154,"states":32,"cities":81,"state_list":["AR","AZ","CA","CO","CT","DE","FL","GA","IA","IL","IN","KY","MA","MD","NC","NH","NJ","NM","NV","NY","OH","OK","OR","PA","SC","TN","TX","UT","VA","WA","WI","WV"],"years":{"2024":{"j":39,"b":59495,"p":52625,"v":19826,"w":138782},"2025":{"j":6,"b":7561,"p":5898,"v":2351,"w":16457}}},{"name":"ERIK_H","jobs":61,"bal":55520,"pay":16932,"vol":6383,"wt":44681,"avg_bal":910,"avg_vol":105,"coll_rate":30.5,"min_bal":-1711,"max_bal":6433,"states":18,"cities":22,"state_list":["CA","CO","CT","DC","FL","GA","ID","IL","KS","NM","NY","OH","OR","PA","TN","TX","VA","WA"],"years":{"2021":{"j":51,"b":32984,"p":3800,"v":1606,"w":11242},"2022":{"j":10,"b":22536,"p":13132,"v":4777,"w":33439}}},{"name":"HAYDEN_F","jobs":10,"bal":51135,"pay":29663,"vol":10326,"wt":72282,"avg_bal":5114,"avg_vol":1033,"coll_rate":58.0,"min_bal":1613,"max_bal":13846,"states":12,"cities":20,"state_list":["CA","CO","CT","FL","GA","NM","OH","RI","TN","VA","WA","WY"],"years":{"2022":{"j":10,"b":51135,"p":29663,"v":10326,"w":72282}}},{"name":"DONNA_R","jobs":13,"bal":48966,"pay":30666,"vol":10769,"wt":75383,"avg_bal":3767,"avg_vol":828,"coll_rate":62.6,"min_bal":1192,"max_bal":9394,"states":18,"cities":26,"state_list":["AL","AZ","CA","IA","KY","LA","MI","NC","NJ","NM","NV","NY","OH","PA","SD","TX","UT","VA"],"years":{"2022":{"j":13,"b":48966,"p":30666,"v":10769,"w":75383}}},{"name":"KYLE_R","jobs":20,"bal":48376,"pay":30213,"vol":10657,"wt":74599,"avg_bal":2419,"avg_vol":533,"coll_rate":62.5,"min_bal":1309,"max_bal":4968,"states":26,"cities":40,"state_list":["AL","AR","AZ","CA","CO","CT","FL","GA","IA","LA","MD","MI","MN","MT","NC","NH","NJ","NM","NY","OK","PA","SC","TN","TX","VA","WA"],"years":{"2022":{"j":19,"b":45696,"p":27695,"v":9857,"w":68999},"2023":{"j":1,"b":2680,"p":2518,"v":800,"w":5600}}},{"name":"GIOVANNA_E","jobs":14,"bal":47216,"pay":24814,"vol":9130,"wt":63910,"avg_bal":3373,"avg_vol":652,"coll_rate":52.6,"min_bal":1377,"max_bal":8180,"states":17,"cities":26,"state_list":["CA","FL","GA","IL","MA","MD","MI","MS","NC","NE","NJ","NM","NV","NY","TX","UT","VA"],"years":{"2022":{"j":14,"b":47216,"p":24814,"v":9130,"w":63910}}},{"name":"DAVE_F","jobs":18,"bal":39722,"pay":24801,"vol":9928,"wt":69496,"avg_bal":2207,"avg_vol":552,"coll_rate":62.4,"min_bal":-1501,"max_bal":12380,"states":16,"cities":26,"state_list":["AL","CA","FL","GA","IA","MA","MO","NC","NJ","NY","OH","OK","PA","VA","WA","WY"],"years":{"2021":{"j":1,"b":4572,"p":3454,"v":1020,"w":7140},"2022":{"j":17,"b":35150,"p":21347,"v":8908,"w":62356}}},{"name":"PATRICK_RANDY","jobs":13,"bal":33205,"pay":27624,"vol":9109,"wt":63763,"avg_bal":2554,"avg_vol":701,"coll_rate":83.2,"min_bal":1000,"max_bal":4686,"states":18,"cities":26,"state_list":["AL","AZ","CA","CO","FL","MA","MI","MN","NC","NJ","OH","OK","OR","PA","SC","TX","VA","WA"],"years":{"2024":{"j":13,"b":33205,"p":27624,"v":9109,"w":63763}}},{"name":"TOM_R","jobs":10,"bal":30240,"pay":24526,"vol":7483,"wt":52381,"avg_bal":3024,"avg_vol":748,"coll_rate":81.1,"min_bal":966,"max_bal":12756,"states":13,"cities":19,"state_list":["AL","CA","FL","GA","ID","KS","NC","NE","NY","OR","SC","SD","TX"],"years":{"2024":{"j":10,"b":30240,"p":24526,"v":7483,"w":52381}}},{"name":"JORDAN_M","jobs":11,"bal":28429,"pay":14991,"vol":5647,"wt":39529,"avg_bal":2584,"avg_vol":513,"coll_rate":52.7,"min_bal":1531,"max_bal":8320,"states":12,"cities":22,"state_list":["AZ","CA","CO","FL","NM","NV","NY","OR","TX","VA","WA","WI"],"years":{"2022":{"j":11,"b":28429,"p":14991,"v":5647,"w":39529}}},{"name":"MICHAEL_T","jobs":8,"bal":26263,"pay":13292,"vol":5405,"wt":37835,"avg_bal":3283,"avg_vol":676,"coll_rate":50.6,"min_bal":1537,"max_bal":5495,"states":13,"cities":16,"state_list":["AZ","CA","CT","FL","GA","KY","MA","MN","MO","OR","PA","TN","TX"],"years":{"2022":{"j":7,"b":24726,"p":12272,"v":5105,"w":35735},"2023":{"j":1,"b":1537,"p":1020,"v":300,"w":2100}}},{"name":"JOHNC","jobs":6,"bal":26186,"pay":21478,"vol":6928,"wt":48496,"avg_bal":4364,"avg_vol":1155,"coll_rate":82.0,"min_bal":1242,"max_bal":10888,"states":11,"cities":12,"state_list":["AZ","FL","MA","MD","MI","NV","NY","TN","TX","VA","WI"],"years":{"2022":{"j":5,"b":21007,"p":16624,"v":5350,"w":37450},"2023":{"j":1,"b":5179,"p":4854,"v":1578,"w":11046}}},{"name":"EVAN_ED","jobs":12,"bal":25476,"pay":28042,"vol":7551,"wt":52857,"avg_bal":2123,"avg_vol":629,"coll_rate":110.1,"min_bal":871,"max_bal":11064,"states":18,"cities":23,"state_list":["AR","AZ","CA","CO","CT","FL","KS","MD","MI","NC","NH","NJ","NY","OR","PA","TN","TX","VA"],"years":{"2024":{"j":12,"b":25476,"p":28042,"v":7551,"w":52857}}},{"name":"JIMMY_M","jobs":10,"bal":23461,"pay":16849,"vol":5735,"wt":40145,"avg_bal":2346,"avg_vol":574,"coll_rate":71.8,"min_bal":1397,"max_bal":3512,"states":17,"cities":20,"state_list":["AZ","CO","FL","GA","IL","MI","MN","MO","NC","NE","OR","TN","TX","UT","VA","VT","WI"],"years":{"2022":{"j":10,"b":23461,"p":16849,"v":5735,"w":40145}}},{"name":"ALICIA_ALICIA","jobs":17,"bal":22121,"pay":24382,"vol":6643,"wt":46501,"avg_bal":1301,"avg_vol":391,"coll_rate":110.2,"min_bal":900,"max_bal":1966,"states":18,"cities":33,"state_list":["AZ","CA","CO","FL","GA","IA","ID","IL","IN","MD","MO","NV","NY","OH","TN","TX","VA","WA"],"years":{"2024":{"j":14,"b":17935,"p":20220,"v":5336,"w":37352},"2025":{"j":3,"b":4186,"p":4162,"v":1307,"w":9149}}},{"name":"OSCAR_OSCAR","jobs":10,"bal":20892,"pay":18903,"vol":6054,"wt":42378,"avg_bal":2089,"avg_vol":605,"coll_rate":90.5,"min_bal":-100,"max_bal":4341,"states":14,"cities":19,"state_list":["AL","AR","CO","FL","IA","KS","MD","MO","NC","OH","TX","WA","WV","WY"],"years":{"2024":{"j":10,"b":20892,"p":18903,"v":6054,"w":42378}}},{"name":"SHANE_W","jobs":6,"bal":20038,"pay":15379,"vol":4757,"wt":33299,"avg_bal":3340,"avg_vol":793,"coll_rate":76.7,"min_bal":1531,"max_bal":6291,"states":8,"cities":12,"state_list":["AZ","CA","CT","FL","MA","TX","WA","WI"],"years":{"2022":{"j":6,"b":20038,"p":15379,"v":4757,"w":33299}}},{"name":"GARRISON_MIKE_MICHAEL","jobs":6,"bal":18397,"pay":16987,"vol":5107,"wt":35749,"avg_bal":3066,"avg_vol":851,"coll_rate":92.3,"min_bal":2082,"max_bal":5262,"states":11,"cities":12,"state_list":["AZ","CA","FL","NJ","NV","OK","OR","TX","VA","WA","WI"],"years":{"2023":{"j":6,"b":18397,"p":16987,"v":5107,"w":35749}}},{"name":"JENNI","jobs":5,"bal":17987,"pay":15354,"vol":4360,"wt":30520,"avg_bal":3597,"avg_vol":872,"coll_rate":85.4,"min_bal":1422,"max_bal":9786,"states":8,"cities":10,"state_list":["AZ","CO","FL","MT","NV","OK","SC","TN"],"years":{"2022":{"j":5,"b":17987,"p":15354,"v":4360,"w":30520}}},{"name":"DANHARRIS","jobs":4,"bal":17887,"pay":11773,"vol":3942,"wt":27594,"avg_bal":4472,"avg_vol":986,"coll_rate":65.8,"min_bal":-1997,"max_bal":8835,"states":5,"cities":6,"state_list":["IN","MN","OK","VA","WA"],"years":{"2022":{"j":4,"b":17887,"p":11773,"v":3942,"w":27594}}},{"name":"MATTHEW_L","jobs":11,"bal":17690,"pay":19098,"vol":5800,"wt":40600,"avg_bal":1608,"avg_vol":527,"coll_rate":108.0,"min_bal":971,"max_bal":3583,"states":16,"cities":22,"state_list":["AR","CA","CO","FL","GA","IA","LA","NC","NH","NM","OH","OK","PA","TX","WA","WI"],"years":{"2025":{"j":11,"b":17690,"p":19098,"v":5800,"w":40600}}},{"name":"VICTORIA_P","jobs":7,"bal":17516,"pay":14401,"vol":4490,"wt":31430,"avg_bal":2502,"avg_vol":641,"coll_rate":82.2,"min_bal":1330,"max_bal":6307,"states":10,"cities":14,"state_list":["CA","CO","FL","IL","IN","LA","MD","NC","TX","VA"],"years":{"2023":{"j":7,"b":17516,"p":14401,"v":4490,"w":31430}}},{"name":"CAROLYNW","jobs":6,"bal":16461,"pay":12764,"vol":4285,"wt":29995,"avg_bal":2744,"avg_vol":714,"coll_rate":77.5,"min_bal":1246,"max_bal":4671,"states":10,"cities":12,"state_list":["AL","CA","CO","FL","NC","NV","NY","TN","TX","VA"],"years":{"2023":{"j":6,"b":16461,"p":12764,"v":4285,"w":29995}}},{"name":"COREY","jobs":10,"bal":15084,"pay":17375,"vol":4927,"wt":34489,"avg_bal":1508,"avg_vol":493,"coll_rate":115.2,"min_bal":740,"max_bal":3207,"states":14,"cities":20,"state_list":["AL","AR","FL","IL","IN","MA","NV","NY","OH","PA","TX","UT","VA","WI"],"years":{"2024":{"j":3,"b":2865,"p":2339,"v":643,"w":4501},"2025":{"j":7,"b":12219,"p":15036,"v":4284,"w":29988}}},{"name":"MIKE_MICHAEL","jobs":7,"bal":14599,"pay":13707,"vol":4479,"wt":31353,"avg_bal":2086,"avg_vol":640,"coll_rate":93.9,"min_bal":1001,"max_bal":3800,"states":11,"cities":14,"state_list":["AZ","CA","GA","IL","MD","MI","MS","NC","NV","PA","TX"],"years":{"2023":{"j":3,"b":9308,"p":7666,"v":2667,"w":18669},"2025":{"j":4,"b":5291,"p":6041,"v":1812,"w":12684}}},{"name":"SAMUELG","jobs":4,"bal":13000,"pay":8874,"vol":3671,"wt":25431,"avg_bal":3250,"avg_vol":918,"coll_rate":68.3,"min_bal":0,"max_bal":9739,"states":8,"cities":8,"state_list":["DE","IL","MA","MI","NC","NV","NY","TN"],"years":{"2023":{"j":4,"b":13000,"p":8874,"v":3671,"w":25431}}},{"name":"DAN_DANIEL","jobs":4,"bal":10570,"pay":7632,"vol":3243,"wt":22701,"avg_bal":2642,"avg_vol":811,"coll_rate":72.2,"min_bal":1111,"max_bal":4668,"states":7,"cities":8,"state_list":["CO","FL","MA","MI","OK","PA","UT"],"years":{"2024":{"j":4,"b":10570,"p":7632,"v":3243,"w":22701}}},{"name":"PATRICK_R","jobs":6,"bal":9359,"pay":6840,"vol":2324,"wt":16268,"avg_bal":1560,"avg_vol":387,"coll_rate":73.1,"min_bal":1055,"max_bal":1912,"states":11,"cities":12,"state_list":["AL","AZ","CO","IL","KY","LA","NC","NM","NY","RI","VA"],"years":{"2023":{"j":6,"b":9359,"p":6840,"v":2324,"w":16268}}},{"name":"MEADON","jobs":3,"bal":8502,"pay":7609,"vol":1983,"wt":13881,"avg_bal":2834,"avg_vol":661,"coll_rate":89.5,"min_bal":1845,"max_bal":4729,"states":6,"cities":6,"state_list":["CA","IA","IL","NC","PA","VA"],"years":{"2023":{"j":3,"b":8502,"p":7609,"v":1983,"w":13881}}},{"name":"BRETT_BRETT","jobs":6,"bal":7988,"pay":10285,"vol":2982,"wt":20874,"avg_bal":1331,"avg_vol":497,"coll_rate":128.8,"min_bal":800,"max_bal":1788,"states":9,"cities":12,"state_list":["AZ","CT","FL","IN","NC","ND","NJ","NV","TX"],"years":{"2024":{"j":3,"b":3180,"p":2871,"v":1175,"w":8225},"2025":{"j":3,"b":4808,"p":7414,"v":1807,"w":12649}}},{"name":"SAMANTHAK","jobs":4,"bal":7058,"pay":5053,"vol":1895,"wt":13265,"avg_bal":1764,"avg_vol":474,"coll_rate":71.6,"min_bal":-242,"max_bal":3012,"states":6,"cities":7,"state_list":["AL","AZ","FL","IL","VA","WI"],"years":{"2021":{"j":4,"b":7058,"p":5053,"v":1895,"w":13265}}},{"name":"GARRET_ROBERT","jobs":5,"bal":6105,"pay":6184,"vol":2697,"wt":18879,"avg_bal":1221,"avg_vol":539,"coll_rate":101.3,"min_bal":898,"max_bal":2000,"states":8,"cities":10,"state_list":["FL","IN","MA","MI","NJ","PA","SC","WV"],"years":{"2025":{"j":5,"b":6105,"p":6184,"v":2697,"w":18879}}},{"name":"RYANK","jobs":3,"bal":3563,"pay":2826,"vol":971,"wt":6797,"avg_bal":1188,"avg_vol":324,"coll_rate":79.3,"min_bal":1001,"max_bal":1553,"states":6,"cities":6,"state_list":["IL","LA","MA","MS","PA","TX"],"years":{"2023":{"j":3,"b":3563,"p":2826,"v":971,"w":6797}}},{"name":"THEODORE","jobs":3,"bal":3464,"pay":3788,"vol":1076,"wt":7532,"avg_bal":1155,"avg_vol":359,"coll_rate":109.4,"min_bal":977,"max_bal":1289,"states":5,"cities":6,"state_list":["FL","GA","IL","MI","TX"],"years":{"2024":{"j":3,"b":3464,"p":3788,"v":1076,"w":7532}}},{"name":"RAMONAA","jobs":3,"bal":2098,"pay":2023,"vol":2318,"wt":16226,"avg_bal":699,"avg_vol":773,"coll_rate":96.4,"min_bal":0,"max_bal":1101,"states":5,"cities":6,"state_list":["FL","GA","NJ","NY","TX"],"years":{"2024":{"j":2,"b":2098,"p":2023,"v":518,"w":3626},"2025":{"j":1,"b":0,"p":0,"v":1800,"w":12600}}}]};
+
+const company = DATA.company;
+const employees = DATA.employees;
+
+// Color palette for avatars
+const COLORS = ['#3b82f6','#8b5cf6','#ec4899','#f59e0b','#10b981','#ef4444','#06b6d4','#f97316','#6366f1','#14b8a6','#e11d48','#84cc16'];
+function nameColor(name) {
+  let h = 0; for(let i=0;i<name.length;i++) h = name.charCodeAt(i) + ((h << 5) - h);
+  return COLORS[Math.abs(h) % COLORS.length];
+}
+function initials(name) {
+  const parts = name.replace(/_/g,' ').split(' ');
+  return parts.length > 1 ? (parts[0][0] + parts[1][0]).toUpperCase() : name.slice(0,2).toUpperCase();
+}
+function formatName(name) {
+  return name.replace(/_/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+function fmt(n) { return n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : n >= 1000 ? '$' + (n/1000).toFixed(0) + 'K' : '$' + n; }
+function fmtN(n) { return n >= 1000000 ? (n/1000000).toFixed(1) + 'M' : n >= 1000 ? (n/1000).toFixed(0) + 'K' : n.toString(); }
+function getTier(e) {
+  if (e.bal >= 500000 && e.jobs >= 100) return 'mvp';
+  if (e.bal >= 200000 || e.jobs >= 100) return 'allstar';
+  if (e.bal >= 50000 || e.jobs >= 30) return 'starter';
+  return 'rookie';
+}
+function tierLabel(t) { return {mvp:'MVP',allstar:'All-Star',starter:'Starter',rookie:'Rookie'}[t]; }
+function collColor(rate) {
+  if (rate >= 95) return '#34d399';
+  if (rate >= 75) return '#60a5fa';
+  if (rate >= 50) return '#fbbf24';
+  return '#f87171';
+}
+function collClass(rate) {
+  if (rate >= 95) return 'green';
+  if (rate >= 75) return '';
+  if (rate >= 50) return 'amber';
+  return 'red';
+}
+
+// Dashboard
+function renderDashboard() {
+  const d = document.getElementById('dashboard');
+  const collRate = company.total_bal > 0 ? (company.total_pay / company.total_bal * 100).toFixed(1) : 0;
+  const stats = [
+    {v: fmtN(company.total_jobs), l: 'Total Jobs', c: ''},
+    {v: fmt(company.total_bal), l: 'Total Billed', c: ''},
+    {v: fmt(company.total_pay), l: 'Collected', c: 'green'},
+    {v: collRate + '%', l: 'Collection Rate', c: parseFloat(collRate) >= 75 ? 'green' : 'amber'},
+    {v: fmtN(company.total_vol) + ' ft³', l: 'Volume Moved', c: 'purple'},
+    {v: fmtN(company.total_wt) + ' lbs', l: 'Weight Moved', c: 'purple'},
+    {v: company.states, l: 'States Covered', c: 'amber'},
+    {v: fmtN(company.cities), l: 'Cities Served', c: 'amber'},
+  ];
+  d.innerHTML = stats.map(s => `<div class="stat-card"><div class="val ${s.c}">${s.v}</div><div class="label">${s.l}</div></div>`).join('');
+}
+
+// Year Chart
+function renderYearChart() {
+  const c = document.getElementById('yearChart');
+  const years = Object.entries(company.years).sort((a,b) => a[0].localeCompare(b[0]));
+  const maxBal = Math.max(...years.map(([,d]) => d.bal));
+  c.innerHTML = years.map(([y, d]) => {
+    const bH = Math.max(4, d.bal / maxBal * 100);
+    const pH = d.bal > 0 ? Math.max(2, d.pay / maxBal * 100) : 0;
+    return `<div class="year-bar-wrap">
+      <div class="year-val">${fmt(d.bal)}</div>
+      <div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:80px">
+        <div class="year-bar billed" style="height:${bH}%"></div>
+        <div class="year-bar collected" style="height:${pH}%"></div>
+      </div>
+      <div class="year-label">${y}</div>
+      <div class="year-val">${fmtN(d.jobs)} jobs</div>
+    </div>`;
+  }).join('');
+}
+
+// Cards
+function renderCards(emps) {
+  const grid = document.getElementById('cardsGrid');
+  document.getElementById('cardCount').textContent = emps.length + ' crew members';
+
+  grid.innerHTML = emps.map((e, i) => {
+    const tier = getTier(e);
+    const color = nameColor(e.name);
+    const years = Object.entries(e.years).sort((a,b) => a[0].localeCompare(b[0]));
+    const maxYBal = Math.max(...years.map(([,d]) => d.b), 1);
+    const cc = collColor(e.coll_rate);
+    const ccls = collClass(e.coll_rate);
+    const barW = Math.min(100, Math.max(5, e.coll_rate));
+
+    return `<div class="card" data-idx="${i}" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="avatar" style="background:${color}">${initials(e.name)}</div>
+        <div class="card-info">
+          <h2>${formatName(e.name)}</h2>
+          <div class="role">${e.jobs} jobs &middot; ${e.states} states</div>
+          <span class="tier ${tier}">${tierLabel(tier)}</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">${fmt(e.bal)}</div><div class="lbl">Revenue</div></div>
+        <div class="stat"><div class="num ${ccls}">${e.coll_rate}%</div><div class="lbl">Collection</div></div>
+        <div class="stat"><div class="num green">${fmt(e.pay)}</div><div class="lbl">Collected</div></div>
+        <div class="stat"><div class="num">${fmt(e.avg_bal)}</div><div class="lbl">Avg Job</div></div>
+        <div class="stat"><div class="num">${fmtN(e.vol)} ft³</div><div class="lbl">Volume</div></div>
+        <div class="stat"><div class="num">${fmtN(e.wt)} lbs</div><div class="lbl">Weight</div></div>
+      </div>
+      <div class="coll-bar-wrap">
+        <div class="coll-bar-bg"><div class="coll-bar" style="width:${barW}%;background:${cc}"></div></div>
+      </div>
+      <div class="card-years">
+        ${years.map(([y,d]) => `<div class="card-year-bar" style="height:${Math.max(8, d.b/maxYBal*100)}%" data-tip="${y}: ${fmt(d.b)} / ${d.j} jobs"></div>`).join('')}
+      </div>
+      <div class="card-year-labels">
+        ${years.map(([y]) => `<span>${y}</span>`).join('')}
+      </div>
+      <div class="detail">
+        <h4>Charlotte FACT Encoding</h4>
+        <div class="fact-row"><span class="ftype">NODE</span> P0:<span class="fval">${e.name}</span> TYPE:<span class="fval">CREW</span> TIER:<span class="fval">${tierLabel(tier).toUpperCase()}</span></div>
+        <div class="fact-row"><span class="ftype">SIGNAL</span> METRIC:<span class="fval">REVENUE</span> VAL:<span class="fval">${fmt(e.bal)}</span> JOBS:<span class="fval">${e.jobs}</span></div>
+        <div class="fact-row"><span class="ftype">SIGNAL</span> METRIC:<span class="fval">COLLECTION_RATE</span> VAL:<span class="fval">${e.coll_rate}%</span></div>
+        <div class="fact-row"><span class="ftype">SIGNAL</span> METRIC:<span class="fval">VOLUME</span> VAL:<span class="fval">${fmtN(e.vol)} ft³</span> WT:<span class="fval">${fmtN(e.wt)} lbs</span></div>
+        <div class="fact-row"><span class="ftype">SIGNAL</span> METRIC:<span class="fval">MAX_JOB</span> VAL:<span class="fval">${fmt(e.max_bal)}</span></div>
+        <div class="fact-row"><span class="ftype">EDGE</span> COVERAGE:<span class="fval">${e.states} states</span> CITIES:<span class="fval">${e.cities}</span></div>
+        <h4>State Coverage</h4>
+        <div class="state-tags">${e.state_list.map(s => `<span class="state-tag">${s}</span>`).join('')}</div>
+        <h4>Year Breakdown</h4>
+        ${years.map(([y,d]) => `<div class="fact-row">${y}: <span class="fval">${d.j} jobs</span> &middot; Billed <span class="fval">${fmt(d.b)}</span> &middot; Collected <span class="fval">${fmt(d.p)}</span> &middot; ${fmtN(d.v)} ft³</div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCard(el) {
+  el.classList.toggle('expanded');
+}
+
+// Filter & Sort
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const sort = document.getElementById('sortBy').value;
+  const tierF = document.getElementById('tierFilter').value;
+
+  let filtered = employees.filter(e => {
+    if (q && !formatName(e.name).toLowerCase().includes(q)) return false;
+    if (tierF !== 'all' && getTier(e) !== tierF) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sort === 'coll_rate') return b.coll_rate - a.coll_rate;
+    return b[sort] - a[sort];
+  });
+
+  renderCards(filtered);
+}
+
+document.getElementById('search').addEventListener('input', applyFilters);
+document.getElementById('sortBy').addEventListener('change', applyFilters);
+document.getElementById('tierFilter').addEventListener('change', applyFilters);
+
+// Init
+renderDashboard();
+renderYearChart();
+applyFilters();
+</script>
+</body>
+</html>
