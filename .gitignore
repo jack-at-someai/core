@@ -46,5 +46,6 @@ industrial-service-group/*.pdf
 industrial-service-group/*.csv
 industrial-service-group/*.xlsx
 top-tier-moving/*.jsonl
+top-tier-moving/*.json
 violins/*.xlsx
 violins/*.docx
