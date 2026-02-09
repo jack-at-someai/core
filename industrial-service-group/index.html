@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISG Knowledge Graph — Charlotte Substrate</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a1628;color:#e2e8f0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;overflow:hidden;height:100vh;width:100vw}
+#header{position:fixed;top:0;left:0;right:0;height:56px;background:linear-gradient(135deg,#0f1d36 0%,#1a2b5f 100%);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;border-bottom:1px solid rgba(226,165,50,0.3);box-shadow:0 2px 20px rgba(0,0,0,0.5)}
+#header h1{font-size:18px;font-weight:700;letter-spacing:1px}
+#header h1 span.isg{color:#e2a532;font-size:22px;font-weight:800}
+#header h1 span.sub{color:#94a3b8;font-size:13px;font-weight:400;margin-left:12px}
+#header .stats{display:flex;gap:24px;font-size:12px;color:#94a3b8}
+#header .stats .stat{display:flex;flex-direction:column;align-items:center}
+#header .stats .stat .val{color:#e2a532;font-size:16px;font-weight:700}
+#graph{position:fixed;top:56px;left:0;right:0;bottom:0}
+#graph svg{width:100%;height:100%}
+#legend{position:fixed;bottom:20px;left:20px;background:rgba(15,29,54,0.92);border:1px solid rgba(226,165,50,0.2);border-radius:8px;padding:14px 18px;z-index:50;backdrop-filter:blur(10px)}
+#legend h3{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#e2a532;margin-bottom:10px}
+#legend .item{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px;color:#cbd5e1;cursor:pointer;opacity:1;transition:opacity 0.2s}
+#legend .item:hover{opacity:0.7}
+#legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#sidebar{position:fixed;top:56px;right:-420px;width:420px;bottom:0;background:rgba(10,22,40,0.96);border-left:1px solid rgba(226,165,50,0.2);z-index:90;transition:right 0.3s ease;overflow-y:auto;backdrop-filter:blur(12px)}
+#sidebar.open{right:0}
+#sidebar .close{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:1px solid #4a5568;background:transparent;color:#94a3b8;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+#sidebar .close:hover{border-color:#e2a532;color:#e2a532}
+#sidebar .node-header{padding:24px 20px 16px;border-bottom:1px solid rgba(226,165,50,0.15)}
+#sidebar .node-header .cat{font-size:10px;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+#sidebar .node-header h2{font-size:20px;font-weight:700;color:#f7fafc}
+#sidebar .node-header .subtitle{font-size:13px;color:#94a3b8;margin-top:4px}
+#sidebar .section{padding:16px 20px;border-bottom:1px solid rgba(226,165,50,0.1)}
+#sidebar .section h4{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#e2a532;margin-bottom:10px}
+#sidebar .fact{background:rgba(26,43,95,0.4);border:1px solid rgba(226,165,50,0.1);border-radius:6px;padding:10px 12px;margin-bottom:8px;font-family:'Consolas','Fira Code',monospace;font-size:11px;line-height:1.5}
+#sidebar .fact .key{color:#e2a532}
+#sidebar .fact .val{color:#90cdf4}
+#sidebar .fact .type{color:#68d391}
+#sidebar .conn{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;cursor:pointer;border-radius:4px;padding:6px 8px;transition:background 0.15s}
+#sidebar .conn:hover{background:rgba(226,165,50,0.1)}
+#sidebar .conn .cdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+#sidebar .conn .rel{color:#94a3b8;font-size:10px;text-transform:uppercase}
+#sidebar .metric-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+#sidebar .metric-row .ml{color:#cbd5e1;font-size:12px}
+#sidebar .metric-row .mv{color:#e2a532;font-size:14px;font-weight:600}
+#sidebar .protocol-box{background:rgba(237,100,166,0.1);border:1px solid rgba(237,100,166,0.3);border-radius:6px;padding:12px;margin-bottom:8px}
+#sidebar .protocol-box .ptitle{color:#ed64a6;font-size:12px;font-weight:600;margin-bottom:4px}
+#sidebar .protocol-box .pdesc{color:#cbd5e1;font-size:11px;line-height:1.4}
+#controls{position:fixed;top:70px;left:20px;display:flex;flex-direction:column;gap:8px;z-index:50}
+#controls button{width:36px;height:36px;border-radius:8px;border:1px solid rgba(226,165,50,0.2);background:rgba(15,29,54,0.9);color:#94a3b8;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;backdrop-filter:blur(8px)}
+#controls button:hover{border-color:#e2a532;color:#e2a532;background:rgba(15,29,54,1)}
+#controls button.active{border-color:#e2a532;color:#e2a532;background:rgba(226,165,50,0.15)}
+#search{position:fixed;top:70px;right:20px;z-index:50}
+#search input{width:220px;height:36px;border-radius:8px;border:1px solid rgba(226,165,50,0.2);background:rgba(15,29,54,0.9);color:#e2e8f0;padding:0 12px;font-size:12px;outline:none;backdrop-filter:blur(8px)}
+#search input::placeholder{color:#4a5568}
+#search input:focus{border-color:#e2a532}
+#substrate-badge{position:fixed;bottom:20px;right:20px;background:rgba(15,29,54,0.92);border:1px solid rgba(226,165,50,0.2);border-radius:8px;padding:12px 16px;z-index:50;backdrop-filter:blur(10px);max-width:260px}
+#substrate-badge h3{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#e2a532;margin-bottom:8px}
+#substrate-badge .prim{display:flex;gap:6px;flex-wrap:wrap}
+#substrate-badge .prim span{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:1px}
+.tooltip{position:absolute;background:rgba(10,22,40,0.95);border:1px solid rgba(226,165,50,0.4);border-radius:6px;padding:8px 12px;font-size:12px;pointer-events:none;z-index:200;max-width:250px;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.tooltip .tt-name{font-weight:700;color:#f7fafc;margin-bottom:2px}
+.tooltip .tt-cat{font-size:10px;color:#e2a532;text-transform:uppercase;letter-spacing:1px}
+.link{stroke-opacity:0.3;transition:stroke-opacity 0.2s}
+.link.highlighted{stroke-opacity:0.8;stroke-width:2px!important}
+.node-circle{cursor:pointer;transition:r 0.2s}
+.node-label{fill:#94a3b8;font-size:10px;pointer-events:none;text-anchor:middle;dominant-baseline:central;font-family:'Segoe UI',system-ui,sans-serif}
+.node-label.highlighted{fill:#f7fafc;font-size:11px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>
+    <span class="isg">ISG</span> Knowledge Graph
+    <span class="sub">Charlotte Substrate</span>
+  </h1>
+  <div class="stats">
+    <div class="stat"><span class="val">$450M</span>Revenue</div>
+    <div class="stat"><span class="val">$62M</span>EBITDA</div>
+    <div class="stat"><span class="val">42</span>Locations</div>
+    <div class="stat"><span class="val">12%</span>CAGR</div>
+    <div class="stat"><span class="val">11</span>Acquisitions</div>
+    <div class="stat"><span class="val">16</span>Brands</div>
+  </div>
+</div>
+
+<div id="graph"></div>
+
+<div id="controls">
+  <button id="btn-zoom-in" title="Zoom In">+</button>
+  <button id="btn-zoom-out" title="Zoom Out">&minus;</button>
+  <button id="btn-reset" title="Reset View">&#8634;</button>
+  <button id="btn-labels" title="Toggle Labels" class="active">A</button>
+</div>
+
+<div id="search"><input type="text" placeholder="Search nodes..." id="searchInput"></div>
+
+<div id="legend">
+  <h3>Charlotte Primitives</h3>
+  <div class="item" data-cat="COMPANY"><span class="dot" style="background:#3b82f6"></span>Company (NODE)</div>
+  <div class="item" data-cat="PERSON"><span class="dot" style="background:#e2a532"></span>Person (NODE)</div>
+  <div class="item" data-cat="VERTICAL"><span class="dot" style="background:#8b5cf6"></span>Vertical (NODE)</div>
+  <div class="item" data-cat="EQUIPMENT"><span class="dot" style="background:#f97316"></span>Equipment (NODE)</div>
+  <div class="item" data-cat="INDUSTRY"><span class="dot" style="background:#ef4444"></span>Industry (NODE)</div>
+  <div class="item" data-cat="LOCATION"><span class="dot" style="background:#14b8a6"></span>Location (NODE)</div>
+  <div class="item" data-cat="VENDOR"><span class="dot" style="background:#a855f7"></span>Vendor (NODE)</div>
+  <div class="item" data-cat="TECHNOLOGY"><span class="dot" style="background:#06b6d4"></span>Technology (NODE)</div>
+</div>
+
+<div id="substrate-badge">
+  <h3>Charlotte Substrate</h3>
+  <div class="prim">
+    <span style="background:rgba(59,130,246,0.3);color:#60a5fa">NODE</span>
+    <span style="background:rgba(148,163,184,0.2);color:#94a3b8">EDGE</span>
+    <span style="background:rgba(56,161,105,0.3);color:#68d391">METRIC</span>
+    <span style="background:rgba(236,201,75,0.3);color:#ecc94b">SIGNAL</span>
+    <span style="background:rgba(237,100,166,0.3);color:#ed64a6">PROTOCOL</span>
+  </div>
+</div>
+
+<div id="sidebar">
+  <button class="close" onclick="closeSidebar()">&times;</button>
+  <div id="sidebar-content"></div>
+</div>
+
+<div class="tooltip" id="tooltip" style="display:none"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════
+// CHARLOTTE SUBSTRATE — ISG FACT STACK
+// All business data encoded as Charlotte FACTs
+// ═══════════════════════════════════════════════════
+
+const COLORS = {
+  COMPANY:'#3b82f6', PERSON:'#e2a532', VERTICAL:'#8b5cf6',
+  EQUIPMENT:'#f97316', INDUSTRY:'#ef4444', LOCATION:'#14b8a6',
+  VENDOR:'#a855f7', TECHNOLOGY:'#06b6d4'
+};
+
+const SIZES = {
+  COMPANY:18, PERSON:12, VERTICAL:16, EQUIPMENT:13,
+  INDUSTRY:14, LOCATION:11, VENDOR:11, TECHNOLOGY:11
+};
+
+// ── NODES ──────────────────────────────────────────
+const nodes = [
+  // Companies
+  {id:'ORG:ISG',label:'Industrial Service Group',cat:'COMPANY',desc:'Premier technical MRO platform. ~$450M revenue, ~15% EBITDA margin, 42 locations, 12% organic CAGR since 2016.',size:28,fx:null,fy:null},
+  {id:'ORG:ISG_ENT',label:'ISG Enterprises',cat:'COMPANY',desc:'ISG corporate holding entity for shared services and strategic functions.'},
+  {id:'ORG:IVS',label:'Industrial Valve Sales & Service',cat:'COMPANY',desc:'Flagship subsidiary. 50/50 service & distribution, ~10% CAGR. Mobile, AL. Valves, actuation, control systems.'},
+  {id:'ORG:GW',label:'Georgia Western',cat:'COMPANY',desc:'Pump repair and distribution. Kennesaw, GA. Rotating equipment specialists.'},
+  {id:'ORG:IAP',label:'Industrial Air Power',cat:'COMPANY',desc:'Compressed air systems sales, service, and distribution. Multi-state operations.'},
+  {id:'ORG:IAC',label:'Industrial Air Centers',cat:'COMPANY',desc:'Compressed air service, aftermarket parts, and field service. Louisville, KY area. Multi-state coverage across Southeast and Midwest.'},
+  {id:'ORG:MORIN',label:'Morin Process',cat:'COMPANY',desc:'Rotating equipment repair — pumps, heat exchangers, gearboxes. Hartselle/Birmingham, AL.'},
+  {id:'ORG:SOLES',label:'Soles Electric',cat:'COMPANY',desc:'Electric motor repair and service. Fairmont, WV. Shop and field service capabilities.'},
+  {id:'ORG:CORE',label:'Core Maintenance',cat:'COMPANY',desc:'Specialty field service — millwrights, mechanical contractors. Mobile, AL region.'},
+  {id:'ORG:PINN',label:'Pinnacle Industrial',cat:'COMPANY',desc:'Industrial service and supply. Houston, TX market.'},
+  {id:'ORG:AIRSPEC',label:'Air Specialty',cat:'COMPANY',desc:'Compressed air systems. Corpus Christi, TX and Gulf Coast.'},
+  {id:'ORG:ILL_ELEC',label:'Illinois Electric',cat:'COMPANY',desc:'Electric motor and crane repair. Bethalto, IL (St. Louis metro).'},
+  {id:'ORG:RSI',label:'RSI Pumps',cat:'COMPANY',desc:'Pump sales and service. Rock Island, IL (Quad Cities).'},
+
+  // Executive Team
+  {id:'PER:JIM_R',label:'Jim Richard',cat:'PERSON',desc:'CEO. Salary: $600K. Bonus target: 70% ($420K). Leads long-term strategy and M&A execution.',title:'CEO',salary:600000},
+  {id:'PER:JEFF_D',label:'Jeff Dubois',cat:'PERSON',desc:'Chief Financial Officer. Salary: $435K. Bonus target: 60% ($261K). HR aligned under Finance.',title:'CFO',salary:435000},
+  {id:'PER:JOHN_J',label:'John Jensen',cat:'PERSON',desc:'Group CEO — V&A, Compressors, Pumps. Salary: $350K. Bonus target: 60% ($210K). COO background.',title:'Group CEO (V&A/Comp/Pumps)',salary:350000},
+  {id:'PER:ROGER_S',label:'Roger Stewart',cat:'PERSON',desc:'Group CEO — Motors, Specialty Field Service. Salary: $350K. Bonus target: 60% ($210K).',title:'Group CEO (Motors/Field)',salary:350000},
+  {id:'PER:MATT_B',label:'Matt Branigan',cat:'PERSON',desc:'Chief Distribution Officer. Salary: $325K. Bonus target: 40% ($130K). Hired 2025.',title:'Chief Distribution Officer',salary:325000},
+  {id:'PER:BART_M',label:'Bart Middleton',cat:'PERSON',desc:'Chief Service Sales Officer. Salary: $290K. Bonus target: 50% ($145K).',title:'CSSO',salary:290000},
+  {id:'PER:JEFF_P',label:'Jeff Pratt',cat:'PERSON',desc:'Executive VP Corporate Development. Salary: $290K. Bonus target: 40% ($116K). M&A pipeline 75+ targets.',title:'EVP Corp Dev',salary:290000},
+  {id:'PER:STEVE_M',label:'Steve Meacham',cat:'PERSON',desc:'Chief Human Resource Officer. Salary: $285K. Bonus target: 35% ($99.75K). Reports to CFO.',title:'CHRO',salary:285000},
+  {id:'PER:BRYAN_L',label:'Bryan LiBrandi',cat:'PERSON',desc:'Chief Marketing Officer. Salary: $275K. Bonus target: 40% ($110K). Reports to CDO.',title:'CMO',salary:275000},
+  {id:'PER:DAVED_K',label:'Daved Karl',cat:'PERSON',desc:'Chief Information Officer. Salary: $225K. Bonus target: 35% ($78.75K). Unified systems across platform.',title:'CIO',salary:225000},
+  {id:'PER:SHERRY_C',label:'Sherry Caldwell',cat:'PERSON',desc:'Executive Assistant to CEO.',title:'Executive Assistant'},
+
+  // Subsidiary Leaders
+  {id:'PER:ERIC_C',label:'Eric Chandler',cat:'PERSON',desc:'President of IVS. Leads flagship valve & actuation subsidiary.',title:'President (IVS)'},
+  {id:'PER:DAVID_S',label:'David Suder',cat:'PERSON',desc:'President of Industrial Air Centers. Leads compressed air aftermarket operations.',title:'President (IAC)'},
+  {id:'PER:CHRIS_S',label:'Chris Seibel',cat:'PERSON',desc:'Vertical President of Industrial Air Power. Compressed air systems.',title:'VP (IAP)'},
+  {id:'PER:DANIEL_M',label:'Daniel Morin',cat:'PERSON',desc:'President of Morin Process. Rotating equipment repair specialist.',title:'President (Morin)'},
+  {id:'PER:STACEY_S',label:'Stacey Schilling',cat:'PERSON',desc:'VP of Merger & Acquisition and Financial Integration.',title:'VP M&A Integration'},
+  {id:'PER:NICOLE_R',label:'Nicole Rodieck',cat:'PERSON',desc:'Chief Financial Officer — ISG Enterprises.',title:'CFO (ISG Ent)'},
+
+  // Verticals
+  {id:'VER:VA',label:'Valves & Actuation',cat:'VERTICAL',desc:'Control valves, safety valves, isolation valves, electric/pneumatic actuation. Service + distribution.'},
+  {id:'VER:COMP',label:'Compressors',cat:'VERTICAL',desc:'Compressed air systems — rotary screw, reciprocating, centrifugal. Service, parts, full systems.'},
+  {id:'VER:PUMP',label:'Pumps',cat:'VERTICAL',desc:'Centrifugal, positive displacement, vertical turbine, submersible. Repair + new equipment.'},
+  {id:'VER:MOTOR',label:'Motors & Drives',cat:'VERTICAL',desc:'Electric motors, VFDs, generators, transformers. Shop repair + field service.'},
+  {id:'VER:FIELD',label:'Specialty Field Service',cat:'VERTICAL',desc:'Millwright services, mechanical contracting, plant turnarounds, emergency response.'},
+
+  // Equipment Types
+  {id:'EQ:VALVE',label:'Valves',cat:'EQUIPMENT',desc:'Globe, gate, ball, butterfly, check, knife gate, control valves. All sizes and pressure classes.'},
+  {id:'EQ:PUMP',label:'Pumps',cat:'EQUIPMENT',desc:'Centrifugal, sump, vertical turbine, progressive cavity, diaphragm, slurry pumps.'},
+  {id:'EQ:COMPRESSOR',label:'Compressors',cat:'EQUIPMENT',desc:'Rotary screw, reciprocating, centrifugal air compressors and systems.'},
+  {id:'EQ:HX',label:'Heat Exchangers',cat:'EQUIPMENT',desc:'Shell & tube, plate & frame, air-cooled. Repair, re-tubing, chemical cleaning.'},
+  {id:'EQ:MOTOR',label:'Electric Motors',cat:'EQUIPMENT',desc:'AC/DC motors, VFDs, servo drives, generators. All frame sizes.'},
+  {id:'EQ:ACT',label:'Actuators',cat:'EQUIPMENT',desc:'Pneumatic, electric, hydraulic actuators. Morin S-Series, B-Series, Fisher, Rotork.'},
+
+  // Industries Served
+  {id:'IND:STEEL',label:'Steel',cat:'INDUSTRY',desc:'Nucor, SSAB, Gerdau, Constellium. Hot/cold mills, melt shops, rolling mills. Uptime-critical.'},
+  {id:'IND:CHEM',label:'Chemicals',cat:'INDUSTRY',desc:'Chemical processing, petrochemical, specialty chemicals. Corrosion-resistant equipment.'},
+  {id:'IND:FB',label:'Food & Beverage',cat:'INDUSTRY',desc:'FDA-compliant equipment, sanitary processing, CIP systems. Red Star Yeast, Southwire.'},
+  {id:'IND:WATER',label:'Water / Wastewater',cat:'INDUSTRY',desc:'Municipal and industrial water treatment, lift stations, distribution systems.'},
+  {id:'IND:POWER',label:'Power Generation',cat:'INDUSTRY',desc:'TVA, utilities, co-generation. Boiler feed, cooling water, condenser systems.'},
+
+  // Key Locations (states)
+  {id:'LOC:AL',label:'Alabama',cat:'LOCATION',desc:'Primary hub — Mobile, Saraland, Satsuma, Hartselle, Birmingham. IVS HQ, Morin, Core.'},
+  {id:'LOC:TN',label:'Tennessee',cat:'LOCATION',desc:'Cleveland, Nashville area. IVS field operations, Core Maintenance.'},
+  {id:'LOC:GA',label:'Georgia',cat:'LOCATION',desc:'Kennesaw (Atlanta metro). Georgia Western HQ.'},
+  {id:'LOC:LA',label:'Louisiana',cat:'LOCATION',desc:'Monroe, Bastrop. IVS safety valve and field service.'},
+  {id:'LOC:WV',label:'West Virginia',cat:'LOCATION',desc:'Fairmont. Soles Electric motor repair operations.'},
+  {id:'LOC:IL',label:'Illinois',cat:'LOCATION',desc:'Bethalto (St. Louis metro), Rock Island (Quad Cities). Illinois Electric, RSI Pumps.'},
+  {id:'LOC:TX',label:'Texas',cat:'LOCATION',desc:'Houston, Corpus Christi. Pinnacle Industrial, Air Specialty.'},
+  {id:'LOC:OH',label:'Ohio',cat:'LOCATION',desc:'Cincinnati area. IAC field service coverage.'},
+  {id:'LOC:KY',label:'Kentucky',cat:'LOCATION',desc:'Louisville, Lexington. IAC headquarters region.'},
+  {id:'LOC:FL',label:'Florida',cat:'LOCATION',desc:'Tampa, Jacksonville. IAC field service coverage.'},
+  {id:'LOC:IN',label:'Indiana',cat:'LOCATION',desc:'Indianapolis, Jeffersonville. IAC warehouse and service.'},
+
+  // Key Vendors
+  {id:'VEN:MORIN_RS',label:'Morin Repair Services',cat:'VENDOR',desc:'Primary rotating equipment repair subcontractor. Pumps, heat exchangers, gearboxes.'},
+  {id:'VEN:WEIR',label:'Weir Slurry Group',cat:'VENDOR',desc:'Slurry pumps, parts, and wear components for mining and minerals processing.'},
+  {id:'VEN:EMERSON',label:'Emerson / Morin Actuators',cat:'VENDOR',desc:'Morin S-Series and B-Series actuators, repair kits, accumulators.'},
+  {id:'VEN:KERR',label:'Kerr Pump & Supply',cat:'VENDOR',desc:'Vertical sump pumps, centrifugal pumps for industrial applications.'},
+  {id:'VEN:DESMI',label:'Desmi Inc',cat:'VENDOR',desc:'Gear pumps, centrifugal pumps for marine and industrial.'},
+  {id:'VEN:NOV',label:'National Oilwell Varco',cat:'VENDOR',desc:'Mission Magnum pumps, parts, and service components.'},
+  {id:'VEN:WCR',label:'WCR Inc',cat:'VENDOR',desc:'Plate heat exchanger replacements, gaskets, and spare plate packs.'},
+  {id:'VEN:CONVAL',label:'Conval Inc',cat:'VENDOR',desc:'High-performance forged steel valves for severe service applications.'},
+
+  // Technology
+  {id:'TECH:NS',label:'NetSuite ERP',cat:'TECHNOLOGY',desc:'Unified ERP platform across all ISG entities. Financial consolidation, inventory, procurement.'},
+  {id:'TECH:CRM',label:'CRM Platform',cat:'TECHNOLOGY',desc:'Customer relationship management. Unified customer view across subsidiaries.'},
+  {id:'TECH:ECOM',label:'eCommerce',cat:'TECHNOLOGY',desc:'Live across 3 brands. Driving inbound quote growth. Key distribution accelerator.'},
+  {id:'TECH:DW',label:'Data Warehouse',cat:'TECHNOLOGY',desc:'Centralized analytics and reporting across all ISG entities and verticals.'},
+  {id:'TECH:M365',label:'Microsoft 365',cat:'TECHNOLOGY',desc:'832+ licenses across plans. ~$17K/mo. Business Premium, Standard, E3, E5. Teams, SharePoint, Exchange.'}
+];
+
+// ── EDGES ──────────────────────────────────────────
+const edges = [
+  // Subsidiary hierarchy
+  {source:'ORG:IVS',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:ISG_ENT',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:GW',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:IAP',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:IAC',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:MORIN',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:SOLES',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:CORE',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:PINN',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:AIRSPEC',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:ILL_ELEC',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+  {source:'ORG:RSI',target:'ORG:ISG',rel:'SUBSIDIARY_OF'},
+
+  // Executive reporting
+  {source:'PER:JIM_R',target:'ORG:ISG',rel:'LEADS'},
+  {source:'PER:JEFF_D',target:'PER:JIM_R',rel:'REPORTS_TO'},
+  {source:'PER:JOHN_J',target:'PER:JIM_R',rel:'REPORTS_TO'},
+  {source:'PER:ROGER_S',target:'PER:JIM_R',rel:'REPORTS_TO'},
+  {source:'PER:MATT_B',target:'PER:JIM_R',rel:'REPORTS_TO'},
+  {source:'PER:BART_M',target:'PER:JIM_R',rel:'REPORTS_TO'},
+  {source:'PER:JEFF_P',target:'PER:JIM_R',rel:'REPORTS_TO'},
+  {source:'PER:STEVE_M',target:'PER:JEFF_D',rel:'REPORTS_TO'},
+  {source:'PER:BRYAN_L',target:'PER:MATT_B',rel:'REPORTS_TO'},
+  {source:'PER:DAVED_K',target:'PER:JOHN_J',rel:'REPORTS_TO'},
+  {source:'PER:SHERRY_C',target:'PER:JIM_R',rel:'REPORTS_TO'},
+
+  // Group CEO → Verticals
+  {source:'PER:JOHN_J',target:'VER:VA',rel:'LEADS_VERTICAL'},
+  {source:'PER:JOHN_J',target:'VER:COMP',rel:'LEADS_VERTICAL'},
+  {source:'PER:JOHN_J',target:'VER:PUMP',rel:'LEADS_VERTICAL'},
+  {source:'PER:ROGER_S',target:'VER:MOTOR',rel:'LEADS_VERTICAL'},
+  {source:'PER:ROGER_S',target:'VER:FIELD',rel:'LEADS_VERTICAL'},
+
+  // Subsidiary leaders
+  {source:'PER:ERIC_C',target:'ORG:IVS',rel:'LEADS'},
+  {source:'PER:DAVID_S',target:'ORG:IAC',rel:'LEADS'},
+  {source:'PER:CHRIS_S',target:'ORG:IAP',rel:'LEADS'},
+  {source:'PER:DANIEL_M',target:'ORG:MORIN',rel:'LEADS'},
+  {source:'PER:STACEY_S',target:'ORG:ISG',rel:'WORKS_AT'},
+  {source:'PER:NICOLE_R',target:'ORG:ISG_ENT',rel:'LEADS'},
+
+  // Subsidiaries → Verticals
+  {source:'ORG:IVS',target:'VER:VA',rel:'OPERATES_IN'},
+  {source:'ORG:IAP',target:'VER:COMP',rel:'OPERATES_IN'},
+  {source:'ORG:IAC',target:'VER:COMP',rel:'OPERATES_IN'},
+  {source:'ORG:AIRSPEC',target:'VER:COMP',rel:'OPERATES_IN'},
+  {source:'ORG:GW',target:'VER:PUMP',rel:'OPERATES_IN'},
+  {source:'ORG:MORIN',target:'VER:PUMP',rel:'OPERATES_IN'},
+  {source:'ORG:RSI',target:'VER:PUMP',rel:'OPERATES_IN'},
+  {source:'ORG:SOLES',target:'VER:MOTOR',rel:'OPERATES_IN'},
+  {source:'ORG:ILL_ELEC',target:'VER:MOTOR',rel:'OPERATES_IN'},
+  {source:'ORG:CORE',target:'VER:FIELD',rel:'OPERATES_IN'},
+  {source:'ORG:PINN',target:'VER:FIELD',rel:'OPERATES_IN'},
+
+  // Verticals → Equipment
+  {source:'VER:VA',target:'EQ:VALVE',rel:'PROVIDES'},
+  {source:'VER:VA',target:'EQ:ACT',rel:'PROVIDES'},
+  {source:'VER:COMP',target:'EQ:COMPRESSOR',rel:'PROVIDES'},
+  {source:'VER:PUMP',target:'EQ:PUMP',rel:'PROVIDES'},
+  {source:'VER:PUMP',target:'EQ:HX',rel:'PROVIDES'},
+  {source:'VER:MOTOR',target:'EQ:MOTOR',rel:'PROVIDES'},
+
+  // ISG → Industries
+  {source:'ORG:ISG',target:'IND:STEEL',rel:'SERVES'},
+  {source:'ORG:ISG',target:'IND:CHEM',rel:'SERVES'},
+  {source:'ORG:ISG',target:'IND:FB',rel:'SERVES'},
+  {source:'ORG:ISG',target:'IND:WATER',rel:'SERVES'},
+  {source:'ORG:ISG',target:'IND:POWER',rel:'SERVES'},
+
+  // Subsidiaries → Locations
+  {source:'ORG:IVS',target:'LOC:AL',rel:'LOCATED_IN'},
+  {source:'ORG:IVS',target:'LOC:TN',rel:'LOCATED_IN'},
+  {source:'ORG:IVS',target:'LOC:LA',rel:'LOCATED_IN'},
+  {source:'ORG:GW',target:'LOC:GA',rel:'LOCATED_IN'},
+  {source:'ORG:MORIN',target:'LOC:AL',rel:'LOCATED_IN'},
+  {source:'ORG:SOLES',target:'LOC:WV',rel:'LOCATED_IN'},
+  {source:'ORG:ILL_ELEC',target:'LOC:IL',rel:'LOCATED_IN'},
+  {source:'ORG:RSI',target:'LOC:IL',rel:'LOCATED_IN'},
+  {source:'ORG:PINN',target:'LOC:TX',rel:'LOCATED_IN'},
+  {source:'ORG:AIRSPEC',target:'LOC:TX',rel:'LOCATED_IN'},
+  {source:'ORG:CORE',target:'LOC:AL',rel:'LOCATED_IN'},
+  {source:'ORG:IAC',target:'LOC:KY',rel:'LOCATED_IN'},
+  {source:'ORG:IAC',target:'LOC:OH',rel:'LOCATED_IN'},
+  {source:'ORG:IAC',target:'LOC:FL',rel:'LOCATED_IN'},
+  {source:'ORG:IAC',target:'LOC:IN',rel:'LOCATED_IN'},
+  {source:'ORG:IAP',target:'LOC:IL',rel:'LOCATED_IN'},
+
+  // Vendors → Equipment
+  {source:'VEN:MORIN_RS',target:'EQ:PUMP',rel:'SUPPLIES'},
+  {source:'VEN:MORIN_RS',target:'EQ:HX',rel:'SUPPLIES'},
+  {source:'VEN:WEIR',target:'EQ:PUMP',rel:'SUPPLIES'},
+  {source:'VEN:EMERSON',target:'EQ:ACT',rel:'SUPPLIES'},
+  {source:'VEN:KERR',target:'EQ:PUMP',rel:'SUPPLIES'},
+  {source:'VEN:DESMI',target:'EQ:PUMP',rel:'SUPPLIES'},
+  {source:'VEN:NOV',target:'EQ:PUMP',rel:'SUPPLIES'},
+  {source:'VEN:WCR',target:'EQ:HX',rel:'SUPPLIES'},
+  {source:'VEN:CONVAL',target:'EQ:VALVE',rel:'SUPPLIES'},
+
+  // ISG → Technology
+  {source:'ORG:ISG',target:'TECH:NS',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:CRM',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:ECOM',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:DW',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:M365',rel:'USES'},
+
+  // Distribution officer
+  {source:'PER:MATT_B',target:'TECH:ECOM',rel:'OVERSEES'},
+  {source:'PER:DAVED_K',target:'TECH:NS',rel:'OVERSEES'},
+  {source:'PER:DAVED_K',target:'TECH:M365',rel:'OVERSEES'},
+  {source:'PER:BART_M',target:'VER:VA',rel:'DRIVES_SALES'},
+  {source:'PER:BART_M',target:'VER:PUMP',rel:'DRIVES_SALES'},
+  {source:'PER:JEFF_P',target:'VER:COMP',rel:'SCOUTS_M&A'},
+];
+
+// ── METRICS (Charlotte P1=type, P2=label) ──────────
+const metrics = {
+  'ORG:ISG': [
+    {id:'M:revenue',label:'Revenue',type:'NUMBER',unit:'$M',value:450},
+    {id:'M:ebitda',label:'EBITDA',type:'NUMBER',unit:'$M',value:62},
+    {id:'M:ebitda_margin',label:'EBITDA Margin',type:'NUMBER',unit:'%',value:15},
+    {id:'M:locations',label:'Locations',type:'NUMBER',unit:'',value:42},
+    {id:'M:cagr',label:'Organic CAGR',type:'NUMBER',unit:'%',value:12},
+    {id:'M:acquisitions',label:'Acquisitions',type:'NUMBER',unit:'',value:11},
+    {id:'M:brands',label:'Brands Integrated',type:'NUMBER',unit:'',value:16},
+    {id:'M:employees',label:'Employees (est.)',type:'NUMBER',unit:'',value:800},
+    {id:'M:ma_pipeline',label:'M&A Pipeline',type:'NUMBER',unit:'targets',value:75},
+    {id:'M:service_split',label:'Service Revenue',type:'NUMBER',unit:'%',value:50},
+    {id:'M:dist_split',label:'Distribution Revenue',type:'NUMBER',unit:'%',value:50},
+    {id:'M:cross_sell_growth',label:'Cross-sell Growth YTD',type:'NUMBER',unit:'%',value:24},
+    {id:'M:revenue_growth_ytd',label:'Revenue Growth YTD',type:'NUMBER',unit:'%',value:11},
+  ],
+  'TECH:M365': [
+    {id:'M:m365_total',label:'Total Licenses',type:'NUMBER',unit:'',value:832},
+    {id:'M:m365_spend',label:'Monthly Spend',type:'NUMBER',unit:'$/mo',value:17765},
+    {id:'M:m365_premium',label:'Business Premium',type:'NUMBER',unit:'licenses',value:300},
+    {id:'M:m365_std',label:'Business Standard',type:'NUMBER',unit:'licenses',value:342},
+    {id:'M:m365_e3',label:'E3 Licenses',type:'NUMBER',unit:'licenses',value:190},
+  ]
+};
+
+// ── PROTOCOLS (Charlotte forward-looking plans) ────
+const protocols = {
+  'ORG:ISG': [
+    {id:'PR:ebitda_80',title:'2026 EBITDA Target: $80M',desc:'Base $59.7M + 12% organic ($8.4M) + GM expansion ($2.4M) + distribution ($4.7M) + M&A ($5.0M)'},
+    {id:'PR:revenue_546',title:'2026 Revenue Target: $546M',desc:'Organic growth + distribution expansion + 1-2 acquisitions'},
+    {id:'PR:exit_q2',title:'Q2 2026 Strategic Exit',desc:'Target close 5/31/2026. Valuation multiple 16.5x-19.0x. MOIC 3.5x-3.8x. In-market Feb 2026.'},
+    {id:'PR:1b_path',title:'Path to $1B Revenue',desc:'Organic growth + cross-vertical expansion + disciplined M&A. Adjacent verticals: process equipment, electrical, NDT, instrumentation.'},
+  ]
+};
+
+// ═══════════════════════════════════════════════════
+// D3.js FORCE-DIRECTED GRAPH VISUALIZATION
+// ═══════════════════════════════════════════════════
+
+const width = window.innerWidth;
+const height = window.innerHeight - 56;
+
+const svg = d3.select('#graph').append('svg')
+  .attr('width', width).attr('height', height);
+
+const defs = svg.append('defs');
+
+// Glow filter
+const filter = defs.append('filter').attr('id','glow');
+filter.append('feGaussianBlur').attr('stdDeviation','3').attr('result','coloredBlur');
+const feMerge = filter.append('feMerge');
+feMerge.append('feMergeNode').attr('in','coloredBlur');
+feMerge.append('feMergeNode').attr('in','SourceGraphic');
+
+// Arrow markers for directed edges
+const relColors = {
+  'SUBSIDIARY_OF':'#3b82f6','REPORTS_TO':'#e2a532','LEADS':'#e2a532',
+  'LEADS_VERTICAL':'#8b5cf6','OPERATES_IN':'#8b5cf6','PROVIDES':'#f97316',
+  'SERVES':'#ef4444','LOCATED_IN':'#14b8a6','SUPPLIES':'#a855f7',
+  'USES':'#06b6d4','OVERSEES':'#06b6d4','WORKS_AT':'#e2a532',
+  'DRIVES_SALES':'#e2a532','SCOUTS_M&A':'#e2a532'
+};
+
+Object.entries(relColors).forEach(([rel,color]) => {
+  defs.append('marker').attr('id',`arrow-${rel}`).attr('viewBox','0 -3 6 6')
+    .attr('refX',20).attr('refY',0).attr('markerWidth',4).attr('markerHeight',4)
+    .attr('orient','auto').append('path').attr('d','M0,-3L6,0L0,3')
+    .attr('fill',color).attr('opacity',0.4);
+});
+
+const g = svg.append('g');
+
+// Zoom
+const zoom = d3.zoom().scaleExtent([0.2,5]).on('zoom',(e)=>{g.attr('transform',e.transform)});
+svg.call(zoom);
+
+// Force simulation
+const simulation = d3.forceSimulation(nodes)
+  .force('link', d3.forceLink(edges).id(d=>d.id).distance(d=>{
+    if(d.rel==='SUBSIDIARY_OF') return 120;
+    if(d.rel==='REPORTS_TO'||d.rel==='LEADS') return 80;
+    if(d.rel==='LOCATED_IN') return 160;
+    return 130;
+  }).strength(d=>{
+    if(d.rel==='SUBSIDIARY_OF') return 0.6;
+    if(d.rel==='REPORTS_TO') return 0.4;
+    return 0.3;
+  }))
+  .force('charge', d3.forceManyBody().strength(d=>d.id==='ORG:ISG'?-800:-250))
+  .force('center', d3.forceCenter(width/2, height/2))
+  .force('collision', d3.forceCollide().radius(d=>(d.size||SIZES[d.cat]||12)+15))
+  .force('x', d3.forceX(width/2).strength(0.03))
+  .force('y', d3.forceY(height/2).strength(0.03));
+
+// Draw edges
+const link = g.append('g').selectAll('line').data(edges).join('line')
+  .attr('class','link')
+  .attr('stroke', d=>relColors[d.rel]||'#4a5568')
+  .attr('stroke-width', d=>d.rel==='SUBSIDIARY_OF'?1.5:1)
+  .attr('marker-end', d=>`url(#arrow-${d.rel})`);
+
+// Draw nodes
+const node = g.append('g').selectAll('g').data(nodes).join('g')
+  .call(d3.drag().on('start',dragstarted).on('drag',dragged).on('end',dragended));
+
+node.append('circle')
+  .attr('class','node-circle')
+  .attr('r', d=>d.size||SIZES[d.cat]||12)
+  .attr('fill', d=>COLORS[d.cat]||'#4a5568')
+  .attr('stroke', d=>COLORS[d.cat]||'#4a5568')
+  .attr('stroke-width', 2)
+  .attr('stroke-opacity', 0.4)
+  .attr('fill-opacity', 0.85)
+  .attr('filter','url(#glow)');
+
+// Labels
+const labels = g.append('g').selectAll('text').data(nodes).join('text')
+  .attr('class','node-label')
+  .attr('dy', d=>(d.size||SIZES[d.cat]||12)+14)
+  .text(d=>d.label.length>22?d.label.substring(0,20)+'...':d.label);
+
+let showLabels = true;
+
+// Hover tooltip
+const tooltip = d3.select('#tooltip');
+
+node.on('mouseover', function(event,d){
+  tooltip.style('display','block')
+    .html(`<div class="tt-name">${d.label}</div><div class="tt-cat">${d.cat}</div>`)
+    .style('left',(event.pageX+12)+'px')
+    .style('top',(event.pageY-10)+'px');
+  highlightConnections(d);
+}).on('mousemove', function(event){
+  tooltip.style('left',(event.pageX+12)+'px').style('top',(event.pageY-10)+'px');
+}).on('mouseout', function(){
+  tooltip.style('display','none');
+  resetHighlight();
+}).on('click', function(event,d){
+  event.stopPropagation();
+  openSidebar(d);
+});
+
+svg.on('click', ()=>closeSidebar());
+
+simulation.on('tick', ()=>{
+  link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+    .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+  node.attr('transform',d=>`translate(${d.x},${d.y})`);
+  labels.attr('x',d=>d.x).attr('y',d=>d.y);
+});
+
+function dragstarted(event,d){
+  if(!event.active) simulation.alphaTarget(0.3).restart();
+  d.fx=d.x; d.fy=d.y;
+}
+function dragged(event,d){ d.fx=event.x; d.fy=event.y; }
+function dragended(event,d){
+  if(!event.active) simulation.alphaTarget(0);
+  if(d.id!=='ORG:ISG'){d.fx=null;d.fy=null;}
+}
+
+// ═══════════════════════════════════════════════════
+// INTERACTION HANDLERS
+// ═══════════════════════════════════════════════════
+
+function highlightConnections(d){
+  const connected = new Set();
+  connected.add(d.id);
+  edges.forEach(e=>{
+    const sid = typeof e.source==='object'?e.source.id:e.source;
+    const tid = typeof e.target==='object'?e.target.id:e.target;
+    if(sid===d.id) connected.add(tid);
+    if(tid===d.id) connected.add(sid);
+  });
+  node.select('circle').attr('opacity', n=>connected.has(n.id)?1:0.15);
+  labels.attr('opacity', n=>connected.has(n.id)?1:0.1)
+    .classed('highlighted', n=>n.id===d.id);
+  link.attr('stroke-opacity', e=>{
+    const sid = typeof e.source==='object'?e.source.id:e.source;
+    const tid = typeof e.target==='object'?e.target.id:e.target;
+    return(sid===d.id||tid===d.id)?0.8:0.05;
+  }).attr('stroke-width', e=>{
+    const sid = typeof e.source==='object'?e.source.id:e.source;
+    const tid = typeof e.target==='object'?e.target.id:e.target;
+    return(sid===d.id||tid===d.id)?2.5:1;
+  });
+}
+
+function resetHighlight(){
+  node.select('circle').attr('opacity',1);
+  labels.attr('opacity',1).classed('highlighted',false);
+  link.attr('stroke-opacity',0.3).attr('stroke-width',d=>d.rel==='SUBSIDIARY_OF'?1.5:1);
+}
+
+function openSidebar(d){
+  const sb = document.getElementById('sidebar');
+  const sc = document.getElementById('sidebar-content');
+  const color = COLORS[d.cat]||'#94a3b8';
+
+  // Find connections
+  const outgoing=[], incoming=[];
+  edges.forEach(e=>{
+    const sid=typeof e.source==='object'?e.source.id:e.source;
+    const tid=typeof e.target==='object'?e.target.id:e.target;
+    if(sid===d.id){
+      const tn=nodes.find(n=>n.id===tid);
+      if(tn) outgoing.push({node:tn,rel:e.rel});
+    }
+    if(tid===d.id){
+      const sn=nodes.find(n=>n.id===sid);
+      if(sn) incoming.push({node:sn,rel:e.rel});
+    }
+  });
+
+  let html=`
+    <div class="node-header">
+      <div class="cat" style="color:${color}">${d.cat}</div>
+      <h2>${d.label}</h2>
+      ${d.title?`<div class="subtitle">${d.title}</div>`:''}
+    </div>
+    <div class="section">
+      <h4>Charlotte Substrate — FACT</h4>
+      <div class="fact">
+        <span class="key">:ID</span> <span class="val">"${d.id}"</span><br>
+        <span class="key">:TYPE</span> <span class="type">"NODE"</span><br>
+        <span class="key">P0</span> <span class="val">"${d.cat}"</span><br>
+        <span class="key">P1</span> <span class="val">"${d.label}"</span>
+      </div>
+    </div>
+    <div class="section">
+      <h4>Description</h4>
+      <p style="font-size:12px;line-height:1.6;color:#cbd5e1">${d.desc||'—'}</p>
+    </div>`;
+
+  // Metrics
+  const m = metrics[d.id];
+  if(m && m.length){
+    html+=`<div class="section"><h4>Metrics &amp; Signals</h4>`;
+    m.forEach(met=>{
+      const fv = met.unit==='$M'?`$${met.value}M`:met.unit==='%'?`${met.value}%`:
+        met.unit==='$/mo'?`$${met.value.toLocaleString()}/mo`:
+        met.unit?`${met.value.toLocaleString()} ${met.unit}`:met.value.toLocaleString();
+      html+=`<div class="metric-row"><span class="ml">${met.label}</span><span class="mv">${fv}</span></div>`;
+    });
+    html+=`<div class="fact" style="margin-top:10px">
+      <span class="key">:TYPE</span> <span class="type">"SIGNAL"</span><br>
+      <span class="key">P0</span> <span class="val">"${d.id}"</span><br>
+      <span class="key">P1</span> <span class="val">"METRIC:${m[0].id}"</span><br>
+      <span class="key">P2</span> <span class="val">${m[0].value}</span>
+    </div></div>`;
+  }
+
+  // Protocols
+  const p = protocols[d.id];
+  if(p && p.length){
+    html+=`<div class="section"><h4>Protocols (Forward Plans)</h4>`;
+    p.forEach(pr=>{
+      html+=`<div class="protocol-box">
+        <div class="ptitle">${pr.title}</div>
+        <div class="pdesc">${pr.desc}</div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // Connections
+  if(outgoing.length||incoming.length){
+    html+=`<div class="section"><h4>Connections (EDGEs)</h4>`;
+    outgoing.forEach(c=>{
+      html+=`<div class="conn" onclick="navigateToNode('${c.node.id}')">
+        <span class="cdot" style="background:${COLORS[c.node.cat]}"></span>
+        <span style="color:#f7fafc">${c.node.label}</span>
+        <span class="rel">${c.rel} →</span>
+      </div>`;
+    });
+    incoming.forEach(c=>{
+      html+=`<div class="conn" onclick="navigateToNode('${c.node.id}')">
+        <span class="cdot" style="background:${COLORS[c.node.cat]}"></span>
+        <span style="color:#f7fafc">${c.node.label}</span>
+        <span class="rel">← ${c.rel}</span>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // Salary for executives
+  if(d.salary){
+    html+=`<div class="section"><h4>Compensation Signal</h4>
+      <div class="fact">
+        <span class="key">:TYPE</span> <span class="type">"SIGNAL"</span><br>
+        <span class="key">P0</span> <span class="val">"${d.id}"</span><br>
+        <span class="key">P1</span> <span class="val">"METRIC:salary"</span><br>
+        <span class="key">P2</span> <span class="val">$${d.salary.toLocaleString()}</span><br>
+        <span class="key">:CREATED</span> <span class="val">"DATE:1-1-2026"</span>
+      </div></div>`;
+  }
+
+  sc.innerHTML = html;
+  sb.classList.add('open');
+}
+
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function navigateToNode(id){
+  const d = nodes.find(n=>n.id===id);
+  if(d) openSidebar(d);
+}
+
+// Controls
+document.getElementById('btn-zoom-in').onclick=()=>{
+  svg.transition().duration(300).call(zoom.scaleBy,1.3);
+};
+document.getElementById('btn-zoom-out').onclick=()=>{
+  svg.transition().duration(300).call(zoom.scaleBy,0.7);
+};
+document.getElementById('btn-reset').onclick=()=>{
+  svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);
+  simulation.alpha(0.3).restart();
+};
+document.getElementById('btn-labels').onclick=function(){
+  showLabels=!showLabels;
+  labels.style('display',showLabels?'block':'none');
+  this.classList.toggle('active');
+};
+
+// Search
+document.getElementById('searchInput').addEventListener('input',function(){
+  const q=this.value.toLowerCase();
+  if(!q){resetHighlight();return;}
+  const matched=new Set();
+  nodes.forEach(n=>{
+    if(n.label.toLowerCase().includes(q)||n.cat.toLowerCase().includes(q)||
+       (n.desc&&n.desc.toLowerCase().includes(q))||(n.title&&n.title.toLowerCase().includes(q)))
+      matched.add(n.id);
+  });
+  node.select('circle').attr('opacity',n=>matched.has(n.id)?1:0.1);
+  labels.attr('opacity',n=>matched.has(n.id)?1:0.05);
+  link.attr('stroke-opacity',0.05);
+});
+
+// Legend filtering
+document.querySelectorAll('#legend .item').forEach(item=>{
+  item.addEventListener('click',function(){
+    const cat=this.dataset.cat;
+    const connected=new Set();
+    nodes.forEach(n=>{if(n.cat===cat)connected.add(n.id)});
+    edges.forEach(e=>{
+      const sid=typeof e.source==='object'?e.source.id:e.source;
+      const tid=typeof e.target==='object'?e.target.id:e.target;
+      if(connected.has(sid))connected.add(tid);
+      if(connected.has(tid))connected.add(sid);
+    });
+    node.select('circle').attr('opacity',n=>connected.has(n.id)?1:0.1);
+    labels.attr('opacity',n=>connected.has(n.id)?1:0.05);
+    link.attr('stroke-opacity',e=>{
+      const sid=typeof e.source==='object'?e.source.id:e.source;
+      const tid=typeof e.target==='object'?e.target.id:e.target;
+      return(connected.has(sid)&&connected.has(tid))?0.6:0.03;
+    });
+    setTimeout(resetHighlight,4000);
+  });
+});
+
+// Warm start — pin ISG to center
+const isg=nodes.find(n=>n.id==='ORG:ISG');
+if(isg){isg.fx=width/2;isg.fy=height/2;}
+
+// Responsive
+window.addEventListener('resize',()=>{
+  const w=window.innerWidth, h=window.innerHeight-56;
+  svg.attr('width',w).attr('height',h);
+  simulation.force('center',d3.forceCenter(w/2,h/2));
+  simulation.force('x',d3.forceX(w/2).strength(0.03));
+  simulation.force('y',d3.forceY(h/2).strength(0.03));
+  if(isg){isg.fx=w/2;isg.fy=h/2;}
+  simulation.alpha(0.3).restart();
+});
+
+</script>
+</body>
+</html>
