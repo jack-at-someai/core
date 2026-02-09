@@ -1,0 +1,1615 @@
+[
+  {
+    ":ID": "DATE:1-26-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-26-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-26",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:1-27-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-27-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-27",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:1-28-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-28-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-28",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:1-29-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-29-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-29",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:1-30-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-30-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-30",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:1-31-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:1-31-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-01-31",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-1-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-1-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-01",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-2-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-2-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-02",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:2-3-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-3-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-03",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-4-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-4-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-04",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-5-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-5-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-05",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:2-6-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-06",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:2-7-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-07",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-8-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-8-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-08",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-9-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-09",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:2-10-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-10-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-10",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-11-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-11-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-11",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-12-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-12-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-12",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:2-13-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-13-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-13",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:2-14-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-14-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-14",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-15-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-15-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-15",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-16-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-16-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-16",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "DATE:2-17-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-17-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-17",
+      "dow": "Tuesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-18-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-18-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-18",
+      "dow": "Wednesday"
+    }
+  },
+  {
+    ":ID": "DATE:2-19-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-19-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-19",
+      "dow": "Thursday"
+    }
+  },
+  {
+    ":ID": "DATE:2-20-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-20-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-20",
+      "dow": "Friday"
+    }
+  },
+  {
+    ":ID": "DATE:2-21-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-21-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-21",
+      "dow": "Saturday"
+    }
+  },
+  {
+    ":ID": "DATE:2-22-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-22-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-22",
+      "dow": "Sunday"
+    }
+  },
+  {
+    ":ID": "DATE:2-23-2026",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-23-2026",
+    "P0": "DATE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "iso": "2026-02-23",
+      "dow": "Monday"
+    }
+  },
+  {
+    ":ID": "venue-kollege-klub",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "VENUE",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Kollege Klub",
+      "address": "529 N State Street, Madison WI",
+      "capacity": 400,
+      "est": 1953,
+      "owner": "Jordan Meier",
+      "type": "college_bar",
+      "license": "Class B Liquor"
+    }
+  },
+  {
+    ":ID": "person-jordan-meier",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PERSON",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Jordan Meier",
+      "role": "owner"
+    }
+  },
+  {
+    ":ID": "edge-jordan-owns-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "person-jordan-meier",
+    "P1": "venue-kollege-klub",
+    "P2": "OWNS",
+    "P3": null
+  },
+  {
+    ":ID": "prod-lineskip",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "LineSkip",
+      "category": "access",
+      "price": 10.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-lineskip-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-lineskip",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-bud-light",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Bud Light",
+      "category": "beer",
+      "price": 5.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-bud-light-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-bud-light",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-miller-lite",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Miller Lite",
+      "category": "beer",
+      "price": 5.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-miller-lite-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-miller-lite",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-white-claw",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "White Claw",
+      "category": "seltzer",
+      "price": 6.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-white-claw-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-white-claw",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-vodka-soda",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Vodka Soda",
+      "category": "cocktail",
+      "price": 8.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-vodka-soda-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-vodka-soda",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-margarita",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Margarita",
+      "category": "cocktail",
+      "price": 9.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-margarita-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-margarita",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-long-island",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Long Island",
+      "category": "cocktail",
+      "price": 10.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-long-island-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-long-island",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-fireball",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Fireball Shot",
+      "category": "shot",
+      "price": 5.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-fireball-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-fireball",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-jager-bomb",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Jager Bomb",
+      "category": "shot",
+      "price": 7.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-jager-bomb-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-jager-bomb",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-cover",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Door Cover",
+      "category": "access",
+      "price": 5.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-cover-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-cover",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-bucket",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Beer Bucket (5)",
+      "category": "beer",
+      "price": 20.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-bucket-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-bucket",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "prod-pitcher",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "PRODUCT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Pitcher",
+      "category": "beer",
+      "price": 12.0,
+      "active": true
+    }
+  },
+  {
+    ":ID": "edge-prod-pitcher-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-pitcher",
+    "P1": "venue-kollege-klub",
+    "P2": "SOLD_AT",
+    "P3": null
+  },
+  {
+    ":ID": "seg-thursday-regulars",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SEGMENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Thursday Regulars",
+      "size": 245,
+      "description": "Users who visit 3+ Thursdays/month"
+    }
+  },
+  {
+    ":ID": "edge-seg-thursday-regulars-of-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "seg-thursday-regulars",
+    "P1": "venue-kollege-klub",
+    "P2": "SEGMENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "seg-weekend-warriors",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SEGMENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Weekend Warriors",
+      "size": 812,
+      "description": "Fri+Sat visitors, 2+ visits/month"
+    }
+  },
+  {
+    ":ID": "edge-seg-weekend-warriors-of-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "seg-weekend-warriors",
+    "P1": "venue-kollege-klub",
+    "P2": "SEGMENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "seg-vip-spenders",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SEGMENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "VIP Spenders",
+      "size": 67,
+      "description": "Top 5% by monthly spend"
+    }
+  },
+  {
+    ":ID": "edge-seg-vip-spenders-of-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "seg-vip-spenders",
+    "P1": "venue-kollege-klub",
+    "P2": "SEGMENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "seg-freshmen",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SEGMENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Freshmen",
+      "size": 390,
+      "description": "First-year users, < 6 months on platform"
+    }
+  },
+  {
+    ":ID": "edge-seg-freshmen-of-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "seg-freshmen",
+    "P1": "venue-kollege-klub",
+    "P2": "SEGMENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "seg-dormant",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SEGMENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Dormant",
+      "size": 158,
+      "description": "No visit in 30+ days"
+    }
+  },
+  {
+    ":ID": "edge-seg-dormant-of-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "seg-dormant",
+    "P1": "venue-kollege-klub",
+    "P2": "SEGMENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "seg-greek-life",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "SEGMENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Greek Life",
+      "size": 305,
+      "description": "Users affiliated with Greek organizations"
+    }
+  },
+  {
+    ":ID": "edge-seg-greek-life-of-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "seg-greek-life",
+    "P1": "venue-kollege-klub",
+    "P2": "SEGMENT_OF",
+    "P3": null
+  },
+  {
+    ":ID": "staff-mike",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Mike",
+      "role": "bartender",
+      "status": "full-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-mike-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-mike",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "staff-sarah",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Sarah",
+      "role": "bartender",
+      "status": "full-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-sarah-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-sarah",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "staff-tony",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Tony",
+      "role": "bartender",
+      "status": "part-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-tony-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-tony",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "staff-jess",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Jess",
+      "role": "bartender",
+      "status": "part-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-jess-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-jess",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "staff-chris",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Chris",
+      "role": "door",
+      "status": "full-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-chris-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-chris",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "staff-anna",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Anna",
+      "role": "door",
+      "status": "part-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-anna-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-anna",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "staff-dave",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "STAFF",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Dave",
+      "role": "bar_back",
+      "status": "part-time"
+    }
+  },
+  {
+    ":ID": "edge-staff-dave-works-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "staff-dave",
+    "P1": "venue-kollege-klub",
+    "P2": "WORKS_AT",
+    "P3": null
+  },
+  {
+    ":ID": "event-thirsty-thursday",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "EVENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Thirsty Thursday",
+      "date": "2-12-2026",
+      "time": "21:00",
+      "cover": 0,
+      "expected_attendance": 280
+    }
+  },
+  {
+    ":ID": "edge-event-thirsty-thursday-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "event-thirsty-thursday",
+    "P1": "venue-kollege-klub",
+    "P2": "EVENT_AT",
+    "P3": null
+  },
+  {
+    ":ID": "event-friday-night-live",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "EVENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Friday Night Live",
+      "date": "2-13-2026",
+      "time": "22:00",
+      "cover": 5,
+      "expected_attendance": 350
+    }
+  },
+  {
+    ":ID": "edge-event-friday-night-live-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "event-friday-night-live",
+    "P1": "venue-kollege-klub",
+    "P2": "EVENT_AT",
+    "P3": null
+  },
+  {
+    ":ID": "event-saturday-social",
+    ":TYPE": "NODE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "EVENT",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "name": "Saturday Social",
+      "date": "2-14-2026",
+      "time": "21:00",
+      "cover": 10,
+      "expected_attendance": 380
+    }
+  },
+  {
+    ":ID": "edge-event-saturday-social-at-kk",
+    ":TYPE": "EDGE",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "event-saturday-social",
+    "P1": "venue-kollege-klub",
+    "P2": "EVENT_AT",
+    "P3": null
+  },
+  {
+    ":ID": "metric-revenue-today",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Revenue Today",
+    "P3": {
+      "current": 0,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-revenue-wtd",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Revenue WTD",
+    "P3": {
+      "current": 14820,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-revenue-mtd",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Revenue MTD",
+    "P3": {
+      "current": 38450,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-revenue-last-friday",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Revenue Last Friday",
+    "P3": {
+      "current": 6240,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-revenue-last-saturday",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Revenue Last Saturday",
+    "P3": {
+      "current": 7180,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-avg-spend",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Avg Spend Per Customer",
+    "P3": {
+      "current": 22.4,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-avg-spend-vip",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Avg Spend VIP",
+    "P3": {
+      "current": 48.6,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-lineskip-today",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-lineskip",
+    "P1": "NUMBER",
+    "P2": "LineSkip Sales Today",
+    "P3": {
+      "current": 0,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-lineskip-wtd",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-lineskip",
+    "P1": "NUMBER",
+    "P2": "LineSkip Sales WTD",
+    "P3": {
+      "current": 187,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-lineskip-conversion",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-lineskip",
+    "P1": "NUMBER",
+    "P2": "LineSkip Conversion %",
+    "P3": {
+      "current": 34.2,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-door-count-today",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Door Count Today",
+    "P3": {
+      "current": 0,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-door-count-last-fri",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Door Count Last Friday",
+    "P3": {
+      "current": 342,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-door-count-last-sat",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Door Count Last Sat",
+    "P3": {
+      "current": 378,
+      "unit": "count"
+    }
+  },
+  {
+    ":ID": "metric-demand-forecast",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Demand Forecast Tonight",
+    "P3": {
+      "current": 40,
+      "score": 0.15,
+      "label": "dead"
+    }
+  },
+  {
+    ":ID": "metric-capacity-utilization",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Capacity Utilization %",
+    "P3": {
+      "current": 0,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-wait-time",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Avg Wait Time (min)",
+    "P3": {
+      "current": 0,
+      "unit": "minutes"
+    }
+  },
+  {
+    ":ID": "metric-csat",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "Customer Satisfaction",
+    "P3": {
+      "current": 4.2,
+      "unit": "stars",
+      "max": 5
+    }
+  },
+  {
+    ":ID": "metric-repeat-rate",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "NUMBER",
+    "P2": "30-Day Repeat Rate %",
+    "P3": {
+      "current": 42.8,
+      "unit": "percent"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-bud-light",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-bud-light",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 1845,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-vodka-soda",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-vodka-soda",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 1520,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-lineskip",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-lineskip",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 1870,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-white-claw",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-white-claw",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 1230,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-miller-lite",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-miller-lite",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 1105,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-fireball",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-fireball",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 980,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-long-island",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-long-island",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 910,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-margarita",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-margarita",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 860,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-jager-bomb",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-jager-bomb",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 740,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-cover",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-cover",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 685,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-bucket",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-bucket",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 620,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "metric-rev7d-prod-pitcher",
+    ":TYPE": "METRIC",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "prod-pitcher",
+    "P1": "NUMBER",
+    "P2": "Revenue (7-day)",
+    "P3": {
+      "current": 455,
+      "unit": "USD"
+    }
+  },
+  {
+    ":ID": "sig-001",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-8-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "metric-revenue-last-saturday",
+    "P2": 7180,
+    "P3": {
+      "description": "Revenue recorded for Saturday night \u2014 strong performance.",
+      "ts": "2026-02-08T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-002",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-8-2026",
+    "P0": "prod-lineskip",
+    "P1": "metric-lineskip-wtd",
+    "P2": 187,
+    "P3": {
+      "description": "LineSkip weekly tally: 187 sales at $10 avg.",
+      "ts": "2026-02-08T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-003",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "seg-thursday-regulars",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "description": "Push campaign sent: '$3 Wells this Thursday' \u2014 245 recipients, 38% open rate.",
+      "ts": "2026-02-07T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-004",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "metric-door-count-last-fri",
+    "P2": 342,
+    "P3": {
+      "description": "Friday door count: 342 (85.5% capacity).",
+      "ts": "2026-02-07T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-005",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-7-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "metric-door-count-last-sat",
+    "P2": 378,
+    "P3": {
+      "description": "Saturday door count: 378 (94.5% capacity). Near sellout.",
+      "ts": "2026-02-07T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-006",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "prod-bud-light",
+    "P1": "metric-rev7d-prod-bud-light",
+    "P2": 1845,
+    "P3": {
+      "description": "Bud Light top seller by volume this week \u2014 369 units.",
+      "ts": "2026-02-06T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-007",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "prod-lineskip",
+    "P1": "metric-lineskip-conversion",
+    "P2": 34.2,
+    "P3": {
+      "description": "LineSkip conversion rate: 34.2% of app openers purchased.",
+      "ts": "2026-02-06T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-008",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-5-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "metric-csat",
+    "P2": 4.2,
+    "P3": {
+      "description": "CSAT survey: 4.2/5.0 (n=89 responses this week).",
+      "ts": "2026-02-05T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-009",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-4-2026",
+    "P0": "seg-dormant",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "description": "Win-back SMS sent to 158 dormant users: '$5 LineSkip comeback offer'.",
+      "ts": "2026-02-04T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-010",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-3-2026",
+    "P0": "venue-kollege-klub",
+    "P1": "metric-repeat-rate",
+    "P2": 42.8,
+    "P3": {
+      "description": "30-day repeat rate: 42.8%, up 2.1pp from last month.",
+      "ts": "2026-02-03T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-011",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-6-2026",
+    "P0": "staff-mike",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "description": "Mike clocked 38 hrs last week \u2014 approaching overtime threshold.",
+      "ts": "2026-02-06T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "sig-012",
+    ":TYPE": "SIGNAL",
+    ":CREATED": "DATE:2-5-2026",
+    "P0": "event-friday-night-live",
+    "P1": null,
+    "P2": null,
+    "P3": {
+      "description": "Friday Night Live event created \u2014 DJ Ricky confirmed, $5 cover.",
+      "ts": "2026-02-05T13:50:29.875307"
+    }
+  },
+  {
+    ":ID": "proto-dynamic-pricing",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Dynamic Pricing",
+    "P2": "Adjust LineSkip price based on demand forecast. Below 50% \u2192 $8, 50-80% \u2192 $10, above 80% \u2192 $15.",
+    "P3": {
+      "trigger": "demand_score",
+      "thresholds": [
+        0.5,
+        0.8
+      ],
+      "prices": [
+        8,
+        10,
+        15
+      ]
+    }
+  },
+  {
+    ":ID": "proto-surge-staffing",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Surge Staffing",
+    "P2": "When forecast > 300, schedule 4 bartenders + 2 door. Otherwise 3 + 1.",
+    "P3": {
+      "trigger": "demand_forecast",
+      "threshold": 300,
+      "surge": {
+        "bartenders": 4,
+        "door": 2
+      },
+      "normal": {
+        "bartenders": 3,
+        "door": 1
+      }
+    }
+  },
+  {
+    ":ID": "proto-happy-hour",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Happy Hour Automation",
+    "P2": "Mon-Wed 4-7pm: all wells $3, all domestics $3. Auto-activate via time trigger.",
+    "P3": {
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday"
+      ],
+      "start": "16:00",
+      "end": "19:00",
+      "well_price": 3,
+      "domestic_price": 3
+    }
+  },
+  {
+    ":ID": "proto-campaign-thursday",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Thursday Push Campaign",
+    "P2": "Every Wednesday at 2pm, send push to Thursday Regulars with the Thursday special.",
+    "P3": {
+      "send_day": "Wednesday",
+      "send_time": "14:00",
+      "segment": "seg-thursday-regulars"
+    }
+  },
+  {
+    ":ID": "proto-capacity-alert",
+    ":TYPE": "PROTOCOL",
+    ":CREATED": "DATE:2-9-2026",
+    "P0": "active",
+    "P1": "Capacity Alert",
+    "P2": "When door count exceeds 360 (90% of 400), send alert to owner and pause LineSkip sales.",
+    "P3": {
+      "threshold": 360,
+      "actions": [
+        "alert_owner",
+        "pause_lineskip"
+      ]
+    }
+  }
+]
