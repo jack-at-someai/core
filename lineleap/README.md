@@ -67,4 +67,10 @@ cd knowledge-graph && python -m http.server 8080
 
 ---
 
+## The Conclusion
+
+Read **[CONCLUSION.md](CONCLUSION.md)** — a function-by-function proof that every role at LineLeap can be automated through Charlotte's substrate. 100 employees → 5. Not through cost-cutting. Through architecture.
+
+---
+
 *Built with Claude Code (Opus 4.6) on February 9, 2026.*
