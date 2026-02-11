@@ -1,0 +1,104 @@
+;;; ================================================================
+;;; SPINE / TEMPORAL / ENCODING
+;;; Epoch boundary encoding and context compression
+;;; ================================================================
+
+(in-microtheory CharlotteTemporalMt)
+
+;; ── The encoding protocol ──
+;; At every epoch boundary (every 2048 years), the system:
+;; 1. Snapshots the entire graph state
+;; 2. Compresses it into a context summary
+;; 3. Hashes the summary (blockchain-style)
+;; 4. Stores the hash at index 0 of the next epoch
+;;
+;; This creates a chain. To access memory from epoch N-2,
+;; you unravel index 0 of epoch N-1, which contains the hash
+;; of epoch N-2's context, which can be decoded to reveal
+;; the full state at the boundary.
+
+(isa EpochEncoding Collection)
+
+(isa ContextSnapshot EpochEncoding)
+(isa ContextSummary EpochEncoding)
+(isa ContextHash EpochEncoding)
+(isa ChainAnchor EpochEncoding)
+
+;; ── Encoding pipeline ──
+
+(isa EncodePhase-Snapshot EncodePhase)
+(isa EncodePhase-Compress EncodePhase)
+(isa EncodePhase-Hash EncodePhase)
+(isa EncodePhase-Anchor EncodePhase)
+
+(encodeOrder EncodePhase-Snapshot 1)
+(encodeOrder EncodePhase-Compress 2)
+(encodeOrder EncodePhase-Hash 3)
+(encodeOrder EncodePhase-Anchor 4)
+
+;; Phase 1: Snapshot — capture the full graph state
+(implies
+  (and (epochBoundaryReached ?E)
+       (currentGraphState ?STATE))
+  (snapshot ?E ?STATE))
+
+;; Phase 2: Compress — reduce the snapshot to essential context
+;; Compression preserves: all NODEs, all EDGEs, summary statistics
+;; of METRICs and SIGNALs, all PROTOCOLs, and the previous chain.
+(implies
+  (snapshot ?E ?STATE)
+  (compress ?E ?STATE ?SUMMARY))
+
+;; Phase 3: Hash — produce a cryptographic hash of the summary
+(implies
+  (compress ?E ?STATE ?SUMMARY)
+  (hash ?E ?SUMMARY ?HASH))
+
+;; Phase 4: Anchor — store the hash at index 0 of the next epoch
+(implies
+  (and (hash ?E ?SUMMARY ?HASH)
+       (epochNumber ?E ?N)
+       (plus ?N 1 ?NEXT))
+  (anchorAtIndex ?NEXT 0 ?HASH))
+
+;; ── Chain unraveling ──
+;; To access historical context, unravel the chain backward.
+
+(implies
+  (and (anchorAtIndex ?EPOCH 0 ?HASH)
+       (decodeHash ?HASH ?SUMMARY)
+       (decompress ?SUMMARY ?STATE))
+  (historicalState ?EPOCH ?STATE))
+
+;; Recursive unraveling
+(implies
+  (and (historicalState ?EPOCH ?STATE)
+       (extractAnchor ?STATE ?PREV_HASH)
+       (decodeHash ?PREV_HASH ?PREV_SUMMARY)
+       (decompress ?PREV_SUMMARY ?PREV_STATE)
+       (epochNumber ?EPOCH ?N)
+       (minus ?N 1 ?PREV_N))
+  (historicalState ?PREV_N ?PREV_STATE))
+
+;; ── Depth of unraveling = depth of memory ──
+
+(implies
+  (and (memoryDepth ?C ?D)
+       (currentEpoch ?CURRENT)
+       (epochNumber ?CURRENT ?N))
+  (canAccess ?C (minus ?N ?D)))
+
+(comment memoryDepth
+  "How many epochs back the container can unravel.
+   Each level of depth adds 2048 years of accessible history.
+   The cost of deeper memory is the computational cost of
+   recursive decompression.")
+
+;; ── Perpetual context growth ──
+;; The chain never breaks. Every epoch boundary adds to it.
+;; Context grows forever. Memory is never lost, only compressed.
+
+(implies
+  (and (anchorAtIndex ?E 0 ?HASH)
+       (not (equals ?HASH Null)))
+  (contextPreserved ?E))

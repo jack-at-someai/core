@@ -1,0 +1,88 @@
+;;; ================================================================
+;;; KNOWLEDGE / DECLARATIVE / ATTRIBUTES
+;;; Default attribute definitions — property vocabulary for NODEs
+;;; ================================================================
+
+(in-microtheory CharlotteDeclarativeMt)
+
+;; ── Attribute type system ──
+
+(isa AttributeType Collection)
+(isa TextAttribute AttributeType)
+(isa NumericAttribute AttributeType)
+(isa BooleanAttribute AttributeType)
+(isa DateAttribute AttributeType)
+(isa EnumAttribute AttributeType)
+(isa ReferenceAttribute AttributeType)
+
+;; ── Universal attributes (all NODEs) ──
+
+(isa ::LABEL TextAttribute)
+(isa ::STATUS EnumAttribute)
+(isa ::CATEGORY EnumAttribute)
+(isa ::DESCRIPTION TextAttribute)
+(isa ::CREATED_BY ReferenceAttribute)
+(isa ::TAGS TextAttribute)
+
+;; ── IndividualEntity attributes ──
+
+(implies (isa ?N IndividualEntity)
+  (and (canHaveAttribute ?N ::NAME)
+       (canHaveAttribute ?N ::DATE_OF_BIRTH)
+       (canHaveAttribute ?N ::IDENTIFIER)
+       (canHaveAttribute ?N ::SEX)))
+
+(isa ::NAME TextAttribute)
+(isa ::DATE_OF_BIRTH DateAttribute)
+(isa ::IDENTIFIER TextAttribute)
+(isa ::SEX EnumAttribute)
+
+;; ── GroupEntity attributes ──
+
+(implies (isa ?N GroupEntity)
+  (and (canHaveAttribute ?N ::MEMBER_COUNT)
+       (canHaveAttribute ?N ::FORMED_DATE)))
+
+(isa ::MEMBER_COUNT NumericAttribute)
+(isa ::FORMED_DATE DateAttribute)
+
+;; ── AssetEntity attributes ──
+
+(implies (isa ?N AssetEntity)
+  (and (canHaveAttribute ?N ::VALUE)
+       (canHaveAttribute ?N ::CONDITION)
+       (canHaveAttribute ?N ::ACQUISITION_DATE)))
+
+(isa ::VALUE NumericAttribute)
+(isa ::CONDITION EnumAttribute)
+(isa ::ACQUISITION_DATE DateAttribute)
+
+;; ── LocationEntity attributes ──
+
+(implies (isa ?N LocationEntity)
+  (and (canHaveAttribute ?N ::LATITUDE)
+       (canHaveAttribute ?N ::LONGITUDE)
+       (canHaveAttribute ?N ::ELEVATION)
+       (canHaveAttribute ?N ::CAPACITY)))
+
+(isa ::LATITUDE NumericAttribute)
+(isa ::LONGITUDE NumericAttribute)
+(isa ::ELEVATION NumericAttribute)
+(isa ::CAPACITY NumericAttribute)
+
+;; ── Attribute constraint rules ──
+
+(implies
+  (and (isa ?ATTR NumericAttribute)
+       (hasAttribute ?N ?ATTR ?V))
+  (isa ?V Number))
+
+(implies
+  (and (isa ?ATTR BooleanAttribute)
+       (hasAttribute ?N ?ATTR ?V))
+  (or (equals ?V True) (equals ?V False)))
+
+(implies
+  (and (isa ?ATTR DateAttribute)
+       (hasAttribute ?N ?ATTR ?V))
+  (isa ?V TemporalCoordinate))

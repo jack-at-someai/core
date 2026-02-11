@@ -1,0 +1,96 @@
+;;; ================================================================
+;;; KNOWLEDGE / STRUCTURAL / RELATIONS
+;;; Default typed relations — the edge vocabulary
+;;; ================================================================
+
+(in-microtheory CharlotteStructuralMt)
+
+;; ── Relation hierarchy ──
+
+(isa SpatialRelation Collection)
+(isa TemporalRelation Collection)
+(isa CausalRelation Collection)
+(isa SocialRelation Collection)
+(isa OwnershipRelation Collection)
+(isa BiologicalRelation Collection)
+(genls SpatialRelation Relation)
+(genls TemporalRelation Relation)
+(genls CausalRelation Relation)
+(genls SocialRelation Relation)
+(genls OwnershipRelation Relation)
+(genls BiologicalRelation Relation)
+
+;; ── Core EDGE types (from Charlotte's validation domains) ──
+
+;; Ownership & membership
+(isa OWNS EdgeType)
+(isa MEMBER_OF EdgeType)
+(isa BELONGS_TO EdgeType)
+(comment OWNS "A owns B. Implies responsibility and authority.")
+(comment MEMBER_OF "A is a member of group B.")
+(comment BELONGS_TO "A belongs to collection B.")
+
+;; Biological
+(isa PARENT_OF EdgeType)
+(isa CHILD_OF EdgeType)
+(isa SIRE_OF EdgeType)
+(isa DAM_OF EdgeType)
+(isa LITTER_OF EdgeType)
+(comment PARENT_OF "A is a biological parent of B.")
+(comment SIRE_OF "A is the sire (father) of B.")
+(comment DAM_OF "A is the dam (mother) of B.")
+
+;; Temporal
+(isa NEXT EdgeType)
+(isa PREVIOUS EdgeType)
+(isa FOLLOWS EdgeType)
+(isa PRECEDES EdgeType)
+(comment NEXT "A is immediately followed by B on the temporal spine.")
+(comment PRECEDES "A occurs before B in time.")
+
+;; Spatial
+(isa LOCATED_AT EdgeType)
+(isa ADJACENT_TO EdgeType)
+(isa CONTAINED_IN EdgeType)
+(comment LOCATED_AT "A is physically located at B.")
+(comment ADJACENT_TO "A is adjacent to B in space. Symmetric.")
+(comment CONTAINED_IN "A is contained within B.")
+
+;; Causal
+(isa CAUSES EdgeType)
+(isa ENABLES EdgeType)
+(isa PREVENTS EdgeType)
+(isa DERIVED_FROM EdgeType)
+(comment CAUSES "A causes B. Directional, not necessarily sufficient.")
+(comment ENABLES "A enables B. Necessary but not sufficient.")
+(comment PREVENTS "A prevents B from occurring.")
+(comment DERIVED_FROM "A is derived from B. Provenance chain.")
+
+;; Functional
+(isa MONITORS EdgeType)
+(isa GOVERNS EdgeType)
+(isa MEASURES EdgeType)
+(comment MONITORS "Agent A monitors NODE B.")
+(comment GOVERNS "PROTOCOL A governs the behavior of B.")
+(comment MEASURES "METRIC A measures dimension of NODE B.")
+
+;; ── Symmetry rules ──
+
+(implies (isa ?R SymmetricRelation)
+  (implies (?R ?X ?Y) (?R ?Y ?X)))
+
+(isa ADJACENT_TO SymmetricRelation)
+(isa SIBLING_OF SymmetricRelation)
+
+;; ── Inverse rules ──
+
+(inverseOf PARENT_OF CHILD_OF)
+(inverseOf OWNS BELONGS_TO)
+(inverseOf NEXT PREVIOUS)
+(inverseOf PRECEDES FOLLOWS)
+(inverseOf CAUSES CAUSED_BY)
+
+(implies
+  (and (inverseOf ?R1 ?R2)
+       (?R1 ?X ?Y))
+  (?R2 ?Y ?X))

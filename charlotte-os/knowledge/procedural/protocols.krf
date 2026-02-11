@@ -1,0 +1,96 @@
+;;; ================================================================
+;;; KNOWLEDGE / PROCEDURAL / PROTOCOLS
+;;; Default protocols — the rules that govern graph evolution
+;;; ================================================================
+
+(in-microtheory CharlotteProceduralMt)
+
+;; ── Protocol structure ──
+;; A PROTOCOL is: when TRIGGER fires and CONDITION holds, execute ACTION.
+
+(implies
+  (isa ?P PROTOCOL)
+  (and (thereExists ?T (hasTrigger ?P ?T))
+       (thereExists ?C (hasCondition ?P ?C))
+       (thereExists ?A (hasAction ?P ?A))))
+
+;; ── Trigger types ──
+
+(isa SignalArrival TriggerType)
+(isa TimeElapsed TriggerType)
+(isa ThresholdCrossed TriggerType)
+(isa StateChanged TriggerType)
+(isa ManualInvocation TriggerType)
+
+(comment SignalArrival "Fires when a new SIGNAL is placed on a METRIC line.")
+(comment TimeElapsed "Fires when a duration has passed since a reference point.")
+(comment ThresholdCrossed "Fires when a METRIC value crosses a defined bound.")
+(comment StateChanged "Fires when a NODE transitions lifecycle state.")
+(comment ManualInvocation "Fires when the observer explicitly triggers the protocol.")
+
+;; ── Action types ──
+
+(isa CreateNode ActionType)
+(isa CreateEdge ActionType)
+(isa CreateSignal ActionType)
+(isa UpdateAttribute ActionType)
+(isa TransitionState ActionType)
+(isa SendNotification ActionType)
+(isa EvaluateRule ActionType)
+(isa ArchiveEntity ActionType)
+
+;; ── Default system protocols ──
+
+;; Protocol: When a NODE is created, set its lifecycle to Nascent
+(isa Protocol-InitLifecycle PROTOCOL)
+(hasTrigger Protocol-InitLifecycle SignalArrival)
+(hasCondition Protocol-InitLifecycle
+  (and (isa ?N NODE) (not (hasState ?N ?ANY))))
+(hasAction Protocol-InitLifecycle
+  (TransitionState ?N Nascent))
+
+;; Protocol: When a signal arrives on a dormant NODE, reactivate it
+(isa Protocol-ReactivateOnSignal PROTOCOL)
+(hasTrigger Protocol-ReactivateOnSignal SignalArrival)
+(hasCondition Protocol-ReactivateOnSignal
+  (and (isa ?N NODE) (hasState ?N Dormant)
+       (isa ?S SIGNAL) (measuresNode ?S ?N)))
+(hasAction Protocol-ReactivateOnSignal
+  (TransitionState ?N Active))
+
+;; Protocol: Protocol forecast — expected signals generate reminders
+(isa Protocol-Forecast PROTOCOL)
+(hasTrigger Protocol-Forecast TimeElapsed)
+(hasCondition Protocol-Forecast
+  (and (isa ?P PROTOCOL)
+       (expectsSignal ?P ?METRIC ?DEADLINE)
+       (not (hasSignalAfter ?METRIC ?DEADLINE))))
+(hasAction Protocol-Forecast
+  (SendNotification OverdueSignal ?METRIC ?DEADLINE))
+
+;; Protocol: Epoch boundary encoding
+(isa Protocol-EpochEncode PROTOCOL)
+(hasTrigger Protocol-EpochEncode ThresholdCrossed)
+(hasCondition Protocol-EpochEncode
+  (epochBoundaryReached ?EPOCH))
+(hasAction Protocol-EpochEncode
+  (and (encodeEpoch ?EPOCH)
+       (blockchainToIndex ?EPOCH NextEpoch 0)))
+
+;; ── Protocol priority ──
+;; Lower number = higher priority
+
+(protocolPriority Protocol-EpochEncode 0)
+(protocolPriority Protocol-InitLifecycle 1)
+(protocolPriority Protocol-ReactivateOnSignal 2)
+(protocolPriority Protocol-Forecast 3)
+
+;; ── Conflict resolution ──
+;; When two protocols fire simultaneously, execute higher priority first.
+
+(implies
+  (and (fires ?P1 ?T) (fires ?P2 ?T)
+       (protocolPriority ?P1 ?N1)
+       (protocolPriority ?P2 ?N2)
+       (lessThan ?N1 ?N2))
+  (executesBefore ?P1 ?P2 ?T))

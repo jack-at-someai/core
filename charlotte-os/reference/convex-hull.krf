@@ -1,0 +1,119 @@
+;;; ================================================================
+;;; REFERENCE / CONVEX HULL
+;;; The convex hull of knowledge — bounding surface theorem
+;;; ================================================================
+
+(in-microtheory CharlotteReferenceMt)
+
+;; ── Convex Hull Theorem ──
+;;
+;; CLAIM: The five knowledge types (structural, declarative,
+;; procedural, heuristic, meta) form the convex hull of knowledge.
+;;
+;; DEFINITION: A convex hull is the tightest enclosure of a point
+;; set such that every interior point can be expressed as a convex
+;; combination of boundary points.
+;;
+;; ANALOGY: Every real-world knowledge artifact — a medical diagnosis,
+;; a breeding decision, a violin provenance chain, a logistics route,
+;; a swarm behavior rule — can be decomposed into some weighted
+;; combination of these five types.
+;;
+;; COROLLARY: If a knowledge system can represent all five types,
+;; it can represent anything. Charlotte's five primitives (NODE,
+;; EDGE, METRIC, SIGNAL, PROTOCOL) are expressive enough to
+;; encode all five knowledge types. Therefore Charlotte can
+;; represent any knowledge domain.
+
+(isa ConvexHullOfKnowledge Theorem)
+(comment ConvexHullOfKnowledge
+  "Any knowledge artifact K can be expressed as:
+   K = w1*Structural + w2*Declarative + w3*Procedural + w4*Heuristic + w5*Meta
+   where w1..w5 >= 0 and w1 + w2 + w3 + w4 + w5 = 1.
+   The five types are the vertices. All knowledge is interior.")
+
+;; ── Vertices of the hull ──
+
+(hullVertex 1 StructuralKnowledge)
+(hullVertex 2 DeclarativeKnowledge)
+(hullVertex 3 ProceduralKnowledge)
+(hullVertex 4 HeuristicKnowledge)
+(hullVertex 5 MetaKnowledge)
+
+;; ── Interior point decomposition ──
+;; Examples of how real knowledge decomposes into the five types.
+
+;; A breeding decision (Sounder/Trogdon domain)
+(isa BreedingDecision KnowledgeArtifact)
+(decomposition BreedingDecision StructuralKnowledge 0.20)
+(decomposition BreedingDecision DeclarativeKnowledge 0.25)
+(decomposition BreedingDecision ProceduralKnowledge 0.15)
+(decomposition BreedingDecision HeuristicKnowledge 0.30)
+(decomposition BreedingDecision MetaKnowledge 0.10)
+(comment BreedingDecision
+  "Structural: sire-dam-litter relationships.
+   Declarative: genotype, phenotype, breed registry.
+   Procedural: breeding protocols, gestation rules.
+   Heuristic: breeder intuition, rule-of-thumb selection.
+   Meta: confidence in genomic predictions.")
+
+;; A violin authentication (Prier Violins domain)
+(isa ViolinAuthentication KnowledgeArtifact)
+(decomposition ViolinAuthentication StructuralKnowledge 0.25)
+(decomposition ViolinAuthentication DeclarativeKnowledge 0.30)
+(decomposition ViolinAuthentication ProceduralKnowledge 0.10)
+(decomposition ViolinAuthentication HeuristicKnowledge 0.20)
+(decomposition ViolinAuthentication MetaKnowledge 0.15)
+(comment ViolinAuthentication
+  "Structural: provenance chain (maker → dealer → owner).
+   Declarative: measurements, wood analysis, label text.
+   Procedural: authentication protocol steps.
+   Heuristic: expert's eye, tonal quality assessment.
+   Meta: certainty of attribution, known gaps in provenance.")
+
+;; A logistics dispatch (Top Tier Moving domain)
+(isa LogisticsDispatch KnowledgeArtifact)
+(decomposition LogisticsDispatch StructuralKnowledge 0.15)
+(decomposition LogisticsDispatch DeclarativeKnowledge 0.20)
+(decomposition LogisticsDispatch ProceduralKnowledge 0.30)
+(decomposition LogisticsDispatch HeuristicKnowledge 0.25)
+(decomposition LogisticsDispatch MetaKnowledge 0.10)
+(comment LogisticsDispatch
+  "Structural: crew-truck-job assignments.
+   Declarative: addresses, weights, inventory lists.
+   Procedural: dispatch workflow, routing rules.
+   Heuristic: estimated time, crew capacity judgment.
+   Meta: tracking what information is missing from the manifest.")
+
+;; A venue experience (LineLeap domain)
+(isa VenueExperience KnowledgeArtifact)
+(decomposition VenueExperience StructuralKnowledge 0.20)
+(decomposition VenueExperience DeclarativeKnowledge 0.15)
+(decomposition VenueExperience ProceduralKnowledge 0.20)
+(decomposition VenueExperience HeuristicKnowledge 0.30)
+(decomposition VenueExperience MetaKnowledge 0.15)
+(comment VenueExperience
+  "Structural: guest-event-venue relationships.
+   Declarative: capacity, schedule, pricing.
+   Procedural: entry protocols, queue management.
+   Heuristic: crowd mood, wait time estimates.
+   Meta: real-time confidence in occupancy counts.")
+
+;; ── Completeness check ──
+;; A container is knowledge-complete if it can encode all five types.
+
+(implies
+  (and (canEncode ?C StructuralKnowledge)
+       (canEncode ?C DeclarativeKnowledge)
+       (canEncode ?C ProceduralKnowledge)
+       (canEncode ?C HeuristicKnowledge)
+       (canEncode ?C MetaKnowledge))
+  (knowledgeComplete ?C))
+
+;; Charlotte is knowledge-complete by construction.
+(canEncode Charlotte StructuralKnowledge)
+(canEncode Charlotte DeclarativeKnowledge)
+(canEncode Charlotte ProceduralKnowledge)
+(canEncode Charlotte HeuristicKnowledge)
+(canEncode Charlotte MetaKnowledge)
+(knowledgeComplete Charlotte)

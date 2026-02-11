@@ -1,0 +1,84 @@
+;;; ================================================================
+;;; SPINE / TEMPORAL / LIFECYCLE
+;;; Universal lifecycle phases — birth through death
+;;; ================================================================
+
+(in-microtheory CharlotteTemporalMt)
+
+;; ── Every entity that exists in time has a lifecycle ──
+;; This is domain-agnostic. A pig, a violin, a truck, a venue,
+;; a team, a business — they all are born, grow, mature, decay, die.
+
+(isa LifecyclePhase Collection)
+
+(isa Birth LifecyclePhase)
+(isa Growth LifecyclePhase)
+(isa Maturity LifecyclePhase)
+(isa Decay LifecyclePhase)
+(isa Death LifecyclePhase)
+
+(comment Birth "The entity comes into existence.")
+(comment Growth "The entity is developing, accumulating capacity.")
+(comment Maturity "The entity is at peak function.")
+(comment Decay "The entity is declining in capacity.")
+(comment Death "The entity ceases to function or exist.")
+
+;; ── Phase ordering ──
+
+(phaseOrder Birth 0)
+(phaseOrder Growth 1)
+(phaseOrder Maturity 2)
+(phaseOrder Decay 3)
+(phaseOrder Death 4)
+
+(FOLLOWS Growth Birth)
+(FOLLOWS Maturity Growth)
+(FOLLOWS Decay Maturity)
+(FOLLOWS Death Decay)
+
+;; ── Not all entities traverse every phase ──
+;; Some die young (Birth → Death). Some never decay (Birth → Growth → Death).
+;; The full sequence is the default; domains override.
+
+(canTransitionLifecycle Birth Growth)
+(canTransitionLifecycle Birth Death)
+(canTransitionLifecycle Growth Maturity)
+(canTransitionLifecycle Growth Decay)
+(canTransitionLifecycle Growth Death)
+(canTransitionLifecycle Maturity Decay)
+(canTransitionLifecycle Maturity Death)
+(canTransitionLifecycle Decay Death)
+
+;; ── Lifecycle mapping to NODE states ──
+
+(mapsToNodeState Birth Nascent)
+(mapsToNodeState Growth Active)
+(mapsToNodeState Maturity Active)
+(mapsToNodeState Decay Active)
+(mapsToNodeState Death Deceased)
+
+;; ── Paper 10: The Dead Teach the Living ──
+;; Deceased entities are not deleted. Their signal history persists
+;; and informs the living. Depth of the archive is depth of wisdom.
+
+(implies
+  (and (isa ?N NODE)
+       (hasState ?N Deceased)
+       (thereExists ?S (and (isa ?S SIGNAL) (measuresNode ?S ?N))))
+  (isHistoricalTeacher ?N))
+
+(comment isHistoricalTeacher
+  "A dead entity whose signal history is still valuable for
+   informing decisions about living entities. The dead teach the living.")
+
+;; ── Lifecycle duration is domain-specific ──
+;; A pig's lifecycle is ~6 years. A violin's is ~300 years.
+;; A business operation may last decades. These are set by domain seeds.
+
+(isa expectedLifecycleDuration Relation)
+(arity expectedLifecycleDuration 2)
+(arg1Isa expectedLifecycleDuration Collection)
+(arg2Isa expectedLifecycleDuration Duration)
+(comment expectedLifecycleDuration
+  "The typical total lifespan of entities in this collection.
+   Domain-specific. Set by the domain seed, not the boot image.")

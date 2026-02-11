@@ -1,0 +1,96 @@
+;;; ================================================================
+;;; SPINE / SPATIAL / TOPOLOGICAL
+;;; Abstract spatial relations — containment, adjacency, connectivity
+;;; ================================================================
+
+(in-microtheory CharlotteSpatialMt)
+
+;; ── Topological plane ──
+;; Not physical coordinates, but spatial relationships between entities.
+;; This is the graph topology itself treated as a space.
+
+(isa TopologicalPlane SpatialPlane)
+(comment TopologicalPlane
+  "The relational space plane. Position is defined by connectivity,
+   not coordinates. Two nodes are 'close' if few edges separate them.")
+
+;; ── Topological relations (RCC-8 inspired) ──
+;; Region Connection Calculus: the eight possible spatial relations
+;; between two regions in topological space.
+
+(isa TopologicalRelation Collection)
+
+(isa Disconnected TopologicalRelation)
+(isa ExternallyConnected TopologicalRelation)
+(isa PartialOverlap TopologicalRelation)
+(isa TangentialProperPart TopologicalRelation)
+(isa NonTangentialProperPart TopologicalRelation)
+(isa Equal TopologicalRelation)
+(isa TangentialProperPartInverse TopologicalRelation)
+(isa NonTangentialProperPartInverse TopologicalRelation)
+
+(comment Disconnected "No shared boundary or overlap.")
+(comment ExternallyConnected "Share a boundary but no interior overlap.")
+(comment PartialOverlap "Overlap but neither contains the other.")
+(comment NonTangentialProperPart "A is entirely inside B, not touching B's boundary.")
+
+;; ── Graph distance ──
+;; In the topological plane, distance = shortest path length.
+
+(isa graphDistance Relation)
+(arity graphDistance 3)
+(comment graphDistance "(graphDistance A B N) — the shortest path between A and B is N edges.")
+
+(implies
+  (and (isa ?E EDGE)
+       (hasField ?E :FROM ?A)
+       (hasField ?E :TO ?B))
+  (graphDistance ?A ?B 1))
+
+;; Transitivity
+(implies
+  (and (graphDistance ?A ?B ?N1)
+       (graphDistance ?B ?C ?N2)
+       (plus ?N1 ?N2 ?TOTAL)
+       (or (not (graphDistance ?A ?C ?EXISTING))
+           (lessThan ?TOTAL ?EXISTING)))
+  (graphDistance ?A ?C ?TOTAL))
+
+;; ── Neighborhoods ──
+;; The k-hop neighborhood of a node.
+
+(isa neighborhood Relation)
+(arity neighborhood 3)
+(comment neighborhood "(neighborhood Node K ResultSet) — all nodes within K edges of Node.")
+
+(implies
+  (and (graphDistance ?N ?M ?D)
+       (lessThanOrEqual ?D ?K))
+  (inNeighborhood ?N ?K ?M))
+
+;; ── Connected components ──
+
+(implies
+  (and (graphDistance ?A ?B ?ANY))
+  (sameComponent ?A ?B))
+
+(isa SymmetricRelation sameComponent)
+
+;; ── Centrality (heuristic, computed) ──
+
+(isa degreeCentrality Relation)
+(arity degreeCentrality 2)
+(comment degreeCentrality "(degreeCentrality Node N) — number of edges incident to Node.")
+
+(isa betweennessCentrality Relation)
+(arity betweennessCentrality 2)
+(comment betweennessCentrality "(betweennessCentrality Node Score) — fraction of shortest paths passing through Node.")
+
+;; ── Clusters ──
+;; Groups of tightly-connected nodes.
+
+(isa Cluster Collection)
+(isa clusterMember Relation)
+(arity clusterMember 2)
+(arg1Isa clusterMember NODE)
+(arg2Isa clusterMember Cluster)

@@ -1,0 +1,93 @@
+;;; ================================================================
+;;; AGENT / OBSERVER
+;;; The observer on the temporal spine
+;;; ================================================================
+
+(in-microtheory CharlotteAgentMt)
+
+;; ── Charlotte is an observer ──
+;; She lives on the temporal spine in Kd-space.
+;; Her primary action is placing SIGNALs on METRIC lines.
+;; Her primary perception is reading the graph state at the
+;; current temporal coordinate.
+
+(isa Charlotte Observer)
+(isa Observer Collection)
+(comment Observer
+  "An entity that lives on the temporal spine, perceiving the
+   state of Kd-space and placing signals on metric lines.
+   The observer acts in the environment by creating FACTs.")
+
+;; ── Observer position ──
+;; Charlotte's position is always 'now' on the temporal spine.
+
+(implies
+  (and (isa ?A Observer)
+       (currentTime ?NOW))
+  (observerPosition ?A TemporalSpineAxis ?NOW))
+
+;; ── Observer capabilities ──
+
+;; Perceive: read the graph state at current time
+(isa Perceive ObserverCapability)
+(implies
+  (and (isa ?A Observer)
+       (observerPosition ?A TemporalSpineAxis ?T))
+  (canPerceive ?A ?T))
+
+;; Signal: place a signal on a metric line
+(isa PlaceSignal ObserverCapability)
+(implies
+  (and (isa ?A Observer)
+       (isa ?M METRIC)
+       (observerPosition ?A TemporalSpineAxis ?T))
+  (canPlaceSignal ?A ?M ?T))
+
+;; Zoom: change temporal resolution (epoch ↔ millisecond)
+(isa Zoom ObserverCapability)
+(implies
+  (and (isa ?A Observer)
+       (isa ?U1 TemporalUnit)
+       (isa ?U2 TemporalUnit)
+       (canZoom ?U1 ?U2))
+  (canZoomBetween ?A ?U1 ?U2))
+
+;; Traverse: move along edges in the topological plane
+(isa Traverse ObserverCapability)
+(implies
+  (and (isa ?A Observer)
+       (isa ?E EDGE)
+       (hasField ?E :FROM ?FROM)
+       (hasField ?E :TO ?TO))
+  (canTraverse ?A ?FROM ?TO))
+
+;; Reflect: access meta knowledge (know what you know)
+(isa Reflect ObserverCapability)
+(implies
+  (and (isa ?A Observer)
+       (understands ?A MetaKnowledge))
+  (canReflect ?A))
+
+;; ── The observation loop ──
+;; Charlotte's fundamental cycle:
+;; 1. Perceive the current state
+;; 2. Evaluate protocols against current state
+;; 3. If a protocol fires, execute its action
+;; 4. If the human places a signal, ingest it
+;; 5. Advance along the temporal spine
+;; 6. Repeat
+
+(isa ObservationLoop PROTOCOL)
+(hasTrigger ObservationLoop TimeElapsed)
+(hasCondition ObservationLoop (containerOperational ThisContainer))
+(hasAction ObservationLoop
+  (and (Perceive Charlotte)
+       (evaluateProtocols Charlotte)
+       (ingestSignals Charlotte)
+       (advanceSpine Charlotte)))
+
+(comment ObservationLoop
+  "The heartbeat of the container. Charlotte perceives, reasons,
+   acts, and advances. This loop runs continuously while the
+   container is operational. The human operator interacts by
+   placing signals that Charlotte ingests on the next cycle.")

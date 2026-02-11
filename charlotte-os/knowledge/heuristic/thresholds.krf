@@ -1,0 +1,79 @@
+;;; ================================================================
+;;; KNOWLEDGE / HEURISTIC / THRESHOLDS
+;;; Default metric bounds and tolerances
+;;; ================================================================
+
+(in-microtheory CharlotteHeuristicMt)
+
+;; ── Threshold structure ──
+;; A threshold defines acceptable bounds for a METRIC value.
+;; These are heuristic — domain seeds override them.
+
+(isa Threshold Collection)
+(isa LowerBound Threshold)
+(isa UpperBound Threshold)
+(isa TargetValue Threshold)
+(isa ToleranceBand Threshold)
+
+(implies
+  (and (hasThreshold ?M LowerBound ?LO)
+       (hasThreshold ?M UpperBound ?HI))
+  (hasThreshold ?M ToleranceBand (minus ?HI ?LO)))
+
+;; ── Threshold violation detection ──
+
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :VALUE ?V)
+       (hasField ?S :METRIC_ID ?M)
+       (hasThreshold ?M LowerBound ?LO)
+       (lessThan ?V ?LO))
+  (thresholdViolation ?S BelowLowerBound))
+
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :VALUE ?V)
+       (hasField ?S :METRIC_ID ?M)
+       (hasThreshold ?M UpperBound ?HI)
+       (greaterThan ?V ?HI))
+  (thresholdViolation ?S AboveUpperBound))
+
+;; ── Default system thresholds ──
+
+;; Graph health: node-to-edge ratio
+(hasThreshold GraphNodeEdgeRatio LowerBound 0.5)
+(hasThreshold GraphNodeEdgeRatio UpperBound 10.0)
+(hasThreshold GraphNodeEdgeRatio TargetValue 2.0)
+(comment GraphNodeEdgeRatio "Healthy graphs have roughly 2 edges per node on average.")
+
+;; Signal frequency: minimum signals per metric per period
+(hasThreshold MinSignalFrequency LowerBound 1)
+(hasThreshold MinSignalFrequency TargetValue 7)
+(comment MinSignalFrequency "At least 1 signal per metric per period. Target: weekly.")
+
+;; Dormancy timeout: days without signal before suggesting dormancy
+(hasThreshold DormancyTimeout TargetValue 90)
+(comment DormancyTimeout "90 days without a signal suggests the NODE may be dormant.")
+
+;; Epoch fullness: percentage of epoch timeline utilized
+(hasThreshold EpochUtilization LowerBound 0.0)
+(hasThreshold EpochUtilization UpperBound 1.0)
+(comment EpochUtilization "Fraction of the current epoch's timeline that has elapsed.")
+
+;; ── Severity levels for violations ──
+
+(isa ViolationSeverity Collection)
+(isa Info ViolationSeverity)
+(isa Warning ViolationSeverity)
+(isa Critical ViolationSeverity)
+(isa Emergency ViolationSeverity)
+
+(severityOrder Info 0)
+(severityOrder Warning 1)
+(severityOrder Critical 2)
+(severityOrder Emergency 3)
+
+;; Default: threshold violations are Warnings unless elevated
+(defaultTrue
+  (implies (thresholdViolation ?S ?TYPE)
+    (hasSeverity ?S Warning)))

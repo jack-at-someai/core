@@ -1,0 +1,75 @@
+;;; ================================================================
+;;; KNOWLEDGE / STRUCTURAL / MEREOLOGY
+;;; Default part-of hierarchies — composition and containment
+;;; ================================================================
+
+(in-microtheory CharlotteStructuralMt)
+
+;; ── Part-of relation ──
+
+(isa partOf Relation)
+(arity partOf 2)
+(comment partOf "X is a part of Y. Transitive, antisymmetric, reflexive.")
+
+;; Transitivity
+(implies
+  (and (partOf ?X ?Y)
+       (partOf ?Y ?Z))
+  (partOf ?X ?Z))
+
+;; Antisymmetry
+(implies
+  (and (partOf ?X ?Y)
+       (partOf ?Y ?X))
+  (equals ?X ?Y))
+
+;; ── Contains (inverse of partOf) ──
+
+(isa contains Relation)
+(arity contains 2)
+(implies (partOf ?PART ?WHOLE) (contains ?WHOLE ?PART))
+
+;; ── Component-of (proper part, non-reflexive) ──
+
+(isa componentOf Relation)
+(arity componentOf 2)
+(implies
+  (and (partOf ?X ?Y)
+       (not (equals ?X ?Y)))
+  (componentOf ?X ?Y))
+
+;; ── Default mereological structure of an Operation ──
+
+(implies
+  (isa ?OP Operation)
+  (and (thereExists ?GRAPH (and (isa ?GRAPH KnowledgeGraph) (partOf ?GRAPH ?OP)))
+       (thereExists ?SPINE (and (isa ?SPINE TemporalSpine) (partOf ?SPINE ?OP)))
+       (thereExists ?AGENT (and (isa ?AGENT CharlotteAgent) (partOf ?AGENT ?OP)))))
+
+;; ── Mereology of a KnowledgeGraph ──
+
+(implies
+  (isa ?KG KnowledgeGraph)
+  (and (thereExists ?NS (and (isa ?NS NodeSet) (partOf ?NS ?KG)))
+       (thereExists ?ES (and (isa ?ES EdgeSet) (partOf ?ES ?KG)))
+       (thereExists ?MS (and (isa ?MS MetricSet) (partOf ?MS ?KG)))
+       (thereExists ?SS (and (isa ?SS SignalSet) (partOf ?SS ?KG)))
+       (thereExists ?PS (and (isa ?PS ProtocolSet) (partOf ?PS ?KG)))))
+
+;; ── Mereology of the TemporalSpine ──
+
+(implies
+  (isa ?SPINE TemporalSpine)
+  (thereExists ?EPOCH (and (isa ?EPOCH Epoch) (partOf ?EPOCH ?SPINE))))
+
+(implies
+  (isa ?EPOCH Epoch)
+  (thereExists ?ERA (and (isa ?ERA Era) (partOf ?ERA ?EPOCH))))
+
+;; ── Mereology of spatial planes ──
+
+(implies
+  (isa ?OP Operation)
+  (and (thereExists ?GEO (and (isa ?GEO GeospatialPlane) (partOf ?GEO ?OP)))
+       (thereExists ?TOPO (and (isa ?TOPO TopologicalPlane) (partOf ?TOPO ?OP)))
+       (thereExists ?THEO (and (isa ?THEO TheoreticalPlane) (partOf ?THEO ?OP)))))

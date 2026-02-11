@@ -1,0 +1,95 @@
+;;; ================================================================
+;;; SPINE / SPATIAL / GEOSPATIAL
+;;; Physical space — latitude, longitude, elevation
+;;; ================================================================
+
+(in-microtheory CharlotteSpatialMt)
+
+;; ── Geospatial plane ──
+;; The physical world. Where things are on Earth.
+
+(isa GeospatialPlane SpatialPlane)
+(comment GeospatialPlane
+  "The physical space plane. Coordinates are latitude, longitude,
+   and elevation. Every physical entity has a position here.")
+
+;; ── Coordinate system ──
+
+(isa GeospatialCoordinate Collection)
+(isa Latitude SpatialDimension)
+(isa Longitude SpatialDimension)
+(isa Elevation SpatialDimension)
+
+(dimensionUnit Latitude Degrees)
+(dimensionUnit Longitude Degrees)
+(dimensionUnit Elevation Meters)
+(dimensionRange Latitude -90.0 90.0)
+(dimensionRange Longitude -180.0 180.0)
+
+;; ── Every physical entity has a geospatial position ──
+
+(implies
+  (isa ?E PhysicalEntity)
+  (canHavePosition ?E GeospatialPlane))
+
+(implies
+  (and (hasPosition ?E GeospatialPlane ?POS)
+       (isa ?POS GeospatialCoordinate))
+  (and (thereExists ?LAT (coordinateValue ?POS Latitude ?LAT))
+       (thereExists ?LON (coordinateValue ?POS Longitude ?LON))))
+
+;; ── Geospatial hierarchy ──
+;; Regions nest: Planet > Continent > Country > State > County > City > Address > Coordinate
+
+(isa GeospatialRegion Collection)
+(isa Planet GeospatialRegion)
+(isa Continent GeospatialRegion)
+(isa Country GeospatialRegion)
+(isa StateOrProvince GeospatialRegion)
+(isa County GeospatialRegion)
+(isa City GeospatialRegion)
+(isa Address GeospatialRegion)
+
+(genls Continent GeospatialRegion)
+(genls Country GeospatialRegion)
+(genls StateOrProvince GeospatialRegion)
+(genls County GeospatialRegion)
+(genls City GeospatialRegion)
+(genls Address GeospatialRegion)
+
+(spatialContainment Planet Continent)
+(spatialContainment Continent Country)
+(spatialContainment Country StateOrProvince)
+(spatialContainment StateOrProvince County)
+(spatialContainment County City)
+(spatialContainment City Address)
+
+;; ── Distance and proximity ──
+
+(isa distanceBetween Relation)
+(arity distanceBetween 3)
+(comment distanceBetween "(distanceBetween A B D) — the geodesic distance between A and B is D.")
+
+(isa nearTo Relation)
+(arity nearTo 2)
+(isa SymmetricRelation nearTo)
+(comment nearTo "A is geospatially near B. Proximity threshold is domain-specific.")
+
+;; ── Geospatial signals ──
+;; A signal can carry location. Movement is a sequence of located signals.
+
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :TIMESTAMP ?T)
+       (hasPosition ?S GeospatialPlane ?POS))
+  (locatedSignal ?S ?T ?POS))
+
+;; Movement detection
+(implies
+  (and (locatedSignal ?S1 ?T1 ?POS1)
+       (locatedSignal ?S2 ?T2 ?POS2)
+       (hasField ?S1 :METRIC_ID ?M)
+       (hasField ?S2 :METRIC_ID ?M)
+       (temporallyAfter ?T2 ?T1)
+       (not (equals ?POS1 ?POS2)))
+  (movementDetected ?M ?T1 ?T2 ?POS1 ?POS2))

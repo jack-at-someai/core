@@ -1,0 +1,82 @@
+;;; ================================================================
+;;; SPINE / TEMPORAL / EPOCHS
+;;; The epoch system — 2048-year units of time
+;;; ================================================================
+
+(in-microtheory CharlotteTemporalMt)
+
+;; ── An Epoch is the largest unit of time ──
+;; 1 Epoch = 2048 years
+;; At epoch boundaries, the entire context is encoded and
+;; blockchained into the first index of the next epoch.
+
+(isa Epoch TemporalUnit)
+(epochDurationYears 2048)
+(comment Epoch
+  "The largest temporal unit. 2048 years. At the boundary, the
+   full context is compressed, encoded, and chained into index 0
+   of the next epoch. Depth of unraveling = depth of memory.")
+
+;; ── Epoch structure ──
+
+(isa EpochIndex Collection)
+(comment EpochIndex "Position within the epoch's encoded chain. Index 0 is the blockchain anchor from the previous epoch.")
+
+;; ── Current epoch definition ──
+;; Epoch 0 begins at the Unix epoch (1970-01-01) for computational convenience.
+;; Historical epochs extend backward. Future epochs extend forward.
+
+(isa Epoch-0 Epoch)
+(epochNumber Epoch-0 0)
+(epochStart Epoch-0 (YearFn 1970))
+(epochEnd Epoch-0 (YearFn 4018))
+(comment Epoch-0 "The current epoch. Begins 1970, ends 4018. We are here.")
+
+(isa Epoch-Neg1 Epoch)
+(epochNumber Epoch-Neg1 -1)
+(epochStart Epoch-Neg1 (YearFn -78))
+(epochEnd Epoch-Neg1 (YearFn 1970))
+(comment Epoch-Neg1 "The previous epoch. 78 BC to 1970 AD.")
+
+;; ── NEXT edges between epochs form the temporal spine ──
+
+(NEXT Epoch-Neg1 Epoch-0)
+
+;; ── Epoch boundary encoding ──
+
+(implies
+  (and (isa ?E Epoch)
+       (epochEnd ?E ?END)
+       (currentTime ?NOW)
+       (temporallyAfterOrEqual ?NOW ?END))
+  (epochBoundaryReached ?E))
+
+;; When an epoch boundary is reached:
+;; 1. Compress all facts in the epoch into a context summary
+;; 2. Hash the summary (blockchain encoding)
+;; 3. Store the hash at index 0 of the next epoch
+;; 4. The depth of unraveling the chain = depth of accessible memory
+
+(implies
+  (and (epochBoundaryReached ?E)
+       (epochNumber ?E ?N)
+       (nextEpochNumber ?N ?NEXT_N))
+  (and (encodeContext ?E)
+       (hashContext ?E ?HASH)
+       (storeAtIndex ?NEXT_N 0 ?HASH)))
+
+;; ── Epoch depth ──
+;; How many epochs back can you unravel? That's the memory depth.
+
+(isa memoryDepth Relation)
+(arity memoryDepth 2)
+(comment memoryDepth "(memoryDepth Container N) — this container can unravel N epochs of history.")
+
+;; Default: a fresh container can see the current epoch only.
+(defaultValue memoryDepth 1)
+
+;; Each unraveling adds 2048 years of context.
+(implies
+  (and (memoryDepth ?C ?N)
+       (greaterThan ?N 0))
+  (accessibleHistory ?C (times ?N 2048)))

@@ -1,0 +1,53 @@
+;;; ================================================================
+;;; CHARLOTTE OPERATING SYSTEM — BOOT IMAGE
+;;; ================================================================
+;;;
+;;; This is the default file system for a Charlotte container.
+;;; Every container ships with these files pre-laid so the
+;;; Charlotte instance has the structural, declarative, procedural,
+;;; heuristic, and meta knowledge it needs to operate from boot.
+;;;
+;;; ORIGIN
+;;; ------
+;;; Derived from the ATLAS_KNOWLEDGE_PRIMITIVES diagram drawn at
+;;; Northwestern University during the development of Atlas (now
+;;; Charlotte). Influenced by Ken Forbus's Companions cognitive
+;;; architecture and the CycL/KRF knowledge representation format.
+;;;
+;;; FORMAT
+;;; ------
+;;; All files use first-order logic in S-expression notation.
+;;; This is the closest language between humans and machines for
+;;; knowledge transfer. It is translatable to any other language.
+;;;
+;;;   (predicate arg1 arg2 ...)     — assertion
+;;;   (in-microtheory MtName)       — scope facts to a context
+;;;   (isa X Y)                     — X is an instance of Y
+;;;   (genls X Y)                   — X is a subclass of Y
+;;;   (genlMt X Y)                  — microtheory X inherits from Y
+;;;   (implies (antecedent) (consequent)) — rule
+;;;   ?VAR                          — variable
+;;;   ;; comment                    — comment
+;;;
+;;; DIRECTORY STRUCTURE
+;;; -------------------
+;;;   kernel/          — primitive definitions, type system, boot sequence
+;;;   knowledge/       — the five knowledge types (structural, declarative,
+;;;                      procedural, heuristic, meta)
+;;;   spine/           — temporal spine and spatial planes
+;;;   reference/       — convex hull documentation and primitive atlas
+;;;   agent/           — Charlotte instance identity and directives
+;;;
+;;; TEMPORAL ARCHITECTURE
+;;; ---------------------
+;;; Time is stored as CT scans of space. The largest unit is one
+;;; epoch (2048 years). At epoch boundaries, the entire context is
+;;; encoded and blockchained into the first index of the next epoch.
+;;; This ensures perpetual context growth while maintaining memory
+;;; over time. Depth of unraveling shows depth of memory.
+;;;
+;;; The primary temporal axis (the temporal spine) is where Charlotte
+;;; lives. The observer in the container zooms from epoch to
+;;; millisecond, placing signals on metric lines in Kd-space.
+;;;
+;;; ================================================================

@@ -1,0 +1,73 @@
+;;; ================================================================
+;;; KNOWLEDGE / DECLARATIVE / ENTITIES
+;;; Default entity types — the NODE vocabulary
+;;; ================================================================
+
+(in-microtheory CharlotteDeclarativeMt)
+
+;; ── Every NODE has an identity and a lifecycle ──
+
+(implies
+  (isa ?N NODE)
+  (and (thereExists ?ID (hasField ?N :ID ?ID))
+       (thereExists ?T (hasField ?N :CREATED ?T))
+       (thereExists ?LC (and (isa ?LC LifecycleState) (hasState ?N ?LC)))))
+
+;; ── Lifecycle states ──
+
+(isa LifecycleState Collection)
+(isa Nascent LifecycleState)
+(isa Active LifecycleState)
+(isa Dormant LifecycleState)
+(isa Archived LifecycleState)
+(isa Deceased LifecycleState)
+
+(comment Nascent "Just created. Not yet fully initialized.")
+(comment Active "Alive and producing signals.")
+(comment Dormant "Exists but not currently active. Can be reactivated.")
+(comment Archived "No longer active. Preserved for historical reference.")
+(comment Deceased "Terminal state. The entity has ceased to exist.")
+
+;; Lifecycle transitions
+(canTransition Nascent Active)
+(canTransition Active Dormant)
+(canTransition Active Archived)
+(canTransition Active Deceased)
+(canTransition Dormant Active)
+(canTransition Dormant Archived)
+(canTransition Archived Deceased)
+
+;; ── Domain-agnostic entity categories ──
+;; These are the universal categories that span all validation domains.
+
+(isa IndividualEntity Collection)
+(isa GroupEntity Collection)
+(isa AssetEntity Collection)
+(isa LocationEntity Collection)
+(isa EventEntity Collection)
+(isa DocumentEntity Collection)
+(genls IndividualEntity NODE)
+(genls GroupEntity NODE)
+(genls AssetEntity NODE)
+(genls LocationEntity NODE)
+(genls EventEntity NODE)
+(genls DocumentEntity NODE)
+
+(comment IndividualEntity "A single identifiable individual: a person, an animal, a machine.")
+(comment GroupEntity "A collection of individuals: a herd, a team, a fleet.")
+(comment AssetEntity "A thing of value: a violin, a truck, a building.")
+(comment LocationEntity "A place: a barn, a venue, a warehouse, a coordinate.")
+(comment EventEntity "An occurrence: a birth, a delivery, a performance.")
+(comment DocumentEntity "A record: an invoice, a certificate, a report.")
+
+;; ── Default attributes every NODE carries ──
+
+(implies
+  (isa ?N NODE)
+  (and (canHaveAttribute ?N ::LABEL)
+       (canHaveAttribute ?N ::STATUS)
+       (canHaveAttribute ?N ::CATEGORY)))
+
+(comment ::LABEL "Human-readable name for the entity.")
+(comment ::STATUS "Current lifecycle state.")
+(comment ::CATEGORY "Domain-specific classification.")

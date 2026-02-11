@@ -1,0 +1,92 @@
+;;; ================================================================
+;;; KNOWLEDGE / PROCEDURAL / CONSTRAINTS
+;;; Validation constraints — rules that must hold at all times
+;;; ================================================================
+
+(in-microtheory CharlotteProceduralMt)
+
+;; ── Constraint types ──
+
+(isa IntegrityConstraint Collection)
+(isa TypeConstraint IntegrityConstraint)
+(isa CardinalityConstraint IntegrityConstraint)
+(isa TemporalConstraint IntegrityConstraint)
+(isa ReferentialConstraint IntegrityConstraint)
+
+;; ── Referential integrity ──
+;; An EDGE cannot reference a NODE that does not exist.
+
+(isa Constraint-EdgeReferentialIntegrity IntegrityConstraint)
+(implies
+  (and (isa ?E EDGE)
+       (hasField ?E :FROM ?A)
+       (hasField ?E :TO ?B))
+  (and (isa ?A NODE) (isa ?B NODE)))
+
+;; ── Signals must reference a valid METRIC ──
+
+(isa Constraint-SignalMetricExists IntegrityConstraint)
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :METRIC_ID ?M))
+  (isa ?M METRIC))
+
+;; ── Temporal ordering ──
+;; A SIGNAL timestamp must be within the current epoch.
+
+(isa Constraint-SignalInEpoch IntegrityConstraint)
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :TIMESTAMP ?T)
+       (currentEpoch ?E)
+       (epochStart ?E ?START)
+       (epochEnd ?E ?END))
+  (and (temporallyAfterOrEqual ?T ?START)
+       (temporallyBeforeOrEqual ?T ?END)))
+
+;; ── Append-only history ──
+;; SIGNALs are immutable once created. They can be superseded but never edited.
+
+(isa Constraint-SignalImmutability IntegrityConstraint)
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :CREATED ?T))
+  (not (canModify ?S)))
+
+;; A SIGNAL can only be superseded by a newer SIGNAL on the same METRIC.
+(implies
+  (supersedes ?S2 ?S1)
+  (and (isa ?S1 SIGNAL) (isa ?S2 SIGNAL)
+       (hasField ?S1 :METRIC_ID ?M)
+       (hasField ?S2 :METRIC_ID ?M)
+       (hasField ?S1 :TIMESTAMP ?T1)
+       (hasField ?S2 :TIMESTAMP ?T2)
+       (temporallyAfter ?T2 ?T1)))
+
+;; ── Lifecycle transition validity ──
+
+(isa Constraint-ValidTransition IntegrityConstraint)
+(implies
+  (and (hasState ?N ?FROM)
+       (transitionsTo ?N ?TO))
+  (canTransition ?FROM ?TO))
+
+;; ── No orphan METRICs ──
+;; Every METRIC must be attached to at least one NODE.
+
+(isa Constraint-MetricAttached IntegrityConstraint)
+(implies
+  (isa ?M METRIC)
+  (thereExists ?N
+    (and (isa ?N NODE)
+         (measures ?M ?N))))
+
+;; ── Protocol completeness ──
+;; Every PROTOCOL must have a trigger, condition, and action.
+
+(isa Constraint-ProtocolComplete IntegrityConstraint)
+(implies
+  (isa ?P PROTOCOL)
+  (and (thereExists ?T (hasTrigger ?P ?T))
+       (thereExists ?C (hasCondition ?P ?C))
+       (thereExists ?A (hasAction ?P ?A))))

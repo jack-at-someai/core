@@ -1,0 +1,90 @@
+;;; ================================================================
+;;; KERNEL / BOOT
+;;; Boot sequence — the order in which the OS initializes
+;;; ================================================================
+
+(in-microtheory CharlotteBootMt)
+
+;; ── Microtheory hierarchy (load order) ──
+;; CharlotteBootMt loads first, then each Mt inherits upward.
+
+(genlMt CharlotteBootMt CharlotteKernelMt)
+(genlMt CharlotteKernelMt CharlotteStructuralMt)
+(genlMt CharlotteKernelMt CharlotteDeclarativeMt)
+(genlMt CharlotteKernelMt CharlotteProceduralMt)
+(genlMt CharlotteKernelMt CharlotteHeuristicMt)
+(genlMt CharlotteKernelMt CharlotteMetaMt)
+(genlMt CharlotteKernelMt CharlotteTemporalMt)
+(genlMt CharlotteKernelMt CharlotteSpatialMt)
+(genlMt CharlotteKernelMt CharlotteAgentMt)
+
+;; ── Boot sequence protocol ──
+
+(isa BootSequence PROTOCOL)
+(comment BootSequence "The ordered initialization of a Charlotte container.")
+
+;; Phase 1: Load kernel primitives and type system
+(isa BootPhase-Kernel BootPhase)
+(bootOrder BootPhase-Kernel 1)
+(bootLoads BootPhase-Kernel "kernel/primitives.krf")
+(bootLoads BootPhase-Kernel "kernel/types.krf")
+
+;; Phase 2: Lay the temporal spine
+(isa BootPhase-Spine BootPhase)
+(bootOrder BootPhase-Spine 2)
+(bootLoads BootPhase-Spine "spine/temporal/epochs.krf")
+(bootLoads BootPhase-Spine "spine/temporal/units.krf")
+(bootLoads BootPhase-Spine "spine/temporal/lifecycle.krf")
+(bootLoads BootPhase-Spine "spine/temporal/encoding.krf")
+
+;; Phase 3: Lay the spatial planes
+(isa BootPhase-Spatial BootPhase)
+(bootOrder BootPhase-Spatial 3)
+(bootLoads BootPhase-Spatial "spine/spatial/geospatial.krf")
+(bootLoads BootPhase-Spatial "spine/spatial/topological.krf")
+(bootLoads BootPhase-Spatial "spine/spatial/theoretical.krf")
+
+;; Phase 4: Load knowledge base (all five types)
+(isa BootPhase-Knowledge BootPhase)
+(bootOrder BootPhase-Knowledge 4)
+(bootLoads BootPhase-Knowledge "knowledge/structural/taxonomy.krf")
+(bootLoads BootPhase-Knowledge "knowledge/structural/mereology.krf")
+(bootLoads BootPhase-Knowledge "knowledge/structural/relations.krf")
+(bootLoads BootPhase-Knowledge "knowledge/declarative/entities.krf")
+(bootLoads BootPhase-Knowledge "knowledge/declarative/attributes.krf")
+(bootLoads BootPhase-Knowledge "knowledge/procedural/protocols.krf")
+(bootLoads BootPhase-Knowledge "knowledge/procedural/constraints.krf")
+(bootLoads BootPhase-Knowledge "knowledge/heuristic/defaults.krf")
+(bootLoads BootPhase-Knowledge "knowledge/heuristic/thresholds.krf")
+(bootLoads BootPhase-Knowledge "knowledge/meta/schema.krf")
+(bootLoads BootPhase-Knowledge "knowledge/meta/provenance.krf")
+(bootLoads BootPhase-Knowledge "knowledge/meta/completeness.krf")
+
+;; Phase 5: Load reference and convex hull
+(isa BootPhase-Reference BootPhase)
+(bootOrder BootPhase-Reference 5)
+(bootLoads BootPhase-Reference "reference/knowledge-primitives.krf")
+(bootLoads BootPhase-Reference "reference/convex-hull.krf")
+
+;; Phase 6: Initialize agent identity
+(isa BootPhase-Agent BootPhase)
+(bootOrder BootPhase-Agent 6)
+(bootLoads BootPhase-Agent "agent/identity.krf")
+(bootLoads BootPhase-Agent "agent/observer.krf")
+(bootLoads BootPhase-Agent "agent/directives.krf")
+
+;; ── Boot complete rule ──
+
+(implies
+  (and (bootOrder ?Phase ?N)
+       (phaseComplete ?Phase))
+  (bootReady ?Phase))
+
+(implies
+  (and (bootReady BootPhase-Kernel)
+       (bootReady BootPhase-Spine)
+       (bootReady BootPhase-Spatial)
+       (bootReady BootPhase-Knowledge)
+       (bootReady BootPhase-Reference)
+       (bootReady BootPhase-Agent))
+  (containerOperational ThisContainer))

@@ -1,0 +1,81 @@
+;;; ================================================================
+;;; KNOWLEDGE / META / PROVENANCE
+;;; Tracking where knowledge came from
+;;; ================================================================
+
+(in-microtheory CharlotteMetaMt)
+
+;; ── Provenance is meta knowledge about origin ──
+;; Every FACT can carry provenance: who created it, when, from what source.
+
+(isa ProvenanceRecord MetaKnowledge)
+
+;; ── Provenance predicates ──
+
+(isa createdBy Relation)
+(arity createdBy 2)
+(arg1Isa createdBy FACT)
+(arg2Isa createdBy Agent)
+(comment createdBy "Which agent or process created this FACT.")
+
+(isa derivedFrom Relation)
+(arity derivedFrom 2)
+(arg1Isa derivedFrom FACT)
+(arg2Isa derivedFrom Source)
+(comment derivedFrom "The upstream source from which this FACT was derived.")
+
+(isa confidenceScore Relation)
+(arity confidenceScore 2)
+(arg1Isa confidenceScore FACT)
+(arg2Isa confidenceScore Number)
+(comment confidenceScore "Confidence in this FACT. 0.0 = no confidence, 1.0 = certain.")
+
+(isa lastVerified Relation)
+(arity lastVerified 2)
+(arg1Isa lastVerified FACT)
+(arg2Isa lastVerified TemporalCoordinate)
+(comment lastVerified "When this FACT was last independently verified.")
+
+;; ── Source types ──
+
+(isa Source Collection)
+(isa HumanObservation Source)
+(isa SensorReading Source)
+(isa AlgorithmicInference Source)
+(isa ExternalImport Source)
+(isa BootImage Source)
+
+(comment HumanObservation "A person directly observed and reported this fact.")
+(comment SensorReading "An automated sensor produced this fact.")
+(comment AlgorithmicInference "Charlotte inferred this fact from other facts.")
+(comment ExternalImport "This fact was imported from an external system.")
+(comment BootImage "This fact was part of the default OS image.")
+
+;; ── All boot image facts have BootImage provenance ──
+
+(implies
+  (and (isa ?F FACT)
+       (assertedInMicrotheory ?F CharlotteKernelMt))
+  (derivedFrom ?F BootImage))
+
+(implies
+  (derivedFrom ?F BootImage)
+  (confidenceScore ?F 1.0))
+
+;; ── Provenance chain rule ──
+;; If A is derived from B and B is derived from C, then A has
+;; transitive provenance from C.
+
+(implies
+  (and (derivedFrom ?A ?B)
+       (derivedFrom ?B ?C))
+  (hasTransitiveProvenance ?A ?C))
+
+;; ── Confidence decay rule ──
+;; Inferred facts inherit the minimum confidence of their sources.
+
+(implies
+  (and (derivedFrom ?INFERRED AlgorithmicInference)
+       (usedEvidence ?INFERRED ?EVIDENCE)
+       (confidenceScore ?EVIDENCE ?C))
+  (confidenceAtMost ?INFERRED ?C))

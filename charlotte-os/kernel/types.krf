@@ -1,0 +1,94 @@
+;;; ================================================================
+;;; KERNEL / TYPES
+;;; Core type system — collections, predicates, and constraints
+;;; ================================================================
+
+(in-microtheory CharlotteKernelMt)
+
+;; ── Top-level collections ──
+
+(isa Collection Collection)
+(isa Primitive Collection)
+(isa KnowledgeType Collection)
+(isa TemporalUnit Collection)
+(isa SpatialDimension Collection)
+(isa LifecyclePhase Collection)
+
+;; ── Knowledge types (from ATLAS diagram) ──
+
+(isa StructuralKnowledge KnowledgeType)
+(isa DeclarativeKnowledge KnowledgeType)
+(isa ProceduralKnowledge KnowledgeType)
+(isa HeuristicKnowledge KnowledgeType)
+(isa MetaKnowledge KnowledgeType)
+
+(comment StructuralKnowledge "Relationship between object and concept. The web of typed edges.")
+(comment DeclarativeKnowledge "Object facts. Assertions that are true or false.")
+(comment ProceduralKnowledge "Rules and procedures. How to do things.")
+(comment HeuristicKnowledge "Rules of thumb. Approximate reasoning from observation.")
+(comment MetaKnowledge "Knowledge about knowledge. Self-awareness of the system.")
+
+;; ── Register system (colon grammar) ──
+;; :field   — framework field (immutable, set at creation)
+;; ::attr   — attribute (mutable, domain-specific)
+;; :::rel   — relationship (resolved to EDGE)
+
+(isa RegisterField Collection)
+(isa RegisterAttribute Collection)
+(isa RegisterRelation Collection)
+
+;; ── Framework fields (every FACT has these) ──
+
+(isa :ID RegisterField)
+(isa :TYPE RegisterField)
+(isa :CREATED RegisterField)
+
+(comment :ID "Unique identifier. Immutable. Set at FACT creation.")
+(comment :TYPE "Primitive type. One of NODE, EDGE, METRIC, SIGNAL, PROTOCOL.")
+(comment :CREATED "Creation timestamp. Immutable. Epoch-relative.")
+
+;; ── EDGE-specific fields ──
+
+(isa :FROM RegisterField)
+(isa :TO RegisterField)
+(isa :EDGE_TYPE RegisterField)
+
+;; ── SIGNAL-specific fields ──
+
+(isa :METRIC_ID RegisterField)
+(isa :TIMESTAMP RegisterField)
+(isa :VALUE RegisterField)
+
+;; ── PROTOCOL-specific fields ──
+
+(isa :TRIGGER RegisterField)
+(isa :CONDITION RegisterField)
+(isa :ACTION RegisterField)
+
+;; ── Payload registers ──
+
+(isa P0 RegisterField)
+(isa P1 RegisterField)
+(isa P2 RegisterField)
+(isa P3 RegisterField)
+
+(comment P0 "Payload register 0. Type-specific. See primitive definition.")
+(comment P1 "Payload register 1. Type-specific.")
+(comment P2 "Payload register 2. Type-specific.")
+(comment P3 "Payload register 3. Type-specific.")
+
+;; ── Type constraints on predicates ──
+
+(arity isa 2)
+(arity genls 2)
+(arity genlMt 2)
+(arity comment 2)
+(arity mapsToKnowledgeType 2)
+(arity disjointWith 2)
+
+(arg1Isa isa Thing)
+(arg2Isa isa Collection)
+(arg1Isa genls Collection)
+(arg2Isa genls Collection)
+(arg1Isa mapsToKnowledgeType Primitive)
+(arg2Isa mapsToKnowledgeType KnowledgeType)

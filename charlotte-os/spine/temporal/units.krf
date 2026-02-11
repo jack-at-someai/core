@@ -1,0 +1,115 @@
+;;; ================================================================
+;;; SPINE / TEMPORAL / UNITS
+;;; Temporal unit hierarchy — epoch down to millisecond
+;;; ================================================================
+
+(in-microtheory CharlotteTemporalMt)
+
+;; ── Temporal unit hierarchy ──
+;; Each unit subdivides the one above it.
+;; The observer zooms along this hierarchy on the temporal spine.
+
+(isa Epoch TemporalUnit)
+(isa Era TemporalUnit)
+(isa Century TemporalUnit)
+(isa Decade TemporalUnit)
+(isa Year TemporalUnit)
+(isa Quarter TemporalUnit)
+(isa Month TemporalUnit)
+(isa Week TemporalUnit)
+(isa Day TemporalUnit)
+(isa Hour TemporalUnit)
+(isa Minute TemporalUnit)
+(isa Second TemporalUnit)
+(isa Millisecond TemporalUnit)
+
+;; ── Subdivision relationships ──
+
+(subdivides Epoch Era)
+(subdivides Era Century)
+(subdivides Century Decade)
+(subdivides Decade Year)
+(subdivides Year Quarter)
+(subdivides Year Month)
+(subdivides Month Week)
+(subdivides Week Day)
+(subdivides Day Hour)
+(subdivides Hour Minute)
+(subdivides Minute Second)
+(subdivides Second Millisecond)
+
+;; ── Subdivision counts ──
+
+(subdivisionCount Epoch Era 8)
+(subdivisionCount Era Century 2.56)
+(subdivisionCount Century Decade 10)
+(subdivisionCount Decade Year 10)
+(subdivisionCount Year Quarter 4)
+(subdivisionCount Year Month 12)
+(subdivisionCount Month Week 4.345)
+(subdivisionCount Week Day 7)
+(subdivisionCount Day Hour 24)
+(subdivisionCount Hour Minute 60)
+(subdivisionCount Minute Second 60)
+(subdivisionCount Second Millisecond 1000)
+
+;; 1 Epoch = 2048 years
+;; 1 Era   = 256 years (8 per epoch)
+;; Then standard calendar from there
+
+(comment Epoch "2048 years. The blockchain boundary.")
+(comment Era "256 years. 8 per epoch. A civilizational unit.")
+(comment Century "100 years.")
+(comment Decade "10 years.")
+(comment Year "365.25 days.")
+(comment Quarter "~91.3 days. 4 per year.")
+(comment Month "~30.4 days. 12 per year.")
+(comment Week "7 days.")
+(comment Day "24 hours. The fundamental human rhythm.")
+(comment Hour "60 minutes.")
+(comment Minute "60 seconds.")
+(comment Second "1000 milliseconds.")
+(comment Millisecond "The smallest addressable unit.")
+
+;; ── Zoom levels ──
+;; The observer on the temporal spine can zoom between any two levels.
+
+(isa ZoomLevel Collection)
+
+(implies
+  (and (isa ?U1 TemporalUnit)
+       (isa ?U2 TemporalUnit)
+       (subdivides ?U1 ?U2))
+  (canZoom ?U1 ?U2))
+
+;; Transitive zoom
+(implies
+  (and (canZoom ?A ?B)
+       (canZoom ?B ?C))
+  (canZoom ?A ?C))
+
+;; ── Temporal coordinates ──
+;; A point in time is addressed by its position in the hierarchy.
+
+(isa TemporalCoordinate Collection)
+(comment TemporalCoordinate
+  "A fully-qualified position on the temporal spine.
+   Example: Epoch-0 / Era-7 / Century-20 / Decade-2 / Year-2026 /
+   Month-2 / Day-11 / Hour-14 / Minute-30 / Second-0 / Millisecond-0")
+
+;; ── CT scan metaphor ──
+;; Time is stored as CT scans of space: each temporal slice is a
+;; cross-section of the entire spatial state at that moment.
+
+(implies
+  (and (isa ?T TemporalCoordinate)
+       (isa ?S SpatialState))
+  (thereExists ?SLICE
+    (and (isa ?SLICE TemporalSlice)
+         (sliceAt ?SLICE ?T)
+         (capturesSpatialState ?SLICE ?S))))
+
+(comment TemporalSlice
+  "A CT scan of space at a moment in time. Every temporal coordinate
+   has a corresponding spatial slice that captures the full state of
+   all entities and their positions at that instant.")

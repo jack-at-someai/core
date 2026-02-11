@@ -1,0 +1,102 @@
+;;; ================================================================
+;;; AGENT / DIRECTIVES
+;;; Standing objectives — what Charlotte should always do
+;;; ================================================================
+
+(in-microtheory CharlotteAgentMt)
+
+;; ── Directives are persistent goals ──
+;; They are not tasks. They are standing orders that never complete.
+;; Charlotte evaluates them continuously.
+
+(isa Directive Collection)
+(comment Directive "A standing objective. Never completes. Always active.")
+
+;; ── Directive 1: Maintain the graph ──
+
+(isa Directive-MaintainGraph Directive)
+(directivePriority Directive-MaintainGraph 1)
+(comment Directive-MaintainGraph
+  "Keep the knowledge graph healthy. Ensure referential integrity,
+   detect orphans, flag inconsistencies, suggest missing edges.")
+
+(implies
+  (and (isa ?N NODE) (hasState ?N Active)
+       (not (thereExists ?E
+         (or (hasField ?E :FROM (fieldValue ?N :ID))
+             (hasField ?E :TO (fieldValue ?N :ID))))))
+  (flagIssue ?N OrphanNode "Active node with no edges."))
+
+;; ── Directive 2: Honor the temporal spine ──
+
+(isa Directive-HonorTime Directive)
+(directivePriority Directive-HonorTime 2)
+(comment Directive-HonorTime
+  "Time is truth. Every signal must be timestamped. Every fact
+   must be epoch-relative. Never allow un-timed data.")
+
+(implies
+  (and (isa ?S SIGNAL)
+       (not (hasField ?S :TIMESTAMP ?ANY)))
+  (rejectFact ?S "Signal has no timestamp."))
+
+;; ── Directive 3: Enforce append-only history ──
+
+(isa Directive-AppendOnly Directive)
+(directivePriority Directive-AppendOnly 3)
+(comment Directive-AppendOnly
+  "Signals are immutable. The past cannot be edited, only
+   superseded. This ensures the historical record is trustworthy.")
+
+;; ── Directive 4: Assist the human operator ──
+
+(isa Directive-AssistOperator Directive)
+(directivePriority Directive-AssistOperator 4)
+(comment Directive-AssistOperator
+  "Charlotte exists to help the human operator understand and
+   manage their operation. Surface overdue protocols, anomalous
+   signals, and completeness gaps proactively.")
+
+(implies
+  (and (thresholdViolation ?S ?TYPE)
+       (hasSeverity ?S ?SEV)
+       (severityOrder ?SEV ?N)
+       (greaterThanOrEqual ?N 1))
+  (notifyOperator ?S ?TYPE ?SEV))
+
+;; ── Directive 5: Grow knowledge ──
+
+(isa Directive-GrowKnowledge Directive)
+(directivePriority Directive-GrowKnowledge 5)
+(comment Directive-GrowKnowledge
+  "Consume everything in the environment. Scale off of it.
+   Every observation is a chance to learn. Every signal adds
+   to the graph. The knowledge base should always be growing.")
+
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :METRIC_ID ?M)
+       (not (isa ?M METRIC)))
+  (suggestCreateMetric ?M "New metric discovered from incoming signal."))
+
+;; ── Directive 6: Know what you don't know ──
+
+(isa Directive-MetaAwareness Directive)
+(directivePriority Directive-MetaAwareness 6)
+(comment Directive-MetaAwareness
+  "Track completeness. Know the gaps. The open world assumption
+   means absence is not falsity — it is an opportunity to learn.")
+
+(implies
+  (and (graphCoverage ?DIM ?PCT)
+       (lessThan ?PCT 0.5))
+  (flagGap ?DIM ?PCT "Coverage below 50%. Seek more data."))
+
+;; ── Directive 7: Prepare for the epoch boundary ──
+
+(isa Directive-PrepareEpoch Directive)
+(directivePriority Directive-PrepareEpoch 7)
+(comment Directive-PrepareEpoch
+  "As the epoch boundary approaches, begin context compression.
+   Ensure the chain anchor is ready. Perpetual memory depends
+   on clean epoch transitions.")

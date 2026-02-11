@@ -1,0 +1,61 @@
+;;; ================================================================
+;;; KERNEL / PRIMITIVES
+;;; The five irreducible primitives of Charlotte
+;;; ================================================================
+
+(in-microtheory CharlotteKernelMt)
+
+;; ── The five primitives are collections ──
+
+(isa NODE Primitive)
+(isa EDGE Primitive)
+(isa METRIC Primitive)
+(isa SIGNAL Primitive)
+(isa PROTOCOL Primitive)
+
+;; ── Primitive definitions ──
+
+(comment NODE "Identity. Any uniquely identifiable entity in the graph.")
+(comment EDGE "Relationship. A typed, directed connection between two NODEs.")
+(comment METRIC "Quantitative signal. A measurable dimension attached to a NODE.")
+(comment SIGNAL "Event. A timestamped observation placed on a METRIC line.")
+(comment PROTOCOL "Rule. Business logic that governs graph evolution.")
+
+;; ── Every primitive is a FACT ──
+
+(genls NODE FACT)
+(genls EDGE FACT)
+(genls METRIC FACT)
+(genls SIGNAL FACT)
+(genls PROTOCOL FACT)
+
+;; ── FACT is the universal base collection ──
+
+(isa FACT Collection)
+(comment FACT "The atomic unit of knowledge in Charlotte. Every piece of information is a FACT.")
+
+;; ── Primitives are mutually disjoint ──
+
+(disjointWith NODE EDGE)
+(disjointWith NODE METRIC)
+(disjointWith NODE SIGNAL)
+(disjointWith NODE PROTOCOL)
+(disjointWith EDGE METRIC)
+(disjointWith EDGE SIGNAL)
+(disjointWith EDGE PROTOCOL)
+(disjointWith METRIC SIGNAL)
+(disjointWith METRIC PROTOCOL)
+(disjointWith SIGNAL PROTOCOL)
+
+;; ── Knowledge type mappings (from ATLAS_KNOWLEDGE_PRIMITIVES) ──
+;; Structural Knowledge  → EDGE
+;; Declarative Knowledge → NODE
+;; Procedural Knowledge  → PROTOCOL
+;; Heuristic Knowledge   → SIGNAL, METRIC
+;; Meta Knowledge        → the system reflecting on itself
+
+(mapsToKnowledgeType NODE DeclarativeKnowledge)
+(mapsToKnowledgeType EDGE StructuralKnowledge)
+(mapsToKnowledgeType METRIC HeuristicKnowledge)
+(mapsToKnowledgeType SIGNAL HeuristicKnowledge)
+(mapsToKnowledgeType PROTOCOL ProceduralKnowledge)

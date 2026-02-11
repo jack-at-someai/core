@@ -1,0 +1,93 @@
+;;; ================================================================
+;;; KNOWLEDGE / HEURISTIC / DEFAULTS
+;;; Default assumptions and rules of thumb
+;;; ================================================================
+
+(in-microtheory CharlotteHeuristicMt)
+
+;; ── Heuristic knowledge is approximate ──
+;; These are default-true assertions that can be overridden by
+;; domain-specific knowledge. They represent the system's rules
+;; of thumb before it has learned anything about its environment.
+
+;; ── Signal freshness heuristic ──
+;; A signal is considered "fresh" if it was placed within the last
+;; recency window. Stale signals lose influence on inferred state.
+
+(defaultTrue
+  (implies
+    (and (isa ?S SIGNAL)
+         (hasField ?S :TIMESTAMP ?T)
+         (currentTime ?NOW)
+         (timeDifference ?NOW ?T ?DELTA)
+         (lessThan ?DELTA RecencyWindow))
+    (isFresh ?S)))
+
+(defaultValue RecencyWindow (DurationOf 30 Day))
+(comment RecencyWindow "Default: a signal younger than 30 days is fresh. Domain-overridable.")
+
+;; ── Activity heuristic ──
+;; A NODE is considered active if it has received a fresh signal.
+
+(defaultTrue
+  (implies
+    (and (isa ?N NODE)
+         (thereExists ?S
+           (and (isa ?S SIGNAL)
+                (measuresNode ?S ?N)
+                (isFresh ?S))))
+    (isActivelyObserved ?N)))
+
+;; ── Dormancy heuristic ──
+;; If no fresh signals exist for a NODE, suggest dormancy.
+
+(defaultTrue
+  (implies
+    (and (isa ?N NODE)
+         (hasState ?N Active)
+         (not (isActivelyObserved ?N)))
+    (suggestTransition ?N Dormant)))
+
+;; ── Anomaly detection heuristic ──
+;; A signal is anomalous if its value deviates from the rolling
+;; mean by more than the anomaly threshold (default: 2 sigma).
+
+(defaultTrue
+  (implies
+    (and (isa ?S SIGNAL)
+         (hasField ?S :VALUE ?V)
+         (hasField ?S :METRIC_ID ?M)
+         (rollingMean ?M ?MEAN)
+         (rollingStdDev ?M ?SIGMA)
+         (absoluteDifference ?V ?MEAN ?DIFF)
+         (greaterThan ?DIFF (times 2 ?SIGMA)))
+    (isAnomalous ?S)))
+
+;; ── Completeness heuristic ──
+;; A NODE is "well-described" if it has at least a label, category,
+;; and one active metric. This is a rule of thumb, not a constraint.
+
+(defaultTrue
+  (implies
+    (and (isa ?N NODE)
+         (hasAttribute ?N ::LABEL ?ANY1)
+         (hasAttribute ?N ::CATEGORY ?ANY2)
+         (thereExists ?M (and (isa ?M METRIC) (measures ?M ?N))))
+    (isWellDescribed ?N)))
+
+;; ── Confidence heuristic ──
+;; More signals = higher confidence in the inferred state.
+
+(defaultTrue
+  (implies
+    (and (isa ?M METRIC)
+         (signalCount ?M ?COUNT)
+         (greaterThan ?COUNT 10))
+    (hasHighConfidence ?M)))
+
+(defaultTrue
+  (implies
+    (and (isa ?M METRIC)
+         (signalCount ?M ?COUNT)
+         (lessThanOrEqual ?COUNT 3))
+    (hasLowConfidence ?M)))

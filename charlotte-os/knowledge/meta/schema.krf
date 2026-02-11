@@ -1,0 +1,81 @@
+;;; ================================================================
+;;; KNOWLEDGE / META / SCHEMA
+;;; Knowledge about the knowledge structure itself
+;;; ================================================================
+
+(in-microtheory CharlotteMetaMt)
+
+;; ── Meta knowledge is the system reflecting on itself ──
+;; Nodes about nodes. Edges about edges. Protocols about protocols.
+;; This is the self-awareness layer.
+
+;; ── Schema is meta-declarative ──
+;; It declares what kinds of knowledge are possible.
+
+(isa SchemaDefinition MetaKnowledge)
+(comment SchemaDefinition "A statement about what structures are valid in this container.")
+
+;; ── The five primitives are themselves schema ──
+
+(isa NODE SchemaDefinition)
+(isa EDGE SchemaDefinition)
+(isa METRIC SchemaDefinition)
+(isa SIGNAL SchemaDefinition)
+(isa PROTOCOL SchemaDefinition)
+
+;; ── Meta-predicates (predicates about predicates) ──
+
+(isa arity MetaPredicate)
+(isa arg1Isa MetaPredicate)
+(isa arg2Isa MetaPredicate)
+(isa comment MetaPredicate)
+(isa inverseOf MetaPredicate)
+(isa genlPreds MetaPredicate)
+
+;; ── Schema for NODEs ──
+
+(schemaFor NODE :ID "Unique identifier. String. Immutable.")
+(schemaFor NODE :TYPE "Always 'NODE'. Immutable.")
+(schemaFor NODE :CREATED "Epoch-relative timestamp. Immutable.")
+(schemaFor NODE ::LABEL "Human-readable name. Mutable.")
+(schemaFor NODE ::STATUS "Lifecycle state. Controlled vocabulary.")
+(schemaFor NODE ::CATEGORY "Domain classification. Mutable.")
+
+;; ── Schema for EDGEs ──
+
+(schemaFor EDGE :ID "Unique identifier.")
+(schemaFor EDGE :TYPE "Always 'EDGE'.")
+(schemaFor EDGE :FROM "Source NODE :ID.")
+(schemaFor EDGE :TO "Target NODE :ID.")
+(schemaFor EDGE :EDGE_TYPE "Typed relationship from relations.krf.")
+
+;; ── Schema for METRICs ──
+
+(schemaFor METRIC :ID "Unique identifier.")
+(schemaFor METRIC :TYPE "Always 'METRIC'.")
+(schemaFor METRIC ::UNIT "Unit of measurement. E.g., kg, cm, count.")
+(schemaFor METRIC ::DIMENSION "What is being measured. E.g., weight, length, temperature.")
+(schemaFor METRIC :::NODE "The NODE this metric measures.")
+
+;; ── Schema for SIGNALs ──
+
+(schemaFor SIGNAL :ID "Unique identifier.")
+(schemaFor SIGNAL :TYPE "Always 'SIGNAL'.")
+(schemaFor SIGNAL :TIMESTAMP "When the observation occurred. Epoch-relative.")
+(schemaFor SIGNAL :METRIC_ID "Which METRIC this signal belongs to.")
+(schemaFor SIGNAL :VALUE "The observed value.")
+
+;; ── Schema for PROTOCOLs ──
+
+(schemaFor PROTOCOL :ID "Unique identifier.")
+(schemaFor PROTOCOL :TYPE "Always 'PROTOCOL'.")
+(schemaFor PROTOCOL :TRIGGER "What event fires this protocol.")
+(schemaFor PROTOCOL :CONDITION "What must be true for the action to execute.")
+(schemaFor PROTOCOL :ACTION "What the protocol does when fired.")
+
+;; ── Schema versioning ──
+;; The schema itself has a version. When schema changes, the version increments.
+
+(currentSchemaVersion 1)
+(schemaVersionDate 1 (DayFn 11 (MonthFn February (YearFn 2026))))
+(comment currentSchemaVersion "The version of the fact stack schema. Increment on breaking changes.")

@@ -1,0 +1,108 @@
+;;; ================================================================
+;;; KNOWLEDGE / STRUCTURAL / TAXONOMY
+;;; Default is-a hierarchies — the backbone of structural knowledge
+;;; ================================================================
+
+(in-microtheory CharlotteStructuralMt)
+
+;; ── Top-level ontology ──
+;; Everything is a Thing. Things divide into Entity and Event.
+
+(isa Thing Collection)
+(isa Entity Collection)
+(isa Event Collection)
+(genls Entity Thing)
+(genls Event Thing)
+(disjointWith Entity Event)
+
+;; ── Entity taxonomy ──
+
+(isa PhysicalEntity Collection)
+(isa AbstractEntity Collection)
+(genls PhysicalEntity Entity)
+(genls AbstractEntity Entity)
+(disjointWith PhysicalEntity AbstractEntity)
+
+;; Physical entities
+(isa Organism Collection)
+(isa Artifact Collection)
+(isa Location Collection)
+(isa Substance Collection)
+(genls Organism PhysicalEntity)
+(genls Artifact PhysicalEntity)
+(genls Location PhysicalEntity)
+(genls Substance PhysicalEntity)
+
+;; Organisms
+(isa Animal Collection)
+(isa Plant Collection)
+(isa Microorganism Collection)
+(genls Animal Organism)
+(genls Plant Organism)
+(genls Microorganism Organism)
+
+;; Animals
+(isa Human Collection)
+(isa Mammal Collection)
+(isa Fish Collection)
+(isa Bird Collection)
+(isa Insect Collection)
+(genls Human Mammal)
+(genls Mammal Animal)
+(genls Fish Animal)
+(genls Bird Animal)
+(genls Insect Animal)
+
+;; Abstract entities
+(isa Concept Collection)
+(isa Quantity Collection)
+(isa Relation Collection)
+(isa Rule Collection)
+(isa Information Collection)
+(genls Concept AbstractEntity)
+(genls Quantity AbstractEntity)
+(genls Relation AbstractEntity)
+(genls Rule AbstractEntity)
+(genls Information AbstractEntity)
+
+;; ── Event taxonomy ──
+
+(isa Action Collection)
+(isa Process Collection)
+(isa StateChange Collection)
+(genls Action Event)
+(genls Process Event)
+(genls StateChange Event)
+
+;; Actions
+(isa Creation Collection)
+(isa Destruction Collection)
+(isa Movement Collection)
+(isa Communication Collection)
+(isa Observation Collection)
+(genls Creation Action)
+(genls Destruction Action)
+(genls Movement Action)
+(genls Communication Action)
+(genls Observation Action)
+
+;; ── Organizational taxonomy ──
+
+(isa Organization Collection)
+(isa Group Collection)
+(isa Operation Collection)
+(genls Organization AbstractEntity)
+(genls Group AbstractEntity)
+(genls Operation AbstractEntity)
+
+;; Operations (Charlotte's primary clients)
+(isa BusinessOperation Collection)
+(isa BiologicalOperation Collection)
+(isa MechanicalOperation Collection)
+(isa LogisticalOperation Collection)
+(isa CulturalOperation Collection)
+(genls BusinessOperation Operation)
+(genls BiologicalOperation Operation)
+(genls MechanicalOperation Operation)
+(genls LogisticalOperation Operation)
+(genls CulturalOperation Operation)

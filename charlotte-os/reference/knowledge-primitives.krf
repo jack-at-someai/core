@@ -1,0 +1,88 @@
+;;; ================================================================
+;;; REFERENCE / KNOWLEDGE PRIMITIVES
+;;; Formalization of the ATLAS_KNOWLEDGE_PRIMITIVES diagram
+;;; ================================================================
+;;;
+;;; This file encodes the original Atlas diagram drawn at Northwestern.
+;;;
+;;; "Atlas needs a very, structured, knowledge base. One that can
+;;;  scale off of his environment, and consume everything around it
+;;;  so it can maintain itself. And at a programmatic level,
+;;;  knowledge is complicated."
+;;;
+;;; The diagram identifies five types of knowledge. Together they
+;;; form the convex hull: the minimal boundary that encloses every
+;;; form of knowing a computational system can possess.
+;;;
+;;; ================================================================
+
+(in-microtheory CharlotteReferenceMt)
+
+;; ── The five knowledge types from the diagram ──
+
+(isa StructuralKnowledge KnowledgeType)
+(isa DeclarativeKnowledge KnowledgeType)
+(isa ProceduralKnowledge KnowledgeType)
+(isa HeuristicKnowledge KnowledgeType)
+(isa MetaKnowledge KnowledgeType)
+
+;; ── Diagram definitions (verbatim from ATLAS_KNOWLEDGE_PRIMITIVES) ──
+
+(diagramLabel StructuralKnowledge "Structural Knowledge")
+(diagramDescription StructuralKnowledge "Relationship between object, concept")
+
+(diagramLabel DeclarativeKnowledge "Declarative Knowledge")
+(diagramDescription DeclarativeKnowledge "Object facts")
+
+(diagramLabel ProceduralKnowledge "Procedural Knowledge")
+(diagramDescription ProceduralKnowledge "Rules, Procedure")
+
+(diagramLabel HeuristicKnowledge "Heuristic Knowledge")
+(diagramDescription HeuristicKnowledge "Rule of thumb")
+
+(diagramLabel MetaKnowledge "Meta Knowledge")
+(diagramDescription MetaKnowledge "Knowledge about knowledge")
+
+;; ── Primitive mappings ──
+;; Each knowledge type maps to one or more Charlotte primitives.
+
+(primaryPrimitive StructuralKnowledge EDGE)
+(primaryPrimitive DeclarativeKnowledge NODE)
+(primaryPrimitive ProceduralKnowledge PROTOCOL)
+(primaryPrimitive HeuristicKnowledge SIGNAL)
+(primaryPrimitive HeuristicKnowledge METRIC)
+(primaryPrimitive MetaKnowledge None)
+
+(comment (primaryPrimitive MetaKnowledge None)
+  "Meta knowledge has no single primitive. It is the system
+   reflecting on itself: nodes about nodes, edges about edges,
+   protocols about protocols.")
+
+;; ── Relationships between knowledge types ──
+
+;; Structural knowledge enables declarative knowledge.
+;; Without relationships, facts are isolated.
+(enables StructuralKnowledge DeclarativeKnowledge)
+
+;; Declarative knowledge feeds procedural knowledge.
+;; You need facts to write rules.
+(enables DeclarativeKnowledge ProceduralKnowledge)
+
+;; Procedural knowledge constrains heuristic knowledge.
+;; Rules of thumb must respect hard rules.
+(constrains ProceduralKnowledge HeuristicKnowledge)
+
+;; Meta knowledge governs all other types.
+;; It is the layer that knows what is known.
+(governs MetaKnowledge StructuralKnowledge)
+(governs MetaKnowledge DeclarativeKnowledge)
+(governs MetaKnowledge ProceduralKnowledge)
+(governs MetaKnowledge HeuristicKnowledge)
+
+;; ── Provenance ──
+
+(diagramOrigin "ATLAS_KNOWLEDGE_PRIMITIVES.png")
+(diagramCreatedAt "Northwestern University")
+(diagramCreatedDuring "Masters in AI / PhD in Swarm Intelligence")
+(diagramOriginalProjectName "Atlas")
+(diagramCurrentProjectName "Charlotte")

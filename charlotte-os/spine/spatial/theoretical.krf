@@ -1,0 +1,115 @@
+;;; ================================================================
+;;; SPINE / SPATIAL / THEORETICAL
+;;; Kd-space — the conceptual space where Charlotte lives
+;;; ================================================================
+
+(in-microtheory CharlotteSpatialMt)
+
+;; ── Theoretical plane ──
+;; The abstract Kd-dimensional space where every operation has a
+;; physical representation. This is the space Charlotte navigates.
+;; The temporal spine is the primary axis of this space.
+
+(isa TheoreticalPlane SpatialPlane)
+(comment TheoreticalPlane
+  "The Kd-dimensional conceptual space. Every entity, metric, and
+   signal has a position here. The temporal spine is the primary
+   axis. Charlotte lives on this plane, observing and placing
+   signals on metric lines.")
+
+;; ── Kd-space definition ──
+;; K dimensions, where each dimension corresponds to a METRIC
+;; or an abstract axis of the domain.
+
+(isa KdSpace Collection)
+(isa KdDimension Collection)
+(isa KdCoordinate Collection)
+
+(comment KdSpace "A K-dimensional vector space where K = number of active metric dimensions.")
+(comment KdDimension "One axis of the Kd-space. Maps 1:1 to a METRIC definition.")
+(comment KdCoordinate "A position in Kd-space. A vector of values, one per dimension.")
+
+;; ── Every METRIC defines a dimension in Kd-space ──
+
+(implies
+  (isa ?M METRIC)
+  (thereExists ?D
+    (and (isa ?D KdDimension)
+         (dimensionDefinedBy ?D ?M))))
+
+;; ── The temporal spine is the primary axis ──
+;; All other dimensions are perpendicular to time.
+
+(isa TemporalSpineAxis KdDimension)
+(isPrimaryAxis TemporalSpineAxis)
+(comment TemporalSpineAxis
+  "The primary axis of Kd-space. Time. The spine on which the
+   observer travels from epoch to millisecond. Every other
+   dimension hangs off this axis like ribs off a backbone.")
+
+;; ── Metric lines ──
+;; Each METRIC is a line through Kd-space, parallel to the temporal axis.
+;; SIGNALs are points placed on these lines.
+
+(implies
+  (and (isa ?M METRIC)
+       (dimensionDefinedBy ?D ?M))
+  (thereExists ?LINE
+    (and (isa ?LINE MetricLine)
+         (parallelTo ?LINE TemporalSpineAxis)
+         (onDimension ?LINE ?D))))
+
+(implies
+  (and (isa ?S SIGNAL)
+       (hasField ?S :METRIC_ID ?M)
+       (hasField ?S :TIMESTAMP ?T)
+       (hasField ?S :VALUE ?V))
+  (pointOnLine ?S ?M ?T ?V))
+
+(comment MetricLine
+  "A line in Kd-space running parallel to the temporal spine.
+   Each METRIC has one. The observer places SIGNALs on these
+   lines. The accumulation of signals over time is the
+   observable reality of that dimension.")
+
+;; ── The observer ──
+;; Charlotte is an observer on the temporal spine.
+;; She can look along any metric line from her current position
+;; on the spine (current time) and see the signal history.
+
+(implies
+  (and (isa ?AGENT CharlotteAgent)
+       (currentTime ?NOW)
+       (isa ?M METRIC))
+  (canObserve ?AGENT ?M ?NOW))
+
+;; ── Spatial interlacing (Paper 6) ──
+;; The three planes (geospatial, topological, theoretical) are
+;; interwoven. A single entity has a position in all three
+;; simultaneously. Cross-plane queries unify them.
+
+(implies
+  (and (hasPosition ?E GeospatialPlane ?GEO)
+       (hasPosition ?E TopologicalPlane ?TOPO)
+       (hasPosition ?E TheoreticalPlane ?THEO))
+  (fullSpatialPosition ?E ?GEO ?TOPO ?THEO))
+
+(comment fullSpatialPosition
+  "The complete spatial address of an entity across all three
+   interwoven planes: where it is physically, where it is in
+   the graph, and where it is in Kd-space.")
+
+;; ── Kd-space distance ──
+;; Euclidean distance in the theoretical plane.
+
+(isa kdDistance Relation)
+(arity kdDistance 3)
+(comment kdDistance "(kdDistance A B D) — the Euclidean distance between A and B in Kd-space.")
+
+;; Entities close in Kd-space are similar in their metric profiles.
+(implies
+  (and (kdDistance ?A ?B ?D)
+       (lessThan ?D SimilarityThreshold))
+  (metricallySimlar ?A ?B))
+
+(defaultValue SimilarityThreshold 0.1)

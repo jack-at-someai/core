@@ -1,0 +1,90 @@
+;;; ================================================================
+;;; KNOWLEDGE / META / COMPLETENESS
+;;; What is known, what is unknown, and open-world assumptions
+;;; ================================================================
+
+(in-microtheory CharlotteMetaMt)
+
+;; ── Charlotte operates under the Open World Assumption ──
+;; Absence of a fact does NOT mean the fact is false.
+;; It means the fact is unknown.
+
+(operatesUnder OpenWorldAssumption)
+(comment OpenWorldAssumption
+  "If a fact is not in the graph, it is unknown — not false.
+   Charlotte never assumes completeness unless explicitly told.")
+
+;; ── Completeness levels ──
+
+(isa CompletenessLevel Collection)
+(isa Complete CompletenessLevel)
+(isa Partial CompletenessLevel)
+(isa Minimal CompletenessLevel)
+(isa Empty CompletenessLevel)
+
+;; ── Completeness assessment predicates ──
+
+(isa completenessOf Relation)
+(arity completenessOf 3)
+(comment completenessOf "(completenessOf Entity Dimension Level) — how complete is Entity along Dimension?")
+
+;; ── Domain completeness ──
+;; A domain's completeness is the proportion of expected schema
+;; fields that are actually populated.
+
+(implies
+  (and (isa ?N NODE)
+       (hasAttribute ?N ::LABEL ?ANY1)
+       (hasAttribute ?N ::CATEGORY ?ANY2)
+       (hasAttribute ?N ::STATUS ?ANY3)
+       (thereExists ?M (measures ?M ?N))
+       (thereExists ?E (or (hasField ?E :FROM (fieldValue ?N :ID))
+                           (hasField ?E :TO (fieldValue ?N :ID)))))
+  (completenessOf ?N SchemaPopulation Complete))
+
+(implies
+  (and (isa ?N NODE)
+       (hasAttribute ?N ::LABEL ?ANY)
+       (not (completenessOf ?N SchemaPopulation Complete)))
+  (completenessOf ?N SchemaPopulation Partial))
+
+(implies
+  (and (isa ?N NODE)
+       (not (hasAttribute ?N ::LABEL ?ANY)))
+  (completenessOf ?N SchemaPopulation Minimal))
+
+;; ── Known unknowns ──
+;; Charlotte can explicitly track what it knows it doesn't know.
+
+(isa KnownUnknown MetaKnowledge)
+(comment KnownUnknown "An explicit record that a piece of knowledge is missing.")
+
+(isa unknownFact Relation)
+(arity unknownFact 3)
+(comment unknownFact "(unknownFact Entity Attribute Reason) — we know this attribute should exist but don't have it.")
+
+;; ── Closed-world override ──
+;; For specific collections, the domain can declare closed-world.
+;; This means: if a member is not listed, it does not exist.
+
+(isa closedWorldFor Relation)
+(arity closedWorldFor 2)
+(comment closedWorldFor "(closedWorldFor Microtheory Collection) — within this Mt, the collection is exhaustively enumerated.")
+
+;; ── Graph coverage metrics ──
+
+(isa graphCoverage Relation)
+(arity graphCoverage 2)
+(comment graphCoverage "(graphCoverage Dimension Percentage) — what fraction of the domain is represented?")
+
+;; Default: at boot, coverage is zero for all domain dimensions.
+(graphCoverage DeclarativeCoverage 0.0)
+(graphCoverage StructuralCoverage 0.0)
+(graphCoverage TemporalCoverage 0.0)
+(graphCoverage SpatialCoverage 0.0)
+(graphCoverage HeuristicCoverage 0.0)
+(comment DeclarativeCoverage "Fraction of domain entities that have NODEs.")
+(comment StructuralCoverage "Fraction of known relationships that have EDGEs.")
+(comment TemporalCoverage "Fraction of the temporal spine that has SIGNALs.")
+(comment SpatialCoverage "Fraction of the spatial planes that are populated.")
+(comment HeuristicCoverage "Fraction of METRICs that have sufficient signal history.")
