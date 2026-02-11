@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple iOS &amp; iPadOS 26 — Design System Baseline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root {
+  --bg: #000000;
+  --surface: #1C1C1E;
+  --surface2: #2C2C2E;
+  --surface3: #3A3A3C;
+  --border: #38383A;
+  --text: #FFFFFF;
+  --text2: #EBEBF599;
+  --text3: #EBEBF54C;
+  --blue: #0A84FF;
+  --green: #30D158;
+  --red: #FF453A;
+  --orange: #FF9F0A;
+  --yellow: #FFD60A;
+  --purple: #BF5AF2;
+  --pink: #FF375F;
+  --teal: #40CBE0;
+  --indigo: #5E5CE6;
+  --cyan: #64D2FF;
+  --mint: #63E6E2;
+  --gray: #8E8E93;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 1100px; margin: 0 auto; padding: 64px 32px 96px; }
+
+/* ── Header ── */
+.brand-header {
+  text-align: center;
+  padding: 80px 0 64px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.brand-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(88,86,214,0.15), rgba(10,132,255,0.1), rgba(48,209,88,0.08));
+  border-radius: 24px;
+  z-index: 0;
+}
+.brand-header * { position: relative; z-index: 1; }
+.brand-header .apple-mark {
+  font-size: 56px;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+.brand-header h1 {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  margin-bottom: 4px;
+}
+.brand-header .sub {
+  font-size: 18px;
+  color: var(--text2);
+  font-weight: 400;
+}
+.brand-header .version {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: rgba(10,132,255,0.15);
+  color: var(--blue);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Sections ── */
+section { margin-bottom: 72px; }
+section h2 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--blue);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+section h2::after { content:''; flex:1; height:1px; background:var(--border); }
+section h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.3px; }
+section p { color: var(--text2); max-width: 720px; margin-bottom: 16px; line-height: 1.7; }
+
+/* ── Liquid Glass Demo ── */
+.glass-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.glass-card {
+  border-radius: 20px;
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
+  z-index: 0;
+}
+.glass-card > * { position: relative; z-index: 1; }
+.glass-card.gc1 { background: linear-gradient(135deg, rgba(10,132,255,0.2), rgba(94,92,230,0.15)); border: 1px solid rgba(10,132,255,0.25); }
+.glass-card.gc2 { background: linear-gradient(135deg, rgba(48,209,88,0.15), rgba(64,203,224,0.12)); border: 1px solid rgba(48,209,88,0.2); }
+.glass-card.gc3 { background: linear-gradient(135deg, rgba(191,90,242,0.15), rgba(255,55,95,0.12)); border: 1px solid rgba(191,90,242,0.2); }
+.glass-card .g-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.glass-card .g-css {
+  font-size: 11px;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  color: var(--text2);
+  line-height: 1.8;
+}
+
+/* ── Color Palette ── */
+.mode-toggle {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 24px;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 3px;
+  width: fit-content;
+}
+.mode-btn {
+  padding: 6px 20px;
+  border: none;
+  background: none;
+  color: var(--text2);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.mode-btn.active { background: var(--surface2); color: var(--text); }
+
+.palette-section { margin-bottom: 32px; }
+.palette-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.palette-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+  width: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.swatch-color { height: 64px; }
+.swatch-info { padding: 6px 8px; background: var(--surface); }
+.swatch-info .name { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 1px; }
+.swatch-info .hex { font-size: 9px; color: var(--gray); font-family: 'SF Mono', monospace; }
+.swatch-info .hex-dark { display: none; }
+
+/* ── Semantic Colors ── */
+.semantic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+.sem-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.sem-card .sem-name { font-size: 11px; font-weight: 600; margin-bottom: 6px; }
+.sem-card .sem-preview { height: 32px; border-radius: 6px; margin-bottom: 8px; }
+.sem-card .sem-val { font-size: 10px; color: var(--gray); font-family: monospace; }
+.sem-card .sem-val span { display: block; }
+
+/* ── Typography ── */
+.type-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+}
+.type-table th {
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--gray);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.type-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(56,56,58,0.5);
+  vertical-align: baseline;
+}
+.type-table .style-name { font-size: 11px; font-weight: 600; color: var(--blue); }
+.type-table .spec { font-size: 11px; color: var(--gray); font-family: monospace; }
+
+/* ── Spacing ── */
+.spacing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.spacing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.spacing-card .sp-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+.spacing-card .sp-unit { font-size: 11px; color: var(--gray); }
+.spacing-card .sp-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px; }
+
+/* ── Corner Radius ── */
+.radius-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  align-items: flex-end;
+}
+.radius-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.radius-box {
+  width: 80px;
+  height: 80px;
+  background: var(--surface);
+  border: 2px solid var(--blue);
+}
+.radius-label { font-size: 10px; color: var(--gray); font-weight: 600; text-transform: uppercase; }
+.radius-val { font-size: 13px; font-weight: 700; color: var(--blue); }
+
+/* ── Figma Source ── */
+.source-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin-top: 24px;
+}
+.source-card .src-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.source-card a {
+  color: var(--blue);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+.source-card a:hover { text-decoration: underline; }
+.source-card .src-note { font-size: 12px; color: var(--text3); margin-top: 8px; }
+
+@media(max-width:768px) {
+  .glass-demo, .semantic-grid { grid-template-columns: 1fr; }
+  .spacing-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="brand-header">
+    <div class="apple-mark">&#63743;</div>
+    <h1>iOS &amp; iPadOS 26</h1>
+    <p class="sub">Design System Baseline</p>
+    <span class="version">Liquid Glass &middot; WWDC 2025</span>
+  </header>
+
+  <!-- ═══════════ LIQUID GLASS ═══════════ -->
+  <section>
+    <h2>Liquid Glass</h2>
+    <h3>The new design language</h3>
+    <p>
+      iOS 26 introduces Liquid Glass &mdash; a translucent material that reflects and refracts its surroundings. Color is informed by the content behind it. It dynamically adapts between light and dark. Controls, navigation bars, tab bars, sidebars, and widgets all use this material. It behaves like real glass: specular highlights, refraction, environmental tinting.
+    </p>
+    <div class="glass-demo">
+      <div class="glass-card gc1">
+        <div class="g-label" style="color:var(--cyan)">Navigation</div>
+        <div class="g-css">
+          backdrop-filter: blur(20px)<br>
+          saturate(180%)<br>
+          background: rgba(255,255,255,0.15)
+        </div>
+      </div>
+      <div class="glass-card gc2">
+        <div class="g-label" style="color:var(--mint)">Controls</div>
+        <div class="g-css">
+          border: 1px solid<br>
+          rgba(255,255,255,0.18)<br>
+          border-radius: 16px
+        </div>
+      </div>
+      <div class="glass-card gc3">
+        <div class="g-label" style="color:var(--pink)">Dynamic Tint</div>
+        <div class="g-css">
+          Color adapts to content<br>
+          behind the glass surface.<br>
+          Light &#8596; Dark automatic.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SYSTEM COLORS ═══════════ -->
+  <section>
+    <h2>System Colors</h2>
+
+    <div class="mode-toggle">
+      <button class="mode-btn" onclick="setMode('light')">Light</button>
+      <button class="mode-btn active" onclick="setMode('dark')">Dark</button>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-label">Primary System Colors</div>
+      <div class="palette-row" id="system-colors">
+        <div class="swatch"><div class="swatch-color" style="background:#FF453A" data-light="#FF3B30" data-dark="#FF453A"></div><div class="swatch-info"><div class="name">Red</div><div class="hex" data-light="#FF3B30" data-dark="#FF453A">#FF453A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FF9F0A" data-light="#FF9500" data-dark="#FF9F0A"></div><div class="swatch-info"><div class="name">Orange</div><div class="hex" data-light="#FF9500" data-dark="#FF9F0A">#FF9F0A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FFD60A" data-light="#FFCC00" data-dark="#FFD60A"></div><div class="swatch-info"><div class="name">Yellow</div><div class="hex" data-light="#FFCC00" data-dark="#FFD60A">#FFD60A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#30D158" data-light="#34C759" data-dark="#30D158"></div><div class="swatch-info"><div class="name">Green</div><div class="hex" data-light="#34C759" data-dark="#30D158">#30D158</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#63E6E2" data-light="#00C7BE" data-dark="#63E6E2"></div><div class="swatch-info"><div class="name">Mint</div><div class="hex" data-light="#00C7BE" data-dark="#63E6E2">#63E6E2</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#40CBE0" data-light="#30B0C7" data-dark="#40CBE0"></div><div class="swatch-info"><div class="name">Teal</div><div class="hex" data-light="#30B0C7" data-dark="#40CBE0">#40CBE0</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#64D2FF" data-light="#32ADE6" data-dark="#64D2FF"></div><div class="swatch-info"><div class="name">Cyan</div><div class="hex" data-light="#32ADE6" data-dark="#64D2FF">#64D2FF</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#0A84FF" data-light="#007AFF" data-dark="#0A84FF"></div><div class="swatch-info"><div class="name">Blue</div><div class="hex" data-light="#007AFF" data-dark="#0A84FF">#0A84FF</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5E5CE6" data-light="#5856D6" data-dark="#5E5CE6"></div><div class="swatch-info"><div class="name">Indigo</div><div class="hex" data-light="#5856D6" data-dark="#5E5CE6">#5E5CE6</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#BF5AF2" data-light="#AF52DE" data-dark="#BF5AF2"></div><div class="swatch-info"><div class="name">Purple</div><div class="hex" data-light="#AF52DE" data-dark="#BF5AF2">#BF5AF2</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FF375F" data-light="#FF2D55" data-dark="#FF375F"></div><div class="swatch-info"><div class="name">Pink</div><div class="hex" data-light="#FF2D55" data-dark="#FF375F">#FF375F</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#AC8E68" data-light="#A2845E" data-dark="#AC8E68"></div><div class="swatch-info"><div class="name">Brown</div><div class="hex" data-light="#A2845E" data-dark="#AC8E68">#AC8E68</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-label">System Grays</div>
+      <div class="palette-row" id="gray-colors">
+        <div class="swatch"><div class="swatch-color" style="background:#8E8E93" data-light="#8E8E93" data-dark="#8E8E93"></div><div class="swatch-info"><div class="name">Gray</div><div class="hex" data-light="#8E8E93" data-dark="#8E8E93">#8E8E93</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#636366" data-light="#AEAEB2" data-dark="#636366"></div><div class="swatch-info"><div class="name">Gray 2</div><div class="hex" data-light="#AEAEB2" data-dark="#636366">#636366</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#48484A" data-light="#C7C7CC" data-dark="#48484A"></div><div class="swatch-info"><div class="name">Gray 3</div><div class="hex" data-light="#C7C7CC" data-dark="#48484A">#48484A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#3A3A3C" data-light="#D1D1D6" data-dark="#3A3A3C"></div><div class="swatch-info"><div class="name">Gray 4</div><div class="hex" data-light="#D1D1D6" data-dark="#3A3A3C">#3A3A3C</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#2C2C2E" data-light="#E5E5EA" data-dark="#2C2C2E"></div><div class="swatch-info"><div class="name">Gray 5</div><div class="hex" data-light="#E5E5EA" data-dark="#2C2C2E">#2C2C2E</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#1C1C1E" data-light="#F2F2F7" data-dark="#1C1C1E"></div><div class="swatch-info"><div class="name">Gray 6</div><div class="hex" data-light="#F2F2F7" data-dark="#1C1C1E">#1C1C1E</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-label">Semantic Colors</div>
+      <div class="semantic-grid">
+        <div class="sem-card">
+          <div class="sem-name">Label</div>
+          <div class="sem-preview" style="background:#FFFFFF"></div>
+          <div class="sem-val"><span>Light: #000000</span><span>Dark: #FFFFFF</span></div>
+        </div>
+        <div class="sem-card">
+          <div class="sem-name">Background</div>
+          <div class="sem-preview" style="background:#000000; border: 1px solid #38383A"></div>
+          <div class="sem-val"><span>Light: #FFFFFF</span><span>Dark: #000000</span></div>
+        </div>
+        <div class="sem-card">
+          <div class="sem-name">Secondary Background</div>
+          <div class="sem-preview" style="background:#1C1C1E"></div>
+          <div class="sem-val"><span>Light: #F2F2F7</span><span>Dark: #1C1C1E</span></div>
+        </div>
+        <div class="sem-card">
+          <div class="sem-name">Tertiary Background</div>
+          <div class="sem-preview" style="background:#2C2C2E"></div>
+          <div class="sem-val"><span>Light: #FFFFFF</span><span>Dark: #2C2C2E</span></div>
+        </div>
+        <div class="sem-card">
+          <div class="sem-name">Separator</div>
+          <div class="sem-preview" style="background:#545458; opacity:0.6"></div>
+          <div class="sem-val"><span>Light: #3C3C43/29%</span><span>Dark: #545458/60%</span></div>
+        </div>
+        <div class="sem-card">
+          <div class="sem-name">Link</div>
+          <div class="sem-preview" style="background:#0A84FF"></div>
+          <div class="sem-val"><span>Light: #007AFF</span><span>Dark: #0A84FF</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TYPOGRAPHY ═══════════ -->
+  <section>
+    <h2>Typography &mdash; San Francisco</h2>
+    <p>
+      SF Pro Display for sizes 20pt+. SF Pro Text for body and below. Dynamic Type scales all styles for accessibility. The typeface dynamically adjusts weight, width, and height for context.
+    </p>
+    <table class="type-table">
+      <thead>
+        <tr><th>Style</th><th>Sample</th><th>Font</th><th>Size</th><th>Weight</th><th>Line Height</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="style-name">Large Title</td>
+          <td style="font-size:34px;font-weight:600;letter-spacing:-0.5px">Aa</td>
+          <td class="spec">SF Pro Display</td>
+          <td class="spec">34pt</td>
+          <td class="spec">Semibold</td>
+          <td class="spec">41pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Title 1</td>
+          <td style="font-size:28px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Display</td>
+          <td class="spec">28pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">34pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Title 2</td>
+          <td style="font-size:22px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Display</td>
+          <td class="spec">22pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">28pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Title 3</td>
+          <td style="font-size:20px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Display</td>
+          <td class="spec">20pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">25pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Headline</td>
+          <td style="font-size:17px;font-weight:600">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">17pt</td>
+          <td class="spec">Semibold</td>
+          <td class="spec">22pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Body</td>
+          <td style="font-size:17px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">17pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">22pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Callout</td>
+          <td style="font-size:16px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">16pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">21pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Subhead</td>
+          <td style="font-size:15px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">15pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">20pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Footnote</td>
+          <td style="font-size:13px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">13pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">18pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Caption 1</td>
+          <td style="font-size:12px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">12pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">16pt</td>
+        </tr>
+        <tr>
+          <td class="style-name">Caption 2</td>
+          <td style="font-size:11px;font-weight:400">Aa</td>
+          <td class="spec">SF Pro Text</td>
+          <td class="spec">11pt</td>
+          <td class="spec">Regular</td>
+          <td class="spec">13pt</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════ SPACING & LAYOUT ═══════════ -->
+  <section>
+    <h2>Spacing &amp; Layout</h2>
+    <div class="spacing-grid">
+      <div class="spacing-card">
+        <div class="sp-value">16</div>
+        <div class="sp-unit">pt</div>
+        <div class="sp-label">Compact Margin</div>
+      </div>
+      <div class="spacing-card">
+        <div class="sp-value">20</div>
+        <div class="sp-unit">pt</div>
+        <div class="sp-label">Regular Margin</div>
+      </div>
+      <div class="spacing-card">
+        <div class="sp-value">44</div>
+        <div class="sp-unit">pt</div>
+        <div class="sp-label">Min Tap Target</div>
+      </div>
+      <div class="spacing-card">
+        <div class="sp-value">8</div>
+        <div class="sp-unit">pt grid</div>
+        <div class="sp-label">Base Unit</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px">Corner Radius</h3>
+    <div class="radius-row">
+      <div class="radius-demo">
+        <div class="radius-box" style="border-radius:10px"></div>
+        <div class="radius-val">10px</div>
+        <div class="radius-label">Small</div>
+      </div>
+      <div class="radius-demo">
+        <div class="radius-box" style="border-radius:13px"></div>
+        <div class="radius-val">13px</div>
+        <div class="radius-label">Medium</div>
+      </div>
+      <div class="radius-demo">
+        <div class="radius-box" style="border-radius:16px"></div>
+        <div class="radius-val">16px</div>
+        <div class="radius-label">Large</div>
+      </div>
+      <div class="radius-demo">
+        <div class="radius-box" style="border-radius:22px"></div>
+        <div class="radius-val">22px</div>
+        <div class="radius-label">XL</div>
+      </div>
+      <div class="radius-demo">
+        <div class="radius-box" style="border-radius:40px"></div>
+        <div class="radius-val">cont.</div>
+        <div class="radius-label">Continuous</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SOURCE ═══════════ -->
+  <section>
+    <h2>Source</h2>
+    <div class="source-card">
+      <div class="src-label">Figma UI Kit</div>
+      <a href="https://www.figma.com/design/ORMJ4PcohoibR0tqJB87Ra/APPLE-DESIGN-SYSTEM?node-id=221-56229" target="_blank">
+        APPLE-DESIGN-SYSTEM &mdash; iOS and iPadOS 26 UI Kit
+      </a>
+      <div class="src-note">Apple Design Resources &middot; Official Figma community file</div>
+    </div>
+    <div class="source-card" style="margin-top:12px">
+      <div class="src-label">References</div>
+      <a href="https://developer.apple.com/design/human-interface-guidelines/" target="_blank">Apple Human Interface Guidelines</a><br>
+      <a href="https://developer.apple.com/fonts/" target="_blank" style="margin-top:4px;display:inline-block">Apple Fonts (SF Pro, SF Mono, New York)</a><br>
+      <a href="https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/" target="_blank" style="margin-top:4px;display:inline-block">Liquid Glass Announcement &mdash; WWDC 2025</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+function setMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.swatch-color[data-light]').forEach(el => {
+    el.style.background = el.dataset[mode];
+  });
+  document.querySelectorAll('.hex[data-light]').forEach(el => {
+    el.textContent = el.dataset[mode];
+  });
+}
+</script>
+</body>
+</html>
