@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SomeAI — Brand Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root {
+  /* ── SomeAI Core Palette ── */
+  --red-950: #3B0A0A;
+  --red-900: #5C1111;
+  --red-800: #7B2020;
+  --red-700: #9B2C2C;
+  --red-600: #C53030;
+  --red-500: #E53E3E;
+  --red-400: #F56565;
+  --red-300: #FC8181;
+  --red-200: #FEB2B2;
+  --red-100: #FED7D7;
+  --red-50:  #FFF5F5;
+
+  /* ── Neutrals ── */
+  --black:   #0A0A0A;
+  --dark-1:  #141414;
+  --dark-2:  #1A1A1A;
+  --dark-3:  #222222;
+  --gray-1:  #333333;
+  --gray-2:  #666666;
+  --gray-3:  #999999;
+  --gray-4:  #CCCCCC;
+  --white:   #FFFFFF;
+
+  /* ── Mauve / Desaturated ── */
+  --mauve-dark:  #6B4F4F;
+  --mauve-mid:   #9B7878;
+  --mauve-light: #C4A8A8;
+
+  /* ── Semantic ── */
+  --bg: var(--dark-1);
+  --surface: var(--dark-2);
+  --border: var(--gray-1);
+  --text: #E8E0E0;
+  --dim: var(--gray-2);
+  --primary: var(--red-500);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.page { max-width: 1100px; margin: 0 auto; padding: 64px 32px 96px; }
+
+/* ── Header ── */
+.brand-header {
+  text-align: center;
+  padding: 80px 0 64px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 64px;
+}
+.brand-header .logo-mark {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 32px;
+  color: var(--primary);
+}
+.brand-header h1 {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+.brand-header .sub {
+  font-size: 16px;
+  color: var(--dim);
+  font-weight: 400;
+}
+.brand-header .version {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(229,62,62,0.12);
+  color: var(--red-400);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Sections ── */
+section {
+  margin-bottom: 72px;
+}
+section h2 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--red-400);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+section h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+section p {
+  color: #B0A0A0;
+  max-width: 680px;
+  margin-bottom: 16px;
+}
+
+/* ── Essence ── */
+.essence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+.essence-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+}
+.essence-card .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--red-400);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.essence-card .value {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ── Logo Display ── */
+.logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+.logo-cell {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  position: relative;
+  min-height: 200px;
+}
+.logo-cell.dark { background: var(--black); }
+.logo-cell.light { background: var(--white); }
+.logo-cell.red { background: linear-gradient(135deg, var(--red-700), var(--red-500)); }
+.logo-cell.gradient { background: linear-gradient(135deg, var(--red-900), var(--red-500)); }
+.logo-cell svg { width: 100%; max-width: 280px; height: auto; }
+.logo-cell .cell-label {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.5;
+}
+.logo-cell.light .cell-label { color: var(--gray-2); }
+
+/* ── Color Palette ── */
+.palette-section { margin-top: 24px; margin-bottom: 40px; }
+.palette-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dim);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.palette-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.swatch {
+  width: 88px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.swatch-color {
+  height: 72px;
+}
+.swatch-info {
+  padding: 8px 10px;
+  background: var(--surface);
+}
+.swatch-info .name {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.swatch-info .hex {
+  font-size: 10px;
+  color: var(--dim);
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+}
+
+/* ── Gradient Strips ── */
+.gradient-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.gradient-strip {
+  height: 80px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.gradient-strip .g-label {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.g1 { background: linear-gradient(to right, var(--red-900), var(--red-400)); }
+.g1 .g-label { color: rgba(255,255,255,0.7); }
+.g2 { background: linear-gradient(to right, var(--red-50), var(--red-300)); }
+.g2 .g-label { color: var(--red-700); }
+.g3 { background: linear-gradient(135deg, var(--red-800), var(--red-500)); }
+.g3 .g-label { color: rgba(255,255,255,0.7); }
+.g4 { background: linear-gradient(to right, var(--mauve-dark), var(--mauve-light)); }
+.g4 .g-label { color: rgba(255,255,255,0.7); }
+
+/* ── Typography ── */
+.type-specimen {
+  margin-top: 24px;
+}
+.type-row {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+.type-row:last-child { border-bottom: none; }
+.type-meta {
+  width: 140px;
+  flex-shrink: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dim);
+  font-weight: 600;
+}
+.type-sample {
+  flex: 1;
+}
+
+/* ── Spacing / Clear Space ── */
+.clearspace-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px 0;
+  padding: 48px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.clearspace-demo svg { width: 160px; height: 160px; color: var(--primary); }
+.clearspace-demo .zone {
+  position: absolute;
+  border: 1px dashed var(--red-400);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── Metaphor ── */
+.metaphor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.metaphor-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+}
+.metaphor-card .m-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+.metaphor-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.metaphor-card p {
+  font-size: 12px;
+  color: #B0A0A0;
+  max-width: 100%;
+}
+
+/* ── Usage Rules ── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.rule-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.rule-card.do { border-color: rgba(52,211,153,0.3); }
+.rule-card.dont { border-color: rgba(229,62,62,0.3); }
+.rule-card .rule-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.rule-card.do .rule-label { color: #34d399; }
+.rule-card.dont .rule-label { color: var(--red-400); }
+.rule-card p { font-size: 13px; color: #B0A0A0; max-width: 100%; }
+
+/* ── App Icon ── */
+.icon-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.app-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.app-icon svg { width: 60%; height: 60%; }
+.app-icon.ai-dark { background: var(--dark-3); color: var(--red-400); }
+.app-icon.ai-red { background: linear-gradient(135deg, var(--red-700), var(--red-400)); color: white; }
+.app-icon.ai-light { background: linear-gradient(135deg, var(--red-50), var(--red-200)); color: var(--red-700); }
+.app-icon.ai-black { background: var(--black); color: var(--red-500); border-color: var(--gray-1); }
+
+@media(max-width:768px) {
+  .essence-grid, .logo-grid, .rules-grid, .gradient-row { grid-template-columns: 1fr; }
+  .metaphor-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="brand-header">
+    <div class="logo-mark">
+      <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(120,120)">
+          <line x1="0" y1="0" x2="0" y2="-108"/>
+          <line x1="0" y1="0" x2="65" y2="-87"/>
+          <line x1="0" y1="0" x2="103" y2="-33"/>
+          <line x1="0" y1="0" x2="95" y2="50"/>
+          <line x1="0" y1="0" x2="40" y2="100"/>
+          <line x1="0" y1="0" x2="-40" y2="100"/>
+          <line x1="0" y1="0" x2="-95" y2="50"/>
+          <line x1="0" y1="0" x2="-103" y2="-33"/>
+          <line x1="0" y1="0" x2="-65" y2="-87"/>
+          <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+          <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+          <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+        </g>
+      </svg>
+    </div>
+    <h1>SomeAI</h1>
+    <p class="sub">Brand Book</p>
+    <span class="version">v1.0 &middot; February 2026</span>
+  </header>
+
+  <!-- ═══════════ BRAND ESSENCE ═══════════ -->
+  <section>
+    <h2>Brand Essence</h2>
+    <h3>The invisible infrastructure company</h3>
+    <p>
+      SomeAI builds operating systems for operations. The logo is a spider web &mdash; nature's most efficient knowledge graph. Every strand is a connection, every node is an anchor, and the web itself is invisible until it catches the light. Like Charlotte's substrate, the best infrastructure disappears into the thing it serves.
+    </p>
+    <div class="essence-grid">
+      <div class="essence-card">
+        <div class="label">Mission</div>
+        <div class="value">Build invisible infrastructure for the 33.2 million businesses technology forgot. The correct measure of progress is not how much technology people use &mdash; it is how little they notice.</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Voice</div>
+        <div class="value">Precise, confident, unhurried. We do not explain ourselves defensively. We state what we build and why it matters. Technical depth without jargon. The tone of someone who has done the work.</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Metaphor</div>
+        <div class="value">Spider silk. Strongest natural material on Earth. Invisible at scale. A web is simultaneously a structure, a sensor network, a home, and a trap &mdash; all from one material, one builder, one design.</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Promise</div>
+        <div class="value">Every business gets its own operating system &mdash; compiled from its own signals, shrunk to its own instruction set &mdash; without knowing it exists. The adoption tax disappears because there is nothing to adopt.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LOGO METAPHOR ═══════════ -->
+  <section>
+    <h2>Logo &mdash; The Web</h2>
+    <p>
+      The mark is a spider web. It reads simultaneously as a knowledge graph (nodes and edges), a convex hull (the outer boundary), and a web of connections (the business substrate). Nine radial threads converge at a center node. Three concentric rings hold the structure together. The form is organic, slightly irregular &mdash; like a real web, like a real business.
+    </p>
+    <div class="metaphor-grid">
+      <div class="metaphor-card">
+        <div class="m-icon">&#x1F578;</div>
+        <h4>Spider Web</h4>
+        <p>Nature's most efficient sensor network. Radial architecture. Catches what it needs. Invisible until activated.</p>
+      </div>
+      <div class="metaphor-card">
+        <div class="m-icon">&#x1F310;</div>
+        <h4>Knowledge Graph</h4>
+        <p>Nodes connected by edges. Every strand is a relationship. The topology encodes meaning. Charlotte's native structure.</p>
+      </div>
+      <div class="metaphor-card">
+        <div class="m-icon">&#x2B21;</div>
+        <h4>Convex Hull</h4>
+        <p>The outer ring is the tightest enclosure. All knowledge lives inside. Five knowledge types are the vertices. The hull bounds what we can know.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ LOGO LOCKUPS ═══════════ -->
+  <section>
+    <h2>Logo Lockups</h2>
+    <div class="logo-grid">
+      <div class="logo-cell dark">
+        <svg viewBox="0 0 520 120" fill="none">
+          <g transform="translate(60,60) scale(0.48)" stroke="#E53E3E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+          <text x="130" y="78" font-family="Inter,sans-serif" font-size="64" font-weight="600" letter-spacing="-1" fill="#E8E0E0">SomeAI</text>
+        </svg>
+        <span class="cell-label" style="color:#666">Dark Background</span>
+      </div>
+      <div class="logo-cell light">
+        <svg viewBox="0 0 520 120" fill="none">
+          <g transform="translate(60,60) scale(0.48)" stroke="#C53030" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+          <text x="130" y="78" font-family="Inter,sans-serif" font-size="64" font-weight="600" letter-spacing="-1" fill="#1A1A1A">SomeAI</text>
+        </svg>
+        <span class="cell-label">Light Background</span>
+      </div>
+      <div class="logo-cell red">
+        <svg viewBox="0 0 520 120" fill="none">
+          <g transform="translate(60,60) scale(0.48)" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+          <text x="130" y="78" font-family="Inter,sans-serif" font-size="64" font-weight="600" letter-spacing="-1" fill="white">SomeAI</text>
+        </svg>
+        <span class="cell-label" style="color:rgba(255,255,255,0.5)">Brand Gradient</span>
+      </div>
+      <div class="logo-cell gradient">
+        <svg viewBox="0 0 520 120" fill="none">
+          <g transform="translate(60,60) scale(0.48)" stroke="rgba(255,255,255,0.6)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+          <text x="130" y="78" font-family="Inter,sans-serif" font-size="64" font-weight="600" letter-spacing="-1" fill="rgba(255,255,255,0.85)">SomeAI</text>
+        </svg>
+        <span class="cell-label" style="color:rgba(255,255,255,0.4)">Deep Gradient</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ APP ICONS ═══════════ -->
+  <section>
+    <h2>App Icons</h2>
+    <div class="icon-row">
+      <div class="app-icon ai-dark">
+        <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(120,120)">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-icon ai-red">
+        <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(120,120)">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-icon ai-light">
+        <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(120,120)">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="app-icon ai-black">
+        <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(120,120)">
+            <line x1="0" y1="0" x2="0" y2="-108"/><line x1="0" y1="0" x2="65" y2="-87"/><line x1="0" y1="0" x2="103" y2="-33"/><line x1="0" y1="0" x2="95" y2="50"/><line x1="0" y1="0" x2="40" y2="100"/><line x1="0" y1="0" x2="-40" y2="100"/><line x1="0" y1="0" x2="-95" y2="50"/><line x1="0" y1="0" x2="-103" y2="-33"/><line x1="0" y1="0" x2="-65" y2="-87"/>
+            <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+            <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+            <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COLOR PALETTE ═══════════ -->
+  <section>
+    <h2>Color Palette</h2>
+
+    <div class="palette-section">
+      <div class="palette-label">SomeAI Red &mdash; Primary</div>
+      <div class="palette-row">
+        <div class="swatch"><div class="swatch-color" style="background:#3B0A0A"></div><div class="swatch-info"><div class="name">950</div><div class="hex">#3B0A0A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5C1111"></div><div class="swatch-info"><div class="name">900</div><div class="hex">#5C1111</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#7B2020"></div><div class="swatch-info"><div class="name">800</div><div class="hex">#7B2020</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#9B2C2C"></div><div class="swatch-info"><div class="name">700</div><div class="hex">#9B2C2C</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#C53030"></div><div class="swatch-info"><div class="name">600</div><div class="hex">#C53030</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E53E3E"></div><div class="swatch-info"><div class="name">500</div><div class="hex">#E53E3E</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#F56565"></div><div class="swatch-info"><div class="name">400</div><div class="hex">#F56565</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FC8181"></div><div class="swatch-info"><div class="name">300</div><div class="hex">#FC8181</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FEB2B2"></div><div class="swatch-info"><div name="name">200</div><div class="hex">#FEB2B2</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FED7D7"></div><div class="swatch-info"><div class="name">100</div><div class="hex">#FED7D7</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FFF5F5"></div><div class="swatch-info"><div class="name">50</div><div class="hex">#FFF5F5</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-label">Mauve &mdash; Desaturated Accent</div>
+      <div class="palette-row">
+        <div class="swatch"><div class="swatch-color" style="background:#4A3535"></div><div class="swatch-info"><div class="name">Dark</div><div class="hex">#4A3535</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#6B4F4F"></div><div class="swatch-info"><div class="name">Mid-Dark</div><div class="hex">#6B4F4F</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#9B7878"></div><div class="swatch-info"><div class="name">Mid</div><div class="hex">#9B7878</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#C4A8A8"></div><div class="swatch-info"><div class="name">Light</div><div class="hex">#C4A8A8</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E8D5D5"></div><div class="swatch-info"><div class="name">Pale</div><div class="hex">#E8D5D5</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-label">Neutrals</div>
+      <div class="palette-row">
+        <div class="swatch"><div class="swatch-color" style="background:#0A0A0A"></div><div class="swatch-info"><div class="name">Black</div><div class="hex">#0A0A0A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#141414"></div><div class="swatch-info"><div class="name">Dark 1</div><div class="hex">#141414</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#1A1A1A"></div><div class="swatch-info"><div class="name">Dark 2</div><div class="hex">#1A1A1A</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#222222"></div><div class="swatch-info"><div class="name">Dark 3</div><div class="hex">#222222</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#333333"></div><div class="swatch-info"><div class="name">Gray 1</div><div class="hex">#333333</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#666666"></div><div class="swatch-info"><div class="name">Gray 2</div><div class="hex">#666666</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#999999"></div><div class="swatch-info"><div class="name">Gray 3</div><div class="hex">#999999</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#CCCCCC"></div><div class="swatch-info"><div class="name">Gray 4</div><div class="hex">#CCCCCC</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FFFFFF; border: 1px solid #333"></div><div class="swatch-info"><div class="name">White</div><div class="hex">#FFFFFF</div></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-label">Brand Gradients</div>
+      <div class="gradient-row">
+        <div class="gradient-strip g1"><span class="g-label">Dark to Bright &mdash; Primary</span></div>
+        <div class="gradient-strip g2"><span class="g-label">Light Mode &mdash; Rose</span></div>
+        <div class="gradient-strip g3"><span class="g-label">Diagonal &mdash; Deep</span></div>
+        <div class="gradient-strip g4"><span class="g-label">Mauve Range</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TYPOGRAPHY ═══════════ -->
+  <section>
+    <h2>Typography</h2>
+    <p>Inter is the primary typeface. Clean, geometric, optimized for screens. Used across all touchpoints.</p>
+    <div class="type-specimen">
+      <div class="type-row">
+        <div class="type-meta">Display / 48px<br>Weight 800</div>
+        <div class="type-sample" style="font-size:48px;font-weight:800;letter-spacing:-2px">SomeAI</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Heading 1 / 32px<br>Weight 700</div>
+        <div class="type-sample" style="font-size:32px;font-weight:700;letter-spacing:-1px">Invisible infrastructure</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Heading 2 / 22px<br>Weight 600</div>
+        <div class="type-sample" style="font-size:22px;font-weight:600;letter-spacing:-0.5px">Operating systems for operations</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body / 15px<br>Weight 400</div>
+        <div class="type-sample" style="font-size:15px;font-weight:400;line-height:1.7;color:#B0A0A0">Every business gets its own operating system &mdash; compiled from its own signals, shrunk to its own instruction set &mdash; without knowing it exists. The adoption tax disappears because there is nothing to adopt.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Caption / 11px<br>Weight 600 Uppercase</div>
+        <div class="type-sample" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--red-400)">Knowledge Graph &middot; Temporal Spine &middot; Convex Hull</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Mono / 13px<br>Code &amp; Data</div>
+        <div class="type-sample" style="font-size:13px;font-family:'SF Mono','Cascadia Code','Consolas',monospace;color:var(--red-300)">(isa SomeAI InfrastructureCompany)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ USAGE RULES ═══════════ -->
+  <section>
+    <h2>Usage Rules</h2>
+    <div class="rules-grid">
+      <div class="rule-card do">
+        <div class="rule-label">Do</div>
+        <p>Use the logo mark at full opacity on dark, light, or red backgrounds. Maintain clear space equal to the inner ring radius on all sides.</p>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-label">Do</div>
+        <p>Use the horizontal lockup for primary placements. The mark goes left, the wordmark goes right. Never stack them vertically.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-label">Don't</div>
+        <p>Never rotate, skew, add drop shadows, or apply effects to the logo. The web's geometry is precise. Distortion breaks the metaphor.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-label">Don't</div>
+        <p>Never use colors outside the palette on the logo. The red spectrum is the brand. Blue, green, or rainbow treatments are not SomeAI.</p>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-label">Do</div>
+        <p>Use SomeAI Red 500 (#E53E3E) as the primary action color. Red 600 for hover states. Red 400 for highlights on dark backgrounds.</p>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-label">Don't</div>
+        <p>Never use the logo mark smaller than 24px. The web's inner details become illegible. At small sizes, simplify to the outer ring only.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CSS VARIABLES ═══════════ -->
+  <section>
+    <h2>CSS Variables &mdash; Copy/Paste</h2>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;font-family:'SF Mono','Cascadia Code','Consolas',monospace;font-size:12px;line-height:2;color:var(--red-300);overflow-x:auto">
+<pre style="margin:0">:root {
+  --someai-red-950: #3B0A0A;
+  --someai-red-900: #5C1111;
+  --someai-red-800: #7B2020;
+  --someai-red-700: #9B2C2C;
+  --someai-red-600: #C53030;
+  --someai-red-500: #E53E3E;  /* Primary */
+  --someai-red-400: #F56565;
+  --someai-red-300: #FC8181;
+  --someai-red-200: #FEB2B2;
+  --someai-red-100: #FED7D7;
+  --someai-red-50:  #FFF5F5;
+
+  --someai-mauve-dark:  #6B4F4F;
+  --someai-mauve-mid:   #9B7878;
+  --someai-mauve-light: #C4A8A8;
+
+  --someai-black:  #0A0A0A;
+  --someai-dark-1: #141414;
+  --someai-dark-2: #1A1A1A;
+  --someai-dark-3: #222222;
+  --someai-white:  #FFFFFF;
+}</pre>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

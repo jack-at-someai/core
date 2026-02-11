@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" width="600" height="100">
+  <!--
+    SomeAI Wordmark
+    Clean rounded sans-serif. The "i" in "Ai" is lowercase in the Figma source.
+    Correct corporate spelling: SomeAI (capital I)
+  -->
+  <text
+    x="0" y="76"
+    font-family="'Inter', 'SF Pro Display', -apple-system, sans-serif"
+    font-size="80"
+    font-weight="600"
+    letter-spacing="-1"
+    fill="currentColor"
+  >SomeAI</text>
+</svg>
