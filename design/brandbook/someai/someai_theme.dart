@@ -5,7 +5,7 @@
 import 'package:charlotte_ui/theme.dart';
 import 'package:flutter/material.dart';
 
-/// SomeAI brand color palette
+/// Someai brand color palette
 class SomeaiColors {
   SomeaiColors._();
 
@@ -62,10 +62,12 @@ class SomeaiColors {
   static const surfaceVariant = Color(0xFF222222);
 
   static const textPrimary = Color(0xFFE8E0E0);
+  static const textSecondary = Color(0xFFE8E0E0);
   static const textTertiary = Color(0xFF666666);
+  static const textDisabled = Color(0xFF666666);
 }
 
-/// SomeAI theme configuration
+/// Someai theme configuration
 const someaiThemeConfig = CharlotteThemeConfig(
   primary: SomeaiColors.primary,
   secondary: SomeaiColors.secondary,
@@ -77,7 +79,7 @@ const someaiThemeConfig = CharlotteThemeConfig(
   textPrimary: SomeaiColors.textPrimary,
   textSecondary: SomeaiColors.textPrimary,
   textTertiary: SomeaiColors.textTertiary,
-  textDisabled: Color(0xFF666666),
+  textDisabled: SomeaiColors.textDisabled,
   glassBlurSubtle: 12,
   glassBlurStandard: 24,
   glassBlurFrosted: 40,

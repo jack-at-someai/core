@@ -62,11 +62,13 @@ class SounderColors {
   static const surfaceVariant = Color(0xFF3D3B3E);
 
   static const textPrimary = Color(0xFFF2F2F3);
+  static const textSecondary = Color(0xFFF2F2F3);
   static const textTertiary = Color(0xFF5B575E);
+  static const textDisabled = Color(0xFF5B575E);
 }
 
 /// Sounder theme configuration
-const sounderGeneratedThemeConfig = CharlotteThemeConfig(
+const sounderThemeConfig = CharlotteThemeConfig(
   primary: SounderColors.primary,
   secondary: SounderColors.secondary,
   tertiary: SounderColors.tertiary,
@@ -77,7 +79,7 @@ const sounderGeneratedThemeConfig = CharlotteThemeConfig(
   textPrimary: SounderColors.textPrimary,
   textSecondary: SounderColors.textPrimary,
   textTertiary: SounderColors.textTertiary,
-  textDisabled: Color(0xFF5B575E),
+  textDisabled: SounderColors.textDisabled,
   glassBlurSubtle: 12,
   glassBlurStandard: 24,
   glassBlurFrosted: 40,

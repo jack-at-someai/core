@@ -5,7 +5,7 @@
 import 'package:charlotte_ui/theme.dart';
 import 'package:flutter/material.dart';
 
-/// ISG brand color palette
+/// Isg brand color palette
 class IsgColors {
   IsgColors._();
 
@@ -62,10 +62,12 @@ class IsgColors {
   static const surfaceVariant = Color(0xFF1A2B5F);
 
   static const textPrimary = Color(0xFFE2E8F0);
+  static const textSecondary = Color(0xFFE2E8F0);
   static const textTertiary = Color(0xFF94A3B8);
+  static const textDisabled = Color(0xFF94A3B8);
 }
 
-/// ISG theme configuration
+/// Isg theme configuration
 const isgThemeConfig = CharlotteThemeConfig(
   primary: IsgColors.primary,
   secondary: IsgColors.secondary,
@@ -77,7 +79,7 @@ const isgThemeConfig = CharlotteThemeConfig(
   textPrimary: IsgColors.textPrimary,
   textSecondary: IsgColors.textPrimary,
   textTertiary: IsgColors.textTertiary,
-  textDisabled: Color(0xFF94A3B8),
+  textDisabled: IsgColors.textDisabled,
   glassBlurSubtle: 12,
   glassBlurStandard: 24,
   glassBlurFrosted: 40,

@@ -62,10 +62,12 @@ class SeaLionColors {
   static const surfaceVariant = Color(0xFF1A2B5F);
 
   static const textPrimary = Color(0xFFE2E8F0);
+  static const textSecondary = Color(0xFFE2E8F0);
   static const textTertiary = Color(0xFF94A3B8);
+  static const textDisabled = Color(0xFF94A3B8);
 }
 
-/// Sea Lion theme configuration
+/// SeaLion theme configuration
 const seaLionThemeConfig = CharlotteThemeConfig(
   primary: SeaLionColors.primary,
   secondary: SeaLionColors.secondary,
@@ -77,7 +79,7 @@ const seaLionThemeConfig = CharlotteThemeConfig(
   textPrimary: SeaLionColors.textPrimary,
   textSecondary: SeaLionColors.textPrimary,
   textTertiary: SeaLionColors.textTertiary,
-  textDisabled: Color(0xFF94A3B8),
+  textDisabled: SeaLionColors.textDisabled,
   glassBlurSubtle: 12,
   glassBlurStandard: 24,
   glassBlurFrosted: 40,

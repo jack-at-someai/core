@@ -62,10 +62,12 @@ class RichardEnterprisesColors {
   static const surfaceVariant = Color(0xFF1C1C22);
 
   static const textPrimary = Color(0xFFF0F0F2);
+  static const textSecondary = Color(0xFFF0F0F2);
   static const textTertiary = Color(0xFF888890);
+  static const textDisabled = Color(0xFF888890);
 }
 
-/// Richard Enterprises theme configuration
+/// RichardEnterprises theme configuration
 const richardEnterprisesThemeConfig = CharlotteThemeConfig(
   primary: RichardEnterprisesColors.primary,
   secondary: RichardEnterprisesColors.secondary,
@@ -77,7 +79,7 @@ const richardEnterprisesThemeConfig = CharlotteThemeConfig(
   textPrimary: RichardEnterprisesColors.textPrimary,
   textSecondary: RichardEnterprisesColors.textPrimary,
   textTertiary: RichardEnterprisesColors.textTertiary,
-  textDisabled: Color(0xFF888890),
+  textDisabled: RichardEnterprisesColors.textDisabled,
   glassBlurSubtle: 12,
   glassBlurStandard: 24,
   glassBlurFrosted: 40,

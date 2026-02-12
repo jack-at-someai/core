@@ -65,8 +65,8 @@
   --lg-blur-standard: 24px;
   --lg-blur-frosted: 40px;
   --lg-blur-deep: 60px;
-  --lg-fill-opacity: 0.1;
-  --lg-border-opacity: 0.2;
+  --lg-fill-opacity: 0.10;
+  --lg-border-opacity: 0.20;
   --lg-saturation: 180%;
 
   --lg-radius-sm: 10px;
