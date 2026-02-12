@@ -577,28 +577,31 @@ h2.section-title span.steel{color:var(--steel-500)}
     {id:'MM49', x:0.6, y:0.2, r:3, color:'#3C783C', label:'49" Market'},
     {id:'OCS', x:0.35, y:0.75, r:3, color:'#3C783C', label:'OCS Cabinet'},
     {id:'STOR', x:0.65, y:0.75, r:3, color:'#3C783C', label:'Storage'},
-    // Competitors
-    {id:'AXIS', x:0.15, y:0.15, r:3, color:'#566068', label:'Axis'},
-    {id:'ADV', x:0.85, y:0.15, r:3, color:'#566068', label:'Advantage'},
-    {id:'MDG', x:0.15, y:0.85, r:3, color:'#566068', label:'Market Design'},
-    {id:'FLOR', x:0.85, y:0.85, r:3, color:'#566068', label:'Florence'},
+    // Competitors (real — from competitive analysis)
+    {id:'AXIS', x:0.15, y:0.15, r:3, color:'#566068', label:'Axis Designs'},
+    {id:'FXLT', x:0.85, y:0.15, r:3, color:'#566068', label:'Fixturelite'},
+    {id:'FCI', x:0.12, y:0.85, r:3, color:'#566068', label:'Food Concepts'},
+    {id:'FWRK', x:0.88, y:0.85, r:3, color:'#566068', label:'FrameWorks'},
+    {id:'GTP', x:0.08, y:0.55, r:3, color:'#566068', label:'Graphics That Pop'},
+    {id:'SV', x:0.92, y:0.55, r:3, color:'#566068', label:'SandenVendo'},
     // Industry
     {id:'NAMA', x:0.1, y:0.45, r:4, color:'#23496D', label:'NAMA'},
     {id:'365', x:0.9, y:0.45, r:4, color:'#23496D', label:'365 Retail'},
+    {id:'NAYAX', x:0.15, y:0.35, r:3, color:'#23496D', label:'Nayax'},
     // Suppliers
     {id:'MFS', x:0.2, y:0.4, r:3, color:'#7F878D', label:'Midwest Finishing'},
-    {id:'AIC', x:0.8, y:0.4, r:3, color:'#7F878D', label:'Am. Industrial'},
   ];
 
   var edgeData = [
     ['ASM','RS'],['ASM','MM'],['ASM','SF'],['ASM','CH'],
     ['ASM','MM27'],['ASM','MM36'],['ASM','MM49'],['ASM','OCS'],['ASM','STOR'],
-    ['ASM','AXIS'],['ASM','ADV'],['ASM','MDG'],['ASM','FLOR'],
-    ['ASM','NAMA'],['ASM','365'],
-    ['ASM','MFS'],['ASM','AIC'],
+    ['ASM','AXIS'],['ASM','FXLT'],['ASM','FCI'],['ASM','FWRK'],['ASM','GTP'],['ASM','SV'],
+    ['ASM','NAMA'],['ASM','365'],['ASM','NAYAX'],
+    ['ASM','MFS'],
     ['RS','MM'],['SF','CH'],
     ['MM27','MM36'],['MM36','MM49'],['OCS','STOR'],
-    ['AXIS','365'],['ADV','365'],
+    ['AXIS','365'],['FXLT','365'],['FCI','365'],['SV','365'],['NAYAX','365'],
+    ['GTP','FWRK'],
   ];
 
   // Add drift to nodes
