@@ -1,0 +1,513 @@
+;;; ================================================================
+;;; NATIONAL SWINE REGISTRY (NSR) — PARTNERSHIP SUBSTRATE
+;;; Validation domain knowledge graph for the Sounder partnership
+;;; assessment with NSR, the largest multi-breed swine registry
+;;; in the United States.
+;;; ================================================================
+
+(in-microtheory NationalSwineRegistryMt)
+
+;;; ================================================================
+;;; 1. INSTITUTION NODE
+;;; ================================================================
+
+(isa NSR NODE)
+(isa NSR GroupEntity)
+(isa NSR BreedRegistry)
+(hasField NSR :ID "nsr-001")
+(hasField NSR :LABEL "National Swine Registry")
+(hasField NSR :CREATED "1994")
+(hasState NSR Active)
+
+(comment NSR
+  "The National Swine Registry (NSR) is the consolidated breed registry
+   for four major US swine breeds. Formed through decades of mergers
+   among the American Hampshire, United Duroc, American Yorkshire,
+   and American Landrace breed associations. Headquartered in West
+   Lafayette, Indiana. Operates the STAGES genetic evaluation program.")
+
+(hasAttribute NSR headquarters "West Lafayette, IN")
+(hasAttribute NSR website "nationalswine.com")
+(hasAttribute NSR parentOrganization "National Pork Board (affiliate)")
+(hasAttribute NSR primaryFunction "breed registry, pedigree verification, performance testing")
+(hasAttribute NSR keyProgram "STAGES (Swine Testing And Genetic Evaluation System)")
+(hasAttribute NSR formationMethod "merger of breed-specific associations")
+
+;;; ================================================================
+;;; 2. BREED NODES
+;;; ================================================================
+
+;; ── Hampshire ──
+
+(isa HampshireBreed NODE)
+(isa HampshireBreed IndividualEntity)
+(isa HampshireBreed SwineBreed)
+(hasField HampshireBreed :ID "breed-hampshire")
+(hasField HampshireBreed :LABEL "Hampshire")
+(hasState HampshireBreed Active)
+
+(comment HampshireBreed
+  "Black pig with distinctive white belt encircling the shoulders and
+   front legs. Terminal and dual-purpose breed known for lean carcass
+   quality and muscling. Association founded 1893.")
+
+(hasAttribute HampshireBreed color "black with white belt")
+(hasAttribute HampshireBreed purpose "terminal/dual-purpose")
+(hasAttribute HampshireBreed associationFounded 1893)
+(hasAttribute HampshireBreed keyTraits "lean carcass, heavy muscling, erect ears")
+(hasAttribute HampshireBreed registrationRequires "purebred parentage, breed standard conformation, ear notch ID")
+
+;; ── Duroc ──
+
+(isa DurocBreed NODE)
+(isa DurocBreed IndividualEntity)
+(isa DurocBreed SwineBreed)
+(hasField DurocBreed :ID "breed-duroc")
+(hasField DurocBreed :LABEL "Duroc")
+(hasState DurocBreed Active)
+
+(comment DurocBreed
+  "Solid red pig ranging from golden to dark cherry. Terminal sire breed
+   valued for growth rate, feed efficiency, and meat quality. One of the
+   oldest American breeds, association founded 1883.")
+
+(hasAttribute DurocBreed color "red (golden to dark cherry)")
+(hasAttribute DurocBreed purpose "terminal")
+(hasAttribute DurocBreed associationFounded 1883)
+(hasAttribute DurocBreed keyTraits "fast growth, feed efficiency, marbling, docility")
+(hasAttribute DurocBreed registrationRequires "purebred parentage, red coloration, drooping ears")
+
+;; ── Yorkshire ──
+
+(isa YorkshireBreed NODE)
+(isa YorkshireBreed IndividualEntity)
+(isa YorkshireBreed SwineBreed)
+(hasField YorkshireBreed :ID "breed-yorkshire")
+(hasField YorkshireBreed :LABEL "Yorkshire")
+(hasState YorkshireBreed Active)
+
+(comment YorkshireBreed
+  "White, erect-eared breed originating from England. Premier maternal
+   breed in the US swine industry. Known for large litters, heavy
+   milking, and excellent mothering ability. Association founded 1893.")
+
+(hasAttribute YorkshireBreed color "white")
+(hasAttribute YorkshireBreed purpose "maternal")
+(hasAttribute YorkshireBreed associationFounded 1893)
+(hasAttribute YorkshireBreed keyTraits "large litters, heavy milking, soundness, longevity")
+(hasAttribute YorkshireBreed registrationRequires "purebred parentage, white coloration, erect ears, no black hair")
+
+;; ── Landrace ──
+
+(isa LandraceBreed NODE)
+(isa LandraceBreed IndividualEntity)
+(isa LandraceBreed SwineBreed)
+(hasField LandraceBreed :ID "breed-landrace")
+(hasField LandraceBreed :LABEL "Landrace")
+(hasState LandraceBreed Active)
+
+(comment LandraceBreed
+  "White, long-bodied breed with characteristic large drooping ears.
+   Danish origin, imported to the US in the 1950s. Maternal breed
+   valued for litter size and cross-breeding performance.")
+
+(hasAttribute LandraceBreed color "white")
+(hasAttribute LandraceBreed purpose "maternal")
+(hasAttribute LandraceBreed associationFounded "1950s (US)")
+(hasAttribute LandraceBreed keyTraits "long body, large litters, cross-breeding vigor, drooping ears")
+(hasAttribute LandraceBreed registrationRequires "purebred parentage, white coloration, breed-standard length and ear set")
+
+;;; ================================================================
+;;; 3. COMPETITOR / PEER NODES
+;;; ================================================================
+
+;; ── Certified Pedigree Swine (CPS) ──
+
+(isa CPS NODE)
+(isa CPS GroupEntity)
+(isa CPS BreedRegistry)
+(hasField CPS :ID "comp-cps")
+(hasField CPS :LABEL "Certified Pedigree Swine")
+(hasState CPS Active)
+(hasAttribute CPS memberCount 65412)
+(hasAttribute CPS breedsServed "all major breeds")
+(comment CPS "Largest pedigree swine organization by membership. Multi-breed competitor to NSR.")
+
+;; ── American Berkshire Association (ABA) ──
+
+(isa ABA NODE)
+(isa ABA GroupEntity)
+(isa ABA BreedRegistry)
+(hasField ABA :ID "comp-aba")
+(hasField ABA :LABEL "American Berkshire Association")
+(hasState ABA Active)
+(hasAttribute ABA memberCount 8807)
+(hasAttribute ABA breedsServed "Berkshire only")
+(comment ABA "Single-breed registry. Oldest swine registry in the world, founded 1875.")
+
+;; ── National Swine Improvement Federation (NSIF) ──
+
+(isa NSIF NODE)
+(isa NSIF GroupEntity)
+(hasField NSIF :ID "peer-nsif")
+(hasField NSIF :LABEL "National Swine Improvement Federation")
+(hasState NSIF Active)
+(hasAttribute NSIF primaryFunction "genetic evaluation standards and guidelines")
+(comment NSIF "Standards body for swine genetic evaluation. Not a registry but sets the benchmarks NSR's STAGES program follows.")
+
+;;; ================================================================
+;;; 4. COMMERCIAL GENETICS THREAT NODES
+;;; ================================================================
+
+(isa CommercialGeneticsCompany Collection)
+(comment CommercialGeneticsCompany
+  "Vertically integrated genetics companies that sell proprietary
+   terminal and maternal lines, bypassing purebred registries entirely.
+   Primary existential threat to the purebred breeder model.")
+
+;; ── PIC / Genus ──
+
+(isa PIC-Genus NODE)
+(isa PIC-Genus GroupEntity)
+(isa PIC-Genus CommercialGeneticsCompany)
+(hasField PIC-Genus :ID "threat-pic")
+(hasField PIC-Genus :LABEL "PIC (Genus plc)")
+(hasState PIC-Genus Active)
+(hasAttribute PIC-Genus scope "global")
+(hasAttribute PIC-Genus model "vertically integrated, proprietary lines")
+(comment PIC-Genus "Largest global swine genetics company. Genus plc subsidiary. Closed-herd system eliminates need for breed registries.")
+
+;; ── Topigs Norsvin ──
+
+(isa TopigsNorsvin NODE)
+(isa TopigsNorsvin GroupEntity)
+(isa TopigsNorsvin CommercialGeneticsCompany)
+(hasField TopigsNorsvin :ID "threat-topigs")
+(hasField TopigsNorsvin :LABEL "Topigs Norsvin")
+(hasState TopigsNorsvin Active)
+(hasAttribute TopigsNorsvin scope "global (European origin)")
+(hasAttribute TopigsNorsvin model "cooperative genetics, proprietary lines")
+(comment TopigsNorsvin "Dutch-Norwegian genetics cooperative. Expanding in US market with high-performing maternal and terminal lines.")
+
+;; ── DNA Genetics ──
+
+(isa DNAGenetics NODE)
+(isa DNAGenetics GroupEntity)
+(isa DNAGenetics CommercialGeneticsCompany)
+(hasField DNAGenetics :ID "threat-dna")
+(hasField DNAGenetics :LABEL "DNA Genetics")
+(hasState DNAGenetics Active)
+(hasAttribute DNAGenetics scope "US domestic")
+(hasAttribute DNAGenetics model "commercial multiplication, proprietary lines")
+(comment DNAGenetics "US-based commercial genetics supplier. Columbus, Nebraska.")
+
+;; ── Genesus ──
+
+(isa Genesus NODE)
+(isa Genesus GroupEntity)
+(isa Genesus CommercialGeneticsCompany)
+(hasField Genesus :ID "threat-genesus")
+(hasField Genesus :LABEL "Genesus")
+(hasState Genesus Active)
+(hasAttribute Genesus scope "global (Canadian origin)")
+(hasAttribute Genesus model "large-scale genetic multiplication")
+(comment Genesus "Canadian genetics company. World's largest purebred swine operation, but operates as a closed commercial system.")
+
+;;; ================================================================
+;;; 5. EDGES — Structural relationships
+;;; ================================================================
+
+;; ── NSR manages breed registries ──
+
+(isa registersBreed EdgeType)
+(comment registersBreed "Registry A maintains the herd book and pedigree records for breed B.")
+
+(registersBreed NSR HampshireBreed)
+(registersBreed NSR DurocBreed)
+(registersBreed NSR YorkshireBreed)
+(registersBreed NSR LandraceBreed)
+
+;; ── Competitive edges ──
+
+(isa competesWith EdgeType)
+(isa competesWith SymmetricRelation)
+(comment competesWith "Organizations A and B compete for overlapping membership or market share.")
+
+(competesWith NSR CPS)
+(competesWith NSR ABA)
+
+;; ── Standards alignment ──
+
+(isa followsStandards EdgeType)
+(comment followsStandards "Organization A follows evaluation standards set by organization B.")
+
+(followsStandards NSR NSIF)
+
+;; ── Commercial threat edges ──
+
+(isa threatensMarketOf EdgeType)
+(comment threatensMarketOf "Commercial entity A erodes the market position of registry B by offering closed-system alternatives to purebred genetics.")
+
+(threatensMarketOf PIC-Genus NSR)
+(threatensMarketOf TopigsNorsvin NSR)
+(threatensMarketOf DNAGenetics NSR)
+(threatensMarketOf Genesus NSR)
+
+;; ── Sounder partnership edge ──
+
+(isa partnersWith EdgeType)
+(isa partnersWith SymmetricRelation)
+(comment partnersWith "A and B have entered or are evaluating a technology partnership.")
+
+(isa Sounder NODE)
+(isa Sounder GroupEntity)
+(hasField Sounder :ID "sounder-001")
+(hasField Sounder :LABEL "Sounder")
+(hasState Sounder Active)
+(comment Sounder "Sounder — swine industry technology platform. Charlotte validation domain.")
+
+(partnersWith NSR Sounder)
+(hasAttribute NSR-SounderPartnership status "proposed")
+(hasAttribute NSR-SounderPartnership scope "digital registry, traceability, genetic evaluation")
+
+;;; ================================================================
+;;; 6. METRICS
+;;; ================================================================
+
+(isa NSR-TotalBreeders METRIC)
+(hasField NSR-TotalBreeders :ID "metric-nsr-breeders")
+(hasField NSR-TotalBreeders :LABEL "Total Registered Breeders")
+(MEASURES NSR-TotalBreeders NSR)
+(hasAttribute NSR-TotalBreeders currentValue 3763)
+(hasAttribute NSR-TotalBreeders unit "breeders")
+(hasThreshold NSR-TotalBreeders LowerBound 3000)
+(comment NSR-TotalBreeders "Active registered breeders across all four breeds. Declining trend is a strategic concern.")
+
+(isa NSR-ManagedBreeds METRIC)
+(hasField NSR-ManagedBreeds :ID "metric-nsr-breeds")
+(hasField NSR-ManagedBreeds :LABEL "Managed Breeds")
+(MEASURES NSR-ManagedBreeds NSR)
+(hasAttribute NSR-ManagedBreeds currentValue 4)
+(hasAttribute NSR-ManagedBreeds unit "breeds")
+(comment NSR-ManagedBreeds "Hampshire, Duroc, Yorkshire, Landrace.")
+
+(isa NSR-AnnualRegistrations METRIC)
+(hasField NSR-AnnualRegistrations :ID "metric-nsr-registrations")
+(hasField NSR-AnnualRegistrations :LABEL "Annual Animal Registrations")
+(MEASURES NSR-AnnualRegistrations NSR)
+(hasAttribute NSR-AnnualRegistrations currentValue "estimated: 45000-55000")
+(hasAttribute NSR-AnnualRegistrations unit "registrations/year")
+(hasThreshold NSR-AnnualRegistrations LowerBound 40000)
+(comment NSR-AnnualRegistrations "Estimated annual purebred registrations. Trending downward as commercial genetics capture market share.")
+
+(isa NSR-StagesParticipants METRIC)
+(hasField NSR-StagesParticipants :ID "metric-nsr-stages")
+(hasField NSR-StagesParticipants :LABEL "STAGES Program Participants")
+(MEASURES NSR-StagesParticipants NSR)
+(hasAttribute NSR-StagesParticipants currentValue "estimated: 800-1200")
+(hasAttribute NSR-StagesParticipants unit "breeders")
+(comment NSR-StagesParticipants "Breeders actively participating in STAGES genetic evaluation. Subset of total membership.")
+
+(isa NSR-AverageBreederAge METRIC)
+(hasField NSR-AverageBreederAge :ID "metric-nsr-breeder-age")
+(hasField NSR-AverageBreederAge :LABEL "Average Breeder Age")
+(MEASURES NSR-AverageBreederAge NSR)
+(hasAttribute NSR-AverageBreederAge currentValue "estimated: 58-62")
+(hasAttribute NSR-AverageBreederAge unit "years")
+(hasThreshold NSR-AverageBreederAge UpperBound 55)
+(comment NSR-AverageBreederAge "Aging membership is a critical succession risk. Above-threshold value indicates demographic crisis.")
+
+;;; ================================================================
+;;; 7. SIGNALS — Strategic observations
+;;; ================================================================
+
+(isa StrategicSignal Collection)
+(genls StrategicSignal SIGNAL)
+(comment StrategicSignal "Observations about market forces, regulatory changes, and partnership opportunities relevant to the NSR assessment.")
+
+;; ── Threat signals ──
+
+(isa Signal-DecliningRegistrations StrategicSignal)
+(hasField Signal-DecliningRegistrations :ID "signal-declining-reg")
+(hasField Signal-DecliningRegistrations :LABEL "Declining Purebred Registrations")
+(hasField Signal-DecliningRegistrations :METRIC_ID NSR-AnnualRegistrations)
+(hasAttribute Signal-DecliningRegistrations direction "negative")
+(hasAttribute Signal-DecliningRegistrations signalType "threat")
+(comment Signal-DecliningRegistrations "Year-over-year decline in purebred registrations as commercial operations move to proprietary genetics lines.")
+
+(isa Signal-CommercialGeneticsGrowth StrategicSignal)
+(hasField Signal-CommercialGeneticsGrowth :ID "signal-commercial-growth")
+(hasField Signal-CommercialGeneticsGrowth :LABEL "Commercial Genetics Market Growth")
+(hasAttribute Signal-CommercialGeneticsGrowth direction "negative")
+(hasAttribute Signal-CommercialGeneticsGrowth signalType "threat")
+(comment Signal-CommercialGeneticsGrowth "PIC, Topigs Norsvin, DNA Genetics, and Genesus are capturing increasing share of the sow herd, displacing purebred breeders from the commercial supply chain.")
+
+;; ── Opportunity signals ──
+
+(isa Signal-USDATraceabilityMandate StrategicSignal)
+(hasField Signal-USDATraceabilityMandate :ID "signal-usda-traceability")
+(hasField Signal-USDATraceabilityMandate :LABEL "USDA Traceability Mandate")
+(hasAttribute Signal-USDATraceabilityMandate direction "positive")
+(hasAttribute Signal-USDATraceabilityMandate signalType "opportunity")
+(comment Signal-USDATraceabilityMandate "Federal traceability requirements create demand for digital animal identification systems — a capability gap NSR could fill with Sounder technology.")
+
+(isa Signal-DigitalTransformationGap StrategicSignal)
+(hasField Signal-DigitalTransformationGap :ID "signal-digital-gap")
+(hasField Signal-DigitalTransformationGap :LABEL "Digital Transformation Gap")
+(hasAttribute Signal-DigitalTransformationGap direction "positive")
+(hasAttribute Signal-DigitalTransformationGap signalType "opportunity")
+(comment Signal-DigitalTransformationGap "NSR operations remain largely paper-based and legacy-system-dependent. Significant opportunity for modern digital infrastructure.")
+
+(isa Signal-SounderPartnershipProposal StrategicSignal)
+(hasField Signal-SounderPartnershipProposal :ID "signal-sounder-proposal")
+(hasField Signal-SounderPartnershipProposal :LABEL "Sounder Partnership Proposal")
+(hasAttribute Signal-SounderPartnershipProposal direction "positive")
+(hasAttribute Signal-SounderPartnershipProposal signalType "opportunity")
+(comment Signal-SounderPartnershipProposal "Sounder proposes technology partnership to modernize NSR registry operations, genetic evaluation platform, and breeder-facing tools.")
+
+;;; ================================================================
+;;; 8. PROTOCOLS — Operational rules
+;;; ================================================================
+
+;; ── Animal Registration Protocol ──
+
+(isa Protocol-AnimalRegistration PROTOCOL)
+(hasTrigger Protocol-AnimalRegistration ManualInvocation)
+(hasCondition Protocol-AnimalRegistration
+  (and (isa ?Animal IndividualEntity)
+       (isa ?Sire IndividualEntity)
+       (isa ?Dam IndividualEntity)
+       (SIRE_OF ?Sire ?Animal)
+       (DAM_OF ?Dam ?Animal)
+       (registeredWith ?Sire NSR)
+       (registeredWith ?Dam NSR)))
+(hasAction Protocol-AnimalRegistration
+  (and (CreateNode ?Animal)
+       (registeredWith ?Animal NSR)
+       (CreateEdge CHILD_OF ?Animal ?Sire)
+       (CreateEdge CHILD_OF ?Animal ?Dam)))
+(comment Protocol-AnimalRegistration "Register a purebred animal. Both sire and dam must be registered with NSR.")
+
+;; ── Pedigree Verification Protocol ──
+
+(isa Protocol-PedigreeVerification PROTOCOL)
+(hasTrigger Protocol-PedigreeVerification ManualInvocation)
+(hasCondition Protocol-PedigreeVerification
+  (and (isa ?Animal IndividualEntity)
+       (registeredWith ?Animal NSR)
+       (thereExists ?Pedigree (pedigreeOf ?Animal ?Pedigree))))
+(hasAction Protocol-PedigreeVerification
+  (and (EvaluateRule verifyAncestry ?Animal 3)
+       (UpdateAttribute ?Animal pedigreeVerified TRUE)))
+(comment Protocol-PedigreeVerification "Verify ancestry chain to at least three generations. Required for show eligibility and breeding certification.")
+
+;; ── STAGES Evaluation Protocol ──
+
+(isa Protocol-StagesEvaluation PROTOCOL)
+(hasTrigger Protocol-StagesEvaluation TimeElapsed)
+(hasCondition Protocol-StagesEvaluation
+  (and (isa ?Animal IndividualEntity)
+       (registeredWith ?Animal NSR)
+       (enrolledIn ?Animal STAGES)))
+(hasAction Protocol-StagesEvaluation
+  (and (CreateSignal growthRate ?Animal)
+       (CreateSignal backfatDepth ?Animal)
+       (CreateSignal loinEyeArea ?Animal)
+       (CreateSignal daysTo250 ?Animal)
+       (UpdateAttribute ?Animal stagesEvaluated TRUE)))
+(comment Protocol-StagesEvaluation "STAGES performance testing: growth rate, backfat, loin eye area, days to 250 lbs. EPDs generated from herd data.")
+
+;; ── Breed Standard Protocol ──
+
+(isa Protocol-BreedStandard PROTOCOL)
+(hasTrigger Protocol-BreedStandard ManualInvocation)
+(hasCondition Protocol-BreedStandard
+  (and (isa ?Animal IndividualEntity)
+       (isa ?Breed SwineBreed)
+       (breedOf ?Animal ?Breed)))
+(hasAction Protocol-BreedStandard
+  (and (EvaluateRule conformation ?Animal ?Breed)
+       (EvaluateRule coloration ?Animal ?Breed)
+       (EvaluateRule structuralSoundness ?Animal)))
+(comment Protocol-BreedStandard "Evaluate animal against breed-specific conformation, coloration, and structural soundness standards.")
+
+;; ── Show Judging Protocol ──
+
+(isa Protocol-ShowJudging PROTOCOL)
+(hasTrigger Protocol-ShowJudging ManualInvocation)
+(hasCondition Protocol-ShowJudging
+  (and (isa ?Animal IndividualEntity)
+       (registeredWith ?Animal NSR)
+       (hasAttribute ?Animal pedigreeVerified TRUE)
+       (isa ?Show EventEntity)))
+(hasAction Protocol-ShowJudging
+  (and (EvaluateRule breedCharacter ?Animal)
+       (EvaluateRule muscleAndStructure ?Animal)
+       (EvaluateRule movement ?Animal)
+       (CreateSignal showPlacement ?Animal ?Show)))
+(comment Protocol-ShowJudging "Show ring evaluation. Animal must be registered and pedigree-verified. Judged on breed character, muscling, structure, and movement.")
+
+;; ── Protocol priorities ──
+
+(protocolPriority Protocol-AnimalRegistration 1)
+(protocolPriority Protocol-PedigreeVerification 2)
+(protocolPriority Protocol-BreedStandard 3)
+(protocolPriority Protocol-StagesEvaluation 4)
+(protocolPriority Protocol-ShowJudging 5)
+
+;;; ================================================================
+;;; 9. INFERENCE RULES
+;;; ================================================================
+
+;; A breed managed by NSR under commercial genetics threat
+(implies
+  (and (registersBreed NSR ?Breed)
+       (threatensMarketOf ?Company NSR)
+       (isa ?Company CommercialGeneticsCompany))
+  (underCompetitivePressure ?Breed ?Company))
+
+;; Aging membership triggers succession risk signal
+(implies
+  (and (hasAttribute NSR-AverageBreederAge currentValue ?Age)
+       (hasThreshold NSR-AverageBreederAge UpperBound ?Max)
+       (greaterThan ?Age ?Max))
+  (hasSeverity NSR-AverageBreederAge Warning))
+
+;; Partnership eligibility: organization must be Active
+(implies
+  (and (partnersWith ?A ?B)
+       (hasState ?A Active)
+       (hasState ?B Active))
+  (partnershipEligible ?A ?B))
+
+;;; ================================================================
+;;; 10. CHARLOTTE PRIMITIVE MAPPING
+;;; ================================================================
+;;;
+;;; How the National Swine Registry maps to Charlotte's five primitives:
+;;;
+;;; NODE     — NSR (institution), 4 breed nodes, competitor/peer
+;;;            organizations, commercial genetics companies, Sounder.
+;;;            Each is an identifiable entity in the graph.
+;;;
+;;; EDGE     — registersBreed, competesWith, threatensMarketOf,
+;;;            partnersWith, followsStandards. Typed directed
+;;;            connections encoding structural relationships.
+;;;
+;;; METRIC   — totalBreeders (3763), managedBreeds (4),
+;;;            annualRegistrations, stagesParticipants,
+;;;            averageBreederAge. Quantitative dimensions
+;;;            attached to the NSR node.
+;;;
+;;; SIGNAL   — decliningRegistrations, commercialGeneticsGrowth,
+;;;            usdaTraceabilityMandate, digitalTransformationGap,
+;;;            sounderPartnershipProposal. Timestamped strategic
+;;;            observations on the metric lines.
+;;;
+;;; PROTOCOL — animalRegistration, pedigreeVerification,
+;;;            stagesEvaluation, breedStandard, showJudging.
+;;;            The operational rules governing NSR's core processes.
+;;;
+;;; ================================================================
+;;; END — NationalSwineRegistryMt
+;;; ================================================================
