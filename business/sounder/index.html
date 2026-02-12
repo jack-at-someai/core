@@ -3,74 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sounder — Biological Lifecycle Intelligence | Charlotte Substrate</title>
+<title>Sounder — Unified Swine Genetics Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0f;color:#e0ddd5;font-family:'Courier New',monospace;overflow:hidden}
-#canvas-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
-#dashboard{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;display:flex;flex-direction:column}
-#header{pointer-events:auto;background:linear-gradient(180deg,rgba(10,10,15,0.95),rgba(10,10,15,0.7));padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d4a37330}
-#header h1{font-size:22px;letter-spacing:4px;background:linear-gradient(90deg,#d4a373,#bc8cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
-#header .subtitle{font-size:11px;color:#8a8578;letter-spacing:2px}
-#stats{pointer-events:auto;background:rgba(10,10,15,0.85);display:flex;gap:0;border-bottom:1px solid #d4a37315;flex-wrap:wrap}
-.stat{flex:1;min-width:100px;padding:8px 12px;text-align:center;border-right:1px solid #d4a37310}
-.stat-value{display:block;font-size:16px;font-weight:700;color:#d4a373}
-.stat-label{display:block;font-size:8px;letter-spacing:2px;color:#8a8578;margin-top:2px}
-#middle{flex:1;display:flex;overflow:hidden}
-#left-panel{pointer-events:auto;width:260px;background:rgba(10,10,15,0.88);padding:16px;overflow-y:auto;border-right:1px solid #d4a37315;scrollbar-width:thin;scrollbar-color:#d4a37330 transparent}
-#left-panel::-webkit-scrollbar{width:4px}
-#left-panel::-webkit-scrollbar-thumb{background:#d4a37330;border-radius:2px}
-#center-gap{flex:1;pointer-events:none}
-#right-panel{pointer-events:auto;width:260px;background:rgba(10,10,15,0.88);padding:16px;overflow-y:auto;border-left:1px solid #d4a37315;scrollbar-width:thin;scrollbar-color:#d4a37330 transparent}
-#right-panel::-webkit-scrollbar{width:4px}
-#right-panel::-webkit-scrollbar-thumb{background:#d4a37330;border-radius:2px}
-.panel-title{font-size:11px;letter-spacing:2px;color:#bc8cff;margin-bottom:10px;padding-bottom:4px;border-bottom:1px solid #bc8cff20}
-.chart-row{display:flex;align-items:center;gap:6px;margin:3px 0}
-.chart-label{width:38px;font-size:9px;text-align:right;color:#8a8578;flex-shrink:0}
-.chart-fill{height:12px;border-radius:2px;min-width:2px;transition:width 0.8s}
-.chart-value{font-size:9px;color:#8a857880;flex-shrink:0;width:40px}
-.legend-item{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:10px;cursor:pointer;padding:3px 6px;border-radius:4px;transition:background 0.2s}
-.legend-item:hover{background:rgba(255,255,255,0.05)}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.legend-shape-box .legend-dot{border-radius:2px}
-.legend-shape-diamond .legend-dot{transform:rotate(45deg);border-radius:1px}
-.legend-count{margin-left:auto;color:#8a8578;font-size:9px}
-#detail-panel{display:none;margin-top:12px;padding:12px;background:rgba(188,140,255,0.06);border:1px solid #bc8cff20;border-radius:6px}
-#detail-panel h3{font-size:13px;color:#d4a373;margin-bottom:6px}
-#detail-panel .detail-type{font-size:9px;color:#bc8cff;letter-spacing:1px;margin-bottom:8px}
-#detail-panel .detail-stat{font-size:10px;margin:3px 0;color:#e0ddd5cc}
-#detail-panel .connections{margin-top:8px;font-size:9px;color:#8a8578}
-#detail-panel .conn-item{margin:2px 0;padding:2px 4px;cursor:pointer;border-radius:2px}
-#detail-panel .conn-item:hover{background:rgba(255,255,255,0.05);color:#e0ddd5}
-#bottom-panel{pointer-events:auto;background:rgba(10,10,15,0.92);padding:10px 24px;border-top:1px solid #d4a37315;display:flex;gap:24px;flex-wrap:wrap}
-.encoding-col{flex:1;min-width:140px}
-.encoding-col h4{font-size:10px;letter-spacing:2px;margin-bottom:4px}
-.encoding-col p{font-size:9px;color:#8a8578;line-height:1.6}
-.enc-primitive{color:#bc8cff}
-.enc-breed{color:#d4a373}
-.enc-teal{color:#4ecdc4}
-.enc-coral{color:#ff6b6b}
-.enc-mint{color:#95e1d3}
-#fact-example{flex:2;min-width:300px;background:rgba(0,0,0,0.3);padding:8px 12px;border-radius:4px;border:1px solid #d4a37310;font-size:9px;line-height:1.7;font-family:'Courier New',monospace}
-.fact-key{color:#bc8cff}.fact-val{color:#d4a373}.fact-op{color:#4ecdc4}
-#tooltip{display:none;position:fixed;background:rgba(10,10,15,0.95);border:1px solid #d4a37340;padding:10px 14px;border-radius:6px;font-size:11px;pointer-events:none;z-index:100;max-width:280px;backdrop-filter:blur(8px)}
-#tooltip strong{color:#d4a373}
-#tooltip .tt-type{color:#bc8cff;font-size:9px;letter-spacing:1px}
-#labels-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5}
-.node-label{position:absolute;font-size:9px;white-space:nowrap;text-shadow:0 0 4px rgba(0,0,0,0.9),0 0 8px rgba(0,0,0,0.6);transform:translate(-50%,-100%);transition:opacity 0.3s;letter-spacing:0.5px}
-#controls-hint{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);font-size:10px;color:#8a857860;z-index:20;pointer-events:none;text-align:center;letter-spacing:1px}
-.filter-btn{pointer-events:auto;background:rgba(255,255,255,0.05);border:1px solid #d4a37320;color:#8a8578;padding:3px 8px;font-size:9px;font-family:'Courier New',monospace;cursor:pointer;border-radius:3px;transition:all 0.2s;letter-spacing:1px}
-.filter-btn:hover,.filter-btn.active{background:rgba(212,163,115,0.15);color:#d4a373;border-color:#d4a37360}
-#type-filters{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+:root{
+  --purple-500:#7200CB;--purple-600:#5B00A2;--purple-700:#44007A;--purple-800:#2E0051;
+  --magenta-500:#F000D2;--magenta-400:#F333DB;
+  --cyan-500:#21D6C6;--cyan-400:#4DDED1;
+  --dark:#232324;--surface:#2D2B2E;--surface-v:#3D3B3E;--border:#4A474B;
+  --text:#F2F2F3;--text-dim:#8a8590;
+  --glass-bg:rgba(10,10,15,0.88);--glass-border:rgba(114,0,203,0.15);
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* === PASSCODE GATE === */
+#gate{position:fixed;inset:0;z-index:9999;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Courier New',monospace;transition:opacity 0.5s}
+#gate-input{background:#151518;border:1px solid var(--purple-700);border-radius:12px;padding:14px 24px;font-size:18px;color:var(--text);text-align:center;letter-spacing:4px;width:220px;outline:none;font-family:inherit;transition:border-color 0.3s}
+#gate-input:focus{border-color:var(--purple-500)}
+
+/* === 3D GRAPH BACKGROUND === */
+#canvas-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.55}
+#labels-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.4}
+.node-label{position:absolute;font-size:8px;white-space:nowrap;text-shadow:0 0 4px rgba(0,0,0,0.9);transform:translate(-50%,-100%);transition:opacity 0.3s;letter-spacing:0.5px;font-family:'Courier New',monospace}
+
+/* === SCROLL CONTENT === */
+#scroll-content{position:relative;z-index:10;pointer-events:none}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;pointer-events:none}
+.section-inner{max-width:900px;width:100%;pointer-events:auto}
+
+/* Glass panel */
+.glass{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  padding:48px;
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.8s ease,transform 0.8s ease;
+}
+.glass.visible{opacity:1;transform:translateY(0)}
+
+/* === TYPOGRAPHY === */
+h1.hero-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(48px,10vw,96px);font-weight:700;letter-spacing:6px;
+  background:linear-gradient(135deg,var(--purple-500),var(--magenta-500));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.05;margin-bottom:8px;
+}
+.hero-sub{font-family:'Oswald',sans-serif;font-size:clamp(16px,3vw,22px);font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--cyan-500);margin-bottom:24px}
+.hero-desc{font-size:15px;color:var(--text-dim);max-width:600px;margin-bottom:32px}
+
+h2.section-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(28px,5vw,42px);font-weight:600;letter-spacing:2px;
+  color:var(--text);margin-bottom:8px;line-height:1.2;
+}
+h2.section-title span.accent{color:var(--cyan-500)}
+.section-subtitle{font-size:14px;color:var(--magenta-500);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;font-weight:500}
+.section-body{font-size:15px;color:var(--text-dim);line-height:1.8;margin-bottom:24px}
+.section-body strong{color:var(--text)}
+
+/* === STAT BAR === */
+.stat-bar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;margin-top:8px}
+.stat-item{flex:1;min-width:120px;padding:16px 12px;text-align:center;border-right:1px solid var(--glass-border);background:rgba(114,0,203,0.04)}
+.stat-item:last-child{border-right:none}
+.stat-val{display:block;font-family:'Oswald',sans-serif;font-size:24px;font-weight:600;color:var(--text)}
+.stat-lbl{display:block;font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;text-transform:uppercase}
+
+/* === PROBLEM LIST === */
+.problem-list{list-style:none;padding:0}
+.problem-list li{position:relative;padding:12px 0 12px 28px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:15px;color:var(--text-dim);line-height:1.7}
+.problem-list li::before{content:'';position:absolute;left:0;top:20px;width:12px;height:12px;border-radius:50%;background:var(--magenta-500);opacity:0.5}
+.problem-list li strong{color:var(--text)}
+
+/* === PRIMITIVE CARDS === */
+.prim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:24px}
+.prim-card{background:rgba(114,0,203,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:20px 16px;text-align:center;transition:border-color 0.3s,transform 0.3s}
+.prim-card:hover{border-color:var(--purple-500);transform:translateY(-2px)}
+.prim-icon{font-size:28px;margin-bottom:8px;display:block}
+.prim-name{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.prim-name.c-purple{color:var(--purple-500)}.prim-name.c-magenta{color:var(--magenta-500)}.prim-name.c-cyan{color:var(--cyan-500)}.prim-name.c-red{color:#CE4F51}.prim-name.c-gold{color:#E9C46A}
+.prim-examples{font-size:12px;color:var(--text-dim);line-height:1.6}
+.prim-examples strong{color:var(--text);font-weight:500}
+
+/* === FARM MAP === */
+.farm-map-container{position:relative;width:100%;max-width:700px;margin:24px auto}
+.farm-map-container svg{width:100%;height:auto}
+.farm-node{cursor:default}
+.farm-label{font-family:'Inter',sans-serif;fill:var(--text);font-size:11px;font-weight:500}
+.farm-sublabel{font-family:'Inter',sans-serif;fill:var(--text-dim);font-size:9px}
+.farm-center-label{font-family:'Oswald',sans-serif;fill:var(--cyan-500);font-size:14px;font-weight:600;letter-spacing:1px}
+@keyframes pulse-ring{0%{r:8;opacity:0.6}100%{r:20;opacity:0}}
+
+/* === CONTRACT CARDS === */
+.contract-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:24px}
+.contract-card{background:rgba(33,214,198,0.04);border:1px solid rgba(33,214,198,0.15);border-radius:10px;padding:16px}
+.contract-card h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--cyan-500);letter-spacing:1px;margin-bottom:6px}
+.contract-card p{font-size:12px;color:var(--text-dim);line-height:1.6}
+
+/* === PRIORITY CARDS === */
+.priority-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:24px}
+.priority-card{background:rgba(114,0,203,0.06);border:1px solid var(--glass-border);border-radius:10px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+.priority-num{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:var(--purple-500);line-height:1;flex-shrink:0;width:32px;text-align:center}
+.priority-card h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.priority-card p{font-size:12px;color:var(--text-dim);line-height:1.5}
+
+/* === DATA STAT CARDS === */
+.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.data-card{background:rgba(240,0,210,0.04);border:1px solid rgba(240,0,210,0.12);border-radius:10px;padding:20px;text-align:center}
+.data-card .d-val{font-family:'Oswald',sans-serif;font-size:32px;font-weight:600;color:var(--text);display:block}
+.data-card .d-lbl{font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+/* === CLOSING === */
+.closing-line{font-family:'Oswald',sans-serif;font-size:clamp(18px,3vw,24px);color:var(--text-dim);letter-spacing:1px;line-height:1.6;margin-top:24px}
+.closing-line strong{color:var(--text)}
+
+/* === SPACER === */
+.spacer{height:50vh;pointer-events:none}
+
+/* === MOBILE === */
+@media(max-width:640px){
+  .glass{padding:28px 20px}
+  .prim-grid{grid-template-columns:repeat(2,1fr)}
+  .contract-grid,.priority-grid{grid-template-columns:1fr}
+  .data-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-item{min-width:80px;padding:12px 6px}
+  .stat-val{font-size:18px}
+  .farm-map-container svg{min-height:300px}
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--purple-800);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--purple-700)}
 </style>
 </head>
 <body>
 
-<div id="gate" style="position:fixed;inset:0;z-index:9999;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Courier New',monospace;transition:opacity 0.5s;">
-  <div style="width:100px;height:100px;border-radius:20px;background:#151518;border:1px solid #d4a37330;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:28px;">🐗</div>
-  <p style="color:#8a8578;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;">Enter Access Code</p>
-  <input id="gate-input" type="password" autocomplete="off" autofocus placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" style="background:#151518;border:1px solid #d4a37330;border-radius:12px;padding:14px 24px;font-size:18px;color:#e0ddd5;text-align:center;letter-spacing:4px;width:220px;outline:none;font-family:inherit;">
-  <p id="gate-error" style="color:#ef4444;font-size:12px;margin-top:12px;opacity:0;transition:opacity 0.3s;">&nbsp;</p>
+<!-- ═══ PASSCODE GATE ═══ -->
+<div id="gate">
+  <div style="width:100px;height:100px;border-radius:20px;background:#151518;border:1px solid var(--purple-700);display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:28px;">&#x1F417;</div>
+  <p style="color:var(--text-dim);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;font-family:'Courier New',monospace">Enter Access Code</p>
+  <input id="gate-input" type="password" autocomplete="off" autofocus placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;">
+  <p id="gate-error" style="color:#CE4F51;font-size:12px;margin-top:12px;opacity:0;transition:opacity 0.3s;font-family:'Courier New',monospace">&nbsp;</p>
 </div>
 <script>
 (function(){
@@ -79,97 +157,339 @@ body{background:#0a0a0f;color:#e0ddd5;font-family:'Courier New',monospace;overfl
   inp.addEventListener('keydown',function(e){
     if(e.key==='Enter'){
       if(inp.value.toLowerCase().trim()===code){sessionStorage.setItem('sounder_auth','1');g.style.opacity='0';setTimeout(function(){g.style.display='none';},500);}
-      else{inp.value='';inp.style.borderColor='#ef4444';err.textContent='Invalid code';err.style.opacity='1';setTimeout(function(){inp.style.borderColor='#d4a37330';err.style.opacity='0';},1500);}
+      else{inp.value='';inp.style.borderColor='#CE4F51';err.textContent='Invalid code';err.style.opacity='1';setTimeout(function(){inp.style.borderColor='var(--purple-700)';err.style.opacity='0';},1500);}
     }
   });
 })();
 </script>
 
+<!-- ═══ 3D GRAPH BACKGROUND ═══ -->
 <div id="canvas-container"></div>
-<div id="dashboard">
-    <div id="header">
-        <div>
-            <h1>SOUNDER</h1>
-            <div class="subtitle">BIOLOGICAL LIFECYCLE INTELLIGENCE &middot; CHARLOTTE SUBSTRATE</div>
-        </div>
-        <div style="text-align:right">
-            <div style="font-size:10px;color:#d4a373">Trogdon Genetics &middot; 3 Years</div>
-            <div style="font-size:9px;color:#8a8578">382,197 LISP Facts &middot; First-Order Logic</div>
-        </div>
-    </div>
-    <div id="stats">
-        <div class="stat"><span class="stat-value">382,197</span><span class="stat-label">TOTAL FACTS</span></div>
-        <div class="stat"><span class="stat-value">65,412</span><span class="stat-label">CPS BREEDERS</span></div>
-        <div class="stat"><span class="stat-value">5,279</span><span class="stat-label">HERDMARKS</span></div>
-        <div class="stat"><span class="stat-value">1,176</span><span class="stat-label">AUCTION SALES</span></div>
-        <div class="stat"><span class="stat-value">$1.13M</span><span class="stat-label">REVENUE</span></div>
-        <div class="stat"><span class="stat-value">11</span><span class="stat-label">BREEDS</span></div>
-        <div class="stat"><span class="stat-value">50</span><span class="stat-label">STATES</span></div>
-        <div class="stat"><span class="stat-value">35</span><span class="stat-label">AUCTIONS</span></div>
-        <div class="stat"><span class="stat-value">90,582</span><span class="stat-label">TEMPORAL EDGES</span></div>
-        <div class="stat"><span class="stat-value">117</span><span class="stat-label">SCRIPTS</span></div>
-    </div>
-    <div id="middle">
-        <div id="left-panel">
-            <div class="panel-title">SALES BY YEAR</div>
-            <div id="sales-chart"></div>
-            <div class="panel-title" style="margin-top:16px">TOP STATES (CPS)</div>
-            <div id="state-chart"></div>
-            <div class="panel-title" style="margin-top:16px">BREED DISTRIBUTION</div>
-            <div id="breed-chart"></div>
-            <div class="panel-title" style="margin-top:16px">SALE TYPES</div>
-            <div id="type-chart"></div>
-        </div>
-        <div id="center-gap"></div>
-        <div id="right-panel">
-            <div class="panel-title">NODE TYPES</div>
-            <div id="type-filters"></div>
-            <div id="legend"></div>
-            <div id="detail-panel">
-                <h3 id="detail-name"></h3>
-                <div class="detail-type" id="detail-type"></div>
-                <div id="detail-stats"></div>
-                <div class="connections" id="detail-connections"><strong>Connections:</strong><div id="conn-list"></div></div>
-            </div>
-        </div>
-    </div>
-    <div id="bottom-panel">
-        <div class="encoding-col">
-            <h4 class="enc-primitive">NODE</h4>
-            <p>Animal <span class="enc-teal">(ear notch)</span><br>Breeder <span class="enc-teal">(herdmark)</span><br>Buyer <span class="enc-teal">(customer ID)</span><br>Sire / Dam <span class="enc-teal">(lineage)</span></p>
-        </div>
-        <div class="encoding-col">
-            <h4 class="enc-primitive">EDGE</h4>
-            <p><span class="enc-coral">IS_SIRE_OF</span> &middot; <span class="enc-coral">IS_DAM_OF</span><br><span class="enc-coral">BRED_BY</span> &middot; <span class="enc-coral">OWNED_BY</span><br><span class="enc-coral">SOLD_TO</span> &middot; <span class="enc-coral">FARROWED_ON</span><br><span class="enc-coral">BORN_ON</span> &middot; <span class="enc-coral">HAS_A</span></p>
-        </div>
-        <div class="encoding-col">
-            <h4 class="enc-primitive">METRIC</h4>
-            <p>Price <span class="enc-breed">($)</span><br>Weight <span class="enc-breed">(lbs)</span><br>Daily Gain &middot; Feed:Gain<br>Heart Rate <span class="enc-breed">(BPM)</span></p>
-        </div>
-        <div class="encoding-col">
-            <h4 class="enc-primitive">SIGNAL</h4>
-            <p>Sale event &middot; Breeding date<br>Farrow date &middot; Wean date<br>Show placement<br>Disease diagnosis</p>
-        </div>
-        <div class="encoding-col">
-            <h4 class="enc-primitive">PROTOCOL</h4>
-            <p>Medication schedule<br>Supplement regime<br>Vaccination program<br>Gestation monitoring</p>
-        </div>
-        <div id="fact-example">
-            <span class="fact-op">;; LISP FACT ENCODING</span><br>
-            <span class="fact-key">::OPERATION</span>:<span class="fact-val">2172753521</span><br>
-            &nbsp;&nbsp;<span class="fact-key">::SALE</span>:<span class="fact-val">ANIMAL</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="fact-key">::SEX</span>:<span class="fact-val">GILT</span> <span class="fact-key">::DAM</span>:<span class="fact-val">RIP_SIS</span> <span class="fact-key">::EAR</span>:<span class="fact-val">34-1</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="fact-key">::CUSTOMER</span>:<span class="fact-val">KEVIN_TUCKER</span> <span class="fact-key">::PRICE</span>:<span class="fact-val">200</span><br>
-            <span class="fact-op">;; FIRST-ORDER LOGIC</span><br>
-            <span class="enc-mint">sale(rip_sis_34_1, kevin_tucker, 200, '2019-11-14').</span><br>
-            <span class="enc-mint">is_dam_of(rip_sis, rip_sis_34_1). sex(rip_sis_34_1, gilt).</span>
-        </div>
-    </div>
-</div>
-<div id="tooltip"></div>
 <div id="labels-container"></div>
-<div id="controls-hint">ORBIT: drag &middot; ZOOM: scroll &middot; PAN: right-drag &middot; CLICK: inspect node</div>
 
+<!-- ═══ SCROLL CONTENT ═══ -->
+<div id="scroll-content">
+
+  <!-- SPACER so graph is visible on load -->
+  <div class="spacer"></div>
+
+  <!-- SECTION 1: HERO -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <h1 class="hero-title">SOUNDER</h1>
+        <div class="hero-sub">Unified Swine Genetics Infrastructure</div>
+        <p class="hero-desc">Charlotte substrate for the swine industry. One graph connecting every breeder, every animal, every sale, every show &mdash; across all registries.</p>
+        <div class="stat-bar">
+          <div class="stat-item"><span class="stat-val">3</span><span class="stat-lbl">Registries</span></div>
+          <div class="stat-item"><span class="stat-val">77K</span><span class="stat-lbl">Breeders</span></div>
+          <div class="stat-item"><span class="stat-val">401K</span><span class="stat-lbl">Facts</span></div>
+          <div class="stat-item"><span class="stat-val">20K</span><span class="stat-lbl">Breeding Cycles</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: THE PROBLEM -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Problem</div>
+        <h2 class="section-title">The swine industry is <span class="accent">fragmented</span>.</h2>
+        <ul class="problem-list">
+          <li><strong>3 separate registries</strong> (CPS, NSR, ABA) with no shared database</li>
+          <li><strong>No system for crossbred ancestry</strong> &mdash; 60%+ of show pigs have no pedigree trail</li>
+          <li>Breeders use <strong>4&ndash;5 different fringe software tools</strong> that don't talk to each other</li>
+          <li>Sale records live in <strong>Facebook Messenger threads</strong> and handshake deals</li>
+          <li><strong>$275K animals</strong> tracked on paper and memory</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THE SOLUTION — FIVE PRIMITIVES -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Solution</div>
+        <h2 class="section-title">Charlotte's Five <span class="accent">Primitives</span></h2>
+        <p class="section-body">Every actor is a <strong>NODE</strong>. Every connection is an <strong>EDGE</strong>. Every measurement is a <strong>METRIC</strong>. Every event is a <strong>SIGNAL</strong>. Every expectation is a <strong>PROTOCOL</strong>.</p>
+        <div class="prim-grid">
+          <div class="prim-card">
+            <span class="prim-icon">&#x25C9;</span>
+            <div class="prim-name c-purple">NODE</div>
+            <div class="prim-examples"><strong>Animal</strong> (ear notch)<br><strong>Breeder</strong> (herdmark)<br><strong>Buyer</strong> &middot; <strong>Sire</strong> &middot; <strong>Dam</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x2194;</span>
+            <div class="prim-name c-magenta">EDGE</div>
+            <div class="prim-examples"><strong>isSireOf</strong> &middot; <strong>isDamOf</strong><br><strong>bredBy</strong> &middot; <strong>soldTo</strong><br><strong>registeredWith</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x25B2;</span>
+            <div class="prim-name c-cyan">METRIC</div>
+            <div class="prim-examples"><strong>Weight</strong> &middot; <strong>Daily Gain</strong><br><strong>Litter Size</strong><br><strong>Sale Price</strong> &middot; <strong>Bid Count</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x26A1;</span>
+            <div class="prim-name c-red">SIGNAL</div>
+            <div class="prim-examples"><strong>Farrowing</strong> &middot; <strong>Breeding</strong><br><strong>Sale</strong> &middot; <strong>Show Placement</strong><br><strong>Weigh-in</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x2696;</span>
+            <div class="prim-name c-gold">PROTOCOL</div>
+            <div class="prim-examples"><strong>Gestation</strong> (114d)<br><strong>Registration</strong><br><strong>Show Check-in</strong> &middot; <strong>Health Screen</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: FARM BY FARM -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Strategy</div>
+        <h2 class="section-title">Farm by farm &mdash; the <span class="accent">traveling salesman</span></h2>
+        <p class="section-body">The swine industry is a network of barns. The question is: where do you go first, and where do you go next, to scan the entire industry? This is a service-based model &mdash; human-centric onboarding, then robotic operation. <strong>We come to your farm. We sit with you. We build the digital twin together.</strong> Everything after that is infrastructure.</p>
+
+        <!-- SVG Farm Network Map -->
+        <div class="farm-map-container">
+          <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid dots -->
+            <defs>
+              <radialGradient id="glow-purple" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#7200CB" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#7200CB" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="glow-cyan" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#21D6C6" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#21D6C6" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Connection lines (solid = active, dashed = future) -->
+            <path d="M350,210 Q280,140 160,130" stroke="#7200CB" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M350,210 Q420,140 540,120" stroke="#7200CB" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M350,210 Q280,280 150,310" stroke="#7200CB" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M350,210 Q450,280 560,300" stroke="#7200CB" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+            <!-- Dashed future connections -->
+            <path d="M350,210 Q200,180 70,230" stroke="#4A474B" stroke-width="1" fill="none" stroke-dasharray="4,6" opacity="0.4"/>
+            <path d="M350,210 Q500,180 650,170" stroke="#4A474B" stroke-width="1" fill="none" stroke-dasharray="4,6" opacity="0.4"/>
+            <path d="M350,210 Q300,350 200,390" stroke="#4A474B" stroke-width="1" fill="none" stroke-dasharray="4,6" opacity="0.4"/>
+            <path d="M350,210 Q450,350 580,390" stroke="#4A474B" stroke-width="1" fill="none" stroke-dasharray="4,6" opacity="0.4"/>
+            <path d="M350,210 Q350,80 350,30" stroke="#4A474B" stroke-width="1" fill="none" stroke-dasharray="4,6" opacity="0.4"/>
+
+            <!-- Future unnamed nodes -->
+            <circle cx="70" cy="230" r="4" fill="#4A474B" opacity="0.4"/>
+            <circle cx="650" cy="170" r="4" fill="#4A474B" opacity="0.4"/>
+            <circle cx="200" cy="390" r="4" fill="#4A474B" opacity="0.4"/>
+            <circle cx="580" cy="390" r="4" fill="#4A474B" opacity="0.4"/>
+            <circle cx="350" cy="30" r="4" fill="#4A474B" opacity="0.4"/>
+
+            <!-- Center: Paris IL -->
+            <circle cx="350" cy="210" r="40" fill="url(#glow-cyan)"/>
+            <circle cx="350" cy="210" r="8" fill="#21D6C6"/>
+            <circle cx="350" cy="210" r="14" fill="none" stroke="#21D6C6" stroke-width="0.8" opacity="0.3">
+              <animate attributeName="r" values="14;26;14" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <text x="350" y="240" text-anchor="middle" class="farm-center-label">PARIS, IL</text>
+            <text x="350" y="254" text-anchor="middle" class="farm-sublabel">Origin</text>
+
+            <!-- Farm 1: Trogdon Show Pigs -->
+            <circle cx="160" cy="130" r="24" fill="url(#glow-purple)"/>
+            <circle cx="160" cy="130" r="6" fill="#7200CB"/>
+            <text x="160" y="108" text-anchor="middle" class="farm-label">Trogdon Show Pigs</text>
+            <text x="160" y="120" text-anchor="middle" class="farm-sublabel">Cofounder &middot; 20K cycles &middot; 1,176 sales</text>
+
+            <!-- Farm 2: Farnham Farms -->
+            <circle cx="540" cy="120" r="20" fill="url(#glow-purple)"/>
+            <circle cx="540" cy="120" r="5" fill="#7200CB"/>
+            <text x="540" y="100" text-anchor="middle" class="farm-label">Farnham Farms</text>
+            <text x="540" y="112" text-anchor="middle" class="farm-sublabel">6,301 animals &middot; Poland specialist</text>
+
+            <!-- Farm 3: Hi Point Genetics -->
+            <circle cx="150" cy="310" r="18" fill="url(#glow-purple)"/>
+            <circle cx="150" cy="310" r="5" fill="#7200CB"/>
+            <text x="150" y="334" text-anchor="middle" class="farm-label">Hi Point Genetics</text>
+            <text x="150" y="346" text-anchor="middle" class="farm-sublabel">Spot breed specialist</text>
+
+            <!-- Farm 4: Premium Blend Genetics -->
+            <circle cx="560" cy="300" r="18" fill="url(#glow-purple)"/>
+            <circle cx="560" cy="300" r="5" fill="#7200CB"/>
+            <text x="560" y="324" text-anchor="middle" class="farm-label">Premium Blend Genetics</text>
+            <text x="560" y="336" text-anchor="middle" class="farm-sublabel">Duroc specialist</text>
+          </svg>
+        </div>
+
+        <p class="section-body" style="margin-top:16px">The human relationship is the entry point. The robotic infrastructure is what stays. Every shared sire, buyer, and show result stitches the new barn into the collective graph.</p>
+
+        <!-- Contract type cards -->
+        <div class="contract-grid">
+          <div class="contract-card">
+            <h4>Genetics Company</h4>
+            <p>Full breeding management, pedigree registration, sale facilitation</p>
+          </div>
+          <div class="contract-card">
+            <h4>Show Operation</h4>
+            <p>Show management, analytics, scouting, &ldquo;the Draft&rdquo;</p>
+          </div>
+          <div class="contract-card">
+            <h4>Registry Partner</h4>
+            <p>Infrastructure &mdash; handle registration processing at scale</p>
+          </div>
+          <div class="contract-card">
+            <h4>Commercial Farm</h4>
+            <p>Health screening, performance testing, biosecurity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: CROSSBRED PEDIGREE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Centerpiece</div>
+        <h2 class="section-title">Crossbred <span class="accent">Pedigree</span></h2>
+        <p class="section-body">Ancestry trees for animals that have never been registered.</p>
+        <ul class="problem-list">
+          <li><strong>Purebred pedigrees</strong> exist in registry databases (NSR, CPS, ABA)</li>
+          <li><strong>Crossbred pedigrees exist nowhere</strong> &mdash; only in sale receipts and breeder memory</li>
+          <li>Charlotte reconstructs lineage from: <strong>sire names on sale catalogs</strong>, dam names in breeding records, maternal grandsire from Exposition data, ownership chains</li>
+          <li>Every <strong>hasSire</strong>, <strong>hasDam</strong>, <strong>isGrandsireOf</strong> edge in the graph IS the crossbred pedigree</li>
+          <li><strong>401,788 KRF facts</strong> already building the tree</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: NSR COLLABORATION -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Partnership</div>
+        <h2 class="section-title">Working with the <span class="accent">National Swine Registry</span></h2>
+        <p class="section-body">Collaborating to modernize the industry across five priority areas.</p>
+        <div class="priority-grid">
+          <div class="priority-card">
+            <div class="priority-num">1</div>
+            <div>
+              <h4>Show Management</h4>
+              <p>Check-in, class breaks, results, premium calculations</p>
+            </div>
+          </div>
+          <div class="priority-card">
+            <div class="priority-num">2</div>
+            <div>
+              <h4>Crossbred Ancestral Tree</h4>
+              <p>AI-built family trees for the crossbred database</p>
+            </div>
+          </div>
+          <div class="priority-card">
+            <div class="priority-num">3</div>
+            <div>
+              <h4>Show &amp; Industry Analytics</h4>
+              <p>Scouting metrics, &ldquo;the Draft&rdquo; &mdash; performance data for every animal</p>
+            </div>
+          </div>
+          <div class="priority-card">
+            <div class="priority-num">4</div>
+            <div>
+              <h4>Biosecurity</h4>
+              <p>TSA Pre-style health paper evaluation at shows and sales</p>
+            </div>
+          </div>
+          <div class="priority-card">
+            <div class="priority-num">5</div>
+            <div>
+              <h4>Digital Competition Platform</h4>
+              <p>Online skillathon for junior members &mdash; education meets engagement</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: THE DATA -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">What Exists Today</div>
+        <h2 class="section-title">The <span class="accent">Data</span></h2>
+        <div class="data-grid">
+          <div class="data-card">
+            <span class="d-val">77,982</span>
+            <span class="d-lbl">Registered Breeders</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">582</span>
+            <span class="d-lbl">Named Sires</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">20,329</span>
+            <span class="d-lbl">Breeding Cycles</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">3,974</span>
+            <span class="d-lbl">NSR Show Results</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">3,328</span>
+            <span class="d-lbl">Auction Lots</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">104K</span>
+            <span class="d-lbl">Temporal Spine Edges</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">401,788</span>
+            <span class="d-lbl">Total KRF Facts</span>
+          </div>
+          <div class="data-card">
+            <span class="d-val">S-expr</span>
+            <span class="d-lbl">Charlotte Format</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: WHERE WE ARE GOING -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Vision</div>
+        <h2 class="section-title">Where we are <span class="accent">going</span></h2>
+        <p class="section-body">Unified pedigree platform for <strong>CPS + NSR + ABA + crossbreeds</strong>. Handle registration for Certified Pedigree Swine, Tamworth Swine Association, and National Swine Registry &mdash; then extend into crossbred ancestry that no existing system tracks.</p>
+        <p class="closing-line">One graph. <strong>Every breeder.</strong> Every animal. <strong>Every sale.</strong> Every show.<br>From <strong>Paris, Illinois</strong> outward.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final spacer -->
+  <div class="spacer"></div>
+
+</div>
+
+<!-- ═══ SCROLL ANIMATION ═══ -->
+<script>
+(function(){
+  var panels = document.querySelectorAll('.glass');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  panels.forEach(function(p){ observer.observe(p); });
+})();
+</script>
+
+<!-- ═══ 3D FORCE GRAPH (BACKGROUND) ═══ -->
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/" } }
 </script>
@@ -199,40 +519,40 @@ const TYPE_CFG = {
 // === NODE DATA ===
 const nodes = [
     // Charlotte Primitives
-    { id:'NODE',     type:'primitive', label:'NODE',     size:3.5, desc:'Identity — animals, breeders, buyers' },
-    { id:'EDGE',     type:'primitive', label:'EDGE',     size:3.5, desc:'Relationship — sire/dam, bred-by, sold-to' },
-    { id:'METRIC',   type:'primitive', label:'METRIC',   size:3.5, desc:'Measurement — price, weight, gain ratios' },
-    { id:'SIGNAL',   type:'primitive', label:'SIGNAL',   size:3.5, desc:'Event — sales, breedings, farrowings, shows' },
-    { id:'PROTOCOL', type:'primitive', label:'PROTOCOL', size:3.5, desc:'Rule — medication, supplement, disease mgmt' },
+    { id:'NODE',     type:'primitive', label:'NODE',     size:3.5, desc:'Identity' },
+    { id:'EDGE',     type:'primitive', label:'EDGE',     size:3.5, desc:'Relationship' },
+    { id:'METRIC',   type:'primitive', label:'METRIC',   size:3.5, desc:'Measurement' },
+    { id:'SIGNAL',   type:'primitive', label:'SIGNAL',   size:3.5, desc:'Event' },
+    { id:'PROTOCOL', type:'primitive', label:'PROTOCOL', size:3.5, desc:'Rule' },
     // Breeds
-    { id:'BERKSHIRE',  type:'breed', label:'Berkshire',     size:2.4, count:8808,  color:0x8B4513 },
-    { id:'CHESTER',    type:'breed', label:'Chester White', size:2.9, count:18702, color:0xD2691E },
-    { id:'DUROC',      type:'breed', label:'Duroc',         size:2.0, count:3763,  color:0xCD5C5C },
-    { id:'HAMPSHIRE',  type:'breed', label:'Hampshire',     size:2.0, count:3763,  color:0x2E8B57 },
-    { id:'HEREFORD',   type:'breed', label:'Hereford',      size:2.7, count:11432, color:0xB22222 },
-    { id:'LANDRACE',   type:'breed', label:'Landrace',      size:1.8, count:3763,  color:0xDEB887 },
-    { id:'POLAND',     type:'breed', label:'Poland China',  size:2.8, count:16655, color:0x666666 },
-    { id:'SPOT',       type:'breed', label:'Spot',          size:2.9, count:18623, color:0x808080 },
-    { id:'YORKSHIRE',  type:'breed', label:'Yorkshire',     size:1.8, count:3763,  color:0xFFE4C4 },
-    { id:'TAMWORTH',   type:'breed', label:'Tamworth',      size:1.5, count:0,     color:0xFF8C00 },
-    { id:'CROSS',      type:'breed', label:'Crossbred',     size:1.5, count:0,     color:0x9ACD32 },
+    { id:'BERKSHIRE',  type:'breed', label:'Berkshire',     size:2.4, color:0x8B4513 },
+    { id:'CHESTER',    type:'breed', label:'Chester White', size:2.9, color:0xD2691E },
+    { id:'DUROC',      type:'breed', label:'Duroc',         size:2.0, color:0xCD5C5C },
+    { id:'HAMPSHIRE',  type:'breed', label:'Hampshire',     size:2.0, color:0x2E8B57 },
+    { id:'HEREFORD',   type:'breed', label:'Hereford',      size:2.7, color:0xB22222 },
+    { id:'LANDRACE',   type:'breed', label:'Landrace',      size:1.8, color:0xDEB887 },
+    { id:'POLAND',     type:'breed', label:'Poland China',  size:2.8, color:0x666666 },
+    { id:'SPOT',       type:'breed', label:'Spot',          size:2.9, color:0x808080 },
+    { id:'YORKSHIRE',  type:'breed', label:'Yorkshire',     size:1.8, color:0xFFE4C4 },
+    { id:'TAMWORTH',   type:'breed', label:'Tamworth',      size:1.5, color:0xFF8C00 },
+    { id:'CROSS',      type:'breed', label:'Crossbred',     size:1.5, color:0x9ACD32 },
     // Registries
-    { id:'CPS', type:'registry', label:'CPS',  size:2.8, count:65412, desc:'Certified Pedigree Swine — 65,412 entries' },
-    { id:'NSR', type:'registry', label:'NSR',  size:2.2, count:3763,  desc:'National Swine Registry — 3,763 breeders' },
-    { id:'ABA', type:'registry', label:'ABA',  size:2.4, count:8808,  desc:'American Berkshire Association — 8,808 entries' },
+    { id:'CPS', type:'registry', label:'CPS',  size:2.8 },
+    { id:'NSR', type:'registry', label:'NSR',  size:2.2 },
+    { id:'ABA', type:'registry', label:'ABA',  size:2.4 },
     // Top States
-    { id:'IN', type:'state', label:'IN', size:2.2, count:14552 },
-    { id:'OK', type:'state', label:'OK', size:2.0, count:9177 },
-    { id:'TX', type:'state', label:'TX', size:2.0, count:9174 },
-    { id:'IL', type:'state', label:'IL', size:1.8, count:5542 },
-    { id:'OH', type:'state', label:'OH', size:1.7, count:4047 },
-    { id:'MO', type:'state', label:'MO', size:1.5, count:2999 },
-    { id:'IA', type:'state', label:'IA', size:1.5, count:2699 },
-    { id:'WI', type:'state', label:'WI', size:1.4, count:2342 },
-    { id:'KS', type:'state', label:'KS', size:1.3, count:1429 },
-    { id:'PA', type:'state', label:'PA', size:1.2, count:1197 },
-    { id:'MN', type:'state', label:'MN', size:1.2, count:1052 },
-    { id:'TN', type:'state', label:'TN', size:1.2, count:1041 },
+    { id:'IN', type:'state', label:'IN', size:2.2 },
+    { id:'OK', type:'state', label:'OK', size:2.0 },
+    { id:'TX', type:'state', label:'TX', size:2.0 },
+    { id:'IL', type:'state', label:'IL', size:1.8 },
+    { id:'OH', type:'state', label:'OH', size:1.7 },
+    { id:'MO', type:'state', label:'MO', size:1.5 },
+    { id:'IA', type:'state', label:'IA', size:1.5 },
+    { id:'WI', type:'state', label:'WI', size:1.4 },
+    { id:'KS', type:'state', label:'KS', size:1.3 },
+    { id:'PA', type:'state', label:'PA', size:1.2 },
+    { id:'MN', type:'state', label:'MN', size:1.2 },
+    { id:'TN', type:'state', label:'TN', size:1.2 },
     // Edge Types
     { id:'IS_SIRE_OF', type:'relationship', label:'IS_SIRE_OF', size:1.2 },
     { id:'IS_DAM_OF',  type:'relationship', label:'IS_DAM_OF',  size:1.2 },
@@ -245,17 +565,17 @@ const nodes = [
     { id:'IS_A',       type:'relationship', label:'IS_A',       size:1.0 },
     { id:'CUSTOMER_OF',type:'relationship', label:'CUSTOMER_OF',size:1.0 },
     // Pipeline
-    { id:'SCRAPE',    type:'pipeline', label:'SCRAPE',    size:1.6, desc:'Puppeteer + Cheerio crawlers' },
-    { id:'PARSE',     type:'pipeline', label:'PARSE',     size:1.6, desc:'HTML/PDF → structured records' },
-    { id:'NORMALIZE', type:'pipeline', label:'NORMALIZE', size:1.6, desc:'Dedup, clean, standardize' },
-    { id:'GENERATE',  type:'pipeline', label:'GENERATE',  size:1.6, desc:'Create NEURON fact nodes' },
-    { id:'AGGREGATE', type:'pipeline', label:'AGGREGATE', size:1.6, desc:'Pivot into DATAFRAMES' },
-    { id:'DEPLOY',    type:'pipeline', label:'DEPLOY',    size:1.6, desc:'Upload to Firebase FACTS' },
+    { id:'SCRAPE',    type:'pipeline', label:'SCRAPE',    size:1.6 },
+    { id:'PARSE',     type:'pipeline', label:'PARSE',     size:1.6 },
+    { id:'NORMALIZE', type:'pipeline', label:'NORMALIZE', size:1.6 },
+    { id:'GENERATE',  type:'pipeline', label:'GENERATE',  size:1.6 },
+    { id:'AGGREGATE', type:'pipeline', label:'AGGREGATE', size:1.6 },
+    { id:'DEPLOY',    type:'pipeline', label:'DEPLOY',    size:1.6 },
     // FACT Types
-    { id:'NEURON',             type:'fact_type', label:'NEURON',             size:1.5, desc:'Atomic fact unit — single observation' },
-    { id:'NEURAL_DATAFRAME',   type:'fact_type', label:'NEURAL_DATAFRAME',   size:1.5, desc:'Temporal aggregation of neurons' },
-    { id:'COMPOUND_DATAFRAME', type:'fact_type', label:'COMPOUND_DATAFRAME', size:1.5, desc:'Cross-pivot aggregation' },
-    { id:'SALE_FACT',          type:'fact_type', label:'SALE',               size:1.5, desc:'Auction transaction record' },
+    { id:'NEURON',             type:'fact_type', label:'NEURON',             size:1.5 },
+    { id:'NEURAL_DATAFRAME',   type:'fact_type', label:'NEURAL_DATAFRAME',   size:1.5 },
+    { id:'COMPOUND_DATAFRAME', type:'fact_type', label:'COMPOUND_DATAFRAME', size:1.5 },
+    { id:'SALE_FACT',          type:'fact_type', label:'SALE',               size:1.5 },
     // Products / Partners
     { id:'BAADE',         type:'product', label:'Baade Genetics',      size:1.0 },
     { id:'GENETIC_EDGE',  type:'product', label:'Genetic Edge',        size:1.0 },
@@ -266,29 +586,29 @@ const nodes = [
     { id:'SOUTHERN_GOLD', type:'product', label:'Southern Gold',       size:1.0 },
     { id:'TOP_CUT',       type:'product', label:'Top Cut Genetics',    size:1.0 },
     // Animal Types
-    { id:'GILT',   type:'animal_type', label:'GILT',   size:1.4, count:430, desc:'Young female — 430 sold' },
-    { id:'BARROW', type:'animal_type', label:'BARROW', size:1.4, count:466, desc:'Castrated male — 466 sold' },
-    { id:'BOAR',   type:'animal_type', label:'BOAR',   size:1.2, count:30,  desc:'Breeding male — 30 sold' },
+    { id:'GILT',   type:'animal_type', label:'GILT',   size:1.4 },
+    { id:'BARROW', type:'animal_type', label:'BARROW', size:1.4 },
+    { id:'BOAR',   type:'animal_type', label:'BOAR',   size:1.2 },
     // Health Categories
-    { id:'DISEASES',    type:'health', label:'DISEASES',    size:1.4, count:25, desc:'25 tracked: PRRS, CIRCOVIRUS, ASF, PEDV...' },
-    { id:'MEDICATIONS', type:'health', label:'MEDICATIONS', size:1.4, count:8,  desc:'8 tracked: DEXTOMAX, IVOMEC, DRAXXIN...' },
-    { id:'SUPPLEMENTS', type:'health', label:'SUPPLEMENTS', size:1.4, count:12, desc:'12 tracked: PG600, LUTALYSE, IRON...' },
+    { id:'DISEASES',    type:'health', label:'DISEASES',    size:1.4 },
+    { id:'MEDICATIONS', type:'health', label:'MEDICATIONS', size:1.4 },
+    { id:'SUPPLEMENTS', type:'health', label:'SUPPLEMENTS', size:1.4 },
     // Top Buyers
-    { id:'DAN_SCROGGINS',     type:'buyer', label:'Dan Scroggins',     size:1.3, count:45 },
-    { id:'DOUG_SMITH',        type:'buyer', label:'Doug Smith',        size:1.1, count:30 },
-    { id:'JOSH_CAMPBELL',     type:'buyer', label:'Josh Campbell',     size:1.0, count:24 },
-    { id:'CRAIG_HAMIL',       type:'buyer', label:'Craig Hamil',       size:1.0, count:20 },
-    { id:'DAVE_GUYER',        type:'buyer', label:'Dave Guyer',        size:0.9, count:15 },
-    { id:'NATALIE_HOFCHULTE', type:'buyer', label:'Natalie Hofchulte', size:0.9, count:14 },
-    { id:'JOSH_DOUGLASS',     type:'buyer', label:'Josh Douglass',     size:0.9, count:14 },
-    { id:'JOSH_POWELL',       type:'buyer', label:'Josh Powell',       size:0.9, count:12 },
+    { id:'DAN_SCROGGINS',     type:'buyer', label:'Dan Scroggins',     size:1.3 },
+    { id:'DOUG_SMITH',        type:'buyer', label:'Doug Smith',        size:1.1 },
+    { id:'JOSH_CAMPBELL',     type:'buyer', label:'Josh Campbell',     size:1.0 },
+    { id:'CRAIG_HAMIL',       type:'buyer', label:'Craig Hamil',       size:1.0 },
+    { id:'DAVE_GUYER',        type:'buyer', label:'Dave Guyer',        size:0.9 },
+    { id:'NATALIE_HOFCHULTE', type:'buyer', label:'Natalie Hofchulte', size:0.9 },
+    { id:'JOSH_DOUGLASS',     type:'buyer', label:'Josh Douglass',     size:0.9 },
+    { id:'JOSH_POWELL',       type:'buyer', label:'Josh Powell',       size:0.9 },
     // Auction Years
-    { id:'Y2017', type:'year', label:'2017', size:1.2, count:88 },
-    { id:'Y2018', type:'year', label:'2018', size:1.5, count:245 },
-    { id:'Y2019', type:'year', label:'2019', size:1.6, count:281 },
-    { id:'Y2020', type:'year', label:'2020', size:1.5, count:270 },
-    { id:'Y2021', type:'year', label:'2021', size:1.4, count:185 },
-    { id:'Y2022', type:'year', label:'2022', size:1.2, count:107 },
+    { id:'Y2017', type:'year', label:'2017', size:1.2 },
+    { id:'Y2018', type:'year', label:'2018', size:1.5 },
+    { id:'Y2019', type:'year', label:'2019', size:1.6 },
+    { id:'Y2020', type:'year', label:'2020', size:1.5 },
+    { id:'Y2021', type:'year', label:'2021', size:1.4 },
+    { id:'Y2022', type:'year', label:'2022', size:1.2 },
     // Key Sires
     { id:'MONEY_LINE',     type:'sire', label:'Money Line',     size:1.1 },
     { id:'SLOW_MOTION',    type:'sire', label:'Slow Motion',    size:1.1 },
@@ -301,60 +621,60 @@ const nodes = [
     { id:'SUMMER_SPECTACULAR',  type:'show', label:'Summer Spectacular',  size:1.4 },
     { id:'NATIONAL_SWINE_EXPO', type:'show', label:'National Swine Expo', size:1.4 },
     // Data Sources
-    { id:'NSR_WEBSITE',  type:'source', label:'NSR Website',  size:1.3, desc:'nationalswine.com — 671M+ animal IDs' },
-    { id:'CPS_WEBSITE',  type:'source', label:'CPS Website',  size:1.3, desc:'Certified Pedigree Swine portal' },
-    { id:'WENDT_GROUP',  type:'source', label:'Wendt Group',  size:1.3, desc:'thewendtgroup.com — 35 auctions scraped' }
+    { id:'NSR_WEBSITE',  type:'source', label:'NSR Website',  size:1.3 },
+    { id:'CPS_WEBSITE',  type:'source', label:'CPS Website',  size:1.3 },
+    { id:'WENDT_GROUP',  type:'source', label:'Wendt Group',  size:1.3 }
 ];
 
 // === EDGE DATA ===
 const edges = [
-    // Primitives → Domain
+    // Primitives -> Domain
     {s:'NODE',e:'BERKSHIRE',w:2},{s:'NODE',e:'CHESTER',w:2},{s:'NODE',e:'DUROC',w:2},{s:'NODE',e:'HAMPSHIRE',w:2},{s:'NODE',e:'HEREFORD',w:2},
     {s:'NODE',e:'GILT',w:1.5},{s:'NODE',e:'BARROW',w:1.5},{s:'NODE',e:'BOAR',w:1.5},
     {s:'EDGE',e:'IS_SIRE_OF',w:2},{s:'EDGE',e:'IS_DAM_OF',w:2},{s:'EDGE',e:'BRED_BY',w:2},{s:'EDGE',e:'OWNED_BY',w:2},{s:'EDGE',e:'SOLD_TO',w:2},{s:'EDGE',e:'BORN_ON',w:1.5},{s:'EDGE',e:'FARROWED_ON',w:1.5},{s:'EDGE',e:'HAS_A',w:1.5},{s:'EDGE',e:'IS_A',w:1.5},{s:'EDGE',e:'CUSTOMER_OF',w:1.5},
     {s:'METRIC',e:'SALE_FACT',w:1.5},{s:'METRIC',e:'NEURON',w:1.5},
     {s:'SIGNAL',e:'SALE_FACT',w:1.5},{s:'SIGNAL',e:'NEURON',w:1.5},{s:'SIGNAL',e:'NEURAL_DATAFRAME',w:1.5},
     {s:'PROTOCOL',e:'DISEASES',w:2},{s:'PROTOCOL',e:'MEDICATIONS',w:2},{s:'PROTOCOL',e:'SUPPLEMENTS',w:2},
-    // Breeds → Registries
+    // Breeds -> Registries
     {s:'CHESTER',e:'CPS',w:1.5},{s:'SPOT',e:'CPS',w:1.5},{s:'POLAND',e:'CPS',w:1.5},{s:'HEREFORD',e:'CPS',w:1.5},
     {s:'BERKSHIRE',e:'ABA',w:1.5},{s:'BERKSHIRE',e:'NSR',w:1},
     {s:'DUROC',e:'NSR',w:1.5},{s:'HAMPSHIRE',e:'NSR',w:1.5},{s:'YORKSHIRE',e:'NSR',w:1.5},{s:'LANDRACE',e:'NSR',w:1.5},{s:'TAMWORTH',e:'NSR',w:1},
-    // Registries → States
+    // Registries -> States
     {s:'CPS',e:'IN',w:1.2},{s:'CPS',e:'OK',w:1},{s:'CPS',e:'TX',w:1},{s:'CPS',e:'IL',w:1},{s:'CPS',e:'OH',w:1},
     {s:'NSR',e:'IN',w:0.8},{s:'NSR',e:'MO',w:0.8},{s:'NSR',e:'IA',w:0.8},{s:'NSR',e:'WI',w:0.8},
     {s:'ABA',e:'IN',w:0.8},{s:'ABA',e:'OH',w:0.8},{s:'ABA',e:'TX',w:0.8},{s:'ABA',e:'IL',w:0.8},
     // Pipeline chain
     {s:'SCRAPE',e:'PARSE',w:2.5},{s:'PARSE',e:'NORMALIZE',w:2.5},{s:'NORMALIZE',e:'GENERATE',w:2.5},{s:'GENERATE',e:'AGGREGATE',w:2.5},{s:'AGGREGATE',e:'DEPLOY',w:2.5},
-    // Pipeline → Sources
+    // Pipeline -> Sources
     {s:'SCRAPE',e:'NSR_WEBSITE',w:1.5},{s:'SCRAPE',e:'CPS_WEBSITE',w:1.5},{s:'SCRAPE',e:'WENDT_GROUP',w:1.5},
-    // Pipeline → FACT Types
+    // Pipeline -> FACT Types
     {s:'GENERATE',e:'NEURON',w:1.5},{s:'GENERATE',e:'SALE_FACT',w:1.5},
     {s:'AGGREGATE',e:'NEURAL_DATAFRAME',w:1.5},{s:'AGGREGATE',e:'COMPOUND_DATAFRAME',w:1.5},
     // FACT type chain
     {s:'NEURON',e:'NEURAL_DATAFRAME',w:1.5},{s:'NEURAL_DATAFRAME',e:'COMPOUND_DATAFRAME',w:1.5},
-    // Products → Breeds
+    // Products -> Breeds
     {s:'HEIMER_HAMPS',e:'HAMPSHIRE',w:1},{s:'BAADE',e:'DUROC',w:1},{s:'GENETIC_EDGE',e:'BERKSHIRE',w:1},
     {s:'HI_POINT',e:'SPOT',w:1},{s:'PERRY',e:'YORKSHIRE',w:1},{s:'PREMIUM_BLEND',e:'DUROC',w:1},
     {s:'SOUTHERN_GOLD',e:'CHESTER',w:1},{s:'TOP_CUT',e:'HAMPSHIRE',w:1},
-    // Buyers → Years
+    // Buyers -> Years
     {s:'DAN_SCROGGINS',e:'Y2018',w:1},{s:'DAN_SCROGGINS',e:'Y2019',w:1},{s:'DAN_SCROGGINS',e:'Y2020',w:1},
     {s:'DOUG_SMITH',e:'Y2019',w:1},{s:'DOUG_SMITH',e:'Y2020',w:1},
     {s:'JOSH_CAMPBELL',e:'Y2018',w:1},{s:'JOSH_CAMPBELL',e:'Y2019',w:1},
     {s:'CRAIG_HAMIL',e:'Y2017',w:1},{s:'CRAIG_HAMIL',e:'Y2018',w:1},
     {s:'DAVE_GUYER',e:'Y2020',w:1},{s:'NATALIE_HOFCHULTE',e:'Y2021',w:1},
     {s:'JOSH_DOUGLASS',e:'Y2019',w:1},{s:'JOSH_POWELL',e:'Y2020',w:1},
-    // Years → Wendt Group
+    // Years -> Wendt Group
     {s:'Y2017',e:'WENDT_GROUP',w:0.8},{s:'Y2018',e:'WENDT_GROUP',w:0.8},{s:'Y2019',e:'WENDT_GROUP',w:0.8},
     {s:'Y2020',e:'WENDT_GROUP',w:0.8},{s:'Y2021',e:'WENDT_GROUP',w:0.8},{s:'Y2022',e:'WENDT_GROUP',w:0.8},
-    // Sires → Breeds
+    // Sires -> Breeds
     {s:'MONEY_LINE',e:'DUROC',w:1},{s:'SLOW_MOTION',e:'HAMPSHIRE',w:1},{s:'CLAWS',e:'BERKSHIRE',w:1},
     {s:'WILD_RIDE',e:'DUROC',w:1},{s:'QUITE_FRANKLY',e:'YORKSHIRE',w:1},{s:'BATTLE_CRY',e:'HAMPSHIRE',w:1},
-    // Sires → IS_SIRE_OF
+    // Sires -> IS_SIRE_OF
     {s:'MONEY_LINE',e:'IS_SIRE_OF',w:0.6},{s:'BATTLE_CRY',e:'IS_SIRE_OF',w:0.6},
-    // Shows → States + Breeds
+    // Shows -> States + Breeds
     {s:'THE_EXPOSITION',e:'IL',w:0.8},{s:'SUMMER_SPECTACULAR',e:'IN',w:0.8},{s:'NATIONAL_SWINE_EXPO',e:'OH',w:0.8},
     {s:'THE_EXPOSITION',e:'BERKSHIRE',w:0.6},{s:'SUMMER_SPECTACULAR',e:'CHESTER',w:0.6},{s:'NATIONAL_SWINE_EXPO',e:'DUROC',w:0.6},
-    // Animal types → Breeds
+    // Animal types -> Breeds
     {s:'GILT',e:'BERKSHIRE',w:0.5},{s:'BARROW',e:'DUROC',w:0.5},{s:'BOAR',e:'HAMPSHIRE',w:0.5}
 ];
 
@@ -390,6 +710,9 @@ controls.minDistance = 30;
 controls.maxDistance = 300;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 0.3;
+controls.enableZoom = false;
+controls.enablePan = false;
+controls.enableRotate = false;
 
 // Lights
 scene.add(new THREE.AmbientLight(0x444455, 0.6));
@@ -565,7 +888,6 @@ for (const n of nodes) {
     labelEls[n.id] = el;
 }
 
-let activeFilter = null;
 function updateLabels() {
     const w = window.innerWidth, h = window.innerHeight;
     for (const n of nodes) {
@@ -578,171 +900,12 @@ function updateLabels() {
         el.style.left = sx + 'px';
         el.style.top = (sy - n.size * 8 - 10) + 'px';
 
-        // Show labels based on type importance and distance
         const camDist = camera.position.distanceTo(m.position);
         const important = n.type === 'primitive' || n.type === 'breed' || n.type === 'registry';
-        const show = (activeFilter && n.type === activeFilter) || important || camDist < 80;
+        const show = important || camDist < 80;
         el.style.opacity = show ? '1' : '0';
-        el.style.fontSize = n.type === 'primitive' ? '11px' : '9px';
+        el.style.fontSize = n.type === 'primitive' ? '10px' : '8px';
         el.style.fontWeight = n.type === 'primitive' ? '700' : '400';
-    }
-}
-
-// === RAYCASTING ===
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-const tooltip = document.getElementById('tooltip');
-let hoveredMesh = null;
-
-renderer.domElement.addEventListener('mousemove', (ev) => {
-    mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(ev.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(meshes);
-    if (hits.length > 0 && hits[0].object.userData.id) {
-        const n = hits[0].object.userData;
-        if (hoveredMesh !== hits[0].object) {
-            hoveredMesh = hits[0].object;
-            hoveredMesh.material.emissiveIntensity = 0.8;
-        }
-        tooltip.style.display = 'block';
-        tooltip.style.left = (ev.clientX + 15) + 'px';
-        tooltip.style.top = (ev.clientY + 15) + 'px';
-        const cfg = TYPE_CFG[n.type];
-        let html = `<strong>${n.label}</strong><br><span class="tt-type">${cfg.label.toUpperCase()}</span>`;
-        if (n.count) html += `<br>Count: ${n.count.toLocaleString()}`;
-        if (n.desc) html += `<br><span style="color:#8a8578">${n.desc}</span>`;
-        tooltip.innerHTML = html;
-        renderer.domElement.style.cursor = 'pointer';
-    } else {
-        if (hoveredMesh) {
-            const cfg = TYPE_CFG[hoveredMesh.userData.type];
-            hoveredMesh.material.emissiveIntensity = cfg.emissive ? 0.6 : 0;
-            hoveredMesh = null;
-        }
-        tooltip.style.display = 'none';
-        renderer.domElement.style.cursor = 'grab';
-    }
-});
-
-// Click to inspect
-renderer.domElement.addEventListener('click', (ev) => {
-    raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(meshes);
-    if (hits.length > 0 && hits[0].object.userData.id) {
-        showDetail(hits[0].object.userData);
-    } else {
-        document.getElementById('detail-panel').style.display = 'none';
-    }
-});
-
-function showDetail(n) {
-    const dp = document.getElementById('detail-panel');
-    dp.style.display = 'block';
-    document.getElementById('detail-name').textContent = n.label;
-    document.getElementById('detail-type').textContent = TYPE_CFG[n.type].label.toUpperCase();
-    let stats = '';
-    if (n.count) stats += `<div class="detail-stat">Count: <strong>${n.count.toLocaleString()}</strong></div>`;
-    if (n.desc) stats += `<div class="detail-stat">${n.desc}</div>`;
-    document.getElementById('detail-stats').innerHTML = stats;
-
-    // Find connections
-    const conns = [];
-    for (const ed of edges) {
-        if (ed.s === n.id) { const t = nodeMap[ed.e]; if (t) conns.push(t.label); }
-        if (ed.e === n.id) { const t = nodeMap[ed.s]; if (t) conns.push(t.label); }
-    }
-    document.getElementById('conn-list').innerHTML = conns.map(c =>
-        `<div class="conn-item">${c}</div>`
-    ).join('');
-}
-
-// === POPULATE DASHBOARD CHARTS ===
-function makeBarChart(containerId, data, maxVal, colorFn) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = '';
-    for (const d of data) {
-        const pct = (d.value / maxVal * 100).toFixed(1);
-        const row = document.createElement('div');
-        row.className = 'chart-row';
-        row.innerHTML = `<span class="chart-label">${d.label}</span><div class="chart-fill" style="width:${pct}%;background:${colorFn(d)}"></div><span class="chart-value">${d.display || d.value.toLocaleString()}</span>`;
-        container.appendChild(row);
-    }
-}
-
-makeBarChart('sales-chart',
-    [{label:'2017',value:88},{label:'2018',value:245},{label:'2019',value:281},{label:'2020',value:270},{label:'2021',value:185},{label:'2022',value:107}],
-    281, () => 'linear-gradient(90deg,#d4a373,#bc8cff)');
-
-makeBarChart('state-chart',
-    [{label:'IN',value:14552},{label:'OK',value:9177},{label:'TX',value:9174},{label:'IL',value:5542},{label:'OH',value:4047},{label:'MO',value:2999},{label:'IA',value:2699},{label:'WI',value:2342}],
-    14552, () => 'linear-gradient(90deg,#ffe066,#d4a373)');
-
-makeBarChart('breed-chart',
-    [{label:'Chester',value:18702,c:'#D2691E'},{label:'Spot',value:18623,c:'#808080'},{label:'Poland',value:16655,c:'#666666'},{label:'Hereford',value:11432,c:'#B22222'},{label:'Berkshire',value:8808,c:'#8B4513'},{label:'Duroc',value:3763,c:'#CD5C5C'},{label:'Hampshire',value:3763,c:'#2E8B57'}],
-    18702, d => d.c || '#d4a373');
-
-makeBarChart('type-chart',
-    [{label:'BARROW',value:466,display:'466 sold'},{label:'GILT',value:430,display:'430 sold'},{label:'BOAR',value:30,display:'30 sold'}],
-    466, () => '#a8e6cf');
-
-// === LEGEND + FILTER BUTTONS ===
-const legend = document.getElementById('legend');
-const typeFilters = document.getElementById('type-filters');
-const typeCounts = {};
-for (const n of nodes) typeCounts[n.type] = (typeCounts[n.type] || 0) + 1;
-
-for (const [type, cfg] of Object.entries(TYPE_CFG)) {
-    if (!typeCounts[type]) continue;
-    // Legend item
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = `<div class="legend-dot" style="background:${cfg.css}"></div><span>${cfg.label}</span><span class="legend-count">${typeCounts[type]}</span>`;
-    item.addEventListener('click', () => toggleFilter(type));
-    legend.appendChild(item);
-
-    // Filter button
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn';
-    btn.textContent = cfg.label.split(' ')[0];
-    btn.dataset.type = type;
-    btn.addEventListener('click', () => toggleFilter(type));
-    typeFilters.appendChild(btn);
-}
-
-// Add "All" button
-const allBtn = document.createElement('button');
-allBtn.className = 'filter-btn active';
-allBtn.textContent = 'All';
-allBtn.addEventListener('click', () => toggleFilter(null));
-typeFilters.prepend(allBtn);
-
-function toggleFilter(type) {
-    activeFilter = activeFilter === type ? null : type;
-    document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.toggle('active', activeFilter === null ? b.textContent === 'All' : b.dataset.type === activeFilter);
-    });
-    // Dim non-matching nodes
-    for (const m of meshes) {
-        const n = m.userData;
-        if (!activeFilter || n.type === activeFilter) {
-            m.material.opacity = 1;
-            m.material.transparent = false;
-            m.visible = true;
-        } else {
-            m.material.opacity = 0.12;
-            m.material.transparent = true;
-            m.visible = true;
-        }
-    }
-    // Dim edges
-    for (const el of edgeLines) {
-        const sn = nodeMap[el.s], en = nodeMap[el.e];
-        if (!activeFilter || (sn && sn.type === activeFilter) || (en && en.type === activeFilter)) {
-            el.line.material.opacity = 0.3;
-        } else {
-            el.line.material.opacity = 0.03;
-        }
     }
 }
 
@@ -752,7 +915,6 @@ function animate() {
     requestAnimationFrame(animate);
     frameCount++;
 
-    // Run simulation
     simulateStep();
 
     // Rotate primitives slowly
@@ -784,14 +946,6 @@ window.addEventListener('resize', () => {
 // === START ===
 updateEdgePositions();
 animate();
-
-// Fade out controls hint
-setTimeout(() => {
-    const hint = document.getElementById('controls-hint');
-    hint.style.transition = 'opacity 2s';
-    hint.style.opacity = '0';
-    setTimeout(() => hint.remove(), 2000);
-}, 8000);
 </script>
 </body>
 </html>
