@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardVault by Tom Brady — Brand Book</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --vault-50:#F5F5F3;--vault-100:#E8E6E1;--vault-300:#A8A49C;--vault-500:#1A1A1A;--vault-600:#141414;--vault-700:#0E0E0E;--vault-800:#0A0A0A;--vault-900:#050505;
+  --gold-50:#FFF9EB;--gold-100:#FCEFC5;--gold-300:#E8C84A;--gold-500:#D4A017;--gold-600:#B8860B;--gold-700:#8B6914;--gold-800:#5C4510;--gold-900:#2E220A;
+  --card-50:#FFFFFF;--card-100:#FAFAF8;--card-300:#E8E6E1;--card-500:#D1CFC8;--card-700:#8A877F;--card-900:#3D3B37;
+  --silver-50:#F8F8F8;--silver-100:#ECECEC;--silver-300:#C0C0C0;--silver-500:#8E8E8E;--silver-700:#5C5C5C;--silver-900:#2A2A2A;
+  --gem:#00A651;--mint:#4CAF50;--nearmint:#8BC34A;--excellent:#FFC107;--good:#FF9800;--poor:#F44336;
+  --bg:#0A0A0A;--surface:rgba(10,10,10,0.92);--border:rgba(212,160,23,0.18);--text:#E8E6E1;--dim:#A8A49C;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1000px;margin:0 auto;padding:64px 32px 96px}
+
+/* Header */
+.brand-header{text-align:center;padding:80px 0 64px;border-bottom:1px solid var(--border);margin-bottom:64px;position:relative;overflow:hidden}
+.brand-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,160,23,0.12),rgba(26,26,26,0.06),rgba(10,10,10,0.8));border-radius:24px}
+.brand-header *{position:relative;z-index:1}
+.brand-header h1{font-family:'Oswald',sans-serif;font-size:52px;font-weight:700;letter-spacing:4px;margin-bottom:4px;background:linear-gradient(135deg,var(--gold-500),var(--gold-300));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.brand-header .tagline{font-size:16px;color:var(--gold-500);font-weight:500;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase}
+.brand-header .sub{font-size:14px;color:var(--dim);max-width:600px;margin:0 auto}
+.brand-header .version{display:inline-block;margin-top:20px;font-size:11px;padding:4px 14px;border-radius:20px;background:rgba(212,160,23,0.15);color:var(--gold-500);font-weight:600;letter-spacing:1px}
+.stats-bar{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:28px}
+.stat{text-align:center}
+.stat .stat-value{font-size:20px;font-weight:800;color:var(--gold-500);letter-spacing:-0.5px}
+.stat .stat-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-top:2px}
+
+/* Sections */
+section{margin-bottom:72px}
+section h2{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--gold-500);margin-bottom:32px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:18px;font-weight:700;margin-bottom:12px}
+section p{color:var(--dim);max-width:680px;margin-bottom:16px;line-height:1.7}
+
+/* Essence */
+.essence-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.essence-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;backdrop-filter:blur(12px)}
+.essence-card .label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-500);font-weight:600;margin-bottom:10px}
+.essence-card .value{font-size:15px;color:var(--text);line-height:1.7}
+
+/* Color swatches */
+.color-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.swatch{width:80px;height:80px;border-radius:10px;display:flex;align-items:flex-end;padding:6px 8px;font-size:9px;font-weight:600;letter-spacing:0.5px;border:1px solid rgba(255,255,255,0.05)}
+.swatch-label{margin-bottom:8px;font-size:11px;font-weight:600;color:var(--text);letter-spacing:1px;text-transform:uppercase}
+
+/* Type specimens */
+.type-specimen{margin-bottom:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;backdrop-filter:blur(12px)}
+.type-specimen .name{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-500);font-weight:600;margin-bottom:12px}
+.type-heading{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;letter-spacing:2px;line-height:1.2;margin-bottom:8px}
+.type-body{font-family:'Inter',sans-serif;font-size:15px;line-height:1.8;color:var(--dim)}
+
+/* Team list */
+.team-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+.team-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;backdrop-filter:blur(12px)}
+.team-item h4{font-size:14px;margin-bottom:2px}
+.team-item p{font-size:12px;color:var(--dim);margin-bottom:0}
+.team-item .note{font-size:10px;color:var(--gold-500);margin-top:4px}
+
+/* Product table */
+.product-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
+.product-table th{text-align:left;font-size:10px;letter-spacing:1.5px;color:var(--gold-500);padding:10px 12px;border-bottom:1px solid var(--border);text-transform:uppercase;font-weight:600}
+.product-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--dim)}
+.product-table td:first-child{color:var(--text);font-weight:500}
+
+/* Location table */
+.location-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
+.location-table th{text-align:left;font-size:10px;letter-spacing:1.5px;color:var(--gold-500);padding:10px 12px;border-bottom:1px solid var(--border);text-transform:uppercase;font-weight:600}
+.location-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--dim)}
+.location-table td:first-child{color:var(--text);font-weight:500}
+.status-open{color:var(--gem);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.status-soon{color:var(--gold-500);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.status-coming{color:var(--excellent);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Gradient bar */
+.gradient-bar{height:48px;border-radius:10px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)}
+.gradient-label{font-size:10px;color:var(--dim);letter-spacing:1px;margin-bottom:16px}
+
+/* Grading swatches */
+.grading-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.grade-swatch{width:100px;height:60px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:0.5px;border:1px solid rgba(255,255,255,0.05)}
+.grade-swatch .grade-label{font-size:8px;font-weight:600;margin-top:4px;opacity:0.8;text-transform:uppercase;letter-spacing:1px}
+
+/* Timeline */
+.timeline-entry{position:relative;padding-left:28px;margin-bottom:20px}
+.timeline-entry::before{content:'';position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--gold-500);border:2px solid var(--gold-700)}
+.timeline-entry::after{content:'';position:absolute;left:4px;top:22px;width:2px;height:calc(100% + 4px);background:var(--border)}
+.timeline-entry:last-child::after{display:none}
+.timeline-year{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:var(--gold-500);letter-spacing:1px;margin-bottom:4px}
+.timeline-text{font-size:13px;color:var(--dim);line-height:1.7}
+
+@media(max-width:640px){
+  .page{padding:32px 16px 64px}
+  .brand-header h1{font-size:36px}
+  .essence-grid{grid-template-columns:1fr}
+  .team-list{grid-template-columns:1fr}
+  .swatch{width:60px;height:60px}
+  .grade-swatch{width:80px;height:50px}
+  .location-table{font-size:11px}
+  .location-table th,.location-table td{padding:8px 6px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="brand-header">
+    <h1>CARDVAULT BY TOM BRADY</h1>
+    <div class="tagline">The Gold Standard in Sports Collectibles</div>
+    <div class="sub">Brand identity system for America's first national retail chain dedicated exclusively to sports cards and collectibles &mdash; premium venues, celebrity ownership, experiential retail.</div>
+    <div class="version">Brand Book v1.0 &mdash; February 2026</div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-value">12</div><div class="stat-label">Locations</div></div>
+      <div class="stat"><div class="stat-value">9</div><div class="stat-label">States</div></div>
+      <div class="stat"><div class="stat-value">338%</div><div class="stat-label">Growth</div></div>
+      <div class="stat"><div class="stat-value">Inc.</div><div class="stat-label">Fastest Growing</div></div>
+      <div class="stat"><div class="stat-value">2020</div><div class="stat-label">Est.</div></div>
+    </div>
+  </div>
+
+  <!-- BRAND ESSENCE -->
+  <section>
+    <h2>Brand Essence</h2>
+    <div class="essence-grid">
+      <div class="essence-card">
+        <div class="label">Mission</div>
+        <div class="value">Redefine the collector experience &mdash; premium retail destinations where sports history is bought, sold, traded, and celebrated.</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Positioning</div>
+        <div class="value">The first and only national retail chain dedicated exclusively to sports cards and collectibles. Premium venues. Celebrity ownership. Experiential retail.</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Voice</div>
+        <div class="value">Championship confidence. Premium but accessible. Sports culture, not finance-speak. "Every card has a story."</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Values</div>
+        <div class="value"><strong>Authenticity</strong> &mdash; every item verified. <strong>Experience</strong> &mdash; the vault, the breaks, the events. <strong>Community</strong> &mdash; collectors, not customers. <strong>Excellence</strong> &mdash; Tom Brady doesn't put his name on anything less.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR SYSTEM -->
+  <section>
+    <h2>Color System</h2>
+    <h3>Primary &mdash; Vault Black</h3>
+    <p>The foundation. The vault door. Luxury darkness that frames every card, every case, every display. Used for backgrounds, primary surfaces, and brand anchoring.</p>
+    <div class="color-row">
+      <div class="swatch" style="background:#F5F5F3;color:#050505">50</div>
+      <div class="swatch" style="background:#E8E6E1;color:#050505">100</div>
+      <div class="swatch" style="background:#A8A49C;color:#050505">300</div>
+      <div class="swatch" style="background:#1A1A1A;color:#E8E6E1">500</div>
+      <div class="swatch" style="background:#141414;color:#E8E6E1">600</div>
+      <div class="swatch" style="background:#0E0E0E;color:#A8A49C">700</div>
+      <div class="swatch" style="background:#0A0A0A;color:#A8A49C;border:1px solid rgba(212,160,23,0.18)">800</div>
+      <div class="swatch" style="background:#050505;color:#A8A49C;border:1px solid rgba(212,160,23,0.18)">900</div>
+    </div>
+
+    <h3>Secondary &mdash; Championship Gold</h3>
+    <p>Seven rings. Seven trophies. The unmistakable shimmer of a championship moment. Used for accents, CTAs, highlights, and the brand signature.</p>
+    <div class="color-row">
+      <div class="swatch" style="background:#FFF9EB;color:#2E220A">50</div>
+      <div class="swatch" style="background:#FCEFC5;color:#2E220A">100</div>
+      <div class="swatch" style="background:#E8C84A;color:#2E220A">300</div>
+      <div class="swatch" style="background:#D4A017;color:#fff">500</div>
+      <div class="swatch" style="background:#B8860B;color:#fff">600</div>
+      <div class="swatch" style="background:#8B6914;color:#fff">700</div>
+      <div class="swatch" style="background:#5C4510;color:#E8C84A">800</div>
+      <div class="swatch" style="background:#2E220A;color:#E8C84A">900</div>
+    </div>
+
+    <h3>Tertiary &mdash; Card White</h3>
+    <p>The pristine surface of an ungraded gem. Clean, neutral, archival. Used for card displays, content areas, and contrast surfaces.</p>
+    <div class="color-row">
+      <div class="swatch" style="background:#FFFFFF;color:#3D3B37;border:1px solid #E8E6E1">50</div>
+      <div class="swatch" style="background:#FAFAF8;color:#3D3B37">100</div>
+      <div class="swatch" style="background:#E8E6E1;color:#3D3B37">300</div>
+      <div class="swatch" style="background:#D1CFC8;color:#3D3B37">500</div>
+      <div class="swatch" style="background:#8A877F;color:#fff">700</div>
+      <div class="swatch" style="background:#3D3B37;color:#D1CFC8">900</div>
+    </div>
+
+    <h3>Neutral &mdash; Trophy Silver</h3>
+    <p>The gleam of a display case. Structure, borders, secondary text, and UI chrome.</p>
+    <div class="color-row">
+      <div class="swatch" style="background:#F8F8F8;color:#2A2A2A">50</div>
+      <div class="swatch" style="background:#ECECEC;color:#2A2A2A">100</div>
+      <div class="swatch" style="background:#C0C0C0;color:#2A2A2A">300</div>
+      <div class="swatch" style="background:#8E8E8E;color:#fff">500</div>
+      <div class="swatch" style="background:#5C5C5C;color:#fff">700</div>
+      <div class="swatch" style="background:#2A2A2A;color:#C0C0C0">900</div>
+    </div>
+
+    <h3>Gradients</h3>
+    <div class="gradient-bar" style="background:linear-gradient(135deg,#0A0A0A,#1A1A1A,#D4A017)"></div>
+    <div class="gradient-label">Vault Gold &mdash; The reveal</div>
+    <div class="gradient-bar" style="background:linear-gradient(135deg,#D4A017,#E8C84A,#D4A017)"></div>
+    <div class="gradient-label">Championship &mdash; Full brilliance</div>
+    <div class="gradient-bar" style="background:linear-gradient(135deg,#1A1A1A,#2E220A,#D4A017)"></div>
+    <div class="gradient-label">Premium &mdash; Dark luxury</div>
+
+    <h3>Grading Colors</h3>
+    <p>Card condition grading scale &mdash; used across product listings, authentication labels, and inventory displays.</p>
+    <div class="grading-row">
+      <div class="grade-swatch" style="background:#00A651;color:#fff">GEM<div class="grade-label">10</div></div>
+      <div class="grade-swatch" style="background:#4CAF50;color:#fff">MINT<div class="grade-label">9</div></div>
+      <div class="grade-swatch" style="background:#8BC34A;color:#fff">NR MINT<div class="grade-label">8</div></div>
+      <div class="grade-swatch" style="background:#FFC107;color:#2E220A">EXCELLENT<div class="grade-label">6-7</div></div>
+      <div class="grade-swatch" style="background:#FF9800;color:#fff">GOOD<div class="grade-label">4-5</div></div>
+      <div class="grade-swatch" style="background:#F44336;color:#fff">POOR<div class="grade-label">1-3</div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <h2>Typography</h2>
+    <div class="type-specimen">
+      <div class="name">Heading &mdash; Oswald</div>
+      <div class="type-heading">CARDVAULT BY TOM BRADY</div>
+      <div class="type-heading" style="font-size:24px;color:var(--gold-500)">THE GOLD STANDARD IN SPORTS COLLECTIBLES</div>
+    </div>
+    <div class="type-specimen">
+      <div class="name">Body &mdash; Inter</div>
+      <div class="type-body">CardVault is the first and only national retail chain dedicated exclusively to sports cards and collectibles. With 12 premium locations across 9 states, CardVault delivers an experiential retail environment where collectors buy, sell, trade, and celebrate sports history. Every card has a story.</div>
+    </div>
+    <div class="type-specimen">
+      <div class="name">Mono &mdash; Courier New</div>
+      <div style="font-family:'Courier New',monospace;font-size:13px;color:var(--gold-300);line-height:1.8">
+        Card: 2000 Playoff Contenders #144<br>
+        Player: Tom Brady RC Auto<br>
+        Grade: PSA 10 Gem Mint<br>
+        Est. Value: $4,800,000
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section>
+    <h2>Leadership &amp; Team</h2>
+    <div class="team-list">
+      <div class="team-item">
+        <h4>Tom Brady</h4>
+        <p>Co-Owner (50%)</p>
+        <div class="note">Seven-time Super Bowl champion. Acquired stake Feb 2025.</div>
+      </div>
+      <div class="team-item">
+        <h4>Chris Costa</h4>
+        <p>Co-Founder &amp; Managing Partner</p>
+        <div class="note">Primary spokesperson</div>
+      </div>
+      <div class="team-item">
+        <h4>Ed Kane</h4>
+        <p>Co-Founder</p>
+      </div>
+      <div class="team-item">
+        <h4>Randy Greenstein</h4>
+        <p>Co-Founder</p>
+      </div>
+      <div class="team-item">
+        <h4>Tim Bonito</h4>
+        <p>Co-Founder</p>
+      </div>
+      <div class="team-item">
+        <h4>Scott Heigelmann</h4>
+        <p>Co-Founder</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section>
+    <h2>Locations</h2>
+    <p>12 premium retail destinations across 9 states &mdash; each location designed as an experiential vault for collectors.</p>
+    <table class="location-table">
+      <thead><tr><th>City</th><th>Venue / Address</th><th>State</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Boston, MA</td><td>TD Garden &mdash; 112 Causeway St</td><td>MA</td><td><span class="status-open">Flagship</span></td></tr>
+        <tr><td>Foxborough, MA</td><td>Patriot Place / Gillette Stadium</td><td>MA</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>Mashantucket, CT</td><td>Foxwoods Resort Casino</td><td>CT</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>East Rutherford, NJ</td><td>American Dream</td><td>NJ</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>East Hampton, NY</td><td>Main Street</td><td>NY</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>Chicago, IL</td><td>Wrigley Field &mdash; 1027 W Addison St</td><td>IL</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>New York, NY</td><td>SoHo &mdash; 244 Lafayette St</td><td>NY</td><td><span class="status-open">Flagship</span></td></tr>
+        <tr><td>Dallas, TX</td><td>American Airlines Center</td><td>TX</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>Bloomington, MN</td><td>Mall of America</td><td>MN</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>Las Vegas, NV</td><td>Mandalay Bay</td><td>NV</td><td><span class="status-open">Open</span></td></tr>
+        <tr><td>San Francisco, CA</td><td>Oracle Park &mdash; 761 3rd St</td><td>CA</td><td><span class="status-open">Flagship</span></td></tr>
+        <tr><td>Sacramento, CA</td><td>TBD</td><td>CA</td><td><span class="status-soon">Coming Soon</span></td></tr>
+        <tr><td>Brooklyn, NY</td><td>TBD</td><td>NY</td><td><span class="status-soon">Coming Soon</span></td></tr>
+        <tr><td>Palo Alto, CA</td><td>TBD</td><td>CA</td><td><span class="status-soon">Coming Soon</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PRODUCT CATALOG -->
+  <section>
+    <h2>Product Catalog</h2>
+    <table class="product-table">
+      <thead><tr><th>Category</th><th>Description</th><th>Key Offerings</th></tr></thead>
+      <tbody>
+        <tr><td>Sports Cards</td><td>NFL, NBA, MLB, NHL, Soccer &mdash; vintage and modern</td><td>Singles, sealed wax, graded slabs, rookie cards</td></tr>
+        <tr><td>TCG</td><td>Trading card games &mdash; Pokemon, Magic, Yu-Gi-Oh!</td><td>Sealed product, singles, tournament-legal decks</td></tr>
+        <tr><td>Entertainment</td><td>Non-sport collectible cards &mdash; movies, music, pop culture</td><td>Marvel, Star Wars, Disney, limited editions</td></tr>
+        <tr><td>Memorabilia</td><td>Authenticated sports memorabilia and signed items</td><td>Autographs, jerseys, game-used equipment, display cases</td></tr>
+        <tr><td>Services</td><td>In-store collector services and experiences</td><td>Live breaks, grading submissions, authentication, vault storage, events</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- HISTORY -->
+  <section>
+    <h2>Company History</h2>
+    <div class="timeline-entry">
+      <div class="timeline-year">2020</div>
+      <div class="timeline-text">CardVault founded by Chris Costa, Ed Kane, Randy Greenstein, Tim Bonito, and Scott Heigelmann. The sports card boom meets premium retail.</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-text">First three locations open: TD Garden (Boston), Patriot Place (Foxborough), and Foxwoods Resort Casino (CT). CardVault establishes the experiential retail model: custom vaults, live breaks, grading submissions.</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Named "America's Best Card Shop." Inc. Magazine Fastest Growing Private Companies &mdash; 338% growth over three years.</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-text"><strong>February 12, 2025</strong> &mdash; Tom Brady acquires 50% stake. Rebrands to "CardVault by Tom Brady." Then: American Dream (NJ), East Hampton (NY), Wrigley Field (Chicago), SoHo NYC, American Airlines Center (Dallas), Mall of America, Mandalay Bay (Las Vegas). 3 locations to 11 in under a year.</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-year">2026</div>
+      <div class="timeline-text"><strong>February 2026</strong> &mdash; San Francisco flagship opens at Oracle Park (12th location). Sacramento, Brooklyn, and Palo Alto announced. National footprint: 9 states and growing.</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section>
+    <h2>Contact</h2>
+    <div class="essence-grid">
+      <div class="essence-card">
+        <div class="label">Headquarters</div>
+        <div class="value">CardVault Boston LLC<br>112 Causeway St<br>Boston, MA 02114<br>(TD Garden)</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Website</div>
+        <div class="value">cardvault.com<br>@cardvault (Instagram)<br>@cardvaultofficial (TikTok)</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Social Media</div>
+        <div class="value">Instagram / TikTok / YouTube / X<br>Facebook / LinkedIn<br>#CardVault #TheGoldStandard</div>
+      </div>
+      <div class="essence-card">
+        <div class="label">Partnerships</div>
+        <div class="value">PSA Grading &mdash; Authorized Dealer<br>Fanatics &mdash; Retail Partner<br>Tom Brady &mdash; Co-Owner &amp; Brand Ambassador</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+;;; CardVault by Tom Brady — Charlotte OS Knowledge Graph
+;;; Domain: Sports card & collectibles retail chain
+;;; Generated: February 2026
+;;; Scope: Company identity, leadership, locations, products, competitors, industry
+
+(in-microtheory CardVaultMt)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 1: Company Identity
+;;; ═══════════════════════════════════════════════
+
+(isa CardVaultBostonLLC Company)
+(companyName CardVaultBostonLLC "CardVault by Tom Brady")
+(legalName CardVaultBostonLLC "CardVault Boston LLC")
+(dba CardVaultBostonLLC "CardVault by Tom Brady")
+(previousName CardVaultBostonLLC "CardVault")
+(foundedYear CardVaultBostonLLC 2020)
+(rebrandedDate CardVaultBostonLLC "2025-02-12")
+(headquartersAddress CardVaultBostonLLC "112 Causeway St, Boston, MA 02114")
+(headquartersVenue CardVaultBostonLLC "TD Garden")
+(industry CardVaultBostonLLC "Sports Cards & Collectibles Retail")
+(businessModel CardVaultBostonLLC "Premium experiential retail chain")
+(totalLocations CardVaultBostonLLC 12)
+(statesPresent CardVaultBostonLLC 9)
+(estimatedEmployees CardVaultBostonLLC 150)
+(growthRate CardVaultBostonLLC "338% over 3 years")
+(recognition CardVaultBostonLLC "Inc. Magazine Fastest Growing Private Companies")
+(recognition CardVaultBostonLLC "America's Best Card Shop")
+(websiteURL CardVaultBostonLLC "cardvaultbytombrady.com")
+(ecommercePlatform CardVaultBostonLLC "Shopify")
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 2: Leadership
+;;; ═══════════════════════════════════════════════
+
+(isa TomBrady Person)
+(fullName TomBrady "Tom Brady")
+(roleAt TomBrady CardVaultBostonLLC "Co-Owner")
+(ownershipStake TomBrady CardVaultBostonLLC "50%")
+(acquisitionDate TomBrady CardVaultBostonLLC "2025-02-12")
+(notableRole TomBrady "Seven-time Super Bowl Champion")
+(notableRole TomBrady "FOX Sports Lead NFL Analyst")
+(notableRole TomBrady "Las Vegas Raiders Minority Owner")
+
+(isa ChrisCosta Person)
+(fullName ChrisCosta "Chris Costa")
+(roleAt ChrisCosta CardVaultBostonLLC "Co-Founder & Managing Partner")
+(foundingMember ChrisCosta CardVaultBostonLLC)
+
+(isa EdKane Person)
+(fullName EdKane "Ed Kane")
+(roleAt EdKane CardVaultBostonLLC "Co-Founder")
+(foundingMember EdKane CardVaultBostonLLC)
+
+(isa RandyGreenstein Person)
+(fullName RandyGreenstein "Randy Greenstein")
+(roleAt RandyGreenstein CardVaultBostonLLC "Co-Founder")
+(foundingMember RandyGreenstein CardVaultBostonLLC)
+
+(isa TimBonito Person)
+(fullName TimBonito "Tim Bonito")
+(roleAt TimBonito CardVaultBostonLLC "Co-Founder")
+(foundingMember TimBonito CardVaultBostonLLC)
+
+(isa ScottHeigelmann Person)
+(fullName ScottHeigelmann "Scott Heigelmann")
+(roleAt ScottHeigelmann CardVaultBostonLLC "Co-Founder")
+(foundingMember ScottHeigelmann CardVaultBostonLLC)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 3: Locations
+;;; ═══════════════════════════════════════════════
+
+(isa CVBoston RetailLocation)
+(locationName CVBoston "TD Garden, Boston")
+(locationAddress CVBoston "112 Causeway St, Boston, MA 02114")
+(locationState CVBoston "MA")
+(locationVenue CVBoston "TD Garden")
+(locationStatus CVBoston "flagship")
+(operatedBy CVBoston CardVaultBostonLLC)
+
+(isa CVFoxborough RetailLocation)
+(locationName CVFoxborough "Patriot Place, Foxborough")
+(locationVenue CVFoxborough "Gillette Stadium")
+(locationState CVFoxborough "MA")
+(locationStatus CVFoxborough "open")
+(operatedBy CVFoxborough CardVaultBostonLLC)
+
+(isa CVFoxwoods RetailLocation)
+(locationName CVFoxwoods "Foxwoods Resort Casino")
+(locationState CVFoxwoods "CT")
+(locationStatus CVFoxwoods "open")
+(operatedBy CVFoxwoods CardVaultBostonLLC)
+
+(isa CVAmericanDream RetailLocation)
+(locationName CVAmericanDream "American Dream, East Rutherford")
+(locationState CVAmericanDream "NJ")
+(locationStatus CVAmericanDream "open")
+(operatedBy CVAmericanDream CardVaultBostonLLC)
+
+(isa CVEastHampton RetailLocation)
+(locationName CVEastHampton "East Hampton")
+(locationState CVEastHampton "NY")
+(locationStatus CVEastHampton "open")
+(operatedBy CVEastHampton CardVaultBostonLLC)
+
+(isa CVChicago RetailLocation)
+(locationName CVChicago "Wrigley Field, Chicago")
+(locationAddress CVChicago "1027 W Addison St, Suite A107, Chicago, IL")
+(locationState CVChicago "IL")
+(locationVenue CVChicago "Wrigley Field")
+(locationStatus CVChicago "open")
+(operatedBy CVChicago CardVaultBostonLLC)
+
+(isa CVSoHo RetailLocation)
+(locationName CVSoHo "SoHo, NYC")
+(locationAddress CVSoHo "244 Lafayette St, New York, NY")
+(locationState CVSoHo "NY")
+(locationStatus CVSoHo "flagship")
+(operatedBy CVSoHo CardVaultBostonLLC)
+
+(isa CVDallas RetailLocation)
+(locationName CVDallas "American Airlines Center, Dallas")
+(locationState CVDallas "TX")
+(locationVenue CVDallas "American Airlines Center")
+(locationStatus CVDallas "open")
+(operatedBy CVDallas CardVaultBostonLLC)
+
+(isa CVMallOfAmerica RetailLocation)
+(locationName CVMallOfAmerica "Mall of America, Bloomington")
+(locationState CVMallOfAmerica "MN")
+(locationVenue CVMallOfAmerica "Mall of America")
+(locationStatus CVMallOfAmerica "open")
+(operatedBy CVMallOfAmerica CardVaultBostonLLC)
+
+(isa CVLasVegas RetailLocation)
+(locationName CVLasVegas "Mandalay Bay, Las Vegas")
+(locationState CVLasVegas "NV")
+(locationVenue CVLasVegas "Mandalay Bay")
+(locationStatus CVLasVegas "open")
+(operatedBy CVLasVegas CardVaultBostonLLC)
+
+(isa CVSanFrancisco RetailLocation)
+(locationName CVSanFrancisco "Oracle Park, San Francisco")
+(locationAddress CVSanFrancisco "761 3rd St, San Francisco, CA")
+(locationState CVSanFrancisco "CA")
+(locationVenue CVSanFrancisco "Oracle Park")
+(locationStatus CVSanFrancisco "flagship")
+(operatedBy CVSanFrancisco CardVaultBostonLLC)
+
+;;; Coming Soon
+(isa CVSacramento RetailLocation)
+(locationName CVSacramento "Sacramento")
+(locationState CVSacramento "CA")
+(locationStatus CVSacramento "coming-soon")
+
+(isa CVBrooklyn RetailLocation)
+(locationName CVBrooklyn "Brooklyn")
+(locationState CVBrooklyn "NY")
+(locationStatus CVBrooklyn "coming-soon")
+
+(isa CVPaloAlto RetailLocation)
+(locationName CVPaloAlto "Palo Alto")
+(locationState CVPaloAlto "CA")
+(locationStatus CVPaloAlto "coming-soon")
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 4: Products & Services
+;;; ═══════════════════════════════════════════════
+
+(isa SportsCards ProductCategory)
+(categoryName SportsCards "Sports Trading Cards")
+(subcategory SportsCards "Baseball")
+(subcategory SportsCards "Basketball")
+(subcategory SportsCards "Football")
+(subcategory SportsCards "Soccer")
+(subcategory SportsCards "Golf")
+(subcategory SportsCards "UFC")
+(subcategory SportsCards "Boxing")
+(subcategory SportsCards "WWE")
+(subcategory SportsCards "NASCAR")
+(offeredBy SportsCards CardVaultBostonLLC)
+
+(isa TCGCards ProductCategory)
+(categoryName TCGCards "Trading Card Games")
+(subcategory TCGCards "Pokemon")
+(subcategory TCGCards "Yu-Gi-Oh!")
+(subcategory TCGCards "Magic: The Gathering")
+(subcategory TCGCards "One Piece")
+(offeredBy TCGCards CardVaultBostonLLC)
+
+(isa EntertainmentCards ProductCategory)
+(categoryName EntertainmentCards "Entertainment Collectibles")
+(subcategory EntertainmentCards "Disney")
+(subcategory EntertainmentCards "Marvel")
+(subcategory EntertainmentCards "Star Wars")
+(offeredBy EntertainmentCards CardVaultBostonLLC)
+
+(isa Memorabilia ProductCategory)
+(categoryName Memorabilia "Authenticated Memorabilia")
+(subcategory Memorabilia "Autographed Helmets")
+(subcategory Memorabilia "Game-Worn Jerseys")
+(subcategory Memorabilia "The Tom Brady Collection")
+(offeredBy Memorabilia CardVaultBostonLLC)
+
+(isa GradingSubmissions Service)
+(serviceName GradingSubmissions "Card Grading Submissions")
+(authorizedFor GradingSubmissions "PSA")
+(authorizedFor GradingSubmissions "Beckett/BGS")
+(authorizedFor GradingSubmissions "SGC")
+(offeredBy GradingSubmissions CardVaultBostonLLC)
+
+(isa CardVaultBreaks Service)
+(serviceName CardVaultBreaks "Live Card Breaks")
+(platform CardVaultBreaks "CardVault Breaks")
+(platform CardVaultBreaks "Fanatics Live")
+(platform CardVaultBreaks "eBay Live")
+(platform CardVaultBreaks "WhatNot")
+(offeredBy CardVaultBreaks CardVaultBostonLLC)
+
+(isa BuySellTrade Service)
+(serviceName BuySellTrade "Buy/Sell/Trade")
+(offeredBy BuySellTrade CardVaultBostonLLC)
+
+(isa CollectorCash Service)
+(serviceName CollectorCash "Collector Cash Loyalty Program")
+(offeredBy CollectorCash CardVaultBostonLLC)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 5: Partners
+;;; ═══════════════════════════════════════════════
+
+(isa FanaticsAuthentic Partner)
+(partnerName FanaticsAuthentic "Fanatics Authentic")
+(partnerType FanaticsAuthentic "Authorized Memorabilia Retailer")
+(partnerOf FanaticsAuthentic CardVaultBostonLLC)
+
+(isa PSA Partner)
+(partnerName PSA "Professional Sports Authenticator")
+(partnerType PSA "Authorized Grading Submission Center")
+(partnerOf PSA CardVaultBostonLLC)
+
+(isa BeckettGrading Partner)
+(partnerName BeckettGrading "Beckett Grading Services")
+(partnerType BeckettGrading "Authorized Grading Submission Center")
+(partnerOf BeckettGrading CardVaultBostonLLC)
+
+(isa SGCGrading Partner)
+(partnerName SGCGrading "Sportscard Guaranty Corporation")
+(partnerType SGCGrading "Authorized Grading Submission Center")
+(partnerOf SGCGrading CardVaultBostonLLC)
+
+(isa ToppsPartner Partner)
+(partnerName ToppsPartner "Topps / Fanatics Collectibles")
+(partnerType ToppsPartner "Authorized Card Retailer")
+(partnerOf ToppsPartner CardVaultBostonLLC)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 6: Competitors
+;;; ═══════════════════════════════════════════════
+
+(isa FanaticsCollect Competitor)
+(companyName FanaticsCollect "Fanatics Collect (formerly PWCC)")
+(competitorType FanaticsCollect "Online Marketplace + Vault")
+(competesDirectlyWith FanaticsCollect CardVaultBostonLLC)
+
+(isa GoldinAuctions Competitor)
+(companyName GoldinAuctions "Goldin Auctions (eBay)")
+(competitorType GoldinAuctions "High-End Auctions")
+(competesDirectlyWith GoldinAuctions CardVaultBostonLLC)
+
+(isa HeritageAuctions Competitor)
+(companyName HeritageAuctions "Heritage Auctions")
+(competitorType HeritageAuctions "Premium Auction House")
+(competesDirectlyWith HeritageAuctions CardVaultBostonLLC)
+
+(isa ArenaClub Competitor)
+(companyName ArenaClub "Arena Club (Derek Jeter)")
+(competitorType ArenaClub "AI Grading + Vault + Marketplace")
+(competesDirectlyWith ArenaClub CardVaultBostonLLC)
+
+(isa DaveAndAdams Competitor)
+(companyName DaveAndAdams "Dave & Adam's")
+(competitorType DaveAndAdams "Online + Retail Card Shop")
+(competesDirectlyWith DaveAndAdams CardVaultBostonLLC)
+
+(isa WhatnotPlatform Competitor)
+(companyName WhatnotPlatform "Whatnot")
+(competitorType WhatnotPlatform "Livestream Marketplace")
+(valuation WhatnotPlatform "$11.5B")
+(competesDirectlyWith WhatnotPlatform CardVaultBostonLLC)
+
+(isa CollectorsHoldings Competitor)
+(companyName CollectorsHoldings "Collectors Holdings (PSA parent)")
+(competitorType CollectorsHoldings "Grading + Data Conglomerate")
+(valuation CollectorsHoldings "$4.3B")
+(competesIndirectlyWith CollectorsHoldings CardVaultBostonLLC)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 7: Industry Context
+;;; ═══════════════════════════════════════════════
+
+(isa SportsCollectiblesIndustry Industry)
+(industryName SportsCollectiblesIndustry "Sports Memorabilia & Trading Cards")
+(marketSize SportsCollectiblesIndustry "$33B (2025)")
+(projectedMarketSize SportsCollectiblesIndustry "$271.2B by 2034")
+(cagr SportsCollectiblesIndustry "22.1%")
+(cardsGradedAnnually SportsCollectiblesIndustry "26.8M (2025)")
+(gradingGrowthYoY SportsCollectiblesIndustry "32%")
+
+(isa NSCC TradeAssociation)
+(associationName NSCC "National Sports Collectors Convention")
+(nextEvent NSCC "July 29 - Aug 2, 2026, Rosemont IL")
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 8: Charlotte Protocol Mapping
+;;; ═══════════════════════════════════════════════
+
+;;; NODE types for CardVault domain
+(charlotteNodeType CardVaultBostonLLC "RetailLocation")
+(charlotteNodeType CardVaultBostonLLC "Card")
+(charlotteNodeType CardVaultBostonLLC "Collector")
+(charlotteNodeType CardVaultBostonLLC "Employee")
+(charlotteNodeType CardVaultBostonLLC "GradingSubmission")
+(charlotteNodeType CardVaultBostonLLC "LiveBreak")
+(charlotteNodeType CardVaultBostonLLC "Vendor")
+
+;;; EDGE types
+(charlotteEdgeType CardVaultBostonLLC "purchasedAt")
+(charlotteEdgeType CardVaultBostonLLC "submittedForGrading")
+(charlotteEdgeType CardVaultBostonLLC "gradedBy")
+(charlotteEdgeType CardVaultBostonLLC "soldTo")
+(charlotteEdgeType CardVaultBostonLLC "tradedWith")
+(charlotteEdgeType CardVaultBostonLLC "hostedBreak")
+(charlotteEdgeType CardVaultBostonLLC "suppliedBy")
+(charlotteEdgeType CardVaultBostonLLC "worksAt")
+
+;;; METRIC types
+(charlotteMetricType CardVaultBostonLLC "Revenue per Location")
+(charlotteMetricType CardVaultBostonLLC "Average Transaction Value")
+(charlotteMetricType CardVaultBostonLLC "Grading Submission Volume")
+(charlotteMetricType CardVaultBostonLLC "Live Break Viewership")
+(charlotteMetricType CardVaultBostonLLC "Collector Lifetime Value")
+(charlotteMetricType CardVaultBostonLLC "Inventory Turnover")
+(charlotteMetricType CardVaultBostonLLC "Foot Traffic")
+
+;;; SIGNAL types
+(charlotteSignalType CardVaultBostonLLC "Sale Completed")
+(charlotteSignalType CardVaultBostonLLC "Grading Returned")
+(charlotteSignalType CardVaultBostonLLC "New Collector Registered")
+(charlotteSignalType CardVaultBostonLLC "Live Break Started")
+(charlotteSignalType CardVaultBostonLLC "Inventory Received")
+(charlotteSignalType CardVaultBostonLLC "Store Opening")
+(charlotteSignalType CardVaultBostonLLC "VIP Event Hosted")
+
+;;; PROTOCOL types
+(charlotteProtocolType CardVaultBostonLLC "Authentication Verification")
+(charlotteProtocolType CardVaultBostonLLC "Grading Submission Workflow")
+(charlotteProtocolType CardVaultBostonLLC "Inventory Intake")
+(charlotteProtocolType CardVaultBostonLLC "Store Opening Playbook")
+(charlotteProtocolType CardVaultBostonLLC "Live Break Production")
+(charlotteProtocolType CardVaultBostonLLC "Buy/Sell/Trade Evaluation")
+(charlotteProtocolType CardVaultBostonLLC "Collector Cash Accrual")
