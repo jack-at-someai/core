@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GesDate — Charlotte-Powered Herd Management Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --purple-500:#7200CB;--purple-600:#5B00A2;--purple-700:#44007A;--purple-800:#2E0051;
+  --green-500:#22C55E;--green-400:#4ADE80;--green-600:#16A34A;
+  --amber-500:#F59E0B;--amber-400:#FBBF24;--amber-300:#FCD34D;
+  --dark:#0A0F0A;--surface:#141A14;--border:#2A332A;
+  --text:#E8EDE8;--text-dim:#7A857A;
+  --glass-bg:rgba(10,15,10,0.92);--glass-border:rgba(114,0,203,0.15);
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* === KG BACKGROUND === */
+#kg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.35}
+
+/* === SCROLL CONTENT === */
+#scroll-content{position:relative;z-index:10;pointer-events:none}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;pointer-events:none}
+.section-inner{max-width:920px;width:100%;pointer-events:auto}
+
+/* Glass */
+.glass{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  padding:48px;
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.8s ease,transform 0.8s ease;
+}
+.glass.visible{opacity:1;transform:translateY(0)}
+
+/* === TYPOGRAPHY === */
+h1.hero-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(42px,9vw,84px);font-weight:700;letter-spacing:5px;
+  background:linear-gradient(135deg,var(--purple-500),var(--green-500));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.05;margin-bottom:8px;
+}
+.hero-sub{font-family:'Oswald',sans-serif;font-size:clamp(15px,2.8vw,21px);font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--green-500);margin-bottom:24px}
+.hero-desc{font-size:15px;color:var(--text-dim);max-width:620px;margin-bottom:32px}
+.hero-badge{display:inline-block;padding:6px 16px;border:1px solid var(--purple-500);border-radius:20px;font-size:11px;letter-spacing:2px;color:var(--purple-500);text-transform:uppercase;margin-bottom:20px}
+
+h2.section-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(26px,4.5vw,40px);font-weight:600;letter-spacing:2px;
+  color:var(--text);margin-bottom:8px;line-height:1.2;
+}
+h2.section-title span.accent{color:var(--green-500)}
+h2.section-title span.purple{color:var(--purple-500)}
+h2.section-title span.amber{color:var(--amber-500)}
+.section-subtitle{font-size:13px;color:var(--purple-500);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.section-body{font-size:15px;color:var(--text-dim);line-height:1.8;margin-bottom:24px}
+.section-body strong{color:var(--text)}
+
+/* === STAT BAR === */
+.stat-bar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;margin-top:8px}
+.stat-item{flex:1;min-width:110px;padding:16px 12px;text-align:center;border-right:1px solid var(--glass-border);background:rgba(114,0,203,0.04)}
+.stat-item:last-child{border-right:none}
+.stat-val{display:block;font-family:'Oswald',sans-serif;font-size:24px;font-weight:600;color:var(--text)}
+.stat-lbl{display:block;font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;text-transform:uppercase}
+
+/* === PROBLEM LIST === */
+.problem-list{list-style:none;padding:0}
+.problem-list li{position:relative;padding:12px 0 12px 28px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:15px;color:var(--text-dim);line-height:1.7}
+.problem-list li::before{content:'';position:absolute;left:0;top:20px;width:12px;height:12px;border-radius:50%;background:var(--amber-500);opacity:0.5}
+.problem-list li strong{color:var(--text)}
+
+/* === PRIMITIVE CARDS === */
+.prim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-top:24px}
+.prim-card{background:rgba(114,0,203,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:20px 16px;text-align:center;transition:border-color 0.3s,transform 0.3s}
+.prim-card:hover{border-color:var(--purple-500);transform:translateY(-2px)}
+.prim-icon{font-size:26px;margin-bottom:8px;display:block}
+.prim-name{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.prim-name.c-purple{color:var(--purple-500)}.prim-name.c-green{color:var(--green-500)}.prim-name.c-amber{color:var(--amber-500)}
+.prim-examples{font-size:11px;color:var(--text-dim);line-height:1.6}
+.prim-examples strong{color:var(--text);font-weight:500}
+
+/* === TIMELINE === */
+.cycle-timeline{display:flex;gap:0;overflow-x:auto;margin-top:24px;padding-bottom:8px}
+.cycle-stage{flex:1;min-width:110px;position:relative;padding:20px 12px 16px;text-align:center;border:1px solid var(--glass-border);background:rgba(34,197,94,0.04)}
+.cycle-stage:first-child{border-radius:12px 0 0 12px}
+.cycle-stage:last-child{border-radius:0 12px 12px 0}
+.cycle-stage::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:0;height:0;border:8px solid transparent;border-left-color:var(--green-600);z-index:1}
+.cycle-stage:last-child::after{display:none}
+.cycle-day{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;color:var(--green-500);text-transform:uppercase;margin-bottom:6px}
+.cycle-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.cycle-desc{font-size:11px;color:var(--text-dim);line-height:1.4}
+
+/* === FEATURE CARDS === */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:24px}
+.feature-card{background:rgba(114,0,203,0.06);border:1px solid var(--glass-border);border-radius:10px;padding:20px}
+.feature-card h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--green-500);letter-spacing:1px;margin-bottom:6px}
+.feature-card p{font-size:12px;color:var(--text-dim);line-height:1.6}
+
+/* === NETWORK CARDS === */
+.network-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:24px}
+.network-card{background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:20px}
+.network-card h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--amber-500);letter-spacing:1px;margin-bottom:6px}
+.network-card p{font-size:12px;color:var(--text-dim);line-height:1.6}
+
+/* === CLOSING === */
+.closing-line{font-family:'Oswald',sans-serif;font-size:clamp(16px,2.5vw,22px);color:var(--text-dim);letter-spacing:1px;line-height:1.6;margin-top:24px}
+.closing-line strong{color:var(--text)}
+.link-back{display:inline-block;margin-top:20px;padding:10px 24px;border:1px solid var(--purple-500);border-radius:8px;color:var(--purple-500);text-decoration:none;font-size:13px;letter-spacing:1px;transition:all 0.3s}
+.link-back:hover{background:var(--purple-500);color:var(--text)}
+
+/* === SPACER === */
+.spacer{height:40vh;pointer-events:none}
+
+/* === MOBILE === */
+@media(max-width:640px){
+  .glass{padding:28px 20px}
+  .prim-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-grid,.network-grid{grid-template-columns:1fr}
+  .cycle-timeline{flex-direction:column}
+  .cycle-stage{border-radius:0!important}
+  .cycle-stage:first-child{border-radius:12px 12px 0 0!important}
+  .cycle-stage:last-child{border-radius:0 0 12px 12px!important}
+  .cycle-stage::after{display:none}
+  .stat-item{min-width:80px;padding:12px 6px}
+  .stat-val{font-size:18px}
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--purple-800);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--purple-700)}
+</style>
+</head>
+<body>
+
+<!-- KG BACKGROUND -->
+<canvas id="kg-canvas"></canvas>
+
+<!-- SCROLL CONTENT -->
+<div id="scroll-content">
+
+  <div class="spacer"></div>
+
+  <!-- SECTION 1: HERO -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="hero-badge">Charlotte Agent</div>
+        <h1 class="hero-title">GESDATE</h1>
+        <div class="hero-sub">Herd Management Intelligence</div>
+        <p class="hero-desc">Charlotte-powered breeding management for the swine industry. GesDate tracks every breeding cycle, predicts every farrowing date, and turns isolated farm records into a connected genetic network &mdash; one litter at a time.</p>
+        <div class="stat-bar">
+          <div class="stat-item"><span class="stat-val">114</span><span class="stat-lbl">Day Gestation</span></div>
+          <div class="stat-item"><span class="stat-val">20K</span><span class="stat-lbl">Breeding Cycles</span></div>
+          <div class="stat-item"><span class="stat-val">77K</span><span class="stat-lbl">Breeders</span></div>
+          <div class="stat-item"><span class="stat-val">401K</span><span class="stat-lbl">KRF Facts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: THE PROBLEM -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Problem</div>
+        <h2 class="section-title">Every farm is an <span class="accent">island</span></h2>
+        <p class="section-body">Swine gestation is <strong>114 days</strong> &mdash; 3 months, 3 weeks, 3 days. Miss a breeding date, you miss a farrowing. Miss a farrowing, you lose a litter. Across the industry, the tools for tracking this are remarkably primitive.</p>
+        <ul class="problem-list">
+          <li><strong>Paper calendars and whiteboards</strong> &mdash; the most common gestation tracking tool in American barns</li>
+          <li><strong>Spreadsheets that die with laptops</strong> &mdash; years of breeding data lost to hard drive failures and forgotten passwords</li>
+          <li><strong>No cross-herd analytics</strong> &mdash; a breeder has no idea how their litter sizes compare to the breed average</li>
+          <li><strong>No breed-level performance data</strong> &mdash; which sires throw larger litters? Nobody can answer that across operations</li>
+          <li><strong>Fringe software that doesn't talk</strong> &mdash; GesDate, EasyPig, PigCHAMP, handwritten notebooks, and Facebook Messenger threads</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: HOW IT WORKS -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">How It Works</div>
+        <h2 class="section-title">Charlotte's five <span class="purple">primitives</span> applied to breeding</h2>
+        <p class="section-body">The same infrastructure that powers industrial equipment service and violin provenance &mdash; mapped to the breeding barn.</p>
+        <div class="prim-grid">
+          <div class="prim-card">
+            <span class="prim-icon">&#x25C9;</span>
+            <div class="prim-name c-purple">NODE</div>
+            <div class="prim-examples"><strong>Sow</strong> (ear notch)<br><strong>Boar</strong> (herdmark)<br><strong>Litter</strong> &middot; <strong>Piglet</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x2194;</span>
+            <div class="prim-name c-green">EDGE</div>
+            <div class="prim-examples"><strong>bredWith</strong><br><strong>farrowedBy</strong><br><strong>siredBy</strong> &middot; <strong>weanedTo</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x25B2;</span>
+            <div class="prim-name c-amber">METRIC</div>
+            <div class="prim-examples"><strong>Gestation Length</strong><br><strong>Litter Size</strong><br><strong>Birth Weight</strong> &middot; <strong>Daily Gain</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x26A1;</span>
+            <div class="prim-name" style="color:#EF4444">SIGNAL</div>
+            <div class="prim-examples"><strong>Heat Detected</strong><br><strong>Bred</strong> &middot; <strong>Farrowed</strong><br><strong>Weaned</strong> &middot; <strong>Re-bred</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x2696;</span>
+            <div class="prim-name" style="color:#E9C46A">PROTOCOL</div>
+            <div class="prim-examples"><strong>114-day Gestation</strong><br><strong>21-day Lactation</strong><br><strong>Breeding Schedule</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: THE BREEDING CYCLE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Breeding Cycle</div>
+        <h2 class="section-title">From heat detection to <span class="accent">re-breeding</span></h2>
+        <p class="section-body">Every stage is a SIGNAL in the graph. Every duration is a METRIC. Every expectation is a PROTOCOL. GesDate turns the breeding cycle into structured, queryable data.</p>
+        <div class="cycle-timeline">
+          <div class="cycle-stage">
+            <div class="cycle-day">Day 0</div>
+            <div class="cycle-name">Heat Detection</div>
+            <div class="cycle-desc">Standing heat confirmed. Clock starts.</div>
+          </div>
+          <div class="cycle-stage">
+            <div class="cycle-day">Day 1</div>
+            <div class="cycle-name">Breeding</div>
+            <div class="cycle-desc">Sow/boar pairing recorded. Sire EDGE created.</div>
+          </div>
+          <div class="cycle-stage">
+            <div class="cycle-day">114 Days</div>
+            <div class="cycle-name">Gestation</div>
+            <div class="cycle-desc">PROTOCOL countdown. Daily monitoring METRICs.</div>
+          </div>
+          <div class="cycle-stage">
+            <div class="cycle-day">Day 115</div>
+            <div class="cycle-name">Farrowing</div>
+            <div class="cycle-desc">Litter born. Count, weights, vitality scored.</div>
+          </div>
+          <div class="cycle-stage">
+            <div class="cycle-day">21 Days</div>
+            <div class="cycle-name">Lactation</div>
+            <div class="cycle-desc">Piglet growth tracked. Sow condition monitored.</div>
+          </div>
+          <div class="cycle-stage">
+            <div class="cycle-day">Day 136</div>
+            <div class="cycle-name">Weaning</div>
+            <div class="cycle-desc">Piglets separated. Weaning weights recorded.</div>
+          </div>
+          <div class="cycle-stage">
+            <div class="cycle-day">Day 141+</div>
+            <div class="cycle-name">Re-breeding</div>
+            <div class="cycle-desc">Sow returns to heat. Cycle restarts.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: FARM-LEVEL INTELLIGENCE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Farm-Level Intelligence</div>
+        <h2 class="section-title">What a single farm <span class="accent">gets</span></h2>
+        <p class="section-body">Before the network effect &mdash; what GesDate delivers to <strong>one operation on day one</strong>. Replace the whiteboard with infrastructure that remembers everything.</p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Farrowing Calendar</h4>
+            <p>Predicted farrowing dates for every bred sow. 114-day countdown with alerts at 7, 3, and 1 day.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Breeding Reminders</h4>
+            <p>Heat cycle predictions based on historical data. Wean-to-breed interval tracking per sow.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Litter Performance</h4>
+            <p>Born alive, stillborn, mummified, weaned count. Birth weights and weaning weights per litter.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Sow Lifetime Metrics</h4>
+            <p>Total litters, average born alive, pigs weaned per sow per year, parity curve analysis.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Boar Utilization</h4>
+            <p>Breeding frequency, conception rates, average litter size by sire. Natural service and AI tracking.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Herd Dashboard</h4>
+            <p>Farrowing rate, breeding efficiency, 21-day re-breed rate, culling metrics &mdash; all real-time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: NETWORK INTELLIGENCE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Network Intelligence</div>
+        <h2 class="section-title">When farms <span class="amber">connect</span></h2>
+        <p class="section-body">A single farm's data is useful. A hundred farms' data is <strong>transformational</strong>. This is the Sounder vision &mdash; stitching farms together into a unified knowledge graph where genetic performance is measurable across operations.</p>
+        <div class="network-grid">
+          <div class="network-card">
+            <h4>Cross-Herd Genetic Performance</h4>
+            <p>How does a sire's progeny perform across 20 different farms, climates, and management styles?</p>
+          </div>
+          <div class="network-card">
+            <h4>Breed-Level Benchmarks</h4>
+            <p>Average litter size for Durocs vs Hampshires vs crossbreds &mdash; with real data, not textbook numbers.</p>
+          </div>
+          <div class="network-card">
+            <h4>Regional Health Patterns</h4>
+            <p>Litter size drops in a county? Farrowing complications trending upward? The graph sees it first.</p>
+          </div>
+          <div class="network-card">
+            <h4>Sire Ranking Across Operations</h4>
+            <p>Objective sire evaluation based on progeny performance data from every farm in the network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: VISION -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Vision</div>
+        <h2 class="section-title">The entry <span class="accent">point</span></h2>
+        <p class="section-body">GesDate is the entry point. Every breeding cycle recorded is a fact in Charlotte's graph. Every farm that joins extends the network. Every sire that appears in two different operations creates a bridge between herds that never knew they were connected.</p>
+        <p class="section-body">The goal: <strong>predict genetic outcomes before the breeding happens</strong>. Not guess &mdash; predict. With enough data across enough operations, Charlotte can tell you what a particular boar-sow pairing is likely to produce before a single piglet is born. Litter size. Birth weight distribution. Growth trajectory. Breed-level tendencies corrected for individual variation.</p>
+        <p class="closing-line">One breeding cycle at a time. One farm at a time.<br><strong>From Paris, Illinois outward.</strong></p>
+        <a class="link-back" href="../sounder/">Back to Sounder</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+</div>
+
+<!-- SCROLL ANIMATION -->
+<script>
+(function(){
+  var panels = document.querySelectorAll('.glass');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  panels.forEach(function(p){ observer.observe(p); });
+})();
+</script>
+
+<!-- KNOWLEDGE GRAPH BACKGROUND (Canvas 2D) -->
+<script>
+(function(){
+  var c = document.getElementById('kg-canvas');
+  var ctx = c.getContext('2d');
+  var W, H;
+  function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var nodeData = [
+    // Center
+    {id:'GD', x:0.50, y:0.48, r:10, color:'#7200CB', label:'GesDate'},
+    // Lifecycle (green ring)
+    {id:'BREED',  x:0.35, y:0.28, r:6, color:'#22C55E', label:'Breeding'},
+    {id:'GEST',   x:0.50, y:0.22, r:6, color:'#22C55E', label:'Gestation'},
+    {id:'FARR',   x:0.65, y:0.28, r:6, color:'#22C55E', label:'Farrowing'},
+    {id:'WEAN',   x:0.68, y:0.42, r:5, color:'#22C55E', label:'Weaning'},
+    {id:'SELECT', x:0.32, y:0.42, r:5, color:'#22C55E', label:'Selection'},
+    // Entities (amber ring)
+    {id:'SOW',    x:0.28, y:0.58, r:5, color:'#F59E0B', label:'Sow'},
+    {id:'BOAR',   x:0.72, y:0.58, r:5, color:'#F59E0B', label:'Boar'},
+    {id:'LITTER', x:0.42, y:0.68, r:5, color:'#F59E0B', label:'Litter'},
+    {id:'PIGLET', x:0.58, y:0.68, r:5, color:'#F59E0B', label:'Piglet'},
+    // Metrics (white dim)
+    {id:'D114',   x:0.18, y:0.20, r:4, color:'#8A9A8A', label:'114 Days'},
+    {id:'LSIZE',  x:0.82, y:0.20, r:4, color:'#8A9A8A', label:'Litter Size'},
+    {id:'BWT',    x:0.15, y:0.75, r:4, color:'#8A9A8A', label:'Birth Weight'},
+    {id:'DGAIN',  x:0.85, y:0.75, r:4, color:'#8A9A8A', label:'Daily Gain'},
+    // Connections (purple dim)
+    {id:'SOUND',  x:0.12, y:0.40, r:4, color:'#5B00A2', label:'Sounder'},
+    {id:'CHARL',  x:0.88, y:0.40, r:4, color:'#5B00A2', label:'Charlotte OS'},
+    {id:'TROG',   x:0.50, y:0.85, r:4, color:'#5B00A2', label:'Trogdon'},
+  ];
+
+  var edgeData = [
+    // Center to lifecycle
+    ['GD','BREED'],['GD','GEST'],['GD','FARR'],['GD','WEAN'],['GD','SELECT'],
+    // Lifecycle sequence
+    ['SELECT','BREED'],['BREED','GEST'],['GEST','FARR'],['FARR','WEAN'],['WEAN','SELECT'],
+    // Center to entities
+    ['GD','SOW'],['GD','BOAR'],['GD','LITTER'],['GD','PIGLET'],
+    // Entities to lifecycle
+    ['SOW','BREED'],['BOAR','BREED'],['SOW','FARR'],['LITTER','FARR'],['PIGLET','WEAN'],
+    // Metrics to related
+    ['D114','GEST'],['LSIZE','FARR'],['BWT','LITTER'],['DGAIN','PIGLET'],
+    // Connections
+    ['SOUND','GD'],['CHARL','GD'],['TROG','GD'],
+    ['SOUND','CHARL'],['TROG','SOUND'],
+    // Entity links
+    ['SOW','LITTER'],['BOAR','LITTER'],['LITTER','PIGLET'],
+  ];
+
+  var nodes = nodeData.map(function(n){
+    return {
+      id: n.id,
+      x: n.x * W + (Math.random()-0.5)*40,
+      y: n.y * H + (Math.random()-0.5)*40,
+      r: n.r, color: n.color, label: n.label,
+      vx: (Math.random()-0.5)*0.25,
+      vy: (Math.random()-0.5)*0.25,
+      baseX: n.x, baseY: n.y
+    };
+  });
+
+  var nodeMap = {};
+  nodes.forEach(function(n){ nodeMap[n.id] = n; });
+
+  function animate(){
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, W, H);
+
+    // Update positions with gentle drift
+    nodes.forEach(function(n){
+      n.x += n.vx;
+      n.y += n.vy;
+      n.vx += (n.baseX * W - n.x) * 0.0004;
+      n.vy += (n.baseY * H - n.y) * 0.0004;
+      n.vx *= 0.994;
+      n.vy *= 0.994;
+    });
+
+    // Draw edges
+    ctx.lineWidth = 0.6;
+    edgeData.forEach(function(e){
+      var a = nodeMap[e[0]], b = nodeMap[e[1]];
+      if(!a || !b) return;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = 'rgba(114,0,203,0.15)';
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach(function(n){
+      // Glow
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI * 2);
+      var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3);
+      g.addColorStop(0, n.color + '22');
+      g.addColorStop(1, n.color + '00');
+      ctx.fillStyle = g;
+      ctx.fill();
+
+      // Core
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.fill();
+
+      // Label
+      ctx.fillStyle = 'rgba(232,237,232,0.45)';
+      ctx.font = '9px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y - n.r - 6);
+    });
+  }
+
+  animate();
+})();
+</script>
+</body>
+</html>

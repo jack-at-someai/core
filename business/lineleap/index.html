@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LineLeap — Charlotte Time Compression Experiment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --neon:#7C3AED;--blue:#3B82F6;--pink:#EC4899;
+  --dark:#0A0A1A;--surface:#141428;
+  --glass-bg:rgba(10,10,26,0.92);--glass-border:rgba(124,58,237,0.18);
+  --text:#E2E8F0;--text-dim:#6B7280;--text-bright:#F8FAFC;
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* === CANVAS BG === */
+#kg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.35}
+
+/* === SCROLL CONTENT === */
+#scroll-content{position:relative;z-index:10;pointer-events:none}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;pointer-events:none}
+.section-inner{max-width:920px;width:100%;pointer-events:auto}
+
+/* Glass panel */
+.glass{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;padding:48px;
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.8s ease,transform 0.8s ease;
+}
+.glass.visible{opacity:1;transform:translateY(0)}
+
+/* === TYPOGRAPHY === */
+.badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);border:1px solid rgba(236,72,153,0.3);padding:6px 14px;border-radius:20px;margin-bottom:20px;font-weight:500}
+h1.hero-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(56px,12vw,110px);font-weight:700;letter-spacing:8px;
+  background:linear-gradient(135deg,var(--neon),var(--pink));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.05;margin-bottom:8px;
+}
+.hero-sub{font-family:'Oswald',sans-serif;font-size:clamp(14px,2.5vw,20px);font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:28px}
+
+h2.section-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(26px,5vw,40px);font-weight:600;letter-spacing:2px;
+  color:var(--text-bright);margin-bottom:8px;line-height:1.2;
+}
+h2.section-title span.accent{color:var(--blue)}
+h2.section-title span.pink{color:var(--pink)}
+.section-subtitle{font-size:12px;color:var(--pink);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;font-weight:500}
+.section-body{font-size:15px;color:var(--text-dim);line-height:1.8;margin-bottom:20px}
+.section-body strong{color:var(--text)}
+
+/* === STAT BAR === */
+.stat-bar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;margin-top:8px}
+.stat-item{flex:1;min-width:100px;padding:16px 8px;text-align:center;border-right:1px solid var(--glass-border);background:rgba(124,58,237,0.04)}
+.stat-item:last-child{border-right:none}
+.stat-val{display:block;font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--text-bright)}
+.stat-lbl{display:block;font-size:9px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;text-transform:uppercase}
+
+/* === TABLE === */
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.data-table th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--glass-border);color:var(--text-dim);font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(124,58,237,0.08);color:var(--text)}
+.data-table td.mono{font-family:'Courier New',monospace;color:var(--blue);font-size:13px}
+
+/* === PRODUCT CARDS === */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px}
+.card{background:rgba(124,58,237,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:18px 14px;text-align:center;transition:border-color 0.3s,transform 0.3s}
+.card:hover{border-color:var(--neon);transform:translateY(-2px)}
+.card-icon{font-size:24px;margin-bottom:8px;display:block}
+.card h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;color:var(--text-bright);margin-bottom:6px}
+.card p{font-size:11px;color:var(--text-dim);line-height:1.5}
+
+/* === SPLIT PANEL === */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.split-col{background:rgba(124,58,237,0.04);border:1px solid var(--glass-border);border-radius:12px;padding:20px}
+.split-col h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;margin-bottom:10px}
+.split-col.ai h4{color:var(--blue)}
+.split-col.human h4{color:var(--pink)}
+.split-col ul{list-style:none;padding:0}
+.split-col li{font-size:13px;color:var(--text-dim);padding:4px 0 4px 16px;position:relative;line-height:1.5}
+.split-col li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%}
+.split-col.ai li::before{background:var(--blue);opacity:0.5}
+.split-col.human li::before{background:var(--pink);opacity:0.5}
+
+/* === PRIM CARDS === */
+.prim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
+.prim-card{background:rgba(124,58,237,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:20px 14px;text-align:center;transition:border-color 0.3s}
+.prim-card:hover{border-color:var(--neon)}
+.prim-name{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.prim-name.c-neon{color:var(--neon)}.prim-name.c-blue{color:var(--blue)}.prim-name.c-pink{color:var(--pink)}.prim-name.c-white{color:var(--text-bright)}.prim-name.c-gold{color:#F59E0B}
+.prim-examples{font-size:11px;color:var(--text-dim);line-height:1.6}
+.prim-examples strong{color:var(--text);font-weight:500}
+
+/* === AUTOMATION CARDS === */
+.auto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:20px}
+.auto-card{background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);border-radius:10px;padding:18px;display:flex;align-items:flex-start;gap:12px}
+.auto-arrow{font-size:18px;color:var(--pink);flex-shrink:0;margin-top:2px}
+.auto-card h4{font-size:13px;font-weight:600;color:var(--text-bright);margin-bottom:4px}
+.auto-card p{font-size:11px;color:var(--text-dim);line-height:1.5}
+
+/* === PATH CARDS === */
+.path-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px}
+.path-card{background:rgba(124,58,237,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:24px;transition:border-color 0.3s}
+.path-card:hover{border-color:var(--neon)}
+.path-letter{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;color:var(--neon);line-height:1;margin-bottom:8px}
+.path-card h4{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--text-bright);letter-spacing:1px;margin-bottom:8px}
+.path-card p{font-size:12px;color:var(--text-dim);line-height:1.6;margin-bottom:6px}
+.path-tag{display:inline-block;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-top:4px}
+.path-tag.low{background:rgba(59,130,246,0.15);color:var(--blue)}
+.path-tag.med{background:rgba(245,158,11,0.15);color:#F59E0B}
+.path-tag.high{background:rgba(236,72,153,0.15);color:var(--pink)}
+
+/* === LINKS === */
+.link-list{list-style:none;padding:0;margin-top:20px}
+.link-list li{margin:8px 0}
+.link-list a{color:var(--blue);text-decoration:none;font-size:14px;letter-spacing:0.5px;transition:color 0.2s}
+.link-list a:hover{color:var(--pink)}
+
+/* === CLOSING === */
+.closing-line{font-family:'Oswald',sans-serif;font-size:clamp(16px,3vw,22px);color:var(--text-dim);letter-spacing:1px;line-height:1.6;margin-top:24px}
+.closing-line strong{color:var(--text-bright)}
+
+/* === SPACER === */
+.spacer{height:50vh;pointer-events:none}
+
+/* === COMPETITOR TABLE === */
+.comp-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.comp-table th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--glass-border);color:var(--text-dim);font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.comp-table td{padding:8px 10px;border-bottom:1px solid rgba(124,58,237,0.08);color:var(--text)}
+.comp-table td.dim{color:var(--text-dim)}
+
+/* === MOBILE === */
+@media(max-width:640px){
+  .glass{padding:28px 18px}
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .prim-grid{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+  .auto-grid{grid-template-columns:1fr}
+  .path-grid{grid-template-columns:1fr}
+  .stat-item{min-width:60px;padding:10px 4px}
+  .stat-val{font-size:16px}
+  .data-table{font-size:12px}
+  .comp-table{font-size:11px}
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(124,58,237,0.4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--neon)}
+
+/* === BACK LINK === */
+.back-link{position:fixed;top:16px;left:24px;z-index:20;color:var(--text-dim);text-decoration:none;font-size:13px;transition:color 0.2s}
+.back-link:hover{color:var(--blue)}
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../">&larr; Portfolio</a>
+
+<!-- ═══ CANVAS BACKGROUND ═══ -->
+<canvas id="kg-canvas"></canvas>
+
+<!-- ═══ SCROLL CONTENT ═══ -->
+<div id="scroll-content">
+
+  <div class="spacer"></div>
+
+  <!-- SECTION 1: HERO -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="badge">Charlotte Time Compression Experiment</div>
+        <h1 class="hero-title">LINELEAP</h1>
+        <div class="hero-sub">Charlotte-Powered Bar Management Agent</div>
+        <div class="stat-bar">
+          <div class="stat-item"><span class="stat-val">2016</span><span class="stat-lbl">Founded</span></div>
+          <div class="stat-item"><span class="stat-val">700+</span><span class="stat-lbl">Venues</span></div>
+          <div class="stat-item"><span class="stat-val">1.5M</span><span class="stat-lbl">Users</span></div>
+          <div class="stat-item"><span class="stat-val">$30M</span><span class="stat-lbl">Revenue</span></div>
+          <div class="stat-item"><span class="stat-val">$200M</span><span class="stat-lbl">Valuation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: THE EXPERIMENT -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Experiment</div>
+        <h2 class="section-title">8 years replicated in <span class="accent">6.5 minutes</span></h2>
+        <p class="section-body">On February 9, 2026, Claude Code researched LineLeap from founding to present, built a spatiotemporal knowledge graph of the company's entire history, and replicated the main website and events platform. All three builds ran in parallel.</p>
+        <table class="data-table">
+          <thead><tr><th>Component</th><th>Lines</th><th>Time</th></tr></thead>
+          <tbody>
+            <tr><td>Company research dossier</td><td class="mono">&mdash;</td><td class="mono">~2 min</td></tr>
+            <tr><td>Knowledge graph (81 nodes, 110 edges)</td><td class="mono">1,571</td><td class="mono">~6 min</td></tr>
+            <tr><td>D3.js graph visualization</td><td class="mono">1,266</td><td class="mono">(parallel)</td></tr>
+            <tr><td>Main website replica (4-page SPA)</td><td class="mono">1,533</td><td class="mono">~6 min</td></tr>
+            <tr><td>Events ticketing site (18 events)</td><td class="mono">2,280</td><td class="mono">~6 min</td></tr>
+            <tr><td><strong>Total</strong></td><td class="mono"><strong>6,650</strong></td><td class="mono"><strong>~6.5 min</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: WHAT TOOK YEARS -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">What Took Years</div>
+        <h2 class="section-title">The full product stack built over <span class="pink">4 years</span></h2>
+        <p class="section-body">From selling LineSkip passes outside Whiskey Jacks on a negative-five-degree night in Madison to a full nightlife operating system. 4 years of powercoding, talking to maybe 6 people total.</p>
+        <div class="card-grid">
+          <div class="card"><span class="card-icon">&#x1F3AB;</span><h4>LineSkip</h4><p>Skip the line at partner venues. The original product.</p></div>
+          <div class="card"><span class="card-icon">&#x1F4B5;</span><h4>Cover Charges</h4><p>Digital cover payment. No cash at the door.</p></div>
+          <div class="card"><span class="card-icon">&#x1F378;</span><h4>Drink Pre-Orders</h4><p>Order and pay before you arrive. Skip the bar too.</p></div>
+          <div class="card"><span class="card-icon">&#x1F3B6;</span><h4>Event Ticketing</h4><p>Full ticketing with tiers, capacity, and QR validation.</p></div>
+          <div class="card"><span class="card-icon">&#x1F37E;</span><h4>VIP Bottle Service</h4><p>Table reservations, bottle packages, premium experience.</p></div>
+          <div class="card"><span class="card-icon">&#x1F4CA;</span><h4>Venue Analytics</h4><p>Real-time dashboard for venue owners.</p></div>
+          <div class="card"><span class="card-icon">&#x1F465;</span><h4>CRM</h4><p>Customer profiles, visit history, segmentation.</p></div>
+          <div class="card"><span class="card-icon">&#x1F4E3;</span><h4>Marketing Suite</h4><p>Push notifications, campaigns, A/B testing.</p></div>
+          <div class="card"><span class="card-icon">&#x1F4B9;</span><h4>Dynamic Pricing</h4><p>Surge pricing based on demand signals.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: THE HONEST REFLECTION -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Honest Reflection</div>
+        <h2 class="section-title">The surface layer is <span class="accent">commoditized</span></h2>
+        <p class="section-body">What used to take weeks of front-end work now takes minutes. But the replicas are hollow. The commodity layer collapsed. The taste layer &mdash; knowing <strong>what</strong> to build, <strong>when</strong> to build it, and <strong>why</strong> it matters &mdash; that's still human.</p>
+        <div class="split">
+          <div class="split-col ai">
+            <h4>What AI Can Replicate</h4>
+            <ul>
+              <li>HTML, CSS, JavaScript</li>
+              <li>Page layouts and structure</li>
+              <li>Data models and schemas</li>
+              <li>Animations and interactions</li>
+              <li>Component libraries</li>
+              <li>API integrations</li>
+            </ul>
+          </div>
+          <div class="split-col human">
+            <h4>What Remains Human</h4>
+            <ul>
+              <li>Payment processing at scale</li>
+              <li>10K concurrent Saturday nights</li>
+              <li>Edge cases from production fires</li>
+              <li>Bar owner relationships and trust</li>
+              <li>Architectural judgment from scar tissue</li>
+              <li>The vision of predicting the next drink</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: COMPETITIVE LANDSCAPE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Competitive Landscape</div>
+        <h2 class="section-title">$39B industry. <span class="pink">68,447</span> establishments.</h2>
+        <table class="comp-table">
+          <thead><tr><th>Company</th><th>Funding</th><th>Scale</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>LineLeap</strong></td><td>$35M</td><td>700+ venues, 1.5M users</td><td>Active, $200M val</td></tr>
+            <tr><td>Discotech</td><td>$2.98M</td><td>1,000+ venues</td><td>Discovery-focused</td></tr>
+            <tr><td>TablelistPro</td><td class="dim">Undisclosed</td><td class="dim">Undisclosed</td><td>VIP management</td></tr>
+            <tr><td>SevenRooms</td><td>$74.4M</td><td>12,000+ clients</td><td>Acquired by DoorDash, $1.2B</td></tr>
+            <tr><td>Toast</td><td class="dim">Public</td><td>140K+ locations</td><td>$2B ARR, apex predator</td></tr>
+            <tr><td>BuzzPass</td><td class="dim">&mdash;</td><td>40+ venues</td><td>Acquired by LineLeap Jul 2025</td></tr>
+          </tbody>
+        </table>
+        <p class="section-body" style="margin-top:16px">LineLeap owns the <strong>door</strong> (line-skip, cover) and the <strong>event</strong> (tickets) but not the <strong>bar top</strong> (drinks, tabs, POS). It captures 15&ndash;20% of a venue's digital transaction surface. The other 80% flows through Toast, Square, or Clover.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: CHARLOTTE PRIMITIVES -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Charlotte Substrate</div>
+        <h2 class="section-title">Five primitives. <span class="accent">One nightlife.</span></h2>
+        <div class="prim-grid">
+          <div class="prim-card">
+            <div class="prim-name c-neon">NODE</div>
+            <div class="prim-examples"><strong>Venue</strong> &middot; <strong>Patron</strong><br><strong>Event</strong> &middot; <strong>Staff</strong></div>
+          </div>
+          <div class="prim-card">
+            <div class="prim-name c-pink">EDGE</div>
+            <div class="prim-examples"><strong>attended</strong> &middot; <strong>purchased</strong><br><strong>managed</strong> &middot; <strong>promoted</strong></div>
+          </div>
+          <div class="prim-card">
+            <div class="prim-name c-blue">METRIC</div>
+            <div class="prim-examples"><strong>Cover Revenue</strong><br><strong>Wait Time</strong> &middot; <strong>Drink Sales</strong><br><strong>Conversion Rate</strong></div>
+          </div>
+          <div class="prim-card">
+            <div class="prim-name c-gold">SIGNAL</div>
+            <div class="prim-examples"><strong>Check-in</strong> &middot; <strong>Purchase</strong><br><strong>Tip</strong> &middot; <strong>Review</strong></div>
+          </div>
+          <div class="prim-card">
+            <div class="prim-name c-white">PROTOCOL</div>
+            <div class="prim-examples"><strong>Door Policy</strong><br><strong>Happy Hour</strong> &middot; <strong>VIP Entry</strong><br><strong>Last Call</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: THE AUTOMATION PROOF -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">The Automation Proof</div>
+        <h2 class="section-title">100 employees &rarr; <span class="pink">5</span></h2>
+        <p class="section-body">Not cost-cutting. <strong>Architecture.</strong> Every person LineLeap employs exists because the software couldn't do their job. Charlotte can.</p>
+        <div class="auto-grid">
+          <div class="auto-card">
+            <span class="auto-arrow">&rarr;</span>
+            <div><h4>Sales Reps &rarr; Self-Serve Onboarding</h4><p>Venue goes live in 10 minutes. Charlotte walks them through setup via conversation. No human pitch needed.</p></div>
+          </div>
+          <div class="auto-card">
+            <span class="auto-arrow">&rarr;</span>
+            <div><h4>Account Managers &rarr; Protocol Drift Alerts</h4><p>Charlotte detects when venue metrics diverge from expected protocols. Suggests corrections automatically.</p></div>
+          </div>
+          <div class="auto-card">
+            <span class="auto-arrow">&rarr;</span>
+            <div><h4>Support Team &rarr; Autonomous Resolution</h4><p>90% of tickets are status queries or refund requests. Both resolve from SIGNAL provenance. No script-reading agent.</p></div>
+          </div>
+          <div class="auto-card">
+            <span class="auto-arrow">&rarr;</span>
+            <div><h4>Marketing &rarr; Signal-Driven Targeting</h4><p>Segmentation emerges from the graph. Charlotte sends the right message to the right patron at the right time.</p></div>
+          </div>
+          <div class="auto-card">
+            <span class="auto-arrow">&rarr;</span>
+            <div><h4>Data Analysts &rarr; Real-Time Substrate Queries</h4><p>No reports to pull. The METRIC stream renders itself. The owner asks a question and gets an answer.</p></div>
+          </div>
+          <div class="auto-card">
+            <span class="auto-arrow">&rarr;</span>
+            <div><h4>Finance &rarr; Automated Reconciliation</h4><p>The graph is the ledger. Every SIGNAL is immutable. Revenue share computed per transaction, not reconciled monthly.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: THREE PATHS FORWARD -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Strategic Paths</div>
+        <h2 class="section-title">Three paths. <span class="accent">12 months.</span></h2>
+        <div class="path-grid">
+          <div class="path-card">
+            <div class="path-letter">A</div>
+            <h4>The Inside Play</h4>
+            <p>Pitch the board. Charlotte as LineLeap's infrastructure layer. The returning founder with the technical vision that completes the company.</p>
+            <p><strong>Approach:</strong> Build demo, pitch investors first. Let the margin math make the argument. $200M &rarr; $500M+ with 5 employees.</p>
+            <span class="path-tag low">Low Risk</span>
+          </div>
+          <div class="path-card">
+            <div class="path-letter">B</div>
+            <h4>Standalone Analytics</h4>
+            <p>PowerBI for bars. Independent product sitting alongside any venue's existing tools. Not competing &mdash; complementing. The intelligence layer nobody offers.</p>
+            <p><strong>Approach:</strong> Integrate Toast + Square APIs. Pilot 5&ndash;10 venues. 68K US bars at $200&ndash;500/mo = $164M&ndash;$411M TAM.</p>
+            <span class="path-tag med">Medium Risk</span>
+          </div>
+          <div class="path-card">
+            <div class="path-letter">C</div>
+            <h4>Full Replacement</h4>
+            <p>Compete directly. Charlotte-powered platform that does everything LineLeap does with zero human operations. Own the entire stack.</p>
+            <p><strong>Approach:</strong> Launch in 3&ndash;5 markets. Publish metrics. Force the acquisition conversation. Charlotte at $30M revenue with 5 employees is worth $500M+.</p>
+            <span class="path-tag high">High Risk</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: VISION -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Vision</div>
+        <h2 class="section-title">Charlotte doesn't replace LineLeap.</h2>
+        <p class="closing-line"><strong>Charlotte makes LineLeap unnecessary to operate.</strong></p>
+        <p class="section-body" style="margin-top:20px">Every operational function can be automated through five primitives. NODE, EDGE, METRIC, SIGNAL, PROTOCOL. The 100 employees aren't wrong. They're early. They're the human-powered prototype of what Charlotte automates.</p>
+        <p class="section-body">The next LineLeap won't have 100 employees. It'll have Charlotte.</p>
+        <ul class="link-list">
+          <li><a href="README.md">README &mdash; The Time Compression Experiment</a></li>
+          <li><a href="CONCLUSION.md">CONCLUSION &mdash; Function-by-Function Automation Proof</a></li>
+          <li><a href="COMPETITOR_ANALYSIS.md">COMPETITOR ANALYSIS &mdash; $39B Market Landscape</a></li>
+          <li><a href="STRATEGY.md">STRATEGY &mdash; Three 12-Month Paths</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+</div>
+
+<!-- ═══ INTERSECTION OBSERVER ═══ -->
+<script>
+(function(){
+  var panels = document.querySelectorAll('.glass');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  panels.forEach(function(p){ observer.observe(p); });
+})();
+</script>
+
+<!-- ═══ CANVAS 2D KNOWLEDGE GRAPH BACKGROUND ═══ -->
+<script>
+(function(){
+  var canvas = document.getElementById('kg-canvas');
+  var ctx = canvas.getContext('2d');
+  var W, H, dpr;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Colors
+  var NEON = '#7C3AED', BLUE = '#3B82F6', PINK = '#EC4899', WHITE = '#94A3B8', GRAY = '#4B5563';
+
+  // Node definitions
+  var nodeDefs = [
+    // Center
+    {id:'LineLeap', x:0.5, y:0.45, r:28, color:NEON, label:'LineLeap', group:'center'},
+    // Products (electric blue)
+    {id:'LineSkip', x:0.30, y:0.25, r:12, color:BLUE, label:'LineSkip', group:'product'},
+    {id:'Cover', x:0.42, y:0.18, r:11, color:BLUE, label:'Cover Charge', group:'product'},
+    {id:'Drinks', x:0.58, y:0.18, r:11, color:BLUE, label:'Drink Pre-Order', group:'product'},
+    {id:'Tickets', x:0.70, y:0.25, r:12, color:BLUE, label:'Event Ticketing', group:'product'},
+    {id:'VIP', x:0.72, y:0.40, r:11, color:BLUE, label:'VIP Service', group:'product'},
+    {id:'Pricing', x:0.28, y:0.40, r:11, color:BLUE, label:'Dynamic Pricing', group:'product'},
+    // People (white)
+    {id:'Jack', x:0.38, y:0.60, r:14, color:WHITE, label:'Jack Richard', group:'people'},
+    {id:'Jake', x:0.62, y:0.60, r:14, color:WHITE, label:'Jake Eselgroth', group:'people'},
+    // Competitors (gray)
+    {id:'Discotech', x:0.12, y:0.55, r:9, color:GRAY, label:'Discotech', group:'competitor'},
+    {id:'TablelistPro', x:0.10, y:0.70, r:8, color:GRAY, label:'TablelistPro', group:'competitor'},
+    {id:'SevenRooms', x:0.88, y:0.55, r:9, color:GRAY, label:'SevenRooms', group:'competitor'},
+    {id:'Toast', x:0.90, y:0.70, r:10, color:GRAY, label:'Toast', group:'competitor'},
+    {id:'BuzzPass', x:0.15, y:0.42, r:7, color:GRAY, label:'BuzzPass', group:'competitor'},
+    // Metrics (hot pink)
+    {id:'Venues', x:0.22, y:0.80, r:10, color:PINK, label:'700+ Venues', group:'metric'},
+    {id:'Users', x:0.40, y:0.82, r:10, color:PINK, label:'1.5M Users', group:'metric'},
+    {id:'Revenue', x:0.60, y:0.82, r:10, color:PINK, label:'$30M Revenue', group:'metric'},
+    {id:'Valuation', x:0.78, y:0.80, r:10, color:PINK, label:'$200M Valuation', group:'metric'},
+    // Extra nodes for density
+    {id:'CRM', x:0.68, y:0.30, r:8, color:BLUE, label:'CRM', group:'product'},
+    {id:'Analytics', x:0.32, y:0.30, r:8, color:BLUE, label:'Analytics', group:'product'},
+    {id:'Marketing', x:0.50, y:0.30, r:8, color:BLUE, label:'Marketing', group:'product'},
+    {id:'Charlotte', x:0.50, y:0.70, r:16, color:NEON, label:'Charlotte', group:'center'},
+  ];
+
+  // Edges
+  var edgeDefs = [
+    // Products to center
+    ['LineLeap','LineSkip'],['LineLeap','Cover'],['LineLeap','Drinks'],
+    ['LineLeap','Tickets'],['LineLeap','VIP'],['LineLeap','Pricing'],
+    ['LineLeap','CRM'],['LineLeap','Analytics'],['LineLeap','Marketing'],
+    // People to center
+    ['LineLeap','Jack'],['LineLeap','Jake'],
+    // Competitors nearby
+    ['LineLeap','BuzzPass'],
+    ['Discotech','LineLeap'],['SevenRooms','LineLeap'],
+    ['Toast','LineLeap'],['TablelistPro','LineLeap'],
+    // Metrics to center
+    ['LineLeap','Venues'],['LineLeap','Users'],['LineLeap','Revenue'],['LineLeap','Valuation'],
+    // Charlotte connections
+    ['Charlotte','Jack'],['Charlotte','Venues'],['Charlotte','Users'],
+    ['Charlotte','Revenue'],['Charlotte','Valuation'],
+    // Inter-product
+    ['Pricing','Analytics'],['CRM','Marketing'],['VIP','Tickets'],
+  ];
+
+  // Build runtime nodes
+  var nodes = nodeDefs.map(function(d){
+    return {
+      id: d.id, label: d.label, color: d.color, r: d.r, group: d.group,
+      x: d.x * W, y: d.y * H,
+      bx: d.x, by: d.y,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      phase: Math.random() * Math.PI * 2
+    };
+  });
+
+  var nodeMap = {};
+  nodes.forEach(function(n){ nodeMap[n.id] = n; });
+
+  var edges = [];
+  edgeDefs.forEach(function(e){
+    if(nodeMap[e[0]] && nodeMap[e[1]]){
+      edges.push({source: nodeMap[e[0]], target: nodeMap[e[1]]});
+    }
+  });
+
+  var time = 0;
+
+  function draw(){
+    time += 0.004;
+    ctx.clearRect(0, 0, W, H);
+
+    // Update node positions with gentle drift
+    nodes.forEach(function(n){
+      var drift = 18;
+      n.x = n.bx * W + Math.sin(time + n.phase) * drift + Math.cos(time * 0.7 + n.phase * 1.3) * drift * 0.6;
+      n.y = n.by * H + Math.cos(time * 0.8 + n.phase * 0.9) * drift + Math.sin(time * 0.5 + n.phase * 1.7) * drift * 0.5;
+    });
+
+    // Draw edges
+    edges.forEach(function(e){
+      ctx.beginPath();
+      ctx.moveTo(e.source.x, e.source.y);
+      ctx.lineTo(e.target.x, e.target.y);
+      ctx.strokeStyle = 'rgba(124,58,237,0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach(function(n){
+      // Glow
+      var glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 2.5);
+      glow.addColorStop(0, n.color + '30');
+      glow.addColorStop(1, n.color + '00');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      // Node circle
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color + '60';
+      ctx.fill();
+      ctx.strokeStyle = n.color + 'A0';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle = n.color + 'CC';
+      ctx.font = (n.r > 14 ? '600 12px' : n.r > 10 ? '500 10px' : '400 9px') + ' Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y + n.r + 14);
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  // Re-anchor on resize
+  window.addEventListener('resize', function(){
+    nodes.forEach(function(n){
+      n.x = n.bx * W;
+      n.y = n.by * H;
+    });
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>
