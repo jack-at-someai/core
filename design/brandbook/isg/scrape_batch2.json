@@ -1,0 +1,2215 @@
+{
+  "scrapeMeta": {
+    "date": "2026-02-12",
+    "sources": [
+      "georgiawestern.com",
+      "dynamic-ms.com",
+      "rsipumps.com",
+      "iacserv.com"
+    ],
+    "notes": "Deep scrape of 4 ISG brand websites. Pricing universally requires direct contact. Georgia Western has ~1,090 electric valve actuator SKUs (46 pages); representative sample extracted. IAC blocks direct page fetches (403); data sourced from search index. Dynamic-MS and RSI are catalog/quote-request sites with no public SKU-level e-commerce."
+  },
+  "brands": [
+    {
+      "brand": "Georgia Western",
+      "website": "https://georgiawestern.com",
+      "location": "2275 McCollum Parkway, Kennesaw, GA 30144",
+      "phone": "800-536-6070",
+      "established": 1992,
+      "description": "Largest stocking distributor of electric valve actuators in the Southeastern US. 20-year history with Emerson Actuation Technologies. Largest stocking distributor of M2CP Series valve actuators in North America.",
+      "oemBrands": [
+        "EIM",
+        "Bettis",
+        "Emerson",
+        "Limitorque",
+        "Auma",
+        "Rotork",
+        "Biffi",
+        "Crown Fusion",
+        "El-O-Matic",
+        "Hytork",
+        "Jordan Controls",
+        "Kennedy",
+        "M&H",
+        "Morin",
+        "MOV Long Life",
+        "Powell",
+        "Reolube",
+        "Royal Purple",
+        "Sambo",
+        "Shafer",
+        "Stream-Flo",
+        "Val-Matic",
+        "Schaeffer"
+      ],
+      "certifications": [
+        "Emerson Gold Seal Service Center",
+        "CCS",
+        "Avetta",
+        "ISNetworld",
+        "Veriforce",
+        "Safeland USA/PEC Safety",
+        "Powersafe"
+      ],
+      "products": [
+        {
+          "category": "Electric Valve Actuators",
+          "subcategory": "Components & Bearings",
+          "totalSkusInCategory": 1090,
+          "url": "https://georgiawestern.com/electric-valve-actuators",
+          "note": "1,090 items across 46 pages; first page sample shown",
+          "items": [
+            {
+              "partNumber": "VA3000600953",
+              "productName": "PLUG 1/2 NPT",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA36554",
+              "productName": "3/4\"-10 A194 2-H Plain Finish Heavy Hex Nut",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA36584",
+              "productName": "MDPI Dial Indicator Fastener TORX AS But 6-32 X .31 Stainless",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4044000105",
+              "productName": "33073 Single Lip Seal 3.313X4.249X0.438 CRWH1 R",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA83422F",
+              "productName": "External Handwheel Shaft Extension",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA84090-K1-6",
+              "productName": "Circuit Breaker, Integral (1.6A)",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA84090-K3",
+              "productName": "EIM Circuit Breaker",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA84250-3",
+              "productName": "3 Phase Monitor Module, TBM Controlinc 320B, 208-230V/3PH",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA84750-1",
+              "productName": "Contactor Board, 37488 (1-Phase)",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000100013",
+              "productName": "Ball Bearing PC #13",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000100035",
+              "productName": "Worm Shaft Bearing",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000100037",
+              "productName": "EIM M2CP Motor Bearing",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000100038",
+              "productName": "Motor Clutch Bearing",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000100039",
+              "productName": "Handwheel Shaft Bearing",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000100054",
+              "productName": "EIM Ball Bearing",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500055",
+              "productName": "Thrust Bearing Cup",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500056",
+              "productName": "Thrust Bearing Cone",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500111",
+              "productName": "6000-160K Thrust Base Cup",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500112",
+              "productName": "6000-160K Thrust Base Cone",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500113",
+              "productName": "1000/D Unit Bearing Cup",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500114",
+              "productName": "1000/D Unit Bearing Cone",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500117",
+              "productName": "Thrust Bearing Cone",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500118",
+              "productName": "Thrust Bearing Cup, MG-05/07 Worm Shaft",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "VA4000500123",
+              "productName": "Thrust Bearing Cup, Model 3000A/4000/5000/6000 Thrust Base Pc#105",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Parts",
+          "subcategory": "Bearing Kits",
+          "url": "https://georgiawestern.com/bearing-kits",
+          "items": [
+            {
+              "partNumber": "0101-352",
+              "productName": "SMB-000 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0301-415",
+              "productName": "SMB-00 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0501-516",
+              "productName": "SMB-0 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0701-511",
+              "productName": "SMB-1 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0901-505",
+              "productName": "SMB-2 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "1101-505",
+              "productName": "SMB-3 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMB-4BK",
+              "productName": "SMB-4 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMB-4TBK",
+              "productName": "SMB-4T Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMB-5BK",
+              "productName": "SMB-5 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMB-5TBK",
+              "productName": "SMB-5T Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-000BK",
+              "productName": "SMA-000 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-00BK",
+              "productName": "SMA-00 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-0BK",
+              "productName": "SMA-0 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-1BK",
+              "productName": "SMA-1 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-2BK",
+              "productName": "SMA-2 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-3BK",
+              "productName": "SMA-3 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "SMA-4BK",
+              "productName": "SMA-4 Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-0BK",
+              "productName": "HBC-0 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-1BK",
+              "productName": "HBC-1 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-2BK",
+              "productName": "HBC-2 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-3BK",
+              "productName": "HBC-3 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-4BK",
+              "productName": "HBC-4 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-5BK",
+              "productName": "HBC-5 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "HBC-6BK",
+              "productName": "HBC-6 Worm Shaft Bearing Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Parts",
+          "subcategory": "Fastener Kits",
+          "url": "https://georgiawestern.com/fastener-kits",
+          "items": [
+            {
+              "partNumber": "1000-3000/FK",
+              "productName": "EIM Fastener Kit for Builds 1000-3000/U",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "EIM 2000/U FK",
+              "productName": "EIM 2000/U Unit Fastener Kit",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "EIM Q Unit FK",
+              "productName": "EIM Q Unit Fastener Kit",
+              "manufacturer": "EIM",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Parts",
+          "subcategory": "Gasket & Seal Kits",
+          "url": "https://georgiawestern.com/seal-kits",
+          "items": [
+            {
+              "partNumber": "0501-190",
+              "productName": "SMB-0 Gasket & Seal Set (BUNA)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0501-191",
+              "productName": "SMB-0 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0301-125",
+              "productName": "SMB-00 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0101-101",
+              "productName": "SMB-000 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0701-216",
+              "productName": "SMB-1 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "0901-216",
+              "productName": "SMB-2 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "1101-216",
+              "productName": "SMB-3 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "1301-218",
+              "productName": "SMB-4/SMB-4T Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "1501-137",
+              "productName": "SMB-5 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11217-V",
+              "productName": "SMA-000 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11218-V",
+              "productName": "SMA-00 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11219-V",
+              "productName": "SMA-0 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11220-V",
+              "productName": "SMA-1 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11221-V",
+              "productName": "SMA-2 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11222-V",
+              "productName": "SMA-3 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "11223-V",
+              "productName": "SMA-4 Complete Gasket & Viton Seal Kit",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "7800-82",
+              "productName": "HBC-0 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "7900-82",
+              "productName": "HBC-1 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "9200-82",
+              "productName": "HBC-2 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "9300-102",
+              "productName": "HBC-3 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "8201-112",
+              "productName": "HBC-4 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "8301-080",
+              "productName": "HBC-5 Gasket & Seal Set (VITON)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Parts",
+          "subcategory": "Stem Nuts & Bushings",
+          "url": "https://georgiawestern.com/stem-nuts-bushings",
+          "totalItems": 37,
+          "items": [
+            {
+              "partNumber": "60-221-0086-1",
+              "productName": "SMB-000 Bronze Stem Nut (PC# 11)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-222-0134-1",
+              "productName": "SMB-00 Bronze Stem Nut (PC# 8)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-223-0117-2",
+              "productName": "SMB-0 Bronze Stem Nut (PC# 20)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-224-0095-2",
+              "productName": "SMB-1 Bronze Stem Nut (PC# 20)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-225-0065-2",
+              "productName": "SMB-2 Bronze Stem Nut (PC# 20)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-226-0034-2",
+              "productName": "SMB-3 Bronze Stem Nut (PC# 20)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-227-0034-3",
+              "productName": "SMB-4 Bronze Stem Nut (PC# 20)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-228-0073-2",
+              "productName": "SMB-5 Bronze Stem Nut (PC# 127)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-241-0145-2",
+              "productName": "HBC-0 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-242-0145-2",
+              "productName": "HBC-1 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-243-0145-2",
+              "productName": "HBC-2 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-244-0145-2",
+              "productName": "HBC-3 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-245-0145-2",
+              "productName": "HBC-4 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-246-0145-2",
+              "productName": "HBC-5 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-247-0108-2",
+              "productName": "HBC-6 Splined Adapter (PC# 7)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-229-0173-1",
+              "productName": "SMA-00 Bronze Stem Nut",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-229-0174-1",
+              "productName": "SMA-0 Bronze Stem Nut",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-229-0175-2",
+              "productName": "SMA-1 Bronze Stem Nut",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-229-0176-2",
+              "productName": "SMA-2 Bronze Stem Nut",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-229-0177-2",
+              "productName": "SMA-3 Bronze Stem Nut",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "60-229-0178-2",
+              "productName": "SMA-4 Bronze Stem Nut",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "61-221-0279-2",
+              "productName": "L120-10 Stem Nut (PC# 101)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "61-221-0280-2",
+              "productName": "L120-20 Stem Nut 2002 and older (PC# 101)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "61-221-0627-3",
+              "productName": "L120-20 Stem Nut 2003 and newer (PC# 101)",
+              "manufacturer": "Limitorque",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Lubricants",
+          "subcategory": "MOV Long Life (Nuclear-Approved)",
+          "url": "https://georgiawestern.com/mov",
+          "items": [
+            {
+              "partNumber": "MOVLL-0/Box",
+              "productName": "MOV Long Life Grade 0 / Box",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-0/Pail",
+              "productName": "MOV Long Life Grade 0 / Pail",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-0/Keg",
+              "productName": "MOV Long Life Grade 0 / Keg",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-0/Drum",
+              "productName": "MOV Long Life Grade 0 / Drum",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-1/Box",
+              "productName": "MOV Long Life Grade 1 / Box",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-1/Pail",
+              "productName": "MOV Long Life Grade 1 / Pail",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-1/Keg",
+              "productName": "MOV Long Life Grade 1 / Keg",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            },
+            {
+              "partNumber": "MOVLL-1/Drum",
+              "productName": "MOV Long Life Grade 1 / Drum",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Nuclear-approved Limitorque grease"
+            }
+          ]
+        },
+        {
+          "category": "Lubricants",
+          "subcategory": "MOV Extra (Commercial-Grade)",
+          "url": "https://georgiawestern.com/mov",
+          "items": [
+            {
+              "partNumber": "MOVEX-0/Box",
+              "productName": "MOV Extra Grade 0 / Box",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-0/Pail",
+              "productName": "MOV Extra Grade 0 / Pail",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-0/Keg",
+              "productName": "MOV Extra Grade 0 / Keg",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-0/Drum",
+              "productName": "MOV Extra Grade 0 / Drum",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-1/Box",
+              "productName": "MOV Extra Grade 1 / Box",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-1/Pail",
+              "productName": "MOV Extra Grade 1 / Pail",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-1/Keg",
+              "productName": "MOV Extra Grade 1 / Keg",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            },
+            {
+              "partNumber": "MOVEX-1/Drum",
+              "productName": "MOV Extra Grade 1 / Drum",
+              "manufacturer": "MOV Long Life",
+              "price": "Contact for pricing",
+              "description": "Commercial-grade valve operator lubricant"
+            }
+          ]
+        },
+        {
+          "category": "Lubricants",
+          "subcategory": "Reolube EHC Fluids",
+          "url": "https://georgiawestern.com/reolube",
+          "items": [
+            {
+              "partNumber": "RL46B",
+              "productName": "Reolube Turbofluid 46B / Drum",
+              "manufacturer": "Reolube",
+              "price": "Contact for pricing",
+              "description": "Fire Resistant EHC Fluid. Approved by GE, Westinghouse, Siemens."
+            },
+            {
+              "partNumber": "RL46XC",
+              "productName": "Reolube Turbofluid 46XC / Drum",
+              "manufacturer": "Reolube",
+              "price": "Contact for pricing",
+              "description": "Fire Resistant EHC Fluid"
+            },
+            {
+              "partNumber": "RL32BGT",
+              "productName": "Reolube TurboFluid 32BGT / Drum",
+              "manufacturer": "Reolube",
+              "price": "Contact for pricing",
+              "description": "Fire Resistant EHC Fluid"
+            }
+          ]
+        },
+        {
+          "category": "Lubricants",
+          "subcategory": "EIM/Bettis Approved Lubricants",
+          "url": "https://georgiawestern.com/EIMBettis-Approved-Lubricants_c_63.html",
+          "items": [
+            {
+              "partNumber": "Schaeffer-167-Pail",
+              "productName": "Schaeffer 167 Oil / Pail",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-197-Keg",
+              "productName": "Schaeffer 197 Grease / Keg",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-197-Pail",
+              "productName": "Schaeffer 197 Grease / Pail",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-229B-Drum",
+              "productName": "Schaeffer 229B Grease / Drum",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-229B-Keg",
+              "productName": "Schaeffer 229B Grease / Keg",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-229B-Pail",
+              "productName": "Schaeffer 229B Grease / Pail",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-267-Pail",
+              "productName": "Schaeffer 267 Oil / Pail",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Schaeffer-271-Pail",
+              "productName": "Schaeffer 271 Grease / Pail",
+              "manufacturer": "Schaeffer",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Lubricants",
+          "subcategory": "Other Lubricants",
+          "url": "https://georgiawestern.com/other-lubricants.html",
+          "items": [
+            {
+              "partNumber": "VSGGreen",
+              "productName": "VSG Hydrogreen Biodegradable Grease",
+              "manufacturer": "VSG",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Encutt77D",
+              "productName": "Encutt 77 Slitter Blade Lubricant / Drum",
+              "manufacturer": "Encutt",
+              "price": "Contact for pricing"
+            },
+            {
+              "partNumber": "Encutt65D",
+              "productName": "Encutt 65 FG Slitter Blade Lubricant / Drum",
+              "manufacturer": "Encutt",
+              "price": "Contact for pricing"
+            }
+          ]
+        },
+        {
+          "category": "Actuators",
+          "subcategory": "Manual & Auxiliary Gears",
+          "url": "https://georgiawestern.com/manual-auxiliary-gears",
+          "description": "High load and standard bevel gears, 90 and 360 degree worm gears, spur gears",
+          "items": [
+            {
+              "productName": "Emerson/Bettis MG Series Manual Gears",
+              "manufacturer": "Emerson/Bettis"
+            },
+            {
+              "productName": "Emerson/Bettis KWG Series Worm Gears",
+              "manufacturer": "Emerson/Bettis"
+            },
+            {
+              "productName": "Emerson/Bettis KBG Series Bevel Gears",
+              "manufacturer": "Emerson/Bettis"
+            },
+            {
+              "productName": "Limitorque HBC Series Gears",
+              "manufacturer": "Limitorque"
+            },
+            {
+              "productName": "Limitorque B320 Series Gears",
+              "manufacturer": "Limitorque"
+            },
+            {
+              "productName": "Limitorque W Series Gears",
+              "manufacturer": "Limitorque"
+            },
+            {
+              "productName": "Limitorque V Series Gears",
+              "manufacturer": "Limitorque"
+            },
+            {
+              "productName": "Sambo WG Series Worm Gears",
+              "manufacturer": "Sambo"
+            },
+            {
+              "productName": "Sambo VB Series Bevel Gears",
+              "manufacturer": "Sambo"
+            },
+            {
+              "productName": "Sambo SR Series Spur Gears",
+              "manufacturer": "Sambo"
+            }
+          ]
+        },
+        {
+          "category": "Actuators",
+          "subcategory": "Pipeline Actuators - Pneumatic",
+          "url": "https://georgiawestern.com/pipeline-actuators",
+          "items": [
+            {
+              "productName": "EIM G-Series Gas Motor",
+              "manufacturer": "EIM"
+            },
+            {
+              "productName": "Shafer RV-Series Pneumatic Actuator",
+              "manufacturer": "Shafer"
+            },
+            {
+              "productName": "Shafer Linear Pneumatic Actuator",
+              "manufacturer": "Shafer"
+            },
+            {
+              "productName": "El-O-Matic Pneumatic Actuator",
+              "manufacturer": "El-O-Matic"
+            },
+            {
+              "productName": "Hytork Pneumatic Actuator",
+              "manufacturer": "Hytork"
+            }
+          ]
+        },
+        {
+          "category": "Actuators",
+          "subcategory": "Pipeline Actuators - Gas Over Oil",
+          "url": "https://georgiawestern.com/pipeline-actuators",
+          "items": [
+            {
+              "productName": "Biffi/Morin Gas Over Oil Actuator",
+              "manufacturer": "Biffi/Morin"
+            },
+            {
+              "productName": "Bettis EHO Actuator",
+              "manufacturer": "Bettis"
+            },
+            {
+              "productName": "Biffi GIG Series Actuator",
+              "manufacturer": "Biffi"
+            },
+            {
+              "productName": "Bettis G-Series Actuator",
+              "manufacturer": "Bettis"
+            },
+            {
+              "productName": "Bettis HP-2000 Actuator",
+              "manufacturer": "Bettis"
+            }
+          ]
+        },
+        {
+          "category": "Actuators",
+          "subcategory": "Pneumatic Valve Actuators",
+          "url": "https://georgiawestern.com/pneumatic-valve-actuators",
+          "items": [
+            {
+              "productName": "El-O-Matic Pneumatic Valve Actuator",
+              "manufacturer": "El-O-Matic"
+            },
+            {
+              "productName": "Hytork Pneumatic Valve Actuator",
+              "manufacturer": "Hytork"
+            },
+            {
+              "productName": "Bettis Pneumatic Valve Actuator",
+              "manufacturer": "Bettis"
+            },
+            {
+              "productName": "Morin Pneumatic Valve Actuator",
+              "manufacturer": "Morin"
+            }
+          ]
+        },
+        {
+          "category": "Valves",
+          "subcategory": "AWWA / Water",
+          "url": "https://georgiawestern.com/awwa-water",
+          "items": [
+            {
+              "productName": "Rotating-Disc Gate Valves",
+              "manufacturer": "Kennedy/M&H/McWane"
+            },
+            {
+              "productName": "Resilient-Seated Gate Valves",
+              "manufacturer": "Kennedy/M&H/McWane"
+            }
+          ]
+        },
+        {
+          "category": "Valves",
+          "subcategory": "Pipeline Valves",
+          "url": "https://georgiawestern.com/ball-valves",
+          "items": [
+            {
+              "productName": "Stream-Flo Pipeline Ball Valves",
+              "manufacturer": "Stream-Flo"
+            },
+            {
+              "productName": "Crown Fusion Pipeline Ball Valves",
+              "manufacturer": "Crown Fusion"
+            }
+          ]
+        },
+        {
+          "category": "Valves",
+          "subcategory": "Power / Process Valves",
+          "url": "https://georgiawestern.com/power-process-valves",
+          "items": [
+            {
+              "productName": "Powell Power/Process Valves",
+              "manufacturer": "Powell"
+            },
+            {
+              "productName": "Val-Matic Power/Process Valves",
+              "manufacturer": "Val-Matic"
+            }
+          ]
+        },
+        {
+          "category": "Assemblies",
+          "subcategory": "Valve/Actuator Packages",
+          "url": "https://georgiawestern.com/assemblies",
+          "description": "Complete MOV assemblies with EIM, Limitorque, Rotork, and Auma electric actuators",
+          "items": [
+            {
+              "productName": "Gate Valve + Actuator Assembly",
+              "description": "Custom MOV with design, fabrication, installation, testing"
+            },
+            {
+              "productName": "Globe Valve + Actuator Assembly"
+            },
+            {
+              "productName": "Butterfly Valve + Actuator Assembly"
+            },
+            {
+              "productName": "Ball Valve + Actuator Assembly"
+            },
+            {
+              "productName": "Plug Valve + Actuator Assembly"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "Field Services",
+          "url": "https://georgiawestern.com/field-services",
+          "items": [
+            {
+              "productName": "On-Site Refurbishment",
+              "description": "25+ years of field service with crane support"
+            },
+            {
+              "productName": "Mobile Shop Services"
+            },
+            {
+              "productName": "Electrical De-termination & Re-termination"
+            },
+            {
+              "productName": "Actuator Troubleshooting & Diagnosis"
+            },
+            {
+              "productName": "Rigging & Equipment Handling"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "Machining & Adaptation",
+          "url": "https://georgiawestern.com/machining-and-adaptation",
+          "items": [
+            {
+              "productName": "Custom Transition & Adapter Plates"
+            },
+            {
+              "productName": "Custom Adaptation Brackets & Couplers"
+            },
+            {
+              "productName": "Stem Nut Threading (Limitorque, EIM, Rotork, Auma)"
+            },
+            {
+              "productName": "Bore & Key Services for Quarter-Turn Applications"
+            },
+            {
+              "productName": "Custom Rising Rotating Bushings (2,4,6,8,36,38 spline)"
+            },
+            {
+              "productName": "Valve Stem Manufacturing"
+            },
+            {
+              "productName": "Reverse Engineering Services"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "General Services",
+          "url": "https://georgiawestern.com/services",
+          "items": [
+            {
+              "productName": "Pipeline Service"
+            },
+            {
+              "productName": "Preventative Maintenance Programs"
+            },
+            {
+              "productName": "Refurbishment & Repair"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Dynamic Mechanical Solutions",
+      "website": "https://dynamic-ms.com",
+      "phone": "251-980-4064",
+      "fax": "251-650-1307",
+      "description": "Industrial distributor specializing in technical solutions for chemical, pulp and paper, power generation, and refining industries.",
+      "oemBrands": [
+        "AZ Valves",
+        "Flo-Tite",
+        "G.I.E.",
+        "ITT Fabri",
+        "Nibco/Sure Seal",
+        "OPW Engineered Systems",
+        "Powell",
+        "QRC",
+        "Ramco",
+        "Safe Harbor Access",
+        "SeaSafe",
+        "Swiss Fluid USA",
+        "Titan Flow Control",
+        "Bray",
+        "Amri",
+        "Max Seal",
+        "Gestra",
+        "Descote"
+      ],
+      "products": [
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Ball Valves",
+          "url": "https://dynamic-ms.com/ball-valves.html",
+          "items": [
+            {
+              "productName": "G.I.E. Ball Valves",
+              "manufacturer": "G.I.E."
+            },
+            {
+              "productName": "AZ Valves Ball Valves",
+              "manufacturer": "AZ Valves"
+            },
+            {
+              "productName": "Flo-Tite Ball Valves",
+              "manufacturer": "Flo-Tite"
+            },
+            {
+              "productName": "Nibco Ball Valves",
+              "manufacturer": "Nibco"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Butterfly Valves",
+          "url": "https://dynamic-ms.com/butterfly-valves.html",
+          "items": [
+            {
+              "productName": "Nibco Sure Seal Butterfly Valves",
+              "manufacturer": "Nibco Sure Seal"
+            },
+            {
+              "productName": "Bray Butterfly Valves",
+              "manufacturer": "Bray"
+            },
+            {
+              "productName": "Swiss Fluid Butterfly Valves",
+              "manufacturer": "Swiss Fluid"
+            },
+            {
+              "productName": "Amri Butterfly Valves",
+              "manufacturer": "Amri"
+            },
+            {
+              "productName": "G.I.E. Butterfly Valves",
+              "manufacturer": "G.I.E."
+            },
+            {
+              "productName": "Max Seal Butterfly Valves",
+              "manufacturer": "Max Seal"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Check Valves",
+          "url": "https://dynamic-ms.com/check-valves.html",
+          "items": [
+            {
+              "productName": "G.I.E. Check Valves",
+              "manufacturer": "G.I.E."
+            },
+            {
+              "productName": "Powell Check Valves",
+              "manufacturer": "Powell"
+            },
+            {
+              "productName": "Titan Flow Control Check Valves",
+              "manufacturer": "Titan Flow Control"
+            },
+            {
+              "productName": "QRC Check Valves",
+              "manufacturer": "QRC"
+            },
+            {
+              "productName": "Swiss Fluid Check Valves",
+              "manufacturer": "Swiss Fluid"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Diaphragm Valves",
+          "url": "https://dynamic-ms.com/diaphragm-valves.html",
+          "items": [
+            {
+              "productName": "G.I.E. Diaphragm Valves",
+              "manufacturer": "G.I.E."
+            },
+            {
+              "productName": "ITT Fabri Diaphragm Valves",
+              "manufacturer": "ITT Fabri"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Gate Valves",
+          "url": "https://dynamic-ms.com/gate-valves.html",
+          "items": [
+            {
+              "productName": "Powell Gate Valves",
+              "manufacturer": "Powell"
+            },
+            {
+              "productName": "ITT Fabri-Valve Gate Valves",
+              "manufacturer": "ITT Fabri-Valve"
+            },
+            {
+              "productName": "QRC Gate Valves",
+              "manufacturer": "QRC"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Globe Valves",
+          "url": "https://dynamic-ms.com/globe-valves.html",
+          "items": [
+            {
+              "productName": "Powell Globe Valves",
+              "manufacturer": "Powell"
+            },
+            {
+              "productName": "Descote Globe Valves",
+              "manufacturer": "Descote"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Plug Valves",
+          "url": "https://dynamic-ms.com/plug-valves.html",
+          "items": [
+            {
+              "productName": "AZ Valves Plug Valves",
+              "manufacturer": "AZ Valves"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Sampling Valves",
+          "url": "https://dynamic-ms.com/sampling-valves.html",
+          "items": [
+            {
+              "productName": "Nibco Sure Seal Sampling Valves",
+              "manufacturer": "Nibco Sure Seal"
+            },
+            {
+              "productName": "AZ Valves Sampling Valves",
+              "manufacturer": "AZ Valves"
+            }
+          ]
+        },
+        {
+          "category": "Valve & Automation",
+          "subcategory": "Actuation",
+          "url": "https://dynamic-ms.com/actuation.html",
+          "items": [
+            {
+              "productName": "ITT Fabri Valve Actuation Systems",
+              "manufacturer": "ITT Fabri"
+            },
+            {
+              "productName": "G.I.E. Valve Actuation Systems",
+              "manufacturer": "G.I.E."
+            },
+            {
+              "productName": "Flo-Tite Valve Actuation Systems",
+              "manufacturer": "Flo-Tite"
+            },
+            {
+              "productName": "AZ Valves Actuation Systems",
+              "manufacturer": "AZ Valves"
+            },
+            {
+              "productName": "Nibco Valve Actuation Systems",
+              "manufacturer": "Nibco"
+            }
+          ]
+        },
+        {
+          "category": "Engineered Products",
+          "subcategory": "Chemical Loading/Unloading",
+          "url": "https://dynamic-ms.com/Chemical-LoadingUnloading_c_27.html",
+          "items": [
+            {
+              "productName": "OPW Loading Arm Systems",
+              "manufacturer": "OPW"
+            },
+            {
+              "productName": "OPW Swivel Joints",
+              "manufacturer": "OPW"
+            },
+            {
+              "productName": "OPW Quick & Dry Disconnects",
+              "manufacturer": "OPW"
+            },
+            {
+              "productName": "OPW Process Products",
+              "manufacturer": "OPW"
+            }
+          ]
+        },
+        {
+          "category": "Engineered Products",
+          "subcategory": "Fall Protection & Access Systems",
+          "url": "https://dynamic-ms.com/Fall-Protection-Access-Systems_c_26.html",
+          "items": [
+            {
+              "productName": "Safe Harbor Fall Protection & Access Systems",
+              "manufacturer": "Safe Harbor Access"
+            },
+            {
+              "productName": "SeaSafe Fall Protection Systems",
+              "manufacturer": "SeaSafe"
+            }
+          ]
+        },
+        {
+          "category": "Engineered Products",
+          "subcategory": "Spill Containment Products",
+          "url": "https://dynamic-ms.com/Spill-Containment-Products_c_25.html",
+          "items": [
+            {
+              "productName": "Industrial Spill Containment Products"
+            }
+          ]
+        },
+        {
+          "category": "FRP Products",
+          "subcategory": "Cable Trays",
+          "url": "https://dynamic-ms.com/cable-trays.html",
+          "items": [
+            {
+              "productName": "FRP Cable Trays",
+              "description": "Fiberglass reinforced plastic cable management"
+            }
+          ]
+        },
+        {
+          "category": "FRP Products",
+          "subcategory": "Grating",
+          "url": "https://dynamic-ms.com/grating.html",
+          "items": [
+            {
+              "productName": "FRP Grating",
+              "description": "Fiberglass reinforced structural floor/walkway solutions"
+            }
+          ]
+        },
+        {
+          "category": "FRP Products",
+          "subcategory": "Stairs & Platforms",
+          "url": "https://dynamic-ms.com/stairs-platforms.html",
+          "items": [
+            {
+              "productName": "FRP Stairs & Platforms",
+              "description": "Fiberglass reinforced access and safety structures"
+            }
+          ]
+        },
+        {
+          "category": "Other Products",
+          "subcategory": "Safety Shields",
+          "url": "https://dynamic-ms.com/safety-shields.html",
+          "items": [
+            {
+              "productName": "Ramco Safety Shields",
+              "manufacturer": "Ramco"
+            }
+          ]
+        },
+        {
+          "category": "Other Products",
+          "subcategory": "Steam Traps",
+          "url": "https://dynamic-ms.com/Steam-Traps_c_58.html",
+          "items": [
+            {
+              "productName": "Gestra Steam Traps",
+              "manufacturer": "Gestra"
+            }
+          ]
+        },
+        {
+          "category": "Other Products",
+          "subcategory": "Strainers",
+          "url": "https://dynamic-ms.com/Strainers_c_59.html",
+          "items": [
+            {
+              "productName": "Titan Flow Control Strainers",
+              "manufacturer": "Titan Flow Control"
+            },
+            {
+              "productName": "G.I.E. Strainers",
+              "manufacturer": "G.I.E."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Renewal Service Inc. (RSI Pumps)",
+      "website": "https://rsipumps.com",
+      "locations": [
+        "2600 5th St, Rock Island, IL 61201",
+        "24 Eastern Ave, Sylacauga, AL 35150"
+      ],
+      "phone": "800-747-0128",
+      "email": "sales@rsipumps.com",
+      "description": "North America's go-to source for new, surplus, discontinued, and rebuilt pumps and pump parts.",
+      "oemBrandsServiced": [
+        "Goulds",
+        "Durco",
+        "Ahlstrom/Sulzer",
+        "Worthington",
+        "Allis Chalmers",
+        "Ingersoll Rand",
+        "Gorman Rupp",
+        "Nash",
+        "Vooner",
+        "Patterson",
+        "Viking",
+        "Travaini",
+        "Taco",
+        "Warren",
+        "Paco"
+      ],
+      "facilityCapabilities": [
+        "Disassembly Department",
+        "Blast Department (two 60-inch sandblast cabinets, one glass bead cabinet)",
+        "Paint Booth (400 sq ft)",
+        "Weld Shop (titanium capable)",
+        "Machine Shop (engine lathes, 4-inch and 5-inch boring mills, vertical turret lathe, mills, CNC, 84-inch vertical lathe, 6-foot radial arm drill, bridge crane)",
+        "Build/Clean Room"
+      ],
+      "products": [
+        {
+          "category": "Pumps",
+          "subcategory": "Complete Pump Units",
+          "url": "https://rsipumps.com/pumps/",
+          "description": "Complete pumps in a wide range of brands, sizes, and materials. Bare pumps to fully assembled base-mounted units.",
+          "items": [
+            {
+              "productName": "Self-Priming Pumps",
+              "description": "Self-Priming Pumps available in multiple brands and configurations"
+            },
+            {
+              "productName": "In-Line Pumps",
+              "description": "In-Line Pumps available in multiple brands and configurations"
+            },
+            {
+              "productName": "ANSI Pumps",
+              "description": "ANSI Pumps available in multiple brands and configurations"
+            },
+            {
+              "productName": "End Suction Pumps",
+              "description": "End Suction Pumps available in multiple brands and configurations"
+            },
+            {
+              "productName": "Split-Case Pumps",
+              "description": "Split-Case Pumps available in multiple brands and configurations"
+            }
+          ]
+        },
+        {
+          "category": "Surplus Parts",
+          "subcategory": "OEM Surplus",
+          "url": "https://rsipumps.com/surplus-parts/",
+          "description": "Large supply of surplus OEM pumps and pump parts. All parts inspected. Spotters/buyers across US and Canada.",
+          "items": [
+            {
+              "productName": "Surplus OEM Pump Parts",
+              "description": "Inspected surplus parts meeting OEM specifications"
+            },
+            {
+              "productName": "Surplus Complete Pump Units"
+            }
+          ]
+        },
+        {
+          "category": "Aftermarket Parts",
+          "subcategory": "High Quality Aftermarket",
+          "url": "https://rsipumps.com/aftermarket-parts/",
+          "description": "High quality aftermarket options to fit many OEM models with significant cost savings.",
+          "items": [
+            {
+              "productName": "Aftermarket Shafts",
+              "description": "Aftermarket replacement shafts for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Bearings",
+              "description": "Aftermarket replacement bearings for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Bearing Isolators/Labyrinth Seals",
+              "description": "Aftermarket replacement bearing isolators/labyrinth seals for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Impellers",
+              "description": "Aftermarket replacement impellers for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Rear Cover Plates",
+              "description": "Aftermarket replacement rear cover plates for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Casings (Volute)",
+              "description": "Aftermarket replacement casings (volute) for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Shaft Sleeves",
+              "description": "Aftermarket replacement shaft sleeves for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Casing/Impeller Wear Rings",
+              "description": "Aftermarket replacement casing/impeller wear rings for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Gaskets & O-Rings",
+              "description": "Aftermarket replacement gaskets & o-rings for OEM pump models"
+            },
+            {
+              "productName": "Aftermarket Mechanical Seal Glands",
+              "description": "Aftermarket replacement mechanical seal glands for OEM pump models"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "Pump Repair",
+          "url": "https://rsipumps.com/pump-repair/",
+          "description": "Built back to OEM specification and tolerance. Includes inspection reports, documentation, failure analysis, as-built reports, and warranty.",
+          "items": [
+            {
+              "productName": "ANSI Standard Pumps Repair Service"
+            },
+            {
+              "productName": "Split Case Pumps Repair Service"
+            },
+            {
+              "productName": "Centrifugal Pumps Repair Service"
+            },
+            {
+              "productName": "Chemical Pumps Repair Service"
+            },
+            {
+              "productName": "Vacuum Pumps Repair Service"
+            },
+            {
+              "productName": "Vertical Turbines Repair Service"
+            },
+            {
+              "productName": "Multi-Stage Pumps Repair Service"
+            },
+            {
+              "productName": "Trash Pumps Repair Service"
+            },
+            {
+              "productName": "Axial Flow Pumps Repair Service"
+            },
+            {
+              "productName": "Caustic Product Pumps Repair Service"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "Part Repair",
+          "url": "https://rsipumps.com/part-repair/",
+          "description": "Welding worn areas back to original dimensions then precision machining to OEM specs.",
+          "items": [
+            {
+              "productName": "Casing (Volute) Repair"
+            },
+            {
+              "productName": "Stuffing Box Cover Repair"
+            },
+            {
+              "productName": "Impeller Repair"
+            },
+            {
+              "productName": "Sideplate Assembly Repair"
+            },
+            {
+              "productName": "Pump Cover Repair (CPT, Durco FML models)"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "Other Services",
+          "url": "https://rsipumps.com/other-services/",
+          "items": [
+            {
+              "productName": "Impeller Trim & Dynamic Balancing",
+              "description": "In-house impeller trimming and dynamic balancing"
+            },
+            {
+              "productName": "Power End Exchange",
+              "description": "Replacement power end units using customer cores, typically 24-hour turnaround"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Industrial Air Centers (IAC)",
+      "website": "https://iacserv.com",
+      "partsStore": "https://parts.iacserv.com",
+      "phone": "877-IAC-SERV",
+      "serviceArea": [
+        "Kentucky",
+        "Indiana",
+        "Ohio",
+        "Florida"
+      ],
+      "description": "Industrial air compressor sales, service, parts, rental, and engineering. Over 61,000 air compressor parts available for immediate shipment.",
+      "oemBrands": [
+        "Atlas Copco",
+        "Beko",
+        "Champion",
+        "Chicago Pneumatic",
+        "Curtis",
+        "Devair",
+        "Dekker",
+        "ELGi",
+        "Gardner Denver",
+        "Hitachi",
+        "Ingersoll Rand",
+        "Kaishan",
+        "Kaeser",
+        "Kobelco",
+        "Pfannenberg",
+        "Quincy",
+        "Rogers Machinery",
+        "Sauer",
+        "SPX/Hankison",
+        "Sullair",
+        "Sullivan-Palatek",
+        "Tamturbo",
+        "Mikropor",
+        "Parker",
+        "Altec AIR",
+        "DRYTEC"
+      ],
+      "products": [
+        {
+          "category": "Air Compressors",
+          "subcategory": "Lubricated Rotary Screw",
+          "url": "https://www.iacserv.com/rotary-screw/",
+          "description": "Continuous-duty compressors using oil for cooling, sealing, and lubrication.",
+          "items": [
+            {
+              "productName": "Sullivan-Palatek D Series (15-40 HP)",
+              "manufacturer": "Sullivan-Palatek",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/sullivan-palatek-rotary-screw-compressors-d-series-15-40-hp/",
+              "specs": {
+                "hp": "15-40",
+                "type": "Direct Drive Electric"
+              }
+            },
+            {
+              "productName": "Sullivan-Palatek SP20 Series (125-300 HP)",
+              "manufacturer": "Sullivan-Palatek",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/sullivan-palatek-rotary-screw-compressors-sp20-series-175-300-hp/",
+              "specs": {
+                "hp": "125-300",
+                "features": "Oversized coolers, web access monitoring"
+              }
+            },
+            {
+              "productName": "Sullivan-Palatek SP32 Series (300-450 HP)",
+              "manufacturer": "Sullivan-Palatek",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/sullivan-palatek-rotary-screw-compressors-sp32-series-300-450-hp/",
+              "specs": {
+                "hp": "300-450"
+              }
+            },
+            {
+              "productName": "ELGi EN03 4 HP Lubricated Rotary Screw",
+              "manufacturer": "ELGi",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/elgi-en03-4-hp-lubricated-rotary-screw-air-compressor/",
+              "specs": {
+                "hp": "4"
+              }
+            },
+            {
+              "productName": "ELGi EG Series Lubricated Rotary Screw",
+              "manufacturer": "ELGi",
+              "url": "https://www.iacserv.com/air-compressors/elgi-eg-lubricated-rotary-screw-air-compressor/"
+            },
+            {
+              "productName": "Bobcat IA75 Fixed Speed (30-100 HP)",
+              "manufacturer": "IAC/Bobcat",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/ia75-75-hp-fixed-speed-lubricated-rotary-screw-air-compressor/",
+              "specs": {
+                "hp": "30, 50, 75, 100",
+                "warranty": "5 years"
+              }
+            },
+            {
+              "productName": "Bobcat IA100 100 HP Fixed Speed",
+              "manufacturer": "IAC/Bobcat",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/ia100-100-hp-fixed-speed-lubricated-rotary-screw-air-compressor/",
+              "specs": {
+                "hp": "100"
+              }
+            },
+            {
+              "productName": "Bobcat IA125 125 HP Fixed Speed",
+              "manufacturer": "IAC/Bobcat",
+              "url": "https://www.iacserv.com/air-compressors/rotary-screw/ia125-125-hp-fixed-speed-lubricated-rotary-screw-air-compressor/",
+              "specs": {
+                "hp": "125"
+              }
+            },
+            {
+              "productName": "Rogers K/KV Series (40-350 HP)",
+              "manufacturer": "Rogers Machinery",
+              "url": "https://www.iacserv.com/rogers_machinery_k_series_rotary_screw_air_compressors.html",
+              "specs": {
+                "hp": "40-350",
+                "cfm": "26-1582 SCFM",
+                "psi": "40-210 PSIG",
+                "vfd": "Starts at 50 HP"
+              }
+            },
+            {
+              "productName": "Kaishan Rotary Screw Compressors",
+              "manufacturer": "Kaishan",
+              "url": "https://www.iacserv.com/kaishan/"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "Oil-Free Rotary Screw",
+          "url": "https://www.iacserv.com/oil-free-rotary/",
+          "description": "For food/beverage, pharmaceutical, electronics, medical applications.",
+          "items": [
+            {
+              "productName": "Kobelco KNW Series Oil-Free Screw",
+              "manufacturer": "Kobelco",
+              "url": "https://www.iacserv.com/kobelco_oil_free_rotary_screw_air_compressors.html"
+            },
+            {
+              "productName": "Hitachi AIRZEUS SDS-U Series Oil-Free Screw",
+              "manufacturer": "Hitachi",
+              "url": "https://iacserv.com/hitachi_oil_free_rotary_screw_air_compressors.html"
+            },
+            {
+              "productName": "ELGi Oil-Free Rotary Screw",
+              "manufacturer": "ELGi",
+              "url": "https://www.iacserv.com/elgi_oil_free_rotary_screw_air_compressors.html"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "Reciprocating",
+          "url": "https://www.iacserv.com/reciprocating/",
+          "items": [
+            {
+              "productName": "Champion R-Series (2-30 HP)",
+              "manufacturer": "Champion",
+              "url": "https://www.iacserv.com/air-compressors/reciprocating/champion-r-series-reciprocating-air-compressors-2-30-hp/",
+              "specs": {
+                "hp": "2-30"
+              }
+            },
+            {
+              "productName": "Champion Evolution Series (5-15 HP)",
+              "manufacturer": "Champion",
+              "url": "https://www.iacserv.com/air-compressors/reciprocating/champion-evolution-series-reciprocating-air-compressors-5-15-hp/",
+              "specs": {
+                "hp": "5-15",
+                "psi": "175 PSIG",
+                "cfm": "16.8-46.6",
+                "noise": "66 dBA"
+              }
+            },
+            {
+              "partNumber": "10120VW40X-3",
+              "productName": "V Series Heavy Duty Piston 10 HP 3-Phase",
+              "manufacturer": "Champion",
+              "url": "https://www.iacserv.com/air-compressors/10120vw40x-3-208-230-460v-10-hp-3-phase-v-series-heavy-duty-piston-compressor/",
+              "specs": {
+                "hp": "10",
+                "cfm": "40",
+                "psi": "175",
+                "voltage": "208-230/460V"
+              }
+            },
+            {
+              "productName": "ICP Reciprocating Compressors",
+              "manufacturer": "ICP",
+              "url": "https://iacserv.com/icp_reciprocating_air_compressors.html"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "Oil-Free Reciprocating",
+          "url": "https://www.iacserv.com/oil_free_reciprocating_air_compressors.html",
+          "items": [
+            {
+              "productName": "Oil-Free Reciprocating Compressors"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "Centrifugal",
+          "url": "https://www.iacserv.com/centrifugal/",
+          "items": [
+            {
+              "productName": "Tamturbo Oil-Free Centrifugal Compressor",
+              "manufacturer": "Tamturbo",
+              "url": "https://www.iacserv.com/air-compressors/centrifugal/tamturbo-oil-free-centrifugal-compressors/"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "Portable",
+          "url": "https://www.iacserv.com/portable/",
+          "items": [
+            {
+              "productName": "ELGi Portable Compressors",
+              "manufacturer": "ELGi",
+              "url": "https://iacserv.com/elgi_portable_air_compressors.html"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "Medical Grade",
+          "url": "https://www.iacserv.com/medical/",
+          "items": [
+            {
+              "productName": "Medical Grade Air Compressors",
+              "description": "Oil-free, ultra-quiet, ISO/NFPA compliant"
+            }
+          ]
+        },
+        {
+          "category": "Air Compressors",
+          "subcategory": "High-Pressure",
+          "url": "https://www.iacserv.com/sauer-compressors-usa/",
+          "items": [
+            {
+              "productName": "Sauer High-Pressure Compressors",
+              "manufacturer": "Sauer Compressors USA"
+            }
+          ]
+        },
+        {
+          "category": "Air Treatment",
+          "subcategory": "Refrigerated Air Dryers",
+          "url": "https://www.iacserv.com/air-dryers-filtration/",
+          "items": [
+            {
+              "productName": "ELGi EGRD 100 Refrigerated Dryer",
+              "manufacturer": "ELGi",
+              "url": "https://www.iacserv.com/air-dryers-filtration/b000506530364-egrd-100-refrigerated-dryer-air-cooled/",
+              "specs": {
+                "cfm": "100"
+              }
+            },
+            {
+              "productName": "ELGi EGRD 300 Refrigerated Dryer",
+              "manufacturer": "ELGi",
+              "url": "https://www.iacserv.com/air-dryers-filtration/b000506530372-egrd-300-refrigerated-dryer-air-cooled/",
+              "specs": {
+                "cfm": "300"
+              }
+            },
+            {
+              "productName": "DRYTEC SDE-US-80 115V Non-Cycling Refrigerated Dryer",
+              "manufacturer": "DRYTEC",
+              "url": "https://www.iacserv.com/air-dryers-filtration/refrigerated/sde-us-80-115v-non-cycling-refrigerated-air-dryer/"
+            },
+            {
+              "productName": "DRYTEC SDE-US-150 115V Non-Cycling Refrigerated Dryer",
+              "manufacturer": "DRYTEC",
+              "url": "https://www.iacserv.com/air-dryers-filtration/refrigerated/sde-us-150-115v-non-cycling-refrigerated-air-dryer/"
+            },
+            {
+              "productName": "DRYTEC SDE-US-2750N 460/3 Non-Cycling Refrigerated Dryer",
+              "manufacturer": "DRYTEC",
+              "url": "https://www.iacserv.com/air-dryers-filtration/refrigerated/sde-us-2750-460v-non-cycling-refrigerated-air-dryer/"
+            }
+          ]
+        },
+        {
+          "category": "Air Treatment",
+          "subcategory": "Desiccant Air Dryers",
+          "url": "https://www.iacserv.com/air-dryers-filtration/",
+          "items": [
+            {
+              "partNumber": "4012641",
+              "productName": "DRYPOINT ACC15 Compact Heatless Desiccant Dryer",
+              "manufacturer": "Beko",
+              "url": "https://www.iacserv.com/air-dryers-filtration/4012641-drypoint-acc15-compact-heatless-desiccant-dryer-with-bekomat-drain/",
+              "specs": {
+                "dewPoint": "-40 F"
+              }
+            },
+            {
+              "partNumber": "4012643",
+              "productName": "DRYPOINT ACC35 Compact Heatless Desiccant Dryer",
+              "manufacturer": "Beko",
+              "url": "https://www.iacserv.com/air-dryers-filtration/4012643-drypoint-acc35-compact-heatless-desiccant-dryer-with-bekomat-drain/",
+              "specs": {
+                "dewPoint": "-40 F"
+              }
+            },
+            {
+              "productName": "160ZPB 115V Desiccant Air Dryer",
+              "url": "https://www.iacserv.com/air-dryers-filtration/desiccant/160zpb-115v-desiccant-air-dryer/"
+            },
+            {
+              "productName": "Altec AIR HRE-1250 Heat Regenerative Desiccant Dryer",
+              "manufacturer": "Altec AIR",
+              "url": "https://www.iacserv.com/air-dryers-filtration/hre-1250-4-3-dual-tower-heat-regenerative-desiccant-air-dryer-460v-3-ph-60-hz-1250-scfm/",
+              "specs": {
+                "cfm": "1250 SCFM",
+                "voltage": "460V"
+              }
+            },
+            {
+              "productName": "Altec AIR HRE-1500 Heat Regenerative Desiccant Dryer",
+              "manufacturer": "Altec AIR",
+              "url": "https://www.iacserv.com/air-dryers-filtration/hre-1500-4-9l-dual-tower-heat-regenerative-desiccant-air-dryer-460v-3-ph-60-hz-1500-scfm/",
+              "specs": {
+                "cfm": "1500 SCFM",
+                "voltage": "460V"
+              }
+            }
+          ]
+        },
+        {
+          "category": "Vacuum Systems",
+          "subcategory": "Vacuum Pumps",
+          "url": "https://www.iacserv.com/dekker/",
+          "description": "Dekker Vacuum Technologies: oil-sealed, liquid ring, and dry vacuum systems.",
+          "items": [
+            {
+              "productName": "Dekker Oil-Sealed Vacuum Pumps",
+              "manufacturer": "Dekker"
+            },
+            {
+              "productName": "Dekker Liquid Ring Vacuum Pumps",
+              "manufacturer": "Dekker"
+            },
+            {
+              "productName": "Dekker Dry Vacuum Systems",
+              "manufacturer": "Dekker"
+            }
+          ]
+        },
+        {
+          "category": "Nitrogen Generation",
+          "subcategory": "Nitrogen Generators",
+          "url": "https://iacserv.com/nitrogen_generators.html",
+          "items": [
+            {
+              "productName": "Parker Nitrogen Generators",
+              "manufacturer": "Parker",
+              "url": "https://iacserv.com/parker_nitrogen_generators.html"
+            },
+            {
+              "productName": "Mikropor Industrial Nitrogen Generators",
+              "manufacturer": "Mikropor",
+              "url": "https://www.iacserv.com/mikropor_industrial_nitrogen_generators.html"
+            },
+            {
+              "productName": "Holtec Nitrogen Generators",
+              "manufacturer": "Holtec",
+              "url": "https://iacserv.com/holtec_nitrogen_generators.html"
+            }
+          ]
+        },
+        {
+          "category": "Controls & Monitoring",
+          "subcategory": "System Controls",
+          "url": "https://www.iacserv.com/controls-engineered/",
+          "items": [
+            {
+              "productName": "Compressed Air Flow Controllers",
+              "url": "https://iacserv.com/compressed_air_flow_controllers.html"
+            },
+            {
+              "productName": "Case Engineering Sequencers",
+              "manufacturer": "Case Engineering",
+              "url": "https://www.iacserv.com/case_engineering_sequencers.html"
+            },
+            {
+              "productName": "Remote Monitoring System",
+              "url": "https://www.iacserv.com/remote-monitoring/"
+            }
+          ]
+        },
+        {
+          "category": "Used Equipment",
+          "subcategory": "Used Compressors",
+          "url": "https://www.iacserv.com/used-compressors/",
+          "description": "Inspected and tested used rotary screw, reciprocating, and portable compressors.",
+          "items": [
+            {
+              "productName": "Used Rotary Screw Compressors"
+            },
+            {
+              "productName": "Used Reciprocating Compressors"
+            },
+            {
+              "productName": "Used Portable Compressors"
+            }
+          ]
+        },
+        {
+          "category": "Rental Equipment",
+          "subcategory": "Compressor & Dryer Rentals",
+          "url": "https://www.iacserv.com/rental.html",
+          "description": "Largest selection in region. Short-term or long-term.",
+          "items": [
+            {
+              "productName": "Industrial Air Compressor Rental"
+            },
+            {
+              "productName": "Refrigerated Air Dryer Rental"
+            },
+            {
+              "productName": "Desiccant Air Dryer Rental"
+            },
+            {
+              "productName": "Vacuum Pump Rental"
+            },
+            {
+              "productName": "Accessories Rental (hoses, aftercoolers, filters)"
+            }
+          ]
+        },
+        {
+          "category": "Services",
+          "subcategory": "Compressed Air Services",
+          "url": "https://www.iacserv.com",
+          "items": [
+            {
+              "productName": "Emergency Service (24/7/365)",
+              "url": "https://www.iacserv.com/emergency-services/",
+              "description": "Fully stocked service trucks, factory-trained technicians"
+            },
+            {
+              "productName": "Compressed Air Supply (CAS)",
+              "url": "https://iacserv.com/compressed_air_supply.html",
+              "description": "IAC designs, installs, owns, and maintains entire systems"
+            },
+            {
+              "productName": "Preventive Maintenance"
+            },
+            {
+              "productName": "System Audit & Engineering"
+            }
+          ]
+        },
+        {
+          "category": "Parts & Accessories",
+          "subcategory": "OEM & Aftermarket Parts",
+          "url": "https://parts.iacserv.com",
+          "description": "61,000+ parts. Supports Atlas Copco, Beko, Champion, Chicago Pneumatic, Curtis, Devair, ELGi, Gardner Denver, Ingersoll Rand, Kaishan, Sullair, Hitachi, Quincy, Kaeser, Kobelco, and more.",
+          "items": [
+            {
+              "productName": "Air/Oil Separators"
+            },
+            {
+              "productName": "Air Filters / Elements"
+            },
+            {
+              "productName": "Oil Filters"
+            },
+            {
+              "productName": "Lubricants & Fluids"
+            },
+            {
+              "productName": "Drain Valves & Kits"
+            },
+            {
+              "productName": "Hoses & Fittings"
+            },
+            {
+              "productName": "Belts"
+            },
+            {
+              "productName": "Gaskets & O-Rings"
+            },
+            {
+              "productName": "Valve Kits"
+            },
+            {
+              "productName": "Bearing Kits"
+            },
+            {
+              "productName": "Motor Starters & Contactors"
+            },
+            {
+              "productName": "Pressure Switches & Sensors"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

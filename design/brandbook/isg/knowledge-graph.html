@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISG Knowledge Graph | Liquid Glass</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Liquid Glass Design System -->
+  <link rel="stylesheet" href="isg_theme.css">
+  <link rel="stylesheet" href="../../liquid-glass/liquid-glass.css">
+  <link rel="stylesheet" href="../../liquid-glass/liquid-glass-viz.css">
+
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../../liquid-glass/liquid-glass.js" defer></script>
+  <script src="../../liquid-glass/liquid-glass-viz.js" defer></script>
+
+  <style>
+    /* ── Page-level layout ─────────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--lg-bg, #0A1628);
+      color: var(--lg-text, #E2E8F0);
+      font-family: var(--lg-font-body, Inter, -apple-system, sans-serif);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Sticky Nav ──────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(var(--lg-blur-frosted, 40px)) saturate(var(--lg-saturation, 180%));
+      -webkit-backdrop-filter: blur(var(--lg-blur-frosted, 40px)) saturate(var(--lg-saturation, 180%));
+      border-bottom: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav__logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--lg-secondary-400, #E8B44E);
+      letter-spacing: 1px;
+    }
+
+    .nav__title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--lg-text-dim, #94A3B8);
+    }
+
+    .nav__back {
+      font-size: 13px;
+      color: var(--lg-primary-400, #8FAADC);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav__back:hover {
+      color: var(--lg-primary-200, #B8CCE9);
+    }
+
+    /* ── Container ───────────────────────────────────────────────── */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ── KPI Stats Bar ───────────────────────────────────────────── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, var(--lg-fill-opacity, 0.12));
+      backdrop-filter: blur(var(--lg-blur-standard, 24px)) saturate(var(--lg-saturation, 180%));
+      -webkit-backdrop-filter: blur(var(--lg-blur-standard, 24px)) saturate(var(--lg-saturation, 180%));
+      border: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md, 16px);
+    }
+
+    .stat-card__value {
+      font-family: var(--lg-font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--lg-text, #E2E8F0);
+      line-height: 1.1;
+    }
+
+    .stat-card__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--lg-text-dim, #94A3B8);
+      margin-top: 6px;
+    }
+
+    /* ── Tabs ────────────────────────────────────────────────────── */
+    .tabs-wrap {
+      margin-bottom: 24px;
+    }
+
+    .tab-panels {
+      margin-top: 20px;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel--active {
+      display: block;
+    }
+
+    /* ── Viz containers ──────────────────────────────────────────── */
+    .viz-container {
+      min-height: 420px;
+    }
+
+    /* ── Legend row (shared) ──────────────────────────────────────── */
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--lg-radius-sm, 10px);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--lg-text-dim, #94A3B8);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Threat Matrix (custom table) ──────────────────────────── */
+    .threat-table-wrap {
+      overflow-x: auto;
+    }
+
+    .threat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .threat-table th {
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--lg-text-dim, #94A3B8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+
+    .threat-table th:first-child {
+      text-align: left;
+      min-width: 160px;
+    }
+
+    .threat-table td {
+      padding: 8px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    .threat-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--lg-text, #E2E8F0);
+    }
+
+    .threat-table tbody tr {
+      transition: background 0.1s ease;
+    }
+
+    .threat-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .threat-cell {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      line-height: 24px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .threat-cell--very-high { background: #EF4444; color: #fff; }
+    .threat-cell--high { background: #F97316; color: #fff; }
+    .threat-cell--medium { background: #EAB308; color: #1a1a1a; }
+    .threat-cell--low { background: #22C55E; color: #1a1a1a; }
+    .threat-cell--none { background: rgba(255,255,255,0.04); color: var(--lg-text-dim); }
+
+    .revenue-col {
+      font-family: var(--lg-font-mono);
+      font-size: 11px;
+      color: var(--lg-text-dim, #94A3B8);
+      text-align: right !important;
+    }
+
+    /* ── Market Penetration indicator ────────────────────────────── */
+    .penetration-note {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--lg-radius-sm, 10px);
+      border-left: 3px solid var(--lg-secondary-400, #E8B44E);
+      font-size: 13px;
+      color: var(--lg-text-dim, #94A3B8);
+      line-height: 1.6;
+    }
+
+    .penetration-note strong {
+      color: var(--lg-secondary-400, #E8B44E);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    .footer {
+      margin-top: 48px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      font-size: 12px;
+      color: var(--lg-text-dim, #94A3B8);
+    }
+
+    .footer span {
+      opacity: 0.6;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-card__value {
+        font-size: 22px;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      .nav {
+        padding: 10px 16px;
+      }
+
+      .nav__title {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════ STICKY NAV ═══════ -->
+  <nav class="nav">
+    <div class="nav__brand">
+      <span class="nav__logo">ISG</span>
+      <span class="nav__title">Knowledge Graph</span>
+    </div>
+    <a href="index.html" class="nav__back">&larr; Back to Brand Book</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- ═══════ DASHBOARD STATS BAR ═══════ -->
+    <section class="stats-bar">
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">1,199</div>
+        <div class="stat-card__label">Products &amp; Services</div>
+      </div>
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">16</div>
+        <div class="stat-card__label">Brands</div>
+      </div>
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">111+</div>
+        <div class="stat-card__label">Competitors</div>
+      </div>
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">$145B+</div>
+        <div class="stat-card__label">Total Addressable Market</div>
+      </div>
+    </section>
+
+    <!-- ═══════ TAB NAVIGATION ═══════ -->
+    <section class="tabs-wrap">
+      <div class="lg-tabs" id="main-tabs" role="tablist">
+        <button class="lg-tabs__tab lg-tabs__tab--active" data-tab="landscape" role="tab" aria-selected="true">Competitive Landscape</button>
+        <button class="lg-tabs__tab" data-tab="taxonomy" role="tab" aria-selected="false">Product Taxonomy</button>
+        <button class="lg-tabs__tab" data-tab="market" role="tab" aria-selected="false">Market Sizing</button>
+        <button class="lg-tabs__tab" data-tab="threat" role="tab" aria-selected="false">Threat Matrix</button>
+      </div>
+
+      <div class="tab-panels">
+
+        <!-- ─── Tab 1: Competitive Landscape ─── -->
+        <div class="tab-panel tab-panel--active" id="panel-landscape">
+          <div id="force-graph" class="viz-container"></div>
+          <div class="legend-row">
+            <div class="legend-item"><div class="legend-dot" style="background:#E8B44E"></div>ISG (Parent)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#8FAADC"></div>ISG Subsidiary</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Very High Threat</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#F97316"></div>High Threat</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#EAB308"></div>Medium Threat</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div>Low Threat</div>
+          </div>
+        </div>
+
+        <!-- ─── Tab 2: Product Taxonomy ─── -->
+        <div class="tab-panel" id="panel-taxonomy">
+          <div id="treemap-viz" class="viz-container"></div>
+          <div class="legend-row">
+            <div class="legend-item"><div class="legend-dot" style="background:#5478B0"></div>Valves</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#06B6D4"></div>Compressors</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div>Motors</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#A855F7"></div>Pumps</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#E8B44E"></div>Specialty / Turbo</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#F97316"></div>MRO</div>
+          </div>
+        </div>
+
+        <!-- ─── Tab 3: Market Sizing ─── -->
+        <div class="tab-panel" id="panel-market">
+          <div id="market-chart" class="viz-container"></div>
+          <div class="penetration-note">
+            <strong>ISG Revenue: $241.3M</strong> across all verticals.
+            Market penetration: <strong>Valves</strong> 1.18% of $20.4B |
+            <strong>Compressors</strong> 6.09% of $3.96B |
+            <strong>Motors</strong> 2.30% of $10.5B |
+            <strong>Pumps</strong> 3.77% of $6.4B |
+            <strong>MRO</strong> 0.26% of $91.5B |
+            <strong>Specialty</strong> 2.75% of $8.77B
+          </div>
+        </div>
+
+        <!-- ─── Tab 4: Threat Matrix ─── -->
+        <div class="tab-panel" id="panel-threat">
+          <div class="lg-card threat-table-wrap">
+            <table class="threat-table" id="threat-matrix">
+              <!-- Rendered by JS -->
+            </table>
+          </div>
+          <div class="legend-row">
+            <div class="legend-item"><span class="threat-cell threat-cell--very-high">VH</span> Very High</div>
+            <div class="legend-item"><span class="threat-cell threat-cell--high">H</span> High</div>
+            <div class="legend-item"><span class="threat-cell threat-cell--medium">M</span> Medium</div>
+            <div class="legend-item"><span class="threat-cell threat-cell--low">L</span> Low</div>
+            <div class="legend-item"><span class="threat-cell threat-cell--none">&mdash;</span> No overlap</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer">
+      <span>Generated 2026-02-12</span> &middot; Powered by Charlotte OS
+    </footer>
+
+  </div><!-- /.container -->
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       INLINE DATA & VISUALIZATION SCRIPTS
+       ═══════════════════════════════════════════════════════════════ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /* ──────────────────────────────────────────────────────────────
+       TAB SWITCHING
+       ────────────────────────────────────────────────────────────── */
+    const tabs = document.querySelectorAll('.lg-tabs__tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    const rendered = {};
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('lg-tabs__tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(function (p) { p.classList.remove('tab-panel--active'); });
+
+        tab.classList.add('lg-tabs__tab--active');
+        tab.setAttribute('aria-selected', 'true');
+        var target = tab.getAttribute('data-tab');
+        document.getElementById('panel-' + target).classList.add('tab-panel--active');
+
+        // Lazy-render visualizations on first view
+        if (target === 'landscape' && !rendered.landscape) { renderForceGraph(); rendered.landscape = true; }
+        if (target === 'taxonomy'  && !rendered.taxonomy)  { renderTreemap();    rendered.taxonomy  = true; }
+        if (target === 'market'    && !rendered.market)     { renderBarChart();   rendered.market    = true; }
+        if (target === 'threat'    && !rendered.threat)     { renderThreatMatrix(); rendered.threat  = true; }
+      });
+    });
+
+    /* ──────────────────────────────────────────────────────────────
+       DATA: ISG Subsidiaries
+       ────────────────────────────────────────────────────────────── */
+    var subsidiaries = [
+      { id: 'IVS',               name: 'Industrial Valve Service',     vertical: 'Valves' },
+      { id: 'Morin',             name: 'Morin Process Equipment',      vertical: 'Valves' },
+      { id: 'TVI',               name: 'Tri-State Valve LLC',          vertical: 'Valves' },
+      { id: 'IAP',               name: 'Industrial Air Power',         vertical: 'Compressors' },
+      { id: 'IAC',               name: 'Industrial Air Centers',       vertical: 'Compressors' },
+      { id: 'CTS',               name: 'Compressor & Turbine Svc',     vertical: 'Compressors' },
+      { id: 'Air Specialty',     name: 'Air Specialty & Equipment',    vertical: 'Compressors' },
+      { id: 'Soles',             name: 'Soles Electric',               vertical: 'Motors' },
+      { id: 'Illinois Electric', name: 'Illinois Electric Works',      vertical: 'Motors' },
+      { id: 'Georgia Western',   name: 'Georgia Western',              vertical: 'Pumps' },
+      { id: 'RSI',               name: 'Renewal Service Inc.',         vertical: 'Pumps' },
+      { id: 'Dynamic-MS',        name: 'Dynamic Mechanical Solutions', vertical: 'Specialty' },
+      { id: 'CORE',              name: 'CORE Industrial Maintenance',  vertical: 'Specialty' },
+      { id: 'Pinnacle',          name: 'Pinnacle Industries',          vertical: 'Specialty' },
+      { id: 'Turbomachinery',    name: 'Turbomachinery Industries',    vertical: 'Specialty' },
+      { id: 'NMM',               name: 'National Mill Maintenance',    vertical: 'Specialty' }
+    ];
+
+    /* ──────────────────────────────────────────────────────────────
+       DATA: Competitors (top 30)
+       ────────────────────────────────────────────────────────────── */
+    var competitors = [
+      { id: 'DXP Enterprises',   rev: 1800,  tier: 2, threat: 'VeryHigh', verticals: ['Valves','Compressors','Motors','Pumps','MRO'] },
+      { id: 'IPS',               rev: 450,   tier: 2, threat: 'VeryHigh', verticals: ['Motors','Pumps'] },
+      { id: 'Setpoint IS',       rev: 200,   tier: 3, threat: 'High',     verticals: ['Valves','Compressors'] },
+      { id: 'FCX Performance',   rev: 170,   tier: 3, threat: 'High',     verticals: ['Valves','Pumps'] },
+      { id: 'OTC Industrial',    rev: 450,   tier: 2, threat: 'High',     verticals: ['Valves','Compressors','MRO'] },
+      { id: 'Ovation Holdings',  rev: 150,   tier: 3, threat: 'High',     verticals: ['Valves'] },
+      { id: 'Motion Industries', rev: 8600,  tier: 1, threat: 'VeryHigh', verticals: ['Motors','Pumps','MRO'] },
+      { id: 'Blake & Pendleton', rev: 85,    tier: 3, threat: 'High',     verticals: ['Valves'] },
+      { id: 'Jay Industrial',    rev: null,  tier: 3, threat: 'High',     verticals: ['Motors'] },
+      { id: 'Emerson (Fisher)',  rev: 18020, tier: 1, threat: 'VeryHigh', verticals: ['Valves'] },
+      { id: 'Flowserve',         rev: 4690,  tier: 1, threat: 'VeryHigh', verticals: ['Valves','Pumps'] },
+      { id: 'Baker Hughes',      rev: 25500, tier: 1, threat: 'Medium',   verticals: ['Valves','Compressors','Specialty'] },
+      { id: 'Spirax-Sarco',      rev: 1900,  tier: 1, threat: 'Medium',   verticals: ['Valves'] },
+      { id: 'Rotork',            rev: 850,   tier: 2, threat: 'Medium',   verticals: ['Valves'] },
+      { id: 'Atlas Copco',       rev: 15000, tier: 1, threat: 'High',     verticals: ['Compressors'] },
+      { id: 'Ingersoll Rand',    rev: 6900,  tier: 1, threat: 'High',     verticals: ['Compressors'] },
+      { id: 'Kaeser',            rev: 3600,  tier: 1, threat: 'Medium',   verticals: ['Compressors'] },
+      { id: 'Gardner Denver/IR', rev: 6900,  tier: 1, threat: 'Medium',   verticals: ['Compressors'] },
+      { id: 'ABB',               rev: 29400, tier: 1, threat: 'Medium',   verticals: ['Motors'] },
+      { id: 'Siemens',           rev: 19000, tier: 1, threat: 'Low',      verticals: ['Motors'] },
+      { id: 'WEG',               rev: 5800,  tier: 1, threat: 'Medium',   verticals: ['Motors'] },
+      { id: 'Nidec',             rev: 14000, tier: 1, threat: 'Low',      verticals: ['Motors'] },
+      { id: 'Regal Rexnord',     rev: 5300,  tier: 1, threat: 'Medium',   verticals: ['Motors'] },
+      { id: 'Sulzer',            rev: 3600,  tier: 1, threat: 'Medium',   verticals: ['Pumps'] },
+      { id: 'ITT',               rev: 3200,  tier: 1, threat: 'Medium',   verticals: ['Pumps'] },
+      { id: 'Grundfos',          rev: 4800,  tier: 1, threat: 'Low',      verticals: ['Pumps'] },
+      { id: 'Xylem',             rev: 7000,  tier: 1, threat: 'Medium',   verticals: ['Pumps'] },
+      { id: 'Grainger',          rev: 16500, tier: 1, threat: 'Medium',   verticals: ['MRO'] },
+      { id: 'Fastenal',          rev: 7400,  tier: 1, threat: 'Low',      verticals: ['MRO'] },
+      { id: 'Applied Industrial',rev: 4100,  tier: 1, threat: 'High',     verticals: ['MRO','Motors','Pumps'] }
+    ];
+
+    /* ──────────────────────────────────────────────────────────────
+       DATA: Product counts per brand
+       ────────────────────────────────────────────────────────────── */
+    var productCounts = {
+      'IVS':               { count: 67,  vertical: 'Valves' },
+      'Morin':             { count: 77,  vertical: 'Valves' },
+      'TVI':               { count: 25,  vertical: 'Valves' },
+      'IAP':               { count: 51,  vertical: 'Compressors' },
+      'IAC':               { count: 65,  vertical: 'Compressors' },
+      'CTS':               { count: 7,   vertical: 'Compressors' },
+      'Air Specialty':     { count: 104, vertical: 'Compressors' },
+      'Soles':             { count: 58,  vertical: 'Motors' },
+      'Illinois Electric': { count: 40,  vertical: 'Motors' },
+      'Georgia Western':   { count: 177, vertical: 'Pumps' },
+      'RSI':               { count: 34,  vertical: 'Pumps' },
+      'Dynamic-MS':        { count: 44,  vertical: 'Specialty' },
+      'CORE':              { count: 15,  vertical: 'Specialty' },
+      'Pinnacle':          { count: 83,  vertical: 'Specialty' },
+      'Turbomachinery':    { count: 339, vertical: 'Specialty' },
+      'NMM':               { count: 11,  vertical: 'Specialty' }
+    };
+
+    /* ──────────────────────────────────────────────────────────────
+       DATA: Market sizes ($B)
+       ────────────────────────────────────────────────────────────── */
+    var marketData = [
+      { label: 'MRO',         value: 91.5,  color: '#F97316' },
+      { label: 'Valves',      value: 20.4,  color: '#5478B0' },
+      { label: 'Motors',      value: 10.5,  color: '#22C55E' },
+      { label: 'Specialty',   value: 8.77,  color: '#E8B44E' },
+      { label: 'Pumps',       value: 6.4,   color: '#A855F7' },
+      { label: 'Compressors', value: 3.96,  color: '#06B6D4' }
+    ];
+
+    /* ──────────────────────────────────────────────────────────────
+       COLORS
+       ────────────────────────────────────────────────────────────── */
+    var threatColors = {
+      VeryHigh: '#EF4444',
+      High:     '#F97316',
+      Medium:   '#EAB308',
+      Low:      '#22C55E'
+    };
+
+    var verticalColors = {
+      Valves:      '#5478B0',
+      Compressors: '#06B6D4',
+      Motors:      '#22C55E',
+      Pumps:       '#A855F7',
+      Specialty:   '#E8B44E',
+      MRO:         '#F97316'
+    };
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 1: COMPETITIVE LANDSCAPE — Force-directed graph
+       ══════════════════════════════════════════════════════════════ */
+    function renderForceGraph() {
+      var nodes = [];
+      var links = [];
+
+      // ISG center node
+      nodes.push({ id: 'ISG', group: 0, radius: 28, color: '#E8B44E', type: 'parent' });
+
+      // Subsidiary nodes
+      subsidiaries.forEach(function (s) {
+        nodes.push({ id: s.id, group: 1, radius: 12, color: '#8FAADC', type: 'subsidiary', vertical: s.vertical });
+        links.push({ source: 'ISG', target: s.id, value: 3, color: '#E8B44E' });
+      });
+
+      // Competitor nodes
+      competitors.forEach(function (c) {
+        var revScale = c.rev ? Math.max(4, Math.min(14, Math.sqrt(c.rev / 100))) : 5;
+        nodes.push({ id: c.id, group: 2, radius: revScale, color: threatColors[c.threat], type: 'competitor', threat: c.threat, rev: c.rev });
+        links.push({ source: c.id, target: 'ISG', value: c.threat === 'VeryHigh' ? 3 : c.threat === 'High' ? 2 : 1, color: threatColors[c.threat] });
+      });
+
+      // Use LiquidGlass force graph API if available, otherwise raw D3
+      var container = document.getElementById('force-graph');
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var h = 560;
+
+      container.innerHTML = '';
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', width)
+        .attr('height', h)
+        .attr('viewBox', [0, 0, width, h])
+        .style('border-radius', 'var(--lg-radius-md, 16px)')
+        .style('background', 'rgba(255,255,255,0.04)');
+
+      // Defs for glow
+      var defs = svg.append('defs');
+      var filter = defs.append('filter').attr('id', 'glow');
+      filter.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'blur');
+      filter.append('feMerge').call(function (m) {
+        m.append('feMergeNode').attr('in', 'blur');
+        m.append('feMergeNode').attr('in', 'SourceGraphic');
+      });
+
+      var simulation = d3.forceSimulation(nodes)
+        .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(function (d) {
+          if (d.source.type === 'parent' || d.target.type === 'parent') return 120;
+          return 80;
+        }))
+        .force('charge', d3.forceManyBody().strength(function (d) {
+          if (d.type === 'parent') return -600;
+          if (d.type === 'subsidiary') return -200;
+          return -120;
+        }))
+        .force('center', d3.forceCenter(width / 2, h / 2))
+        .force('collide', d3.forceCollide().radius(function (d) { return d.radius + 4; }));
+
+      var linkEl = svg.append('g')
+        .selectAll('line')
+        .data(links)
+        .join('line')
+        .attr('stroke', function (d) { return d.color || 'rgba(255,255,255,0.1)'; })
+        .attr('stroke-opacity', 0.35)
+        .attr('stroke-width', function (d) { return d.value; });
+
+      var nodeEl = svg.append('g')
+        .selectAll('circle')
+        .data(nodes)
+        .join('circle')
+        .attr('r', function (d) { return d.radius; })
+        .attr('fill', function (d) { return d.color; })
+        .attr('stroke', 'rgba(255,255,255,0.2)')
+        .attr('stroke-width', 1)
+        .style('cursor', 'grab')
+        .attr('filter', function (d) { return d.type === 'parent' ? 'url(#glow)' : null; })
+        .call(drag(simulation));
+
+      // Tooltips
+      nodeEl.on('mousemove', function (event, d) {
+        var html = '<div style="font-weight:700;font-size:13px">' + d.id + '</div>';
+        if (d.type === 'competitor') {
+          html += '<div style="font-size:11px;color:#94A3B8;margin-top:3px">Rev: ' + (d.rev ? '$' + d.rev.toLocaleString() + 'M' : 'N/A') + '</div>';
+          html += '<div style="font-size:11px;color:' + threatColors[d.threat] + '">Threat: ' + d.threat + '</div>';
+        } else if (d.type === 'subsidiary') {
+          html += '<div style="font-size:11px;color:#94A3B8;margin-top:3px">' + d.vertical + '</div>';
+        } else {
+          html += '<div style="font-size:11px;color:#94A3B8;margin-top:3px">$241.3M Rev | 16 Brands | 40 Locations</div>';
+        }
+        showTip(html, event);
+      }).on('mouseleave', hideTip);
+
+      var labelEl = svg.append('g')
+        .selectAll('text')
+        .data(nodes)
+        .join('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', function (d) { return d.radius + 14; })
+        .attr('font-size', function (d) { return d.type === 'parent' ? 13 : d.type === 'subsidiary' ? 10 : 9; })
+        .attr('font-weight', function (d) { return d.type === 'parent' ? 700 : 400; })
+        .attr('fill', function (d) { return d.type === 'parent' ? '#E8B44E' : '#94A3B8'; })
+        .attr('pointer-events', 'none')
+        .text(function (d) { return d.id; });
+
+      simulation.on('tick', function () {
+        linkEl
+          .attr('x1', function (d) { return d.source.x; })
+          .attr('y1', function (d) { return d.source.y; })
+          .attr('x2', function (d) { return d.target.x; })
+          .attr('y2', function (d) { return d.target.y; });
+        nodeEl
+          .attr('cx', function (d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
+          .attr('cy', function (d) { return d.y = Math.max(d.radius, Math.min(h - d.radius, d.y)); });
+        labelEl
+          .attr('x', function (d) { return d.x; })
+          .attr('y', function (d) { return d.y; });
+      });
+
+      function drag(sim) {
+        return d3.drag()
+          .on('start', function (event, d) {
+            if (!event.active) sim.alphaTarget(0.3).restart();
+            d.fx = d.x; d.fy = d.y;
+          })
+          .on('drag', function (event, d) { d.fx = event.x; d.fy = event.y; })
+          .on('end', function (event, d) {
+            if (!event.active) sim.alphaTarget(0);
+            d.fx = null; d.fy = null;
+          });
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 2: PRODUCT TAXONOMY — Treemap
+       ══════════════════════════════════════════════════════════════ */
+    function renderTreemap() {
+      // Build hierarchy: ISG > Vertical > Brand > count
+      var verticalMap = {};
+      Object.keys(productCounts).forEach(function (brand) {
+        var pc = productCounts[brand];
+        if (!verticalMap[pc.vertical]) verticalMap[pc.vertical] = [];
+        verticalMap[pc.vertical].push({ name: brand, value: pc.count });
+      });
+
+      var treeData = {
+        name: 'ISG',
+        children: Object.keys(verticalMap).map(function (v) {
+          return { name: v, children: verticalMap[v] };
+        })
+      };
+
+      var container = document.getElementById('treemap-viz');
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var h = 480;
+
+      container.innerHTML = '';
+
+      var root = d3.hierarchy(treeData)
+        .sum(function (d) { return d.value || 0; })
+        .sort(function (a, b) { return b.value - a.value; });
+
+      d3.treemap()
+        .size([width, h])
+        .padding(3)
+        .paddingTop(24)
+        .round(true)(root);
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', width)
+        .attr('height', h)
+        .style('border-radius', 'var(--lg-radius-md, 16px)')
+        .style('background', 'rgba(255,255,255,0.04)');
+
+      // Group headers
+      var groups = svg.selectAll('.group')
+        .data(root.children)
+        .join('g')
+        .attr('class', 'group');
+
+      groups.append('rect')
+        .attr('x', function (d) { return d.x0; })
+        .attr('y', function (d) { return d.y0; })
+        .attr('width', function (d) { return d.x1 - d.x0; })
+        .attr('height', function (d) { return d.y1 - d.y0; })
+        .attr('fill', 'none')
+        .attr('stroke', function (d) { return verticalColors[d.data.name] || '#888'; })
+        .attr('stroke-opacity', 0.3)
+        .attr('rx', 6);
+
+      groups.append('text')
+        .attr('x', function (d) { return d.x0 + 8; })
+        .attr('y', function (d) { return d.y0 + 16; })
+        .text(function (d) { return d.data.name; })
+        .attr('fill', function (d) { return verticalColors[d.data.name] || '#94A3B8'; })
+        .attr('font-size', 11)
+        .attr('font-weight', 600)
+        .attr('pointer-events', 'none');
+
+      // Leaves
+      var leaf = svg.selectAll('.leaf')
+        .data(root.leaves())
+        .join('g')
+        .attr('class', 'leaf')
+        .attr('transform', function (d) { return 'translate(' + d.x0 + ',' + d.y0 + ')'; });
+
+      leaf.append('rect')
+        .attr('width', function (d) { return Math.max(0, d.x1 - d.x0); })
+        .attr('height', function (d) { return Math.max(0, d.y1 - d.y0); })
+        .attr('fill', function (d) {
+          var v = d.parent ? d.parent.data.name : '';
+          return verticalColors[v] || '#888';
+        })
+        .attr('fill-opacity', 0.6)
+        .attr('rx', 4)
+        .attr('stroke', 'var(--lg-bg, #0A1628)')
+        .attr('stroke-width', 2)
+        .style('cursor', 'pointer')
+        .on('mousemove', function (event, d) {
+          var vName = d.parent ? d.parent.data.name : '';
+          showTip(
+            '<div style="font-size:10px;color:#94A3B8;text-transform:uppercase">' + vName + '</div>' +
+            '<div style="font-weight:700">' + d.data.name + '</div>' +
+            '<div style="font-size:12px;color:#E2E8F0">' + d.data.value + ' products</div>',
+            event
+          );
+        })
+        .on('mouseleave', hideTip);
+
+      leaf.append('text')
+        .attr('x', 6)
+        .attr('y', 16)
+        .text(function (d) {
+          var w = d.x1 - d.x0;
+          return w > 50 ? d.data.name : '';
+        })
+        .attr('font-size', function (d) { return (d.x1 - d.x0) > 90 ? 12 : 10; })
+        .attr('fill', '#fff')
+        .attr('pointer-events', 'none');
+
+      leaf.append('text')
+        .attr('x', 6)
+        .attr('y', 30)
+        .text(function (d) {
+          var w = d.x1 - d.x0;
+          var ch = d.y1 - d.y0;
+          return (w > 50 && ch > 34) ? d.data.value : '';
+        })
+        .attr('font-size', 10)
+        .attr('fill', 'rgba(255,255,255,0.6)')
+        .attr('pointer-events', 'none');
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 3: MARKET SIZING — Horizontal bar chart
+       ══════════════════════════════════════════════════════════════ */
+    function renderBarChart() {
+      var container = document.getElementById('market-chart');
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var h = 380;
+      var margin = { top: 20, right: 60, bottom: 20, left: 110 };
+
+      container.innerHTML = '';
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', width)
+        .attr('height', h)
+        .style('border-radius', 'var(--lg-radius-md, 16px)')
+        .style('background', 'rgba(255,255,255,0.04)');
+
+      var x = d3.scaleLinear()
+        .domain([0, d3.max(marketData, function (d) { return d.value; }) * 1.15])
+        .range([margin.left, width - margin.right]);
+
+      var y = d3.scaleBand()
+        .domain(marketData.map(function (d) { return d.label; }))
+        .range([margin.top, h - margin.bottom])
+        .padding(0.35);
+
+      // Y axis labels
+      svg.append('g')
+        .selectAll('text')
+        .data(marketData)
+        .join('text')
+        .attr('x', margin.left - 12)
+        .attr('y', function (d) { return y(d.label) + y.bandwidth() / 2; })
+        .attr('text-anchor', 'end')
+        .attr('dominant-baseline', 'central')
+        .attr('fill', '#E2E8F0')
+        .attr('font-size', 13)
+        .attr('font-weight', 500)
+        .text(function (d) { return d.label; });
+
+      // Bars
+      svg.selectAll('.bar')
+        .data(marketData)
+        .join('rect')
+        .attr('class', 'bar')
+        .attr('x', margin.left)
+        .attr('y', function (d) { return y(d.label); })
+        .attr('width', function (d) { return x(d.value) - margin.left; })
+        .attr('height', y.bandwidth())
+        .attr('fill', function (d) { return d.color; })
+        .attr('fill-opacity', 0.75)
+        .attr('rx', 4)
+        .style('cursor', 'pointer')
+        .on('mousemove', function (event, d) {
+          showTip(
+            '<div style="font-weight:700">' + d.label + '</div>' +
+            '<div style="font-size:12px">$' + d.value + 'B market size</div>',
+            event
+          );
+        })
+        .on('mouseleave', hideTip);
+
+      // Value labels
+      svg.selectAll('.bar-label')
+        .data(marketData)
+        .join('text')
+        .attr('x', function (d) { return x(d.value) + 8; })
+        .attr('y', function (d) { return y(d.label) + y.bandwidth() / 2; })
+        .attr('dominant-baseline', 'central')
+        .attr('fill', '#94A3B8')
+        .attr('font-size', 12)
+        .attr('font-weight', 600)
+        .text(function (d) { return '$' + d.value + 'B'; });
+
+      // ISG revenue marker ($241.3M = $0.2413B)
+      var isgX = x(0.2413);
+      svg.append('line')
+        .attr('x1', isgX).attr('x2', isgX)
+        .attr('y1', margin.top - 5).attr('y2', h - margin.bottom + 5)
+        .attr('stroke', '#E8B44E')
+        .attr('stroke-width', 2)
+        .attr('stroke-dasharray', '6 3');
+
+      svg.append('text')
+        .attr('x', isgX + 6)
+        .attr('y', margin.top - 2)
+        .attr('fill', '#E8B44E')
+        .attr('font-size', 11)
+        .attr('font-weight', 600)
+        .text('ISG $241.3M');
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 4: THREAT MATRIX — Heatmap table
+       ══════════════════════════════════════════════════════════════ */
+    function renderThreatMatrix() {
+      var verticals = ['Valves', 'Compressors', 'Motors', 'Pumps', 'MRO', 'Specialty'];
+
+      // Pick the top 15 competitors by threat (VeryHigh first, then High, then by revenue)
+      var threatRank = { VeryHigh: 0, High: 1, Medium: 2, Low: 3 };
+      var sorted = competitors.slice().sort(function (a, b) {
+        var tr = threatRank[a.threat] - threatRank[b.threat];
+        if (tr !== 0) return tr;
+        return (b.rev || 0) - (a.rev || 0);
+      });
+      var top15 = sorted.slice(0, 15);
+
+      var table = document.getElementById('threat-matrix');
+      if (!table) return;
+
+      // Build header
+      var thead = '<thead><tr><th>Competitor</th>';
+      verticals.forEach(function (v) {
+        thead += '<th>' + v + '</th>';
+      });
+      thead += '<th style="text-align:right">Revenue</th>';
+      thead += '</tr></thead>';
+
+      // Build rows
+      var tbody = '<tbody>';
+      top15.forEach(function (c) {
+        tbody += '<tr>';
+        tbody += '<td>' + c.id + '</td>';
+        verticals.forEach(function (v) {
+          var inVertical = c.verticals.indexOf(v) !== -1;
+          if (inVertical) {
+            var cls = 'threat-cell--' + c.threat.toLowerCase().replace('veryhigh', 'very-high');
+            var label = c.threat === 'VeryHigh' ? 'VH' : c.threat.charAt(0);
+            tbody += '<td><span class="threat-cell ' + cls + '">' + label + '</span></td>';
+          } else {
+            tbody += '<td><span class="threat-cell threat-cell--none">&mdash;</span></td>';
+          }
+        });
+        var revStr = c.rev ? '$' + (c.rev >= 1000 ? (c.rev / 1000).toFixed(1) + 'B' : c.rev + 'M') : 'N/A';
+        tbody += '<td class="revenue-col">' + revStr + '</td>';
+        tbody += '</tr>';
+      });
+      tbody += '</tbody>';
+
+      table.innerHTML = thead + tbody;
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+       SHARED TOOLTIP (lightweight, no dependency on viz lib tooltip)
+       ────────────────────────────────────────────────────────────── */
+    var tipEl;
+    function showTip(html, event) {
+      if (!tipEl) {
+        tipEl = document.createElement('div');
+        tipEl.className = 'lg-viz-tooltip';
+        document.body.appendChild(tipEl);
+      }
+      tipEl.innerHTML = html;
+      tipEl.classList.add('lg-viz-tooltip--visible');
+      tipEl.style.left = (event.pageX + 14) + 'px';
+      tipEl.style.top  = (event.pageY - 12) + 'px';
+    }
+
+    function hideTip() {
+      if (tipEl) tipEl.classList.remove('lg-viz-tooltip--visible');
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+       INITIAL RENDER — Landscape tab is visible on load
+       ────────────────────────────────────────────────────────────── */
+    renderForceGraph();
+    rendered.landscape = true;
+
+  }); // end DOMContentLoaded
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1153 @@
+{
+  "vertical": "Valves",
+  "reportDate": "2026-02-12",
+  "isgBrands": [
+    "Industrial Valve Service",
+    "Morin Process Equipment",
+    "Tri-State Valve LLC"
+  ],
+  "isgProfile": {
+    "parentCompany": "Industrial Service Group (ISG)",
+    "founded": 2018,
+    "headquarters": "Indianapolis, IN",
+    "website": "https://isgservice.com",
+    "privateEquitySponsor": "TJC LP / Five Points Capital",
+    "totalBrands": 16,
+    "valveBrands": ["Industrial Valve Service", "Tri-State Valve LLC"],
+    "processBrands": ["Morin Process Equipment"],
+    "totalLocations": "40+",
+    "valveLocations": ["Alabama", "Louisiana", "Tennessee"],
+    "valveInventory": {
+      "pressureManagementValves": "13,000+",
+      "manualValves": "36,000+",
+      "controlValves": "1,500+",
+      "electricActuationUnits": "1,200+"
+    },
+    "manufacturerPartnerships": [
+      "Farris", "Crosby", "Consolidated", "Anderson-Greenwood", "Kunkle",
+      "Crane", "Pacific", "Powell", "Duo-Check", "Edward", "Kitz", "Velan",
+      "Cameron", "DelVal", "Flow-Tek", "Bray", "Xomox", "Durco", "WKM",
+      "Dyna-Flo", "Fisher", "Masoneilan", "Samson", "Valtek", "Copes-Vulcan",
+      "Rotork", "Sambo", "Limitorque", "EIM", "Bettis", "Automax", "Auma"
+    ],
+    "services": [
+      "Relief valve repair",
+      "Manual valve servicing",
+      "Control valve servicing",
+      "Safety valve servicing",
+      "Gas/hydraulic/pneumatic/electrical actuation repair",
+      "Machining and fabrication",
+      "Portable safety valve testing",
+      "On-site machining (milling, pipe cutting, flange facing, line boring)",
+      "24/7 preventative maintenance",
+      "Outage assistance via mobile field service trailers",
+      "Valve removal and installation",
+      "Remanufactured inventory sales"
+    ],
+    "customerSegments": [
+      "Power generation",
+      "Pulp & paper",
+      "Chemical",
+      "Gas processing",
+      "Refinery",
+      "Petrochemical"
+    ],
+    "ivsFounded": 1975,
+    "ivsExperience": "45+ years"
+  },
+  "competitors": [
+    {
+      "name": "Flowserve Corporation",
+      "website": "https://www.flowserve.com",
+      "hq": "Irving, TX",
+      "companyType": "Public (NYSE: FLS)",
+      "locations": "200+ worldwide, 50+ countries",
+      "usaPresence": "Multiple manufacturing and service centers across USA",
+      "services": [
+        "Valve manufacturing (gate, globe, check, ball, butterfly, plug, control)",
+        "Aftermarket repair and maintenance",
+        "Installation and commissioning",
+        "Seal systems and spare parts",
+        "Advanced diagnostics",
+        "Re-rate and upgrade solutions",
+        "Retrofit programs",
+        "Asset management solutions",
+        "Training centers (Irving, TX)"
+      ],
+      "products": [
+        "Ball valves", "Rotary control valves", "Butterfly valves",
+        "Linear control valves", "Gate valves", "Check valves", "Plug valves",
+        "Severe service valves", "Cryogenic valves", "Actuators"
+      ],
+      "pricing": {
+        "model": "OEM and aftermarket pricing, contract-based for large customers",
+        "publicPricing": "Not publicly available",
+        "notes": "Premium OEM pricing; aftermarket services priced at project level"
+      },
+      "revenue": "$4.69 billion (FY2025, entire company)",
+      "employees": "~16,000 globally",
+      "differentiators": [
+        "Largest pure-play flow control company globally",
+        "End-to-end OEM manufacturer and service provider",
+        "Acquired Trillium Flow Technologies Valves Division ($200M annualized revenue)",
+        "Global network of quick response centers",
+        "Integrated pump, seal, and valve platform"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Chemical", "Power generation", "Water management",
+        "General industrial", "Pulp & paper", "Mining"
+      ],
+      "competitiveThreat": "High — dominant OEM with massive aftermarket network"
+    },
+    {
+      "name": "Emerson Electric Co. (Fisher / Automation Solutions)",
+      "website": "https://www.emerson.com/en-us/automation/fisher",
+      "hq": "St. Louis, MO",
+      "companyType": "Public (NYSE: EMR)",
+      "locations": "Global, 200+ countries; Marshalltown, IA Solutions Center; McKinney, TX; network of 50+ accredited service providers in USA",
+      "usaPresence": "Extensive via direct operations and authorized service provider network",
+      "services": [
+        "Fisher control valve manufacturing and service",
+        "Crosby/Anderson Greenwood safety valve service",
+        "Accredited OEM-certified valve repair (Fisher, Crosby, Anderson Greenwood, Enardo, Vanessa, Bettis, Shafer)",
+        "Lifecycle services for valves, actuators, and regulators",
+        "Spare parts distribution (50,000+ parts in inventory)",
+        "Digital diagnostics and predictive maintenance",
+        "Smart valve technology (IoT-enabled)"
+      ],
+      "products": [
+        "Fisher control valves", "Crosby safety valves", "Anderson Greenwood relief valves",
+        "Bettis actuators", "Shafer actuators", "Enardo tank protection",
+        "Vanessa triple offset valves", "Fisher regulators",
+        "DeltaV control systems integration"
+      ],
+      "pricing": {
+        "model": "OEM premium pricing; authorized service provider markup varies",
+        "publicPricing": "Not publicly available",
+        "notes": "Fisher parts carry OEM premium; service through authorized network at regional pricing"
+      },
+      "revenue": "$18.02 billion (FY2025, Automation Solutions ~$12.4B Intelligent Devices segment)",
+      "employees": "~75,000 globally",
+      "differentiators": [
+        "Dominant control valve OEM worldwide (Fisher brand)",
+        "Massive installed base creates recurring aftermarket demand",
+        "Integrated automation platform (DeltaV + valves)",
+        "Extensive accredited service provider network",
+        "Industry-leading smart valve and digital twin technology"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Refining", "Chemical", "Power generation",
+        "Pulp & paper", "Food & beverage", "Pharmaceutical",
+        "Water & wastewater", "Mining"
+      ],
+      "competitiveThreat": "Very High — dominant OEM, controls channel through authorized service network"
+    },
+    {
+      "name": "SLB Cameron (Schlumberger)",
+      "website": "https://www.slb.com/companies/cameron",
+      "hq": "Houston, TX",
+      "companyType": "Public (NYSE: SLB)",
+      "locations": "60+ worldwide, 25 in North America",
+      "usaPresence": "Manufacturing in Oklahoma City, OK and Ville Platte, LA; multiple service centers",
+      "services": [
+        "Valve manufacturing and engineering",
+        "Valve and valve automation services",
+        "Spare parts and repair",
+        "Field services",
+        "Preventive maintenance",
+        "Remanufacturing",
+        "Training and recertification",
+        "OEM and third-party brand support"
+      ],
+      "products": [
+        "GROVE ball valves", "ORBIT rising stem ball valves",
+        "CAMERON gate/globe/check valves", "WKM plug valves",
+        "TOM WHEATLEY valves", "DEMCO butterfly valves",
+        "Actuators and controls", "Subsea valves"
+      ],
+      "pricing": {
+        "model": "OEM and project-based pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Premium pricing for OEM parts; competitive on large project bids"
+      },
+      "revenue": "~$33 billion (SLB total FY2024); Cameron segment not separately disclosed",
+      "employees": "~8,200 (Cameron division)",
+      "differentiators": [
+        "Backed by SLB's massive global infrastructure",
+        "Strong upstream oil & gas positioning",
+        "25 North American service locations",
+        "Full OEM + aftermarket capability",
+        "Subsea and deepwater valve expertise"
+      ],
+      "customerSegments": [
+        "Upstream oil & gas", "Midstream pipeline", "Downstream refining",
+        "Petrochemical", "Subsea/deepwater", "LNG"
+      ],
+      "competitiveThreat": "High — strong in oil & gas valve service across Gulf Coast"
+    },
+    {
+      "name": "Crane ChemPharma & Energy",
+      "website": "https://cranecpe.com",
+      "hq": "The Woodlands, TX",
+      "companyType": "Public (NYSE: CR — Crane Company)",
+      "locations": "21 locations across 5 continents; manufacturing in CA, TX, IN, OH",
+      "usaPresence": "Multiple manufacturing and authorized service centers",
+      "services": [
+        "Valve manufacturing",
+        "Industrial valve sales and service",
+        "Authorized service center partnerships (e.g., Total Valve Systems)",
+        "Engineering and custom solutions",
+        "Cryogenic valve manufacturing"
+      ],
+      "products": [
+        "Crane sealed globe valves", "Safety valves", "Diaphragm valves",
+        "Check valves", "Ball valves", "Butterfly valves",
+        "Xomox plug valves", "Pacific gate/globe/check valves",
+        "Krombach metal-seated valves", "DEPA pumps"
+      ],
+      "pricing": {
+        "model": "OEM manufacturer pricing through distribution",
+        "publicPricing": "Not publicly available",
+        "notes": "Mid-to-premium pricing; strong brand recognition in process industries"
+      },
+      "revenue": "$596 million (Crane ChemPharma & Energy, FY2025)",
+      "employees": "~2,500 (estimated across 21 locations)",
+      "differentiators": [
+        "Legacy brand with 160+ year history",
+        "Strong in chemical and pharmaceutical verticals",
+        "Broad product portfolio across valve types",
+        "Cryogenic and specialty valve expertise",
+        "Authorized service center partner network"
+      ],
+      "customerSegments": [
+        "Chemical processing", "Pharmaceutical", "Oil & gas",
+        "Power generation", "General industrial", "Cryogenic/LNG"
+      ],
+      "competitiveThreat": "Medium-High — major OEM brand, ISG carries Crane products"
+    },
+    {
+      "name": "ValvTechnologies Inc. (Severn Group)",
+      "website": "https://www.valvtechnologies.com",
+      "hq": "Houston, TX",
+      "companyType": "Private (owned by Severn Group)",
+      "locations": "Headquarters in Houston; offices across 4 continents (North America, Asia, Europe)",
+      "usaPresence": "Primary manufacturing and service in Houston, TX",
+      "services": [
+        "Design and manufacture of metal-seated, zero-leakage valves",
+        "Severe service valve solutions",
+        "Valve repair and refurbishment",
+        "Engineering and technical support",
+        "Field service"
+      ],
+      "products": [
+        "Zero-leakage isolation valves",
+        "Metal-seated ball valves",
+        "High-performance butterfly valves",
+        "Severe service gate valves",
+        "Custom-engineered valves"
+      ],
+      "pricing": {
+        "model": "Premium pricing for severe service and zero-leakage technology",
+        "publicPricing": "Not publicly available",
+        "notes": "Commands premium due to specialized zero-leakage technology"
+      },
+      "revenue": "$72 million (FY2025)",
+      "employees": "253-364",
+      "differentiators": [
+        "Industry leader in zero-leakage, metal-seated valve technology",
+        "Specialization in severe service applications",
+        "Niche position in harsh environment valve solutions",
+        "Part of Severn Group portfolio of valve companies"
+      ],
+      "customerSegments": [
+        "Energy", "Chemical processing", "Mining & minerals",
+        "Pulp & paper", "Nuclear", "Power generation"
+      ],
+      "competitiveThreat": "Medium — specialized niche, not broad service competitor"
+    },
+    {
+      "name": "Setpoint Integrated Solutions (Vytl Controls / PON Holdings)",
+      "website": "https://www.setpointis.com",
+      "hq": "Baton Rouge, LA",
+      "companyType": "Private (subsidiary of PON Holdings B.V., Netherlands)",
+      "locations": "14 service/repair centers + 4 embedded asset locations across Gulf South",
+      "usaPresence": "TX (Corpus Christi, Kilgore, La Porte, Port Arthur, Richwood), LA (Baton Rouge, Lafayette, Lake Charles, Luling, Monroe), AL (Mobile), TN (Memphis)",
+      "services": [
+        "Control valve repair",
+        "Pressure safety valve repair",
+        "Actuation and motor-operated valve services",
+        "On-site and in-line repair",
+        "Start-up and commissioning support",
+        "Capital projects management",
+        "Spare pool valve management",
+        "Clean room services",
+        "ValvKeep asset management (tracks 1.5M+ valves worldwide)",
+        "24/7 customer support"
+      ],
+      "products": [
+        "GE Masoneilan", "GE Consolidated", "Flowserve", "Rotork",
+        "Schneider Electric", "Spirax Sarco", "Clark Reliance",
+        "Ashcroft", "A-T Controls"
+      ],
+      "pricing": {
+        "model": "Service contract and T&M pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Competitive regional pricing; strong on turnaround/outage contracts"
+      },
+      "revenue": "$211.7 million (FY2026)",
+      "employees": "500+",
+      "differentiators": [
+        "65+ years of experience (since 1959)",
+        "1.2 million sq ft of repair facilities",
+        "400+ quality technicians",
+        "ValvKeep proprietary asset management software",
+        "Strong Gulf South geographic concentration",
+        "Backed by Dutch industrial conglomerate PON Holdings"
+      ],
+      "customerSegments": [
+        "Power generation", "Refining", "Chemical processing",
+        "Petrochemical", "Oil & gas"
+      ],
+      "competitiveThreat": "Very High — direct regional competitor in Gulf South with much larger revenue"
+    },
+    {
+      "name": "Chalmers & Kubeck",
+      "website": "https://www.candk.com",
+      "hq": "Aston, PA",
+      "companyType": "Private",
+      "locations": "13 locations across Eastern US (PA, NY, NJ, DE, MD, DC, VA, WV, NC, SC, TN, AL, MS, GA, FL)",
+      "usaPresence": "Rochester NY to Central FL; C&K South centers in Watkinsville GA, Gastonia NC, Lynchburg VA, Cayce SC, Chattanooga TN, Decatur AL, Mobile AL, Mulberry FL",
+      "services": [
+        "Pressure relief valve testing and repair",
+        "Control valve trim manufacturing",
+        "Hydro and steam testing",
+        "CNC precision machining",
+        "Thermal spray and grinding",
+        "Welding and fabrication (5-axis waterjet)",
+        "Field machining with laser metrology",
+        "Nuclear services (NIAC/NUPIC audited)",
+        "Pump engineering",
+        "Gear division and borescope inspection"
+      ],
+      "products": [
+        "Consolidated Safety Valves", "Masoneilan Control Valves",
+        "Limitorque Actuation", "Clark-Reliance Instrumentation",
+        "Greene Tweed Sealing Solutions", "Gestra", "Velan",
+        "ZOOK Rupture Disks"
+      ],
+      "pricing": {
+        "model": "Service contract and project-based pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Largest Limitorque distributor east of the Mississippi; largest Consolidated Safety Valve inventory on East Coast"
+      },
+      "revenue": "$58 million (FY2025)",
+      "employees": "323 (240 at Aston, PA headquarters)",
+      "differentiators": [
+        "Largest Limitorque distributor east of Mississippi",
+        "Largest Consolidated Safety Valve inventory on East Coast",
+        "Nuclear-certified (10CFR50 Appendix B)",
+        "150,000 sq ft headquarters with 50-ton crane capacity",
+        "100,000+ valves serviced historically",
+        "11 authorized Limitorque Blue Ribbon Service Centers",
+        "~$15M in tailored inventory stock"
+      ],
+      "customerSegments": [
+        "Power generation (nuclear and fossil)",
+        "Chemical/petrochemical", "Pharmaceutical/biotech",
+        "Marine", "General industrial"
+      ],
+      "competitiveThreat": "High — strong East Coast presence overlapping with ISG's SE territory"
+    },
+    {
+      "name": "Ovation Holdings Inc.",
+      "website": "https://ovationholdingsinc.com",
+      "hq": "Riverdale, IA",
+      "companyType": "Private (PE-backed by Lewis and Clark Capital)",
+      "locations": "15+ locations across Midwest US (IA, IL, IN, MN, ND, OH, WI, MI, OK)",
+      "usaPresence": "Strong Midwest coverage through multiple brand subsidiaries",
+      "services": [
+        "Valve and actuator sales, installation, maintenance, repair, decommissioning",
+        "Pressure relief valve repair (shop and field)",
+        "Control valve repair (Masoneilan authorized centers)",
+        "Electronic valve testing",
+        "MOBILELab on-site repair units",
+        "Valve management programs (ValvKeep)",
+        "Remanufactured instrumentation and control valve supply",
+        "Rotating equipment service",
+        "Field machining and bolt torquing"
+      ],
+      "products": [
+        "Consolidated safety valves", "Kunkle valves",
+        "Masoneilan control valves", "Cash Valve",
+        "REXA actuators", "Groth Corporation",
+        "Continental Disc Corporation", "Bettis", "EIM",
+        "SAMBO", "Shafer", "Biffi actuators"
+      ],
+      "pricing": {
+        "model": "Cradle-to-grave service contracts; T&M for ad-hoc work",
+        "publicPricing": "Not publicly available",
+        "notes": "$5M+ inventory; competitive Midwest pricing"
+      },
+      "revenue": "$150 million (2022 reported; likely higher in 2025 post-acquisitions)",
+      "employees": "350+",
+      "brands": [
+        "Allied Valve Inc.", "Allied Instrumentation", "Automation Service",
+        "Valve Sales Inc.", "Conhagen", "Millennium Power Services"
+      ],
+      "differentiators": [
+        "Roll-up acquisition strategy similar to ISG",
+        "Cradle-to-grave service model",
+        "100+ certified service technicians",
+        "Extensive mobile fleet (MOBILELab)",
+        "5 Consolidated Green Tag Centers",
+        "5 Masoneilan authorized repair centers",
+        "Strong Midwest geographic concentration"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Chemical", "Pharmaceutical",
+        "Food & beverage", "Water treatment",
+        "Power generation", "Refining"
+      ],
+      "competitiveThreat": "High — PE-backed roll-up platform directly analogous to ISG model"
+    },
+    {
+      "name": "Southern Valve Services",
+      "website": "https://southernvalve.com",
+      "hq": "Louisiana (dual facilities in LA and TX)",
+      "companyType": "Private",
+      "locations": "2 facilities (Louisiana and Texas), 140,000 sq ft combined on 24.5 acres",
+      "usaPresence": "Gulf Coast focused — Louisiana and Texas",
+      "services": [
+        "All types of manual/automated block valve repair (gate, globe, check, ball, plug, butterfly)",
+        "Severe service valve repair",
+        "Nuclear valve repair",
+        "Oil & gas valve repair",
+        "Valve modification and remanufacturing",
+        "On-site troubleshooting and maintenance (via Southern Actuation Service subsidiary)",
+        "Preventive maintenance programs",
+        "Startup assistance",
+        "Proprietary valve data analytics software"
+      ],
+      "products": [
+        "All major valve brands serviced",
+        "Specializes in block valves across all manufacturers"
+      ],
+      "pricing": {
+        "model": "Repair-focused pricing (40-60% savings vs. replacement)",
+        "publicPricing": "Not publicly available",
+        "notes": "Markets 40-60% cost savings through repair vs. replacement"
+      },
+      "revenue": "Estimated $15-30 million (private, not disclosed)",
+      "employees": "Estimated 75-150",
+      "differentiators": [
+        "Proprietary valve data analysis software for root cause failure identification",
+        "Single-source provider for large turnarounds",
+        "140,000 sq ft of production space",
+        "Specialized in severe service and nuclear valve repair",
+        "Southern Actuation Service subsidiary for field work"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Refining", "Petrochemical",
+        "Chemical processing", "Nuclear", "Power generation"
+      ],
+      "competitiveThreat": "Medium-High — direct regional competitor in LA/TX Gulf Coast"
+    },
+    {
+      "name": "United Valve",
+      "website": "https://unitedvalve.com",
+      "hq": "Houston, TX",
+      "companyType": "Private",
+      "locations": "2 (Houston, TX and Corpus Christi, TX)",
+      "usaPresence": "Gulf Coast Texas — Houston and Corpus Christi",
+      "services": [
+        "Industrial valve repair (all types including coker ball, large diameter, high-pressure)",
+        "Valve modification (CNC machining, casting upgrades, cryogenic fabrication)",
+        "Industrial valve testing (fugitive emissions, cryogenic, radiography, PMI, hydrostatic)",
+        "Welding and fabrication",
+        "Engineering services"
+      ],
+      "products": [
+        "40+ manufacturer partnerships for OEM-authorized service",
+        "Gate, globe, check, ball, specialty valves"
+      ],
+      "pricing": {
+        "model": "Quote-based per project",
+        "publicPricing": "Not publicly available",
+        "notes": "Competitive Houston-area pricing; focus on repair cost savings"
+      },
+      "revenue": "$21.1 million (FY2025)",
+      "employees": "~50",
+      "differentiators": [
+        "104,000 sq ft Houston facility with 40-ton crane capacity",
+        "Eight overhead bridge cranes",
+        "40+ OEM manufacturer partnerships",
+        "In-house X-ray radiography and advanced NDE",
+        "65+ years of operation (founded 1961)",
+        "Multi-axis CNC machining centers"
+      ],
+      "customerSegments": [
+        "Refining", "Petrochemical", "Chemical processing",
+        "Oil & gas", "Power generation"
+      ],
+      "competitiveThreat": "Medium — regional Houston competitor, specialized in repair/modification"
+    },
+    {
+      "name": "Total Valve Systems",
+      "website": "https://www.totalvalve.com",
+      "hq": "Broken Arrow, OK",
+      "companyType": "Private",
+      "locations": "7 US locations + 9 international (corporate HQ: 70,000 sq ft on 10 acres); regional facilities across TX, KS, MO, NE, IA, WY, AR, LA, NM, CO, UT, ID, MT, ND, SD, MN",
+      "usaPresence": "Central US concentration with broad multi-state coverage",
+      "services": [
+        "Valve repair and testing (in-shop and on-site)",
+        "Flow lab testing (4 loops: water up to 1700 GPM, air at various pressures)",
+        "CNC machining, wire EDM, prototype machining",
+        "Flame arrestor repair and refurbishment",
+        "Mobile repair units",
+        "Valve management software",
+        "PMI testing",
+        "On-site training (Lunch and Learn)",
+        "Power plant relief valve and actuator repair"
+      ],
+      "products": [
+        "Pressure relief valves", "Control valves", "Excess flow valves",
+        "Isolation valves (ball, gate, globe, plug, butterfly, diaphragm)",
+        "Emergency shutdown valves", "Check/vent valves", "Rupture discs",
+        "Actuators", "Gauges",
+        "Represents 30+ brands including Crane, Cameron, Rotork, Limitorque"
+      ],
+      "pricing": {
+        "model": "Service and product pricing through distribution and direct",
+        "publicPricing": "Not publicly available",
+        "notes": "Competitive pricing with emphasis on engineered solutions"
+      },
+      "revenue": "Estimated $30-50 million (private, not disclosed)",
+      "employees": "Estimated 100-200",
+      "differentiators": [
+        "40+ years of operation",
+        "Proprietary flow lab with 4 testing loops",
+        "Broad Central US geographic coverage",
+        "30+ brand partnerships including Crane and Cameron",
+        "ISO 9001:2015, VR, UV, NB certified",
+        "International presence (Shanghai, Jordan, India, Singapore)"
+      ],
+      "customerSegments": [
+        "Power generation", "Pipelines and gathering",
+        "Refineries", "Chemical processing",
+        "Gas and liquids storage"
+      ],
+      "competitiveThreat": "Medium-High — strong Central US presence overlapping ISG territory"
+    },
+    {
+      "name": "Gulf Valve Service Company",
+      "website": "https://gulfvalveservice.com",
+      "hq": "Baton Rouge, LA",
+      "companyType": "Private",
+      "locations": "1 (Baton Rouge, LA — 14045 Jefferson Hwy)",
+      "usaPresence": "Gulf Coast / Louisiana focused",
+      "services": [
+        "Safety valve and safety relief valve repair (exclusive focus)",
+        "Valve testing and certification (ASME/National Board)",
+        "Replacement parts inventory",
+        "Equipment rental program",
+        "Same-day/hotshot delivery",
+        "On-demand service"
+      ],
+      "products": [
+        "Consolidated Valves and other safety/relief valve brands",
+        "Extensive hard-to-find parts inventory in various metals"
+      ],
+      "pricing": {
+        "model": "Service and parts pricing; emergency/hotshot premium",
+        "publicPricing": "Not publicly available",
+        "notes": "Niche safety valve focus; likely premium for emergency service"
+      },
+      "revenue": "Estimated $5-15 million (private, not disclosed)",
+      "employees": "Estimated 20-50",
+      "differentiators": [
+        "59 years of exclusive safety/relief valve focus (since 1967)",
+        "Sole focus on safety and safety relief valves",
+        "ASME and National Board certified technicians",
+        "Same-day and hotshot delivery",
+        "Hard-to-find parts inventory"
+      ],
+      "customerSegments": [
+        "Petrochemical", "Chemical processing",
+        "Refining", "Industrial safety compliance"
+      ],
+      "competitiveThreat": "Low-Medium — niche safety valve specialist in ISG's backyard (Baton Rouge)"
+    },
+    {
+      "name": "Flotech (FloWorks Company)",
+      "website": "https://www.flotechinc.com",
+      "hq": "Jacksonville, FL",
+      "companyType": "Private (owned by FloWorks / Clearlake Capital)",
+      "locations": "3 (Jacksonville FL, Charleston SC, Mobile AL)",
+      "usaPresence": "Southeast US — Florida, South Carolina, Alabama",
+      "services": [
+        "Valve repair, maintenance, actuation, and certification",
+        "In-plant repair services",
+        "Safety and relief valve testing and certification",
+        "Heat exchanger repair, re-tubing, and manufacturing",
+        "New valve sales and distribution",
+        "Automation services"
+      ],
+      "products": [
+        "40+ manufacturer brands including Asco, Fisher, Kunkle, Limitorque, Powell, Pratt, Singer, Topworx, Westlock, Morin actuators",
+        "Butterfly, ball, gate, globe, check, knife gate, plug, specialty valves"
+      ],
+      "pricing": {
+        "model": "Distribution markup and service T&M",
+        "publicPricing": "Not publicly available",
+        "notes": "Backed by FloWorks distribution platform; competitive SE pricing"
+      },
+      "revenue": "$33.6 million (FY2025)",
+      "employees": "Estimated 75-150",
+      "differentiators": [
+        "Founded 1961 — 65+ years of Southeast experience",
+        "Part of FloWorks platform (Clearlake Capital PE backing)",
+        "Comprehensive valve + heat exchanger service",
+        "40+ manufacturer relationships",
+        "Strong Southeast geographic concentration"
+      ],
+      "customerSegments": [
+        "Power generation", "Pulp & paper",
+        "Chemical processing", "Water/wastewater",
+        "Offshore operations"
+      ],
+      "competitiveThreat": "Medium — direct SE regional competitor; PE-backed growth platform"
+    },
+    {
+      "name": "FloWorks International",
+      "website": "https://www.gofloworks.com",
+      "hq": "Houston, TX",
+      "companyType": "Private (Clearlake Capital)",
+      "locations": "50+ facilities across North America and Asia",
+      "usaPresence": "Nationwide through legacy brands (Sunbelt Supply, SemiTorr, Oliver Equipment, Flotech, Triple S, Genesis Systems)",
+      "services": [
+        "Valve distribution and sales",
+        "Field services",
+        "Valve automation and actuation",
+        "Systems and process optimization consulting",
+        "Specialty PFF (Pipe, Fittings, Flanges)"
+      ],
+      "products": [
+        "Manual valves", "Valve automation and controls",
+        "Safety relief valves", "Specialty PFF",
+        "Pumps and rotating equipment"
+      ],
+      "pricing": {
+        "model": "Distribution platform with volume pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Scale advantage through multi-brand distribution platform"
+      },
+      "revenue": "$89 million (estimated FY2025)",
+      "employees": "~1,089",
+      "differentiators": [
+        "50+ strategically located facilities",
+        "Multi-brand distribution platform",
+        "Clearlake Capital PE backing for acquisitions",
+        "Combined valve + PFF + rotating equipment offering",
+        "Acquisition-driven growth strategy"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Petrochemical", "Semiconductor",
+        "General industrial", "Power generation"
+      ],
+      "competitiveThreat": "Medium — more distribution-focused than service; indirect competitor"
+    },
+    {
+      "name": "CIRCOR International",
+      "website": "https://www.circor.com",
+      "hq": "Burlington, MA",
+      "companyType": "Private (acquired by KKR in 2023)",
+      "locations": "9 US offices (Oklahoma City OK, Spartanburg SC, Monroe NC, Tampa FL, Houston TX, Corona CA, Warren MA, Burlington MA)",
+      "usaPresence": "Multiple offices across East Coast, Southeast, Gulf Coast, and West Coast",
+      "services": [
+        "Valve manufacturing and engineering",
+        "Flow control solutions",
+        "Aftermarket parts and service",
+        "Valve repair and refurbishment"
+      ],
+      "products": [
+        "Engineered trunnion and floating ball valves",
+        "Gate, globe, and check valves",
+        "Butterfly valves", "Triple offset valves",
+        "Severe service valves", "Cryogenic valves"
+      ],
+      "pricing": {
+        "model": "OEM manufacturer pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Premium pricing for engineered and severe service applications"
+      },
+      "revenue": "$795.4 million (FY2026)",
+      "employees": "~3,220 globally",
+      "differentiators": [
+        "KKR private equity backing for strategic growth",
+        "Strong in aerospace and defense valve markets",
+        "Broad engineered valve portfolio",
+        "Multiple US locations for customer proximity",
+        "Severe service and cryogenic expertise"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Aerospace & defense", "Power generation",
+        "Chemical/petrochemical", "Industrial processing"
+      ],
+      "competitiveThreat": "Medium — more OEM/manufacturer than service; indirect competitor"
+    },
+    {
+      "name": "Precision Valve Group (PVG)",
+      "website": "http://www.precisionvalvegroup.com",
+      "hq": "Monroe, NC",
+      "companyType": "Private",
+      "locations": "2 (Monroe NC and Norfolk VA, with mobile repair centers)",
+      "usaPresence": "Southeast US — North Carolina and Virginia",
+      "services": [
+        "Critical high-pressure valve repair",
+        "Control valve and motor-operated valve diagnostics/repair",
+        "Safety relief valve testing and repair",
+        "Valve repacking",
+        "Welding",
+        "Custom shop and field machining",
+        "45-53 ft Mobile Repair Centers (MRC)"
+      ],
+      "products": [
+        "Services virtually all types and sizes of valves"
+      ],
+      "pricing": {
+        "model": "Repair-based pricing, mobile service premium",
+        "publicPricing": "Not publicly available",
+        "notes": "Competitive regional pricing with mobile service capability"
+      },
+      "revenue": "Estimated $5-15 million (private, not disclosed)",
+      "employees": "Estimated 25-75",
+      "differentiators": [
+        "40+ years of industry experience",
+        "Mobile Repair Centers (45-53 ft trailers)",
+        "Cross-trained technicians for all valve types",
+        "Southeast US specialization",
+        "Nuclear and power plant focus"
+      ],
+      "customerSegments": [
+        "Power generation (nuclear and fossil)",
+        "Chemical processing", "Refining",
+        "General industrial"
+      ],
+      "competitiveThreat": "Low-Medium — small regional player in Southeast"
+    },
+    {
+      "name": "Gulf Coast Modification LP",
+      "website": "https://www.gulfcoastmod.com",
+      "hq": "Houston, TX",
+      "companyType": "Private",
+      "locations": "1 (Houston, TX — 125,000 sq ft facility)",
+      "usaPresence": "Gulf Coast Texas",
+      "services": [
+        "Valve modifications",
+        "Valve cleaning and coating",
+        "Valve inspection and testing",
+        "Custom fabrication"
+      ],
+      "products": [
+        "All major valve brands serviced — specializes in modification rather than specific brands"
+      ],
+      "pricing": {
+        "model": "Project-based modification pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Competitive Houston-area pricing for valve modification work"
+      },
+      "revenue": "$17-20 million (FY2025-2026, varies by source)",
+      "employees": "60-100",
+      "differentiators": [
+        "125,000 sq ft specialized modification facility",
+        "Founded 2003 — 20+ years of focused valve modification",
+        "Trusted across multiple industries",
+        "VMA member"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Refining", "Chemical",
+        "Petrochemical", "Power generation",
+        "Pulp & paper", "Water treatment"
+      ],
+      "competitiveThreat": "Low-Medium — specialized modification shop, not full-service competitor"
+    },
+    {
+      "name": "ERL Houston",
+      "website": "https://erlinc.com",
+      "hq": "Channelview, TX",
+      "companyType": "Private",
+      "locations": "1 (Channelview, TX — near Houston ports, off I-10)",
+      "usaPresence": "Houston Gulf Coast area",
+      "services": [
+        "National Board-Certified valve repair (marine and industrial)",
+        "Valve teardown, cleaning, inspection, rebuilding",
+        "Valve testing and certification",
+        "VR repair",
+        "Pump test facility and diagnostics"
+      ],
+      "products": [
+        "Marine and industrial valves — all major brands"
+      ],
+      "pricing": {
+        "model": "Repair service pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Competitive pricing for marine/industrial crossover market"
+      },
+      "revenue": "$3-5 million (FY2025)",
+      "employees": "6-11",
+      "differentiators": [
+        "National Board-Certified repair shop",
+        "Marine AND industrial valve specialization",
+        "Convenient port-area location (Channelview, TX)",
+        "Combined valve and pump repair facility"
+      ],
+      "customerSegments": [
+        "Marine/shipping", "Industrial",
+        "Chemical processing", "Oil & gas"
+      ],
+      "competitiveThreat": "Low — very small marine-focused shop"
+    },
+    {
+      "name": "East Coast Valve Services",
+      "website": "https://eastcoastvalve.com",
+      "hq": "Chesapeake, VA",
+      "companyType": "Private",
+      "locations": "2 (Chesapeake VA and Groton CT)",
+      "usaPresence": "Mid-Atlantic and Northeast US",
+      "services": [
+        "Power plant valve repair and reconditioning",
+        "Marine valve repair and reconditioning",
+        "Valve testing and certification"
+      ],
+      "products": [
+        "Power plant valves", "Marine valves"
+      ],
+      "pricing": {
+        "model": "Service-based pricing for power and marine sectors",
+        "publicPricing": "Not publicly available",
+        "notes": "Niche power plant and marine specialization"
+      },
+      "revenue": "Estimated $5-15 million (private, not disclosed)",
+      "employees": "Estimated 25-75",
+      "differentiators": [
+        "Dual specialization in power plant and marine valves",
+        "East Coast geographic focus (VA and CT)",
+        "Specialized reconditioning capabilities"
+      ],
+      "customerSegments": [
+        "Power generation", "Marine/naval",
+        "General industrial"
+      ],
+      "competitiveThreat": "Low — niche East Coast player, minimal geographic overlap"
+    },
+    {
+      "name": "Rotork plc",
+      "website": "https://www.rotork.com",
+      "hq": "Bath, UK (US operations across multiple states)",
+      "companyType": "Public (LSE: ROR)",
+      "locations": "170 countries; US offices include Dallas TX, Tulsa OK, and multiple distributor partners",
+      "usaPresence": "Direct operations plus extensive authorized distributor network",
+      "services": [
+        "Valve actuator manufacturing",
+        "Site services for actuator maintenance and repair",
+        "Actuator installation and commissioning",
+        "Upgrade and retrofit programs",
+        "Training and certification",
+        "Asset management services"
+      ],
+      "products": [
+        "Electric valve actuators", "Pneumatic valve actuators",
+        "Hydraulic valve actuators", "Manual gearboxes for valves",
+        "Intelligent actuators with IoT connectivity",
+        "Explosion-proof actuators"
+      ],
+      "pricing": {
+        "model": "OEM manufacturer pricing through distribution",
+        "publicPricing": "Not publicly available",
+        "notes": "Premium actuator brand; commands market-leading pricing"
+      },
+      "revenue": "~$950 million (£754M, FY2024 global)",
+      "employees": "~3,600 globally",
+      "differentiators": [
+        "Global leader in valve actuation",
+        "Intelligent/IoT-connected actuator technology",
+        "170-country presence",
+        "Comprehensive retrofit and upgrade programs",
+        "Strong brand recognition across all process industries"
+      ],
+      "customerSegments": [
+        "Oil & gas", "Power generation", "Water/wastewater",
+        "Chemical", "Industrial", "Marine"
+      ],
+      "competitiveThreat": "Medium — actuation specialist rather than full valve service; ISG carries Rotork"
+    },
+    {
+      "name": "Curtiss-Wright Valve Group",
+      "website": "https://www.cw-valvegroup.com",
+      "hq": "Davidson, NC (parent); valve operations across USA",
+      "companyType": "Public (NYSE: CW — parent Curtiss-Wright Corporation)",
+      "locations": "Multiple US and international locations; brands include Dyna-Flo, Farris, Phönix, EST Group",
+      "usaPresence": "Manufacturing and service across multiple US states",
+      "services": [
+        "Severe-service valve manufacturing",
+        "Safety-critical valve solutions",
+        "Control valve services (Dyna-Flo)",
+        "Pressure relief valve manufacturing (Farris)",
+        "Aftermarket parts and service"
+      ],
+      "products": [
+        "Farris pressure relief valves", "Dyna-Flo control valves",
+        "Phönix severe service valves", "EST Group valves",
+        "Nuclear-qualified valves"
+      ],
+      "pricing": {
+        "model": "OEM and engineered product pricing",
+        "publicPricing": "Not publicly available",
+        "notes": "Premium pricing for nuclear and severe-service applications"
+      },
+      "revenue": "~$3 billion (Curtiss-Wright total FY2024); valve group segment not separately disclosed",
+      "employees": "~8,500 (Curtiss-Wright total)",
+      "differentiators": [
+        "Strong nuclear and defense valve expertise",
+        "Farris brand recognition in pressure relief",
+        "Severe-service and safety-critical specialization",
+        "US Navy and commercial nuclear market leader"
+      ],
+      "customerSegments": [
+        "Nuclear power", "US Navy/defense",
+        "Refining", "Petrochemical", "Chemical",
+        "Natural gas", "General processing"
+      ],
+      "competitiveThreat": "Medium — more OEM/manufacturer; ISG carries Farris products"
+    },
+    {
+      "name": "Conval Inc.",
+      "website": "https://www.conval.com",
+      "hq": "Enfield, CT",
+      "companyType": "Private",
+      "locations": "1 (Enfield/Somers, CT)",
+      "usaPresence": "Northeast US manufacturing; 50%+ international sales",
+      "services": [
+        "Severe service valve manufacturing",
+        "In-line repairable valve design",
+        "Valve repair and maintenance services",
+        "Engineering and technical support"
+      ],
+      "products": [
+        "High-pressure, high-temperature valves",
+        "Globe valves", "Check valves", "Ball valves",
+        "Forged steel valves",
+        "In-line repairable designs"
+      ],
+      "pricing": {
+        "model": "OEM premium pricing; emphasizes lowest lifecycle cost",
+        "publicPricing": "Not publicly available",
+        "notes": "Premium upfront but markets lowest total lifecycle cost"
+      },
+      "revenue": "$15-20 million (FY2025)",
+      "employees": "~100",
+      "differentiators": [
+        "Industry leader in severe service valves",
+        "In-line repairable design (unique selling point)",
+        "Focus on extreme longevity and lowest lifecycle cost",
+        "Strong international presence (50%+ export)",
+        "Since 1967"
+      ],
+      "customerSegments": [
+        "Power generation", "Refining",
+        "Oil & gas production", "Chemical",
+        "Fertilizer", "Pulp & paper"
+      ],
+      "competitiveThreat": "Low — manufacturer, not service competitor; niche severe service"
+    },
+    {
+      "name": "Continental Disc Corporation (Baker Hughes)",
+      "website": "https://www.contdisc.com",
+      "hq": "Liberty, MO",
+      "companyType": "Private (acquired by Baker Hughes)",
+      "locations": "1 primary manufacturing (Liberty, MO); global distribution",
+      "usaPresence": "Manufacturing in Liberty, MO with national distribution",
+      "services": [
+        "Rupture disc manufacturing",
+        "Pressure/vacuum relief valve manufacturing",
+        "Flame and detonation arrestor manufacturing",
+        "Regular replacement services (80% recurring revenue)"
+      ],
+      "products": [
+        "Rupture discs", "Rupture disc holders",
+        "Burst disc indicators", "Pressure relief valves",
+        "Vacuum relief valves", "Flame arrestors",
+        "Detonation arrestors"
+      ],
+      "pricing": {
+        "model": "Product pricing with recurring replacement revenue model",
+        "publicPricing": "Not publicly available",
+        "notes": "~80% recurring revenue from replacement cycle"
+      },
+      "revenue": "$109 million (proforma FY2024)",
+      "employees": "300+",
+      "differentiators": [
+        "60+ year history (since 1965)",
+        "80% recurring revenue model",
+        "Now backed by Baker Hughes scale",
+        "40+ industries served",
+        "Leader in safety-critical pressure management"
+      ],
+      "customerSegments": [
+        "Pharmaceutical", "Chemical",
+        "Food & beverage", "Oil & gas",
+        "Aerospace", "General industrial"
+      ],
+      "competitiveThreat": "Low — pressure management products, not valve service"
+    },
+    {
+      "name": "Independence Valve & Supply",
+      "website": "https://www.independencevalve.com",
+      "hq": "Pasadena, TX (Houston area)",
+      "companyType": "Private",
+      "locations": "2 (Houston and Orange, TX)",
+      "usaPresence": "Gulf Coast Texas",
+      "services": [
+        "Valve supply and distribution",
+        "24/7 emergency valve supply",
+        "Maritime industry valve solutions"
+      ],
+      "products": [
+        "Industrial and marine valves",
+        "Various manufacturers represented"
+      ],
+      "pricing": {
+        "model": "Distribution pricing with emergency premium",
+        "publicPricing": "Not publicly available",
+        "notes": "$5-10M revenue range"
+      },
+      "revenue": "$5-10 million",
+      "employees": "11-20",
+      "differentiators": [
+        "24/7 maritime industry commitment",
+        "Customer-first service model",
+        "Gulf Coast proximity to ports and refineries"
+      ],
+      "customerSegments": [
+        "Maritime/inland barge", "Shipyards",
+        "Offshore drilling", "Tank farms",
+        "Refinery & petrochemical"
+      ],
+      "competitiveThreat": "Low — small distribution-focused company"
+    }
+  ],
+  "marketInsights": {
+    "marketSize": {
+      "usValveManufacturing2025": "$38.4 billion",
+      "usIndustrialFluidPowerValve2025": "$25.6 billion",
+      "northAmericaIndustrialValve2024": "$18.4 billion",
+      "usValveMarket2024": "$20.4 billion",
+      "usIndustrialValve2024": "$12.5 billion",
+      "projectedNorthAmerica2034": "$27.8 billion",
+      "projectedUS2030": "$28.4 billion",
+      "projectedUS2035": "$21.5 billion (industrial valves only)",
+      "globalIndustrialValves2035": "$273.49 billion",
+      "aftermarketEstimate": "Aftermarket services represent significant portion of installed base revenue; North America generates high aftermarket revenue from vast installed base"
+    },
+    "growthRate": {
+      "usValveMarketCAGR_2025_2030": "5.4-5.6%",
+      "usIndustrialValveCAGR_2025_2035": "5.05%",
+      "northAmericaIndustrialValveCAGR_2025_2034": "4.3%",
+      "usValveManufacturingCAGR_2020_2025": "0.9%",
+      "valveServiceAftermarketGrowth": "Growing faster than OEM equipment due to aging installed base and maintenance requirements"
+    },
+    "trends": [
+      "Smart valves and IoT integration — digital monitoring, predictive maintenance, and real-time analytics becoming standard",
+      "Consolidation through PE-backed roll-up platforms (Ovation Holdings, ISG, FloWorks model)",
+      "Increasing foreign competition from Chinese manufacturers (XHVAL Group, SUFA) using hybrid manufacturing to undercut domestic pricing",
+      "Tariff policy uncertainty creating pricing volatility in imported valve markets",
+      "Shift from product-centric to service-centric business models across the industry",
+      "Aging infrastructure driving aftermarket service demand (installed base maintenance)",
+      "Automation and actuator integration becoming standard requirement for valve service providers",
+      "Severe service and high-specification valve demand growing in chemical, LNG, and power sectors",
+      "Mobile service units (field trailers, MOBILELab) becoming competitive differentiator",
+      "Proprietary asset management software (ValvKeep by Setpoint, similar tools by others) as stickiness mechanism",
+      "Nuclear and defense valve markets remain high-margin, high-barrier niches",
+      "Environmental compliance (fugitive emissions testing) creating new service revenue streams",
+      "OEM authorized service center certifications becoming table stakes for credibility",
+      "Labor shortage in skilled valve technicians driving wage inflation and training investments"
+    ],
+    "keyPlayers": [
+      {
+        "tier": "Tier 1 — Global OEM Manufacturers ($1B+ revenue)",
+        "companies": ["Emerson Electric (Fisher)", "Flowserve Corporation", "SLB Cameron", "Crane Company", "Rotork plc", "Curtiss-Wright"]
+      },
+      {
+        "tier": "Tier 2 — Large Regional/National Service & Distribution ($100M-$1B)",
+        "companies": ["Setpoint Integrated Solutions ($212M)", "Ovation Holdings ($150M+)", "CIRCOR International ($795M)", "Crane ChemPharma & Energy ($596M)", "FloWorks International ($89M)", "Continental Disc / Baker Hughes ($109M)"]
+      },
+      {
+        "tier": "Tier 3 — Mid-Market Regional Service Companies ($20M-$100M)",
+        "companies": ["ValvTechnologies ($72M)", "Chalmers & Kubeck ($58M)", "Flotech/FloWorks ($34M)", "Total Valve Systems (est. $30-50M)", "Allied Valve / Ovation ($27M)", "United Valve ($21M)", "Gulf Coast Modification ($17-20M)"]
+      },
+      {
+        "tier": "Tier 4 — Small/Niche Regional Service Companies (<$20M)",
+        "companies": ["Southern Valve Services (est. $15-30M)", "Conval ($15-20M)", "Gulf Valve Service (est. $5-15M)", "Precision Valve Group (est. $5-15M)", "East Coast Valve Services (est. $5-15M)", "Independence Valve ($5-10M)", "ERL Houston ($3-5M)"]
+      }
+    ],
+    "competitivePositioning": {
+      "isgStrengths": [
+        "Multi-brand platform with 16 operating companies",
+        "45+ year legacy through Industrial Valve Service brand",
+        "Strong SE/Central US geographic footprint (AL, LA, TN)",
+        "Massive remanufactured valve inventory (50,000+ units)",
+        "Broad manufacturer partnerships (30+ brands)",
+        "24/7 mobile field service capability",
+        "Diversified across valves, compressors, motors, pumps"
+      ],
+      "isgVulnerabilities": [
+        "Setpoint Integrated Solutions is 4-5x larger in valve revenue with deeper Gulf South presence",
+        "Ovation Holdings pursues nearly identical PE roll-up strategy in Midwest",
+        "Tier 1 OEMs (Emerson, Flowserve) control the authorized service channel",
+        "Chinese import competition compressing margins on commodity valve distribution",
+        "Labor shortage for skilled valve technicians across the industry",
+        "FloWorks/Clearlake Capital aggressively acquiring SE valve distributors (Flotech)"
+      ],
+      "strategicRecommendations": [
+        "Invest in proprietary asset management software (compete with Setpoint's ValvKeep)",
+        "Pursue geographic expansion into Texas Gulf Coast (largest valve service market)",
+        "Deepen OEM authorized service certifications (Fisher, Masoneilan, Consolidated)",
+        "Build nuclear valve service capability (high-margin, high-barrier niche)",
+        "Develop smart valve and IoT diagnostic capabilities for differentiation",
+        "Consider bolt-on acquisition of smaller Gulf Coast service shops (United Valve, Gulf Valve Service, etc.)",
+        "Strengthen turnaround/outage service capability with additional mobile units"
+      ]
+    },
+    "industryPricing": {
+      "hourlyRates": {
+        "standardTechnician": "$50-100/hr",
+        "expertTechnician": "$100-150/hr",
+        "afterHoursPremium": "25-50% surcharge",
+        "metropolitanPremium": "10-25% above base rates"
+      },
+      "repairEconomics": {
+        "repairVsReplacementSavings": "40-60% cost savings through repair",
+        "typicalMarkup": "Parts markup typically 25-45% over cost",
+        "contractPricing": "Long-term service contracts typically 10-20% discount vs. T&M"
+      },
+      "vmaIndustryStats": {
+        "vmaMemberMarketShare": "80% of US industrial valve shipments",
+        "note": "Pricing data is closely guarded; most companies operate on quote-based systems"
+      }
+    },
+    "sources": [
+      "IBISWorld — Valve Manufacturing in the US (2025)",
+      "Mordor Intelligence — United States Valves Market",
+      "Spherical Insights — North America Industrial Valve Market",
+      "GM Insights — North America Industrial Valve Market Size 2025-2034",
+      "Market Research Future — US Industrial Valve Market 2035",
+      "Valve Manufacturers Association of America (VMA)",
+      "Company websites, LinkedIn profiles, ZoomInfo, RocketReach, Owler, Craft.co",
+      "PitchBook, Crunchbase, Dun & Bradstreet company profiles",
+      "Valve World Americas magazine",
+      "Baker Hughes investor relations (CDC acquisition)",
+      "Emerson Electric annual report 2024",
+      "Flowserve Corporation public filings"
+    ]
+  }
+}

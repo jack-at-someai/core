@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServiceIQ CRM — Industrial Service Group</title>
+  <link rel="stylesheet" href="isg_theme.css">
+  <link rel="stylesheet" href="../../liquid-glass/liquid-glass.css">
+  <link rel="stylesheet" href="../../liquid-glass/liquid-glass-viz.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../../liquid-glass/liquid-glass.js" defer></script>
+  <script src="../../liquid-glass/liquid-glass-viz.js" defer></script>
+  <style>
+    /* ---- CRM Page Layout ---- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--lg-bg, #0A1628);
+      color: var(--lg-text, #E2E8F0);
+      font-family: var(--lg-font-body, Inter, -apple-system, sans-serif);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+
+    /* ---- Sticky Header ---- */
+    .crm-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      height: 60px;
+      padding: 0 24px;
+      gap: 16px;
+      background: rgba(15, 29, 54, 0.85);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .crm-header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--lg-font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--lg-text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .crm-header__logo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: var(--lg-secondary-500, #E2A532);
+      color: #0A1628;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .crm-header__spacer { flex: 1; }
+
+    .crm-header__select {
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--lg-radius-sm);
+      background: rgba(255,255,255,0.06);
+      color: var(--lg-text);
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+      min-width: 160px;
+    }
+    .crm-header__select option { background: #0F1D36; color: #E2E8F0; }
+
+    .crm-header__bell {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: var(--lg-radius-sm);
+      background: rgba(255,255,255,0.06);
+      color: var(--lg-text);
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.15s;
+    }
+    .crm-header__bell:hover { background: rgba(255,255,255,0.12); }
+
+    .crm-header__bell-count {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 16px;
+      text-align: center;
+      background: var(--lg-error-500, #EF4444);
+      color: #fff;
+      border-radius: 8px;
+    }
+
+    .crm-header__avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--lg-primary-600, #5478B0);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .crm-header__back {
+      font-size: 13px;
+      color: var(--lg-text-dim);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+    .crm-header__back:hover { color: var(--lg-text); }
+
+    /* ---- Main Container ---- */
+    .crm-main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ---- KPI Row ---- */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      padding: 16px 18px;
+      background: rgba(255,255,255, var(--lg-fill-opacity, 0.12));
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255,255,255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md);
+    }
+
+    .kpi-card__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--lg-text-dim);
+      margin-bottom: 6px;
+    }
+
+    .kpi-card__row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .kpi-card__value {
+      font-family: var(--lg-font-heading);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--lg-text);
+      line-height: 1.1;
+    }
+
+    .kpi-card__trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .kpi-card__trend--up { color: #34D399; }
+    .kpi-card__trend--down { color: #F87171; }
+    .kpi-card__trend--neutral { color: var(--lg-text-dim); }
+
+    .kpi-card__sparkline {
+      flex-shrink: 0;
+    }
+
+    /* ---- Content Layout ---- */
+    .crm-content {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .crm-left { display: flex; flex-direction: column; gap: 24px; }
+    .crm-right { display: flex; flex-direction: column; gap: 24px; }
+
+    /* ---- Section Titles ---- */
+    .section-title {
+      font-family: var(--lg-font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--lg-text);
+      margin: 0 0 16px;
+    }
+
+    /* ---- Alert Cards ---- */
+    .alert-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .alert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--lg-radius-sm);
+      border-left: 3px solid transparent;
+      font-size: 13px;
+      color: var(--lg-text);
+      line-height: 1.4;
+    }
+
+    .alert-item--critical { border-left-color: var(--lg-error-500); }
+    .alert-item--warning  { border-left-color: var(--lg-secondary-500); }
+    .alert-item--info     { border-left-color: var(--lg-tertiary-500); }
+
+    .alert-item__icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .alert-item--critical .alert-item__icon { background: rgba(239,68,68,0.2); color: #F87171; }
+    .alert-item--warning .alert-item__icon  { background: rgba(226,165,50,0.2); color: #E8B44E; }
+    .alert-item--info .alert-item__icon     { background: rgba(6,182,212,0.2); color: #22D3EE; }
+
+    /* ---- Status Badges ---- */
+    .status-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .status-badge--shipped   { background: rgba(52,211,153,0.15); color: #34D399; }
+    .status-badge--processing { background: rgba(96,165,250,0.15); color: #60A5FA; }
+    .status-badge--pending   { background: rgba(226,165,50,0.15); color: #E8B44E; }
+    .status-badge--backordered { background: rgba(248,113,113,0.15); color: #F87171; }
+
+    /* Priority badges */
+    .priority-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .priority-badge--critical { background: rgba(248,113,113,0.15); color: #F87171; }
+    .priority-badge--high     { background: rgba(251,146,60,0.15); color: #FB923C; }
+    .priority-badge--medium   { background: rgba(250,204,21,0.15); color: #FACC15; }
+    .priority-badge--low      { background: rgba(52,211,153,0.15); color: #34D399; }
+
+    /* Health score badges */
+    .health-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .health-badge--excellent { background: rgba(52,211,153,0.15); color: #34D399; }
+    .health-badge--good      { background: rgba(96,165,250,0.15); color: #60A5FA; }
+    .health-badge--at-risk   { background: rgba(250,204,21,0.15); color: #FACC15; }
+    .health-badge--critical  { background: rgba(248,113,113,0.15); color: #F87171; }
+
+    /* ---- Footer ---- */
+    .crm-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--lg-text-dim);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 24px;
+    }
+
+    .crm-footer span { color: var(--lg-secondary-500); }
+
+    /* ---- Customer Management Section ---- */
+    .crm-customers {
+      margin-bottom: 0;
+    }
+
+    .crm-customers__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .crm-customers__search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--lg-radius-sm);
+      background: rgba(255,255,255,0.05);
+      min-width: 280px;
+    }
+
+    .crm-customers__search-icon {
+      color: var(--lg-text-dim);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .crm-customers__search input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--lg-text);
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+    .crm-customers__search input::placeholder { color: var(--lg-text-dim); }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1200px) {
+      .crm-content {
+        grid-template-columns: 1fr;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .crm-header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 12px 16px;
+        gap: 10px;
+      }
+      .crm-header__select { min-width: 120px; }
+      .crm-main { padding: 16px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .crm-content { grid-template-columns: 1fr; }
+      .crm-customers__header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .crm-customers__search { min-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ---- Glass card wrapper for sections ---- */
+    .glass-section {
+      padding: 20px;
+      background: rgba(255,255,255, var(--lg-fill-opacity, 0.12));
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255,255,255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md);
+    }
+
+    /* ---- Activity Feed ---- */
+    .activity-feed { padding-left: 0; }
+  </style>
+</head>
+<body>
+  <!-- ================================================================
+       HEADER
+       ================================================================ -->
+  <header class="crm-header">
+    <a href="#" class="crm-header__logo">
+      ServiceIQ
+      <span class="crm-header__logo-badge">ISG</span>
+    </a>
+    <span class="crm-header__spacer"></span>
+
+    <select class="crm-header__select" id="brandFilter">
+      <option value="all">All Brands</option>
+      <option value="IVS">Industrial Valve Service</option>
+      <option value="Morin">Morin Process Equipment</option>
+      <option value="IAP">Industrial Air Power</option>
+      <option value="Soles">Soles Electric</option>
+      <option value="GW">Georgia Western</option>
+      <option value="Dynamic-MS">Dynamic Mechanical Solutions</option>
+      <option value="RSI">Renewal Service Inc.</option>
+      <option value="IAC">Industrial Air Centers</option>
+      <option value="CORE">CORE Industrial Maintenance</option>
+      <option value="Pinnacle">Pinnacle Industries Ltd.</option>
+      <option value="IEW">Illinois Electric Works</option>
+      <option value="TVI">Tri-State Valve LLC</option>
+      <option value="CTS">Compressor & Turbine Services</option>
+      <option value="TMI">Turbomachinery Industries</option>
+      <option value="ASE">Air Specialty & Equipment Co.</option>
+      <option value="NMM">National Mill Maintenance</option>
+    </select>
+
+    <button class="crm-header__bell" title="Notifications">
+      &#x1F514;
+      <span class="crm-header__bell-count">7</span>
+    </button>
+
+    <div class="crm-header__avatar">JR</div>
+
+    <a href="index.html" class="crm-header__back">&larr; Brandbook</a>
+  </header>
+
+  <!-- ================================================================
+       MAIN
+       ================================================================ -->
+  <main class="crm-main">
+
+    <!-- ---- KPI ROW ---- -->
+    <div class="kpi-grid" id="kpiGrid">
+      <div class="kpi-card">
+        <div class="kpi-card__label">Total Revenue</div>
+        <div class="kpi-card__row">
+          <div>
+            <div class="kpi-card__value">$241.3M</div>
+            <div class="kpi-card__trend kpi-card__trend--up">&#9650; +12.4%</div>
+          </div>
+          <div class="kpi-card__sparkline" id="spark-revenue"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card__label">Active Customers</div>
+        <div class="kpi-card__row">
+          <div>
+            <div class="kpi-card__value">3,847</div>
+            <div class="kpi-card__trend kpi-card__trend--up">&#9650; +8.2%</div>
+          </div>
+          <div class="kpi-card__sparkline" id="spark-customers"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card__label">Open Orders</div>
+        <div class="kpi-card__row">
+          <div>
+            <div class="kpi-card__value">1,234</div>
+            <div class="kpi-card__trend kpi-card__trend--neutral">&#9654; steady</div>
+          </div>
+          <div class="kpi-card__sparkline" id="spark-orders"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card__label">Inventory Value</div>
+        <div class="kpi-card__row">
+          <div>
+            <div class="kpi-card__value">$18.7M</div>
+            <div class="kpi-card__trend kpi-card__trend--down">&#9660; -2.1%</div>
+          </div>
+          <div class="kpi-card__sparkline" id="spark-inventory"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card__label">Service Tickets</div>
+        <div class="kpi-card__row">
+          <div>
+            <div class="kpi-card__value">89</div>
+            <div class="kpi-card__trend kpi-card__trend--up">&#9650; +5 today</div>
+          </div>
+          <div class="kpi-card__sparkline" id="spark-tickets"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card__label">Avg Response Time</div>
+        <div class="kpi-card__row">
+          <div>
+            <div class="kpi-card__value">2.4 hrs</div>
+            <div class="kpi-card__trend kpi-card__trend--up">&#9650; -18 min</div>
+          </div>
+          <div class="kpi-card__sparkline" id="spark-response"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- MAIN CONTENT GRID ---- -->
+    <div class="crm-content">
+
+      <!-- LEFT COLUMN (60%) -->
+      <div class="crm-left">
+        <!-- Revenue by Brand Bar Chart -->
+        <div id="revenueChart"></div>
+
+        <!-- Recent Orders Table -->
+        <div id="ordersTable"></div>
+
+        <!-- Service Tickets Table -->
+        <div id="ticketsTable"></div>
+      </div>
+
+      <!-- RIGHT COLUMN (40%) -->
+      <div class="crm-right">
+        <!-- Sales Pipeline Donut -->
+        <div id="pipelineDonut"></div>
+
+        <!-- Customer Segments Donut -->
+        <div id="segmentsDonut"></div>
+
+        <!-- Inventory Alerts -->
+        <div class="glass-section">
+          <h3 class="section-title">Inventory Alerts</h3>
+          <div class="alert-list" id="alertList">
+            <div class="alert-item alert-item--warning">
+              <div class="alert-item__icon">!</div>
+              <div><strong>IAP:</strong> IR RS15i stock below reorder point (3 units)</div>
+            </div>
+            <div class="alert-item alert-item--critical">
+              <div class="alert-item__icon">!!</div>
+              <div><strong>Soles:</strong> WEG W22 100HP backordered until Mar 15</div>
+            </div>
+            <div class="alert-item alert-item--info">
+              <div class="alert-item__icon">i</div>
+              <div><strong>TMI:</strong> T0062 Governor Valve &mdash; 2 units reserved for Gulf Coast</div>
+            </div>
+            <div class="alert-item alert-item--warning">
+              <div class="alert-item__icon">!</div>
+              <div><strong>GW:</strong> EIM M2CP Motor Bearing &mdash; restock recommended</div>
+            </div>
+            <div class="alert-item alert-item--info">
+              <div class="alert-item__icon">i</div>
+              <div><strong>Pinnacle:</strong> PDQM Mini Cabinet &mdash; 12 units in transit</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="glass-section">
+          <h3 class="section-title">Activity Feed</h3>
+          <div class="lg-timeline" id="activityFeed">
+            <div class="lg-timeline__item">
+              <div class="lg-timeline__time">10:34 AM</div>
+              <div class="lg-timeline__content">
+                <h4>New Purchase Order</h4>
+                <p>PO #ISG-4521 from Delta Petrochemical ($34,200)</p>
+              </div>
+            </div>
+            <div class="lg-timeline__item">
+              <div class="lg-timeline__time">10:12 AM</div>
+              <div class="lg-timeline__content">
+                <h4>Ticket Escalated</h4>
+                <p>Service ticket #ST-892 escalated to Critical</p>
+              </div>
+            </div>
+            <div class="lg-timeline__item">
+              <div class="lg-timeline__time">9:45 AM</div>
+              <div class="lg-timeline__content">
+                <h4>Inventory Alert</h4>
+                <p>IAP compressor parts below threshold</p>
+              </div>
+            </div>
+            <div class="lg-timeline__item">
+              <div class="lg-timeline__time">9:20 AM</div>
+              <div class="lg-timeline__content">
+                <h4>Quote Approved</h4>
+                <p>Quote #Q-1847 approved by Midwest Steel ($12,800)</p>
+              </div>
+            </div>
+            <div class="lg-timeline__item">
+              <div class="lg-timeline__time">8:55 AM</div>
+              <div class="lg-timeline__content">
+                <h4>Service Complete</h4>
+                <p>CTS completed turbine overhaul for Baytown Refining</p>
+              </div>
+            </div>
+            <div class="lg-timeline__item">
+              <div class="lg-timeline__time">8:30 AM</div>
+              <div class="lg-timeline__content">
+                <h4>New Customer</h4>
+                <p>Pacific Northwest Pulp &amp; Paper onboarded</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- CUSTOMER MANAGEMENT ---- -->
+    <div class="crm-customers">
+      <div class="crm-customers__header">
+        <h3 class="section-title" style="margin-bottom:0">Customer Management</h3>
+        <div class="crm-customers__search">
+          <span class="crm-customers__search-icon">&#x1F50D;</span>
+          <input type="text" id="customerSearch" placeholder="Search customers...">
+        </div>
+      </div>
+      <div id="customerTable"></div>
+    </div>
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="crm-footer">
+    <span>ServiceIQ</span> v2.0 &mdash; Powered by Charlotte OS &nbsp;|&nbsp; Last sync: 2 min ago
+  </footer>
+
+  <!-- ================================================================
+       DATA + SCRIPTS
+       ================================================================ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // ===================================================================
+    // DATA
+    // ===================================================================
+
+    var brandRevenue = [
+      { label: 'IAP',      value: 31.4, brand: 'IAP' },
+      { label: 'IVS',      value: 28.5, brand: 'IVS' },
+      { label: 'IAC',      value: 24.6, brand: 'IAC' },
+      { label: 'Morin',    value: 22.1, brand: 'Morin' },
+      { label: 'GW',       value: 19.8, brand: 'GW' },
+      { label: 'IEW',      value: 17.2, brand: 'IEW' },
+      { label: 'Soles',    value: 15.0, brand: 'Soles' },
+      { label: 'Pinnacle', value: 14.5, brand: 'Pinnacle' },
+      { label: 'Dynamic-MS', value: 12.3, brand: 'Dynamic-MS' },
+      { label: 'TVI',      value: 11.4, brand: 'TVI' },
+      { label: 'CTS',      value: 9.8,  brand: 'CTS' },
+      { label: 'ASE',      value: 8.9,  brand: 'ASE' },
+      { label: 'RSI',      value: 8.7,  brand: 'RSI' },
+      { label: 'TMI',      value: 7.3,  brand: 'TMI' },
+      { label: 'CORE',     value: 6.2,  brand: 'CORE' },
+      { label: 'NMM',      value: 3.6,  brand: 'NMM' },
+    ];
+
+    var ordersData = [
+      { order: 'ISG-4521', customer: 'Delta Petrochemical',         brand: 'IAP',      items: 12, total: 34200, status: 'Processing',    date: '2026-02-12' },
+      { order: 'ISG-4520', customer: 'Gulf Coast Refining',         brand: 'IVS',      items: 8,  total: 28750, status: 'Shipped',        date: '2026-02-11' },
+      { order: 'ISG-4519', customer: 'Midwest Steel Works',         brand: 'Morin',    items: 5,  total: 12800, status: 'Shipped',        date: '2026-02-11' },
+      { order: 'ISG-4518', customer: 'Baytown Energy',              brand: 'CTS',      items: 3,  total: 67400, status: 'Processing',    date: '2026-02-11' },
+      { order: 'ISG-4517', customer: 'Southeast Paper',             brand: 'GW',       items: 22, total: 9450,  status: 'Pending Quote',  date: '2026-02-10' },
+      { order: 'ISG-4516', customer: 'Pacific Northwest Pulp',      brand: 'Soles',    items: 6,  total: 18200, status: 'Shipped',        date: '2026-02-10' },
+      { order: 'ISG-4515', customer: 'Great Lakes Chemical',        brand: 'IAC',      items: 15, total: 42100, status: 'Processing',    date: '2026-02-10' },
+      { order: 'ISG-4514', customer: 'Appalachian Power',           brand: 'IEW',      items: 4,  total: 8900,  status: 'Backordered',    date: '2026-02-09' },
+      { order: 'ISG-4513', customer: 'Texas Plastics Corp',         brand: 'Dynamic-MS', items: 7, total: 15300, status: 'Shipped',      date: '2026-02-09' },
+      { order: 'ISG-4512', customer: 'Rocky Mountain Mining',       brand: 'Pinnacle', items: 18, total: 24600, status: 'Processing',    date: '2026-02-08' },
+      { order: 'ISG-4511', customer: 'Louisiana Refining Corp',     brand: 'TVI',      items: 2,  total: 5200,  status: 'Pending Quote',  date: '2026-02-08' },
+      { order: 'ISG-4510', customer: 'Northern Gas & Electric',     brand: 'TMI',      items: 9,  total: 31000, status: 'Shipped',        date: '2026-02-07' },
+      { order: 'ISG-4509', customer: 'Cascade Pulp & Paper',        brand: 'RSI',      items: 11, total: 19700, status: 'Backordered',    date: '2026-02-07' },
+      { order: 'ISG-4508', customer: 'San Jacinto Petrochemical',   brand: 'ASE',      items: 4,  total: 7600,  status: 'Shipped',        date: '2026-02-06' },
+      { order: 'ISG-4507', customer: 'Ohio Valley Manufacturing',   brand: 'NMM',      items: 20, total: 11200, status: 'Pending Quote',  date: '2026-02-06' },
+    ];
+
+    var ticketsData = [
+      { ticket: 'ST-892', customer: 'Gulf Coast Refining',       brand: 'IVS',      issue: 'Compressor failure — Plant A',        priority: 'Critical', assigned: 'M. Torres',  status: 'In Progress' },
+      { ticket: 'ST-891', customer: 'Delta Petrochemical',       brand: 'IAP',      issue: 'Motor vibration alert — Unit 7',     priority: 'High',     assigned: 'J. Webb',    status: 'Open' },
+      { ticket: 'ST-890', customer: 'Baytown Energy',            brand: 'CTS',      issue: 'Turbine blade inspection overdue',   priority: 'High',     assigned: 'R. Nguyen',  status: 'In Progress' },
+      { ticket: 'ST-889', customer: 'Midwest Steel Works',       brand: 'Morin',    issue: 'Valve leak on Line 3',               priority: 'Medium',   assigned: 'D. Cooper',  status: 'Open' },
+      { ticket: 'ST-888', customer: 'Great Lakes Chemical',      brand: 'IAC',      issue: 'Parts reorder — air compressor kit', priority: 'Low',      assigned: 'S. Patel',   status: 'Awaiting Parts' },
+      { ticket: 'ST-887', customer: 'Appalachian Power',         brand: 'IEW',      issue: 'Generator winding fault',            priority: 'Critical', assigned: 'M. Torres',  status: 'Open' },
+      { ticket: 'ST-886', customer: 'Texas Plastics Corp',       brand: 'Dynamic-MS', issue: 'Pump seal replacement needed',     priority: 'Medium',   assigned: 'K. Johnson', status: 'Scheduled' },
+      { ticket: 'ST-885', customer: 'Southeast Paper',           brand: 'GW',       issue: 'Motor bearing overheating',          priority: 'High',     assigned: 'J. Webb',    status: 'In Progress' },
+      { ticket: 'ST-884', customer: 'Rocky Mountain Mining',     brand: 'Pinnacle', issue: 'Cabinet ventilation malfunction',     priority: 'Low',      assigned: 'L. Chen',    status: 'Scheduled' },
+      { ticket: 'ST-883', customer: 'Northern Gas & Electric',   brand: 'TMI',      issue: 'Governor valve calibration drift',   priority: 'Medium',   assigned: 'R. Nguyen',  status: 'Open' },
+    ];
+
+    var pipelineData = [
+      { label: 'Prospecting',   value: 4.2 },
+      { label: 'Qualification', value: 6.8 },
+      { label: 'Proposal',      value: 12.3 },
+      { label: 'Negotiation',   value: 8.1 },
+      { label: 'Closed Won',    value: 18.7 },
+    ];
+
+    var segmentsData = [
+      { label: 'Refining',       value: 34 },
+      { label: 'Chemical',       value: 22 },
+      { label: 'Power Gen',      value: 18 },
+      { label: 'Manufacturing',  value: 14 },
+      { label: 'Mining',         value: 8 },
+      { label: 'Other',          value: 4 },
+    ];
+
+    var customersData = [
+      { company: 'Gulf Coast Refining',         brand: 'IVS',       spend: 4280000, orders: 47, lastActivity: '2026-02-12', health: 95 },
+      { company: 'Midwest Steel Works',         brand: 'Morin',     spend: 2150000, orders: 31, lastActivity: '2026-02-11', health: 88 },
+      { company: 'Delta Petrochemical',         brand: 'IAP',       spend: 5640000, orders: 62, lastActivity: '2026-02-12', health: 92 },
+      { company: 'Baytown Energy',              brand: 'CTS',       spend: 3870000, orders: 28, lastActivity: '2026-02-11', health: 76 },
+      { company: 'Southeast Paper',             brand: 'GW',        spend: 1230000, orders: 19, lastActivity: '2026-02-10', health: 63 },
+      { company: 'Pacific Northwest Pulp',      brand: 'Soles',     spend: 890000,  orders: 14, lastActivity: '2026-02-10', health: 71 },
+      { company: 'Great Lakes Chemical',        brand: 'IAC',       spend: 3450000, orders: 41, lastActivity: '2026-02-10', health: 85 },
+      { company: 'Appalachian Power',           brand: 'IEW',       spend: 2780000, orders: 35, lastActivity: '2026-02-09', health: 58 },
+      { company: 'Texas Plastics Corp',         brand: 'Dynamic-MS', spend: 1560000, orders: 22, lastActivity: '2026-02-09', health: 74 },
+      { company: 'Rocky Mountain Mining',       brand: 'Pinnacle',  spend: 2100000, orders: 26, lastActivity: '2026-02-08', health: 81 },
+      { company: 'Louisiana Refining Corp',     brand: 'TVI',       spend: 980000,  orders: 15, lastActivity: '2026-02-08', health: 67 },
+      { company: 'Northern Gas & Electric',     brand: 'TMI',       spend: 1840000, orders: 24, lastActivity: '2026-02-07', health: 79 },
+      { company: 'Cascade Pulp & Paper',        brand: 'RSI',       spend: 720000,  orders: 11, lastActivity: '2026-02-07', health: 45 },
+      { company: 'San Jacinto Petrochemical',   brand: 'ASE',       spend: 1340000, orders: 18, lastActivity: '2026-02-06', health: 83 },
+      { company: 'Ohio Valley Manufacturing',   brand: 'NMM',       spend: 560000,  orders: 9,  lastActivity: '2026-02-06', health: 52 },
+      { company: 'Columbia River Power',        brand: 'IEW',       spend: 3120000, orders: 38, lastActivity: '2026-02-05', health: 90 },
+      { company: 'Permian Basin Energy',        brand: 'IAP',       spend: 4750000, orders: 55, lastActivity: '2026-02-05', health: 94 },
+      { company: 'Inland Empire Chemical',      brand: 'IAC',       spend: 1680000, orders: 20, lastActivity: '2026-02-04', health: 72 },
+      { company: 'Allegheny Industrial',        brand: 'CORE',      spend: 410000,  orders: 7,  lastActivity: '2026-02-03', health: 38 },
+      { company: 'Prairie Wind Refining',       brand: 'IVS',       spend: 2950000, orders: 33, lastActivity: '2026-02-02', health: 86 },
+    ];
+
+    // ===================================================================
+    // SPARKLINES
+    // ===================================================================
+
+    if (window.LiquidGlass && LiquidGlass.sparkline) {
+      LiquidGlass.sparkline('#spark-revenue',   { data: [180, 195, 201, 210, 218, 225, 230, 241], width: 80, height: 28, color: '#34D399' });
+      LiquidGlass.sparkline('#spark-customers',  { data: [3200, 3350, 3410, 3520, 3600, 3680, 3750, 3847], width: 80, height: 28, color: '#34D399' });
+      LiquidGlass.sparkline('#spark-orders',     { data: [1180, 1220, 1260, 1210, 1240, 1230, 1250, 1234], width: 80, height: 28, color: '#60A5FA' });
+      LiquidGlass.sparkline('#spark-inventory',  { data: [20.1, 19.8, 19.5, 19.2, 19.0, 18.9, 18.8, 18.7], width: 80, height: 28, color: '#F87171' });
+      LiquidGlass.sparkline('#spark-tickets',    { data: [72, 65, 78, 82, 75, 80, 84, 89], width: 80, height: 28, color: '#E8B44E' });
+      LiquidGlass.sparkline('#spark-response',   { data: [3.2, 3.0, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4], width: 80, height: 28, color: '#34D399' });
+    }
+
+    // ===================================================================
+    // REVENUE BAR CHART
+    // ===================================================================
+
+    if (window.LiquidGlass && LiquidGlass.barChart) {
+      LiquidGlass.barChart('#revenueChart', {
+        title: 'Revenue by Brand ($M)',
+        data: brandRevenue,
+        horizontal: true,
+        height: 520,
+      });
+    }
+
+    // ===================================================================
+    // ORDERS TABLE
+    // ===================================================================
+
+    function statusBadge(val) {
+      var cls = {
+        'Shipped': 'shipped',
+        'Processing': 'processing',
+        'Pending Quote': 'pending',
+        'Backordered': 'backordered',
+      };
+      return '<span class="status-badge status-badge--' + (cls[val] || 'processing') + '">' + val + '</span>';
+    }
+
+    if (window.LiquidGlass && LiquidGlass.table) {
+      var ordersTableInstance = LiquidGlass.table('#ordersTable', {
+        title: 'Recent Orders',
+        filterable: true,
+        sortable: true,
+        pageSize: 0,
+        columns: [
+          { key: 'order',    label: 'Order #',   mono: true },
+          { key: 'customer', label: 'Customer' },
+          { key: 'brand',    label: 'Brand' },
+          { key: 'items',    label: 'Items',   align: 'right' },
+          { key: 'total',    label: 'Total',   align: 'right', format: function(v) { return '$' + v.toLocaleString(); } },
+          { key: 'status',   label: 'Status' },
+          { key: 'date',     label: 'Date' },
+        ],
+        data: ordersData,
+      });
+
+      // Inject HTML badges for status after render
+      injectStatusBadges('#ordersTable');
+    }
+
+    function injectStatusBadges(selector) {
+      var rows = document.querySelectorAll(selector + ' .lg-table tbody tr');
+      rows.forEach(function(tr) {
+        var cells = tr.querySelectorAll('td');
+        if (cells.length >= 6) {
+          var statusCell = cells[5];
+          var val = statusCell.textContent.trim();
+          statusCell.innerHTML = statusBadge(val);
+        }
+      });
+    }
+
+    // ===================================================================
+    // TICKETS TABLE
+    // ===================================================================
+
+    function priorityBadge(val) {
+      var cls = {
+        'Critical': 'critical',
+        'High': 'high',
+        'Medium': 'medium',
+        'Low': 'low',
+      };
+      return '<span class="priority-badge priority-badge--' + (cls[val] || 'medium') + '">' + val + '</span>';
+    }
+
+    if (window.LiquidGlass && LiquidGlass.table) {
+      LiquidGlass.table('#ticketsTable', {
+        title: 'Service Tickets',
+        filterable: true,
+        sortable: true,
+        pageSize: 0,
+        columns: [
+          { key: 'ticket',   label: 'Ticket #',  mono: true },
+          { key: 'customer', label: 'Customer' },
+          { key: 'brand',    label: 'Brand' },
+          { key: 'issue',    label: 'Issue' },
+          { key: 'priority', label: 'Priority' },
+          { key: 'assigned', label: 'Assigned' },
+          { key: 'status',   label: 'Status' },
+        ],
+        data: ticketsData,
+      });
+      injectPriorityBadges('#ticketsTable');
+    }
+
+    function injectPriorityBadges(selector) {
+      var rows = document.querySelectorAll(selector + ' .lg-table tbody tr');
+      rows.forEach(function(tr) {
+        var cells = tr.querySelectorAll('td');
+        if (cells.length >= 5) {
+          var priorityCell = cells[4];
+          var val = priorityCell.textContent.trim();
+          priorityCell.innerHTML = priorityBadge(val);
+        }
+      });
+    }
+
+    // ===================================================================
+    // PIPELINE DONUT
+    // ===================================================================
+
+    if (window.LiquidGlass && LiquidGlass.donut) {
+      LiquidGlass.donut('#pipelineDonut', {
+        title: 'Sales Pipeline',
+        data: pipelineData,
+        centerValue: '$50.1M',
+        centerLabel: 'Total Pipeline',
+        size: 220,
+        thickness: 36,
+      });
+    }
+
+    // ===================================================================
+    // CUSTOMER SEGMENTS DONUT
+    // ===================================================================
+
+    if (window.LiquidGlass && LiquidGlass.donut) {
+      LiquidGlass.donut('#segmentsDonut', {
+        title: 'Customer Segments',
+        data: segmentsData,
+        centerValue: '3,847',
+        centerLabel: 'Customers',
+        size: 220,
+        thickness: 36,
+      });
+    }
+
+    // ===================================================================
+    // CUSTOMER TABLE
+    // ===================================================================
+
+    function healthBadge(val) {
+      var label, cls;
+      if (val >= 90) { label = 'Excellent'; cls = 'excellent'; }
+      else if (val >= 70) { label = 'Good'; cls = 'good'; }
+      else if (val >= 50) { label = 'At Risk'; cls = 'at-risk'; }
+      else { label = 'Critical'; cls = 'critical'; }
+      return '<span class="health-badge health-badge--' + cls + '">' + val + ' &mdash; ' + label + '</span>';
+    }
+
+    if (window.LiquidGlass && LiquidGlass.table) {
+      LiquidGlass.table('#customerTable', {
+        title: '',
+        filterable: false,
+        sortable: true,
+        pageSize: 10,
+        columns: [
+          { key: 'company',      label: 'Company Name' },
+          { key: 'brand',        label: 'Primary Brand' },
+          { key: 'spend',        label: 'Annual Spend', align: 'right', format: function(v) { return '$' + (v/1000000).toFixed(2) + 'M'; } },
+          { key: 'orders',       label: '# Orders', align: 'right' },
+          { key: 'lastActivity', label: 'Last Activity' },
+          { key: 'health',       label: 'Health Score', align: 'right' },
+        ],
+        data: customersData,
+      });
+
+      injectHealthBadges('#customerTable');
+    }
+
+    function injectHealthBadges(selector) {
+      var rows = document.querySelectorAll(selector + ' .lg-table tbody tr');
+      rows.forEach(function(tr) {
+        var cells = tr.querySelectorAll('td');
+        if (cells.length >= 6) {
+          var healthCell = cells[5];
+          var val = parseInt(healthCell.textContent);
+          if (!isNaN(val)) healthCell.innerHTML = healthBadge(val);
+        }
+      });
+    }
+
+    // ===================================================================
+    // CUSTOMER SEARCH (external input wired to customer table filter)
+    // ===================================================================
+
+    var customerSearchInput = document.getElementById('customerSearch');
+    if (customerSearchInput) {
+      customerSearchInput.addEventListener('input', function () {
+        var searchVal = this.value.toLowerCase();
+        // Find the internal filter input within the customer table and sync
+        var internalFilter = document.querySelector('#customerTable .lg-table-wrap__filter');
+        if (internalFilter) {
+          internalFilter.value = searchVal;
+          internalFilter.dispatchEvent(new Event('input'));
+          // Re-inject health badges after re-render
+          setTimeout(function() { injectHealthBadges('#customerTable'); }, 50);
+        }
+      });
+    }
+
+    // ===================================================================
+    // BRAND FILTER
+    // ===================================================================
+
+    var brandSelect = document.getElementById('brandFilter');
+    if (brandSelect) {
+      brandSelect.addEventListener('change', function () {
+        var brand = this.value;
+        applyBrandFilter(brand);
+      });
+    }
+
+    function applyBrandFilter(brand) {
+      // --- Filter Orders Table ---
+      var filteredOrders = brand === 'all' ? ordersData : ordersData.filter(function(o) { return o.brand === brand; });
+      if (window.LiquidGlass && LiquidGlass.table) {
+        LiquidGlass.table('#ordersTable', {
+          title: 'Recent Orders',
+          filterable: true,
+          sortable: true,
+          pageSize: 0,
+          columns: [
+            { key: 'order',    label: 'Order #',   mono: true },
+            { key: 'customer', label: 'Customer' },
+            { key: 'brand',    label: 'Brand' },
+            { key: 'items',    label: 'Items',   align: 'right' },
+            { key: 'total',    label: 'Total',   align: 'right', format: function(v) { return '$' + v.toLocaleString(); } },
+            { key: 'status',   label: 'Status' },
+            { key: 'date',     label: 'Date' },
+          ],
+          data: filteredOrders,
+        });
+        injectStatusBadges('#ordersTable');
+      }
+
+      // --- Filter Tickets Table ---
+      var filteredTickets = brand === 'all' ? ticketsData : ticketsData.filter(function(t) { return t.brand === brand; });
+      if (window.LiquidGlass && LiquidGlass.table) {
+        LiquidGlass.table('#ticketsTable', {
+          title: 'Service Tickets',
+          filterable: true,
+          sortable: true,
+          pageSize: 0,
+          columns: [
+            { key: 'ticket',   label: 'Ticket #',  mono: true },
+            { key: 'customer', label: 'Customer' },
+            { key: 'brand',    label: 'Brand' },
+            { key: 'issue',    label: 'Issue' },
+            { key: 'priority', label: 'Priority' },
+            { key: 'assigned', label: 'Assigned' },
+            { key: 'status',   label: 'Status' },
+          ],
+          data: filteredTickets,
+        });
+        injectPriorityBadges('#ticketsTable');
+      }
+
+      // --- Filter Customer Table ---
+      var filteredCustomers = brand === 'all' ? customersData : customersData.filter(function(c) { return c.brand === brand; });
+      if (window.LiquidGlass && LiquidGlass.table) {
+        LiquidGlass.table('#customerTable', {
+          title: '',
+          filterable: false,
+          sortable: true,
+          pageSize: 10,
+          columns: [
+            { key: 'company',      label: 'Company Name' },
+            { key: 'brand',        label: 'Primary Brand' },
+            { key: 'spend',        label: 'Annual Spend', align: 'right', format: function(v) { return '$' + (v/1000000).toFixed(2) + 'M'; } },
+            { key: 'orders',       label: '# Orders', align: 'right' },
+            { key: 'lastActivity', label: 'Last Activity' },
+            { key: 'health',       label: 'Health Score', align: 'right' },
+          ],
+          data: filteredCustomers,
+        });
+        injectHealthBadges('#customerTable');
+      }
+
+      // --- Filter Revenue Bar Chart ---
+      var filteredRevenue = brand === 'all' ? brandRevenue : brandRevenue.filter(function(r) { return r.brand === brand; });
+      if (window.LiquidGlass && LiquidGlass.barChart) {
+        LiquidGlass.barChart('#revenueChart', {
+          title: 'Revenue by Brand ($M)',
+          data: filteredRevenue,
+          horizontal: true,
+          height: brand === 'all' ? 520 : 120,
+        });
+      }
+    }
+
+    // ===================================================================
+    // MutationObserver: Re-inject badges when LiquidGlass.table re-renders
+    // ===================================================================
+
+    function observeTableReRenders(selector, injectFn) {
+      var container = document.querySelector(selector);
+      if (!container) return;
+      var observer = new MutationObserver(function() {
+        setTimeout(function() { injectFn(selector); }, 10);
+      });
+      observer.observe(container, { childList: true, subtree: true });
+    }
+
+    observeTableReRenders('#ordersTable', injectStatusBadges);
+    observeTableReRenders('#ticketsTable', injectPriorityBadges);
+    observeTableReRenders('#customerTable', injectHealthBadges);
+
+  }); // end DOMContentLoaded
+  </script>
+</body>
+</html>

@@ -1,0 +1,1374 @@
+{
+  "vertical": "Specialty Services & Turbomachinery",
+  "reportDate": "2026-02-12",
+  "isgBrands": [
+    "Dynamic Mechanical Solutions",
+    "CORE Industrial Maintenance",
+    "Pinnacle Industries Ltd.",
+    "Turbomachinery Industries",
+    "National Mill Maintenance"
+  ],
+  "isgOverview": {
+    "parentCompany": "Industrial Service Group (ISG)",
+    "website": "https://isgservice.com",
+    "strategy": "Buy-and-build consolidation of industrial MRO and distribution companies specializing in critical-to-process rotating equipment",
+    "totalLocations": "40+",
+    "skusInInventory": "259,000+",
+    "serviceAreas": ["Valves", "Motors", "Pumps", "Compressors", "Specialty Services"],
+    "geographicFocus": "Southeast/Central US with national expansion",
+    "investorHistory": "PNC MC (2019), KCM Capital, Five Points Capital; TJC LP acquired ISG Holdings",
+    "ceo": "Jim Richard"
+  },
+  "competitors": [
+    {
+      "name": "Sulzer Turbo Services",
+      "website": "https://www.sulzer.com/en/shared/services/turbo-services",
+      "hq": "Winterthur, Switzerland (US hub: La Porte, TX)",
+      "locations": "120+ global service centers; Houston Service Center is the world's largest turbomachinery service center (32 acres, 285,000 sq ft)",
+      "additionalUSLocations": ["La Porte, TX (Houston)", "Margate, FL (aeroderivative)"],
+      "services": [
+        "Gas turbine repair and overhaul",
+        "Steam turbine repair and overhaul",
+        "Compressor services (axial, centrifugal, screw)",
+        "Gearbox repair",
+        "Pump services",
+        "Field services for turbomachinery",
+        "Rotor maintenance and balancing",
+        "Root cause analysis (RCA)",
+        "Re-rates and component redesign",
+        "Advanced coatings",
+        "Engineering and specialty services",
+        "Performance testing",
+        "Parts manufacturing"
+      ],
+      "equipmentTypes": [
+        "Gas turbines (all major OEMs)",
+        "Steam turbines (small to large)",
+        "Centrifugal compressors",
+        "Axial flow compressors",
+        "Screw compressors",
+        "Gearboxes",
+        "Industrial pumps",
+        "Aeroderivative gas turbines",
+        "Generators"
+      ],
+      "pricing": {
+        "model": "Project-based and long-term service agreements (LTSAs)",
+        "notes": "Premium pricing consistent with global OEM-alternative positioning; custom quotes based on equipment type and scope"
+      },
+      "revenue": "CHF 3.53 billion (Sulzer total, 2024); Services division CHF 1.25 billion (2024); ~12.3% YoY growth",
+      "employees": "13,453 (global); 700+ at Houston Service Center alone",
+      "differentiators": [
+        "World's largest turbomachinery service center in Houston",
+        "120+ year heritage in rotating equipment",
+        "Full lifecycle support from inspection to overhaul",
+        "Advanced coating and machining capabilities",
+        "Multi-brand OEM-alternative expertise",
+        "Global scale with local execution"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Oil and gas (upstream, midstream, downstream)",
+        "Petrochemical and refining",
+        "Pipeline operators",
+        "Water and wastewater",
+        "General industrial"
+      ],
+      "competitiveThreatLevel": "High"
+    },
+    {
+      "name": "EthosEnergy",
+      "website": "https://ethosenergy.com",
+      "hq": "Houston, TX (dual HQ with Aberdeen, UK)",
+      "locations": "Operations in 100+ countries across 6 continents; Houston steam/heavy gas turbine shop and light turbines Performance Center",
+      "services": [
+        "Heavy-duty gas turbine maintenance and overhaul",
+        "Light industrial gas turbine services",
+        "Steam turbine repairs, upgrades, and field services",
+        "Generator repairs and rewinds (up to 300MW)",
+        "Compressor inspection, repair, and rebuild (centrifugal, axial, integrally geared)",
+        "Turbomachinery engineered solutions",
+        "Power plant operations and maintenance (O&M)",
+        "Long-term service agreements (LTSAs)",
+        "Aerospace MRO",
+        "Performance upgrades and life extension",
+        "Remote monitoring and diagnostics"
+      ],
+      "equipmentTypes": [
+        "GE Frame 3, 5, 6B, 6FA, 7E/EA, 7FA, 9E, 9FA gas turbines",
+        "Siemens Energy SGT600 (GT10)",
+        "Fiat Avio gas turbines",
+        "Westinghouse mature frame gas turbines",
+        "Steam turbines (all major OEMs)",
+        "Generators (up to 300MW)",
+        "Centrifugal compressors",
+        "Axial compressors",
+        "Integrally geared compressors"
+      ],
+      "pricing": {
+        "model": "Project-based, LTSAs, and O&M contracts",
+        "notes": "Competitive mid-market pricing; strong LTSA value proposition for fleet operators"
+      },
+      "revenue": "$768M - $821M (FY 2023 estimates)",
+      "employees": "~2,000",
+      "differentiators": [
+        "Independent (non-OEM) full-service rotating equipment provider",
+        "Deep GE frame expertise across all major variants",
+        "Combined shop and field service capabilities",
+        "Power plant O&M operations management",
+        "Remote operations and performance monitoring center",
+        "OEM-quality for Fiat Avio and Westinghouse platforms"
+      ],
+      "customerSegments": [
+        "Power generation (natural gas, combined cycle)",
+        "Oil and gas",
+        "Petrochemical",
+        "Aerospace",
+        "Steel mills",
+        "Automotive",
+        "Food and beverage",
+        "Pharmaceutical",
+        "Pulp and paper",
+        "Textiles"
+      ],
+      "competitiveThreatLevel": "High"
+    },
+    {
+      "name": "MD&A (Mechanical Dynamics & Analysis)",
+      "website": "https://www.mdaturbines.com",
+      "hq": "Latham, NY (25 British American Blvd., Latham, NY 12110)",
+      "locations": "7 US service centers: Latham/Clifton Park, NY; Malta, NY; Fort Collins, CO; St. Louis, MO; San Antonio, TX; Houston, TX; Euclid/Willoughby, OH; Anoka, MN",
+      "services": [
+        "Gas turbine outage planning and turnkey inspections",
+        "Steam turbine overhauls and repairs",
+        "Generator robotic in-situ inspection",
+        "Rotor life extension programs",
+        "Steam path audits",
+        "Turbine engineering and finite element analysis",
+        "Control system retrofits",
+        "Performance testing and thermodynamic analysis",
+        "Field machining and alignment services",
+        "Balancing and vibration analysis",
+        "Remote monitoring",
+        "Foundation monitoring",
+        "Parts manufacturing (diaphragms, blade rings)",
+        "Hydrogen purge systems for generators",
+        "Excitation system retrofits"
+      ],
+      "equipmentTypes": [
+        "GE Frame 7FA gas turbines",
+        "GE Frame 7EA gas turbines",
+        "GE V-Series gas turbines",
+        "Steam turbines (up to 1,200 MW)",
+        "Industrial generators",
+        "Fuel nozzles",
+        "Compressor components",
+        "Diaphragms and blade rings"
+      ],
+      "pricing": {
+        "model": "Project-based and time-and-materials for field services",
+        "notes": "Positioned as cost-effective OEM-alternative; competitive pricing for independent services"
+      },
+      "revenue": "Estimated $100M - $200M (private, not publicly disclosed)",
+      "employees": "400-600 (estimated)",
+      "differentiators": [
+        "Largest independent turbine-generator repair organization in the US",
+        "40+ years of power generation expertise",
+        "Robotic generator inspection technology",
+        "Turnkey overhaul capability up to 1,200 MW",
+        "Emphasis on 'easy to work with' customer experience",
+        "Strong engineering and diagnostic capabilities",
+        "Owned by Mitsubishi Power (MHPS) - access to OEM resources"
+      ],
+      "customerSegments": [
+        "Utility power plants",
+        "Independent power producers (IPPs)",
+        "Industrial power generation",
+        "Combined cycle plants",
+        "Nuclear (generator services)"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Elliott Group (Ebara Corporation)",
+      "website": "https://www.elliott-turbo.com",
+      "hq": "Jeannette, PA (US); Sodegaura, Chiba (Japan)",
+      "locations": "32 locations worldwide; 29 sales/service offices; primary manufacturing in Jeannette, PA (~900 employees at HQ)",
+      "services": [
+        "Compressor design and manufacturing",
+        "Steam turbine design and manufacturing",
+        "Aftermarket repair and overhaul",
+        "Field services",
+        "Parts supply and manufacturing",
+        "Performance upgrades",
+        "Re-rates and modernization",
+        "Installation and commissioning"
+      ],
+      "equipmentTypes": [
+        "Centrifugal compressors",
+        "Axial compressors",
+        "Steam turbines (heavy-duty industrial)",
+        "Power recovery expanders",
+        "Cryogenic pumps and expanders",
+        "Gearboxes"
+      ],
+      "pricing": {
+        "model": "OEM equipment sales plus aftermarket service contracts",
+        "notes": "Premium OEM pricing for new equipment; competitive aftermarket rates"
+      },
+      "revenue": "$487.3M (2026 estimate, Elliott Group)",
+      "employees": "2,000+ worldwide; ~900 in Jeannette, PA",
+      "differentiators": [
+        "Full OEM capability (design through manufacturing)",
+        "Deep expertise in centrifugal and axial compressors",
+        "Backed by Ebara Corporation (Japanese industrial conglomerate)",
+        "Cryogenic equipment specialty (LNG industry)",
+        "Power recovery expander technology",
+        "150+ year heritage"
+      ],
+      "customerSegments": [
+        "Oil and gas (upstream, midstream, downstream)",
+        "LNG/cryogenic processing",
+        "Petrochemical and chemical",
+        "Refining",
+        "Power generation",
+        "General industrial"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Dresser-Rand (Siemens Energy)",
+      "website": "https://www.siemens-energy.com",
+      "hq": "Houston, TX (integrated into Siemens Energy)",
+      "locations": "12+ manufacturing facilities globally; major US service presence in Houston/Deer Park, TX; Olean, NY; Painted Post, NY; service in 150+ countries",
+      "services": [
+        "Turbo and reciprocating compressor manufacturing",
+        "Steam turbine manufacturing and service",
+        "Gas turbine service (industrial and aero-derivative)",
+        "Aftermarket parts and upgrades",
+        "Field service and installation",
+        "Revamps and modernization",
+        "Long-term service agreements",
+        "Remote monitoring and diagnostics",
+        "Controls and automation"
+      ],
+      "equipmentTypes": [
+        "Turbo compressors",
+        "Reciprocating compressors",
+        "Steam turbines",
+        "Industrial gas turbines",
+        "Aero-derivative gas turbines",
+        "High-speed engines",
+        "Modular power substations",
+        "Generators"
+      ],
+      "pricing": {
+        "model": "OEM pricing for new equipment; aftermarket service contracts and LTSAs",
+        "notes": "Premium OEM pricing; aging installed base driving aftermarket growth"
+      },
+      "revenue": "~$2.8B historical (pre-acquisition); now part of Siemens Energy (~$38B total revenue)",
+      "employees": "~10,000 (Dresser-Rand business unit); Siemens Energy NA Service Operations 1,000+",
+      "differentiators": [
+        "Full OEM manufacturer with massive installed base",
+        "Backed by Siemens Energy global resources",
+        "Broadest product range in compression and turbines",
+        "150+ country service network",
+        "Advanced digital monitoring solutions",
+        "Extensive aftermarket parts inventory"
+      ],
+      "customerSegments": [
+        "Oil and gas extraction and processing",
+        "Pipeline operators",
+        "Refining",
+        "Petrochemical",
+        "Power generation",
+        "Marine and offshore",
+        "Industrial process"
+      ],
+      "competitiveThreatLevel": "High"
+    },
+    {
+      "name": "Chromalloy Gas Turbine",
+      "website": "https://www.chromalloy.com",
+      "hq": "Palm Beach Gardens, FL",
+      "locations": "20+ locations worldwide; US locations include Newnan, GA; Oldsmar, FL; Carson City, NV; Phoenix, AZ; Palm Beach Gardens, FL",
+      "services": [
+        "Gas turbine component repair",
+        "Advanced coatings (thermal barrier, oxidation resistant)",
+        "Precision manufacturing of turbine components",
+        "Airfoil repair and manufacturing",
+        "Engineering and metallurgical services",
+        "Parts manufacturing (blades, vanes, combustion hardware)",
+        "Reverse engineering"
+      ],
+      "equipmentTypes": [
+        "Industrial gas turbines (all major OEMs)",
+        "Aero-derivative gas turbines",
+        "Aerospace turbine engines",
+        "Hot-section components (blades, vanes, nozzles)",
+        "Combustion hardware (liners, transition pieces)"
+      ],
+      "pricing": {
+        "model": "Component-level pricing; repair vs. new part cost savings typically 40-70%",
+        "notes": "Premium quality positioning in coatings and advanced repair; competitive with OEM replacement parts"
+      },
+      "revenue": "$1.1 billion",
+      "employees": "~2,000",
+      "differentiators": [
+        "World leader in gas turbine coatings and component repair",
+        "70+ year heritage (founded 1951)",
+        "Dual aerospace and industrial gas turbine expertise",
+        "Advanced metallurgy and materials science capabilities",
+        "FAA/EASA certified repair station",
+        "Proprietary coating technologies"
+      ],
+      "customerSegments": [
+        "Aerospace (commercial and military)",
+        "Industrial gas turbine operators",
+        "Power generation",
+        "Oil and gas",
+        "Aero-derivative power plants"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "ProEnergy Services",
+      "website": "https://www.proenergyservices.com",
+      "hq": "Sedalia, MO (2001 ProEnergy Blvd, Sedalia, MO 65301)",
+      "locations": "3 US locations: Sedalia, MO (HQ/manufacturing); Houston, TX; Fort Collins, CO; plus global aero depot network",
+      "services": [
+        "Aeroderivative turbine manufacturing (PE6000, LM6000-class)",
+        "Turbine and power package engineering",
+        "Turnkey power plant project execution",
+        "Power purchase agreements (contracted power)",
+        "Lifecycle asset care and maintenance",
+        "Major overhauls (120-day turnaround)",
+        "Predictive maintenance (AMPS system)",
+        "Operations and maintenance (O&M)",
+        "Parts and engine support",
+        "Technical consulting",
+        "Depot-level overhaul services"
+      ],
+      "equipmentTypes": [
+        "GE LM6000 aeroderivative gas turbines",
+        "GE LM2500 aeroderivative gas turbines",
+        "PE6000 (ProEnergy-manufactured, LM6000PC-interchangeable)",
+        "Power blocks and balance of plant",
+        "Control systems"
+      ],
+      "pricing": {
+        "model": "Equipment sales, PPA-based ($/MWh), and lifecycle service contracts",
+        "notes": "Vertically integrated model enables competitive total cost of ownership; CAPEX-free power options via PPAs"
+      },
+      "revenue": "$308M - $3.9B (estimates vary widely; includes power generation revenue)",
+      "employees": "~1,000",
+      "differentiators": [
+        "Only independent manufacturer of LM6000-class aeroderivative turbines",
+        "Largest independent aero depot network globally",
+        "Vertically integrated: manufacturing through O&M",
+        "Fast-start power generation specialty (10-minute startup)",
+        "USA-based manufacturing",
+        "120-day major overhaul capability",
+        "CAPEX-free contracted power model"
+      ],
+      "customerSegments": [
+        "Utility power generation",
+        "Independent power producers",
+        "Industrial power users",
+        "Grid peaking and emergency power",
+        "Data centers (emerging)"
+      ],
+      "competitiveThreatLevel": "Low-Medium"
+    },
+    {
+      "name": "MAN Energy Solutions (renamed Everllence, June 2025)",
+      "website": "https://www.man-es.com",
+      "hq": "Augsburg, Germany (US HQ: Brookshire, TX — 1758 Twinwood Parkway)",
+      "locations": "120+ sites globally; US locations: Brookshire/Houston, TX (130,000 sq ft HQ); Los Angeles, CA; Fort Lauderdale, FL",
+      "services": [
+        "Gas turbine manufacturing and service",
+        "Steam turbine manufacturing and service",
+        "Compressor manufacturing and service",
+        "Turbocharger service",
+        "Marine diesel engine service",
+        "Aftermarket (MAN PrimeServ) — 24/7/365 service",
+        "Field service engineering",
+        "Rotating equipment repair (oil and gas)",
+        "Chemical reactor systems",
+        "Parts supply and manufacturing"
+      ],
+      "equipmentTypes": [
+        "Industrial gas turbines",
+        "Steam turbines",
+        "Axial and centrifugal compressors",
+        "Turbochargers",
+        "Two-stroke and four-stroke marine engines",
+        "Propellers",
+        "Chemical reactors"
+      ],
+      "pricing": {
+        "model": "OEM equipment sales; PrimeServ aftermarket service contracts",
+        "notes": "German-engineered premium positioning; strong service contract offerings through PrimeServ"
+      },
+      "revenue": "EUR 4.3 billion (2024, global)",
+      "employees": "14,000 (global)",
+      "differentiators": [
+        "Broadest portfolio spanning marine, power, and oil & gas",
+        "PrimeServ 24/7 aftermarket brand",
+        "Combined engine and turbomachinery expertise",
+        "New US HQ consolidates service capabilities",
+        "Strong hydrogen and decarbonization technology pipeline",
+        "120+ year German engineering heritage"
+      ],
+      "customerSegments": [
+        "Oil and gas (upstream, midstream, downstream)",
+        "Marine and shipping",
+        "Power generation",
+        "Petrochemical and chemical",
+        "Industrial process"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Baker Hughes (Turbomachinery & Process Solutions)",
+      "website": "https://www.bakerhughes.com/turbomachinery-services",
+      "hq": "Houston, TX (global TPS HQ: Florence, Italy)",
+      "locations": "120+ countries; US facilities plus major centers in Italy, UK, India; 1,000+ field service personnel across 7 regions",
+      "services": [
+        "Gas turbine manufacturing and aftermarket service",
+        "Compressor manufacturing and service",
+        "Turnkey repair and maintenance",
+        "Modernization and upgrades",
+        "Lifetime extensions",
+        "Digital solutions and remote monitoring",
+        "Field services (24/7 technical support)",
+        "Advanced component repairs",
+        "Parts management and supply chain",
+        "Live remote diagnostics"
+      ],
+      "equipmentTypes": [
+        "Industrial gas turbines (Nuovo Pignone heritage)",
+        "Centrifugal compressors",
+        "Reciprocating compressors",
+        "Axial compressors",
+        "Steam turbines",
+        "Gearing technology",
+        "Pumps and valves"
+      ],
+      "pricing": {
+        "model": "OEM equipment sales; comprehensive LTSAs; parts and services",
+        "notes": "Premium OEM pricing; growing aftermarket revenue with Chart Industries acquisition expanding lifecycle value"
+      },
+      "revenue": "$38.1B (Baker Hughes total, 2025); TPS segment estimated $7-9B",
+      "employees": "58,000+ (Baker Hughes total); 1,000+ in TPS field service alone",
+      "differentiators": [
+        "Full OEM manufacturer with century-long legacy (Nuovo Pignone)",
+        "Massive global installed base driving aftermarket",
+        "Digital/AI-enabled monitoring and predictive maintenance",
+        "Chart Industries acquisition expands LNG/process capabilities",
+        "Integrated energy technology company",
+        "Aftermarket contributes 50%+ of backlog"
+      ],
+      "customerSegments": [
+        "Oil and gas (all segments)",
+        "LNG processing",
+        "Petrochemical and refining",
+        "Power generation",
+        "Industrial process",
+        "Pipeline and midstream"
+      ],
+      "competitiveThreatLevel": "High"
+    },
+    {
+      "name": "GE Vernova (Gas Power Services)",
+      "website": "https://www.gevernova.com",
+      "hq": "Cambridge, MA (services operations: Greenville, SC and Atlanta, GA)",
+      "locations": "Global; major US service hubs in Greenville, SC; Schenectady, NY; Houston, TX; field service across all US regions",
+      "services": [
+        "Gas turbine aftermarket services and upgrades",
+        "Steam turbine services",
+        "Generator services",
+        "Controls lifecycle services (24/7)",
+        "Live remote diagnostics",
+        "Onsite field engineering",
+        "Parts management and manufacturing",
+        "Performance upgrades and output enhancements",
+        "Long-term service agreements",
+        "Digital monitoring solutions"
+      ],
+      "equipmentTypes": [
+        "GE HA-class gas turbines",
+        "GE F-class gas turbines (7FA, 9FA)",
+        "GE E-class gas turbines (7EA, 9E)",
+        "GE B/C-class gas turbines",
+        "GE aeroderivative turbines (LM2500, LM6000, LM9000)",
+        "Steam turbines",
+        "Generators",
+        "HRSG components"
+      ],
+      "pricing": {
+        "model": "OEM parts and services; comprehensive LTSAs; contractual service agreements (CSAs)",
+        "notes": "Premium OEM pricing; services represent 55%+ of total backlog; predictable recurring revenue model"
+      },
+      "revenue": "$38.1B (GE Vernova total, 2025); services 55%+ of backlog",
+      "employees": "80,000+ (GE Vernova total)",
+      "differentiators": [
+        "Largest installed base of gas turbines globally",
+        "OEM with unmatched parts availability and engineering data",
+        "Advanced digital monitoring (Predix platform heritage)",
+        "Vertically integrated from design to lifecycle services",
+        "80-GW gas turbine backlog stretching to 2029",
+        "Dominant market position in F-class and HA-class turbines"
+      ],
+      "customerSegments": [
+        "Utility power generation",
+        "Independent power producers",
+        "Combined cycle power plants",
+        "Simple cycle peaking plants",
+        "Industrial cogeneration",
+        "LNG facilities"
+      ],
+      "competitiveThreatLevel": "High"
+    },
+    {
+      "name": "Allied Power Group (APG)",
+      "website": "https://alliedpg.com",
+      "hq": "Houston, TX (10131 Mills Road, Houston, TX 77070)",
+      "locations": "2 Houston facilities: Mills Road (primary) and Farrell Road (manufacturing)",
+      "services": [
+        "Gas turbine component inspection and repair",
+        "Steam turbine repair",
+        "Specialized coatings",
+        "Precision manufacturing of replacement components",
+        "Field services for major outages",
+        "Rotor repair and restoration",
+        "Fuel nozzle repair",
+        "New and refurbished parts supply",
+        "Performance upgrades (output, heat rate, reliability)",
+        "Part life extension programs"
+      ],
+      "equipmentTypes": [
+        "GE 7F gas turbines",
+        "Siemens Westinghouse 501F gas turbines",
+        "Siemens V84.2 gas turbines",
+        "Alstom GT11 (D4, D5, N1) gas turbines",
+        "Steam turbine generators",
+        "Combined-cycle turbine systems",
+        "Combustion hardware (liners, caps, transition pieces)"
+      ],
+      "pricing": {
+        "model": "Component-level repair pricing; field service day rates; parts sales",
+        "notes": "Competitive independent pricing; typically 30-50% below OEM for equivalent repairs"
+      },
+      "revenue": "$10M - $50M (estimates vary; private company)",
+      "employees": "50-150 (estimated)",
+      "differentiators": [
+        "Most comprehensive independent aftermarket organization (self-described)",
+        "Deep expertise in GE 7F and Siemens 501F platforms",
+        "24/7 emergency response capability",
+        "Vertically integrated repair and manufacturing",
+        "AEA SBF private equity backing for growth",
+        "Mission-critical maintenance focus"
+      ],
+      "customerSegments": [
+        "Petrochemical plants",
+        "Refineries",
+        "Municipal utilities",
+        "Pipeline operators",
+        "Industrial power generation",
+        "Data centers (emerging)"
+      ],
+      "competitiveThreatLevel": "Low"
+    },
+    {
+      "name": "Rotating Machinery Services (RMS)",
+      "website": "https://rotatingmachinery.com",
+      "hq": "Bethlehem, PA",
+      "locations": "9 facilities globally (US, UK, Netherlands); recently acquired TurboCare (Chicopee, MA; UK; Netherlands facilities)",
+      "services": [
+        "Aftermarket turbomachinery repair",
+        "Overhaul services",
+        "OEM equipment supply",
+        "Compressor repair and rebuild",
+        "Steam turbine repair (expanded via TurboCare acquisition)",
+        "Expander services",
+        "Engineering and design",
+        "Field services",
+        "Parts manufacturing"
+      ],
+      "equipmentTypes": [
+        "Centrifugal compressors",
+        "Steam turbines",
+        "Power recovery expanders",
+        "Turbo-expanders",
+        "Gearboxes",
+        "Hot gas expanders"
+      ],
+      "pricing": {
+        "model": "Project-based repair pricing; parts sales",
+        "notes": "Mid-market independent pricing; focused on engineered solutions value"
+      },
+      "revenue": "$25M - $50M (pre-TurboCare acquisition)",
+      "employees": "235 (pre-acquisition); 395+ with TurboCare (160+ employees added)",
+      "differentiators": [
+        "Leading independent aftermarket turbomachinery specialist",
+        "TurboCare acquisition (Dec 2025) significantly expanded capabilities",
+        "Arcline Investment Management backing (Jan 2025)",
+        "9-facility global network",
+        "Specialty focus on highly engineered, large turbomachinery",
+        "Founded 1998 with clear aftermarket vision"
+      ],
+      "customerSegments": [
+        "Oil and gas",
+        "Petrochemical",
+        "Power generation",
+        "Industrial process",
+        "LNG and cryogenic"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Fox Innovation & Technologies (FIT)",
+      "website": "https://www.foxinnovation.com",
+      "hq": "Houston, TX",
+      "locations": "Houston, TX (HQ); global service through acquired companies; Revak Keene facilities in Houston",
+      "services": [
+        "Gas turbine and steam turbine services",
+        "Compressor revamps and overhaul",
+        "Field services and maintenance",
+        "Controls services and training",
+        "Parts supply and manufacturing",
+        "Bearing services",
+        "Machinery storage",
+        "Turnaround support",
+        "Waukesha engine services",
+        "Field rental solutions",
+        "Balance of plant services",
+        "Decarbonization solutions",
+        "Turbine/engine-to-electric drive conversions"
+      ],
+      "equipmentTypes": [
+        "Industrial gas turbines",
+        "Steam turbines",
+        "Centrifugal compressors",
+        "Reciprocating compressors",
+        "Gearboxes",
+        "Pumps",
+        "Waukesha gas engines"
+      ],
+      "pricing": {
+        "model": "Service contracts; project-based; parts sales",
+        "notes": "Competitive independent pricing; acquisition strategy building scale advantages"
+      },
+      "revenue": "Not publicly disclosed (estimated $100M-$300M combined platform)",
+      "employees": "200-500 (estimated across platform)",
+      "differentiators": [
+        "Led by former Dresser-Rand CEO Vincent Volpe Jr.",
+        "Bluewater PE-backed acquisition platform",
+        "Acquired Revak Keene (40+ year Houston turbomachinery leader)",
+        "Acquired Cotter Holdings Group and SSE SpA",
+        "End-to-end service from design through overhaul",
+        "Decarbonization and electrification capabilities",
+        "OEM-quality or better parts"
+      ],
+      "customerSegments": [
+        "Oil and gas",
+        "Power generation",
+        "Petrochemical",
+        "Industrial process",
+        "Pipeline and midstream"
+      ],
+      "competitiveThreatLevel": "Medium-High"
+    },
+    {
+      "name": "Doosan Turbomachinery Services",
+      "website": "https://www.doosanturbo.com",
+      "hq": "La Porte, TX (12000 N. P Street, La Porte, TX 77571)",
+      "locations": "La Porte, TX (single primary facility)",
+      "services": [
+        "Gas turbine component repair",
+        "Advanced coatings",
+        "Hot-section component repair",
+        "Parts manufacturing",
+        "Engineering services"
+      ],
+      "equipmentTypes": [
+        "Industrial gas turbines",
+        "Gas turbine hot-section components",
+        "Combustion hardware",
+        "Blades and vanes"
+      ],
+      "pricing": {
+        "model": "Component repair pricing",
+        "notes": "Competitive pricing backed by Doosan corporate resources"
+      },
+      "revenue": "$10M - $100M (estimated range)",
+      "employees": "50-200",
+      "differentiators": [
+        "Backed by Doosan Group (Korean conglomerate)",
+        "Gas turbine component repair specialty",
+        "Advanced coating technologies",
+        "La Porte, TX location near major petrochemical corridor"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Oil and gas",
+        "Petrochemical",
+        "Industrial"
+      ],
+      "competitiveThreatLevel": "Low"
+    },
+    {
+      "name": "Turbomachinery Solutions LLC",
+      "website": "https://www.turbomachinerysolutions.com",
+      "hq": "Las Vegas, NV",
+      "locations": "Las Vegas, NV (single facility)",
+      "services": [
+        "Gas turbine preventive maintenance and overhaul",
+        "Centrifugal compressor maintenance",
+        "Generator maintenance",
+        "Vibration analysis and troubleshooting",
+        "Equipment sales",
+        "Installation and commissioning",
+        "Custom fabrication"
+      ],
+      "equipmentTypes": [
+        "Solar Saturn gas turbines",
+        "Solar Centaur gas turbines",
+        "Aero-derivative gas turbines",
+        "Industrial gas turbines",
+        "Centrifugal compressors",
+        "Generators"
+      ],
+      "pricing": {
+        "model": "Service-based and project pricing",
+        "notes": "Regional pricing; smaller independent operator"
+      },
+      "revenue": "Not publicly disclosed (estimated < $10M)",
+      "employees": "20-50 (estimated)",
+      "differentiators": [
+        "20+ years vibration analysis expertise",
+        "Solar turbine specialization (Saturn/Centaur)",
+        "Western US regional focus",
+        "Small-shop agility and customer relationships"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Oil and gas",
+        "Manufacturing",
+        "Pipeline operators"
+      ],
+      "competitiveThreatLevel": "Low"
+    },
+    {
+      "name": "BrandSafway (Brand Industrial Services)",
+      "website": "https://brandsafway.com",
+      "hq": "Atlanta, GA",
+      "locations": "340 strategic locations across 30 countries; extensive US network",
+      "services": [
+        "Industrial scaffolding and access solutions",
+        "Forming and shoring",
+        "Industrial coatings and painting",
+        "Insulation services",
+        "Fireproofing",
+        "Environmental services",
+        "Turnaround and outage support",
+        "Routine maintenance support",
+        "Capital project support",
+        "Confined space access"
+      ],
+      "equipmentTypes": [
+        "Not equipment-focused; provides access and maintenance support services for all industrial equipment types"
+      ],
+      "pricing": {
+        "model": "Project-based; master service agreements; time-and-materials",
+        "notes": "Large-scale enterprise pricing; volume discounts for multi-site MSAs"
+      },
+      "revenue": "$5 billion (annual)",
+      "employees": "38,000+",
+      "differentiators": [
+        "Largest specialty industrial services company globally",
+        "340 locations providing local execution",
+        "Full-service scaffolding through environmental services",
+        "Significant turnaround and outage support capabilities",
+        "Deep relationships with major refiners and chemical companies",
+        "Proprietary access system technologies"
+      ],
+      "customerSegments": [
+        "Refineries",
+        "Chemical plants",
+        "Power generation",
+        "Pulp and paper",
+        "Infrastructure and commercial construction",
+        "Offshore platforms"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Brock Group",
+      "website": "https://www.brockgroup.com",
+      "hq": "Houston, TX",
+      "locations": "71 locations across North America (US, Canada, Latin America); regional offices in Chicago (Great Lakes), Philadelphia (Eastern)",
+      "services": [
+        "Industrial maintenance",
+        "Capital project solutions",
+        "Scaffolding and access",
+        "Insulation services",
+        "Coatings and painting",
+        "Fabrication",
+        "Turnaround and outage services",
+        "Routine maintenance programs",
+        "Mechanical services",
+        "Electrical and instrumentation"
+      ],
+      "equipmentTypes": [
+        "Not equipment-specific; provides maintenance labor and services across all industrial plant equipment"
+      ],
+      "pricing": {
+        "model": "Master service agreements; project-based; time-and-materials; nested maintenance contracts",
+        "notes": "Competitive large-contractor pricing; owned by American Industrial Partners PE"
+      },
+      "revenue": "$3.5 billion (2025)",
+      "employees": "15,000+",
+      "differentiators": [
+        "Leading specialty industrial maintenance provider",
+        "500+ industrial and commercial facilities served",
+        "American Industrial Partners PE ownership provides capital for growth",
+        "Comprehensive service offering from scaffolding to mechanical",
+        "Strong turnaround execution track record",
+        "71-location network for rapid mobilization"
+      ],
+      "customerSegments": [
+        "Refineries",
+        "Chemical and petrochemical plants",
+        "Power generation",
+        "Pulp and paper mills",
+        "Manufacturing",
+        "Commercial facilities"
+      ],
+      "competitiveThreatLevel": "Medium-High"
+    },
+    {
+      "name": "Turner Industries",
+      "website": "https://www.turner-industries.com",
+      "hq": "Baton Rouge, LA",
+      "locations": "15 offices/locations nationwide; primary presence along US Gulf Coast",
+      "services": [
+        "Industrial construction",
+        "Maintenance and turnarounds",
+        "Pipe and module fabrication",
+        "Equipment and specialty services",
+        "Rigging and specialized transportation",
+        "Electrical and instrumentation",
+        "Engineering services",
+        "Electronic documentation",
+        "Shutdown/turnaround/outage (STO) management"
+      ],
+      "equipmentTypes": [
+        "Not equipment-specific; provides construction and maintenance services across all industrial plant equipment including rotating equipment, heat exchangers, vessels, piping"
+      ],
+      "pricing": {
+        "model": "Project-based; master service agreements; time-and-materials; lump-sum construction",
+        "notes": "Large-scale industrial contractor pricing; competitive for Gulf Coast region"
+      },
+      "revenue": "$2.4 billion (2025)",
+      "employees": "19,000-20,000",
+      "differentiators": [
+        "65+ years in industrial construction and maintenance",
+        "Gulf Coast market leader",
+        "Four integrated business lines (construction, maintenance, fabrication, equipment)",
+        "Employee-owned company culture",
+        "Massive workforce mobilization capability",
+        "Strong refining and petrochemical relationships"
+      ],
+      "customerSegments": [
+        "Petrochemical",
+        "Refining",
+        "Power generation",
+        "LNG and pipeline",
+        "Pulp and paper",
+        "General industrial"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Wood PLC",
+      "website": "https://www.woodplc.com",
+      "hq": "Aberdeen, UK (US operations: Houston, TX)",
+      "locations": "Global operations; significant US presence across energy corridor",
+      "services": [
+        "Operations and maintenance (O&M)",
+        "Shutdown/turnaround (TAR) management",
+        "Preventive and predictive maintenance",
+        "Preservation services",
+        "Digital operations technologies",
+        "Engineering and consulting",
+        "Operational excellence programs",
+        "Modification and construction"
+      ],
+      "equipmentTypes": [
+        "Not equipment-specific; broad plant O&M covering all rotating and static equipment"
+      ],
+      "pricing": {
+        "model": "Integrated O&M contracts; project-based; consulting fees",
+        "notes": "Premium consulting and engineering rates; competitive for large O&M contracts"
+      },
+      "revenue": "$4.78 billion (trailing 12M, June 2025)",
+      "employees": "35,000",
+      "differentiators": [
+        "Global engineering and consultancy scale",
+        "Integrated operations and maintenance best practices",
+        "Digital-first approach to operational excellence",
+        "Broad energy sector expertise (oil, gas, renewables, nuclear)",
+        "Strong engineering consulting capabilities",
+        "TAR/STO management expertise"
+      ],
+      "customerSegments": [
+        "Oil and gas (upstream, downstream)",
+        "Refining",
+        "Chemical and petrochemical",
+        "Power generation (conventional and renewable)",
+        "Mining and minerals",
+        "Nuclear"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "Team Inc. (TISI)",
+      "website": "https://www.teaminc.com",
+      "hq": "Sugar Land, TX",
+      "locations": "Multiple US and international locations; publicly traded (TISI)",
+      "services": [
+        "Inspection and heat treating (IHT)",
+        "Mechanical services",
+        "On-stream leak repair",
+        "Hot tapping and plugging",
+        "Fugitive emissions monitoring",
+        "Non-destructive testing (NDT)",
+        "Field heat treating",
+        "Turnaround and outage support",
+        "Bolting services",
+        "Valve repair"
+      ],
+      "equipmentTypes": [
+        "High-temperature and high-pressure piping systems",
+        "Pressure vessels",
+        "Heat exchangers",
+        "Valves",
+        "Rotating equipment (limited scope)"
+      ],
+      "pricing": {
+        "model": "Service-based; callout rates; nested maintenance contracts; turnaround project pricing",
+        "notes": "Publicly traded; competitive pricing with strong turnaround revenue growth (11.3% YoY in 2025)"
+      },
+      "revenue": "$885M (trailing 12M)",
+      "employees": "5,400",
+      "differentiators": [
+        "Specialty inspection and mechanical services focus",
+        "Publicly traded with financial transparency",
+        "Broad US and international coverage",
+        "On-stream leak repair without shutdown capability",
+        "Strong turnaround services growth",
+        "Hot tapping technology leadership"
+      ],
+      "customerSegments": [
+        "Refineries",
+        "Petrochemical plants",
+        "Chemical facilities",
+        "Power plants",
+        "Pipeline operators",
+        "Pulp and paper mills"
+      ],
+      "competitiveThreatLevel": "Medium"
+    },
+    {
+      "name": "MISTRAS Group",
+      "website": "https://www.mistrasgroup.com",
+      "hq": "Princeton Junction, NJ",
+      "locations": "41 US office locations; 100+ worldwide",
+      "services": [
+        "Non-destructive testing (NDT)",
+        "Inline pipeline inspection",
+        "Plant condition management software",
+        "Light mechanical services",
+        "Turnaround planning and execution",
+        "Asset protection solutions",
+        "Inspection engineering",
+        "Corrosion monitoring",
+        "Remote inspection technologies"
+      ],
+      "equipmentTypes": [
+        "Pipelines",
+        "Pressure vessels",
+        "Storage tanks",
+        "Heat exchangers",
+        "Structural components",
+        "Rotating equipment (inspection focus)"
+      ],
+      "pricing": {
+        "model": "Service-based; technology licensing; project-based turnaround pricing",
+        "notes": "Technology-enabled premium; publicly traded (MG)"
+      },
+      "revenue": "$715M - $739M",
+      "employees": "3,353 - 4,800",
+      "differentiators": [
+        "Technology-enabled asset protection",
+        "Proprietary condition monitoring software",
+        "Single-contractor turnaround management",
+        "Publicly traded with financial transparency",
+        "Remote and robotic inspection capabilities",
+        "Broad NDT and inspection expertise"
+      ],
+      "customerSegments": [
+        "Oil and gas",
+        "Petrochemical and chemical",
+        "Power generation",
+        "Aerospace and defense",
+        "Infrastructure",
+        "Manufacturing"
+      ],
+      "competitiveThreatLevel": "Low-Medium"
+    },
+    {
+      "name": "PSC Industrial Outsourcing",
+      "website": "https://www.pscgroup.com",
+      "hq": "Houston, TX (5151 San Felipe)",
+      "locations": "National presence; Deer Park, TX industrial operations center; multiple field offices",
+      "services": [
+        "Hydroblasting",
+        "Chemical cleaning",
+        "Tank cleaning",
+        "Liquid vacuuming",
+        "Catalyst handling (loading/unloading)",
+        "Waste minimization",
+        "Leak detection and repair (LDAR)",
+        "Industrial maintenance outsourcing",
+        "Refrigeration services",
+        "Air moving"
+      ],
+      "equipmentTypes": [
+        "Process vessels and tanks",
+        "Heat exchangers",
+        "Catalyst beds and reactors",
+        "Piping systems",
+        "Storage tanks"
+      ],
+      "pricing": {
+        "model": "Long-term maintenance outsourcing contracts; project-based",
+        "notes": "Competitive for outsourced maintenance; longstanding contracts with major manufacturers"
+      },
+      "revenue": "$398.5M (estimated)",
+      "employees": "5,600",
+      "differentiators": [
+        "Specialty maintenance outsourcing model",
+        "Longstanding contracts with largest US manufacturers",
+        "National coverage across downstream, utility, and power sectors",
+        "Proprietary LDAR capabilities (Seal Tech acquisition)",
+        "Technology solutions integrated with maintenance"
+      ],
+      "customerSegments": [
+        "Downstream oil and gas (refineries)",
+        "Utility and power generation",
+        "Upstream and midstream oil and gas",
+        "Automotive manufacturing",
+        "Agricultural manufacturing"
+      ],
+      "competitiveThreatLevel": "Low"
+    },
+    {
+      "name": "Siemens Energy (Service Division - USA)",
+      "website": "https://www.siemens-energy.com/us",
+      "hq": "Orlando, FL (Siemens Energy US); service hub: Deer Park, TX",
+      "locations": "Multiple US facilities including Deer Park, TX (engineering/manufacturing/training); Redmond, WA (turbomachinery lab); Charlotte, NC; Houston, TX",
+      "services": [
+        "Gas turbine field services and aftermarket",
+        "Steam turbine services",
+        "Generator factory and field-based service",
+        "Controls and automation upgrades",
+        "Long-term service agreements (LTSAs)",
+        "Performance upgrades and modernization",
+        "Digital monitoring and remote diagnostics",
+        "Nuclear turbine generator services",
+        "Training programs"
+      ],
+      "equipmentTypes": [
+        "Siemens SGT-class gas turbines",
+        "Dresser-Rand compressors and turbines",
+        "Steam turbines",
+        "Generators",
+        "Nuclear turbine generators",
+        "Wind turbine generators"
+      ],
+      "pricing": {
+        "model": "OEM LTSAs; parts and services; training programs",
+        "notes": "Premium OEM pricing; comprehensive LTSA offerings"
+      },
+      "revenue": "Part of Siemens Energy AG (~$38B total); US service operations significant but not separately disclosed",
+      "employees": "1,000+ (NA Service Operations alone); Siemens Energy total ~99,000",
+      "differentiators": [
+        "OEM with complete service lifecycle capability",
+        "Dresser-Rand product line integration",
+        "Full-size turbine training facility in Deer Park",
+        "Advanced digital monitoring solutions",
+        "Global parts and engineering support network",
+        "Nuclear turbine generator expertise"
+      ],
+      "customerSegments": [
+        "Power generation (gas, steam, nuclear)",
+        "Oil and gas",
+        "Pipeline and compression",
+        "Petrochemical",
+        "Marine",
+        "Industrial process"
+      ],
+      "competitiveThreatLevel": "High"
+    },
+    {
+      "name": "Midsouth Mechanical Contractors",
+      "website": "https://midsouthmechanical.com",
+      "hq": "Southeast US (Alabama-based)",
+      "locations": "Multiple offices across Southeast: Birmingham, Huntsville, Montgomery, AL; Georgia, Tennessee, Carolinas",
+      "services": [
+        "Millwright services",
+        "Rigging and machine moving",
+        "Process piping",
+        "Steel work and structural",
+        "Preventive maintenance",
+        "Bearing replacement",
+        "Seal replacement",
+        "Equipment overhaul",
+        "Mechanical contracting",
+        "Design-build services"
+      ],
+      "equipmentTypes": [
+        "Industrial machinery (general)",
+        "Process piping systems",
+        "Pumps and compressors (field-level service)",
+        "Bearings and seals",
+        "Conveyor systems"
+      ],
+      "pricing": {
+        "model": "Time-and-materials; project-based; preventive maintenance contracts",
+        "notes": "Regional pricing competitive for Southeast US; 25+ years track record"
+      },
+      "revenue": "Not publicly disclosed (estimated $20M-$50M)",
+      "employees": "100-300 (estimated)",
+      "differentiators": [
+        "25+ year Southeast US regional expertise",
+        "Broad mechanical contracting capabilities",
+        "Strong presence in Alabama, Georgia, Tennessee",
+        "Data center construction growth market",
+        "Manufacturing and distribution sector focus"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Distribution and logistics",
+        "Food processing",
+        "Data centers",
+        "Steel and metals",
+        "General industrial"
+      ],
+      "competitiveThreatLevel": "Medium (direct regional competitor)"
+    },
+    {
+      "name": "B.A.M.A. Mill Services",
+      "website": "https://bamamillservices.com",
+      "hq": "Northport, AL",
+      "locations": "Northport, Birmingham, Tuscaloosa, AL and surrounding areas",
+      "services": [
+        "Metal fabrication",
+        "Mechanical engineering",
+        "Equipment installation",
+        "Equipment servicing",
+        "Steel mill maintenance",
+        "New equipment fabrication",
+        "Pre-owned equipment installation"
+      ],
+      "equipmentTypes": [
+        "Steel mill equipment",
+        "Rolling mill machinery",
+        "Industrial process equipment"
+      ],
+      "pricing": {
+        "model": "Project-based; service contracts",
+        "notes": "Local Alabama pricing; competitive for regional mill maintenance"
+      },
+      "revenue": "Not publicly disclosed (estimated < $10M)",
+      "employees": "20-50 (estimated)",
+      "differentiators": [
+        "Alabama-focused mill maintenance specialist since 1997",
+        "Combined fabrication and field service",
+        "Boom truck capability for on-site work",
+        "Strong local relationships"
+      ],
+      "customerSegments": [
+        "Steel mills",
+        "Metal fabrication",
+        "General industrial"
+      ],
+      "competitiveThreatLevel": "Low (direct local competitor to National Mill Maintenance)"
+    },
+    {
+      "name": "Mill Maintenance Group LLC",
+      "website": "https://millmaintenancegroup.com",
+      "hq": "USA (specific location not disclosed in search results)",
+      "locations": "Multiple US locations serving steel industry",
+      "services": [
+        "OSHA inspections",
+        "Electrical maintenance and repair",
+        "Mechanical maintenance and repair",
+        "Troubleshooting",
+        "Preventive maintenance programs",
+        "Steel mill production support"
+      ],
+      "equipmentTypes": [
+        "Steel mill equipment",
+        "Rolling mill machinery",
+        "Electrical systems",
+        "Mechanical systems"
+      ],
+      "pricing": {
+        "model": "Service contracts; project-based",
+        "notes": "Competitive mill maintenance pricing with strong safety record emphasis"
+      },
+      "revenue": "Not publicly disclosed",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "Proven preventive maintenance program for steel mills",
+        "Superb safety record",
+        "Maximum production yield focus",
+        "Combined electrical and mechanical capabilities"
+      ],
+      "customerSegments": [
+        "Steel mills",
+        "Metal processing"
+      ],
+      "competitiveThreatLevel": "Low (direct niche competitor)"
+    }
+  ],
+  "marketInsights": {
+    "marketSize": {
+      "usIndustrialServicesMarket": {
+        "value2024": "$8.77 billion",
+        "projected2034": "$16.86 billion",
+        "cagr": "6.73%"
+      },
+      "globalIndustrialServicesMarket": {
+        "value2025": "$34.26 billion",
+        "projected2030": "$54.69 billion",
+        "projected2032": "$65.89 billion",
+        "cagr": "9.7%"
+      },
+      "globalTurbomachineryServicesMarket": {
+        "value2024": "$2.42 billion",
+        "projected2031": "$3.53 billion",
+        "cagr": "6.1%"
+      },
+      "globalRotatingEquipmentRepairMarket": {
+        "value2024": "$19.67 billion",
+        "projected2034": "$32.05 billion",
+        "cagr": "5.0%"
+      },
+      "globalTurboMachineryMarket": {
+        "value2024": "$27.93 billion",
+        "projected2035": "$34.99 billion",
+        "cagr": "2.07%"
+      }
+    },
+    "growthRate": "5-10% CAGR across segments; US industrial services growing at 6.73% CAGR through 2034",
+    "trends": [
+      "Aging infrastructure driving aftermarket demand — average gas turbine fleet age increasing, creating sustained repair/upgrade revenue",
+      "AI-enabled predictive maintenance adoption accelerating — 27% of installations now incorporate AI-based systems, improving uptime 27% and reducing maintenance cycles 12%",
+      "Shift from coal to natural gas power generation expanding turbomachinery installed base",
+      "Data center power demand creating new customer segment for gas turbine operators and service providers",
+      "Consolidation through PE-backed platform acquisitions (ISG, Fox Innovation, RMS/Arcline, Brock/AIP models)",
+      "OEM vs. independent aftermarket tension — independents gaining share on price advantage (30-50% below OEM) while OEMs expand digital/LTSA lock-in",
+      "Hydrogen-ready and decarbonization upgrades emerging as new service category",
+      "Supply chain constraints in specialty alloys and coatings increasing lead times and pricing",
+      "Skilled labor shortage in field service technicians — average industrial maintenance tech earning $27-33/hr, creating wage pressure",
+      "Long-term service agreements (LTSAs) becoming standard for fleet operators, shifting revenue from transactional to recurring",
+      "Remote monitoring and digital twin technologies reducing unplanned outages but increasing technology investment requirements",
+      "Aftermarket services contributing 50%+ of revenue for major OEMs (GE Vernova, Baker Hughes), validating independent service provider market",
+      "Gulf Coast and Southeast US remain highest-density markets for specialty industrial services due to refining, petrochemical, and power generation concentration"
+    ],
+    "keyPlayers": [
+      {
+        "tier": "Tier 1 — Global OEMs",
+        "companies": ["GE Vernova", "Siemens Energy (incl. Dresser-Rand)", "Baker Hughes", "MAN Energy Solutions/Everllence", "Elliott Group (Ebara)"],
+        "combinedRevenue": "$100B+",
+        "notes": "Dominant installed base owners; transitioning to digital/LTSA models; highest pricing but comprehensive lifecycle support"
+      },
+      {
+        "tier": "Tier 2 — Large Independents & Specialty Services",
+        "companies": ["Sulzer", "EthosEnergy", "Chromalloy", "BrandSafway", "Brock Group", "Turner Industries", "Wood PLC", "Team Inc.", "MISTRAS Group"],
+        "combinedRevenue": "$15-20B",
+        "notes": "Scale independents with multi-site operations; compete on price/flexibility vs. OEMs; significant turnaround and maintenance capabilities"
+      },
+      {
+        "tier": "Tier 3 — Mid-Market Specialists",
+        "companies": ["MD&A", "ProEnergy Services", "Fox Innovation & Technologies", "Rotating Machinery Services", "PSC Industrial", "Allied Power Group"],
+        "combinedRevenue": "$1-5B",
+        "notes": "Niche expertise and agility; growing through PE-backed acquisitions; ISG competitors in specific equipment/service categories"
+      },
+      {
+        "tier": "Tier 4 — Regional Specialists",
+        "companies": ["Doosan Turbomachinery Services", "Turbomachinery Solutions LLC", "Midsouth Mechanical", "B.A.M.A. Mill Services", "Mill Maintenance Group", "Tidal Power Services"],
+        "combinedRevenue": "< $500M",
+        "notes": "Regional focus with deep customer relationships; most directly comparable to ISG portfolio company scale; acquisition targets for consolidators"
+      }
+    ],
+    "isgCompetitivePosition": {
+      "strengths": [
+        "Buy-and-build consolidation strategy creates national scale from regional specialists",
+        "259,000+ SKUs provide one-stop-shop procurement advantage",
+        "Critical-to-process rotating equipment focus aligns with highest-growth market segments",
+        "40+ locations enable local service with national coordination",
+        "PE backing (TJC) provides capital for continued acquisitions",
+        "Southeast US stronghold in mill maintenance and mechanical services"
+      ],
+      "vulnerabilities": [
+        "Individual brands smaller than Tier 1-2 competitors",
+        "Limited turbomachinery OEM depth vs. Sulzer, EthosEnergy, or OEMs",
+        "Integration risk across diverse acquired companies",
+        "Skilled labor competition from larger contractors offering higher wages",
+        "Technology/digital monitoring capabilities behind OEM competitors"
+      ],
+      "opportunities": [
+        "Acquire regional turbomachinery specialists to deepen capabilities",
+        "Expand into data center power equipment maintenance",
+        "Develop digital monitoring/predictive maintenance offerings",
+        "Leverage national network for LTSA-style recurring contracts",
+        "Target hydrogen and decarbonization retrofit services"
+      ],
+      "threats": [
+        "OEM digital lock-in through LTSAs reducing addressable market",
+        "Larger PE-backed platforms (Fox Innovation, Brock Group) competing for same acquisition targets",
+        "Skilled labor shortage limiting growth capacity",
+        "Economic cyclicality in oil & gas and industrial sectors"
+      ]
+    },
+    "pricingLandscape": {
+      "fieldServiceTechnicianRates": {
+        "entryLevel": "$20-25/hour (billed at $55-75/hour to client)",
+        "midCareer": "$26-30/hour (billed at $75-100/hour to client)",
+        "experienced": "$29-35/hour (billed at $100-150/hour to client)",
+        "specialist": "$35-50/hour (billed at $150-250/hour to client)"
+      },
+      "turbineOverhaulPricing": {
+        "notes": "Highly variable by equipment type and scope",
+        "gasturbinemajorOverhaul": "$2M - $15M+ depending on frame size",
+        "steamTurbineOverhaul": "$500K - $5M+ depending on size",
+        "compressorOverhaul": "$200K - $3M+",
+        "componentRepair": "Typically 40-70% of new OEM part cost"
+      },
+      "contractModels": [
+        "Time-and-materials (T&M) — most common for reactive/emergency work",
+        "Lump-sum/fixed-price — common for defined scope turnarounds",
+        "Master Service Agreements (MSAs) — framework for ongoing relationships",
+        "Long-Term Service Agreements (LTSAs) — multi-year contracts with availability guarantees",
+        "Cost-plus — used for complex or undefined scope projects",
+        "Nested maintenance — dedicated on-site crews under long-term contract"
+      ]
+    }
+  }
+}

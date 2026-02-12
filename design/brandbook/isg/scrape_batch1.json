@@ -1,0 +1,3998 @@
+{
+  "scrapeDate": "2026-02-12",
+  "totalProducts": 253,
+  "brands": [
+    {
+      "brand": "Industrial Valve Service (IVS)",
+      "website": "indvalve.com",
+      "overview": "Industry leader in valve sales, service, and management. 24/7 emergency service. VR-certified technicians. Three facilities in Alabama, Louisiana, and Tennessee. OEM brands: Farris, Crosby, Anderson Greenwood, Kunkle, Masoneilan, Fisher, Samson, Copes Vulcan, Valtek, Gestra, Rotork, Dyna-Flo, Sambo, Bray, Flow-Tek, Crane.",
+      "products": [
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 6400 Series Steam Safety Valve",
+          "partNumber": "6400",
+          "manufacturer": "Farris",
+          "description": "Flanged spring loaded steam safety valve, ASME/NB Certified for Steam",
+          "specs": {
+            "type": "Flanged Spring Loaded",
+            "certification": "ASME/NB Certified",
+            "medium": "Steam"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 4200 Series Steam Safety Valve",
+          "partNumber": "4200",
+          "manufacturer": "Farris",
+          "description": "Flanged spring loaded steam safety valve, ASME/NB Certified for Steam",
+          "specs": {
+            "type": "Flanged Spring Loaded",
+            "certification": "ASME/NB Certified",
+            "medium": "Steam"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris Smart PRV",
+          "partNumber": "Smart PRV",
+          "manufacturer": "Farris",
+          "description": "Pressure Relief Valve with wireless position monitoring via WirelessHART protocol",
+          "specs": {
+            "technology": "WirelessHART Protocol",
+            "feature": "Wireless Position Monitoring"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 3800 Series Process Valve",
+          "partNumber": "3800",
+          "manufacturer": "Farris",
+          "description": "Pilot operated process valve, ASME/NB Certified for Air/Steam/Water",
+          "specs": {
+            "type": "Pilot Operated",
+            "certification": "ASME/NB Certified",
+            "medium": "Air/Steam/Water"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 2600/2600L Series Process Valve",
+          "partNumber": "2600/2600L",
+          "manufacturer": "Farris",
+          "description": "Flanged spring loaded process valve, ASME/NB Certified for Air/Steam/Water",
+          "specs": {
+            "type": "Flanged Spring Loaded",
+            "certification": "ASME/NB Certified",
+            "medium": "Air/Steam/Water"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 1896 Series Steam Safety Valve",
+          "partNumber": "1896",
+          "manufacturer": "Farris",
+          "description": "Threaded brass/bronze construction steam safety valve, ASME/NB Certified",
+          "specs": {
+            "type": "Threaded",
+            "material": "Brass/Bronze",
+            "certification": "ASME/NB Certified",
+            "medium": "Air/Steam/Water"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 1890 Series Process Valve",
+          "partNumber": "1890",
+          "manufacturer": "Farris",
+          "description": "Threaded steel process valve, ASME/NB Certified for Air/Steam/Water",
+          "specs": {
+            "type": "Threaded",
+            "material": "Steel",
+            "certification": "ASME/NB Certified",
+            "medium": "Air/Steam/Water"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Safety Relief Valves",
+          "subcategory": "Farris Valves",
+          "productName": "Farris 2700 Series Process Valve",
+          "partNumber": "2700",
+          "manufacturer": "Farris",
+          "description": "Threaded/flanged spring loaded process valve, ASME/NB Certified for Air/Steam/Water",
+          "specs": {
+            "type": "Threaded/Flanged Spring Loaded",
+            "certification": "ASME/NB Certified",
+            "medium": "Air/Steam/Water"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/farris-valves/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Gestra",
+          "productName": "Gestra Type ZK Control Valve",
+          "partNumber": "Type ZK",
+          "manufacturer": "Gestra",
+          "description": "Multi-stage pressure reduction for high differential pressures up to 560 barg. Available with pneumatic, electric, or hydraulic actuators or handwheel.",
+          "specs": {
+            "maxPressure": "560 barg",
+            "actuatorOptions": "Pneumatic/Electric/Hydraulic/Handwheel",
+            "type": "Multi-stage pressure reduction"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Steam Traps",
+          "subcategory": "Gestra",
+          "productName": "Gestra BK Range Steam Trap",
+          "partNumber": "BK",
+          "manufacturer": "Gestra",
+          "description": "Steam trap for applications up to PN 40 / Class 300",
+          "specs": {
+            "pressureClass": "PN 40 / Class 300"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Steam Traps",
+          "subcategory": "Gestra",
+          "productName": "Gestra MK Range Steam Trap",
+          "partNumber": "MK",
+          "manufacturer": "Gestra",
+          "description": "For large condensate flowrates, up to 32 bar",
+          "specs": {
+            "maxPressure": "32 bar",
+            "application": "Large condensate flowrates"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Steam Traps",
+          "subcategory": "Gestra",
+          "productName": "Gestra UNA Range Steam Trap",
+          "partNumber": "UNA",
+          "manufacturer": "Gestra",
+          "description": "Adaptable for horizontal or vertical installation",
+          "specs": {
+            "installation": "Horizontal or Vertical"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Steam Traps",
+          "subcategory": "Gestra",
+          "productName": "Gestra UNA 25 PK/PS Range Steam Trap",
+          "partNumber": "UNA 25 PK/PS",
+          "manufacturer": "Gestra",
+          "description": "Features automatic activation of motive steam",
+          "specs": {
+            "feature": "Automatic activation of motive steam"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Flowmeters",
+          "subcategory": "Gestra",
+          "productName": "Gestra Pro-V Multivariable Flowmeter M24 In-line Vortex",
+          "partNumber": "M24",
+          "manufacturer": "Gestra",
+          "description": "In-line vortex multivariable flowmeter monitoring mass, flow, temperatures, pressure, and density. FM, FMC, ATEX, IECEx Approved.",
+          "specs": {
+            "type": "In-line Vortex",
+            "approvals": "FM, FMC, ATEX, IECEx",
+            "measures": "Mass, Flow, Temperature, Pressure, Density"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Flowmeters",
+          "subcategory": "Gestra",
+          "productName": "Gestra Pro-V Multivariable Flowmeter M23 Insertion Vortex",
+          "partNumber": "M23",
+          "manufacturer": "Gestra",
+          "description": "Insertion vortex multivariable flowmeter. FM, FMC, ATEX, IECEx Approved.",
+          "specs": {
+            "type": "Insertion Vortex",
+            "approvals": "FM, FMC, ATEX, IECEx"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Flowmeters",
+          "subcategory": "Gestra",
+          "productName": "Gestra Pro-V Multivariable Flowmeter M22 In-line Vortex",
+          "partNumber": "M22",
+          "manufacturer": "Gestra",
+          "description": "In-line vortex multivariable flowmeter. FM, FMC, ATEX, IECEx Approved.",
+          "specs": {
+            "type": "In-line Vortex",
+            "approvals": "FM, FMC, ATEX, IECEx"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Monitoring Equipment",
+          "subcategory": "Gestra",
+          "productName": "Gestra Trap Monitoring Type VK",
+          "partNumber": "Type VK",
+          "manufacturer": "Gestra",
+          "description": "Diagnostic testing capability for steam trap malfunctions",
+          "specs": {
+            "type": "Diagnostic Monitor"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/gestra/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Electric Actuators",
+          "subcategory": "Rotork",
+          "productName": "Rotork IQ3 Range Electric Actuator",
+          "partNumber": "IQ3",
+          "manufacturer": "Rotork",
+          "description": "Multi-turn electric actuator available in 3-phase, DC, and 1-phase variants with watertight and hazardous area enclosures",
+          "specs": {
+            "variants": "3-phase, DC, 1-phase",
+            "enclosures": "Watertight, Hazardous area"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/rotork/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Electric Actuators",
+          "subcategory": "Rotork",
+          "productName": "Rotork IQT Series Part-Turn Electric Actuator",
+          "partNumber": "IQT",
+          "manufacturer": "Rotork",
+          "description": "Direct drive part-turn electric actuator",
+          "specs": {
+            "type": "Direct Drive Part-Turn"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/rotork/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Electric Actuators",
+          "subcategory": "Rotork",
+          "productName": "Rotork IQTM Series Part-Turn Electric Actuator",
+          "partNumber": "IQTM",
+          "manufacturer": "Rotork",
+          "description": "Direct drive part-turn electric actuator with modulating capability",
+          "specs": {
+            "type": "Direct Drive Part-Turn Modulating"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/rotork/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Electric Actuators",
+          "subcategory": "Rotork",
+          "productName": "Rotork IQT Fail-safe Actuator",
+          "partNumber": "IQT Fail-safe",
+          "manufacturer": "Rotork",
+          "description": "Part-turn actuator with fail-safe capability",
+          "specs": {
+            "type": "Part-Turn Fail-safe"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/rotork/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Electric Actuators",
+          "subcategory": "Rotork",
+          "productName": "Rotork IQTF Series Actuator",
+          "partNumber": "IQTF",
+          "manufacturer": "Rotork",
+          "description": "Part-turn fail-safe electric actuator series",
+          "specs": {
+            "type": "Part-Turn Fail-safe"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/rotork/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Electric Actuators",
+          "subcategory": "Rotork",
+          "productName": "Rotork A-Range Series Electric Actuator (Reconditioned)",
+          "partNumber": "A-Range",
+          "manufacturer": "Rotork",
+          "description": "Reconditioned A-Range series electric actuators and parts",
+          "specs": {
+            "condition": "Reconditioned"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/rotork/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DFRP Rotary Pneumatic Piston Actuator",
+          "partNumber": "DFRP",
+          "manufacturer": "Dyna-Flo",
+          "description": "Used in demanding applications involving splined shaft rotary control valves",
+          "specs": {
+            "type": "Rotary Pneumatic Piston"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DFLP Linear Pneumatic Piston Actuator",
+          "partNumber": "DFLP",
+          "manufacturer": "Dyna-Flo",
+          "description": "Double-acting high-force actuators for throttling or on/off control",
+          "specs": {
+            "type": "Linear Pneumatic Piston",
+            "action": "Double-acting"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DFR Rotary Spring & Diaphragm Actuator",
+          "partNumber": "DFR",
+          "manufacturer": "Dyna-Flo",
+          "description": "Large diaphragm area actuators for low-pressure operation",
+          "specs": {
+            "type": "Rotary Spring & Diaphragm"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DFC Linear Spring & Diaphragm Actuator (Fail Closed)",
+          "partNumber": "DFC",
+          "manufacturer": "Dyna-Flo",
+          "description": "Fail Closed spring & diaphragm actuator for throttle/on-off control",
+          "specs": {
+            "type": "Linear Spring & Diaphragm",
+            "failPosition": "Closed"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DFO Linear Spring & Diaphragm Actuator (Fail Open)",
+          "partNumber": "DFO",
+          "manufacturer": "Dyna-Flo",
+          "description": "Fail Open spring & diaphragm actuator for throttle/on-off control",
+          "specs": {
+            "type": "Linear Spring & Diaphragm",
+            "failPosition": "Open"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DFN Yokeless Spring & Diaphragm Actuator",
+          "partNumber": "DFN",
+          "manufacturer": "Dyna-Flo",
+          "description": "Bracket-mounted, direct acting, spring and diaphragm actuator",
+          "specs": {
+            "type": "Yokeless Spring & Diaphragm",
+            "mounting": "Bracket-mounted",
+            "action": "Direct acting"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo Model 590 Flangeless Full Ball Control Valve",
+          "partNumber": "590",
+          "manufacturer": "Dyna-Flo",
+          "description": "Suited for high flow, low pressure drop services",
+          "specs": {
+            "type": "Flangeless Full Ball"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo Model 570 Flangeless Segmented Ball Valve",
+          "partNumber": "570",
+          "manufacturer": "Dyna-Flo",
+          "description": "Segmented ball design for high flow, low pressure drop applications",
+          "specs": {
+            "type": "Flangeless Segmented Ball"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DF270 Integral Valve & Actuator",
+          "partNumber": "DF270",
+          "manufacturer": "Dyna-Flo",
+          "description": "Heavy duty, compact control valve for tight-space applications",
+          "specs": {
+            "type": "Integral Valve & Actuator",
+            "feature": "Compact design"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DF234 Integral Valve & Actuator",
+          "partNumber": "DF234",
+          "manufacturer": "Dyna-Flo",
+          "description": "Compact dump valve for tough fluid applications, up to 2,250 PSIG (155 Bar)",
+          "specs": {
+            "type": "Integral Dump Valve",
+            "maxPressure": "2250 PSIG / 155 Bar"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo DF100 Integral Valve & Actuator",
+          "partNumber": "DF100",
+          "manufacturer": "Dyna-Flo",
+          "description": "Compact dump valve for tough fluid applications, up to 2,250 PSIG (155 Bar)",
+          "specs": {
+            "type": "Integral Dump Valve",
+            "maxPressure": "2250 PSIG / 155 Bar"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo 320 Series with AxFlo Trim",
+          "partNumber": "320",
+          "manufacturer": "Dyna-Flo",
+          "description": "High resistance, multi-stage, axial flow path trim for erosive service",
+          "specs": {
+            "type": "Cage-Guided with AxFlo Trim",
+            "application": "Erosive service"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Dyna-Flo",
+          "productName": "Dyna-Flo 380 Series Control Valve",
+          "partNumber": "380",
+          "manufacturer": "Dyna-Flo",
+          "description": "Cage guided control valves designed for high pressure applications. Class V shutoff at temperatures below 450F.",
+          "specs": {
+            "type": "Cage-Guided",
+            "shutoff": "Class V",
+            "maxTemp": "450 deg F"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/dyna-flo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo MT Type Multi-Turn Worm Gear Actuator",
+          "partNumber": "MT",
+          "manufacturer": "Sambo",
+          "description": "Multi-turn actuator with 1045 heat treated carbon steel worm, optional hand wheels and chain",
+          "specs": {
+            "type": "Multi-Turn Worm Gear",
+            "material": "1045 Heat Treated Carbon Steel"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo TN Type Part-Turn Worm Gear Actuator",
+          "partNumber": "TN",
+          "manufacturer": "Sambo",
+          "description": "Part-turn actuator with 1045 heat treated carbon steel worm with customization options",
+          "specs": {
+            "type": "Part-Turn Worm Gear",
+            "material": "1045 Heat Treated Carbon Steel"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo DC Type Declutch Worm Gear",
+          "partNumber": "DC",
+          "manufacturer": "Sambo",
+          "description": "Declutch gear with heat-treated carbon steel construction",
+          "specs": {
+            "type": "Declutch Worm Gear",
+            "material": "Heat Treated Carbon Steel"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 2B Type Standard Type-B Worm Gear",
+          "partNumber": "2B",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-B configuration worm gear actuator",
+          "specs": {
+            "type": "Standard Type-B Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 1S Type Standard Type-A Worm Gear",
+          "partNumber": "1S",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-A worm gear actuator for gate and globe valves",
+          "specs": {
+            "type": "Standard Type-A Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 1ST Type Standard Type-A Worm Gear",
+          "partNumber": "1ST",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-A worm gear actuator variant",
+          "specs": {
+            "type": "Standard Type-A Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 1SD Type Standard Type-A Worm Gear",
+          "partNumber": "1SD",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-A worm gear actuator variant",
+          "specs": {
+            "type": "Standard Type-A Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 1SDT Type Standard Type-A Worm Gear",
+          "partNumber": "1SDT",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-A worm gear actuator variant",
+          "specs": {
+            "type": "Standard Type-A Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 2SD Type Standard Type-A Worm Gear",
+          "partNumber": "2SD",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-A worm gear actuator variant",
+          "specs": {
+            "type": "Standard Type-A Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo 1SD2B Type Standard Type-A Worm Gear",
+          "partNumber": "1SD2B",
+          "manufacturer": "Sambo",
+          "description": "Standard Type-A worm gear actuator variant",
+          "specs": {
+            "type": "Standard Type-A Worm Gear"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Gear Actuators",
+          "subcategory": "Sambo",
+          "productName": "Sambo SR-H-2B Type Standard Type-C Heavy Duty",
+          "partNumber": "SR-H-2B",
+          "manufacturer": "Sambo",
+          "description": "Heavy duty type with roller bearings, Ductile Iron class 65-45-12 castings",
+          "specs": {
+            "type": "Standard Type-C Heavy Duty",
+            "bearings": "Heavy duty roller",
+            "material": "Ductile Iron Class 65-45-12"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/sambo/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Ball Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Flow-Tek Series M4 Ball Valve",
+          "partNumber": "M4",
+          "manufacturer": "Flow-Tek",
+          "description": "Designed with long-term performance and zero leakage, available fully automated with robust drivetrain",
+          "specs": {
+            "type": "Ball Valve",
+            "feature": "Zero leakage design"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Ball Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Flow-Tek Series RF15/RF30 Flanged Ball Valve",
+          "partNumber": "RF15/RF30",
+          "manufacturer": "Flow-Tek",
+          "description": "Flanged design, one-piece body, floating ball for low torque operation",
+          "specs": {
+            "type": "Flanged Ball Valve",
+            "body": "One-piece",
+            "ball": "Floating"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Ball Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Flow-Tek Series F15/F30 MS Ball Valve",
+          "partNumber": "F15/F30 MS",
+          "manufacturer": "Flow-Tek",
+          "description": "Two-piece body, full port configuration emphasizing wear resistance",
+          "specs": {
+            "type": "Ball Valve",
+            "body": "Two-piece",
+            "port": "Full port"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray S19 Segmented Control Valve",
+          "partNumber": "S19",
+          "manufacturer": "Bray",
+          "description": "Designed for throttling or on-off applications with high rangeability and splined stem connection",
+          "specs": {
+            "type": "Segmented Control Valve",
+            "feature": "High rangeability, Splined stem"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 31U Fire Protection Valve",
+          "partNumber": "31U",
+          "manufacturer": "Bray",
+          "description": "Designed for onshore and offshore fire protection with ductile iron body",
+          "specs": {
+            "type": "Fire Protection Valve",
+            "body": "Ductile iron"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Control Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 20/21 Sanitary & Chemical Valve",
+          "partNumber": "20/21",
+          "manufacturer": "Bray",
+          "description": "Sanitary and chemical applications featuring one-piece disc/stem and high Cv rating",
+          "specs": {
+            "type": "Sanitary/Chemical Valve",
+            "feature": "One-piece disc/stem, High Cv"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 30/31 Resilient Seated Butterfly Valve",
+          "partNumber": "30/31",
+          "manufacturer": "Bray",
+          "description": "Lug-style, one-piece body with high-strength through stem design",
+          "specs": {
+            "type": "Resilient Seated Butterfly",
+            "style": "Lug",
+            "body": "One-piece"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 35F Large Diameter Butterfly Valve",
+          "partNumber": "35F",
+          "manufacturer": "Bray",
+          "description": "Large diameter, specifically engineered for high chloride services",
+          "specs": {
+            "type": "Large Diameter Butterfly",
+            "application": "High chloride services"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 32/33 Butterfly Valve",
+          "partNumber": "32/33",
+          "manufacturer": "Bray",
+          "description": "High Cv ratings with minimal media-exposed parts",
+          "specs": {
+            "type": "Butterfly Valve",
+            "feature": "High Cv, Minimal media exposure"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 31H Butterfly Valve",
+          "partNumber": "31H",
+          "manufacturer": "Bray",
+          "description": "Lug-style with high-strength one-piece stem design",
+          "specs": {
+            "type": "Resilient Seated Butterfly",
+            "style": "Lug"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 3A/3AH Double Flanged Butterfly Valve",
+          "partNumber": "3A/3AH",
+          "manufacturer": "Bray",
+          "description": "Double flanged, suited for dead-end service with international compatibility",
+          "specs": {
+            "type": "Double Flanged Butterfly",
+            "application": "Dead-end service"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Bray/Flow-Tek",
+          "productName": "Bray Series 35/36 Butterfly Valve",
+          "partNumber": "35/36",
+          "manufacturer": "Bray",
+          "description": "Features blow-out proof stem and adjustable packing system",
+          "specs": {
+            "type": "Butterfly Valve",
+            "feature": "Blow-out proof stem, Adjustable packing"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/bray-flow-tek/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Valves",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Aloyco Corrosion-Resistant Check/Gate/Globe Valves",
+          "partNumber": null,
+          "manufacturer": "Aloyco (Crane)",
+          "description": "Stainless and alloy steel corrosion-resistant check, gate, and globe valves, pressure classes 150 to 600",
+          "specs": {
+            "material": "Stainless/Alloy Steel",
+            "pressureClass": "150-600",
+            "types": "Check, Gate, Globe"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Butterfly Valves",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Center-Line Pressure-Seated Butterfly Valves",
+          "partNumber": null,
+          "manufacturer": "Center-Line (Crane)",
+          "description": "Pressure-seated butterfly valves with bi-directional shutoff",
+          "specs": {
+            "type": "Pressure-Seated Butterfly",
+            "feature": "Bi-directional shutoff"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Check Valves",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Compac-Noz Check Valves",
+          "partNumber": null,
+          "manufacturer": "Compac-Noz (Crane)",
+          "description": "Cost-effective valves with shorter face-to-face design",
+          "specs": {
+            "type": "Check Valve",
+            "feature": "Short face-to-face"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Check Valves",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Duo-Chek Non-Slam Check Valves",
+          "partNumber": null,
+          "manufacturer": "Duo-Chek (Crane)",
+          "description": "Non-slam check valves for low-pressure drop",
+          "specs": {
+            "type": "Non-Slam Check Valve"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Check Valves",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Uni-Chek High-Performance Wafer Check Valves",
+          "partNumber": null,
+          "manufacturer": "Uni-Chek (Crane)",
+          "description": "High-performance wafer check valves",
+          "specs": {
+            "type": "Wafer Check Valve"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Diaphragm Valves",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Saunders Diaphragm Valves",
+          "partNumber": null,
+          "manufacturer": "Saunders (Crane)",
+          "description": "Aseptic and industrial diaphragm valves",
+          "specs": {
+            "type": "Diaphragm Valve",
+            "variants": "Aseptic, Industrial"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Instrumentation",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Hoke Valves and Gyrolock Fittings",
+          "partNumber": null,
+          "manufacturer": "Hoke (Crane)",
+          "description": "Instrumentation valves and Gyrolock tube fittings",
+          "specs": {
+            "type": "Instrumentation Valves and Fittings"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        },
+        {
+          "brand": "Industrial Valve Service",
+          "category": "Actuation & Controls",
+          "subcategory": "Crane Fluid Handling",
+          "productName": "Westlock Controls",
+          "partNumber": null,
+          "manufacturer": "Westlock (Crane)",
+          "description": "Actuation and controls for valve automation",
+          "specs": {
+            "type": "Actuation and Controls"
+          },
+          "price": null,
+          "url": "https://indvalve.com/valve-sales/crane-fluid-handling/"
+        }
+      ]
+    },
+    {
+      "brand": "Morin Process Equipment",
+      "website": "morinprocess.com",
+      "overview": "Process equipment company - equipment sales and repair. Divisions: Pumps and Mechanical Equipment, Valves and Controls, Repair Services, Marine, Power. Service area: AL, GA, MS, FL, TN, KY, AR, LA. Facilities in Birmingham, Decatur, Saraland AL. Authorized Siemens Flender gearbox repair.",
+      "products": [
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Slurry Pumps",
+          "productName": "Warman Centrifugal Slurry Pumps",
+          "partNumber": null,
+          "manufacturer": "Weir Minerals",
+          "description": "Centrifugal slurry pumps for mining and industrial applications",
+          "specs": {
+            "type": "Centrifugal Slurry"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Vertical Turbine",
+          "productName": "Floway Vertical Turbine Pumps",
+          "partNumber": null,
+          "manufacturer": "Weir Minerals",
+          "description": "Vertical turbine pumps for industrial applications",
+          "specs": {
+            "type": "Vertical Turbine"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Mine Dewatering",
+          "productName": "Multiflo Mine Dewatering Pumps",
+          "partNumber": null,
+          "manufacturer": "Weir Minerals",
+          "description": "Mine dewatering pump systems",
+          "specs": {
+            "type": "Mine Dewatering"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Hydrocyclones",
+          "productName": "Cavex Hydrocyclones",
+          "partNumber": null,
+          "manufacturer": "Weir Minerals",
+          "description": "Hydrocyclone separation equipment",
+          "specs": {
+            "type": "Hydrocyclone"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "PD Slurry",
+          "productName": "Geho Positive Displacement Slurry Pumps",
+          "partNumber": null,
+          "manufacturer": "Weir Minerals",
+          "description": "Positive displacement slurry pumps",
+          "specs": {
+            "type": "Positive Displacement Slurry"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Specialty Slurry",
+          "productName": "Hazleton Specialty Slurry Pumps",
+          "partNumber": null,
+          "manufacturer": "Weir Minerals",
+          "description": "Specialty slurry pumps for demanding applications",
+          "specs": {
+            "type": "Specialty Slurry"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "ANSI Pumps",
+          "productName": "AnsiPro Goulds 3196 Replacement Pump",
+          "partNumber": "3196",
+          "manufacturer": "AnsiPro",
+          "description": "Drop-in replacement for Goulds 3196 ANSI pumps",
+          "specs": {
+            "type": "ANSI Centrifugal",
+            "replaces": "Goulds 3196"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "ANSI Pumps",
+          "productName": "AnsiPro Peerless 8196 Replacement Pump",
+          "partNumber": "8196",
+          "manufacturer": "AnsiPro",
+          "description": "Drop-in replacement for Peerless 8196",
+          "specs": {
+            "type": "ANSI Centrifugal",
+            "replaces": "Peerless 8196"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "ANSI Pumps",
+          "productName": "AnsiPro Griswold 811 Replacement Pump",
+          "partNumber": "811",
+          "manufacturer": "AnsiPro",
+          "description": "Drop-in replacement for Griswold 811",
+          "specs": {
+            "type": "ANSI Centrifugal",
+            "replaces": "Griswold 811"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "ANSI Pumps",
+          "productName": "AnsiPro Flowserve Durco Mark I/II/III Replacement",
+          "partNumber": null,
+          "manufacturer": "AnsiPro",
+          "description": "Drop-in replacement for Flowserve Durco Mark I, II, III",
+          "specs": {
+            "type": "ANSI Centrifugal",
+            "replaces": "Flowserve Durco Mark I/II/III"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "API Pumps",
+          "productName": "CPC API 610 Centrifugal Pumps",
+          "partNumber": null,
+          "manufacturer": "CPC",
+          "description": "API 610 pumps, ASME radial split, multi-stage up to 15,000 GPM and 2175 PSIG",
+          "specs": {
+            "type": "API 610",
+            "maxFlow": "15000 GPM",
+            "maxPressure": "2175 PSIG",
+            "configuration": "Radial split, Multi-stage"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Drum Pumps",
+          "productName": "Flux Drum Pumps",
+          "partNumber": null,
+          "manufacturer": "Flux",
+          "description": "Drum pumps, tote unloading, dispensing, metering",
+          "specs": {
+            "type": "Drum/Tote Pump",
+            "applications": "Drum pumping, Tote unloading, Dispensing, Metering"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Centrifugal",
+          "productName": "KSB Centrifugal Pumps",
+          "partNumber": null,
+          "manufacturer": "KSB",
+          "description": "End suction, horizontal split case, hot oil, API, magnetic drive centrifugal pumps",
+          "specs": {
+            "types": "End suction, Split case, Hot oil, API, Magnetic drive"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Metering",
+          "productName": "Iwaki Diaphragm Metering Pumps",
+          "partNumber": null,
+          "manufacturer": "Iwaki",
+          "description": "Diaphragm metering pumps",
+          "specs": {
+            "type": "Diaphragm Metering"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Metering",
+          "productName": "LMI Milton Roy Chemical Metering Pumps",
+          "partNumber": null,
+          "manufacturer": "LMI Milton Roy",
+          "description": "Chemical metering/dosing pumps and controllers",
+          "specs": {
+            "type": "Chemical Metering/Dosing"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Magnetic Drive",
+          "productName": "Magnatex Sealless Centrifugal Magnetic Drive Pumps",
+          "partNumber": null,
+          "manufacturer": "Magnatex",
+          "description": "Sealless centrifugal and gear magnetic drive pumps in stainless steel, high alloy, thermoplastic lined",
+          "specs": {
+            "type": "Sealless Magnetic Drive",
+            "materials": "Stainless steel, High alloy, Thermoplastic lined"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Lined Pumps",
+          "productName": "Munsch Chemically Resistant Lined Pumps",
+          "partNumber": null,
+          "manufacturer": "Munsch",
+          "description": "Chemically resistant lined pumps",
+          "specs": {
+            "type": "Chemically Resistant Lined"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Self-Priming",
+          "productName": "Phantom Self-Priming Pumps",
+          "partNumber": null,
+          "manufacturer": "Phantom",
+          "description": "Self-priming pumps, Gorman Rupp T-Series replacements",
+          "specs": {
+            "type": "Self-Priming",
+            "replaces": "Gorman Rupp T-Series"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Lined Pumps",
+          "productName": "Richter Fluoropolymer-Lined Magnetic Drive Pumps",
+          "partNumber": null,
+          "manufacturer": "Richter",
+          "description": "Fluoropolymer-lined magnetic drive and sealed pumps",
+          "specs": {
+            "type": "Fluoropolymer-Lined Magnetic Drive"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Gear Pumps",
+          "productName": "DESMI/Rotan Gear Pumps",
+          "partNumber": null,
+          "manufacturer": "DESMI/Rotan",
+          "description": "Gear pumps for general duty, high viscosity, corrosive, mag-drive, refinery applications",
+          "specs": {
+            "type": "Gear Pump",
+            "applications": "General duty, High viscosity, Corrosive, Mag-drive, Refinery"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Progressive Cavity",
+          "productName": "SYDEX Progressive Cavity Pumps",
+          "partNumber": null,
+          "manufacturer": "SYDEX",
+          "description": "Progressive cavity pumps, Moyno and Seepex interchangeable",
+          "specs": {
+            "type": "Progressive Cavity",
+            "compatible": "Moyno, Seepex interchangeable"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Vacuum Pumps",
+          "productName": "Travaini Liquid Ring Vacuum Pumps/Compressors",
+          "partNumber": null,
+          "manufacturer": "Travaini",
+          "description": "Liquid ring vacuum pumps and compressors, rotary vane vacuum",
+          "specs": {
+            "type": "Liquid Ring Vacuum Pump/Compressor, Rotary Vane"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Thermoplastic",
+          "productName": "Vanton Thermoplastic Corrosive-Resistant Pumps",
+          "partNumber": null,
+          "manufacturer": "Vanton",
+          "description": "Thermoplastic corrosive-resistant pumps",
+          "specs": {
+            "type": "Thermoplastic Corrosive-Resistant"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Gear Pumps",
+          "productName": "Witte Extreme/Heavy-Duty Gear Pumps",
+          "partNumber": null,
+          "manufacturer": "Witte",
+          "description": "Extreme and heavy-duty gear pumps, MAAG replacements",
+          "specs": {
+            "type": "Heavy-Duty Gear Pump",
+            "replaces": "MAAG"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "ANSI/Centrifugal",
+          "productName": "Gusher ANSI & Vertical Turbine Pumps",
+          "partNumber": null,
+          "manufacturer": "Gusher",
+          "description": "ANSI, DIN, self-priming, vortex, vertical turbine pumps",
+          "specs": {
+            "types": "ANSI, DIN, Self-priming, Vortex, Vertical turbine"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Centrifugal",
+          "productName": "American Marsh Split Case & Centrifugal Pumps",
+          "partNumber": null,
+          "manufacturer": "American Marsh",
+          "description": "Split case, end suction centrifugal, vertical turbine/sump pumps",
+          "specs": {
+            "types": "Split case, End suction, Vertical turbine/sump"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Pumps",
+          "subcategory": "Industrial Fans",
+          "productName": "Robinson Industrial Fans",
+          "partNumber": null,
+          "manufacturer": "Robinson",
+          "description": "Industrial fans for harsh environments",
+          "specs": {
+            "type": "Industrial Fan",
+            "application": "Harsh environments"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Heat Exchangers",
+          "subcategory": "Shell & Tube",
+          "productName": "API Basco Shell & Tube Heat Exchangers",
+          "partNumber": null,
+          "manufacturer": "API Basco",
+          "description": "Shell & tube heat exchangers including tube bundles, custom designs, oil coolers, hairpin, U-tube, TEMA, extended surface",
+          "specs": {
+            "types": "Tube bundles, Custom, Oil coolers, Hairpin, U-tube, TEMA, Extended surface"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Heat Exchangers",
+          "subcategory": "Plate",
+          "productName": "Schmidt-Bretten Plate Heat Exchangers",
+          "partNumber": null,
+          "manufacturer": "Schmidt-Bretten",
+          "description": "Complete plate heat exchanger units, plate packs, gaskets, parts, service",
+          "specs": {
+            "type": "Plate Heat Exchanger"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Heat Exchangers",
+          "subcategory": "Specialty",
+          "productName": "Titanium Fabrication Shell & Tube Exchangers",
+          "partNumber": null,
+          "manufacturer": "Titanium Fabrication",
+          "description": "Titanium, zirconium, tantalum shell & tube heat exchangers, condensers, vessels, piping",
+          "specs": {
+            "materials": "Titanium, Zirconium, Tantalum",
+            "types": "Shell & tube, Condensers, Vessels, Piping"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Filtration",
+          "subcategory": "Strainers",
+          "productName": "Eaton Hayward Simplex & Duplex Basket Strainers",
+          "partNumber": null,
+          "manufacturer": "Eaton Hayward",
+          "description": "Simplex & duplex cast/fabricated basket strainers, Y-strainers, bag filtration, filter bags, plastic strainers",
+          "specs": {
+            "types": "Simplex, Duplex, Cast, Fabricated, Y-strainers, Bag filtration"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Filtration",
+          "subcategory": "Gas/Liquid Separation",
+          "productName": "Wright Austin Gas/Liquid Separators",
+          "partNumber": null,
+          "manufacturer": "Wright Austin",
+          "description": "Gas and liquid separators",
+          "specs": {
+            "type": "Gas/Liquid Separator"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Filtration",
+          "subcategory": "Particulate/Coalescing",
+          "productName": "NAFCO Particulate/Coalescing Filters",
+          "partNumber": null,
+          "manufacturer": "NAFCO",
+          "description": "Particulate and coalescing filters, liquid filtration, cartridges",
+          "specs": {
+            "types": "Particulate, Coalescing, Liquid filtration, Cartridges"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Compressors",
+          "subcategory": "Diaphragm/Piston/Rotary",
+          "productName": "Howden Burton Corblin Compressors",
+          "partNumber": null,
+          "manufacturer": "Howden Burton Corblin",
+          "description": "Diaphragm, piston, and rotary perflow compressors",
+          "specs": {
+            "types": "Diaphragm, Piston, Rotary Perflow"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Process Equipment",
+          "subcategory": "Steam Injection",
+          "productName": "Hydro-Thermal Direct Steam Injection Heaters",
+          "partNumber": null,
+          "manufacturer": "Hydro-Thermal",
+          "description": "Direct steam injection heaters for heating liquids and slurries",
+          "specs": {
+            "type": "Direct Steam Injection Heater"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Process Equipment",
+          "subcategory": "Fume/Scrubbing",
+          "productName": "KCH Engineering Fume Scrubbers",
+          "partNumber": null,
+          "manufacturer": "KCH Engineering",
+          "description": "Fume scrubbers, mist eliminators, polypropylene tanks",
+          "specs": {
+            "types": "Fume scrubbers, Mist eliminators, Polypropylene tanks"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Process Equipment",
+          "subcategory": "Dampers/Valves",
+          "productName": "Kirk & Blum Backdraft Dampers",
+          "partNumber": null,
+          "manufacturer": "Kirk & Blum",
+          "description": "Backdraft dampers, automatic gates, silencers, diverter valves",
+          "specs": {
+            "types": "Backdraft dampers, Automatic gates, Silencers, Diverter valves"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Dust Collection",
+          "subcategory": "Collectors",
+          "productName": "United Air Specialist (UAS) Dust/Mist/Smoke Collectors",
+          "partNumber": null,
+          "manufacturer": "UAS",
+          "description": "Dust, mist & smoke collectors including cartridge, cyclone, bag/media types",
+          "specs": {
+            "types": "Cartridge, Cyclone, Bag/Media"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Motors",
+          "subcategory": "General Purpose",
+          "productName": "Hyundai Electric Motors",
+          "partNumber": null,
+          "manufacturer": "Hyundai",
+          "description": "General purpose TEFC premium efficiency, severe duty IEEE 841, medium voltage, UL explosion proof, VFD motors. 3-5 year warranty.",
+          "specs": {
+            "types": "General purpose TEFC, Severe duty IEEE 841, Medium voltage, Explosion proof, VFD",
+            "warranty": "3-5 years"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Gearboxes",
+          "subcategory": "Industrial",
+          "productName": "Siemens/Flender Gearboxes",
+          "partNumber": null,
+          "manufacturer": "Siemens/Flender",
+          "description": "Authorized gearbox repair facility for Siemens Flender gearboxes",
+          "specs": {
+            "authorization": "Authorized Repair Facility"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Butterfly",
+          "productName": "ABZ Butterfly Valves with Actuators",
+          "partNumber": null,
+          "manufacturer": "ABZ Valve",
+          "description": "Resilient seated, high performance, triple offset butterfly valves with pneumatic/electric actuators",
+          "specs": {
+            "types": "Resilient seated, High performance, Triple offset",
+            "actuators": "Pneumatic, Electric"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Severe Service",
+          "productName": "Conval Metal Seated Severe Service Valves",
+          "partNumber": null,
+          "manufacturer": "Conval",
+          "description": "Metal seated severe service ball, gate, globe valves; strainers; blow down valves",
+          "specs": {
+            "types": "Ball, Gate, Globe, Strainers, Blow down",
+            "seating": "Metal seated"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Ball & Butterfly",
+          "productName": "Bonomi Ball & Butterfly Valves with Actuators",
+          "partNumber": null,
+          "manufacturer": "Bonomi",
+          "description": "Ball and butterfly valves with actuators",
+          "specs": {
+            "types": "Ball, Butterfly",
+            "actuators": "Available"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Multi-Type",
+          "productName": "Bray Butterfly/Ball/Knife Gate/Check Valves",
+          "partNumber": null,
+          "manufacturer": "Bray",
+          "description": "Butterfly, ball, knife gate, check valves",
+          "specs": {
+            "types": "Butterfly, Ball, Knife gate, Check"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Check",
+          "productName": "Champion Check Valves",
+          "partNumber": null,
+          "manufacturer": "Champion Valves",
+          "description": "Dual disc, single disc, silent disc, nozzle type check valves",
+          "specs": {
+            "types": "Dual disc, Single disc, Silent disc, Nozzle type"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "PTFE Lined",
+          "productName": "Chemtite PTFE/PFA/TFM Lined Valves",
+          "partNumber": null,
+          "manufacturer": "Chemtite",
+          "description": "PTFE/PFA/TFM lined butterfly, ball, plug, check valves and sight flow indicators",
+          "specs": {
+            "lining": "PTFE, PFA, TFM",
+            "types": "Butterfly, Ball, Plug, Check, Sight flow indicators"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Air/Vacuum",
+          "productName": "Crispin Air Release & Vacuum Valves",
+          "partNumber": null,
+          "manufacturer": "Crispin",
+          "description": "Air release & vacuum valves, foot valves, check valves, eccentric plug valves",
+          "specs": {
+            "types": "Air release, Vacuum, Foot, Check, Eccentric plug"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Globe",
+          "productName": "Descote Bellows Sealed Globe Valves",
+          "partNumber": null,
+          "manufacturer": "Descote",
+          "description": "Bellows sealed globe valves",
+          "specs": {
+            "type": "Bellows Sealed Globe"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Check",
+          "productName": "DFT In-Line Check Valves",
+          "partNumber": null,
+          "manufacturer": "DFT",
+          "description": "In-line check valves: metal seated, threaded, wafer, flanged; control valves",
+          "specs": {
+            "types": "Metal seated, Threaded, Wafer, Flanged",
+            "includes": "Control valves"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Gate/Globe/Check",
+          "productName": "Chicago Cast & Forged Gate/Globe/Check Valves",
+          "partNumber": null,
+          "manufacturer": "Chicago",
+          "description": "Cast and forged gate, globe, check valves",
+          "specs": {
+            "types": "Gate, Globe, Check",
+            "construction": "Cast, Forged"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Ball",
+          "productName": "Flotite Ball Valves",
+          "partNumber": null,
+          "manufacturer": "Flotite",
+          "description": "Ball valves: threaded, economy, 3-piece, flanged, multi-port, specialty, segmented",
+          "specs": {
+            "types": "Threaded, Economy, 3-piece, Flanged, Multi-port, Specialty, Segmented"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Knife Gate",
+          "productName": "FLS Smith Slurry Knife Gate Valves",
+          "partNumber": null,
+          "manufacturer": "FLS Smith",
+          "description": "Slurry knife gate valves",
+          "specs": {
+            "type": "Slurry Knife Gate"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Recirculating",
+          "productName": "HBE Automatic Recirculating Valves",
+          "partNumber": null,
+          "manufacturer": "HBE",
+          "description": "Automatic recirculating valves; multi-stage orifice & anti-flash valves",
+          "specs": {
+            "types": "Automatic recirculating, Multi-stage orifice, Anti-flash"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Diaphragm",
+          "productName": "Hills & McCanna Diaphragm Valves",
+          "partNumber": null,
+          "manufacturer": "Hills & McCanna",
+          "description": "Diaphragm valves",
+          "specs": {
+            "type": "Diaphragm"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Ball",
+          "productName": "JFlow Ball Valves",
+          "partNumber": null,
+          "manufacturer": "JFlow",
+          "description": "Ball valves: 2-piece, 3-piece, flanged, top entry, segmented, customized 3/4-way, trunnion, tri-clamp",
+          "specs": {
+            "types": "2-piece, 3-piece, Flanged, Top entry, Segmented, 3/4-way, Trunnion, Tri-clamp"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Butterfly",
+          "productName": "Keystone Resilient Seat & HP Butterfly Valves",
+          "partNumber": null,
+          "manufacturer": "Keystone",
+          "description": "Resilient seat and high performance butterfly valves",
+          "specs": {
+            "types": "Resilient seat, High performance"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Knife Gate",
+          "productName": "Orbinox Knife Gate Valves & Gates",
+          "partNumber": null,
+          "manufacturer": "Orbinox",
+          "description": "Knife gate valves, penstock/sluice gates, dampers, roller gates, radial gates, cone valves",
+          "specs": {
+            "types": "Knife gate, Penstock/sluice gates, Dampers, Roller gates, Radial gates, Cone valves"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Ball",
+          "productName": "Flowtek Ball Valves & Actuators",
+          "partNumber": null,
+          "manufacturer": "Flowtek",
+          "description": "Ball valves, actuators, and accessories",
+          "specs": {
+            "types": "Ball valves, Actuators, Accessories"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Lined",
+          "productName": "Pureflex PTFE Lined Butterfly/Ball Valves",
+          "partNumber": null,
+          "manufacturer": "Pureflex",
+          "description": "Composite body; PTFE lined butterfly/ball valves; ball checks; sight glass; expansion joints; gaskets",
+          "specs": {
+            "types": "Butterfly, Ball, Ball checks, Sight glass, Expansion joints, Gaskets",
+            "lining": "PTFE"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Ball & Butterfly",
+          "productName": "Apollo Ball & Butterfly Valves",
+          "partNumber": null,
+          "manufacturer": "Apollo",
+          "description": "Ball and butterfly valves with actuators and accessories",
+          "specs": {
+            "types": "Ball, Butterfly",
+            "actuators": "Available"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Control",
+          "productName": "Samson Globe/Rotary/Specialty Control Valves",
+          "partNumber": null,
+          "manufacturer": "Samson",
+          "description": "Globe, rotary & specialty control valves; ceramic lined products",
+          "specs": {
+            "types": "Globe, Rotary, Specialty",
+            "options": "Ceramic lined"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Multi-Type",
+          "productName": "SHARPE Ball/Gate/Globe/Check/Butterfly Valves",
+          "partNumber": null,
+          "manufacturer": "SHARPE",
+          "description": "Ball, gate, globe, check, butterfly valves",
+          "specs": {
+            "types": "Ball, Gate, Globe, Check, Butterfly"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Knife Gate",
+          "productName": "WEIR Knife Gate Valves",
+          "partNumber": null,
+          "manufacturer": "WEIR",
+          "description": "Knife gate valves for heavy-duty, abrasive, high-temperature slurry applications",
+          "specs": {
+            "type": "Knife Gate",
+            "applications": "Heavy-duty, Abrasive, High-temperature slurry"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Valves",
+          "subcategory": "Multi-Type",
+          "productName": "Pentair Ball/Butterfly/Check/Gate/Knife/Plug Valves & Actuators",
+          "partNumber": null,
+          "manufacturer": "Pentair",
+          "description": "Ball, butterfly, check, gate, knife, plug valves and actuators",
+          "specs": {
+            "types": "Ball, Butterfly, Check, Gate, Knife, Plug",
+            "actuators": "Available"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/products.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Actuators",
+          "subcategory": "Pneumatic/Hydraulic",
+          "productName": "Morin Pneumatic/Hydraulic/Electro-Hydraulic Actuators",
+          "partNumber": null,
+          "manufacturer": "Morin",
+          "description": "Quarter-turn & linear cylinders; lock-out, partial stroke testing, ESD options; stainless steel available",
+          "specs": {
+            "types": "Pneumatic, Hydraulic, Electro-hydraulic",
+            "motion": "Quarter-turn, Linear",
+            "options": "Lock-out, Partial stroke testing, ESD, Stainless steel"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Actuators",
+          "subcategory": "Multi-Type",
+          "productName": "Biffi Pneumatic/Hydraulic/Electric Actuators",
+          "partNumber": null,
+          "manufacturer": "Biffi",
+          "description": "Quarter-turn, multi-turn, linear cylinder actuators; torques exceeding 4,000,000 in-lbs",
+          "specs": {
+            "types": "Pneumatic, Hydraulic, Electric",
+            "motion": "Quarter-turn, Multi-turn, Linear",
+            "maxTorque": "4000000 in-lbs"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Controls",
+          "subcategory": "Limit Switches",
+          "productName": "Westlock Limit Switches & Position Monitors",
+          "partNumber": null,
+          "manufacturer": "Westlock",
+          "description": "Limit switches, position monitors, control monitors, positioners, partial stroke devices, HART capabilities",
+          "specs": {
+            "types": "Limit switches, Position monitors, Control monitors, Positioners, Partial stroke devices",
+            "protocol": "HART"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Controls",
+          "subcategory": "Solenoids",
+          "productName": "Norgren Solenoid Valves & Air Preparation",
+          "partNumber": null,
+          "manufacturer": "Norgren",
+          "description": "Solenoid valves, air manifolds, air preparation equipment, cylinders",
+          "specs": {
+            "types": "Solenoid valves, Air manifolds, Air preparation, Cylinders"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Controls",
+          "subcategory": "Solenoids",
+          "productName": "ASCO Solenoid Valves & Air Preparation",
+          "partNumber": null,
+          "manufacturer": "ASCO",
+          "description": "Solenoid valves, air manifolds, air preparation equipment",
+          "specs": {
+            "types": "Solenoid valves, Air manifolds, Air preparation"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Piping",
+          "subcategory": "PTFE Lined",
+          "productName": "Durcor Structural Composite Piping with PTFE Liners",
+          "partNumber": null,
+          "manufacturer": "Durcor",
+          "description": "Structural composite piping with seamless PTFE liners; expansion joints",
+          "specs": {
+            "type": "Composite piping",
+            "lining": "Seamless PTFE",
+            "includes": "Expansion joints"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Piping",
+          "subcategory": "PTFE Lined",
+          "productName": "Ethylene Carbon Steel Piping with PTFE Liners",
+          "partNumber": null,
+          "manufacturer": "Ethylene",
+          "description": "Carbon steel piping with seamless PTFE liners; expansion joints; piping accessories",
+          "specs": {
+            "type": "Carbon steel piping",
+            "lining": "Seamless PTFE"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Piping",
+          "subcategory": "Fiberglass",
+          "productName": "Conley Corrosion Resistant Fiberglass Piping",
+          "partNumber": null,
+          "manufacturer": "Conley",
+          "description": "Corrosion resistant fiberglass piping",
+          "specs": {
+            "type": "Fiberglass piping",
+            "feature": "Corrosion resistant"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Piping",
+          "subcategory": "Thermoplastic",
+          "productName": "Simtech Thermoplastic Piping Systems",
+          "partNumber": null,
+          "manufacturer": "Simtech",
+          "description": "Thermoplastic piping systems",
+          "specs": {
+            "type": "Thermoplastic piping"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Expansion Joints",
+          "subcategory": "Rubber",
+          "productName": "Mercer Rubber Expansion Joints",
+          "partNumber": null,
+          "manufacturer": "Mercer",
+          "description": "Rubber expansion joints",
+          "specs": {
+            "type": "Rubber expansion joint"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Expansion Joints",
+          "subcategory": "High Temperature",
+          "productName": "Holz Piping/Flue Duct/High Temperature Expansion Joints",
+          "partNumber": null,
+          "manufacturer": "Holz",
+          "description": "Piping, flue duct and high temperature expansion joints",
+          "specs": {
+            "types": "Piping, Flue duct, High temperature"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Tanks",
+          "subcategory": "Fiberglass",
+          "productName": "Endurance Fiberglass Tanks",
+          "partNumber": null,
+          "manufacturer": "Endurance",
+          "description": "Fiberglass tanks",
+          "specs": {
+            "type": "Fiberglass tank"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        },
+        {
+          "brand": "Morin Process Equipment",
+          "category": "Strainers",
+          "subcategory": "Non-Metallic",
+          "productName": "Fluidtrol Non-Metallic Basket Strainers",
+          "partNumber": null,
+          "manufacturer": "Fluidtrol",
+          "description": "Non-metallic basket strainers",
+          "specs": {
+            "type": "Non-metallic basket strainer"
+          },
+          "price": null,
+          "url": "https://morinprocess.com/valves-controls.php"
+        }
+      ]
+    },
+    {
+      "brand": "Industrial Air Power",
+      "website": "industrialairpower.com",
+      "overview": "Air compressor parts, lubricants, accessories, and complete compressor systems. 30+ years experience. 300,000+ parts inventory. Authorized Ingersoll Rand online reseller. Parts for Atlas Copco, Champion, Gardner Denver, Kaeser, Quincy, Sullair, CompAir.",
+      "products": [
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Fixed Speed",
+          "productName": "Ingersoll Rand R4i Rotary Screw Air Compressor - 5 HP",
+          "partNumber": "R4i",
+          "manufacturer": "Ingersoll Rand",
+          "description": "5 HP rotary screw air compressor, multiple voltage/phase/tank configurations",
+          "specs": {
+            "hp": "5",
+            "psi": "125-145",
+            "tankGallons": "80-120",
+            "voltage": "208V/230V",
+            "phase": "1-Phase/3-Phase",
+            "motor": "IE3 Premium Efficiency TEFC"
+          },
+          "price": "$9,680.99 - $13,819.99",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Fixed Speed",
+          "productName": "Ingersoll Rand R5.5i Rotary Screw Air Compressor - 7.5 HP",
+          "partNumber": "R5.5i",
+          "manufacturer": "Ingersoll Rand",
+          "description": "7.5 HP rotary screw air compressor with multiple configurations",
+          "specs": {
+            "hp": "7.5",
+            "psi": "115-145",
+            "tankGallons": "80-120",
+            "voltage": "230V/460V/575V",
+            "phase": "1-Phase/3-Phase"
+          },
+          "price": "$10,664.99 - $14,999.99",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Fixed Speed",
+          "productName": "Ingersoll Rand R7.5i Rotary Screw Air Compressor - 10 HP",
+          "partNumber": "R7.5i",
+          "manufacturer": "Ingersoll Rand",
+          "description": "10 HP rotary screw air compressor",
+          "specs": {
+            "hp": "10",
+            "psi": "125-145",
+            "tankGallons": "80-120",
+            "voltage": "230V/460V/575V",
+            "phase": "3-Phase"
+          },
+          "price": "$11,408.99 - $12,414.99",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Fixed Speed",
+          "productName": "Ingersoll Rand R11i Rotary Screw Air Compressor - 15 HP",
+          "partNumber": "R11i",
+          "manufacturer": "Ingersoll Rand",
+          "description": "15 HP rotary screw air compressor",
+          "specs": {
+            "hp": "15",
+            "psi": "115-145",
+            "tankGallons": "80-120",
+            "voltage": "208V/230V/460V/575V",
+            "phase": "3-Phase"
+          },
+          "price": "$12,929.99 - $18,319.99",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand R5.5n Variable Speed Rotary Compressor - 7.5 HP",
+          "partNumber": "R5.5n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "7.5 HP variable speed rotary screw compressor, 24.3 CFM",
+          "specs": {
+            "hp": "7.5",
+            "cfm": "24.3",
+            "type": "Variable Speed"
+          },
+          "price": "$14,877.00",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/r5-5n-variable-speed-rotary-air-compressor-7-5-hp/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand R7.5n Variable Speed Rotary Compressor - 10 HP",
+          "partNumber": "R7.5n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "10 HP variable speed rotary screw compressor",
+          "specs": {
+            "hp": "10",
+            "type": "Variable Speed"
+          },
+          "price": "$15,678.00",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand R11n Variable Speed Rotary Compressor - 15 HP",
+          "partNumber": "R11n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "15 HP variable speed rotary screw compressor, 135 PSI max, 50.4 CFM, integrated dryer",
+          "specs": {
+            "hp": "15",
+            "psiMax": "135",
+            "cfm": "50.4",
+            "feature": "Integrated dryer",
+            "type": "Variable Speed"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/r11n-variable-speed-rotary-air-compressor-15-hp/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand RS15n Variable Speed Rotary Compressor - 20 HP",
+          "partNumber": "RS15n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "20 HP variable speed rotary screw, 145 PSI max, 91 CFM",
+          "specs": {
+            "hp": "20",
+            "psiMax": "145",
+            "cfm": "91",
+            "type": "Variable Speed"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/rs15n-variable-speed-rotary-air-compressor-20hp/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand RS18n Variable Speed Rotary Compressor - 25 HP",
+          "partNumber": "RS18n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "25 HP variable speed rotary screw, 145 PSI max, 111 CFM",
+          "specs": {
+            "hp": "25",
+            "psiMax": "145",
+            "cfm": "111",
+            "type": "Variable Speed"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/rs18n-variable-speed-rotary-air-compressor-25-hp/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand RS22n Variable Speed Rotary Compressor - 30 HP",
+          "partNumber": "RS22n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "30 HP variable speed rotary screw air compressor",
+          "specs": {
+            "hp": "30",
+            "type": "Variable Speed"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand RS30n Variable Speed Rotary Compressor - 40 HP",
+          "partNumber": "RS30n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "40 HP variable speed rotary screw, 125 PSI max, 187 CFM",
+          "specs": {
+            "hp": "40",
+            "psiMax": "125",
+            "cfm": "187",
+            "type": "Variable Speed"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/rs30n-rotary-screw-air-compressor-40-hp-230v-3-phase-125-psi/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Variable Speed",
+          "productName": "Ingersoll Rand RS37n Variable Speed Rotary Compressor - 50 HP",
+          "partNumber": "RS37n",
+          "manufacturer": "Ingersoll Rand",
+          "description": "50 HP variable speed rotary screw, 125 PSI max, 222 CFM, integrated dryer",
+          "specs": {
+            "hp": "50",
+            "psiMax": "125",
+            "cfm": "222",
+            "feature": "Integrated dryer",
+            "type": "Variable Speed"
+          },
+          "price": "$44,462.00",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/rs37n-variable-speed-rotary-air-compressor-50-hp/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Rotary Screw Compressors",
+          "subcategory": "Fixed Speed",
+          "productName": "Ingersoll Rand RS37i Rotary Screw Air Compressor - 50 HP",
+          "partNumber": "RS37i",
+          "manufacturer": "Ingersoll Rand",
+          "description": "50 HP fixed speed rotary screw, 460V 3-Phase",
+          "specs": {
+            "hp": "50",
+            "voltage": "460V",
+            "phase": "3-Phase",
+            "type": "Fixed Speed"
+          },
+          "price": "$26,924.88",
+          "url": "https://www.industrialairpower.com/air-compressors/rotary-screw-air-compressors/rs37i-rotary-screw-air-compressor-50-hp-460v-3-ph/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Two Stage Compressors",
+          "subcategory": "Reciprocating",
+          "productName": "Ingersoll Rand 2340N5-V Two Stage Cast Iron Compressor - 5 HP",
+          "partNumber": "2340N5-V",
+          "manufacturer": "Ingersoll Rand",
+          "description": "5 HP two-stage cast iron air compressor, 175 PSI, 80 gallons",
+          "specs": {
+            "hp": "5",
+            "psi": "175",
+            "tankGallons": "80",
+            "type": "Two-Stage Cast Iron",
+            "pump": "100% Cast Iron"
+          },
+          "price": "$2,684.99",
+          "url": "https://www.industrialairpower.com/air-compressors/two-stage-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Two Stage Compressors",
+          "subcategory": "Reciprocating",
+          "productName": "Ingersoll Rand 2475N5-V Two Stage Cast Iron Compressor - 5 HP",
+          "partNumber": "2475N5-V",
+          "manufacturer": "Ingersoll Rand",
+          "description": "5 HP two-stage cast iron compressor, 175 PSI, 80 gallons, ODP motor",
+          "specs": {
+            "hp": "5",
+            "psi": "175",
+            "tankGallons": "80",
+            "type": "Two-Stage Cast Iron",
+            "motor": "ODP"
+          },
+          "price": "$4,364.99",
+          "url": "https://www.industrialairpower.com/air-compressors/two-stage-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Two Stage Compressors",
+          "subcategory": "Reciprocating",
+          "productName": "Ingersoll Rand 2545E10-V Two Stage Cast Iron Compressor - 10 HP",
+          "partNumber": "2545E10-V",
+          "manufacturer": "Ingersoll Rand",
+          "description": "10 HP two-stage cast iron compressor, 175 PSI, 120 gallons",
+          "specs": {
+            "hp": "10",
+            "psi": "175",
+            "tankGallons": "120",
+            "type": "Two-Stage Cast Iron"
+          },
+          "price": "$4,904.99",
+          "url": "https://www.industrialairpower.com/air-compressors/two-stage-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Two Stage Compressors",
+          "subcategory": "Reciprocating",
+          "productName": "Ingersoll Rand 2545K10-VP Two Stage Cast Iron Compressor - 10 HP Premium",
+          "partNumber": "2545K10-VP",
+          "manufacturer": "Ingersoll Rand",
+          "description": "10 HP two-stage cast iron compressor, premium package, 175 PSI, 120 gallons",
+          "specs": {
+            "hp": "10",
+            "psi": "175",
+            "tankGallons": "120",
+            "type": "Two-Stage Cast Iron Premium"
+          },
+          "price": "$5,209.99",
+          "url": "https://www.industrialairpower.com/air-compressors/two-stage-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Two Stage Compressors",
+          "subcategory": "Reciprocating",
+          "productName": "Ingersoll Rand 7100E15-P Two Stage Cast Iron Compressor - 15 HP",
+          "partNumber": "7100E15-P",
+          "manufacturer": "Ingersoll Rand",
+          "description": "15 HP two-stage cast iron compressor, 175 PSI, 120 gallons",
+          "specs": {
+            "hp": "15",
+            "psi": "175",
+            "tankGallons": "120",
+            "type": "Two-Stage Cast Iron"
+          },
+          "price": "$6,779.99",
+          "url": "https://www.industrialairpower.com/air-compressors/two-stage-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Two Stage Compressors",
+          "subcategory": "Duplex",
+          "productName": "Ingersoll Rand 2-2475E5-V Two Stage Duplex Compressor - 5 HP",
+          "partNumber": "2-2475E5-V",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Two-stage duplex cast iron compressor, 200V 3-Phase, 175 PSI, 120 gallons",
+          "specs": {
+            "hp": "5",
+            "psi": "175",
+            "tankGallons": "120",
+            "voltage": "200V",
+            "phase": "3-Phase",
+            "type": "Two-Stage Duplex"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/two-stage-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Portable Compressors",
+          "subcategory": "Single Stage",
+          "productName": "Ingersoll Rand SS3J3-WB Portable Air Compressor - 3 HP",
+          "partNumber": "SS3J3-WB",
+          "manufacturer": "Ingersoll Rand",
+          "description": "3 HP portable single stage air compressor, 230V 1-Phase, 135 PSI, 8 gallons",
+          "specs": {
+            "hp": "3",
+            "psi": "135",
+            "tankGallons": "8",
+            "voltage": "230V",
+            "phase": "1-Phase"
+          },
+          "price": "$1,789.99",
+          "url": "https://www.industrialairpower.com/air-compressors/portable-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Portable Compressors",
+          "subcategory": "Single Stage",
+          "productName": "Ingersoll Rand SS3J2-WB Portable Air Compressor",
+          "partNumber": "SS3J2-WB",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Portable single stage air compressor",
+          "specs": {
+            "type": "Single Stage Portable"
+          },
+          "price": "$1,329.99",
+          "url": "https://www.industrialairpower.com/air-compressors/portable-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Portable Compressors",
+          "subcategory": "Single Stage",
+          "productName": "Ingersoll Rand SS3L3 Portable Air Compressor",
+          "partNumber": "SS3L3",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Portable single stage air compressor",
+          "specs": {
+            "type": "Single Stage Portable"
+          },
+          "price": "$1,179.99",
+          "url": "https://www.industrialairpower.com/air-compressors/portable-air-compressors/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Portable Compressors",
+          "subcategory": "Single Stage",
+          "productName": "Ingersoll Rand P1.5IU-A9 Single Stage Air Compressor",
+          "partNumber": "P1.5IU-A9",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Compact single stage air compressor",
+          "specs": {
+            "type": "Single Stage"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/single-stage-air-compressors/p1-5iu-a9-single-stage-air-compressor/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Gas Driven Compressors",
+          "subcategory": "Portable",
+          "productName": "Ingersoll Rand 2475F13GH Portable Gas Air Compressor - 13 HP",
+          "partNumber": "2475F13GH",
+          "manufacturer": "Ingersoll Rand",
+          "description": "13 HP two-stage portable gas compressor with Honda engine and electric start",
+          "specs": {
+            "hp": "13",
+            "engine": "Honda Gasoline",
+            "start": "Electric",
+            "type": "Two-Stage Gas Driven",
+            "pump": "100% Cast Iron"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/gas-driven-air-compressors/2475f13gh-portable-gas-air-compressor/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Gas Driven Compressors",
+          "subcategory": "Portable",
+          "productName": "Ingersoll Rand 2475F14G Portable Gas Air Compressor - 14 HP",
+          "partNumber": "2475F14G",
+          "manufacturer": "Ingersoll Rand",
+          "description": "14 HP two-stage portable gas compressor with Kohler engine and electric start",
+          "specs": {
+            "hp": "14",
+            "engine": "Kohler Gasoline",
+            "start": "Electric",
+            "type": "Two-Stage Gas Driven",
+            "pump": "100% Cast Iron"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/gas-driven-air-compressors/2475f14g-portable-gas-air-compressor-14hp/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Bare Pumps",
+          "subcategory": "Two Stage",
+          "productName": "Ingersoll Rand 7100 Two Stage Bare Pump",
+          "partNumber": "18002436",
+          "manufacturer": "Ingersoll Rand",
+          "description": "High-output two-stage bare compressor pump for industrial reliability, delivers up to 50 CFM at 175 PSI",
+          "specs": {
+            "cfm": "50",
+            "psi": "175",
+            "type": "Two-Stage Bare Pump"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/air-compressor-bare-pumps/7100-two-stage-bare-pump-18002436/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Bare Pumps",
+          "subcategory": "Two Stage",
+          "productName": "Ingersoll Rand 15T Two Stage Bare Pump",
+          "partNumber": "15T",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Two-stage bare compressor pump",
+          "specs": {
+            "type": "Two-Stage Bare Pump"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-compressors/air-compressor-bare-pumps/15t-two-stage-bare-pump/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Desiccant",
+          "productName": "Ingersoll Rand DA55IM Modular Desiccant Air Dryer",
+          "partNumber": "47675077001",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Modular desiccant air dryer",
+          "specs": {
+            "type": "Modular Desiccant"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/air-dryers/da55im-modular-desiccant-air-dryer-47675077001/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Thermal Mass",
+          "productName": "Ingersoll Rand DA31EC Thermal Mass Air Dryer",
+          "partNumber": "47696378001",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Thermal mass air dryer",
+          "specs": {
+            "type": "Thermal Mass"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/air-dryers/da31ec-thermal-mass-air-dryer-47696378001/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Heatless Regenerative",
+          "productName": "Altec HRL-2500-1 Heatless Regenerative Desiccant Air Dryer",
+          "partNumber": "HRL-2500-1",
+          "manufacturer": "Altec",
+          "description": "120 VAC, 1 Phase, 60Hz heatless regenerative desiccant air dryer",
+          "specs": {
+            "voltage": "120 VAC",
+            "phase": "1",
+            "frequency": "60Hz",
+            "type": "Heatless Regenerative Desiccant"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-dryers/hrl-2500-1-120-vac-1-phase-60hz-heatless-regenerative-desiccant-air-dryer/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Heatless Regenerative",
+          "productName": "Great Lakes Air GPS-2500-116 Heatless Regenerative Air Dryer",
+          "partNumber": "GPS-2500-116",
+          "manufacturer": "Great Lakes Air",
+          "description": "Heatless regenerative air dryer",
+          "specs": {
+            "type": "Heatless Regenerative"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/air-dryers/gps-2500-116-heatless-regenerative-air-dryer/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Heatless Regenerative",
+          "productName": "Great Lakes Air GPS-3000-116 Heatless Regenerative Air Dryer",
+          "partNumber": "GPS-3000-116",
+          "manufacturer": "Great Lakes Air",
+          "description": "Heatless regenerative air dryer",
+          "specs": {
+            "type": "Heatless Regenerative"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/air-dryers/gps-3000-116-heatless-regenerative-air-dryer/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Externally Heated",
+          "productName": "Great Lakes Air GEH-125 Externally Heated Regenerative Air Dryer",
+          "partNumber": "GEH-125",
+          "manufacturer": "Great Lakes Air",
+          "description": "Externally heated regenerative air dryer",
+          "specs": {
+            "type": "Externally Heated Regenerative"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/air-dryers/geh-125-externally-heated-regenerative-air-dryer/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Refrigerated",
+          "productName": "Great Lakes Air EDR-A1-116 High Temperature Refrigerated Air Dryer",
+          "partNumber": "EDR-A1-116",
+          "manufacturer": "Great Lakes Air",
+          "description": "High temperature refrigerated air dryer",
+          "specs": {
+            "type": "High Temperature Refrigerated"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/air-dryers/edr-a1-116-high-temperature-refrigerated-air-dryer/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Air Dryers",
+          "subcategory": "Inline Desiccant",
+          "productName": "RapidAir MDD250 Mini Disposable Inline Desiccant Dryer - 2 Pack",
+          "partNumber": "MDD250",
+          "manufacturer": "RapidAir",
+          "description": "Mini disposable inline desiccant dryer, 2 pack",
+          "specs": {
+            "type": "Disposable Inline Desiccant",
+            "quantity": "2 pack"
+          },
+          "price": "$128.17",
+          "url": "https://www.industrialairpower.com/air-compressor-parts/mdd250-mini-disposable-inline-desiccant-dryer-2-pack/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Coalescer",
+          "productName": "Industrial Air Power CH-120 Compressed Air Filter - 3/4 Inch",
+          "partNumber": "CH-120",
+          "manufacturer": "Industrial Air Power",
+          "description": "3/4 inch compressed air coalescer filter",
+          "specs": {
+            "size": "3/4 inch",
+            "type": "Coalescer"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/ch-120-compressed-air-filter-3-4-inch/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Coalescer",
+          "productName": "Industrial Air Power CH-150 Compressed Air Filter - 1 Inch",
+          "partNumber": "CH-150",
+          "manufacturer": "Industrial Air Power",
+          "description": "1 inch compressed air coalescer filter",
+          "specs": {
+            "size": "1 inch",
+            "type": "Coalescer"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/ch-150-compressed-air-filter-1-inch/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Coalescer",
+          "productName": "Industrial Air Power CH-710 Compressed Air Filter - 2 Inch",
+          "partNumber": "CH-710",
+          "manufacturer": "Industrial Air Power",
+          "description": "2 inch compressed air coalescer filter",
+          "specs": {
+            "size": "2 inch",
+            "type": "Coalescer"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/ch-710-compressed-air-filter-2-inch/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Coalescer",
+          "productName": "Industrial Air Power CH-950 Compressed Air Filter - 2.5 Inch",
+          "partNumber": "CH-950",
+          "manufacturer": "Industrial Air Power",
+          "description": "2.5 inch compressed air coalescer filter",
+          "specs": {
+            "size": "2.5 inch",
+            "type": "Coalescer"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/ch-950-compressed-air-filter-2-1-2-inch/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Coalescer",
+          "productName": "Industrial Air Power CH-1150 Compressed Air Filter - 3 Inch",
+          "partNumber": "CH-1150",
+          "manufacturer": "Industrial Air Power",
+          "description": "3 inch compressed air coalescer filter",
+          "specs": {
+            "size": "3 inch",
+            "type": "Coalescer"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/ch-1150-compressed-air-filter-3-inch/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Coalescer",
+          "productName": "Industrial Air Power CH-1400 Compressed Air Filter - 3 Inch",
+          "partNumber": "CH-1400",
+          "manufacturer": "Industrial Air Power",
+          "description": "3 inch compressed air coalescer filter (higher capacity)",
+          "specs": {
+            "size": "3 inch",
+            "type": "Coalescer"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/ch-1400-compressed-air-filter-3-inch/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "Activated Carbon",
+          "productName": "Ingersoll Rand FA110IA Activated Carbon Filter",
+          "partNumber": "24233405",
+          "manufacturer": "Ingersoll Rand",
+          "description": "Activated carbon filter for compressed air",
+          "specs": {
+            "type": "Activated Carbon"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/fa110ia-activated-carbon-filter-24233405/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Compressed Air Filters",
+          "subcategory": "General Purpose",
+          "productName": "Ingersoll Rand FA75IG General Purpose Filter",
+          "partNumber": "24233363",
+          "manufacturer": "Ingersoll Rand",
+          "description": "General purpose compressed air filter",
+          "specs": {
+            "type": "General Purpose"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/compressed-air-filters/fa75ig-general-purpose-filter-24233363/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "CRP-PAK",
+          "productName": "Clean Resources CRP-500 CFM Oil/Water Separator",
+          "partNumber": "CRP-500",
+          "manufacturer": "Clean Resources",
+          "description": "500 CFM oil/water separator with pre-plumbed timer drain and alumina silicate substrate",
+          "specs": {
+            "cfm": "500",
+            "type": "Oil/Water Separator",
+            "feature": "Pre-plumbed timer drain"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/crp-500-cfm-oil-water-separator-system/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "CRP-PAK",
+          "productName": "Clean Resources CRP-1000 CFM Oil/Water Separator",
+          "partNumber": "CRP-1000",
+          "manufacturer": "Clean Resources",
+          "description": "1000 CFM oil/water separator system",
+          "specs": {
+            "cfm": "1000",
+            "type": "Oil/Water Separator"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/crp-1000-cfm-oil-water-separator-system/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "CRP-PAK",
+          "productName": "Clean Resources CRP-1500 CFM Oil/Water Separator",
+          "partNumber": "CRP-1500",
+          "manufacturer": "Clean Resources",
+          "description": "1500 CFM oil/water separator system",
+          "specs": {
+            "cfm": "1500",
+            "type": "Oil/Water Separator"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/crp-1500-cfm-oil-water-separator-system/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "Compact",
+          "productName": "Clean Resources MICRO 50 Oil/Water Separator",
+          "partNumber": "MICRO 50",
+          "manufacturer": "Clean Resources",
+          "description": "50 CFM oil/water separator for smaller industrial compressors, EPA compliant",
+          "specs": {
+            "cfm": "50",
+            "type": "Compact Oil/Water Separator",
+            "compliance": "EPA"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/micro-50-oil-water-separator-50-cfm/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "Gravity",
+          "productName": "Summit ConDePhase 15 Plus",
+          "partNumber": "ConDePhase 15 Plus",
+          "manufacturer": "Summit",
+          "description": "Automatic gravity-based oily condensate separator, no electric, no moving parts, virtually maintenance-free",
+          "specs": {
+            "type": "Gravity Separator",
+            "power": "None required",
+            "maintenance": "Virtually maintenance-free"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/condephase-15-plus/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "Three-Stage",
+          "productName": "Jorc Sepremium 350 PG Oil/Water Separator",
+          "partNumber": "Sepremium 350 PG",
+          "manufacturer": "Jorc",
+          "description": "Three-stage oil/water separator for polyglycol applications, 350 CFM",
+          "specs": {
+            "cfm": "350",
+            "stages": "3",
+            "type": "Oil/Water Separator",
+            "fluid": "Polyglycol"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/sepremium-350-pg-oil-water-separator-polyglycol-350-cfm/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Oil/Water Separators",
+          "subcategory": "Three-Stage",
+          "productName": "Jorc Sepremium 2500 PG Oil/Water Separator",
+          "partNumber": "Sepremium 2500 PG",
+          "manufacturer": "Jorc",
+          "description": "Three-stage oil/water separator for polyglycol applications, 2500 CFM",
+          "specs": {
+            "cfm": "2500",
+            "stages": "3",
+            "type": "Oil/Water Separator",
+            "fluid": "Polyglycol"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/air-treatment/oil-water-separators/sepremium-2500-pg-oil-water-separator-polyglycol-2500-cfm/"
+        },
+        {
+          "brand": "Industrial Air Power",
+          "category": "Piping",
+          "subcategory": "Compressed Air",
+          "productName": "RapidAir Compressed Air Piping System",
+          "partNumber": null,
+          "manufacturer": "RapidAir",
+          "description": "Complete line of compressed air piping, fittings & accessories",
+          "specs": {
+            "type": "Compressed Air Piping System"
+          },
+          "price": null,
+          "url": "https://www.industrialairpower.com/rapidair/"
+        }
+      ]
+    },
+    {
+      "brand": "Soles Electric",
+      "website": "soleselectric.com",
+      "overview": "Electric motor sales, repair, and predictive maintenance since 1960. 24/7/365. Primary manufacturers: WEG and Toshiba. Categories: TEFC, ODP, TEXP, TEAO, IEC, Fire Pump, DC/PMDC, P-Base Pump Motors. Also Toshiba VFDs. Services: motor repair, pump repair, PdMA testing, predictive maintenance.",
+      "products": [
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00118ET3E56C-S Three Phase General Purpose Motor 1 HP TEFC C-Face Foot Mount",
+          "partNumber": "00118ET3E56C-S",
+          "manufacturer": "WEG",
+          "description": "1 HP, 3 Phase, TEFC, C-Face Foot Mount general purpose motor",
+          "specs": {
+            "hp": "1",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Foot Mount",
+            "frame": "56C"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00118et3e56c-s-three-phase-general-purpose-motor-1-hp-tefc-c-face-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00136ET3H143T-S Three Phase General Purpose Motor 1 HP TEFC Foot Mount",
+          "partNumber": "00136ET3H143T-S",
+          "manufacturer": "WEG",
+          "description": "1 HP, 3 Phase, TEFC, Foot Mount general purpose motor",
+          "specs": {
+            "hp": "1",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "frame": "143T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00136et3h143t-s-three-phase-general-purpose-motor-1-hp-tefc-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00212ET3E184T-W22 Three Phase General Purpose Motor 2 HP TEFC Foot Mount",
+          "partNumber": "00212ET3E184T-W22",
+          "manufacturer": "WEG",
+          "description": "2 HP, 1200 RPM, 230/460V, Frame 182/4T, Service Factor 1.25, Full Load Amps 3.22",
+          "specs": {
+            "hp": "2",
+            "kw": "1.5",
+            "rpm": "1200",
+            "voltage": "230/460",
+            "phase": "3",
+            "frame": "182/4T",
+            "serviceFactor": "1.25",
+            "fullLoadAmps": "3.22",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount"
+          },
+          "price": "$819.00",
+          "url": "https://soleselectric.com/00212et3e184t-w22-three-phase-general-purpose-motor-2-hp-tefc-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00218ET3ER145TC-W22 Three Phase General Purpose Motor 2 HP TEFC C-Face Footless",
+          "partNumber": "00218ET3ER145TC-W22",
+          "manufacturer": "WEG",
+          "description": "2 HP, 1800 RPM, 230/460V, Frame 145TC, Service Factor 1.25, Full Load Amps 2.76",
+          "specs": {
+            "hp": "2",
+            "kw": "1.5",
+            "rpm": "1800",
+            "voltage": "230/460",
+            "phase": "3",
+            "frame": "145TC",
+            "serviceFactor": "1.25",
+            "fullLoadAmps": "2.76",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Footless"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00218et3er145tc-w22-three-phase-general-purpose-motor-2-hp-tefc-c-face-footless/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00236ET3E56C-S Three Phase General Purpose Motor 2 HP TEFC C-Face Foot Mount",
+          "partNumber": "00236ET3E56C-S",
+          "manufacturer": "WEG",
+          "description": "2 HP, 3600 RPM, 3 Phase, TEFC, C-Face Foot Mount",
+          "specs": {
+            "hp": "2",
+            "rpm": "3600",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Foot Mount",
+            "frame": "56C"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00236et3e56c-s-three-phase-general-purpose-motor-2-hp-tefc-c-face-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00318ET3E182TC-W22 Three Phase General Purpose Motor 3 HP TEFC C-Face Foot Mount",
+          "partNumber": "00318ET3E182TC-W22",
+          "manufacturer": "WEG",
+          "description": "3 HP, 1800 RPM, 230/460V, Frame 182/4TC, Service Factor 1.25, Full Load Amps 3.91",
+          "specs": {
+            "hp": "3",
+            "kw": "2.2",
+            "rpm": "1800",
+            "voltage": "230/460",
+            "phase": "3",
+            "frame": "182/4TC",
+            "serviceFactor": "1.25",
+            "fullLoadAmps": "3.91",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Foot Mount"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00318et3e182tc-w22-three-phase-general-purpose-motor-3-hp-tefc-c-face-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 00336ET3E56C-S Three Phase General Purpose Motor 3 HP TEFC C-Face Foot Mount",
+          "partNumber": "00336ET3E56C-S",
+          "manufacturer": "WEG",
+          "description": "3 HP, 3 Phase, TEFC, C-Face Foot Mount",
+          "specs": {
+            "hp": "3",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Foot Mount",
+            "frame": "56C"
+          },
+          "price": "$606.00",
+          "url": "https://soleselectric.com/00336et3e56c-s-three-phase-general-purpose-motor-3-hp-tefc-c-face-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Single Phase TEFC General Purpose",
+          "productName": "WEG 00318ES1DFD184T-W22 Single-Phase General Purpose Motor 3 HP TEFC Foot Mount",
+          "partNumber": "00318ES1DFD184T-W22",
+          "manufacturer": "WEG",
+          "description": "3 HP, Single Phase, TEFC, Foot Mount",
+          "specs": {
+            "hp": "3",
+            "phase": "1",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "frame": "184T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00318es1dfd184t-w22-single-phase-general-purpose-motor-3-hp-tefc-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 02012ET3E286TC-W22 Three Phase General Purpose Motor 20 HP TEFC C-Face Foot Mount",
+          "partNumber": "02012ET3E286TC-W22",
+          "manufacturer": "WEG",
+          "description": "20 HP, 3 Phase, TEFC, C-Face Foot Mount",
+          "specs": {
+            "hp": "20",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Foot Mount",
+            "frame": "286TC"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/02012et3e286tc-w22-three-phase-general-purpose-motor-20-hp-tefc-c-face-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 04036ET3ER324TSC-W22 Three Phase General Purpose Motor 40 HP TEFC C-Face Footless",
+          "partNumber": "04036ET3ER324TSC-W22",
+          "manufacturer": "WEG",
+          "description": "40 HP, 3600 RPM, 230/460V, Frame 324TSC, Service Factor 1.25, Full Load Amps 45.8",
+          "specs": {
+            "hp": "40",
+            "kw": "30",
+            "rpm": "3600",
+            "voltage": "230/460",
+            "phase": "3",
+            "frame": "324TSC",
+            "serviceFactor": "1.25",
+            "fullLoadAmps": "45.8",
+            "enclosure": "TEFC",
+            "mounting": "C-Face Footless"
+          },
+          "price": "$4,988.00",
+          "url": "https://soleselectric.com/04036et3er324tsc-w22-three-phase-general-purpose-motor-40-hp-tefc-c-face-footless/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 10036ET3G405TS-W22 Three Phase General Purpose Motor 100 HP TEFC Foot Mount",
+          "partNumber": "10036ET3G405TS-W22",
+          "manufacturer": "WEG",
+          "description": "100 HP, 3 Phase, TEFC, Foot Mount",
+          "specs": {
+            "hp": "100",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "frame": "405TS"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/10036et3g405ts-w22-three-phase-general-purpose-motor-100-hp-tefc-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Three Phase TEFC General Purpose",
+          "productName": "WEG 35018ET3G449T-W22 Three Phase General Purpose Motor 350 HP TEFC Foot Mount",
+          "partNumber": "35018ET3G449T-W22",
+          "manufacturer": "WEG",
+          "description": "350 HP, 3 Phase, TEFC, Foot Mount",
+          "specs": {
+            "hp": "350",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "frame": "449T"
+          },
+          "price": "$36,517.00 - $47,633.00",
+          "url": "https://soleselectric.com/35018et3g449t-w22-three-phase-general-purpose-motor-350-hp-tefc-foot-mount/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "IEC Tru-Metric",
+          "productName": "WEG .3712EP3EAL80-W22 IEC Tru-Metric 0.5 HP TEFC Foot Mount",
+          "partNumber": ".3712EP3EAL80-W22",
+          "manufacturer": "WEG",
+          "description": "0.5 HP IEC Tru-Metric motor, Frame 80, 1200/1000 RPM, 230/460 & 190/380V, SF 1.15",
+          "specs": {
+            "hp": "0.5",
+            "rpm": "1200/1000",
+            "voltage": "230/460 & 190/380",
+            "phase": "3",
+            "frame": "80",
+            "serviceFactor": "1.15",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "standard": "IEC"
+          },
+          "price": "$378.00",
+          "url": "https://soleselectric.com/3712ep3eal80-w22-iec-tru-metric-0-5-hp-tefc-foot-mount-three-purpose-general-purpose-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "IEC Tru-Metric",
+          "productName": "WEG .5512EP3EAL80-W22 IEC Tru-Metric 0.75 HP TEFC Foot Mount",
+          "partNumber": ".5512EP3EAL80-W22",
+          "manufacturer": "WEG",
+          "description": "0.75 HP IEC Tru-Metric motor, Frame 80, 1200/1000 RPM, 230/460 & 190/380V, SF 1.15",
+          "specs": {
+            "hp": "0.75",
+            "rpm": "1200/1000",
+            "voltage": "230/460 & 190/380",
+            "phase": "3",
+            "frame": "80",
+            "serviceFactor": "1.15",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "standard": "IEC"
+          },
+          "price": "$405.00",
+          "url": "https://soleselectric.com/5512ep3eal80-w22-iec-tru-metric-0-75-hp-tefc-foot-mount-three-purpose-general-purpose-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "IEC Tru-Metric",
+          "productName": "WEG 00218ET3W100L-W22 IEC Tru-Metric 3 HP TEFC Foot Mount",
+          "partNumber": "00218ET3W100L-W22",
+          "manufacturer": "WEG",
+          "description": "3 HP IEC Tru-Metric motor, Frame 100L, 1800/1500 RPM, 460/220-240/380-415V, SF 1.25",
+          "specs": {
+            "hp": "3",
+            "rpm": "1800/1500",
+            "voltage": "460/220-240/380-415",
+            "phase": "3",
+            "frame": "100L",
+            "serviceFactor": "1.25",
+            "enclosure": "TEFC",
+            "mounting": "Foot Mount",
+            "standard": "IEC"
+          },
+          "price": "$645.00",
+          "url": "https://soleselectric.com/00218et3w100l-w22-iec-tru-metric-3-hp-tefc-foot-mount-three-purpose-general-purpose-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "P-Base Pump Motors",
+          "productName": "WEG 02518ET3E284HP-W22 P-Base Motor 25 HP TEFC NEMA Premium Pump Motor",
+          "partNumber": "02518ET3E284HP-W22",
+          "manufacturer": "WEG",
+          "description": "25 HP P-Base pump motor, TEFC, Three-Phase, NEMA Premium",
+          "specs": {
+            "hp": "25",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "P-Base",
+            "standard": "NEMA Premium",
+            "type": "Pump Motor"
+          },
+          "price": "$3,624.00",
+          "url": "https://soleselectric.com/02518et3e284hp-w22-p-base-motor-25-hp-tefc-three-phase-nema-premium-pump-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "P-Base Pump Motors",
+          "productName": "WEG 05036ET3E326HP-W22 P-Base Motor 50 HP TEFC NEMA Premium Pump Motor",
+          "partNumber": "05036ET3E326HP-W22",
+          "manufacturer": "WEG",
+          "description": "50 HP P-Base pump motor, TEFC, Three-Phase, NEMA Premium",
+          "specs": {
+            "hp": "50",
+            "phase": "3",
+            "enclosure": "TEFC",
+            "mounting": "P-Base",
+            "standard": "NEMA Premium",
+            "type": "Pump Motor"
+          },
+          "price": "$6,681.00",
+          "url": "https://soleselectric.com/05036et3e326hp-w22-p-base-motor-50-hp-tefc-three-phase-nema-premium-pump-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Explosion Proof (TEXP)",
+          "productName": "WEG 00156XT3E143TC Three Phase 1.5 HP C-Face Foot Mount Explosion Proof Motor",
+          "partNumber": "00156XT3E143TC",
+          "manufacturer": "WEG",
+          "description": "1.5 HP explosion proof motor, 3 Phase, C-Face Foot Mount",
+          "specs": {
+            "hp": "1.5",
+            "phase": "3",
+            "enclosure": "TEXP",
+            "mounting": "C-Face Foot Mount",
+            "frame": "143TC"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/00156xt3e143tc-three-phase-1-5-hp-c-face-foot-mount-explosion-proof-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Explosion Proof (TEXP)",
+          "productName": "WEG 01018XT3H215T Three Phase 10 HP Foot Mount Explosion Proof Motor",
+          "partNumber": "01018XT3H215T",
+          "manufacturer": "WEG",
+          "description": "10 HP explosion proof motor, 3 Phase, Foot Mount",
+          "specs": {
+            "hp": "10",
+            "phase": "3",
+            "enclosure": "TEXP",
+            "mounting": "Foot Mount",
+            "frame": "215T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/01018xt3h215t-three-phase-10-hp-foot-mount-explosion-proof-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Explosion Proof (TEXP)",
+          "productName": "WEG 06012XT3E404T Three Phase 60 HP Foot Mount Explosion Proof Motor",
+          "partNumber": "06012XT3E404T",
+          "manufacturer": "WEG",
+          "description": "60 HP explosion proof motor, 3 Phase, Foot Mount",
+          "specs": {
+            "hp": "60",
+            "phase": "3",
+            "enclosure": "TEXP",
+            "mounting": "Foot Mount",
+            "frame": "404T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/06012xt3e404t-three-phase-60-hp-foot-mount-explosion-proof-motor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Fire Pump Motors",
+          "productName": "WEG FF60E1ZS Fire Pump Motor 60 HP ODP 2965 RPM",
+          "partNumber": "FF60E1ZS",
+          "manufacturer": "WEG",
+          "description": "60 HP fire pump motor, ODP, 2965 RPM, special application",
+          "specs": {
+            "hp": "60",
+            "rpm": "2965",
+            "enclosure": "ODP",
+            "type": "Fire Pump Motor"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/ff60e1zs-60-hp-odp-2965-rpm-fire-pump-motors-special-application/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Fire Pump Motors",
+          "productName": "WEG FF75E1XS Fire Pump Motor 75 HP ODP 3560 RPM",
+          "partNumber": "FF75E1XS",
+          "manufacturer": "WEG",
+          "description": "75 HP fire pump motor, ODP, 3560 RPM, special application",
+          "specs": {
+            "hp": "75",
+            "rpm": "3560",
+            "enclosure": "ODP",
+            "type": "Fire Pump Motor"
+          },
+          "price": "$6,255.00",
+          "url": "https://soleselectric.com/ff75e1xs-75-hp-odp-3560-rpm-fire-pump-motors-special-application/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Fire Pump Motors",
+          "productName": "WEG FF125E1ZS Fire Pump Motor 125 HP ODP 2965 RPM",
+          "partNumber": "FF125E1ZS",
+          "manufacturer": "WEG",
+          "description": "125 HP fire pump motor, ODP, 2965 RPM, special application",
+          "specs": {
+            "hp": "125",
+            "rpm": "2965",
+            "enclosure": "ODP",
+            "type": "Fire Pump Motor"
+          },
+          "price": "$9,717.00",
+          "url": "https://soleselectric.com/ff125e1zs-125-hp-odp-2965-rpm-fire-pump-motors-special-application/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "DC Motors",
+          "productName": "WEG MT-069 Permanent Magnet 0.5 HP PMDC Motor (12 & 24VDC)",
+          "partNumber": "MT-069",
+          "manufacturer": "WEG",
+          "description": "0.5 HP NEMA Frame low voltage permanent magnet DC motor and gearmotor, 12 & 24VDC",
+          "specs": {
+            "hp": "0.5",
+            "voltage": "12/24 VDC",
+            "type": "Permanent Magnet DC",
+            "frame": "NEMA"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/mt-069-permanent-magnet-0-5-hp-nema-frame-low-voltage-pmdc-motor-12-24vdc-dc-motor-and-gearmotor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "DC Motors",
+          "productName": "WEG MT-070 Permanent Magnet 0.5 HP PMDC Motor (12 & 24VDC)",
+          "partNumber": "MT-070",
+          "manufacturer": "WEG",
+          "description": "0.5 HP NEMA Frame low voltage permanent magnet DC motor and gearmotor, 12 & 24VDC",
+          "specs": {
+            "hp": "0.5",
+            "voltage": "12/24 VDC",
+            "type": "Permanent Magnet DC",
+            "frame": "NEMA"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/mt-070-permanent-magnet-0-5-hp-nema-frame-low-voltage-pmdc-motor-12-24vdc-dc-motor-and-gearmotor/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba F5006VLF4BM Electric Motor 500 HP 1200 RPM 460V",
+          "partNumber": "F5006VLF4BM",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 1200 RPM, 460 Volts, 5810UZ Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "1200",
+            "voltage": "460",
+            "frame": "5810UZ"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-f5006vlf4bm-electric-motor-500-hp-1200-rpm-460-volts-5810uz-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba F5006FLF4BMH Electric Motor 500 HP 1200 RPM 460V",
+          "partNumber": "F5006FLF4BMH",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 1200 RPM, 460 Volts, 5810UZ Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "1200",
+            "voltage": "460",
+            "frame": "5810UZ"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-f5006flf4bmh-electric-motor-500-hp-1200-rpm-460-volts-5810uz-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba F5006VLF4OM Electric Motor 500 HP 1200 RPM 575V",
+          "partNumber": "F5006VLF4OM",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 1200 RPM, 575 Volts, 5810UZ Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "1200",
+            "voltage": "575",
+            "frame": "5810UZ"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-f5006vlf4om-electric-motor-500-hp-1200-rpm-575-volts-5810uz-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba 5004XSSB41E Electric Motor 500 HP 1800 RPM 460V",
+          "partNumber": "5004XSSB41E",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 1800 RPM, 460 Volts, 5011US Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "1800",
+            "voltage": "460",
+            "frame": "5011US"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-5004xssb41e-electric-motor-500-hp-1800-rpm-460-volts-5011us-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba B5003FKG8OMH Electric Motor 500 HP 3600 RPM 575V",
+          "partNumber": "B5003FKG8OMH",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 3600 RPM, 575 Volts, 5010USS Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "3600",
+            "voltage": "575",
+            "frame": "5010USS"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-b5003fkg8omh-electric-motor-500-hp-3600-rpm-575-volts-5010uss-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba B5002VLG3BMH Electric Motor 500 HP 3600 RPM 460V",
+          "partNumber": "B5002VLG3BMH",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 3600 RPM, 460 Volts, 507USS Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "3600",
+            "voltage": "460",
+            "frame": "507USS"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-b5002vlg3bmh-electric-motor-500-hp-3600-rpm-460-volts-507uss-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba B5002VLG3OMH Electric Motor 500 HP 3600 RPM 575V",
+          "partNumber": "B5002VLG3OMH",
+          "manufacturer": "Toshiba",
+          "description": "500 HP electric motor, 3600 RPM, 575 Volts, 507USS Frame",
+          "specs": {
+            "hp": "500",
+            "rpm": "3600",
+            "voltage": "575",
+            "frame": "507USS"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-b5002vlg3omh-electric-motor-500-hp-3600-rpm-575-volts-507uss-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba 7004QDSB31A-R Electric Motor 700 HP 1800 RPM 460V",
+          "partNumber": "7004QDSB31A-R",
+          "manufacturer": "Toshiba",
+          "description": "700 HP electric motor, 1800 RPM, 460 Volts, B587LL Frame",
+          "specs": {
+            "hp": "700",
+            "rpm": "1800",
+            "voltage": "460",
+            "frame": "B587LL"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-7004qdsb31a-r-electric-motor-700-hp-1800-rpm-460-volts-b587ll-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba F7006VKF4OM Electric Motor 700 HP 1200 RPM 575V",
+          "partNumber": "F7006VKF4OM",
+          "manufacturer": "Toshiba",
+          "description": "700 HP electric motor, 1200 RPM, 575 Volts, 5810UZ Frame",
+          "specs": {
+            "hp": "700",
+            "rpm": "1200",
+            "voltage": "575",
+            "frame": "5810UZ"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-f7006vkf4om-electric-motor-700-hp-1200-rpm-575-volts-5810uz-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba 7006FTAB11E-A Electric Motor 700 HP 1200 RPM 460V",
+          "partNumber": "7006FTAB11E-A",
+          "manufacturer": "Toshiba",
+          "description": "700 HP electric motor, 1200 RPM, 460 Volts, 5811US Frame",
+          "specs": {
+            "hp": "700",
+            "rpm": "1200",
+            "voltage": "460",
+            "frame": "5811US"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-7006ftab11e-a-electric-motor-700-hp-1200-rpm-460-volts-5811us-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba F7004FLF4BMH Electric Motor 700 HP 1800 RPM 460V",
+          "partNumber": "F7004FLF4BMH",
+          "manufacturer": "Toshiba",
+          "description": "700 HP electric motor, 1800 RPM, 460 Volts, 5810UZ Frame",
+          "specs": {
+            "hp": "700",
+            "rpm": "1800",
+            "voltage": "460",
+            "frame": "5810UZ"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-f7004flf4bmh-electric-motor-700-hp-1800-rpm-460-volts-5810uz-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Large HP",
+          "productName": "Toshiba 8004FTAC11E-A Electric Motor 800 HP 1800 RPM 575V",
+          "partNumber": "8004FTAC11E-A",
+          "manufacturer": "Toshiba",
+          "description": "800 HP electric motor, 1800 RPM, 575 Volts, 5811US Frame",
+          "specs": {
+            "hp": "800",
+            "rpm": "1800",
+            "voltage": "575",
+            "frame": "5811US"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-8004ftac11e-a-electric-motor-800-hp-1800-rpm-575-volts-5811us-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Medium HP",
+          "productName": "Toshiba 0202SDSR41A-P Electric Motor 20 HP 3600 RPM 230/460V",
+          "partNumber": "0202SDSR41A-P",
+          "manufacturer": "Toshiba",
+          "description": "20 HP electric motor, 3600 RPM, 230/460 Volts, 256T Frame",
+          "specs": {
+            "hp": "20",
+            "rpm": "3600",
+            "voltage": "230/460",
+            "frame": "256T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-0202sdsr41a-p-electric-motor-20-hp-3600-rpm-230-460-volts-256t-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Medium HP",
+          "productName": "Toshiba 0102XDSB41A-P Electric Motor 10 HP 3600 RPM 460V",
+          "partNumber": "0102XDSB41A-P",
+          "manufacturer": "Toshiba",
+          "description": "10 HP electric motor, 3600 RPM, 460 Volts, 215T Frame",
+          "specs": {
+            "hp": "10",
+            "rpm": "3600",
+            "voltage": "460",
+            "frame": "215T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-0102xdsb41a-p-electric-motor-10-hp-3600-rpm-460-volts-215t-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Medium HP",
+          "productName": "Toshiba 0022SDSR41A-P Electric Motor 2 HP 3600 RPM 230/460V",
+          "partNumber": "0022SDSR41A-P",
+          "manufacturer": "Toshiba",
+          "description": "2 HP electric motor, 3600 RPM, 230/460 Volts, 145T Frame",
+          "specs": {
+            "hp": "2",
+            "rpm": "3600",
+            "voltage": "230/460",
+            "frame": "145T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-0022sdsr41a-p-electric-motor-2-hp-3600-rpm-230-460-volts-145t-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Medium HP",
+          "productName": "Toshiba 3004XPEB41A Electric Motor 300 HP 1800 RPM 460V",
+          "partNumber": "3004XPEB41A",
+          "manufacturer": "Toshiba",
+          "description": "300 HP electric motor, 1800 RPM, 460 Volts, N449T Frame",
+          "specs": {
+            "hp": "300",
+            "rpm": "1800",
+            "voltage": "460",
+            "frame": "N449T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-3004xpeb41a-electric-motor-300-hp-1800-rpm-460-volts-n449t-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Medium HP",
+          "productName": "Toshiba 2504XDSB41A Electric Motor 250 HP 1800 RPM 460V",
+          "partNumber": "2504XDSB41A",
+          "manufacturer": "Toshiba",
+          "description": "250 HP electric motor, 1800 RPM, 460 Volts, S449T Frame",
+          "specs": {
+            "hp": "250",
+            "rpm": "1800",
+            "voltage": "460",
+            "frame": "S449T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-2504xdsb41a-electric-motor-250-hp-1800-rpm-460-volts-s449t-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Medium HP",
+          "productName": "Toshiba 1254XDSB41A-P Electric Motor 125 HP 1800 RPM 460V",
+          "partNumber": "1254XDSB41A-P",
+          "manufacturer": "Toshiba",
+          "description": "125 HP electric motor, 1800 RPM, 460 Volts, S444T Frame",
+          "specs": {
+            "hp": "125",
+            "rpm": "1800",
+            "voltage": "460",
+            "frame": "S444T"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-1254xdsb41a-p-electric-motor-125-hp-1800-rpm-460-volts-s444t-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Electric Motors",
+          "subcategory": "Toshiba Small HP",
+          "productName": "Toshiba 0014XDSC44A-P Electric Motor 1 HP 1800 RPM 575V",
+          "partNumber": "0014XDSC44A-P",
+          "manufacturer": "Toshiba",
+          "description": "1 HP electric motor, 1800 RPM, 575 Volts, 143TC Frame",
+          "specs": {
+            "hp": "1",
+            "rpm": "1800",
+            "voltage": "575",
+            "frame": "143TC"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-0014xdsc44a-p-electric-motor-1-hp-1800-rpm-575-volts-143tc-frame/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba S Series",
+          "productName": "Toshiba VFS15-4150PL-W1 Low Voltage Adjustable Speed Drive - S Series 20 HP 460V",
+          "partNumber": "VFS15-4150PL-W1",
+          "manufacturer": "Toshiba",
+          "description": "20 HP, 460 Volt low voltage adjustable speed drive, S Series, for variable and constant torque applications",
+          "specs": {
+            "hp": "20",
+            "voltage": "460",
+            "series": "S15",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-s-series-vfs15-4150pl-w1-20-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba S Series",
+          "productName": "Toshiba VFS15-2075PM-W1 Low Voltage Adjustable Speed Drive - S Series 10 HP 230V",
+          "partNumber": "VFS15-2075PM-W1",
+          "manufacturer": "Toshiba",
+          "description": "10 HP, 230 Volt low voltage adjustable speed drive, S Series",
+          "specs": {
+            "hp": "10",
+            "voltage": "230",
+            "series": "S15",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-s-series-vfs15-2075pm-w1-10-hp-230-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba AS3 Series",
+          "productName": "Toshiba VFAS3-2150P AS3 Series 20/25 HP 230V",
+          "partNumber": "VFAS3-2150P",
+          "manufacturer": "Toshiba",
+          "description": "20 HP/25 HP, 230 Volt adjustable speed drive, AS3 Series",
+          "specs": {
+            "hp": "20/25",
+            "voltage": "230",
+            "series": "AS3",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-as3-series-vfas3-2150p-20-hp-25-hp-230-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba AS3 Series",
+          "productName": "Toshiba VFAS3-4022PCE AS3 Series 3/5 HP 460V",
+          "partNumber": "VFAS3-4022PCE",
+          "manufacturer": "Toshiba",
+          "description": "3 HP/5 HP, 460 Volt adjustable speed drive, AS3 Series",
+          "specs": {
+            "hp": "3/5",
+            "voltage": "460",
+            "series": "AS3",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-as3-series-vfas3-4022pce-3-hp-5-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba AS3 Series",
+          "productName": "Toshiba VFAS3-4110PCE AS3 Series 15/20 HP 460V",
+          "partNumber": "VFAS3-4110PCE",
+          "manufacturer": "Toshiba",
+          "description": "15 HP/20 HP, 460 Volt adjustable speed drive, AS3 Series",
+          "specs": {
+            "hp": "15/20",
+            "voltage": "460",
+            "series": "AS3",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-as3-series-vfas3-4110pce-15-hp-20-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba AS3 Series",
+          "productName": "Toshiba VFAS3-4450PC AS3 Series 60/75 HP 460V",
+          "partNumber": "VFAS3-4450PC",
+          "manufacturer": "Toshiba",
+          "description": "60 HP/75 HP, 460 Volt adjustable speed drive, AS3 Series",
+          "specs": {
+            "hp": "60/75",
+            "voltage": "460",
+            "series": "AS3",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-as3-series-vfas3-4450pc-60-hp-75-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba AS3 Series",
+          "productName": "Toshiba VFAS3-4110KPC AS3 Series 150/200 HP 460V",
+          "partNumber": "VFAS3-4110KPC",
+          "manufacturer": "Toshiba",
+          "description": "150 HP/200 HP, 460 Volt adjustable speed drive, AS3 Series",
+          "specs": {
+            "hp": "150/200",
+            "voltage": "460",
+            "series": "AS3",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-as3-series-vfas3-4110kpc-150-hp-200-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba AS3 Series",
+          "productName": "Toshiba VFAS3-6750PC AS3 Series 75/100 HP 600V",
+          "partNumber": "VFAS3-6750PC",
+          "manufacturer": "Toshiba",
+          "description": "75 HP/100 HP, 600 Volt adjustable speed drive, AS3 Series",
+          "specs": {
+            "hp": "75/100",
+            "voltage": "600",
+            "series": "AS3",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-as3-series-vfas3-6750pc-75-hp-100-hp-600-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba H Series",
+          "productName": "Toshiba VFAS3-4280KPC H Series 450/500 HP 460V",
+          "partNumber": "VFAS3-4280KPC",
+          "manufacturer": "Toshiba",
+          "description": "450 HP/500 HP, 460 Volt adjustable speed drive, H Series",
+          "specs": {
+            "hp": "450/500",
+            "voltage": "460",
+            "series": "H",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-h-series-vfas3-4280kpc-450-hp-500-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba H Series",
+          "productName": "Toshiba HX7+D451K40CB H Series 500 HP 460V",
+          "partNumber": "HX7+D451K40CB",
+          "manufacturer": "Toshiba",
+          "description": "500 HP, 460 Volt adjustable speed drive, H Series HX7+",
+          "specs": {
+            "hp": "500",
+            "voltage": "460",
+            "series": "H (HX7+)",
+            "type": "Low Voltage ASD"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-h-series-hx7-d451k40cb-500-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Variable Frequency Drives",
+          "subcategory": "Toshiba G Series",
+          "productName": "Toshiba VT130G9U420K G Series 200 HP 460V",
+          "partNumber": "VT130G9U420K",
+          "manufacturer": "Toshiba",
+          "description": "200 HP, 460 Volt adjustable speed drive, G9 Series, 115% continuous overload, dual 32-bit processor",
+          "specs": {
+            "hp": "200",
+            "voltage": "460",
+            "series": "G9",
+            "type": "Low Voltage ASD",
+            "overload": "115% continuous",
+            "processor": "Dual 32-bit"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/toshiba-low-voltage-adjustable-speed-drive-g-series-vt130g9u420k-200-hp-460-volt/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Services",
+          "subcategory": "Repair",
+          "productName": "Electric Motor Repair Services",
+          "partNumber": null,
+          "manufacturer": "Soles Electric",
+          "description": "24/7/365 electric motor repair, pump repair, equipment rebuild, DC motor cleanup, truck frame reassembly, rewiring",
+          "specs": {
+            "availability": "24/7/365",
+            "types": "Motor repair, Pump repair, Equipment rebuild, DC motor cleanup, Rewiring"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/about-us/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Services",
+          "subcategory": "Predictive Maintenance",
+          "productName": "Predictive Maintenance Services",
+          "partNumber": null,
+          "manufacturer": "Soles Electric",
+          "description": "Predictive maintenance for motors, gearboxes, generators, and pumps using high-quality testing equipment",
+          "specs": {
+            "equipment": "Motors, Gearboxes, Generators, Pumps"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/predictive-maintenance/"
+        },
+        {
+          "brand": "Soles Electric",
+          "category": "Services",
+          "subcategory": "PdMA Testing",
+          "productName": "PdMA Motor Testing Services",
+          "partNumber": null,
+          "manufacturer": "Soles Electric",
+          "description": "Static and dynamic motor testing evaluating power quality, stator health, rotor condition, and overall efficiency",
+          "specs": {
+            "testTypes": "Static, Dynamic",
+            "parameters": "Power quality, Stator health, Rotor condition, Motor efficiency"
+          },
+          "price": null,
+          "url": "https://soleselectric.com/pdma-testing/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,928 @@
+{
+  "vertical": "Pumps",
+  "reportDate": "2026-02-12",
+  "isgBrands": ["Georgia Western", "Renewal Service Inc."],
+  "isgOverview": {
+    "parentCompany": "The Industrial Service Group (ISG)",
+    "headquarters": "Indianapolis, IN",
+    "owner": "TJC LP (The Jordan Company)",
+    "previousOwner": "KCM Capital Partners (2019-2022)",
+    "founded": 2018,
+    "employees": 1200,
+    "totalLocations": "40+",
+    "totalBrands": 16,
+    "brandPortfolio": {
+      "pumps": ["Renewal Service Inc.", "Air Specialty & Equipment Co."],
+      "valves": ["Industrial Valve Service", "Tri-State Valve LLC"],
+      "compressors": ["Morin Process Equipment", "Compressor & Turbine Services", "Turbomachinery Industries"],
+      "motors": ["Soles Electric", "Illinois Electric Works"],
+      "actuators": ["Georgia Western"],
+      "specialty": ["Industrial Air Power", "Industrial Air Centers", "Dynamic Mechanical Solutions", "CORE Industrial Maintenance", "Pinnacle Industries Ltd.", "National Mill Maintenance"]
+    },
+    "geographicPresence": [
+      "Florida (Cape Coral, Tampa)",
+      "Texas (Corpus Christi, Houston, Fort Worth, Pasadena, Schertz, Deer Park, Gregory)",
+      "Alabama (Birmingham, Pelham, Mobile, Decatur, Eight Mile)",
+      "Indiana", "Kentucky", "Tennessee (Memphis, Cleveland)",
+      "Louisiana (Bastrop)", "Mississippi (Hamilton)",
+      "Arkansas", "Ohio", "Illinois", "Wisconsin",
+      "Georgia (Kennesaw)", "West Virginia"
+    ],
+    "coreCategories": ["Valves & Actuators", "Compressors", "Pumps", "Motors", "Heat Exchangers", "Rotating Equipment"],
+    "valueProp": "Provider of critical-to-process MRO rotating equipment for diversified industrial markets, helping plants avoid high cost of unplanned downtime"
+  },
+  "competitors": [
+    {
+      "name": "Flowserve Corporation",
+      "website": "https://www.flowserve.com",
+      "hq": "Irving, TX",
+      "tier": "Tier 1 - Global OEM / Service Provider",
+      "locations": "300+ worldwide, 180+ Quick Response Centers (QRCs), North American QRCs in Baton Rouge, Boothwyn, Irving TX and others",
+      "services": [
+        "Pump repair and overhaul",
+        "Startup and commissioning",
+        "Operational support and responsive repairs",
+        "Performance optimization (upgrades and retrofits)",
+        "Customizable service agreements",
+        "Emergency 24/7 support via QRCs",
+        "Valve and seal service",
+        "Predictive maintenance (RedRaven IoT)",
+        "Energy Advantage Program (system-wide analysis)",
+        "Decoking systems service"
+      ],
+      "products": [
+        "Centrifugal pumps (Durco, Byron Jackson, Worthington, United, Pacific, Ingersoll-Dresser)",
+        "Positive displacement pumps",
+        "Mechanical seals and sealing systems",
+        "Valves",
+        "Actuators and instrumentation",
+        "Energy recovery devices",
+        "Decoking systems"
+      ],
+      "legacyBrands": ["Durco", "Byron Jackson", "Worthington", "Pacific", "Ingersoll-Dresser", "IDP", "Wilson Snyder", "Scienco", "Lawrence", "Innomag", "Pleuger", "Limitorque"],
+      "pricing": {
+        "model": "Custom quotes, service agreements, aftermarket parts markup",
+        "notes": "Aftermarket segment grew 8.8% YoY in 2025, indicating strong pricing power in service/parts"
+      },
+      "revenue": "$4.687B (TTM ending Sep 2025); $4.558B (FY2024)",
+      "employees": 16000,
+      "differentiators": [
+        "World's most comprehensive portfolio of flow control solutions",
+        "RedRaven IoT monitoring platform for predictive maintenance",
+        "Energy Advantage Program for system-wide efficiency analysis",
+        "17+ established heritage pump brands",
+        "Over 95% market share in decoking systems",
+        "Global Quick Response Center network (180+ locations)",
+        "Vertically integrated OEM + aftermarket service"
+      ],
+      "customerSegments": [
+        "Oil & gas / refining",
+        "Chemical processing",
+        "Power generation (including nuclear)",
+        "Water & wastewater treatment",
+        "Mining",
+        "General industrial"
+      ]
+    },
+    {
+      "name": "Sulzer Ltd",
+      "website": "https://www.sulzer.com",
+      "hq": "Winterthur, Switzerland (US HQ: Houston, TX)",
+      "tier": "Tier 1 - Global OEM / Service Provider",
+      "locations": "180+ manufacturing/service sites globally; 100+ service sites worldwide; 12 US service centers (Houston, Baton Rouge, Barboursville, Bridgeport, Chattanooga, Denver, Joliet, Los Angeles, Mobile, Odessa, Piedmont, Salt Lake City)",
+      "services": [
+        "Pump repair and overhaul (OEM and non-OEM)",
+        "Retrofits and upgrades",
+        "Field service and installation",
+        "Predictive maintenance (Sulzer Sense)",
+        "Vibration analysis",
+        "Laser alignment",
+        "Machining and welding",
+        "Small steam turbomachinery repair",
+        "Motor and generator services",
+        "Compressor services",
+        "Comprehensive lifecycle solutions"
+      ],
+      "products": [
+        "Centrifugal pumps",
+        "Vertical pumps",
+        "Horizontal pumps",
+        "Submersible pumps",
+        "Agitators",
+        "Mixers",
+        "Separators",
+        "Tower management systems"
+      ],
+      "pricing": {
+        "model": "Custom quotes, service contracts, lifecycle agreements",
+        "notes": "Services division revenue CHF 1.25B in 2024, growing 12.3% — strong aftermarket pricing"
+      },
+      "revenue": "$3.9B global (FY2024); $4.12B TTM (Jun 2025); Services division CHF 1.25B; US subsidiary Sulzer Pumps (US) ~$75M",
+      "employees": "13,500 globally; ~172 in US pump subsidiary",
+      "differentiators": [
+        "200+ years of engineering heritage",
+        "Services both Sulzer OEM and third-party equipment",
+        "Sulzer Sense predictive maintenance platform (ML-based)",
+        "Houston facility: 130,000+ sq ft shop with full capabilities",
+        "Expanding aftermarket beyond spare parts to full lifecycle solutions",
+        "New Easley, USA plant expansion for assembly and testing"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Oil & gas / petrochemical",
+        "Steel and heavy manufacturing",
+        "Mining",
+        "Water & wastewater",
+        "Chemical processing"
+      ]
+    },
+    {
+      "name": "Xylem Inc. (Goulds Water Technology)",
+      "website": "https://www.xylem.com",
+      "hq": "Washington, DC",
+      "tier": "Tier 1 - Global OEM",
+      "locations": "Global operations across 150+ countries; major US manufacturing and service facilities",
+      "services": [
+        "Pump manufacturing and distribution",
+        "Aftermarket parts and service",
+        "System design and engineering",
+        "Water treatment solutions",
+        "Smart water network solutions",
+        "Monitoring and analytics"
+      ],
+      "products": [
+        "Goulds Water Technology centrifugal pumps",
+        "Goulds turbine pumps",
+        "Controllers and VFDs",
+        "Water treatment systems",
+        "Analytics and monitoring platforms",
+        "Dewatering equipment",
+        "Applied Water Systems"
+      ],
+      "pricing": {
+        "model": "OEM pricing through authorized distributor network",
+        "notes": "Premium pricing as market leader; revenue guidance $8.6-8.7B for 2025"
+      },
+      "revenue": "$8.6B (FY2024); $8.894B TTM (Sep 2025)",
+      "employees": 23000,
+      "differentiators": [
+        "Largest water technology company globally",
+        "Goulds brand recognition and installed base",
+        "Smart water and digital solutions (analytics/IoT)",
+        "Extensive authorized distributor network",
+        "Vertically integrated water infrastructure solutions",
+        "Acquired Evoqua Water Technologies (2023) — expanded treatment capabilities"
+      ],
+      "customerSegments": [
+        "Municipal water & wastewater",
+        "Agricultural / irrigation",
+        "Commercial building services",
+        "Light industrial",
+        "Residential water systems"
+      ]
+    },
+    {
+      "name": "ITT Inc. (Goulds Pumps)",
+      "website": "https://www.gouldspumps.com",
+      "hq": "Stamford, CT (Goulds Pumps in Seneca Falls, NY)",
+      "tier": "Tier 1 - Global OEM",
+      "locations": "17 manufacturing locations globally; operations across 6 continents",
+      "services": [
+        "Engineered pump systems",
+        "Aftermarket parts and service",
+        "API-610 centrifugal pump systems",
+        "Field service and installation",
+        "Pump overhaul and repair"
+      ],
+      "products": [
+        "ITT Goulds Pumps centrifugal pumps",
+        "ANSI process pumps",
+        "API process pumps",
+        "Twin-screw pumps",
+        "Submersible pumps",
+        "Vertical turbine pumps"
+      ],
+      "pricing": {
+        "model": "OEM pricing; major contracts (e.g., $50-80M ExxonMobil deal)",
+        "notes": "Industrial Process segment ~$1B revenue; Goulds Pumps division ~$750M"
+      },
+      "revenue": "$3.939B (ITT total, 2025); Goulds Pumps ~$750M; IP segment ~$1B",
+      "employees": "~817 at Goulds Pumps; ~2,700 in IP segment globally",
+      "differentiators": [
+        "Heritage brand (Goulds) with massive installed base",
+        "Largest single pump contract ever: $50-80M ExxonMobil API-610 deal",
+        "Strong chemical, energy, and mining market presence",
+        "Twin-screw pump technology leadership",
+        "Focus on highly engineered solutions vs. commodity"
+      ],
+      "customerSegments": [
+        "Chemical processing",
+        "Oil & gas / energy",
+        "Mining",
+        "General industrial",
+        "Pharmaceutical"
+      ]
+    },
+    {
+      "name": "DXP Enterprises",
+      "website": "https://www.dxpe.com",
+      "hq": "Houston, TX",
+      "tier": "Tier 1 - National Distributor / Service Provider",
+      "locations": "228+ locations across North America",
+      "services": [
+        "Pump remanufacturing and repair",
+        "MRO product distribution",
+        "Supply chain management",
+        "Safety services (including confined space rescue)",
+        "Technology solutions (vending, scanning, CMMS software)",
+        "Training programs and engineering support",
+        "Integrated supply chain solutions"
+      ],
+      "products": [
+        "Centrifugal pumps",
+        "Positive displacement pumps",
+        "Submersible pumps",
+        "Metering pumps",
+        "Compressors",
+        "Bearings and power transmission",
+        "Fluid power components",
+        "Industrial supplies (broad MRO catalog)"
+      ],
+      "pricing": {
+        "model": "Distributor markup on OEM products; service labor rates; MRO contracts; integrated supply agreements",
+        "notes": "Revenue grew from $1.67B (2023) to $1.80B (2024) — strong demand"
+      },
+      "revenue": "$1.80B (FY2024); $1.92B TTM (Q2 2025)",
+      "employees": 3028,
+      "differentiators": [
+        "Founded 1908 — over 100 years in business",
+        "228+ locations — massive geographic coverage",
+        "Multi-category MRO distributor (not just pumps)",
+        "Integrated supply chain solutions with data analytics",
+        "CMMS software and technology solutions",
+        "ESG commitment and training programs"
+      ],
+      "customerSegments": [
+        "Oil & gas / refining",
+        "Power generation",
+        "Chemical processing",
+        "Food & beverage",
+        "Agriculture",
+        "Mining",
+        "Manufacturing",
+        "Renewable energy",
+        "Wastewater treatment",
+        "Data centers"
+      ]
+    },
+    {
+      "name": "FCX Performance (Applied Industrial Technologies)",
+      "website": "https://www.fcxperformance.com",
+      "hq": "Columbus, OH (parent Applied Industrial HQ: Cleveland, OH)",
+      "tier": "Tier 1 - National Distributor / Service Provider",
+      "locations": "65+ locations nationwide across 24 specialized divisions",
+      "services": [
+        "Valve automation and repair",
+        "Pump distribution and service",
+        "System engineering",
+        "Hose fabrication",
+        "Instrumentation and calibration",
+        "Filtration solutions",
+        "Process heating",
+        "Flow control consulting"
+      ],
+      "products": [
+        "Flowserve pumps and valves",
+        "Specialty flow control products",
+        "Measurement instrumentation",
+        "Filtration equipment",
+        "Process heating equipment",
+        "Safety relief products",
+        "Specialty piping"
+      ],
+      "pricing": {
+        "model": "Distributor pricing; value-added service fees; custom engineering fees",
+        "notes": "Acquired by Applied Industrial Technologies for $784M in 2018 — significant platform value"
+      },
+      "revenue": "Part of Applied Industrial Technologies ($4.5B FY2024 total); FCX standalone not disclosed post-acquisition",
+      "employees": 1000,
+      "differentiators": [
+        "Largest distributor of specialty flow control products in the US",
+        "24 specialized divisions with deep technical expertise",
+        "Backed by Applied Industrial Technologies ($4.5B parent)",
+        "National footprint with local technical expertise",
+        "Authorized distributor for major OEMs (Flowserve, etc.)",
+        "Integrated engineering and service capabilities"
+      ],
+      "customerSegments": [
+        "Chemical processing",
+        "Oil & gas / refining",
+        "Power generation",
+        "Pulp & paper",
+        "Mining",
+        "Water & wastewater",
+        "Pharmaceutical"
+      ]
+    },
+    {
+      "name": "Grundfos",
+      "website": "https://www.grundfos.com",
+      "hq": "Bjerringbro, Denmark (US: Brookshire, TX)",
+      "tier": "Tier 1 - Global OEM",
+      "locations": "Global operations; US facilities in Brookshire TX, Olathe KS, Allentown PA, Fresno CA, Indianapolis IN, Selma AL, Aurora IL",
+      "services": [
+        "Pump manufacturing and distribution",
+        "Machine Health predictive maintenance platform",
+        "System design and engineering",
+        "Aftermarket parts and service",
+        "Energy optimization consulting"
+      ],
+      "products": [
+        "Centrifugal pumps",
+        "Submersible pumps",
+        "Circulator pumps",
+        "Dosing pumps",
+        "Booster systems",
+        "Water treatment solutions",
+        "IoT-enabled smart pumps"
+      ],
+      "pricing": {
+        "model": "OEM pricing through distributor network; Grundfos Machine Health subscription model",
+        "notes": "Premium positioning as world's largest pump manufacturer"
+      },
+      "revenue": "EUR 4.46B global (FY2024); ~$3.3B USD equivalent",
+      "employees": "19,000+ globally",
+      "differentiators": [
+        "World's largest pump manufacturer by unit volume",
+        "Grundfos Machine Health — ML-based predictive maintenance platform",
+        "Strong HVAC and water utility market position",
+        "Danish engineering heritage (founded 1945)",
+        "Industry leader in energy-efficient pump design",
+        "Significant US manufacturing footprint"
+      ],
+      "customerSegments": [
+        "HVAC / building services",
+        "Water & wastewater utilities",
+        "Industrial manufacturing",
+        "Commercial buildings",
+        "Residential"
+      ]
+    },
+    {
+      "name": "KSB SE & Co. KGaA",
+      "website": "https://www.ksb.com",
+      "hq": "Frankenthal, Germany (US: Richmond, VA)",
+      "tier": "Tier 1 - Global OEM / Service Provider",
+      "locations": "Global presence in 40+ countries; US: Richmond VA HQ, Bakersfield CA, regional offices in OH, TX, IL, AZ; 12+ North American service stations (SupremeServ); GIW Industries (Augusta, GA)",
+      "services": [
+        "KSB SupremeServ (pumps911.com) — pump repair and service",
+        "Field service and installation",
+        "Laser alignment",
+        "Vibration analysis",
+        "Pump optimization",
+        "Spare parts distribution",
+        "Retrofit and upgrade programs"
+      ],
+      "products": [
+        "Centrifugal pumps",
+        "Submersible pumps",
+        "Process pumps",
+        "Slurry pumps (GIW brand)",
+        "Valves and automation",
+        "Booster systems"
+      ],
+      "pricing": {
+        "model": "OEM pricing; SupremeServ service contracts; aftermarket parts",
+        "notes": "Strong aftermarket focus through SupremeServ network"
+      },
+      "revenue": "EUR 2.97B global (FY2024)",
+      "employees": "16,000+ globally; 150+ SupremeServ specialists in North America",
+      "differentiators": [
+        "GIW Industries (Augusta, GA) — leading slurry pump manufacturer",
+        "SupremeServ dedicated aftermarket/service brand",
+        "Strong European and global installed base",
+        "Valve and automation integrated offering",
+        "150+ year engineering heritage"
+      ],
+      "customerSegments": [
+        "Mining (slurry handling via GIW)",
+        "Water & wastewater",
+        "Energy / power generation",
+        "Chemical processing",
+        "Building services"
+      ]
+    },
+    {
+      "name": "Pump Solutions Group (PSG) — Dover Corporation",
+      "website": "https://www.psgdover.com",
+      "hq": "Chicago, IL (parent Dover Corp: Downers Grove, IL)",
+      "tier": "Tier 1 - Global OEM (Specialty / Positive Displacement)",
+      "locations": "Plants in California, Michigan, Georgia; international in Germany, China, India, France, Czech Republic",
+      "services": [
+        "Pump manufacturing",
+        "Aftermarket parts and service",
+        "Technical support and engineering",
+        "Application engineering"
+      ],
+      "products": [
+        "Wilden (air-operated double-diaphragm pumps)",
+        "Blackmer (rotary vane, centrifugal, screw pumps)",
+        "Almatec (AODD pumps)",
+        "Mouvex (eccentric disc pumps)",
+        "Griswold (centrifugal pumps)",
+        "Neptune (chemical metering pumps)",
+        "Quattroflow (quaternary diaphragm pumps)",
+        "Hydro (pump rebuilding and engineering services)",
+        "Quantex, Ebsray, em-tec, Malema, Abaque, All-Flo, PSG Biotech"
+      ],
+      "pricing": {
+        "model": "OEM pricing; distributor network; aftermarket parts",
+        "notes": "$300M+ annualized revenue from pump brands"
+      },
+      "revenue": "$300M+ (PSG division); Dover Pumps & Process Solutions segment is larger",
+      "employees": "Not separately disclosed",
+      "differentiators": [
+        "15+ specialty pump brands under one umbrella",
+        "Positive displacement pump specialist (vs. centrifugal focus of most competitors)",
+        "Hydro brand offers pump rebuilding/engineering services",
+        "Backed by Dover Corporation ($8.5B diversified industrial)",
+        "Strong biotech/pharmaceutical pump line (Quattroflow, PSG Biotech)"
+      ],
+      "customerSegments": [
+        "Chemical processing",
+        "Oil & gas / energy transfer",
+        "Food & beverage",
+        "Pharmaceutical / biotech",
+        "Water & wastewater",
+        "Hygienic / sanitary applications"
+      ]
+    },
+    {
+      "name": "The Weir Group",
+      "website": "https://www.global.weir",
+      "hq": "Glasgow, Scotland (US: Madison, WI — Weir Minerals; Portland, OR — ESCO)",
+      "tier": "Tier 1 - Global OEM (Mining / Slurry Specialist)",
+      "locations": "Operations in 50+ countries; US: Madison WI, Portland OR (ESCO), plus regional offices",
+      "services": [
+        "Slurry pump repair and service",
+        "Hydrocyclone services",
+        "Mill liner replacement",
+        "Ground-engaging tools (ESCO)",
+        "Field service and installation",
+        "Performance optimization"
+      ],
+      "products": [
+        "Warman slurry pumps",
+        "Cavex hydrocyclones",
+        "Warman knife gate valves",
+        "Linatex rubber products",
+        "ESCO ground-engaging tools",
+        "Submersible centrifugal slurry pumps"
+      ],
+      "pricing": {
+        "model": "OEM pricing plus aftermarket parts and wear components",
+        "notes": "Heavy aftermarket revenue from wear parts and consumables in mining"
+      },
+      "revenue": "$3.22B TTM (Jun 2025)",
+      "employees": "~2,500 at ESCO globally; 400 in Oregon; total group not specified",
+      "differentiators": [
+        "Global leader in mining/slurry pump applications",
+        "Warman brand dominance in mining sector",
+        "High aftermarket revenue from wear parts",
+        "ESCO ground-engaging tools complement mining offering",
+        "Founded 1871 — deep mining engineering heritage"
+      ],
+      "customerSegments": [
+        "Mining (primary focus)",
+        "Oil sands",
+        "Power generation",
+        "General industrial"
+      ]
+    },
+    {
+      "name": "Ruhrpumpen",
+      "website": "https://www.ruhrpumpen.com",
+      "hq": "Monterrey, Mexico (US: Tulsa, OK)",
+      "tier": "Tier 2 - Specialized OEM / Service Provider",
+      "locations": "Tulsa OK and Houston TX service centers (US); global manufacturing in Mexico, India, Germany, South Africa, Brazil, China",
+      "services": [
+        "Engineering services",
+        "Pump repair and maintenance",
+        "Spare parts distribution",
+        "Field service",
+        "Pump testing"
+      ],
+      "products": [
+        "API-610 centrifugal pumps",
+        "Vertical pumps",
+        "Multistage pumps",
+        "Submersible pumps",
+        "Fire pumps"
+      ],
+      "pricing": {
+        "model": "OEM pricing; competitive against Flowserve/Sulzer in API applications",
+        "notes": "Positioned as cost-competitive alternative to major OEMs"
+      },
+      "revenue": "Not publicly disclosed (private company)",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "Strong API-610 pump manufacturer",
+        "Cost-competitive vs. Flowserve and Sulzer",
+        "Houston and Tulsa service centers for oil & gas corridor",
+        "Global manufacturing footprint for cost optimization"
+      ],
+      "customerSegments": [
+        "Oil & gas / refining",
+        "Petrochemical",
+        "Power generation",
+        "Water",
+        "General industrial"
+      ]
+    },
+    {
+      "name": "Sundyne",
+      "website": "https://www.sundyne.com",
+      "hq": "Arvada, CO",
+      "tier": "Tier 2 - Specialized OEM",
+      "locations": "Arvada CO headquarters; authorized service centers: Santa Fe Springs CA (Pump Engineering), Willow Grove PA (Sunair), NJ/PA/DE/NY (ProcessFlo); global factory service centers",
+      "services": [
+        "Authorized pump service and repair",
+        "Emergency repair service",
+        "Spare parts distribution",
+        "Field service",
+        "Performance upgrades"
+      ],
+      "products": [
+        "High-speed centrifugal pumps",
+        "API-610 / API-685 sealless pumps",
+        "Compressors",
+        "Low-flow, high-head pumps"
+      ],
+      "pricing": {
+        "model": "OEM pricing; authorized service center network",
+        "notes": "Niche premium pricing for specialized high-speed/sealless applications"
+      },
+      "revenue": "Not publicly disclosed",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "High-speed, integrally-geared pump technology leader",
+        "Sealless/magnetic-drive pump specialist",
+        "Strong position in hydrocarbon processing",
+        "Authorized service center network ensures quality control"
+      ],
+      "customerSegments": [
+        "Oil & gas / hydrocarbon processing",
+        "Chemical processing",
+        "Power generation",
+        "Industrial gas"
+      ]
+    },
+    {
+      "name": "Industrial Service Solutions (ISS)",
+      "website": "https://iss-na.com",
+      "hq": "Not publicly disclosed",
+      "tier": "Tier 2 - National Service Provider",
+      "locations": "50 US-based shops and service locations nationwide",
+      "services": [
+        "Industrial pump repair (all types and brands)",
+        "Electric motor repair",
+        "Industrial valve repair",
+        "Rotating mechanical equipment maintenance",
+        "Field service — 24/7 emergency dispatch",
+        "Large pump service (shop and field)",
+        "Vibration analysis",
+        "Laser alignment"
+      ],
+      "products": [
+        "All OEM pump brands (service/repair only, not manufacturing)",
+        "Spare parts and components",
+        "Refurbished equipment"
+      ],
+      "pricing": {
+        "model": "Service labor rates; repair quotes; emergency service premiums",
+        "notes": "Nationwide 24/7 availability commands premium for emergency work"
+      },
+      "revenue": "Not publicly disclosed",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "50 US service locations — largest independent pump/motor repair network",
+        "Brand-agnostic repair (all OEMs)",
+        "24/7 emergency dispatch nationwide",
+        "Combined pump, motor, and valve service capabilities",
+        "Trusted leader in industrial equipment repair"
+      ],
+      "customerSegments": [
+        "Oil & gas / refining",
+        "Chemical processing",
+        "Power generation",
+        "Pulp & paper",
+        "Mining",
+        "Municipal water/wastewater"
+      ]
+    },
+    {
+      "name": "Hydra-Tech Pumps",
+      "website": "https://www.hydratechpumps.com",
+      "hq": "Nesquehoning, PA",
+      "tier": "Tier 3 - Niche OEM",
+      "locations": "Single manufacturing facility: 167 Stock Street, Nesquehoning, PA 18240",
+      "services": [
+        "Hydraulic pump manufacturing",
+        "Custom hydraulic power unit design",
+        "Pump system engineering",
+        "Parts and service support"
+      ],
+      "products": [
+        "Hydraulically driven submersible pumps",
+        "Hydraulic power units",
+        "Custom pumping systems",
+        "Trash pumps",
+        "Sludge pumps"
+      ],
+      "pricing": {
+        "model": "Direct OEM pricing; custom quote for specialized systems",
+        "notes": "Small-scale manufacturer with niche focus"
+      },
+      "revenue": "$6M (est. 2025)",
+      "employees": "12-14",
+      "differentiators": [
+        "Specialist in hydraulically driven pumps (unique niche)",
+        "Since 1977 — nearly 50 years of hydraulic pump expertise",
+        "Versatile, fuel-efficient, and cost-effective solutions",
+        "Custom hydraulic power unit design capability"
+      ],
+      "customerSegments": [
+        "Construction",
+        "Municipal utilities",
+        "Petrochemical",
+        "Mining",
+        "Marine",
+        "Utilities"
+      ]
+    },
+    {
+      "name": "Southeast Pump Specialist",
+      "website": "https://sepump.net",
+      "hq": "Augusta, GA",
+      "tier": "Tier 3 - Regional Distributor / Service Provider",
+      "locations": "Augusta, GA headquarters; service coverage across Georgia, South Carolina, Florida, and North Carolina",
+      "services": [
+        "Pump distribution and sales",
+        "SKF-certified pump repairs and rebuilds",
+        "On-site field services",
+        "Preventive maintenance programs",
+        "Sealing solutions",
+        "Technical consulting"
+      ],
+      "products": [
+        "Industrial pumps (multiple OEM brands)",
+        "Advanced sealing solutions",
+        "Pump parts and accessories"
+      ],
+      "pricing": {
+        "model": "Distributor pricing; service labor rates",
+        "notes": "Regional pricing competitive with national distributors"
+      },
+      "revenue": "Not publicly disclosed (estimated <$50M)",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "20+ years of experience in Southeast US",
+        "SKF-certified repair technicians",
+        "Strong regional relationships in GA, SC, FL, NC",
+        "Focused on chemical, pulp & paper, and power generation"
+      ],
+      "customerSegments": [
+        "Chemical processing",
+        "Pulp & paper",
+        "Power generation",
+        "Municipal facilities"
+      ]
+    },
+    {
+      "name": "Mid-State Industrial Pump Services",
+      "website": "https://midstatepumpservices.com",
+      "hq": "Florida",
+      "tier": "Tier 3 - Regional Distributor / Service Provider",
+      "locations": "Florida and Southeast US; 27,500 sq ft dedicated Pump Division facility under crane rails",
+      "services": [
+        "New pump sales",
+        "Minor to major pump repair",
+        "Complete OEM specification repairs",
+        "Pump remanufacturing",
+        "Field service"
+      ],
+      "products": [
+        "Weir pumps (exclusive Florida distributor)",
+        "Various industrial pump brands",
+        "Pump parts and accessories"
+      ],
+      "pricing": {
+        "model": "Distributor pricing; repair service quotes",
+        "notes": "40-year track record provides strong value proposition"
+      },
+      "revenue": "Not publicly disclosed",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "40-year proven track record",
+        "Exclusive Weir pump distributor for Florida",
+        "Largest machining equipment in the Southeast",
+        "Can handle smallest to largest circulating water pumps",
+        "27,500 sq ft dedicated pump facility under crane rails"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Mining",
+        "Water & wastewater",
+        "General industrial"
+      ]
+    },
+    {
+      "name": "Hydra Service, Inc.",
+      "website": "https://www.hydraservice.net",
+      "hq": "Warrior, AL",
+      "tier": "Tier 3 - Regional Distributor / Service Provider",
+      "locations": "Warrior AL (HQ), Robertsdale AL, Athens AL, Jasper GA, Mississippi",
+      "services": [
+        "Pump repair (65,000+ sq ft of repair facilities)",
+        "Electric motor repair and rewind",
+        "Machine shop services",
+        "Pump testing (test tanks)",
+        "24-hour on-call field service",
+        "Crane-equipped service trucks",
+        "Pump rentals"
+      ],
+      "products": [
+        "ABS pumps",
+        "Godwin pumps",
+        "Yamada pumps",
+        "Toyo pumps",
+        "ESSCO pumps",
+        "National Pump",
+        "Ingersoll Rand equipment"
+      ],
+      "pricing": {
+        "model": "Distributor pricing; rental rates; service labor rates; 24-hour emergency rates",
+        "notes": "Established 1982 — strong Alabama market presence"
+      },
+      "revenue": "Not publicly disclosed (estimated <$25M)",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "65,000+ sq ft repair facility (pump, motor, machine shop)",
+        "Fleet of crane-equipped service trucks",
+        "24-hour on-call service",
+        "Equipment rental program",
+        "Stocking distributor for multiple OEM brands",
+        "40+ years serving AL, MS, GA, FL"
+      ],
+      "customerSegments": [
+        "Municipal water/wastewater",
+        "Mining",
+        "Construction",
+        "General industrial",
+        "Agricultural"
+      ]
+    },
+    {
+      "name": "John Bouchard & Sons Co. (JBS)",
+      "website": "https://jbouchard.com",
+      "hq": "Tennessee",
+      "tier": "Tier 3 - Regional Service Provider",
+      "locations": "2 locations in Tennessee; service coverage across Tennessee, Kentucky, and Northern Alabama",
+      "services": [
+        "Pump repair and rebuilding (all types and sizes)",
+        "Rotating equipment service (blowers, gearboxes, motors)",
+        "Field service",
+        "Shop repair",
+        "General and CNC machine work",
+        "Air compressor sales and service"
+      ],
+      "products": [
+        "Authorized for: American Marsh, Kaeser, Ebara, Warren Rupp, Sandpiper, Crane Pumps, Vertiflo, Rainbird, Barnes, Fairbanks Morse Pentair, Becker"
+      ],
+      "pricing": {
+        "model": "Service labor rates; repair quotes",
+        "notes": "Most experienced pump rebuilder in the Mid-South"
+      },
+      "revenue": "Not publicly disclosed",
+      "employees": "Not publicly disclosed",
+      "differentiators": [
+        "Most experienced pump rebuilder in the Mid-South",
+        "Can recondition every type and size — from hand pumps to 750+ HP",
+        "Multiple authorized factory service agreements",
+        "CNC machining capability",
+        "Strong Tennessee/Kentucky/Alabama coverage"
+      ],
+      "customerSegments": [
+        "Municipal water/wastewater",
+        "Industrial manufacturing",
+        "Commercial facilities",
+        "Institutional"
+      ]
+    }
+  ],
+  "marketInsights": {
+    "marketSize": {
+      "globalIndustrialPumps2025": "$48.2B - $75.8B (varies by research firm definition)",
+      "usIndustrialPumps": "Significant portion of global; US earmarked $50B+ for water infrastructure 2022-2026",
+      "northAmericaPumpServices2025": "$6.4B",
+      "northAmericaPumpServices2026": "$6.8B",
+      "northAmericaPumpServices2035": "$12.8B",
+      "globalCentrifugalPumps2024": "$42.2B",
+      "pumpRepairAndMaintenanceAnnual": "$15B (global aftermarket estimate)",
+      "serviceContractsShareOfMarket": "40% of total aftermarket value"
+    },
+    "growthRate": {
+      "northAmericaPumpServicesCAGR": "7.7% (2026-2035)",
+      "globalIndustrialPumpsCAGR": "4.3% - 5.3% (varies by source, to 2030-2032)",
+      "flowserveAftermarketGrowth": "8.8% YoY (2025)",
+      "sulzerServicesGrowth": "12.3% YoY (2024)"
+    },
+    "trends": [
+      {
+        "trend": "Predictive Maintenance & IoT",
+        "description": "AI-enabled predictive maintenance platforms (Flowserve RedRaven, Grundfos Machine Health, Sulzer Sense) forecast bearing failures 2 weeks ahead. Wireless vibration sensors and edge computing chips embedded in pumps cut mean time to repair by 25%. Predictive maintenance expected to save companies $630B globally by 2025."
+      },
+      {
+        "trend": "Pump-as-a-Service (PaaS) Business Models",
+        "description": "Shift from transactional repair to subscription-based service models utilizing vibration sensors, continuous monitoring, and predictive analytics to extend pump fleet life. Flowserve aftermarket grew 8.8% YoY driven by this model."
+      },
+      {
+        "trend": "Aftermarket & Lifecycle Services Expansion",
+        "description": "OEMs expanding beyond spare parts to full lifecycle solutions. Sulzer now services non-Sulzer equipment. Revenue from contracts and preventative maintenance accounts for 40% of total aftermarket market value."
+      },
+      {
+        "trend": "Private Equity Consolidation",
+        "description": "PE firms actively rolling up regional service companies into platforms. ISG itself is a PE-backed rollup (KCM Capital, now TJC LP). Organic EBITDA CAGR of ~30% achieved during KCM ownership through acquisitions and operational improvement."
+      },
+      {
+        "trend": "Water Infrastructure Investment",
+        "description": "US earmarked $50B+ for water infrastructure upgrades (2022-2026), driving sustained replacement of aging municipal pump networks and creating aftermarket service demand."
+      },
+      {
+        "trend": "Skilled Labor Shortage",
+        "description": "High cost of skilled labor, need for specialized tools and equipment, and complexities of maintaining different pump types are key market challenges. Companies with established training programs and deep benches have competitive advantage."
+      },
+      {
+        "trend": "Digital Transformation & Smart Pumping",
+        "description": "Edge computing expected to process nearly half of enterprise data by 2025, enabling faster pump monitoring decisions. Smart sensors track vibration, temperature, and pressure in real time. IIoT-based technologies with wireless data transmission becoming standard."
+      },
+      {
+        "trend": "OEM Brand-Agnostic Service Growth",
+        "description": "Independent service providers (ISS, regional companies) growing by servicing all OEM brands, not just their own. Sulzer explicitly expanding to non-Sulzer equipment. ISG brands serve as brand-agnostic repair providers."
+      }
+    ],
+    "keyPlayers": {
+      "tier1OEMs": [
+        {"name": "Flowserve", "revenue": "$4.7B", "focus": "Full-line pumps, valves, seals + global aftermarket"},
+        {"name": "Xylem (Goulds Water Technology)", "revenue": "$8.9B", "focus": "Water technology, municipal/residential pumps"},
+        {"name": "Grundfos", "revenue": "EUR 4.5B", "focus": "World's largest pump manufacturer, HVAC/water"},
+        {"name": "ITT (Goulds Pumps)", "revenue": "$3.9B (corp), $750M (Goulds)", "focus": "Engineered centrifugal pumps, chemical/energy"},
+        {"name": "Sulzer", "revenue": "$3.9B", "focus": "OEM + multi-brand aftermarket services"},
+        {"name": "KSB", "revenue": "EUR 3.0B", "focus": "Pumps, valves, automation + SupremeServ aftermarket"},
+        {"name": "Weir Group", "revenue": "$3.2B", "focus": "Mining/slurry specialist (Warman pumps)"},
+        {"name": "PSG (Dover)", "revenue": "$300M+", "focus": "Positive displacement pump specialist (15+ brands)"}
+      ],
+      "tier1Distributors": [
+        {"name": "DXP Enterprises", "revenue": "$1.9B", "focus": "Multi-category MRO distributor, 228+ locations"},
+        {"name": "FCX Performance (Applied Industrial)", "revenue": "Part of $4.5B AIT", "focus": "Largest specialty flow control distributor, 65+ locations"}
+      ],
+      "tier2ServiceProviders": [
+        {"name": "Industrial Service Solutions (ISS)", "focus": "50 US shops, brand-agnostic pump/motor/valve repair"},
+        {"name": "Ruhrpumpen", "focus": "API-610 specialist, Houston/Tulsa service centers"},
+        {"name": "Sundyne", "focus": "High-speed/sealless pump niche, authorized service network"}
+      ],
+      "tier3RegionalCompetitors": [
+        {"name": "Southeast Pump Specialist", "hq": "Augusta, GA", "focus": "SE US pump distribution and SKF-certified repair"},
+        {"name": "Mid-State Industrial", "hq": "Florida", "focus": "Weir distributor FL, largest SE machining capability"},
+        {"name": "Hydra Service Inc.", "hq": "Warrior, AL", "focus": "65K sq ft repair facility, AL/MS/GA/FL coverage"},
+        {"name": "John Bouchard & Sons (JBS)", "hq": "Tennessee", "focus": "Mid-South pump rebuilder, TN/KY/AL"},
+        {"name": "Hydra-Tech Pumps", "hq": "Nesquehoning, PA", "focus": "Hydraulic pump specialist since 1977"}
+      ]
+    },
+    "competitivePositioning": {
+      "isgStrengths": [
+        "Multi-brand platform with 16+ specialized companies",
+        "40+ locations providing national coverage with local expertise",
+        "PE-backed growth engine (TJC LP) with acquisition track record",
+        "Critical-to-process positioning — non-discretionary spend",
+        "Strong Southeast and Central US presence",
+        "Brand-agnostic service model across pumps, valves, motors, compressors"
+      ],
+      "isgOpportunities": [
+        "Expand pump service capabilities (RSI as platform)",
+        "Add predictive maintenance / IoT service offerings",
+        "Acquire additional regional pump service companies in underserved geographies",
+        "Develop Pump-as-a-Service recurring revenue model",
+        "Cross-sell across 16 brands to existing customer base",
+        "Capitalize on $50B+ US water infrastructure investment cycle"
+      ],
+      "isgThreats": [
+        "Tier 1 OEMs (Flowserve, Sulzer) expanding aftermarket to service non-OEM equipment",
+        "Large distributors (DXP, FCX) with deeper product catalogs and more locations",
+        "Predictive maintenance platforms from OEMs could reduce repair demand long-term",
+        "Skilled labor shortage affecting ability to scale service operations",
+        "PE-backed competitor rollups creating similar multi-brand platforms"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISG Parts & Equipment Catalog</title>
+  <link rel="stylesheet" href="isg_theme.css">
+  <link rel="stylesheet" href="../../liquid-glass/liquid-glass.css">
+  <link rel="stylesheet" href="../../liquid-glass/liquid-glass-viz.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../../liquid-glass/liquid-glass.js" defer></script>
+  <script src="../../liquid-glass/liquid-glass-viz.js" defer></script>
+  <style>
+    /* ---- Layout ---- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--lg-bg, #0A1628);
+      color: var(--lg-text, #E2E8F0);
+      font-family: var(--lg-font-body, Inter, -apple-system, sans-serif);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---- Sticky Header ---- */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; gap: 16px;
+      height: 64px; padding: 0 24px;
+      background: rgba(15, 29, 54, 0.85);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .header__logo {
+      font-family: var(--lg-font-heading); font-size: 20px; font-weight: 700;
+      color: var(--lg-primary-400); white-space: nowrap; cursor: default;
+    }
+    .header__logo span { color: var(--lg-text-dim); font-weight: 400; font-size: 14px; margin-left: 8px; }
+    .header__search { flex: 1; max-width: 480px; }
+    .header__search .lg-search { width: 100%; }
+    .header__actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+    .header__cart-btn {
+      position: relative; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: var(--lg-radius-sm);
+      color: var(--lg-text); width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 20px; transition: background 0.15s;
+    }
+    .header__cart-btn:hover { background: rgba(255,255,255,0.14); }
+    .header__cart-badge {
+      position: absolute; top: -4px; right: -4px;
+      min-width: 18px; height: 18px; padding: 0 5px;
+      background: var(--lg-primary-500); color: #fff;
+      font-size: 11px; font-weight: 700; border-radius: 9px;
+      display: none; align-items: center; justify-content: center; line-height: 1;
+    }
+    .header__cart-badge.show { display: flex; }
+    .header__back {
+      color: var(--lg-text-dim); text-decoration: none; font-size: 13px;
+      white-space: nowrap; transition: color 0.15s;
+    }
+    .header__back:hover { color: var(--lg-text); }
+
+    /* ---- Sidebar Toggle (mobile) ---- */
+    .sidebar-toggle {
+      display: none; background: none; border: none;
+      color: var(--lg-text); font-size: 24px; cursor: pointer; padding: 4px;
+    }
+
+    /* ---- Main layout ---- */
+    .layout {
+      display: flex; margin-top: 64px; min-height: calc(100vh - 64px);
+    }
+
+    /* ---- Sidebar ---- */
+    .sidebar {
+      width: 260px; min-width: 260px; padding: 20px 16px;
+      background: rgba(15, 29, 54, 0.5);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      overflow-y: auto; height: calc(100vh - 64px); position: sticky; top: 64px;
+    }
+    .sidebar__title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--lg-text-dim); margin: 16px 0 8px; padding: 0 8px;
+    }
+    .sidebar__title:first-child { margin-top: 0; }
+    .sidebar__btn {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 8px 12px; margin-bottom: 2px;
+      background: transparent; border: none; border-radius: var(--lg-radius-sm);
+      color: var(--lg-text-dim); font-size: 13px; font-family: inherit;
+      cursor: pointer; transition: all 0.15s; text-align: left;
+    }
+    .sidebar__btn:hover { background: rgba(255,255,255,0.06); color: var(--lg-text); }
+    .sidebar__btn.active { background: rgba(255,255,255,0.1); color: var(--lg-primary-300); font-weight: 600; }
+    .sidebar__btn .count {
+      font-size: 11px; background: rgba(255,255,255,0.08);
+      padding: 1px 7px; border-radius: 8px; color: var(--lg-text-dim);
+    }
+    .sidebar__btn.active .count { background: rgba(255,255,255,0.15); color: var(--lg-primary-300); }
+
+    /* ---- Main Content ---- */
+    .main { flex: 1; padding: 24px; max-width: 100%; overflow: hidden; }
+
+    /* ---- Toolbar ---- */
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 20px;
+    }
+    .toolbar__chips {
+      display: flex; flex-wrap: wrap; gap: 6px; flex: 1;
+    }
+    .chip {
+      padding: 6px 14px; border-radius: 20px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--lg-text-dim); font-size: 13px; cursor: pointer;
+      transition: all 0.15s; font-family: inherit; white-space: nowrap;
+    }
+    .chip:hover { background: rgba(255,255,255,0.1); color: var(--lg-text); }
+    .chip.active {
+      background: var(--lg-primary-600); border-color: var(--lg-primary-500);
+      color: #fff; font-weight: 500;
+    }
+    .toolbar__sort select {
+      padding: 8px 32px 8px 12px; border-radius: var(--lg-radius-sm);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--lg-text); font-size: 13px; font-family: inherit;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+      cursor: pointer; outline: none;
+    }
+    .toolbar__sort select:focus { border-color: var(--lg-primary-500); }
+    .toolbar__sort select option { background: var(--lg-surface); color: var(--lg-text); }
+
+    .results-info {
+      font-size: 13px; color: var(--lg-text-dim); margin-bottom: 16px;
+    }
+    .results-info strong { color: var(--lg-text); }
+
+    /* ---- Product Grid ---- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .product-card {
+      padding: 20px; cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .product-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.25); }
+    .product-card__name {
+      font-weight: 600; font-size: 15px; color: var(--lg-text);
+      line-height: 1.3; margin: 0;
+    }
+    .product-card__brand {
+      font-size: 11px; display: inline-block;
+    }
+    .product-card__category {
+      display: inline-block; padding: 2px 8px; border-radius: 6px;
+      background: rgba(255,255,255,0.06); font-size: 11px;
+      color: var(--lg-text-dim); margin-left: 4px;
+    }
+    .product-card__meta { font-size: 12px; color: var(--lg-text-dim); line-height: 1.5; }
+    .product-card__meta span { display: block; }
+    .product-card__specs {
+      font-size: 11px; color: var(--lg-tertiary-400); line-height: 1.5;
+    }
+    .product-card__specs span { display: block; }
+    .product-card__footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto; padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .product-card__price {
+      font-size: 16px; font-weight: 700; color: var(--lg-secondary-400);
+    }
+    .product-card__price.quote { font-size: 13px; font-weight: 500; color: var(--lg-text-dim); font-style: italic; }
+    .product-card__footer .lg-btn { font-size: 12px; padding: 6px 14px; }
+
+    /* ---- Pagination ---- */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; margin-top: 28px; padding-bottom: 40px;
+    }
+    .pagination__btn {
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--lg-radius-sm); background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08); color: var(--lg-text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .pagination__btn:hover { background: rgba(255,255,255,0.12); color: var(--lg-text); }
+    .pagination__btn.active {
+      background: var(--lg-primary-600); border-color: var(--lg-primary-500); color: #fff; font-weight: 600;
+    }
+    .pagination__btn:disabled { opacity: 0.3; cursor: default; }
+    .pagination__info { font-size: 13px; color: var(--lg-text-dim); margin: 0 12px; }
+
+    /* ---- Cart Drawer ---- */
+    .cart-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      z-index: 899; opacity: 0; visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .cart-backdrop.open { opacity: 1; visibility: visible; }
+    .cart-drawer {
+      position: fixed; top: 0; right: 0; width: 380px; height: 100%;
+      background: var(--lg-surface);
+      backdrop-filter: blur(60px) saturate(180%);
+      border-left: 1px solid rgba(255,255,255,0.12);
+      z-index: 900; transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      display: flex; flex-direction: column;
+    }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-drawer__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .cart-drawer__title {
+      font-size: 18px; font-weight: 600; color: var(--lg-text);
+      font-family: var(--lg-font-heading);
+    }
+    .cart-drawer__close {
+      background: none; border: none; color: var(--lg-text-dim);
+      font-size: 22px; cursor: pointer; padding: 4px;
+    }
+    .cart-drawer__close:hover { color: var(--lg-text); }
+    .cart-drawer__items {
+      flex: 1; overflow-y: auto; padding: 16px 24px;
+    }
+    .cart-item {
+      display: flex; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .cart-item__info { flex: 1; }
+    .cart-item__name { font-size: 13px; font-weight: 600; color: var(--lg-text); margin-bottom: 2px; }
+    .cart-item__brand { font-size: 11px; color: var(--lg-text-dim); }
+    .cart-item__price { font-size: 13px; color: var(--lg-secondary-400); margin-top: 4px; }
+    .cart-item__qty {
+      display: flex; align-items: center; gap: 8px; margin-top: 6px;
+    }
+    .cart-item__qty button {
+      width: 26px; height: 26px; border-radius: 6px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--lg-text); font-size: 14px; cursor: pointer; font-family: inherit;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-item__qty button:hover { background: rgba(255,255,255,0.14); }
+    .cart-item__qty span { font-size: 14px; font-weight: 600; min-width: 20px; text-align: center; }
+    .cart-item__remove {
+      background: none; border: none; color: var(--lg-error-400);
+      font-size: 11px; cursor: pointer; padding: 2px 0; font-family: inherit;
+    }
+    .cart-item__remove:hover { text-decoration: underline; }
+    .cart-drawer__empty {
+      text-align: center; padding: 60px 24px; color: var(--lg-text-dim); font-size: 14px;
+    }
+    .cart-drawer__footer {
+      padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .cart-drawer__subtotal {
+      display: flex; justify-content: space-between; margin-bottom: 16px;
+      font-size: 15px;
+    }
+    .cart-drawer__subtotal strong { color: var(--lg-secondary-400); }
+    .cart-drawer__footer .lg-btn { width: 100%; justify-content: center; margin-bottom: 8px; }
+
+    /* ---- Product Detail Modal ---- */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      z-index: 1000; opacity: 0; visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .modal-backdrop.open { opacity: 1; visibility: visible; }
+    .modal {
+      width: 100%; max-width: 640px; max-height: 85vh;
+      background: var(--lg-surface);
+      backdrop-filter: blur(60px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--lg-radius-lg);
+      transform: scale(0.95); transition: transform 0.2s;
+      overflow-y: auto;
+    }
+    .modal-backdrop.open .modal { transform: scale(1); }
+    .modal__header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 24px 24px 0;
+    }
+    .modal__close {
+      background: none; border: none; color: var(--lg-text-dim);
+      font-size: 24px; cursor: pointer; padding: 0; line-height: 1;
+    }
+    .modal__close:hover { color: var(--lg-text); }
+    .modal__body { padding: 16px 24px 24px; }
+    .modal__name {
+      font-size: 22px; font-weight: 700; color: var(--lg-text);
+      font-family: var(--lg-font-heading); margin: 0 0 4px;
+    }
+    .modal__brand-line {
+      font-size: 13px; color: var(--lg-text-dim); margin-bottom: 12px;
+    }
+    .modal__desc {
+      font-size: 14px; line-height: 1.6; color: var(--lg-text-dim); margin-bottom: 20px;
+    }
+    .modal__specs-table {
+      width: 100%; border-collapse: collapse; margin-bottom: 20px;
+    }
+    .modal__specs-table th,
+    .modal__specs-table td {
+      padding: 8px 12px; text-align: left; font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .modal__specs-table th {
+      color: var(--lg-text-dim); font-weight: 500; width: 40%;
+    }
+    .modal__specs-table td { color: var(--lg-text); }
+    .modal__price-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .modal__price { font-size: 22px; font-weight: 700; color: var(--lg-secondary-400); }
+    .modal__price.quote { font-size: 15px; color: var(--lg-text-dim); font-style: italic; font-weight: 500; }
+    .modal__source {
+      display: block; font-size: 12px; color: var(--lg-primary-400);
+      text-decoration: none; margin-top: 12px; word-break: break-all;
+    }
+    .modal__source:hover { text-decoration: underline; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .sidebar-toggle { display: block; }
+      .sidebar {
+        position: fixed; top: 64px; left: 0; bottom: 0;
+        z-index: 200; transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+        background: var(--lg-surface);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay {
+        position: fixed; inset: 0; top: 64px; background: rgba(0,0,0,0.4);
+        z-index: 199; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+      }
+      .sidebar-overlay.open { opacity: 1; visibility: visible; }
+      .product-grid { grid-template-columns: 1fr; }
+      .cart-drawer { width: 100%; }
+      .header__back { display: none; }
+    }
+    @media (max-width: 480px) {
+      .header { padding: 0 12px; gap: 8px; }
+      .header__logo span { display: none; }
+      .main { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header class="header">
+    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+    <div class="header__logo">ISG<span>Parts &amp; Equipment</span></div>
+    <div class="header__search">
+      <div class="lg-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="lg-search__input" id="searchInput" type="text" placeholder="Search products, brands, part numbers...">
+      </div>
+    </div>
+    <div class="header__actions">
+      <button class="header__cart-btn" onclick="toggleCart()" title="Shopping Cart">
+        &#128722;
+        <span class="header__cart-badge" id="cartBadge">0</span>
+      </button>
+      <a href="index.html" class="header__back">&#8592; Brandbook</a>
+    </div>
+  </header>
+
+  <!-- ====== SIDEBAR OVERLAY (mobile) ====== -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- ====== LAYOUT ====== -->
+  <div class="layout">
+
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar__btn active" data-brand="all" onclick="selectBrand('all', this)">
+        All Brands <span class="count" id="countAll">0</span>
+      </button>
+
+      <div class="sidebar__title">Valves</div>
+      <button class="sidebar__btn" data-brand="ivs" onclick="selectBrand('ivs', this)">
+        Industrial Valve Service <span class="count" id="countIvs">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="morin" onclick="selectBrand('morin', this)">
+        Morin Process <span class="count" id="countMorin">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="tvi" onclick="selectBrand('tvi', this)">
+        Tri-State Valve <span class="count" id="countTvi">0</span>
+      </button>
+
+      <div class="sidebar__title">Compressors</div>
+      <button class="sidebar__btn" data-brand="iap" onclick="selectBrand('iap', this)">
+        Industrial Air Power <span class="count" id="countIap">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="iac" onclick="selectBrand('iac', this)">
+        Industrial Air Centers <span class="count" id="countIac">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="ase" onclick="selectBrand('ase', this)">
+        Air Specialty <span class="count" id="countAse">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="cts" onclick="selectBrand('cts', this)">
+        Compressor &amp; Turbine Svc <span class="count" id="countCts">0</span>
+      </button>
+
+      <div class="sidebar__title">Motors</div>
+      <button class="sidebar__btn" data-brand="soles" onclick="selectBrand('soles', this)">
+        Soles Electric <span class="count" id="countSoles">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="iew" onclick="selectBrand('iew', this)">
+        Illinois Electric Works <span class="count" id="countIew">0</span>
+      </button>
+
+      <div class="sidebar__title">Pumps</div>
+      <button class="sidebar__btn" data-brand="gw" onclick="selectBrand('gw', this)">
+        Georgia Western <span class="count" id="countGw">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="rsi" onclick="selectBrand('rsi', this)">
+        Renewal Service Inc. <span class="count" id="countRsi">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="dms" onclick="selectBrand('dms', this)">
+        Dynamic Mechanical Sol. <span class="count" id="countDms">0</span>
+      </button>
+
+      <div class="sidebar__title">Specialty</div>
+      <button class="sidebar__btn" data-brand="pinnacle" onclick="selectBrand('pinnacle', this)">
+        Pinnacle Industries <span class="count" id="countPinnacle">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="tmi" onclick="selectBrand('tmi', this)">
+        Turbomachinery Ind. <span class="count" id="countTmi">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="core" onclick="selectBrand('core', this)">
+        CORE Industrial <span class="count" id="countCore">0</span>
+      </button>
+      <button class="sidebar__btn" data-brand="nmm" onclick="selectBrand('nmm', this)">
+        National Mill Maint. <span class="count" id="countNmm">0</span>
+      </button>
+    </aside>
+
+    <!-- ====== MAIN ====== -->
+    <main class="main">
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="toolbar__chips" id="categoryChips"></div>
+        <div class="toolbar__sort">
+          <select id="sortSelect" onchange="applySort()">
+            <option value="name-asc">Name A-Z</option>
+            <option value="name-desc">Name Z-A</option>
+            <option value="price-asc">Price: Low-High</option>
+            <option value="price-desc">Price: High-Low</option>
+            <option value="brand-asc">Brand A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="results-info" id="resultsInfo"></div>
+
+      <!-- Product Grid -->
+      <div class="product-grid" id="productGrid"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+    </main>
+  </div>
+
+  <!-- ====== CART DRAWER ====== -->
+  <div class="cart-backdrop" id="cartBackdrop" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header">
+      <div class="cart-drawer__title">Shopping Cart</div>
+      <button class="cart-drawer__close" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-drawer__items" id="cartItems"></div>
+    <div class="cart-drawer__footer" id="cartFooter"></div>
+  </div>
+
+  <!-- ====== PRODUCT MODAL ====== -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal__header">
+        <div></div>
+        <button class="modal__close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+<script>
+// ==========================================================================
+// PRODUCT DATA (embedded)
+// ==========================================================================
+const PRODUCTS = [
+  // ---- VALVES: Industrial Valve Service (IVS) ----
+  {id:1,name:"Farris 6400 Series Steam Safety Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"6400",manufacturer:"Farris",description:"Flanged spring loaded steam safety valve, ASME/NB Certified for Steam. Industry-standard high-capacity safety relief for steam service in power generation and process applications.",specs:{type:"Flanged Spring Loaded",certification:"ASME/NB Certified",medium:"Steam"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:2,name:"Farris 4200 Series Steam Safety Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"4200",manufacturer:"Farris",description:"Flanged spring loaded steam safety valve, ASME/NB Certified for Steam.",specs:{type:"Flanged Spring Loaded",certification:"ASME/NB Certified",medium:"Steam"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:3,name:"Farris Smart PRV",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"Smart PRV",manufacturer:"Farris",description:"Pressure Relief Valve with wireless position monitoring via WirelessHART protocol. Enables predictive maintenance and real-time monitoring.",specs:{technology:"WirelessHART Protocol",feature:"Wireless Position Monitoring"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:4,name:"Farris 3800 Series Process Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"3800",manufacturer:"Farris",description:"Pilot operated process valve, ASME/NB Certified for Air/Steam/Water service.",specs:{type:"Pilot Operated",certification:"ASME/NB Certified",medium:"Air/Steam/Water"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:5,name:"Farris 2600 Series Process Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"2600",manufacturer:"Farris",description:"Flanged spring loaded process valve, ASME/NB Certified for Air/Steam/Water applications.",specs:{type:"Flanged Spring Loaded",certification:"ASME/NB Certified",medium:"Air/Steam/Water"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:6,name:"Farris 1896 Series Steam Safety Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"1896",manufacturer:"Farris",description:"Threaded brass/bronze construction steam safety valve, ASME/NB Certified.",specs:{type:"Threaded",material:"Brass/Bronze",certification:"ASME/NB Certified",medium:"Air/Steam/Water"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:7,name:"Farris 1890 Series Process Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"1890",manufacturer:"Farris",description:"Threaded steel process valve, ASME/NB Certified for Air/Steam/Water.",specs:{type:"Threaded",material:"Steel",certification:"ASME/NB Certified"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:8,name:"Farris 2700 Series Process Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Farris Valves",partNumber:"2700",manufacturer:"Farris",description:"Threaded/flanged spring loaded process valve, ASME/NB Certified.",specs:{type:"Threaded/Flanged Spring Loaded",certification:"ASME/NB Certified"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/farris-valves/"},
+  {id:9,name:"Gestra Type ZK Control Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Control Valves",subcategory:"Gestra",partNumber:"Type ZK",manufacturer:"Gestra",description:"Multi-stage pressure reduction for high differential pressures up to 560 barg. Available with pneumatic, electric, or hydraulic actuators or handwheel.",specs:{maxPressure:"560 barg",actuatorOptions:"Pneumatic/Electric/Hydraulic/Handwheel",type:"Multi-stage pressure reduction"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/gestra/"},
+  {id:10,name:"Gestra BK Range Steam Trap",brand:"Industrial Valve Service",brandId:"ivs",category:"Steam Traps",subcategory:"Gestra",partNumber:"BK",manufacturer:"Gestra",description:"Steam trap for applications up to PN 40 / Class 300.",specs:{pressureClass:"PN 40 / Class 300"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/gestra/"},
+  {id:11,name:"Gestra MK Range Steam Trap",brand:"Industrial Valve Service",brandId:"ivs",category:"Steam Traps",subcategory:"Gestra",partNumber:"MK",manufacturer:"Gestra",description:"For large condensate flowrates, up to 32 bar.",specs:{maxPressure:"32 bar",application:"Large condensate flowrates"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/gestra/"},
+  {id:12,name:"Rotork IQ3 Electric Actuator",brand:"Industrial Valve Service",brandId:"ivs",category:"Actuators",subcategory:"Rotork",partNumber:"IQ3",manufacturer:"Rotork",description:"Intelligent multi-turn electric actuator with advanced data logging and non-intrusive commissioning.",specs:{type:"Multi-turn Electric",features:"Data Logging, Non-intrusive Commissioning",protocol:"Modbus/Foundation Fieldbus"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/rotork/"},
+  {id:13,name:"Rotork IQT Part-Turn Actuator",brand:"Industrial Valve Service",brandId:"ivs",category:"Actuators",subcategory:"Rotork",partNumber:"IQT",manufacturer:"Rotork",description:"Part-turn electric valve actuator for quarter-turn ball and butterfly valves. IQ3 intelligence platform.",specs:{type:"Part-Turn Electric",turnAngle:"90 degrees",intelligence:"IQ3 Platform"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/rotork/"},
+  {id:14,name:"Dyna-Flo Globe Control Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Control Valves",subcategory:"Dyna-Flo",partNumber:"DFG",manufacturer:"Dyna-Flo",description:"High-performance globe control valve for throttling service in petrochemical and refining applications.",specs:{type:"Globe Control Valve",service:"Throttling",application:"Petrochemical/Refining"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/dyna-flo/"},
+  {id:15,name:"Flow-Tek B10 Ball Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Ball Valves",subcategory:"Flow-Tek",partNumber:"B10",manufacturer:"Flow-Tek",description:"Full-bore ball valve designed for high cycle applications. Available in carbon steel, stainless steel, and alloy.",specs:{type:"Full Bore Ball",materials:"Carbon Steel/SS/Alloy",feature:"High Cycle"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/flow-tek/"},
+  {id:16,name:"Gestra UNA Range Steam Trap",brand:"Industrial Valve Service",brandId:"ivs",category:"Steam Traps",subcategory:"Gestra",partNumber:"UNA",manufacturer:"Gestra",description:"Adaptable for horizontal or vertical installation.",specs:{installation:"Horizontal or Vertical"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/gestra/"},
+  {id:17,name:"Crosby J-Series Pressure Relief Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Crosby",partNumber:"J-Series",manufacturer:"Crosby",description:"Direct spring-operated pressure relief valve for process applications. ASME Section VIII certified.",specs:{type:"Direct Spring",certification:"ASME Section VIII",application:"Process"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/crosby/"},
+  {id:18,name:"Anderson Greenwood POPRV",brand:"Industrial Valve Service",brandId:"ivs",category:"Safety Relief Valves",subcategory:"Anderson Greenwood",partNumber:"POPRV",manufacturer:"Anderson Greenwood",description:"Pilot-operated pressure relief valve for high-pressure applications with tight shutoff.",specs:{type:"Pilot-Operated PRV",feature:"Tight Shutoff",application:"High Pressure"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/anderson-greenwood/"},
+  {id:19,name:"Masoneilan 41005 Control Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Control Valves",subcategory:"Masoneilan",partNumber:"41005",manufacturer:"Masoneilan",description:"Globe-style control valve with camflex design for low-noise throttling applications.",specs:{type:"Camflex Globe",feature:"Low Noise",rangeability:"100:1"},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/masoneilan/"},
+  {id:20,name:"Bray Series 20/21 Butterfly Valve",brand:"Industrial Valve Service",brandId:"ivs",category:"Butterfly Valves",subcategory:"Bray",partNumber:"20/21",manufacturer:"Bray",description:"Resilient seated butterfly valve, wafer or lug style. Sizes 2\" through 48\".",specs:{type:"Resilient Seated",style:"Wafer or Lug",sizes:"2\" - 48\""},price:null,priceHigh:null,url:"https://indvalve.com/valve-sales/bray/"},
+
+  // ---- VALVES: Morin Process ----
+  {id:21,name:"Weir Minerals WARMAN Slurry Pump",brand:"Morin Process",brandId:"morin",category:"Pumps",subcategory:"Slurry Pumps",partNumber:"WARMAN",manufacturer:"Weir Minerals",description:"Heavy-duty centrifugal slurry pump for mining and mineral processing. Best-in-class wear life.",specs:{type:"Centrifugal Slurry",application:"Mining/Mineral Processing",feature:"High Wear Life"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:22,name:"KSB MEGA Centrifugal Pump",brand:"Morin Process",brandId:"morin",category:"Pumps",subcategory:"Centrifugal",partNumber:"MEGA",manufacturer:"KSB",description:"Single-stage centrifugal pump for water supply, industrial processes, and HVAC applications.",specs:{type:"Single-stage Centrifugal",application:"Water/Industrial/HVAC"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:23,name:"ABZ Butterfly Valve",brand:"Morin Process",brandId:"morin",category:"Butterfly Valves",subcategory:"ABZ",partNumber:"ABZ-HP",manufacturer:"ABZ",description:"High-performance double-offset butterfly valve for severe service applications.",specs:{type:"Double Offset",service:"Severe Service"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:24,name:"Conval Clampseal High Pressure Valve",brand:"Morin Process",brandId:"morin",category:"Control Valves",subcategory:"High Pressure",partNumber:"Clampseal",manufacturer:"Conval",description:"High-pressure globe valve with clampseal body design for power and process applications.",specs:{type:"Globe Valve",pressureClass:"Up to 4500 ANSI",feature:"Clampseal Body"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:25,name:"Bray Resilient Seated Butterfly Valve",brand:"Morin Process",brandId:"morin",category:"Butterfly Valves",subcategory:"Bray",partNumber:"S20/S21",manufacturer:"Bray",description:"General purpose resilient seated butterfly valve. Suitable for water, air, and mild chemical service.",specs:{type:"Resilient Seated",sizes:"2\" - 72\"",service:"Water/Air/Chemical"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:26,name:"Morin B Series Pneumatic Actuator",brand:"Morin Process",brandId:"morin",category:"Actuators",subcategory:"Pneumatic",partNumber:"B-Series",manufacturer:"Morin",description:"Scotch-yoke pneumatic actuator for quarter-turn valve applications. Spring-return and double-acting.",specs:{type:"Scotch-Yoke Pneumatic",action:"Spring-Return / Double-Acting",torque:"Up to 180,000 in-lbs"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:27,name:"Morin S Series Electric Actuator",brand:"Morin Process",brandId:"morin",category:"Actuators",subcategory:"Electric",partNumber:"S-Series",manufacturer:"Morin",description:"Compact electric actuator for quarter-turn valves. Weather-proof enclosure.",specs:{type:"Electric Quarter-Turn",enclosure:"Weather-proof",voltage:"12V-440V"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+  {id:28,name:"CIRCOR Flow Control Valve",brand:"Morin Process",brandId:"morin",category:"Control Valves",subcategory:"CIRCOR",partNumber:"CF-200",manufacturer:"CIRCOR",description:"Precision flow control valve for critical process applications.",specs:{type:"Flow Control",accuracy:"High Precision"},price:null,priceHigh:null,url:"https://morinprocess.com/"},
+
+  // ---- VALVES: Tri-State Valve (TVI) ----
+  {id:29,name:"Farris 2600 Series (TVI)",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Safety Relief Valves",subcategory:"Farris",partNumber:"2600",manufacturer:"Farris",description:"Flanged spring loaded process valve. ASME/NB certified for air, steam, and water service.",specs:{type:"Flanged Spring Loaded",certification:"ASME/NB Certified",medium:"Air/Steam/Water"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:30,name:"Samson Type 3241 Globe Control Valve",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Control Valves",subcategory:"Samson",partNumber:"Type 3241",manufacturer:"Samson",description:"Pneumatic single-seated globe control valve for precise control in process applications.",specs:{type:"Globe Control Valve",actuator:"Pneumatic",feature:"Single-seated"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:31,name:"Samson Type 3271 Rotary Valve",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Control Valves",subcategory:"Samson",partNumber:"Type 3271",manufacturer:"Samson",description:"Rotary plug valve for high-capacity flow control. Excellent rangeability and low noise.",specs:{type:"Rotary Plug Valve",feature:"High Capacity, Low Noise",rangeability:"100:1"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:32,name:"TROVIS 3730 Digital Positioner",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Instrumentation",subcategory:"Positioners",partNumber:"TROVIS 3730",manufacturer:"Samson",description:"Microprocessor-based digital valve positioner with HART communication. Auto-tuning capability.",specs:{communication:"HART",feature:"Auto-Tuning",type:"Digital Positioner"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:33,name:"Samson Type 3310 Pneumatic Controller",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Instrumentation",subcategory:"Controllers",partNumber:"Type 3310",manufacturer:"Samson",description:"Pneumatic PID controller for on-site control without need for external power supply.",specs:{type:"Pneumatic PID",feature:"No External Power Required"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:34,name:"Crosby Style JOS Safety Valve",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Safety Relief Valves",subcategory:"Crosby",partNumber:"JOS",manufacturer:"Crosby",description:"Spring-loaded safety valve for steam, gas, and vapor applications.",specs:{type:"Spring-Loaded",service:"Steam/Gas/Vapor",certification:"ASME"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:35,name:"Fisher ED Globe Body Valve",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Control Valves",subcategory:"Fisher",partNumber:"ED",manufacturer:"Fisher",description:"Heavy-duty globe body control valve for high-pressure, high-temperature applications.",specs:{type:"Globe Body",service:"High Pressure/Temperature",sizes:"1\" - 16\""},price:null,priceHigh:null,url:"https://tvimem.com/"},
+  {id:36,name:"TVI Field Instrumentation Services",brand:"Tri-State Valve & Instrument",brandId:"tvi",category:"Services",subcategory:"Instrumentation",partNumber:null,manufacturer:"TVI",description:"Complete field instrumentation calibration, installation, and commissioning services.",specs:{service:"Calibration/Installation/Commissioning"},price:null,priceHigh:null,url:"https://tvimem.com/"},
+
+  // ---- COMPRESSORS: Industrial Air Power (IAP) ----
+  {id:37,name:"IR RS4i Rotary Screw 5HP",brand:"Industrial Air Power",brandId:"iap",category:"Compressors",subcategory:"Rotary Screw",partNumber:"RS4i-A115",manufacturer:"Ingersoll Rand",description:"Next Generation R-Series 5 HP rotary screw air compressor. Fixed speed, integrated dryer option.",specs:{hp:"5 HP",type:"Rotary Screw",voltage:"115/230V",cfm:"16.5 CFM @ 125 PSI"},price:9681,priceHigh:13820,url:"https://industrialairpower.com/"},
+  {id:38,name:"IR RS7i Rotary Screw 10HP",brand:"Industrial Air Power",brandId:"iap",category:"Compressors",subcategory:"Rotary Screw",partNumber:"RS7i-A125",manufacturer:"Ingersoll Rand",description:"Next Generation R-Series 10 HP rotary screw compressor with integrated air treatment.",specs:{hp:"10 HP",type:"Rotary Screw",cfm:"35 CFM @ 125 PSI"},price:12589,priceHigh:17069,url:"https://industrialairpower.com/"},
+  {id:39,name:"IR RS11i Rotary Screw 15HP",brand:"Industrial Air Power",brandId:"iap",category:"Compressors",subcategory:"Rotary Screw",partNumber:"RS11i-A125",manufacturer:"Ingersoll Rand",description:"Next Generation R-Series 15 HP rotary screw compressor. Ultra-efficient airend design.",specs:{hp:"15 HP",type:"Rotary Screw",cfm:"50 CFM @ 125 PSI"},price:14429,priceHigh:19099,url:"https://industrialairpower.com/"},
+  {id:40,name:"IR RS15i Rotary Screw 20HP",brand:"Industrial Air Power",brandId:"iap",category:"Compressors",subcategory:"Rotary Screw",partNumber:"RS15i-A125",manufacturer:"Ingersoll Rand",description:"Next Generation R-Series 20 HP rotary screw compressor. Premium efficiency for medium-duty applications.",specs:{hp:"20 HP",type:"Rotary Screw",cfm:"64 CFM @ 125 PSI"},price:18179,priceHigh:20549,url:"https://industrialairpower.com/"},
+  {id:41,name:"IR RS22i Rotary Screw 30HP",brand:"Industrial Air Power",brandId:"iap",category:"Compressors",subcategory:"Rotary Screw",partNumber:"RS22i-A125",manufacturer:"Ingersoll Rand",description:"Next Generation R-Series 30 HP rotary screw compressor with V-Shield technology.",specs:{hp:"30 HP",type:"Rotary Screw",cfm:"96 CFM @ 125 PSI"},price:22450,priceHigh:28900,url:"https://industrialairpower.com/"},
+  {id:42,name:"Heatless Desiccant Air Dryer",brand:"Industrial Air Power",brandId:"iap",category:"Air Treatment",subcategory:"Dryers",partNumber:"HLD Series",manufacturer:"Ingersoll Rand",description:"Heatless regenerative desiccant dryer for critical-quality compressed air. Delivers -40F/-100F dew points.",specs:{type:"Heatless Desiccant",dewPoint:"-40F / -100F",regeneration:"Pressure Swing"},price:3640,priceHigh:13539,url:"https://industrialairpower.com/"},
+  {id:43,name:"Refrigerated Compressed Air Dryer",brand:"Industrial Air Power",brandId:"iap",category:"Air Treatment",subcategory:"Dryers",partNumber:"D-Series",manufacturer:"Ingersoll Rand",description:"Cycling refrigerated air dryer with energy-saving technology. Consistent 38F pressure dew point.",specs:{type:"Cycling Refrigerated",dewPoint:"38F",feature:"Energy Saving"},price:1179,priceHigh:6640,url:"https://industrialairpower.com/"},
+  {id:44,name:"IR Inline Compressed Air Filter",brand:"Industrial Air Power",brandId:"iap",category:"Air Treatment",subcategory:"Filters",partNumber:"FA Series",manufacturer:"Ingersoll Rand",description:"Coalescing compressed air filter for particulate and oil aerosol removal.",specs:{type:"Coalescing",removal:"Particulate & Oil Aerosol",efficiency:"99.99%"},price:189,priceHigh:890,url:"https://industrialairpower.com/"},
+  {id:45,name:"IR 120-Gallon Vertical Receiver",brand:"Industrial Air Power",brandId:"iap",category:"Air Treatment",subcategory:"Receivers",partNumber:"R120V",manufacturer:"Ingersoll Rand",description:"ASME-rated 120-gallon vertical air receiver tank for compressed air storage.",specs:{capacity:"120 Gallons",orientation:"Vertical",certification:"ASME Rated",pressure:"200 PSI"},price:1250,priceHigh:null,url:"https://industrialairpower.com/"},
+
+  // ---- COMPRESSORS: Industrial Air Centers (IAC) ----
+  {id:46,name:"Rotary Screw Lubricated Compressor",brand:"Industrial Air Centers",brandId:"iac",category:"Compressors",subcategory:"Rotary Screw",partNumber:null,manufacturer:"Various",description:"Oil-injected rotary screw compressors for general industrial use. Multiple OEM brands available.",specs:{type:"Rotary Screw, Oil-Injected",hpRange:"5-500 HP"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:47,name:"Rotary Screw Oil-Free Compressor",brand:"Industrial Air Centers",brandId:"iac",category:"Compressors",subcategory:"Oil-Free",partNumber:null,manufacturer:"Various",description:"Oil-free rotary screw compressors for food, pharmaceutical, and electronics manufacturing.",specs:{type:"Rotary Screw, Oil-Free",hpRange:"15-500 HP",certification:"ISO 8573-1 Class 0"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:48,name:"Reciprocating Air Compressor",brand:"Industrial Air Centers",brandId:"iac",category:"Compressors",subcategory:"Reciprocating",partNumber:null,manufacturer:"Various",description:"Piston-type reciprocating compressors for intermittent duty and high-pressure applications.",specs:{type:"Reciprocating/Piston",hpRange:"1-50 HP",pressure:"Up to 6000 PSI"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:49,name:"Centrifugal Air Compressor",brand:"Industrial Air Centers",brandId:"iac",category:"Compressors",subcategory:"Centrifugal",partNumber:null,manufacturer:"Various",description:"Multi-stage centrifugal compressors for continuous high-volume air supply.",specs:{type:"Multi-Stage Centrifugal",hpRange:"200-3000 HP",feature:"Continuous Duty"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:50,name:"Portable Air Compressor",brand:"Industrial Air Centers",brandId:"iac",category:"Compressors",subcategory:"Portable",partNumber:null,manufacturer:"Various",description:"Diesel and electric portable compressors for construction and field applications.",specs:{type:"Portable",fuel:"Diesel/Electric",cfmRange:"185-1600 CFM"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:51,name:"Medical Air System",brand:"Industrial Air Centers",brandId:"iac",category:"Compressors",subcategory:"Medical",partNumber:null,manufacturer:"Various",description:"NFPA 99 compliant medical air compressor packages for hospitals and healthcare.",specs:{type:"Medical Air",compliance:"NFPA 99",feature:"Duplex/Triplex Systems"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:52,name:"Nitrogen Generator System",brand:"Industrial Air Centers",brandId:"iac",category:"Gas Generation",subcategory:"Nitrogen",partNumber:null,manufacturer:"Various",description:"PSA and membrane nitrogen generators for on-site nitrogen production.",specs:{type:"PSA/Membrane",purity:"Up to 99.999%",application:"On-site N2 Production"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+  {id:53,name:"Vacuum Pump System",brand:"Industrial Air Centers",brandId:"iac",category:"Vacuum",subcategory:"Pumps",partNumber:null,manufacturer:"Various",description:"Industrial vacuum pump packages for manufacturing, packaging, and process applications.",specs:{type:"Rotary Vane/Screw",vacuumRange:"Up to 29.9 inHg"},price:null,priceHigh:null,url:"https://industrialaircenters.com/"},
+
+  // ---- COMPRESSORS: Air Specialty (ASE) ----
+  {id:54,name:"Champion PL Series Lubricated Reciprocating",brand:"Air Specialty Equipment",brandId:"ase",category:"Compressors",subcategory:"Reciprocating",partNumber:"PL Series",manufacturer:"Champion",description:"Pressure-lubricated reciprocating compressors for demanding industrial applications.",specs:{type:"Reciprocating, Pressure-Lubricated",hpRange:"5-25 HP"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:55,name:"Champion RV Series Two-Stage",brand:"Air Specialty Equipment",brandId:"ase",category:"Compressors",subcategory:"Reciprocating",partNumber:"RV Series",manufacturer:"Champion",description:"Two-stage reciprocating compressor with heavy-duty cast iron construction.",specs:{type:"Two-Stage Reciprocating",material:"Cast Iron",hpRange:"5-30 HP"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:56,name:"Atlas Copco G110-250 Oil-Injected",brand:"Air Specialty Equipment",brandId:"ase",category:"Compressors",subcategory:"Rotary Screw",partNumber:"G110-250",manufacturer:"Atlas Copco",description:"Oil-injected rotary screw compressor for medium to large industrial applications.",specs:{type:"Rotary Screw, Oil-Injected",hpRange:"150-350 HP",feature:"High Efficiency"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:57,name:"Atlas Copco GA7-110 Rotary Screw",brand:"Air Specialty Equipment",brandId:"ase",category:"Compressors",subcategory:"Rotary Screw",partNumber:"GA7-110",manufacturer:"Atlas Copco",description:"Compact rotary screw compressor with integrated dryer and filters.",specs:{type:"Rotary Screw",hpRange:"10-150 HP",feature:"Integrated Air Treatment"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:58,name:"Ingersoll Rand Impact Tools",brand:"Air Specialty Equipment",brandId:"ase",category:"Tools",subcategory:"Pneumatic",partNumber:"IR Impact",manufacturer:"Ingersoll Rand",description:"Professional-grade pneumatic impact wrenches and tools for industrial maintenance.",specs:{type:"Pneumatic Impact",driveSize:"3/8\" - 1\""},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:59,name:"Generac MLT6SMD Light Tower",brand:"Air Specialty Equipment",brandId:"ase",category:"Equipment",subcategory:"Lighting",partNumber:"MLT6SMD",manufacturer:"Generac",description:"Mobile LED light tower with 6kW generator. 50,000+ hour LED lifespan.",specs:{type:"Mobile Light Tower",generator:"6kW Diesel",leds:"4x LED Fixtures",height:"Up to 23 ft"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:60,name:"Sandpiper Heavy Duty Diaphragm Pump",brand:"Air Specialty Equipment",brandId:"ase",category:"Pumps",subcategory:"Diaphragm",partNumber:"HDB Series",manufacturer:"Sandpiper",description:"Air-operated double-diaphragm pump for transferring fluids in industrial applications.",specs:{type:"AODD Pump",material:"Aluminum/SS/Cast Iron",maxFlow:"300 GPM"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+  {id:61,name:"Champion Air Dryer System",brand:"Air Specialty Equipment",brandId:"ase",category:"Air Treatment",subcategory:"Dryers",partNumber:"CRN Series",manufacturer:"Champion",description:"Non-cycling refrigerated air dryer for general-purpose compressed air applications.",specs:{type:"Refrigerated",dewPoint:"38F",cfmRange:"10-2000 CFM"},price:null,priceHigh:null,url:"https://airspecialtyequipment.com/"},
+
+  // ---- MOTORS: Soles Electric ----
+  {id:62,name:"WEG W22 TEFC Motor 1HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"General Purpose",partNumber:"W22-1HP",manufacturer:"WEG",description:"WEG W22 premium efficiency TEFC motor. 1 HP, 3-phase, cast iron frame.",specs:{hp:"1 HP",efficiency:"NEMA Premium",enclosure:"TEFC",frame:"Cast Iron",voltage:"208-230/460V"},price:378,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:63,name:"WEG W22 TEFC Motor 5HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"General Purpose",partNumber:"W22-5HP",manufacturer:"WEG",description:"WEG W22 premium efficiency TEFC motor. 5 HP, 3-phase, cast iron frame.",specs:{hp:"5 HP",efficiency:"NEMA Premium",enclosure:"TEFC",frame:"Cast Iron",voltage:"208-230/460V"},price:1249,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:64,name:"WEG W22 TEFC Motor 25HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"General Purpose",partNumber:"W22-25HP",manufacturer:"WEG",description:"WEG W22 premium efficiency TEFC motor. 25 HP, 3-phase, cast iron frame.",specs:{hp:"25 HP",efficiency:"NEMA Premium",enclosure:"TEFC",frame:"Cast Iron",voltage:"208-230/460V"},price:4850,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:65,name:"WEG W22 TEFC Motor 100HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"Large Frame",partNumber:"W22-100HP",manufacturer:"WEG",description:"WEG W22 premium efficiency TEFC motor. 100 HP, 3-phase, cast iron frame for heavy industrial duty.",specs:{hp:"100 HP",efficiency:"NEMA Premium",enclosure:"TEFC",frame:"Cast Iron",voltage:"460V"},price:15690,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:66,name:"WEG W22 TEFC Motor 250HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"Large Frame",partNumber:"W22-250HP",manufacturer:"WEG",description:"WEG W22 premium efficiency TEFC motor. 250 HP, large frame for continuous heavy-duty industrial processes.",specs:{hp:"250 HP",efficiency:"NEMA Premium",enclosure:"TEFC",frame:"Cast Iron",voltage:"460V"},price:47633,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:67,name:"Toshiba Premium Efficiency Large HP Motor",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"Large Frame",partNumber:"Toshiba-LHP",manufacturer:"Toshiba",description:"Premium efficiency large horsepower AC motor for process industries, mining, and power generation.",specs:{hpRange:"100-5000 HP",efficiency:"NEMA Premium",type:"Induction Motor"},price:null,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:68,name:"Toshiba AS3 Variable Frequency Drive",brand:"Soles Electric",brandId:"soles",category:"Drives",subcategory:"VFD",partNumber:"AS3",manufacturer:"Toshiba",description:"Advanced medium-voltage variable frequency drive with regenerative capability.",specs:{type:"VFD",voltage:"Medium Voltage",feature:"Regenerative Capability"},price:null,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:69,name:"WEG CFW500 Variable Frequency Drive",brand:"Soles Electric",brandId:"soles",category:"Drives",subcategory:"VFD",partNumber:"CFW500",manufacturer:"WEG",description:"Compact VFD for general-purpose motor control. Built-in PID, SoftPLC, and communication protocols.",specs:{type:"VFD",hpRange:"0.5-30 HP",features:"Built-in PID, SoftPLC",protocols:"Modbus/Profibus/Ethernet"},price:null,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:70,name:"WEG W22 TEFC Motor 50HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"General Purpose",partNumber:"W22-50HP",manufacturer:"WEG",description:"WEG W22 premium efficiency TEFC motor. 50 HP, 3-phase, cast iron frame.",specs:{hp:"50 HP",efficiency:"NEMA Premium",enclosure:"TEFC",frame:"Cast Iron",voltage:"208-230/460V"},price:8250,priceHigh:null,url:"https://soleselectric.com/"},
+  {id:71,name:"WEG Explosion-Proof Motor 10HP",brand:"Soles Electric",brandId:"soles",category:"Motors",subcategory:"Explosion-Proof",partNumber:"W22XP-10HP",manufacturer:"WEG",description:"Explosion-proof motor for hazardous locations. Class I Div 1 Groups C&D, Class II Div 1 Groups F&G.",specs:{hp:"10 HP",enclosure:"Explosion-Proof",classification:"Class I Div 1, Class II Div 1"},price:2890,priceHigh:null,url:"https://soleselectric.com/"},
+
+  // ---- MOTORS: Illinois Electric Works (IEW) ----
+  {id:72,name:"WEG NEMA Premium Efficiency Motor",brand:"Illinois Electric Works",brandId:"iew",category:"Motors",subcategory:"General Purpose",partNumber:"W22-NEMA",manufacturer:"WEG",description:"NEMA premium efficiency three-phase AC motor. Complete range of frame sizes for industrial applications.",specs:{efficiency:"NEMA Premium",type:"Three-Phase AC",frames:"143T-449T"},price:null,priceHigh:null,url:"https://illinoiselectric.com/"},
+  {id:73,name:"Siemens GP100 General Purpose Motor",brand:"Illinois Electric Works",brandId:"iew",category:"Motors",subcategory:"General Purpose",partNumber:"GP100",manufacturer:"Siemens",description:"Siemens GP100 general purpose induction motor. Robust design for HVAC, pump, and fan applications.",specs:{type:"General Purpose Induction",application:"HVAC/Pump/Fan",hpRange:"1-400 HP"},price:null,priceHigh:null,url:"https://illinoiselectric.com/"},
+  {id:74,name:"Harrington ER Series Chain Hoist",brand:"Illinois Electric Works",brandId:"iew",category:"Hoists",subcategory:"Chain Hoist",partNumber:"ER Series",manufacturer:"Harrington",description:"Electric chain hoist with variable speed and precision lifting. Capacities from 1/8 to 5 tons.",specs:{type:"Electric Chain Hoist",capacity:"1/8 - 5 Ton",feature:"Variable Speed"},price:null,priceHigh:null,url:"https://illinoiselectric.com/"},
+  {id:75,name:"IEW Motor Rewind Service",brand:"Illinois Electric Works",brandId:"iew",category:"Services",subcategory:"Repair",partNumber:null,manufacturer:"IEW",description:"Complete motor rewind and repair services. EASA AR-100 compliant. All motor types and sizes.",specs:{compliance:"EASA AR-100",service:"Rewind/Repair/Rebuild"},price:null,priceHigh:null,url:"https://illinoiselectric.com/"},
+  {id:76,name:"Baldor-Reliance Super-E Motor",brand:"Illinois Electric Works",brandId:"iew",category:"Motors",subcategory:"Premium",partNumber:"Super-E",manufacturer:"Baldor-Reliance",description:"Premium efficiency severe duty motor for harsh industrial environments.",specs:{type:"Severe Duty",efficiency:"NEMA Premium",enclosure:"TEFC/TEBC",hpRange:"1-500 HP"},price:null,priceHigh:null,url:"https://illinoiselectric.com/"},
+  {id:77,name:"US Motors HOLLOSHAFT Vertical Motor",brand:"Illinois Electric Works",brandId:"iew",category:"Motors",subcategory:"Vertical",partNumber:"HOLLOSHAFT",manufacturer:"US Motors",description:"Vertical hollow shaft motor designed for deep well turbine pump applications.",specs:{type:"Vertical Hollow Shaft",application:"Deep Well Turbine Pump",enclosure:"WPI/WPII"},price:null,priceHigh:null,url:"https://illinoiselectric.com/"},
+
+  // ---- PUMPS: Georgia Western (GW) ----
+  {id:78,name:"EIM M2CP Electric Actuator",brand:"Georgia Western",brandId:"gw",category:"Actuators",subcategory:"Electric",partNumber:"M2CP",manufacturer:"EIM",description:"Compact multi-turn electric actuator for valve automation in oil & gas applications.",specs:{type:"Multi-turn Electric",application:"Oil & Gas",feature:"Compact Design"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+  {id:79,name:"Limitorque SMB-0 Bearing Kit",brand:"Georgia Western",brandId:"gw",category:"Actuator Parts",subcategory:"Bearing Kits",partNumber:"SMB-0 BK",manufacturer:"Limitorque",description:"Replacement bearing kit for Limitorque SMB-0 multi-turn electric actuator.",specs:{compatibility:"Limitorque SMB-0",type:"Bearing Kit"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+  {id:80,name:"Bettis RPC Series Electric Actuator",brand:"Georgia Western",brandId:"gw",category:"Actuators",subcategory:"Electric",partNumber:"RPC Series",manufacturer:"Bettis",description:"Scotch yoke electric actuator for quarter-turn valve applications. Explosion-proof option.",specs:{type:"Scotch Yoke Electric",turn:"Quarter-Turn",option:"Explosion-Proof"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+  {id:81,name:"EIM Worm Shaft Bearing Assembly",brand:"Georgia Western",brandId:"gw",category:"Actuator Parts",subcategory:"Bearings",partNumber:"EIM-WSB",manufacturer:"EIM",description:"Replacement worm shaft bearing assembly for EIM electric actuators.",specs:{compatibility:"EIM Actuators",type:"Worm Shaft Bearing"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+  {id:82,name:"Rotork A Range Pneumatic Actuator",brand:"Georgia Western",brandId:"gw",category:"Actuators",subcategory:"Pneumatic",partNumber:"A Range",manufacturer:"Rotork",description:"Rack and pinion pneumatic actuator for quarter-turn valves. Spring-return and double-acting.",specs:{type:"Rack & Pinion Pneumatic",action:"Spring-Return/Double-Acting"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+  {id:83,name:"Limitorque MX Multi-Turn Actuator",brand:"Georgia Western",brandId:"gw",category:"Actuators",subcategory:"Electric",partNumber:"MX",manufacturer:"Limitorque",description:"Non-intrusive intelligent multi-turn electric actuator with absolute encoder.",specs:{type:"Multi-Turn Electric",intelligence:"Non-Intrusive",feature:"Absolute Encoder"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+  {id:84,name:"GW Actuator Rebuild Service",brand:"Georgia Western",brandId:"gw",category:"Services",subcategory:"Repair",partNumber:null,manufacturer:"Georgia Western",description:"Complete actuator repair, rebuild, and testing services. OEM-authorized service center.",specs:{service:"Repair/Rebuild/Test",authorization:"OEM Authorized"},price:null,priceHigh:null,url:"https://georgiawestern.com/"},
+
+  // ---- PUMPS: Renewal Service Inc. (RSI) ----
+  {id:85,name:"Centrifugal Pump Repair & Rebuild",brand:"Renewal Service Inc.",brandId:"rsi",category:"Services",subcategory:"Pump Repair",partNumber:null,manufacturer:"RSI",description:"Complete centrifugal pump overhaul, repair, and rebuild services. All major OEM brands.",specs:{type:"Centrifugal Pump",service:"Overhaul/Repair/Rebuild",brands:"All Major OEMs"},price:null,priceHigh:null,url:"https://renewalserviceinc.com/"},
+  {id:86,name:"Surplus Pump Inventory",brand:"Renewal Service Inc.",brandId:"rsi",category:"Pumps",subcategory:"Surplus",partNumber:null,manufacturer:"Various",description:"Large inventory of surplus centrifugal, positive displacement, and specialty pumps.",specs:{type:"Centrifugal/PD/Specialty",condition:"Surplus/Reconditioned"},price:null,priceHigh:null,url:"https://renewalserviceinc.com/"},
+  {id:87,name:"Aftermarket Pump Parts",brand:"Renewal Service Inc.",brandId:"rsi",category:"Parts",subcategory:"Pump Parts",partNumber:null,manufacturer:"RSI",description:"Aftermarket replacement parts for major pump brands. Impellers, shafts, wear rings, mechanical seals.",specs:{parts:"Impellers/Shafts/Wear Rings/Seals",compatibility:"Major OEM Brands"},price:null,priceHigh:null,url:"https://renewalserviceinc.com/"},
+  {id:88,name:"API 610 Pump Overhaul",brand:"Renewal Service Inc.",brandId:"rsi",category:"Services",subcategory:"Pump Repair",partNumber:null,manufacturer:"RSI",description:"API 610 compliant centrifugal pump overhaul for refinery and petrochemical service.",specs:{standard:"API 610",service:"Complete Overhaul",application:"Refinery/Petrochemical"},price:null,priceHigh:null,url:"https://renewalserviceinc.com/"},
+
+  // ---- PUMPS: Dynamic Mechanical Solutions (DMS) ----
+  {id:89,name:"Centrifugal Pump Field Service",brand:"Dynamic Mechanical Solutions",brandId:"dms",category:"Services",subcategory:"Field Service",partNumber:null,manufacturer:"DMS",description:"On-site centrifugal pump installation, alignment, and commissioning services.",specs:{service:"Install/Align/Commission",type:"Field Service"},price:null,priceHigh:null,url:"https://dynamicmechanicalsolutions.com/"},
+  {id:90,name:"Positive Displacement Pump Repair",brand:"Dynamic Mechanical Solutions",brandId:"dms",category:"Services",subcategory:"Pump Repair",partNumber:null,manufacturer:"DMS",description:"Repair and overhaul services for gear pumps, screw pumps, and progressive cavity pumps.",specs:{type:"Gear/Screw/Progressive Cavity",service:"Repair/Overhaul"},price:null,priceHigh:null,url:"https://dynamicmechanicalsolutions.com/"},
+  {id:91,name:"Mechanical Seal Installation",brand:"Dynamic Mechanical Solutions",brandId:"dms",category:"Services",subcategory:"Sealing",partNumber:null,manufacturer:"DMS",description:"Expert mechanical seal installation, troubleshooting, and replacement for all pump types.",specs:{service:"Install/Troubleshoot/Replace",application:"All Pump Types"},price:null,priceHigh:null,url:"https://dynamicmechanicalsolutions.com/"},
+  {id:92,name:"Laser Alignment Service",brand:"Dynamic Mechanical Solutions",brandId:"dms",category:"Services",subcategory:"Alignment",partNumber:null,manufacturer:"DMS",description:"Precision laser alignment for pumps, motors, and rotating equipment.",specs:{method:"Laser Alignment",equipment:"Pumps/Motors/Rotating Equipment",accuracy:"0.001\""},price:null,priceHigh:null,url:"https://dynamicmechanicalsolutions.com/"},
+
+  // ---- SPECIALTY: Pinnacle Industries ----
+  {id:93,name:"PDQM Mini Cabinet Hydrostatic Test Pump",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Test Equipment",subcategory:"Hydrostatic Pumps",partNumber:"SKU 624",manufacturer:"PDQ Pumps",description:"Mini Cabinet PSI Hydrostatic Test Pump with 1/2\" x 15' Hose. Air-operated, capable of pressures up to 10,000 PSIG, 97:1 pressure ratio.",specs:{weight:"72 lbs",dimensions:"22 x 15 x 22 in",pressureRatio:"97:1",maxAirInput:"100 PSI",variants:"1000/3600/6000/10000 PSI"},price:4170,priceHigh:6650,url:"https://pinnacleindustriestexas.com/"},
+  {id:94,name:"PDQC10000 Cabinet Hydrostatic Test Pump",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Test Equipment",subcategory:"Hydrostatic Pumps",partNumber:"PDQC10000",manufacturer:"PDQ Pumps",description:"Full-size cabinet hydrostatic test pump for industrial pressure testing. Max output 9,700 PSI.",specs:{weight:"95 lbs",maxOutput:"9,700 PSI",maxFlow:"1 GPM",airConsumption:"56 CFM @ 100 PSI"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:95,name:"PDQCHV10000 Cabinet High Volume Pump",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Test Equipment",subcategory:"Hydrostatic Pumps",partNumber:"PDQCHV10000",manufacturer:"PDQ Pumps",description:"High-volume cabinet hydrostatic test pump with increased water flow capacity of 20 GPM.",specs:{weight:"105 lbs",maxOutput:"9,700 PSI",maxFlow:"20 GPM",feature:"High Volume"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:96,name:"PDQH3000 Hydrostatic Hand Pump",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Test Equipment",subcategory:"Hand Pumps",partNumber:"PDQH3000",manufacturer:"PDQ Pumps",description:"Manual hydrostatic hand pump for portable pressure testing. 60:1 pump ratio.",specs:{weight:"17 lbs",pumpRatio:"60:1",maxOutput:"3,020 PSI",displacement:"0.360 cu.in./stroke"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:97,name:"Gardner Denver LRSV Rotary Screw",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Compressors",subcategory:"Rotary Screw",partNumber:"LRSV",manufacturer:"Gardner Denver",description:"Low-pressure rotary screw compressor for vacuum and low-pressure applications.",specs:{type:"Rotary Screw, Low Pressure",feature:"Vacuum & Low Pressure"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:98,name:"Gardner Denver Electra-Saver II",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Compressors",subcategory:"Rotary Screw",partNumber:"ES-II",manufacturer:"Gardner Denver",description:"Direct drive rotary screw with oversized airends and bearings. Variable displacement for energy savings.",specs:{type:"Oil-Flooded Rotary Screw",hpRange:"15-200 HP",feature:"Direct Drive, Variable Displacement"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:99,name:"Gardner Denver VS Series VSD",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Compressors",subcategory:"Variable Speed",partNumber:"VS Series",manufacturer:"Gardner Denver",description:"Variable speed drive compressor with widest turndown range in the industry.",specs:{type:"Oil-Flooded Rotary Screw, VSD",hpRange:"34-335 HP",feature:"Widest Turndown Range"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:100,name:"Gardner Denver EnviroAire Oil-Free",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Compressors",subcategory:"Oil-Free",partNumber:"EnviroAire",manufacturer:"Gardner Denver",description:"Water-injected oil-free compressor. Absolutely no lubricating oil for sensitive applications.",specs:{type:"Oil-Free, Water-Injected",certification:"100% Oil-Free",application:"Food/Pharma/Electronics"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:101,name:"PDQDF10000 Calibration System",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Test Equipment",subcategory:"Calibration",partNumber:"PDQDF10000",manufacturer:"PDQ Pumps",description:"Dedicated pressure calibration system for test instrument verification.",specs:{type:"Calibration System"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+  {id:102,name:"PDQH5000 Hydrostatic Hand Pump",brand:"Pinnacle Industries",brandId:"pinnacle",category:"Test Equipment",subcategory:"Hand Pumps",partNumber:"PDQH5000",manufacturer:"PDQ Pumps",description:"High-pressure manual hydrostatic hand pump. 150:1 pump ratio, max 6,800 PSI.",specs:{weight:"17 lbs",pumpRatio:"150:1",maxOutput:"6,800 PSI"},price:null,priceHigh:null,url:"https://pinnacleindustriestexas.com/"},
+
+  // ---- SPECIALTY: Turbomachinery Industries (TMI) ----
+  {id:103,name:"T0007 Bearing Case and Cap Assembly",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Bearings",partNumber:"T0007",manufacturer:"TMI",description:"Precision-machined bearing case and cap assembly for steam and gas turbines.",specs:{type:"Bearing Case & Cap",application:"Steam/Gas Turbines",quality:"Precision Machined"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:104,name:"T0010 Profile Wheel Assembly",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Wheels",partNumber:"T0010",manufacturer:"TMI",description:"Turbine profile wheel for impulse and reaction stage applications.",specs:{type:"Profile Wheel",application:"Impulse/Reaction Stage"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:105,name:"T0012 Bearing Housing",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Bearings",partNumber:"T0012",manufacturer:"TMI",description:"Replacement bearing housing for turbomachinery applications. Precision bore and alignment surfaces.",specs:{type:"Bearing Housing",feature:"Precision Bore & Alignment"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:106,name:"T0014 Carbon Box Assembly",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Sealing",partNumber:"T0014",manufacturer:"TMI",description:"Carbon box packing assembly for steam turbine shaft sealing.",specs:{type:"Carbon Box/Packing",application:"Steam Turbine Shaft Seal"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:107,name:"T0018 Nozzle Ring Assembly",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Nozzles",partNumber:"T0018",manufacturer:"TMI",description:"Nozzle ring assembly for first-stage steam admission. Precision casting and machining.",specs:{type:"Nozzle Ring",application:"First Stage Steam Admission"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:108,name:"T0022 Rotor Blade Set",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Blades",partNumber:"T0022",manufacturer:"TMI",description:"Replacement rotor blade set for steam turbines. Various profiles and alloys available.",specs:{type:"Rotor Blades",material:"Various Alloys",feature:"Multiple Profiles"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:109,name:"T0025 Governor Valve Assembly",brand:"Turbomachinery Industries",brandId:"tmi",category:"Turbine Parts",subcategory:"Valves",partNumber:"T0025",manufacturer:"TMI",description:"Governor valve assembly for turbine speed control. Precision lapped valve and seat.",specs:{type:"Governor Valve",feature:"Precision Lapped Valve & Seat"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+  {id:110,name:"TMI Turbine Rotor Balancing Service",brand:"Turbomachinery Industries",brandId:"tmi",category:"Services",subcategory:"Balancing",partNumber:null,manufacturer:"TMI",description:"High-speed turbine rotor balancing service. API 687 compliant.",specs:{compliance:"API 687",service:"High-Speed Balancing"},price:null,priceHigh:null,url:"https://turbomachineryindustries.com/"},
+
+  // ---- SPECIALTY: Compressor & Turbine Services (CTS) ----
+  {id:111,name:"Steam Turbine Repair & Overhaul",brand:"Compressor & Turbine Services",brandId:"cts",category:"Services",subcategory:"Turbine Repair",partNumber:null,manufacturer:"CTS",description:"Comprehensive steam turbine repair, overhaul, and re-rating services for all major OEM brands.",specs:{service:"Repair/Overhaul/Re-rate",equipment:"Steam Turbines",brands:"All Major OEMs"},price:null,priceHigh:null,url:"https://ctshouston.com/"},
+  {id:112,name:"Centrifugal Compressor Repair",brand:"Compressor & Turbine Services",brandId:"cts",category:"Services",subcategory:"Compressor Repair",partNumber:null,manufacturer:"CTS",description:"Complete centrifugal compressor repair including impeller replacement, bearing upgrades, and seal modifications.",specs:{service:"Repair/Upgrade/Modify",equipment:"Centrifugal Compressors"},price:null,priceHigh:null,url:"https://ctshouston.com/"},
+  {id:113,name:"Gearbox Repair & Rebuild",brand:"Compressor & Turbine Services",brandId:"cts",category:"Services",subcategory:"Gearbox Repair",partNumber:null,manufacturer:"CTS",description:"Industrial gearbox repair, rebuild, and reverse engineering for all types and manufacturers.",specs:{service:"Repair/Rebuild/Reverse Engineer",equipment:"All Gearbox Types"},price:null,priceHigh:null,url:"https://ctshouston.com/"},
+  {id:114,name:"Reciprocating Compressor Service",brand:"Compressor & Turbine Services",brandId:"cts",category:"Services",subcategory:"Compressor Repair",partNumber:null,manufacturer:"CTS",description:"Reciprocating compressor valve repair, cylinder reboring, and complete overhaul services.",specs:{service:"Valve Repair/Reboring/Overhaul",equipment:"Reciprocating Compressors"},price:null,priceHigh:null,url:"https://ctshouston.com/"},
+  {id:115,name:"Gas Turbine Component Repair",brand:"Compressor & Turbine Services",brandId:"cts",category:"Services",subcategory:"Turbine Repair",partNumber:null,manufacturer:"CTS",description:"Gas turbine hot gas path component repair including blades, vanes, and combustion hardware.",specs:{service:"Hot Gas Path Repair",components:"Blades/Vanes/Combustion Hardware"},price:null,priceHigh:null,url:"https://ctshouston.com/"},
+  {id:116,name:"Rotor Dynamics Analysis",brand:"Compressor & Turbine Services",brandId:"cts",category:"Services",subcategory:"Engineering",partNumber:null,manufacturer:"CTS",description:"Computational rotor dynamics analysis for vibration troubleshooting and design verification.",specs:{service:"Rotor Dynamics Analysis",method:"FEA/Computational"},price:null,priceHigh:null,url:"https://ctshouston.com/"},
+
+  // ---- SPECIALTY: CORE Industrial ----
+  {id:117,name:"Black Grey Mesh Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:"843",manufacturer:"Richardson",description:"Classic trucker cap style built with Richardson quality. Style 112, seamless front, 5-panel construction.",specs:{shape:"Mid-Pro",fabric:"47% Cotton, 53% Polyester",fit:"Adjustable Snapback",size:"OSFM"},price:25,priceHigh:null,url:"https://coremaintenance.com/product/black-grey-mesh/"},
+  {id:118,name:"Mossy Oak Obsession Khaki Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback",size:"OSFM"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:119,name:"Mossy Oak Obsession Bottomland Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:120,name:"Grey Black Mesh Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:121,name:"Desert Camo Brown Mesh Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:122,name:"Black White Mesh Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:123,name:"Mossy Oak Bonefish Light Grey Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:124,name:"Tan Brown Mesh Hat",brand:"CORE Industrial Maintenance",brandId:"core",category:"Merchandise",subcategory:"Hats",partNumber:null,manufacturer:"Richardson",description:"Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",specs:{fabric:"Twill/Polyester Mesh",fit:"Adjustable Snapback"},price:25,priceHigh:null,url:"https://coremaintenance.com/shop/"},
+  {id:125,name:"CORE Safety Services",brand:"CORE Industrial Maintenance",brandId:"core",category:"Services",subcategory:"Safety",partNumber:null,manufacturer:"CORE",description:"Industrial safety services including confined space entry, scaffolding, and insulation.",specs:{services:"Confined Space/Scaffolding/Insulation"},price:null,priceHigh:null,url:"https://coremaintenance.com/"},
+  {id:126,name:"CORE Millwright Services",brand:"CORE Industrial Maintenance",brandId:"core",category:"Services",subcategory:"Millwright",partNumber:null,manufacturer:"CORE",description:"Mechanical maintenance and millwright services for industrial plants.",specs:{services:"Mechanical Maintenance/Millwright"},price:null,priceHigh:null,url:"https://coremaintenance.com/"},
+
+  // ---- SPECIALTY: National Mill Maintenance (NMM) ----
+  {id:127,name:"Millwright & Rigging Services",brand:"National Mill Maintenance",brandId:"nmm",category:"Services",subcategory:"Millwright",partNumber:null,manufacturer:"NMM",description:"Complete millwright and rigging services for heavy industrial equipment installation and relocation.",specs:{service:"Millwright/Rigging",application:"Heavy Industrial Equipment"},price:null,priceHigh:null,url:"https://nationalmillmaintenance.com/"},
+  {id:128,name:"Hydraulic Cylinder Repair",brand:"National Mill Maintenance",brandId:"nmm",category:"Services",subcategory:"Hydraulic Repair",partNumber:null,manufacturer:"NMM",description:"Hydraulic cylinder repair, rebuild, and custom fabrication services.",specs:{service:"Repair/Rebuild/Custom Fabrication",equipment:"Hydraulic Cylinders"},price:null,priceHigh:null,url:"https://nationalmillmaintenance.com/"},
+  {id:129,name:"Conveyor System Maintenance",brand:"National Mill Maintenance",brandId:"nmm",category:"Services",subcategory:"Conveyor",partNumber:null,manufacturer:"NMM",description:"Conveyor system installation, maintenance, and repair for industrial and mining operations.",specs:{service:"Install/Maintain/Repair",equipment:"Conveyor Systems"},price:null,priceHigh:null,url:"https://nationalmillmaintenance.com/"},
+  {id:130,name:"Steel Fabrication & Welding",brand:"National Mill Maintenance",brandId:"nmm",category:"Services",subcategory:"Fabrication",partNumber:null,manufacturer:"NMM",description:"Custom steel fabrication, structural welding, and pipe fabrication services.",specs:{service:"Fabrication/Welding",types:"Structural/Pipe/Custom"},price:null,priceHigh:null,url:"https://nationalmillmaintenance.com/"},
+  {id:131,name:"Crane & Hoist Inspection",brand:"National Mill Maintenance",brandId:"nmm",category:"Services",subcategory:"Inspection",partNumber:null,manufacturer:"NMM",description:"OSHA-compliant crane and hoist inspection, load testing, and certification.",specs:{compliance:"OSHA",service:"Inspection/Load Testing/Certification"},price:null,priceHigh:null,url:"https://nationalmillmaintenance.com/"},
+  {id:132,name:"Preventive Maintenance Program",brand:"National Mill Maintenance",brandId:"nmm",category:"Services",subcategory:"Maintenance",partNumber:null,manufacturer:"NMM",description:"Customized preventive maintenance programs for mills, plants, and industrial facilities.",specs:{service:"Preventive Maintenance",scope:"Customized Programs"},price:null,priceHigh:null,url:"https://nationalmillmaintenance.com/"}
+];
+
+// ==========================================================================
+// STATE
+// ==========================================================================
+const PER_PAGE = 18;
+let state = {
+  brand: 'all',
+  category: 'All',
+  search: '',
+  sort: 'name-asc',
+  page: 1,
+  cart: JSON.parse(sessionStorage.getItem('isg-cart') || '[]')
+};
+
+// ==========================================================================
+// HELPERS
+// ==========================================================================
+function formatPrice(p) {
+  if (p == null) return null;
+  return '$' + Number(p).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+}
+
+function priceDisplay(product) {
+  if (product.price == null) return {text: 'Request Quote', isQuote: true};
+  if (product.priceHigh) return {text: formatPrice(product.price) + ' - ' + formatPrice(product.priceHigh), isQuote: false};
+  return {text: formatPrice(product.price), isQuote: false};
+}
+
+function getSpecsSummary(specs, max) {
+  if (!specs) return [];
+  const entries = Object.entries(specs);
+  return entries.slice(0, max || 3).map(([k, v]) => {
+    const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+    return label + ': ' + v;
+  });
+}
+
+function saveCart() {
+  sessionStorage.setItem('isg-cart', JSON.stringify(state.cart));
+}
+
+// ==========================================================================
+// CATEGORIES
+// ==========================================================================
+function getCategories() {
+  const cats = new Set();
+  PRODUCTS.forEach(p => cats.add(p.category));
+  return ['All', ...Array.from(cats).sort()];
+}
+
+function buildCategoryChips() {
+  const container = document.getElementById('categoryChips');
+  const cats = getCategories();
+  container.innerHTML = cats.map(c => {
+    const active = c === state.category ? ' active' : '';
+    return `<button class="chip${active}" onclick="selectCategory('${c.replace(/'/g, "\\'")}')">${c}</button>`;
+  }).join('');
+}
+
+// ==========================================================================
+// BRAND COUNTS
+// ==========================================================================
+function updateBrandCounts() {
+  const brandIds = ['ivs','morin','tvi','iap','iac','ase','cts','soles','iew','gw','rsi','dms','pinnacle','tmi','core','nmm'];
+  const counts = {};
+  brandIds.forEach(b => counts[b] = 0);
+  let total = 0;
+  PRODUCTS.forEach(p => {
+    if (counts[p.brandId] !== undefined) counts[p.brandId]++;
+    total++;
+  });
+  document.getElementById('countAll').textContent = total;
+  const idMap = {ivs:'Ivs',morin:'Morin',tvi:'Tvi',iap:'Iap',iac:'Iac',ase:'Ase',cts:'Cts',soles:'Soles',iew:'Iew',gw:'Gw',rsi:'Rsi',dms:'Dms',pinnacle:'Pinnacle',tmi:'Tmi',core:'Core',nmm:'Nmm'};
+  Object.entries(idMap).forEach(([id, name]) => {
+    const el = document.getElementById('count' + name);
+    if (el) el.textContent = counts[id] || 0;
+  });
+}
+
+// ==========================================================================
+// FILTERING & SORTING
+// ==========================================================================
+function getFilteredProducts() {
+  let items = [...PRODUCTS];
+
+  // Brand filter
+  if (state.brand !== 'all') {
+    items = items.filter(p => p.brandId === state.brand);
+  }
+
+  // Category filter
+  if (state.category !== 'All') {
+    items = items.filter(p => p.category === state.category);
+  }
+
+  // Search
+  if (state.search) {
+    const q = state.search.toLowerCase();
+    items = items.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q) ||
+      (p.partNumber && p.partNumber.toLowerCase().includes(q)) ||
+      p.manufacturer.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      (p.description && p.description.toLowerCase().includes(q))
+    );
+  }
+
+  // Sort
+  const [field, dir] = state.sort.split('-');
+  items.sort((a, b) => {
+    let va, vb;
+    if (field === 'price') {
+      va = a.price || 999999;
+      vb = b.price || 999999;
+    } else if (field === 'brand') {
+      va = a.brand;
+      vb = b.brand;
+    } else {
+      va = a.name;
+      vb = b.name;
+    }
+    const cmp = typeof va === 'number' ? va - vb : String(va).localeCompare(String(vb));
+    return dir === 'asc' ? cmp : -cmp;
+  });
+
+  return items;
+}
+
+// ==========================================================================
+// RENDERING
+// ==========================================================================
+function render() {
+  const filtered = getFilteredProducts();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+  if (state.page > totalPages) state.page = totalPages;
+  const start = (state.page - 1) * PER_PAGE;
+  const pageItems = filtered.slice(start, start + PER_PAGE);
+
+  // Results info
+  const info = document.getElementById('resultsInfo');
+  info.innerHTML = `Showing <strong>${start + 1}-${Math.min(start + PER_PAGE, filtered.length)}</strong> of <strong>${filtered.length}</strong> products`;
+
+  // Grid
+  const grid = document.getElementById('productGrid');
+  if (pageItems.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--lg-text-dim);">No products found matching your criteria.</div>';
+  } else {
+    grid.innerHTML = pageItems.map(p => {
+      const pd = priceDisplay(p);
+      const specs = getSpecsSummary(p.specs, 2);
+      return `
+        <div class="lg-card product-card" onclick="openModal(${p.id})">
+          <h3 class="product-card__name">${esc(p.name)}</h3>
+          <div>
+            <span class="lg-badge product-card__brand">${esc(p.brand)}</span>
+            <span class="product-card__category">${esc(p.category)}</span>
+          </div>
+          <div class="product-card__meta">
+            ${p.partNumber ? `<span>Part: <strong>${esc(p.partNumber)}</strong></span>` : ''}
+            <span>Mfr: ${esc(p.manufacturer)}</span>
+          </div>
+          ${specs.length ? `<div class="product-card__specs">${specs.map(s => `<span>${esc(s)}</span>`).join('')}</div>` : ''}
+          <div class="product-card__footer">
+            <span class="product-card__price${pd.isQuote ? ' quote' : ''}">${pd.text}</span>
+            ${pd.isQuote
+              ? `<button class="lg-btn lg-btn--tonal lg-btn--sm" onclick="event.stopPropagation();addToCart(${p.id})">Request Quote</button>`
+              : `<button class="lg-btn lg-btn--filled lg-btn--sm" onclick="event.stopPropagation();addToCart(${p.id})">Add to Cart</button>`
+            }
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // Pagination
+  renderPagination(totalPages);
+
+  // Cart badge
+  updateCartBadge();
+}
+
+function renderPagination(totalPages) {
+  const container = document.getElementById('pagination');
+  if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+  let html = '';
+  html += `<button class="pagination__btn" ${state.page <= 1 ? 'disabled' : ''} onclick="goPage(${state.page - 1})">&lsaquo;</button>`;
+
+  const maxVisible = 7;
+  let startP = Math.max(1, state.page - 3);
+  let endP = Math.min(totalPages, startP + maxVisible - 1);
+  if (endP - startP < maxVisible - 1) startP = Math.max(1, endP - maxVisible + 1);
+
+  if (startP > 1) {
+    html += `<button class="pagination__btn" onclick="goPage(1)">1</button>`;
+    if (startP > 2) html += `<span class="pagination__info">...</span>`;
+  }
+
+  for (let i = startP; i <= endP; i++) {
+    html += `<button class="pagination__btn${i === state.page ? ' active' : ''}" onclick="goPage(${i})">${i}</button>`;
+  }
+
+  if (endP < totalPages) {
+    if (endP < totalPages - 1) html += `<span class="pagination__info">...</span>`;
+    html += `<button class="pagination__btn" onclick="goPage(${totalPages})">${totalPages}</button>`;
+  }
+
+  html += `<button class="pagination__btn" ${state.page >= totalPages ? 'disabled' : ''} onclick="goPage(${state.page + 1})">&rsaquo;</button>`;
+  container.innerHTML = html;
+}
+
+function esc(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ==========================================================================
+// INTERACTIONS
+// ==========================================================================
+function selectBrand(brandId, btn) {
+  state.brand = brandId;
+  state.page = 1;
+  document.querySelectorAll('.sidebar__btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  render();
+  // Close mobile sidebar
+  if (window.innerWidth <= 768) toggleSidebar();
+}
+
+function selectCategory(cat) {
+  state.category = cat;
+  state.page = 1;
+  buildCategoryChips();
+  render();
+}
+
+function applySort() {
+  state.sort = document.getElementById('sortSelect').value;
+  state.page = 1;
+  render();
+}
+
+function goPage(n) {
+  state.page = n;
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Search
+let searchTimeout;
+document.getElementById('searchInput').addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    state.search = this.value.trim();
+    state.page = 1;
+    render();
+  }, 250);
+});
+
+// ---- Sidebar toggle ----
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+
+// ---- Cart ----
+function addToCart(productId) {
+  const existing = state.cart.find(c => c.id === productId);
+  if (existing) {
+    existing.qty++;
+  } else {
+    state.cart.push({id: productId, qty: 1});
+  }
+  saveCart();
+  updateCartBadge();
+  showSnackbar('Added to cart');
+}
+
+function removeFromCart(productId) {
+  state.cart = state.cart.filter(c => c.id !== productId);
+  saveCart();
+  renderCart();
+  updateCartBadge();
+}
+
+function updateCartQty(productId, delta) {
+  const item = state.cart.find(c => c.id === productId);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  saveCart();
+  renderCart();
+  updateCartBadge();
+}
+
+function clearCart() {
+  state.cart = [];
+  saveCart();
+  renderCart();
+  updateCartBadge();
+}
+
+function updateCartBadge() {
+  const count = state.cart.reduce((s, c) => s + c.qty, 0);
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = count;
+  badge.classList.toggle('show', count > 0);
+}
+
+function toggleCart() {
+  const drawer = document.getElementById('cartDrawer');
+  const backdrop = document.getElementById('cartBackdrop');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open');
+  backdrop.classList.toggle('open');
+  if (!isOpen) renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+
+  if (state.cart.length === 0) {
+    container.innerHTML = '<div class="cart-drawer__empty">Your cart is empty.<br>Browse products and add items to get started.</div>';
+    footer.innerHTML = '';
+    return;
+  }
+
+  let subtotal = 0;
+  let hasQuoteItems = false;
+
+  container.innerHTML = state.cart.map(item => {
+    const p = PRODUCTS.find(pr => pr.id === item.id);
+    if (!p) return '';
+    const pd = priceDisplay(p);
+    if (p.price) subtotal += p.price * item.qty;
+    else hasQuoteItems = true;
+
+    return `
+      <div class="cart-item">
+        <div class="cart-item__info">
+          <div class="cart-item__name">${esc(p.name)}</div>
+          <div class="cart-item__brand">${esc(p.brand)}</div>
+          <div class="cart-item__price">${pd.text}${!pd.isQuote && item.qty > 1 ? ' x ' + item.qty : ''}</div>
+          <div class="cart-item__qty">
+            <button onclick="updateCartQty(${p.id}, -1)">-</button>
+            <span>${item.qty}</span>
+            <button onclick="updateCartQty(${p.id}, 1)">+</button>
+            <button class="cart-item__remove" onclick="removeFromCart(${p.id})">Remove</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  let footerHtml = '';
+  if (subtotal > 0) {
+    footerHtml += `<div class="cart-drawer__subtotal"><span>Subtotal</span><strong>${formatPrice(subtotal)}</strong></div>`;
+  }
+  if (hasQuoteItems) {
+    footerHtml += `<div style="font-size:12px;color:var(--lg-text-dim);margin-bottom:12px;">Some items require a quote. Final pricing will be provided upon request.</div>`;
+  }
+  footerHtml += `<button class="lg-btn lg-btn--filled" onclick="requestQuote()">Request Quote</button>`;
+  footerHtml += `<button class="lg-btn lg-btn--text" onclick="clearCart()">Clear Cart</button>`;
+  footer.innerHTML = footerHtml;
+}
+
+function requestQuote() {
+  if (state.cart.length === 0) return;
+  showSnackbar('Quote request submitted! A sales representative will contact you shortly.');
+  clearCart();
+  toggleCart();
+}
+
+// ---- Product Modal ----
+function openModal(productId) {
+  const p = PRODUCTS.find(pr => pr.id === productId);
+  if (!p) return;
+
+  const pd = priceDisplay(p);
+  const specEntries = p.specs ? Object.entries(p.specs) : [];
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <h2 class="modal__name">${esc(p.name)}</h2>
+    <div class="modal__brand-line">
+      <span class="lg-badge" style="margin-right:6px;">${esc(p.brand)}</span>
+      ${esc(p.category)}${p.subcategory ? ' / ' + esc(p.subcategory) : ''}
+      ${p.partNumber ? ` &middot; Part #${esc(p.partNumber)}` : ''}
+    </div>
+    <p class="modal__desc">${esc(p.description)}</p>
+    ${specEntries.length > 0 ? `
+      <table class="modal__specs-table">
+        <tbody>
+          ${specEntries.map(([k, v]) => `
+            <tr>
+              <th>${esc(k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()))}</th>
+              <td>${esc(typeof v === 'object' ? JSON.stringify(v) : String(v))}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>` : ''}
+    <div class="modal__price-row">
+      <span class="modal__price${pd.isQuote ? ' quote' : ''}">${pd.text}</span>
+      ${pd.isQuote
+        ? `<button class="lg-btn lg-btn--tonal" onclick="addToCart(${p.id});closeModal()">Request Quote</button>`
+        : `<button class="lg-btn lg-btn--filled" onclick="addToCart(${p.id});closeModal()">Add to Cart</button>`
+      }
+    </div>
+    <div style="font-size:12px;color:var(--lg-text-dim);margin-top:4px;">Manufacturer: ${esc(p.manufacturer)}</div>
+    ${p.url ? `<a class="modal__source" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.url)}</a>` : ''}
+  `;
+
+  document.getElementById('modalBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+  if (event && event.target !== document.getElementById('modalBackdrop')) return;
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('modalBackdrop').classList.contains('open')) closeModal();
+    if (document.getElementById('cartDrawer').classList.contains('open')) toggleCart();
+  }
+});
+
+// ---- Snackbar ----
+function showSnackbar(msg) {
+  let snack = document.querySelector('.lg-snackbar');
+  if (!snack) {
+    snack = document.createElement('div');
+    snack.className = 'lg-snackbar';
+    document.body.appendChild(snack);
+  }
+  snack.textContent = msg;
+  snack.classList.add('lg-snackbar--visible');
+  setTimeout(() => snack.classList.remove('lg-snackbar--visible'), 2500);
+}
+
+// ==========================================================================
+// INIT
+// ==========================================================================
+buildCategoryChips();
+updateBrandCounts();
+updateCartBadge();
+render();
+</script>
+</body>
+</html>

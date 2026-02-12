@@ -1,0 +1,2181 @@
+{
+  "scrapeDate": "2026-02-12",
+  "sources": [
+    "coremaintenance.com",
+    "pinnacleindustriestexas.com",
+    "illinoiselectric.com",
+    "tvimem.com"
+  ],
+  "brands": [
+    {
+      "brandName": "CORE Industrial Maintenance",
+      "domain": "coremaintenance.com",
+      "isgCategory": "Specialty Services",
+      "locations": [
+        {"city": "Mt. Vernon", "state": "AL", "phone": "205-305-6237", "email": "Bryan.Brock@coremaintenance.com"},
+        {"city": "Columbus", "state": "MS", "phone": "601-678-2278", "email": "alex.nicholson@coremaintenance.com"},
+        {"city": "Birmingham", "state": "AL", "phone": "205-703-6497", "email": "Cody.Goodwin@coremaintenance.com"}
+      ]
+    },
+    {
+      "brandName": "Pinnacle Industries Ltd.",
+      "domain": "pinnacleindustriestexas.com",
+      "isgCategory": "Specialty Services",
+      "locations": [
+        {"city": "Pasadena", "state": "TX", "phone": "(713) 740-4300", "email": "sales@pinnind.com", "address": "407 Eagle Avenue, Pasadena, Texas 77506"}
+      ]
+    },
+    {
+      "brandName": "Illinois Electric Works",
+      "domain": "illinoiselectric.com",
+      "isgCategory": "Motors",
+      "locations": [
+        {"city": "Granite City", "state": "IL"}
+      ]
+    },
+    {
+      "brandName": "Tri-State Valve & Instrument (TVI)",
+      "domain": "tvimem.com",
+      "isgCategory": "Valves",
+      "locations": [
+        {"city": "Memphis", "state": "TN"},
+        {"city": "El Dorado", "state": "AR"},
+        {"city": "Calvert City", "state": "KY"},
+        {"city": "Evansville", "state": "IN"},
+        {"city": "Hamilton", "state": "MS"}
+      ],
+      "phone": "800-682-9948",
+      "afterHoursPhone": "901-340-5882",
+      "email": "sales@tvimem.com"
+    }
+  ],
+  "products": [
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Black Grey Mesh",
+      "partNumber": "843",
+      "manufacturer": "Richardson",
+      "description": "Classic trucker cap style built with Richardson quality and fit of best-selling style 112, seamless front, 5-panel construction.",
+      "specs": {
+        "decoration": "Woven Label Applique",
+        "shape": "Mid-Pro",
+        "fabric": "Twill/Polyester Mesh",
+        "visor": "Precurved",
+        "sweatband": "Cotton",
+        "materialComposition": "47% Cotton, 53% Polyester",
+        "construction": "Woven/Knitted",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM (7 - 7 3/4)"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/product/black-grey-mesh/",
+      "imageUrl": "https://coremaintenance.com/wp-content/uploads/2022/07/Black_Black_Mesh2.png",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Mossy Oak Obsession Khaki",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Mossy Oak Obsession Bottomland",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Grey Black Mesh",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Desert Camo Brown Mesh",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Black White Mesh",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Mossy Oak Bonefish Light Grey",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Merchandise",
+      "subcategory": "Hats",
+      "productName": "Tan Brown Mesh",
+      "partNumber": null,
+      "manufacturer": "Richardson",
+      "description": "Branded trucker cap, Richardson style 112, seamless front 5-panel construction.",
+      "specs": {
+        "fabric": "Twill/Polyester Mesh",
+        "fitType": "Adjustable Snapback",
+        "size": "OSFM"
+      },
+      "price": "$25.00",
+      "url": "https://coremaintenance.com/shop/",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Cabinet Pumps",
+      "productName": "PDQM Mini Cabinet Hydrostatic Test Pump",
+      "partNumber": "SKU 624",
+      "manufacturer": "PDQ Pumps",
+      "description": "Mini Cabinet PSI Hydrostatic Test Pump with 1/2\" x 15' Hose. Air-operated, capable of pressures up to 10,000 PSIG, 97:1 pressure ratio.",
+      "specs": {
+        "weight": "72 lbs",
+        "dimensions": "22 x 15 x 22 inches",
+        "pressureRatio": "97:1 (liquid to air)",
+        "maxAirInput": "100 PSI",
+        "cabinetMaterial": "Aluminum (corrosion-resistant)",
+        "wheels": "Two swivel wheels with bumpers",
+        "gaugeRange": "0-15,000 PSIG (4\" dial)",
+        "airFilterRegulator": "1/2\" with 2.5\" dial gauge (0-160 PSIG)",
+        "filterElement": "40-micron",
+        "hose": "1/2\" x 15' high-pressure discharge",
+        "variants": ["1,000 PSI", "3,600 PSI", "6,000 PSI", "10,000 PSI"]
+      },
+      "price": "$4,170 - $6,650",
+      "url": "https://www.pinnacleindustriestexas.com/shop/pdqm-mini-cabinet-hydrostatic-test-pump/",
+      "imageUrl": "https://www.pinnacleindustriestexas.com/wp-content/uploads/2017/09/PDQM-3-300x300.jpg",
+      "availability": "In Stock (all variants)"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Cabinet Pumps",
+      "productName": "PDQC10000 Cabinet Hydrostatic Test Pump",
+      "partNumber": "PDQC10000",
+      "manufacturer": "PDQ Pumps",
+      "description": "Full-size cabinet hydrostatic test pump for industrial pressure testing applications.",
+      "specs": {
+        "weight": "95 lbs",
+        "maxOutputPressure": "9,700 PSI @ 100 PSI air input",
+        "maxWaterFlowRate": "1 GPM @ 100 PSI (no load)",
+        "waterConnections": "1/2 NPT Female inlet/outlet",
+        "maxAirInput": "100 PSI",
+        "airConsumption": "56 CFM @ 100 PSI (no load)",
+        "airInlet": "Universal Hose Coupling"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/pdq-hydrostatic-test-pumps/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Cabinet Pumps",
+      "productName": "PDQCHV10000 Cabinet High Volume Hydrostatic Test Pump",
+      "partNumber": "PDQCHV10000",
+      "manufacturer": "PDQ Pumps",
+      "description": "High-volume cabinet hydrostatic test pump with increased water flow capacity.",
+      "specs": {
+        "weight": "105 lbs",
+        "maxOutputPressure": "9,700 PSI @ 100 PSI air input",
+        "maxWaterFlowRate": "20 GPM (with 3/4\" ID, 40 PSI inlet hose)",
+        "waterConnections": "3/4 NPT Female inlet/outlet",
+        "maxAirInput": "100 PSI",
+        "airConsumption": "56 CFM @ 100 PSI (no load)",
+        "airInlet": "Universal Hose Coupling"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/pdq-hydrostatic-test-pumps/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Cabinet Pumps",
+      "productName": "PDQM10000 Mini Cabinet Hydrostatic Test Pump",
+      "partNumber": "PDQM10000",
+      "manufacturer": "PDQ Pumps",
+      "description": "Compact mini cabinet hydrostatic test pump.",
+      "specs": {
+        "weight": "70 lbs",
+        "maxOutputPressure": "9,700 PSI @ 100 PSI air input",
+        "maxWaterFlowRate": "1 GPM @ 100 PSI (no load)",
+        "waterConnections": "1/2 NPT Female inlet/outlet",
+        "maxAirInput": "100 PSI",
+        "airConsumption": "56 CFM @ 100 PSI (no load)",
+        "airInlet": "Universal Hose Coupling"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/pdq-hydrostatic-test-pumps/",
+      "availability": "Available for online purchase"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Hand Pumps",
+      "productName": "PDQH3000 Hydrostatic Hand Pump",
+      "partNumber": "PDQH3000",
+      "manufacturer": "PDQ Pumps",
+      "description": "Manual hydrostatic hand pump for portable pressure testing.",
+      "specs": {
+        "weight": "17 lbs",
+        "pumpRatio": "60:1",
+        "maxOutputPressure": "3,020 PSI (75 lbs handle load)",
+        "displacementPerStroke": "0.360 cu. in.",
+        "maxWaterFlowRate": "3.5 GPM @ 60 PSI inlet",
+        "fluidConnections": "1/2\" NPT Female (inlet/outlet)"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/pdq-hydrostatic-test-pumps/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Hand Pumps",
+      "productName": "PDQH5000 Hydrostatic Hand Pump",
+      "partNumber": "PDQH5000",
+      "manufacturer": "PDQ Pumps",
+      "description": "High-pressure manual hydrostatic hand pump for portable pressure testing.",
+      "specs": {
+        "weight": "17 lbs",
+        "pumpRatio": "150:1",
+        "maxOutputPressure": "6,800 PSI (75 lbs handle load)",
+        "displacementPerStroke": "0.140 cu. in.",
+        "maxWaterFlowRate": "1 GPM @ 60 PSI inlet",
+        "fluidConnections": "1/2\" NPT Female (inlet/outlet)"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/pdq-hydrostatic-test-pumps/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Hydrostatic Test Pumps",
+      "subcategory": "Calibration Systems",
+      "productName": "PDQDF10000 Calibration System",
+      "partNumber": "PDQDF10000",
+      "manufacturer": "PDQ Pumps",
+      "description": "Dedicated pressure calibration system.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/pdq-hydrostatic-test-pumps/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver Apex Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "New line of 25-30hp oil-flooded rotary screw air compressors focused on performance and reliability with industrial design.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw",
+        "hpRange": "25-30 HP"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver Integra",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Energy-efficient airend with AirSmart control, low noise, accessible components in compact footprint.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw",
+        "hpRange": "20-50 HP",
+        "features": "AirSmart control, compact footprint"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver Electra-Screw",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Economical solution with modulating capacity control and microprocessor-based system control.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw",
+        "hpRange": "40-50 HP",
+        "features": "Modulating capacity control, microprocessor control",
+        "options": "Quiet enclosure, wye-delta starting"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver Electra-Saver",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Variable displacement with patented Turn-Valve technology for energy savings during fluctuating demand.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw",
+        "hpRange": "75-500 HP",
+        "features": "Patented Turn-Valve technology, variable displacement"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver Electra-Saver II",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Direct drive with oversized airends and bearings for energy savings with extended lifespan.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw",
+        "hpRange": "15-200 HP",
+        "features": "Direct drive, oversized airends and bearings"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver Electra-Saver II G2",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Slow-speed, 1800 rpm design with proven reliability.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw",
+        "hpRange": "40-50 HP",
+        "rpm": "1800"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver VS Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Widest turndown range in the industry with highest efficiency and maximum reliability.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw, Variable Speed",
+        "hpRange": "34-335 HP (25-250 kW)"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Flooded",
+      "productName": "Gardner Denver VST Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Two-stage variable speed system, most efficient product in the market.",
+      "specs": {
+        "type": "Oil-Flooded Rotary Screw, Variable Speed Two-Stage",
+        "hpRange": "75-335 HP (55-260 kW)"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver EnviroAire",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Water-injected oil-free design for sensitive applications with absolutely no lubricating oil.",
+      "specs": {
+        "type": "Oil-Free Rotary Screw, Water-Injected"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver EnviroAire ES Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Oil-less rotary scroll compressors delivering 100% oil-free air for medical, pharmaceutical, food & beverage.",
+      "specs": {
+        "type": "Oil-Free Rotary Scroll",
+        "hpRange": "5-40 HP",
+        "certification": "100% Oil-Free"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver EnviroAire S Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Simplex through quadraplex scroll compressor designs with optional remote receiver or tank-mounted.",
+      "specs": {
+        "type": "Oil-Free Rotary Scroll",
+        "hpRange": "3-10 HP",
+        "configurations": "Simplex through Quadraplex"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver EnviroAire T/TVS Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Zero risk of product contamination due to oil carryover.",
+      "specs": {
+        "type": "Oil-Free Rotary Screw",
+        "hpRange_T": "75-315 HP",
+        "hpRange_TVS": "110-400 HP"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver EnviroAire VS Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Meets ISO 8573-1 Class 0, the most stringent oil-free air class.",
+      "specs": {
+        "type": "Oil-Free Rotary Screw, Variable Speed",
+        "hpRange": "15-150 HP",
+        "certification": "ISO 8573-1 Class 0"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver L Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Fixed-speed rotary screw combining simplicity with cutting edge design.",
+      "specs": {
+        "type": "Oil-Free Rotary Screw, Fixed Speed",
+        "hpRange": "5-400 HP"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver LRS Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Variable speed with sound-insulating enclosure and thermostatically controlled fan.",
+      "specs": {
+        "type": "Oil-Free Rotary Screw, Variable Speed",
+        "kwRange": "7-290 kW",
+        "features": "Sound-insulating enclosure, thermostatically controlled fan"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver Quantima Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Oil-less design with ISO 8573-1 Class 0 and silicone-free certification for automotive/pharmaceutical.",
+      "specs": {
+        "type": "Oil-Free",
+        "hpRange": "300-400 HP",
+        "certification": "ISO 8573-1 Class 0, Silicone-free"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressors",
+      "subcategory": "Rotary Screw - Oil Free",
+      "productName": "Gardner Denver Ultima",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Oil-free compression process with ISO 8573-1 Class 0 and silicone-free certification.",
+      "specs": {
+        "type": "Oil-Free",
+        "hpRange": "100-200 HP",
+        "certification": "ISO 8573-1 Class 0, Silicone-free"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/rotary-screw-air-compressors/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blower Packages",
+      "productName": "Custom Blower Package",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Custom-built blower packages designed to customer specifications.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "CycloBlower",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Positive displacement blower for industrial applications.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "CycloBlower HE",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "High-efficiency positive displacement blower.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "DuroFlow Blowers",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Positive displacement blowers with 60+ years of proven results.",
+      "specs": {
+        "heritage": "60+ years proven performance"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "HeliFlow",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Helical rotor blower for industrial applications.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blower Packages",
+      "productName": "IQ Blower Packages",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Integrated blower package systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blower Packages",
+      "productName": "IQ-HE Blower Packages",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "High-efficiency integrated blower package systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blower Packages",
+      "productName": "IQ-RB Blower Packages",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Rebuild blower package systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Pumps",
+      "productName": "PDQ Pumps",
+      "partNumber": null,
+      "manufacturer": "PDQ Pumps",
+      "description": "Hydrostatic test pump systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "RBS Blowers",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Rotary blower systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "Robuschi",
+      "partNumber": null,
+      "manufacturer": "Robuschi (Gardner Denver)",
+      "description": "Industrial blowers and vacuum pumps.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Blowers",
+      "productName": "Sutorbilt Legend Series",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Positive displacement blowers with 75 years of proven performance.",
+      "specs": {
+        "heritage": "75 years proven performance"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Vacuum Pumps & PD Blowers",
+      "subcategory": "Vacuum Pumps",
+      "productName": "TriFlow PD Vacuum Pump",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Positive displacement vacuum pump.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/industrial-vacuum-pumps-pd-blowers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Compressors",
+      "productName": "Elmo Rietschle Claw Compressor",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Industrial claw-type compressor for vacuum and pressure applications.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Vacuum Pumps",
+      "productName": "Elmo Rietschle Claw Vacuum",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Industrial claw-type vacuum pump.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Vacuum Systems",
+      "productName": "Elmo Rietschle Industrial Vacuum Packages and Central Systems",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Complete industrial vacuum package and central vacuum systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Compressors",
+      "productName": "Elmo Rietschle Liquid Ring Compressors",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Liquid ring type compressors.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Vacuum Pumps",
+      "productName": "Elmo Rietschle Liquid Ring Vacuum Pump",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Liquid ring type vacuum pump.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Blowers",
+      "productName": "Elmo Rietschle Radial Blower",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Radial-type industrial blower.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Vacuum Pumps",
+      "productName": "Elmo Rietschle Radial Vacuum Pump",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Radial-type vacuum pump.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Compressors",
+      "productName": "Elmo Rietschle Rotary Lobe Compressor R-Series",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "R-Series rotary lobe compressor.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Vacuum Pumps",
+      "productName": "Elmo Rietschle Rotary Screw Vacuum Pump",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Rotary screw type vacuum pump.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Vacuum Pumps",
+      "productName": "Elmo Rietschle Rotary Vane Vacuum Pump",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Rotary vane type vacuum pump.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Vacuum",
+      "subcategory": "Blowers",
+      "productName": "Elmo Rietschle Side Channel Regenerative Blowers",
+      "partNumber": null,
+      "manufacturer": "Elmo Rietschle (Gardner Denver)",
+      "description": "Side channel regenerative blower systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/elmo-rietschle/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Nitrogen Generators",
+      "subcategory": "PSA Generators",
+      "productName": "Great Lakes Air GN2 System",
+      "partNumber": null,
+      "manufacturer": "Great Lakes Air",
+      "description": "Pressure Swing Adsorption (PSA) nitrogen generator using Carbon Molecular Sieve (CMS) bed technology for high-purity gaseous nitrogen production.",
+      "specs": {
+        "type": "Pressure Swing Adsorption (PSA)",
+        "technology": "Carbon Molecular Sieve (CMS) bed",
+        "productionCost": "$0.131 - $0.320 per 100 cubic feet",
+        "costSavings": "75-92% vs purchased nitrogen",
+        "roi": "6-18 months"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/nitrogen-generators/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Dryers & Ancillary Equipment",
+      "subcategory": "Refrigerated Dryers",
+      "productName": "Gardner Denver Refrigerated Air Dryers",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Refrigerated air dryers for moisture removal from compressed air systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/refrigerated-air-dryers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Dryers & Ancillary Equipment",
+      "subcategory": "Refrigerated Dryers",
+      "productName": "Great Lakes Air GRF Series Refrigerated Air Dryer",
+      "partNumber": null,
+      "manufacturer": "Great Lakes Air",
+      "description": "Refrigerated air dryer for industrial compressed air systems.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/refrigerated-air-dryers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Dryers & Ancillary Equipment",
+      "subcategory": "Membrane Dryers",
+      "productName": "Gardner Denver MMD Series Membrane Dryer",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Engineered to separate moisture as water vapor while filters remove solid particles, liquid water droplets, liquid oil, and oil vapors.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/refrigerated-air-dryers/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Filters",
+      "productName": "FIL Series Filters",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Compressed air filtration system for removing solid particles, condensed water, liquid oil, and oil vapors.",
+      "specs": {
+        "flowRange": "20-21,250 SCFM",
+        "workingPressures": "Up to 300 PSIG",
+        "inletTemperatures": "Up to 150 F",
+        "filtrationGrades": "7 available",
+        "standard": "ISO 8573.1"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Filters",
+      "productName": "FME Series Mist Eliminator Filters",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Long-life mist eliminator for reducing energy costs and removing oil and water aerosols.",
+      "specs": {
+        "flowRange": "125-3,000 SCFM",
+        "workingPressures": "Up to 150 PSIG",
+        "operatingTemperatures": "Up to 150 F",
+        "options": "Automatic condensate drain"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Oil Removal",
+      "productName": "CTS Eliminator II",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Pre-absorption filter with 40% longer service life than competitors.",
+      "specs": {
+        "ambientTemperatures": "Up to 120 F",
+        "inletTemperatures": "Up to 120 F",
+        "humidity": "90% RH",
+        "options": "Level minder alarm, heater, remote flow indicator"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Oil Removal",
+      "productName": "Eliminator Troubleshooter",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Four times standard activated carbon capacity, non-clogging filter, fully automatic, low maintenance.",
+      "specs": {
+        "cfmRange": "125-1,125 delivery system CFM",
+        "oilAbsorption": "4x standard activated carbon capacity"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Separators",
+      "productName": "Liquid Separators",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Centrifugal, impingement, and laminar flow separation with quick disconnect bowls.",
+      "specs": {
+        "operatingTemperatures": "Up to 150 F",
+        "pressures": "Up to 300 PSIG",
+        "pressureDrop": "Less than 1 PSIG differential",
+        "drainModels": "3 automatic drain models"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "DS2 Evacuator (Demand Drain)",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Microprocessor-based demand drain with self-diagnostics and host computer compatibility.",
+      "specs": {
+        "versions": "52 oz pneumatic; 27 oz or 77 oz electronic"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "SMD Mechanical Drain",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Mechanical condensate drain.",
+      "specs": {
+        "workingPressures": "Up to 175 PSIG",
+        "operatingTemperatures": "Up to 120 F",
+        "dischargeRate": "0.04 per operation (0.3-1.2 gal/hr)"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "TMD/BMD Mechanical Drains",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Heavy-duty mechanical condensate drains.",
+      "specs": {
+        "workingPressures": "Up to 500 PSIG",
+        "operatingTemperatures": "Up to 150 F",
+        "dischargeRate": "3-24 gallons/hour"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "DS4 Motorized Ball Valve Drain",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Motorized ball valve drain with battery backup and 10 programmable settings.",
+      "specs": {
+        "operatingPressures": "Up to 600 PSIG",
+        "fluidTemperatures": "Up to 190 F",
+        "ambientTemperatures": "Up to 130 F",
+        "valve": "1/2\" full-flow ball valve",
+        "features": "Battery backup, 10 programmable settings"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "AED Series Automatic Electric Drain",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Particle-resistant automatic electric drain for aftercoolers, receiver tanks, and refrigerated dryers.",
+      "specs": {
+        "pressures": "Up to 1,500 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "DS3 Series Electronic Timed Drain",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Electronic timed drain with dual surge protectors, UL/CSA/CE certified.",
+      "specs": {
+        "pressures": "Up to 1,200 PSIG",
+        "fluidTemperatures": "33-190 F",
+        "ambientTemperatures": "33-130 F",
+        "certifications": "UL, CSA, CE",
+        "options": "4-Port controller for multiple drains"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filtration & Accessories",
+      "subcategory": "Drains",
+      "productName": "EDD Series Electronic Demand Drain",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "Zero air loss electronic demand drain with capacitive level control and integrated alarm.",
+      "specs": {
+        "operatingPressures": "Up to 232 PSIG",
+        "ambientTemperatures": "Up to 140 F",
+        "capacity": "Up to 1,300 SCFM",
+        "features": "No air loss, capacitive level control, integrated alarm"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/product/filtration-accessory-clean-up-equipment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filters",
+      "subcategory": "Air Filters",
+      "productName": "Mann Air Filters",
+      "partNumber": null,
+      "manufacturer": "MANN+HUMMEL Group",
+      "description": "Industrial air filtration products for general engineering, process engineering, and industrial manufacturing.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/mann-filters/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filters",
+      "subcategory": "Oil Filters",
+      "productName": "Mann Oil Filters",
+      "partNumber": null,
+      "manufacturer": "MANN+HUMMEL Group",
+      "description": "Industrial oil filtration products.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/mann-filters/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filters",
+      "subcategory": "Hydraulic Filters",
+      "productName": "Mann Hydraulic Filters",
+      "partNumber": null,
+      "manufacturer": "MANN+HUMMEL Group",
+      "description": "Industrial hydraulic filtration products.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/mann-filters/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Filters",
+      "subcategory": "Fuel Filters",
+      "productName": "Mann Fuel Filters",
+      "partNumber": null,
+      "manufacturer": "MANN+HUMMEL Group",
+      "description": "Industrial fuel filtration products.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/mann-filters/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Sonic Air Systems",
+      "subcategory": "Drying Systems",
+      "productName": "Sonic Air Systems Dry-in-Place System",
+      "partNumber": null,
+      "manufacturer": "Sonic Air Systems",
+      "description": "Industrial drying solution using blowers, air knives, and HEPA filtration.",
+      "specs": {
+        "components": "Blowers, air knives, enclosures, HEPA filters, accessories"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/sonic-air-systems/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Sonic Air Systems",
+      "subcategory": "Tank Drying",
+      "productName": "Sonic Air Systems Tank Dryers",
+      "partNumber": null,
+      "manufacturer": "Sonic Air Systems",
+      "description": "Specialized tank drying equipment for industrial applications.",
+      "specs": {},
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/products/sonic-air-systems/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "30HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "30HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "30 HP",
+        "cfm": "115 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "50HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "50HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "50 HP",
+        "cfm": "185 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "75HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "75HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "75 HP",
+        "cfm": "320 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "100HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "100HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "100 HP",
+        "cfm": "450 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "150HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "150HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "150 HP",
+        "cfm": "618 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "200HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "200HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "200 HP",
+        "cfm": "742 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Compressor Rentals",
+      "subcategory": "Electric Air Compressors",
+      "productName": "300HP Electric Air Compressor Rental",
+      "partNumber": null,
+      "manufacturer": "Gardner Denver",
+      "description": "300HP electric air compressor available for short or long term rental.",
+      "specs": {
+        "horsepower": "300 HP",
+        "cfm": "1206 CFM",
+        "pressure": "125 PSIG"
+      },
+      "price": null,
+      "url": "https://www.pinnacleindustriestexas.com/compressor-rentals/"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "WEG 01036ET3E215T-W22",
+      "partNumber": "01036ET3E215T-W22",
+      "manufacturer": "WEG",
+      "description": "10HP 3600RPM 213/5T frame, 230/460V TEFC industrial motor.",
+      "specs": {
+        "horsepower": "10 HP",
+        "rpm": "3600",
+        "frame": "213/5T",
+        "voltage": "230/460V",
+        "enclosure": "TEFC"
+      },
+      "price": "$980.00",
+      "url": "https://shop.illinoiselectric.com/illinois/01036et3e215t-w22",
+      "availability": "In Stock"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "WEG 07518ET3E365T-W22",
+      "partNumber": "07518ET3E365T-W22",
+      "manufacturer": "WEG",
+      "description": "75HP 1800RPM 364/5T frame, 230/460V TEFC industrial motor.",
+      "specs": {
+        "horsepower": "75 HP",
+        "rpm": "1800",
+        "frame": "364/5T",
+        "voltage": "230/460V",
+        "enclosure": "TEFC"
+      },
+      "price": "$8,780.00",
+      "url": "https://shop.illinoiselectric.com/illinois/07518et3e365t-w22",
+      "availability": "Out of Stock"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE24213BA212AA3",
+      "partNumber": "1LE24213BA212AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le24213ba212aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE24213CB212AA3",
+      "partNumber": "1LE24213CB212AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le24213cb212aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE23213AC212AA3",
+      "partNumber": "1LE23213AC212AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le23213ac212aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE24213BA112AA3",
+      "partNumber": "1LE24213BA112AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le24213ba112aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE24213AB212AA3",
+      "partNumber": "1LE24213AB212AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le24213ab212aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE24211CB312AA3",
+      "partNumber": "1LE24211CB312AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le24211cb312aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE23213CB212AA3",
+      "partNumber": "1LE23213CB212AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le23213cb212aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE23212CB216AA3",
+      "partNumber": "1LE23212CB216AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le23212cb216aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE63214CB112AA1",
+      "partNumber": "1LE63214CB112AA1",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le63214cb112aa1"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Motors",
+      "subcategory": "Industrial Motors",
+      "productName": "Siemens 1LE24213CB112AA3",
+      "partNumber": "1LE24213CB112AA3",
+      "manufacturer": "Siemens",
+      "description": "Siemens industrial motor.",
+      "specs": {},
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/1le24213cb112aa3"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Chain Hoists",
+      "productName": "Harrington CF020-15",
+      "partNumber": "CF020-15",
+      "manufacturer": "Harrington",
+      "description": "Chain hoist, 2 ton capacity, 15 ft lift.",
+      "specs": {
+        "capacity": "2 ton",
+        "lift": "15 ft",
+        "type": "Chain Hoist"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/cf020-15"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Chain Hoists",
+      "productName": "Harrington CF050-20",
+      "partNumber": "CF050-20",
+      "manufacturer": "Harrington",
+      "description": "Chain block hoist, 5 ton capacity, 20 ft lift.",
+      "specs": {
+        "capacity": "5 ton",
+        "lift": "20 ft",
+        "type": "Chain Block Hoist"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/cf050-20"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Lever Hoists",
+      "productName": "Harrington L5LB008-15",
+      "partNumber": "L5LB008-15",
+      "manufacturer": "Harrington",
+      "description": "Lever hoist, 3/4 ton capacity, 15 ft lift.",
+      "specs": {
+        "capacity": "3/4 ton",
+        "lift": "15 ft",
+        "type": "Lever Hoist"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/lb008-15"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Lever Hoists",
+      "productName": "Harrington L5LB008-5",
+      "partNumber": "L5LB008-5",
+      "manufacturer": "Harrington",
+      "description": "Lever hoist, 3/4 ton capacity, 5 ft lift.",
+      "specs": {
+        "capacity": "3/4 ton",
+        "lift": "5 ft",
+        "type": "Lever Hoist"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/lb008-5"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Lever Hoists",
+      "productName": "Harrington L5LB030-20",
+      "partNumber": "L5LB030-20",
+      "manufacturer": "Harrington",
+      "description": "Lever hoist, 3 ton capacity, 20 ft lift.",
+      "specs": {
+        "capacity": "3 ton",
+        "lift": "20 ft",
+        "type": "Lever Hoist"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/lb030-20"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Mini Hoists",
+      "productName": "Harrington LX005-10",
+      "partNumber": "LX005-10",
+      "manufacturer": "Harrington",
+      "description": "Mini hoist, 1/2 ton capacity, 10 ft lift.",
+      "specs": {
+        "capacity": "1/2 ton",
+        "lift": "10 ft"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/lx005-10"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Cranes & Hoists",
+      "subcategory": "Mini Hoists",
+      "productName": "Harrington CX005-10",
+      "partNumber": "CX005-10",
+      "manufacturer": "Harrington",
+      "description": "Mini chain block hoist, 1/2 ton capacity, 10 ft lift.",
+      "specs": {
+        "capacity": "1/2 ton",
+        "lift": "10 ft",
+        "type": "Mini Chain Block"
+      },
+      "price": null,
+      "url": "https://shop.illinoiselectric.com/illinois/cx005-10"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Over Pressure Protection",
+      "subcategory": "Process Valves",
+      "productName": "Farris 2600 Series Process Valve",
+      "partNumber": "2600/2600L",
+      "manufacturer": "Farris (Curtiss-Wright)",
+      "description": "Full Nozzle Design safety relief valve with integral cast flanges, metal seat with optional o-ring, balanced bellows option.",
+      "specs": {
+        "sizes": "1\" x 2\" to 20\" x 24\"",
+        "orificeAreas": "D (0.15 sq in) to Z (176.7 sq in)",
+        "setPressure": "15 to 6,000 psig (1.0 to 413 barg)",
+        "temperatureRange": "-320 to 1500 F (-195 to 815 C)",
+        "flangeClasses": "150# to 2500#",
+        "materials": "Carbon Steel, Stainless Steel, Alloy Steels, Monel, Hastelloy C, Duplex, NACE compliant",
+        "certifications": "ASME/NB Section VIII and III, CSA B51, ISO 9001-2008, PED 97/23/EC, ATEX 94/9/EC, CSQL (China), GOST-R (Russia), US Coast Guard, Nuclear 10 CFR 50 App B"
+      },
+      "price": null,
+      "url": "https://tvimem.com/farris/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Over Pressure Protection",
+      "subcategory": "Process Valves",
+      "productName": "Farris 2700 Series Process Valve",
+      "partNumber": "2700",
+      "manufacturer": "Farris (Curtiss-Wright)",
+      "description": "Compact process safety relief valve with metal seat, optional o-ring, balanced design, sanitary connections available.",
+      "specs": {
+        "sizes": "1/2\" x 1\" to 1-1/2\" x 2-1/2\"",
+        "orificeAreas": "C (0.068 sq in) to G (0.573 sq in)",
+        "setPressure": "15 to 6,500 psig (1.0 to 413 barg)",
+        "temperatureRange": "-320 to 750 F (-195 to 399 C)",
+        "features": "Metal seat with optional o-ring, balanced design, flanged option, sanitary connections",
+        "certifications": "ASME/NB Section VIII and III, CSA B51, ISO 9001-2008, PED 97/23/EC, ATEX 94/9/EC"
+      },
+      "price": null,
+      "url": "https://tvimem.com/farris/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Over Pressure Protection",
+      "subcategory": "Pilot Operated Valves",
+      "productName": "Farris 3800 Series Process Valve",
+      "partNumber": "3800",
+      "manufacturer": "Farris (Curtiss-Wright)",
+      "description": "Snap acting and modulating control actuation pilot operated relief valve with typical blowdown 3-6%.",
+      "specs": {
+        "sizes": "1\" x 2\" to 12\" x 16\"",
+        "orificeAreas": "D (0.15 sq in) to T (26.0 sq in)",
+        "setPressure": "15 to 6,170 psig (1.0 to 425 barg)",
+        "temperatureRange": "-320 to 500 F (-195 to 260 C)",
+        "blowdown": "3-6% typical",
+        "accessories": "Dual pilot, reverse flow preventer, field test connection, remote depressurizing",
+        "certifications": "ASME/NB Section VIII and III, CSA B51, ISO 9001-2008, PED 97/23/EC"
+      },
+      "price": null,
+      "url": "https://tvimem.com/farris/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Over Pressure Protection",
+      "subcategory": "Safety Valves",
+      "productName": "Farris 4200 Series Steam Safety Valve",
+      "partNumber": "4200",
+      "manufacturer": "Farris (Curtiss-Wright)",
+      "description": "Full nozzle design steam safety valve with open bonnet, one-piece guide, and temperature equalizing disc.",
+      "specs": {
+        "sizes": "1\" x 1/4\" x 1-1/2\" to 6\" x 8\"",
+        "orificeAreas": "F (0.316 sq in) to Q (11.39 sq in)",
+        "setPressure": "15 to 1,000 psig (1.0 to 68.9 barg)",
+        "temperatureRange": "-20 to 1,000 F (538 C)",
+        "features": "Open bonnet design, one-piece guide, temperature equalizing disc",
+        "certifications": "ASME/NB Section VIII and III, CSA B51, ISO 9001-2008, PED 97/23/EC, ATEX 94/9/EC"
+      },
+      "price": null,
+      "url": "https://tvimem.com/farris/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Over Pressure Protection",
+      "subcategory": "Software",
+      "productName": "Farris SizeMaster Mark IV",
+      "partNumber": null,
+      "manufacturer": "Farris (Curtiss-Wright)",
+      "description": "Pressure relief valve engineering software supporting multiple valve series and sizing scenarios with API standards and best engineering practice.",
+      "specs": {
+        "type": "Engineering Software",
+        "standards": "API"
+      },
+      "price": null,
+      "url": "https://tvimem.com/farris/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Globe Valves",
+      "productName": "Samson Globe Valves",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Globe, angle, and three-way body configurations from micro-flow to 100 inch and larger, in standard, exotic, or PFA/PTFE lined materials.",
+      "specs": {
+        "configurations": "Globe, angle, three-way",
+        "sizeRange": "Micro-flow to 100+ inches",
+        "materials": "Standard, exotic, PFA/PTFE lined",
+        "endConnections": "Welded, threaded, flanged",
+        "service": "Continuous control or on/off",
+        "media": "Non-corrosive, corrosive, erosive, steam"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Rotary Valves",
+      "productName": "Samson Rotary Valves",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Ball, segmented ball, butterfly, and eccentric rotary plug valves in various materials and pressure classes.",
+      "specs": {
+        "types": "Ball, segmented ball, butterfly, eccentric rotary plug",
+        "materials": "Ceramic, PFA/PTFE lined, carbon steel, stainless steel, Duplex, Monel, titanium, Hastelloy, Inconel, SMO, bronze",
+        "pressureClasses": "Low and high pressure",
+        "standards": "ANSI, API, ASME"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Specialty Valves",
+      "productName": "Samson Cryogenic Valves",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Cryogenic service valves operating from -459 F (-273 C) to +149 F (+65 C).",
+      "specs": {
+        "temperatureRange": "-459 F to +149 F (-273 C to +65 C)"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Specialty Valves",
+      "productName": "Samson Hygienic/Aseptic Valves",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Stainless steel valves with polished finishes, CIP/SIP capable for hygienic applications.",
+      "specs": {
+        "sizeRange": "1/4\" to 5\"",
+        "material": "Stainless steel, polished",
+        "features": "CIP/SIP capable"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Specialty Valves",
+      "productName": "Samson Steam Converting Valves",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Steam converting valves for industrial steam systems.",
+      "specs": {
+        "sizeRange": "2\" to 20\" ANSI",
+        "pressureClass": "Class 150 to 900"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Actuators",
+      "productName": "Samson Actuators",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Pneumatic, electric, electropneumatic, hydraulic, and hand crank actuators. Pneumatic with rolling diaphragm and internal springs. Rotary at 70 deg (throttling) or 90 deg (on/off).",
+      "specs": {
+        "types": "Pneumatic, electric, electropneumatic, hydraulic, hand crank",
+        "pneumaticDesign": "Rolling diaphragm with internal springs",
+        "rotaryAngles": "70 deg (throttling), 90 deg (on/off)"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Accessories",
+      "productName": "Samson Digital Positioners & Accessories",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Digital positioners with HART, Profibus, Foundation Fieldbus protocols. Limit switches, solenoid valves, boosters, heating jackets. SIL 3 capable.",
+      "specs": {
+        "protocols": "HART, Profibus, Foundation Fieldbus",
+        "safetyRating": "SIL 3 capable",
+        "accessories": "Limit switches, solenoid valves, boosters, heating jackets"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Regulators",
+      "productName": "Samson Self-Operated Regulators",
+      "partNumber": null,
+      "manufacturer": "Samson",
+      "description": "Self-operated pressure, temperature, differential pressure, and flow regulators. Sanitary pressure reducing regulators available.",
+      "specs": {
+        "types": "Pressure, temperature, differential pressure, flow",
+        "sanitarySizes": "0.5-2 inch",
+        "sanitaryPressureRange": "5-90 psi",
+        "sanitaryMaxTemp": "320 F"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valves & Automation",
+      "subcategory": "Control Systems",
+      "productName": "TROVIS Control Systems",
+      "partNumber": null,
+      "manufacturer": "Samson (TROVIS brand)",
+      "description": "Building automation and plant control systems for food/beverage, pharmaceutical, and waste management industries.",
+      "specs": {
+        "applications": "Building automation, plant control",
+        "industries": "Food/beverage, pharmaceutical, waste management"
+      },
+      "price": null,
+      "url": "https://tvimem.com/samson/"
+    }
+  ],
+  "services": [
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Capital Expansion",
+      "description": "Wide range of capital projects delivered on time and within budget. Project planning, execution, and quality assurance.",
+      "url": "https://coremaintenance.com/services/capital-expansion/"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Industrial Maintenance",
+      "description": "Reactive maintenance (emergency equipment repair, production interruption resolution) and proactive maintenance (custom routine programs, inspection scheduling, preventive planning).",
+      "url": "https://coremaintenance.com/services/industrial-maintenance/"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Contract Labor",
+      "description": "Flexible staffing solutions providing millwrights, ironworkers, welders, maintenance mechanics, and general laborers for any duration.",
+      "url": "https://coremaintenance.com/services/contract-labor/"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Steel Fabrication",
+      "description": "Custom fabrication from customer specifications/blueprints or in-house design solutions. Emphasis on safety, quality, efficiency, and customer satisfaction.",
+      "url": "https://coremaintenance.com/services/steel-fabrication/"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Equipment Installation",
+      "description": "Specialized rigging and installation for heavy industrial equipment with in-house laser alignment. One-stop shop for equipment installation needs.",
+      "url": "https://coremaintenance.com/services/equipment-installation/"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Pipe Welding & Installation",
+      "description": "Pipe welding specializing in carbon steel, stainless steel, and titanium. Capabilities include repair, modification, new pipe builds, and hot tapping.",
+      "url": "https://coremaintenance.com/services/pipe-welding-installation/"
+    },
+    {
+      "brand": "CORE Industrial Maintenance",
+      "category": "Laser Alignment",
+      "description": "Precision laser alignment using latest Leica technology to prevent premature equipment wear and failure.",
+      "specs": {
+        "equipment": "Leica laser alignment systems"
+      },
+      "url": "https://coremaintenance.com/services/laser-alignment/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Field Services",
+      "description": "24/7 field service including air system audits, flow analysis, and service for air compressors, PD blowers, vacuum pumps, and ancillary equipment. Factory-trained and certified technicians.",
+      "url": "https://www.pinnacleindustriestexas.com/service/field-services/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Preventative Maintenance",
+      "description": "Regularly scheduled PM services with proprietary tracking database, proactive scheduling, and free spectrographic oil analysis every 1,000 hours. 24/7 emergency support.",
+      "url": "https://www.pinnacleindustriestexas.com/service/preventative-maintenance/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Air Compressor Repair, Overhaul & Rebuild",
+      "description": "Full service repair for all major brands, 5-500 HP. On-site or in-shop service with diagnostic evaluation, parts ordering, and expert repairs.",
+      "url": "https://www.pinnacleindustriestexas.com/service/air-compressor-repair-overhaul-and-rebuild/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Positive Displacement Blower Rebuild",
+      "description": "Rebuild services for Gardner Denver, Roots, and Tuthill brand blowers, on-site or in-shop.",
+      "specs": {
+        "brandsServiced": ["Gardner Denver", "Roots", "Tuthill"]
+      },
+      "url": "https://www.pinnacleindustriestexas.com/service/positive-displacement-blower-rebuild/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Centrifugal Blower Rebuild",
+      "description": "Specialized rebuild services for Hoffman Lamson centrifugal blowers.",
+      "specs": {
+        "brandsServiced": ["Hoffman Lamson"]
+      },
+      "url": "https://www.pinnacleindustriestexas.com/service/centrifugal-blower-rebuild/"
+    },
+    {
+      "brand": "Pinnacle Industries Ltd.",
+      "category": "Elmo Rietschle Rebuild",
+      "description": "Dedicated rebuild services for Elmo Rietschle vacuum equipment.",
+      "url": "https://www.pinnacleindustriestexas.com/service/elmo-rietschle-rebuild/"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Electric Motor Repair",
+      "description": "Redesign and rewind for AC and DC motors from fractional HP through 20,000 HP, weights up to 40 tons. Since 1931.",
+      "specs": {
+        "hpRange": "Fractional to 20,000 HP",
+        "maxWeight": "40 tons",
+        "types": "AC and DC",
+        "voltageRange": "Up to 13,200 volts"
+      },
+      "url": "https://www.illinoiselectric.com/electric-motor-repair"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Pump Repair",
+      "description": "Industrial pump repair services.",
+      "url": "https://www.illinoiselectric.com/pump-repair"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Gearbox Repair",
+      "description": "Industrial gearbox repair and rebuild services.",
+      "url": "https://www.illinoiselectric.com/gearbox-repair"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Babbitt Bearing Repair",
+      "description": "Babbitt bearing repair services for industrial rotating equipment.",
+      "url": "https://www.illinoiselectric.com/babbitt-bearing-repair"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Switched Reluctance Motor Repair",
+      "description": "Specialized repair for switched reluctance motors.",
+      "url": "https://www.illinoiselectric.com/switched-reluctance-motor-repair"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Magnet Repair",
+      "description": "Industrial magnet repair services.",
+      "url": "https://www.illinoiselectric.com/magnet-repair"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Crane & Hoist Repair",
+      "description": "In-house repair of all brands of hoists, trolleys, winches, and gearboxes including Demag, Harrington, and UESCO. Inspections include frequent, periodic, and engineered lift inspections, load testing, and dye penetrant inspections.",
+      "specs": {
+        "brandsServiced": ["Demag", "Harrington", "UESCO"],
+        "inspectionTypes": ["Frequent", "Periodic", "Engineered Lift", "Load Testing", "Dye Penetrant"]
+      },
+      "url": "https://www.illinoiselectric.com/cranes-and-hoists"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "On-Site Machining",
+      "description": "On-site machining services with expert technicians bringing tools and equipment to customer location to minimize disruptions.",
+      "url": "https://www.illinoiselectric.com/on-site-machining"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Laser Alignment",
+      "description": "Precision laser alignment services for industrial equipment.",
+      "url": "https://www.illinoiselectric.com/laser-alignment"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Vibration Analysis",
+      "description": "Vibration analysis and diagnostic services for rotating equipment.",
+      "url": "https://www.illinoiselectric.com/vibration-analysis"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Thermography",
+      "description": "Infrared thermography inspection of electrification systems and control panels.",
+      "url": "https://www.illinoiselectric.com/thermography"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "PdMA Motor Testing",
+      "description": "PdMA motor analysis and condition-based testing services.",
+      "url": "https://www.illinoiselectric.com/pdma-motor-test"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Engineering Services",
+      "description": "Electric motor engineering and custom design services.",
+      "url": "https://www.illinoiselectric.com/engineering-services"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Prototype Development",
+      "description": "Custom prototype development services for industrial equipment.",
+      "url": "https://www.illinoiselectric.com/prototype-development"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Critical Spare Evaluation",
+      "description": "Assessment of critical spare parts inventory and recommendations.",
+      "url": "https://www.illinoiselectric.com/critical-spare-evaluation"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Electric Motor Storage",
+      "description": "Climate-controlled electric motor storage services.",
+      "url": "https://www.illinoiselectric.com/electric-motor-storage"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Industrial Equipment Installation & Removal",
+      "description": "Industrial equipment rigging, installation, and removal services.",
+      "url": "https://www.illinoiselectric.com/industrial-equipment-installation-removal"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Energy Efficiency",
+      "description": "Energy efficiency consulting and motor upgrade recommendations.",
+      "url": "https://www.illinoiselectric.com/energy-efficiency"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Fall Protection",
+      "description": "Fall protection systems and safety services.",
+      "url": "https://www.illinoiselectric.com/fall-protection"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Rigging Services",
+      "description": "Rigging services for heavy industrial equipment.",
+      "url": "https://www.illinoiselectric.com/rigging-services"
+    },
+    {
+      "brand": "Illinois Electric Works",
+      "category": "Power Generation",
+      "description": "Generator repair, testing, and maintenance services.",
+      "url": "https://www.illinoiselectric.com/power-generation"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "New Valve Automation",
+      "description": "Custom automation packages built through factory relationships with supporting documentation and asset tracking.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Relief Valve & VR Repair",
+      "description": "Three National Board and ASME certified repair locations with quality processes approved by National Board.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "High Pressure Relief Valve Repair",
+      "description": "Uses AVK equipment for valves exceeding standard test stand capabilities.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Non-Code Relief Valve Repair",
+      "description": "Refurbishes conservation vents, flame arrestors, and similar equipment to like-new condition.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Manual Valve Repair",
+      "description": "In-house repair for gate, globe, and check valves exceeding 72\". Includes parts replacement and hydro-testing.",
+      "specs": {
+        "maxSize": "72+ inches",
+        "valveTypes": ["Gate", "Globe", "Check"]
+      },
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Automated Valve Repair",
+      "description": "Valve sizing and automation design, custom bracket and coupling fabrication using factory parts exclusively.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "On-Site Maintenance & Repair",
+      "description": "Welded-in relief valve repair and pre-testing, mobile repair facility deployment, field machining, welded or flanged valve repair for pressure seal, Orbit, gate, globe, and check valves.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Asset Management",
+      "description": "Farris IPrism software for OSHA-compliant plant safety management. Storeroom management, inventory reduction, valve automation rationalization, relief valve tracking, RFID asset tracking.",
+      "specs": {
+        "software": ["Farris IPrism", "Custom relief valve tracking"],
+        "capabilities": ["RFID tracking", "Custom part number tagging", "Storeroom management"]
+      },
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Valve Sizing",
+      "description": "Relief valve sizing using Farris Sizemaster software supporting volume, mass flow, steam, and two-phase flow. Valve automation actuator sizing. Free sizing and validation sheets.",
+      "specs": {
+        "software": "Farris Sizemaster",
+        "flowTypes": ["Volume", "Mass flow", "Steam", "Two-phase flow"]
+      },
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Supply Chain Services",
+      "description": "Vendor rationalization, cost reduction, online ordering, contractually agreed pricing, customized product catalogs, multi-location support.",
+      "url": "https://tvimem.com/services/"
+    },
+    {
+      "brand": "Tri-State Valve & Instrument (TVI)",
+      "category": "Vendor Managed Inventory",
+      "description": "On-site asset management or consignment inventory with RFID tracking, secure web-based management platform, and custom data feeds.",
+      "url": "https://tvimem.com/services/"
+    }
+  ],
+  "distributorBrands": {
+    "Illinois Electric Works": {
+      "motorBrands": ["Toshiba", "US Motors", "Tatung", "Marathon", "GE", "TECO-Westinghouse", "WEG", "Emerson", "Leeson", "Baldor", "AO Smith", "Lafert", "Reuland", "Worldwide Electric", "Siemens"],
+      "craneHoistBrands": ["Demag", "Harrington", "UESCO"],
+      "productCategories": [
+        "Industrial Motors (fractional HP to 20,000 HP)",
+        "Variable Frequency Drives (up to 150 HP)",
+        "Motor Starters",
+        "Cranes & Hoists",
+        "Pump Controls",
+        "Blowers & Fans",
+        "Lehr Heaters",
+        "Generators",
+        "Custom Control Panels"
+      ],
+      "motorTypes": ["Induction", "Vertical", "Synchronous", "Wound Rotor", "Crane Motors", "Traction Motors"],
+      "inventoryRange": "New and used motors 1/4 HP to 5,000 HP in stock; repair capability to 20,000 HP",
+      "voltageRange": "Up to 13,200 volts",
+      "shopUrl": "https://shop.illinoiselectric.com/illinois"
+    },
+    "Pinnacle Industries Ltd.": {
+      "primaryBrands": ["Gardner Denver", "Hydrovane", "Great Lakes Air", "Elmo Rietschle", "Sonic Air Systems", "MANN+HUMMEL", "PDQ Pumps", "Robuschi"],
+      "compressorOverallRange": {
+        "capacityCFM": "15-2,580 CFM",
+        "hpRange": "5-500 HP",
+        "maxPressure": "200 PSI"
+      }
+    },
+    "Tri-State Valve & Instrument (TVI)": {
+      "overPressureProtectionBrands": ["Farris (Curtiss-Wright)"],
+      "valvesAutomationBrands": ["Samson", "Bray"],
+      "instrumentationBrands": ["Check-All", "Custom Control Sensors", "Dwyer Instruments", "Fairchild", "Greyline", "Hedland Flow Meters", "Herion", "Mac Process", "Magnatrol Valves", "Murphy", "Palmer Instruments", "Reotemp", "Winters"],
+      "corrosionResistanceBrands": ["Charter Plastics", "Fluoroseal", "Green Leaf", "Harvel", "Hayward", "Heritage Plastics", "Ipex", "Lasco Fittings", "Lined Valve Company", "Nibco", "Nil-Cor", "Simtech", "SwissFluid", "XOMOX"]
+    }
+  },
+  "projectPortfolio": {
+    "CORE Industrial Maintenance": {
+      "categories": ["Equipment Installations", "Platforms and Handrails", "Pipe", "Repairs", "Design and Build"],
+      "url": "https://coremaintenance.com/projects/"
+    }
+  }
+}

@@ -1,0 +1,279 @@
+;;; ================================================================
+;;; KERNEL / VALUATION LAYER
+;;; The serial reasoning architecture that distinguishes Charlotte
+;;; from conventional knowledge graph implementations.
+;;; ================================================================
+;;;
+;;; THIS FILE IS ARCHITECTURAL DOCTRINE.
+;;; It explains why Charlotte has five primitives instead of two,
+;;; and why that distinction is not a convenience — it is the system.
+;;;
+;;; ================================================================
+
+(in-microtheory CharlotteKernelMt)
+
+;;; ─── THE TWO LAYERS ─────────────────────────────────────────────
+;;;
+;;; Charlotte's five primitives separate into two architecturally
+;;; distinct layers that serve fundamentally different purposes:
+;;;
+;;;   ONTOLOGICAL LAYER     NODE, EDGE
+;;;   VALUATION LAYER       METRIC, SIGNAL, PROTOCOL
+;;;
+;;; The ontological layer answers: WHAT EXISTS?
+;;; The valuation layer answers:  WHAT IS IT WORTH?
+;;;
+;;; Most knowledge graph implementations conflate these. They encode
+;;; "DXP Enterprises has revenue $1.8B" as a node-edge-node triple
+;;; and then attempt to derive meaning through graph traversal —
+;;; random walks, GNN embeddings, link prediction, vector similarity.
+;;; The reasoning is probabilistic, the path is ambiguous, and the
+;;; explanation for any conclusion is a statistical confidence score.
+;;;
+;;; Charlotte does not do this.
+;;;
+;;; In Charlotte, "DXP Enterprises has revenue $1.8B" decomposes:
+;;;
+;;;   NODE:     DXPEnterprises              (the entity)
+;;;   EDGE:     (competitorOf DXP ISG)      (the relationship)
+;;;   METRIC:   annualRevenue = 1800        (the measurement)
+;;;   SIGNAL:   revenueExceedsISGBy6x       (the detected pattern)
+;;;   PROTOCOL: avoidHeadToHeadInLargeAcct  (the prescribed action)
+;;;
+;;; The first two live in the graph. The last three live in the
+;;; valuation layer — a serial pipeline that sits ON TOP of the
+;;; graph, not inside it.
+
+;;; ─── THE SERIAL PIPELINE ────────────────────────────────────────
+;;;
+;;; METRIC → SIGNAL → PROTOCOL is always serial. Always.
+;;;
+;;;   METRIC    A concrete, measurable value attached to a NODE.
+;;;             Like features in a regression model. The K dimensions
+;;;             that define the observation space.
+;;;
+;;;   SIGNAL    A detected pattern derived from one or more METRICs.
+;;;             This is feature engineering — the transformation that
+;;;             turns raw measurements into decision-relevant inputs.
+;;;             A SIGNAL is placed on a METRIC line by the observer
+;;;             at a specific point on the temporal spine.
+;;;
+;;;   PROTOCOL  A prescribed action triggered by one or more SIGNALs.
+;;;             This is the decision function. If these signals fire,
+;;;             then this action follows. Deterministic. Traceable.
+;;;
+;;; The chain is directional:
+;;;
+;;;   METRIC ──→ SIGNAL ──→ PROTOCOL
+;;;     ↑           ↑           ↑
+;;;   "measure"  "detect"    "act"
+;;;
+;;; You do not traverse this chain the way you traverse NODE→EDGE→NODE.
+;;; There is no ambiguous walk. There is no probabilistic embedding.
+;;; The valuation layer is signal processing, not graph search.
+
+(isa ValuationLayer Collection)
+(comment ValuationLayer
+  "The serial reasoning pipeline (METRIC → SIGNAL → PROTOCOL) that
+   sits on top of the ontological graph (NODE + EDGE). The valuation
+   layer is not traversed ambiguously — it is processed serially,
+   like a signal processing pipeline. Every conclusion has a
+   deterministic, traceable reasoning path back through the exact
+   signals and metrics that produced it.")
+
+(isa OntologicalLayer Collection)
+(comment OntologicalLayer
+  "The structural knowledge graph (NODE + EDGE). Answers 'what exists'
+   and 'how things relate.' Supports standard graph traversal and
+   topological reasoning. This is the layer most KG implementations
+   stop at.")
+
+(genls NODE OntologicalLayer)
+(genls EDGE OntologicalLayer)
+(genls METRIC ValuationLayer)
+(genls SIGNAL ValuationLayer)
+(genls PROTOCOL ValuationLayer)
+
+;;; ─── THE DIVE LINE ──────────────────────────────────────────────
+;;;
+;;; In cave diving, you run a physical line from the entrance to
+;;; your position. No matter how deep you go, no matter how silted
+;;; the visibility, you can always trace the line back. You never
+;;; lose the path.
+;;;
+;;; Charlotte's valuation layer works the same way.
+;;;
+;;; Every PROTOCOL that fires can be traced back:
+;;;   "This PROTOCOL fired because of SIGNAL X"
+;;;   "SIGNAL X was detected because METRIC Y crossed THRESHOLD Z"
+;;;   "METRIC Y is attached to NODE W via EDGE V"
+;;;
+;;; The dive line is unbroken. The reasoning path is never:
+;;;   "The model predicted with 73% confidence..."
+;;;   "The embedding space suggests similarity to..."
+;;;   "The attention mechanism weighted..."
+;;;
+;;; It is always:
+;;;   "This happened because this was measured and this threshold
+;;;    was crossed and this rule was in effect."
+;;;
+;;; This is not a philosophical preference. It is an operational
+;;; requirement. When you are deciding whether a compressor needs
+;;; service, or a pig is worth a certain price, or a competitor
+;;; threatens a market position — the humans making the decision
+;;; need to see the line. The whole line. Not a confidence score.
+
+(isa DiveLineProperty MetaKnowledge)
+(comment DiveLineProperty
+  "Every conclusion in the valuation layer has a complete, serial,
+   deterministic trace back to the raw metrics and graph entities
+   that produced it. This trace is the dive line. It is never
+   probabilistic. It is never approximate. It is the line.")
+
+;;; ─── THE FEATURE EQUATION ───────────────────────────────────────
+;;;
+;;; Consider valuing a house in ML 101:
+;;;
+;;;   price = f(sqft, bedrooms, bathrooms, lot_size, year_built,
+;;;             school_district, crime_rate, ...)
+;;;
+;;; The features are concrete. The model learns weights. The
+;;; prediction is a function of K measured dimensions.
+;;;
+;;; Charlotte's valuation layer is this, made explicit:
+;;;
+;;;   METRICs  = the features         (sqft, bedrooms, ...)
+;;;   SIGNALs  = the feature crosses  (above_median_sqft, good_schools)
+;;;   PROTOCOL = the valuation        (price_in_range_X, recommend_buy)
+;;;
+;;; But unlike a black-box model, every weight is a named SIGNAL
+;;; with a named threshold on a named METRIC attached to a named
+;;; NODE. The "model" is the set of PROTOCOL rules. The "training
+;;; data" is the history of SIGNALs on the temporal spine. The
+;;; "prediction" is a PROTOCOL firing — and you can read exactly
+;;; why it fired by following the dive line.
+;;;
+;;; This is the hybrid structure:
+;;;   Ontological (NODE+EDGE)  = what exists
+;;;   Heuristic (METRIC+SIGNAL) = what we observe and detect
+;;;   Procedural (PROTOCOL)    = what we do about it
+;;;
+;;; The five knowledge types map cleanly:
+;;;   Structural    → EDGE         (how things connect)
+;;;   Declarative   → NODE         (what things are)
+;;;   Heuristic     → METRIC+SIGNAL (what we measure and notice)
+;;;   Procedural    → PROTOCOL     (what rules govern action)
+;;;   Meta          → the system reflecting on all of the above
+
+;;; ─── WHY THIS MATTERS NOW ───────────────────────────────────────
+;;;
+;;; The AI boom is pushing knowledge graphs toward vector embeddings,
+;;; GNN reasoning, and LLM-powered traversal. The industry consensus
+;;; is: embed everything, let the model figure it out.
+;;;
+;;; This works for open-ended question answering. It does not work
+;;; for operational decisions where:
+;;;
+;;;   1. The stakes are real (equipment failure, inventory stockout,
+;;;      contract pricing, acquisition valuation)
+;;;
+;;;   2. The reasoning must be auditable (why did ServiceIQ recommend
+;;;      reordering 500 units of part X at location Y?)
+;;;
+;;;   3. The observer's judgment must be separable from the facts
+;;;      (the graph says DXP has 228 locations — that is a fact.
+;;;      The valuation layer says DXP is a threat — that is a
+;;;      judgment, made by an observer, based on metrics, expressed
+;;;      as signals, resulting in protocols.)
+;;;
+;;; Charlotte's architecture keeps these layers clean:
+;;;
+;;;   FACT LAYER (NODE+EDGE):
+;;;     Objective. Verifiable. Shared across all observers.
+;;;     "DXP has revenue $1.8B" is true regardless of who reads it.
+;;;
+;;;   VALUATION LAYER (METRIC+SIGNAL+PROTOCOL):
+;;;     Perspectival. Observer-dependent. Scoped to a microtheory.
+;;;     "DXP is a VERY HIGH threat to ISG" is a SIGNAL placed by
+;;;     an observer who measured specific METRICs against specific
+;;;     thresholds. A different observer (say, DXP's own analyst)
+;;;     would place different signals on the same facts.
+;;;
+;;; The ontological layer is the territory.
+;;; The valuation layer is the map.
+;;; Different observers draw different maps of the same territory.
+;;; Charlotte keeps both, and keeps them separate.
+
+(isa ObserverPerspective MetaKnowledge)
+(comment ObserverPerspective
+  "The valuation layer is perspectival — it encodes the observer's
+   judgment, not objective truth. Two observers looking at the same
+   NODE+EDGE graph may place different SIGNALs on the same METRICs
+   because they apply different thresholds and different PROTOCOLs.
+   This is by design. The graph (facts) is shared. The valuation
+   (interpretation) is scoped to the observer's microtheory.")
+
+;;; ─── FORMAL CONSTRAINT ──────────────────────────────────────────
+;;; The valuation layer is serial. Enforce it.
+
+(implies
+  (and (isa ?P PROTOCOL)
+       (hasTrigger ?P ?S))
+  (isa ?S SIGNAL))
+
+(implies
+  (and (isa ?S SIGNAL)
+       (derivedFrom ?S ?M))
+  (isa ?M METRIC))
+
+(implies
+  (and (isa ?M METRIC)
+       (attachedTo ?M ?N))
+  (isa ?N NODE))
+
+(comment "PROTOCOL requires SIGNAL requires METRIC requires NODE.
+          The chain is strict. You cannot fire a PROTOCOL from a NODE
+          directly. You cannot derive a SIGNAL without a METRIC.
+          The dive line is enforced at the type level.")
+
+;;; ─── VALUATION CHAIN TRACEABILITY ──────────────────────────────
+
+(isa valuationChain Predicate)
+(arity valuationChain 4)
+(arg1Isa valuationChain PROTOCOL)
+(arg2Isa valuationChain SIGNAL)
+(arg3Isa valuationChain METRIC)
+(arg4Isa valuationChain NODE)
+(comment valuationChain
+  "(valuationChain ?protocol ?signal ?metric ?node)
+   The complete dive line from a protocol firing back to the
+   entity it concerns. Every protocol must have at least one
+   complete chain. If you cannot produce the chain, the protocol
+   has no grounding and should not fire.")
+
+(implies
+  (and (isa ?P PROTOCOL)
+       (hasTrigger ?P ?S)
+       (derivedFrom ?S ?M)
+       (attachedTo ?M ?N))
+  (valuationChain ?P ?S ?M ?N))
+
+;;; ─── END ────────────────────────────────────────────────────────
+;;; This is the architectural doctrine. The five primitives are not
+;;; five flavors of the same thing. They are two layers:
+;;;
+;;;   The graph tells you what is.
+;;;   The pipeline tells you what it means.
+;;;
+;;; The graph is shared truth.
+;;; The pipeline is observer judgment.
+;;;
+;;; The graph is traversed.
+;;; The pipeline is processed.
+;;;
+;;; The graph is a territory.
+;;; The pipeline is a map.
+;;;
+;;; Charlotte keeps both. Charlotte keeps them separate.
+;;; That is the whole architecture.
+;;; ================================================================

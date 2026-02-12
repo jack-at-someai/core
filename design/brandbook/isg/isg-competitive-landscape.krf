@@ -1,0 +1,1089 @@
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; ISG COMPETITIVE LANDSCAPE — Pricing Mesh & Market Intelligence
+;;; Generated: 2026-02-11
+;;; Source: Deep web scrape of 111+ competitors across 6 verticals
+;;; Microtheory: ISGCompetitiveLandscapeMt
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(in-microtheory ISGCompetitiveLandscapeMt)
+
+;;; ─── Ontology ───────────────────────────────────────────────────────────
+
+(isa ISGCompetitiveLandscapeMt Microtheory)
+(genlMt ISGCompetitiveLandscapeMt CharlotteKernelMt)
+(comment ISGCompetitiveLandscapeMt
+  "Competitive intelligence for Industrial Service Group (ISG).
+   Maps 111+ competitors across 6 verticals (valves, compressors, motors,
+   pumps, MRO distribution, specialty/turbo) with pricing benchmarks,
+   market sizing, and competitive threat assessments.")
+
+;;; ─── Types ──────────────────────────────────────────────────────────────
+
+(isa IndustrialServiceCompany Collection)
+(isa CompetitorTier Collection)
+(isa IndustrialVertical Collection)
+(isa CompetitiveThreatLevel Collection)
+(isa PricingBenchmark Collection)
+(isa MarketSegment Collection)
+
+(isa Tier1-GlobalOEM CompetitorTier)
+(isa Tier2-LargeRegional CompetitorTier)
+(isa Tier3-MidMarket CompetitorTier)
+(isa Tier4-LocalNiche CompetitorTier)
+
+(isa ThreatVeryHigh CompetitiveThreatLevel)
+(isa ThreatHigh CompetitiveThreatLevel)
+(isa ThreatMedium CompetitiveThreatLevel)
+(isa ThreatLow CompetitiveThreatLevel)
+
+(isa ValveServices IndustrialVertical)
+(isa CompressorServices IndustrialVertical)
+(isa MotorServices IndustrialVertical)
+(isa PumpServices IndustrialVertical)
+(isa MRODistribution IndustrialVertical)
+(isa SpecialtyTurboServices IndustrialVertical)
+
+;;; ─── Predicates ─────────────────────────────────────────────────────────
+
+(isa competitorOf Predicate)
+(arity competitorOf 2)
+(arg1Isa competitorOf IndustrialServiceCompany)
+(arg2Isa competitorOf IndustrialServiceCompany)
+
+(isa competitorTier Predicate)
+(arity competitorTier 2)
+(arg1Isa competitorTier IndustrialServiceCompany)
+(arg2Isa competitorTier CompetitorTier)
+
+(isa threatLevel Predicate)
+(arity threatLevel 3)
+(arg1Isa threatLevel IndustrialServiceCompany)
+(arg2Isa threatLevel IndustrialServiceCompany)
+(arg3Isa threatLevel CompetitiveThreatLevel)
+(comment threatLevel "(threatLevel ?competitor ?target ?level) — threat of ?competitor to ?target")
+
+(isa operatesInVertical Predicate)
+(arity operatesInVertical 2)
+(arg1Isa operatesInVertical IndustrialServiceCompany)
+(arg2Isa operatesInVertical IndustrialVertical)
+
+(isa annualRevenue Predicate)
+(arity annualRevenue 2)
+(comment annualRevenue "Revenue in USD millions")
+
+(isa locationCount Predicate)
+(arity locationCount 2)
+
+(isa employeeCount Predicate)
+(arity employeeCount 2)
+
+(isa skuCount Predicate)
+(arity skuCount 2)
+
+(isa headquarteredIn Predicate)
+(arity headquarteredIn 2)
+
+(isa marketSharePct Predicate)
+(arity marketSharePct 2)
+
+(isa geographicOverlap Predicate)
+(arity geographicOverlap 3)
+(comment geographicOverlap "(geographicOverlap ?competitor ISG ?level)")
+
+(isa pricingBenchmark Predicate)
+(arity pricingBenchmark 4)
+(comment pricingBenchmark "(pricingBenchmark ?vertical ?metric ?lowValue ?highValue)")
+
+(isa marketSize Predicate)
+(arity marketSize 3)
+(comment marketSize "(marketSize ?vertical ?year ?valueUSDMillions)")
+
+(isa marketGrowthRate Predicate)
+(arity marketGrowthRate 2)
+(comment marketGrowthRate "(marketGrowthRate ?vertical ?cagrPct)")
+
+(isa grossMarginPct Predicate)
+(arity grossMarginPct 2)
+
+(isa partsMarkupPct Predicate)
+(arity partsMarkupPct 3)
+(comment partsMarkupPct "(partsMarkupPct ?company ?low ?high)")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; ISG PARENT ENTITY
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa ISG IndustrialServiceCompany)
+(prettyName ISG "Industrial Service Group")
+(headquarteredIn ISG "Indianapolis, IN")
+(annualRevenue ISG 241.3)
+(locationCount ISG 40)
+(employeeCount ISG 1300)
+(skuCount ISG 259000)
+(founded ISG 2018)
+(peOwner ISG "TJC LP / The Jordan Company")
+(operatesInVertical ISG ValveServices)
+(operatesInVertical ISG CompressorServices)
+(operatesInVertical ISG MotorServices)
+(operatesInVertical ISG PumpServices)
+(operatesInVertical ISG MRODistribution)
+(operatesInVertical ISG SpecialtyTurboServices)
+
+;;; ISG Brand Portfolio
+(isa ISG-IndustrialValveService IndustrialServiceCompany)
+(subsidiaryOf ISG-IndustrialValveService ISG)
+(prettyName ISG-IndustrialValveService "Industrial Valve Service")
+(operatesInVertical ISG-IndustrialValveService ValveServices)
+(founded ISG-IndustrialValveService 1975)
+
+(isa ISG-MorinProcess IndustrialServiceCompany)
+(subsidiaryOf ISG-MorinProcess ISG)
+(prettyName ISG-MorinProcess "Morin Process Equipment")
+(operatesInVertical ISG-MorinProcess ValveServices)
+
+(isa ISG-TriStateValve IndustrialServiceCompany)
+(subsidiaryOf ISG-TriStateValve ISG)
+(prettyName ISG-TriStateValve "Tri-State Valve LLC")
+(operatesInVertical ISG-TriStateValve ValveServices)
+
+(isa ISG-IndustrialAirPower IndustrialServiceCompany)
+(subsidiaryOf ISG-IndustrialAirPower ISG)
+(prettyName ISG-IndustrialAirPower "Industrial Air Power")
+(headquarteredIn ISG-IndustrialAirPower "Muskego, WI")
+(operatesInVertical ISG-IndustrialAirPower CompressorServices)
+
+(isa ISG-IndustrialAirCenters IndustrialServiceCompany)
+(subsidiaryOf ISG-IndustrialAirCenters ISG)
+(prettyName ISG-IndustrialAirCenters "Industrial Air Centers")
+(operatesInVertical ISG-IndustrialAirCenters CompressorServices)
+
+(isa ISG-CompressorTurbineServices IndustrialServiceCompany)
+(subsidiaryOf ISG-CompressorTurbineServices ISG)
+(prettyName ISG-CompressorTurbineServices "Compressor & Turbine Services")
+(operatesInVertical ISG-CompressorTurbineServices CompressorServices)
+
+(isa ISG-AirSpecialty IndustrialServiceCompany)
+(subsidiaryOf ISG-AirSpecialty ISG)
+(prettyName ISG-AirSpecialty "Air Specialty & Equipment Co.")
+(headquarteredIn ISG-AirSpecialty "Corpus Christi, TX")
+(locationCount ISG-AirSpecialty 5)
+(operatesInVertical ISG-AirSpecialty CompressorServices)
+
+(isa ISG-SolesElectric IndustrialServiceCompany)
+(subsidiaryOf ISG-SolesElectric ISG)
+(prettyName ISG-SolesElectric "Soles Electric")
+(headquarteredIn ISG-SolesElectric "Fairmont, WV")
+(annualRevenue ISG-SolesElectric 15.0)
+(founded ISG-SolesElectric 1960)
+(operatesInVertical ISG-SolesElectric MotorServices)
+
+(isa ISG-IllinoisElectricWorks IndustrialServiceCompany)
+(subsidiaryOf ISG-IllinoisElectricWorks ISG)
+(prettyName ISG-IllinoisElectricWorks "Illinois Electric Works")
+(headquarteredIn ISG-IllinoisElectricWorks "Granite City, IL")
+(annualRevenue ISG-IllinoisElectricWorks 17.2)
+(founded ISG-IllinoisElectricWorks 1931)
+(operatesInVertical ISG-IllinoisElectricWorks MotorServices)
+
+(isa ISG-GeorgiaWestern IndustrialServiceCompany)
+(subsidiaryOf ISG-GeorgiaWestern ISG)
+(prettyName ISG-GeorgiaWestern "Georgia Western")
+(headquarteredIn ISG-GeorgiaWestern "Kennesaw, GA")
+(operatesInVertical ISG-GeorgiaWestern PumpServices)
+
+(isa ISG-RenewalService IndustrialServiceCompany)
+(subsidiaryOf ISG-RenewalService ISG)
+(prettyName ISG-RenewalService "Renewal Service Inc.")
+(headquarteredIn ISG-RenewalService "Rock Island, IL")
+(employeeCount ISG-RenewalService 30)
+(operatesInVertical ISG-RenewalService PumpServices)
+
+(isa ISG-DynamicMechanical IndustrialServiceCompany)
+(subsidiaryOf ISG-DynamicMechanical ISG)
+(prettyName ISG-DynamicMechanical "Dynamic Mechanical Solutions")
+(operatesInVertical ISG-DynamicMechanical SpecialtyTurboServices)
+
+(isa ISG-COREIndustrial IndustrialServiceCompany)
+(subsidiaryOf ISG-COREIndustrial ISG)
+(prettyName ISG-COREIndustrial "CORE Industrial Maintenance")
+(operatesInVertical ISG-COREIndustrial SpecialtyTurboServices)
+
+(isa ISG-PinnacleIndustries IndustrialServiceCompany)
+(subsidiaryOf ISG-PinnacleIndustries ISG)
+(prettyName ISG-PinnacleIndustries "Pinnacle Industries Ltd.")
+(operatesInVertical ISG-PinnacleIndustries SpecialtyTurboServices)
+
+(isa ISG-TurbomachineryIndustries IndustrialServiceCompany)
+(subsidiaryOf ISG-TurbomachineryIndustries ISG)
+(prettyName ISG-TurbomachineryIndustries "Turbomachinery Industries")
+(operatesInVertical ISG-TurbomachineryIndustries SpecialtyTurboServices)
+
+(isa ISG-NationalMillMaintenance IndustrialServiceCompany)
+(subsidiaryOf ISG-NationalMillMaintenance ISG)
+(prettyName ISG-NationalMillMaintenance "National Mill Maintenance")
+(operatesInVertical ISG-NationalMillMaintenance SpecialtyTurboServices)
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; MARKET SIZING
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+;;; Valve Markets
+(marketSize ValveServices 2024 20400)
+(marketSize ValveServices 2034 27800)
+(marketGrowthRate ValveServices 4.8)
+
+;;; Compressor Markets
+(marketSize CompressorServices 2024 3960)
+(marketGrowthRate CompressorServices 3.56)
+
+;;; Motor Markets
+(marketSize MotorServices 2024 10500)
+(marketSize MotorServices 2032 16290)
+(marketGrowthRate MotorServices 5.5)
+
+;;; Pump Markets
+(marketSize PumpServices 2025 6400)
+(marketSize PumpServices 2035 12800)
+(marketGrowthRate PumpServices 7.7)
+
+;;; MRO Distribution Markets
+(marketSize MRODistribution 2024 91500)
+(marketSize MRODistribution 2030 101700)
+(marketGrowthRate MRODistribution 1.77)
+
+;;; Specialty / Turbo Markets
+(marketSize SpecialtyTurboServices 2024 8770)
+(marketSize SpecialtyTurboServices 2034 16860)
+(marketGrowthRate SpecialtyTurboServices 6.73)
+
+;;; Global Turbomachinery Services
+(marketSize TurbomachineryServicesGlobal 2024 2420)
+(marketSize TurbomachineryServicesGlobal 2031 3530)
+(marketGrowthRate TurbomachineryServicesGlobal 6.1)
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; PRICING BENCHMARKS BY VERTICAL
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+;;; Valve Pricing
+(pricingBenchmark ValveServices "standardTechHourlyRate" 50 100)
+(pricingBenchmark ValveServices "expertTechHourlyRate" 100 150)
+(pricingBenchmark ValveServices "afterHoursPremiumPct" 25 50)
+(pricingBenchmark ValveServices "repairVsReplaceSavingsPct" 40 60)
+(pricingBenchmark ValveServices "partsMarkupPct" 25 45)
+(pricingBenchmark ValveServices "contractDiscountVsTMPct" 10 20)
+
+;;; Compressor Pricing
+(pricingBenchmark CompressorServices "fieldServiceHourlyRate" 85 150)
+(pricingBenchmark CompressorServices "techBasePayHourly" 26 33)
+(pricingBenchmark CompressorServices "annualMaintenanceSmall" 1000 3000)
+(pricingBenchmark CompressorServices "annualMaintenanceLarge" 5000 15000)
+(pricingBenchmark CompressorServices "emergencyRepair" 500 1500)
+(pricingBenchmark CompressorServices "partsMarkupOEM" 25 50)
+(pricingBenchmark CompressorServices "partsMarkupAftermarket" 15 30)
+(pricingBenchmark CompressorServices "annualMaintPctEquipValue" 5 10)
+
+;;; Motor Pricing
+(pricingBenchmark MotorServices "rewindCostPerHP-Small" 95 475)
+(pricingBenchmark MotorServices "rewindCostPerHP-Medium" 40 63)
+(pricingBenchmark MotorServices "rewindCostPerHP-Large" 25 30)
+(pricingBenchmark MotorServices "rewindCostPerHP-VeryLarge" 15 25)
+(pricingBenchmark MotorServices "rewindCost-QuarterHP" 475 475)
+(pricingBenchmark MotorServices "rewindCost-1HP" 575 575)
+(pricingBenchmark MotorServices "rewindCost-10HP" 625 625)
+(pricingBenchmark MotorServices "rewindCost-100HP" 2500 2700)
+(pricingBenchmark MotorServices "replaceThresholdPct" 65 65)
+(pricingBenchmark MotorServices "laborPctOfRewindCost" 90 90)
+
+;;; Pump Pricing
+(pricingBenchmark PumpServices "flowserveAftermarketGrowthPct" 8.8 8.8)
+(pricingBenchmark PumpServices "sulzerServicesGrowthPct" 12.3 12.3)
+(pricingBenchmark PumpServices "globalAftermarketValue" 15000 15000)
+
+;;; MRO Distribution Pricing
+(pricingBenchmark MRODistribution "motionGrossMarginPct" 30 32)
+(pricingBenchmark MRODistribution "motionMarkupPct" 20 40)
+(pricingBenchmark MRODistribution "appliedGrossMarginPct" 29 31)
+(pricingBenchmark MRODistribution "appliedMarkupPct" 20 35)
+(pricingBenchmark MRODistribution "graingerGrossMarginPct" 39 40)
+(pricingBenchmark MRODistribution "fastenalGrossMarginPct" 45 45)
+(pricingBenchmark MRODistribution "dxpMarkupDistribution" 20 35)
+(pricingBenchmark MRODistribution "dxpMarkupEngineered" 40 60)
+
+;;; Specialty / Turbo Pricing
+(pricingBenchmark SpecialtyTurboServices "entryTechBillRate" 55 75)
+(pricingBenchmark SpecialtyTurboServices "midTechBillRate" 75 100)
+(pricingBenchmark SpecialtyTurboServices "seniorTechBillRate" 100 150)
+(pricingBenchmark SpecialtyTurboServices "specialistTechBillRate" 150 250)
+(pricingBenchmark SpecialtyTurboServices "gasTurbineMajorOverhaul" 2000000 15000000)
+(pricingBenchmark SpecialtyTurboServices "steamTurbineOverhaul" 500000 5000000)
+(pricingBenchmark SpecialtyTurboServices "compressorOverhaul" 200000 3000000)
+(pricingBenchmark SpecialtyTurboServices "componentRepairSavingsPct" 40 70)
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; VALVE COMPETITORS
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+;;; --- Tier 1: Global OEMs ---
+
+(isa EmersonFisher IndustrialServiceCompany)
+(prettyName EmersonFisher "Emerson Electric Co. (Fisher/Automation Solutions)")
+(headquarteredIn EmersonFisher "St. Louis, MO")
+(annualRevenue EmersonFisher 18020)
+(employeeCount EmersonFisher 75000)
+(locationCount EmersonFisher 200)
+(competitorTier EmersonFisher Tier1-GlobalOEM)
+(operatesInVertical EmersonFisher ValveServices)
+(competitorOf EmersonFisher ISG)
+(threatLevel EmersonFisher ISG ThreatVeryHigh)
+(geographicOverlap EmersonFisher ISG "National")
+
+(isa Flowserve IndustrialServiceCompany)
+(prettyName Flowserve "Flowserve Corporation")
+(headquarteredIn Flowserve "Irving, TX")
+(annualRevenue Flowserve 4690)
+(employeeCount Flowserve 16000)
+(locationCount Flowserve 300)
+(competitorTier Flowserve Tier1-GlobalOEM)
+(operatesInVertical Flowserve ValveServices)
+(operatesInVertical Flowserve PumpServices)
+(competitorOf Flowserve ISG)
+(threatLevel Flowserve ISG ThreatHigh)
+
+(isa SLBCameron IndustrialServiceCompany)
+(prettyName SLBCameron "SLB Cameron (Schlumberger)")
+(headquarteredIn SLBCameron "Houston, TX")
+(annualRevenue SLBCameron 33000)
+(employeeCount SLBCameron 8200)
+(locationCount SLBCameron 25)
+(competitorTier SLBCameron Tier1-GlobalOEM)
+(operatesInVertical SLBCameron ValveServices)
+(competitorOf SLBCameron ISG)
+(threatLevel SLBCameron ISG ThreatHigh)
+(geographicOverlap SLBCameron ISG "Gulf Coast")
+
+(isa CraneChemPharma IndustrialServiceCompany)
+(prettyName CraneChemPharma "Crane ChemPharma & Energy")
+(headquarteredIn CraneChemPharma "The Woodlands, TX")
+(annualRevenue CraneChemPharma 596)
+(employeeCount CraneChemPharma 2500)
+(competitorTier CraneChemPharma Tier1-GlobalOEM)
+(operatesInVertical CraneChemPharma ValveServices)
+(competitorOf CraneChemPharma ISG)
+(threatLevel CraneChemPharma ISG ThreatMedium)
+
+(isa Rotork IndustrialServiceCompany)
+(prettyName Rotork "Rotork plc")
+(headquarteredIn Rotork "Dallas, TX")
+(annualRevenue Rotork 950)
+(employeeCount Rotork 3600)
+(competitorTier Rotork Tier1-GlobalOEM)
+(operatesInVertical Rotork ValveServices)
+(competitorOf Rotork ISG)
+(threatLevel Rotork ISG ThreatMedium)
+
+(isa CurtissWright IndustrialServiceCompany)
+(prettyName CurtissWright "Curtiss-Wright Valve Group")
+(headquarteredIn CurtissWright "Davidson, NC")
+(annualRevenue CurtissWright 3000)
+(employeeCount CurtissWright 8500)
+(competitorTier CurtissWright Tier1-GlobalOEM)
+(operatesInVertical CurtissWright ValveServices)
+(competitorOf CurtissWright ISG)
+(threatLevel CurtissWright ISG ThreatMedium)
+
+;;; --- Tier 2: Large Regional ---
+
+(isa SetpointIS IndustrialServiceCompany)
+(prettyName SetpointIS "Setpoint Integrated Solutions")
+(headquarteredIn SetpointIS "Baton Rouge, LA")
+(annualRevenue SetpointIS 211.7)
+(employeeCount SetpointIS 500)
+(locationCount SetpointIS 18)
+(competitorTier SetpointIS Tier2-LargeRegional)
+(operatesInVertical SetpointIS ValveServices)
+(competitorOf SetpointIS ISG)
+(threatLevel SetpointIS ISG ThreatVeryHigh)
+(geographicOverlap SetpointIS ISG "Very High — TX, LA, AL, TN")
+(comment SetpointIS "Most dangerous direct valve competitor. 4-5x ISG valve ops. 65+ years, 400+ technicians, ValvKeep tracks 1.5M+ valves.")
+
+(isa OvationHoldings IndustrialServiceCompany)
+(prettyName OvationHoldings "Ovation Holdings Inc.")
+(headquarteredIn OvationHoldings "Riverdale, IA")
+(annualRevenue OvationHoldings 150)
+(employeeCount OvationHoldings 350)
+(locationCount OvationHoldings 15)
+(competitorTier OvationHoldings Tier2-LargeRegional)
+(operatesInVertical OvationHoldings ValveServices)
+(competitorOf OvationHoldings ISG)
+(threatLevel OvationHoldings ISG ThreatHigh)
+(geographicOverlap OvationHoldings ISG "Moderate — Midwest IL, IN, OH, WI")
+(comment OvationHoldings "PE-backed roll-up identical to ISG model. Midwest focus.")
+
+(isa CIRCOR IndustrialServiceCompany)
+(prettyName CIRCOR "CIRCOR International (KKR)")
+(headquarteredIn CIRCOR "Burlington, MA")
+(annualRevenue CIRCOR 795.4)
+(employeeCount CIRCOR 3220)
+(competitorTier CIRCOR Tier2-LargeRegional)
+(operatesInVertical CIRCOR ValveServices)
+(competitorOf CIRCOR ISG)
+(threatLevel CIRCOR ISG ThreatMedium)
+
+;;; --- Tier 3: Mid-Market ---
+
+(isa ValvTechnologies IndustrialServiceCompany)
+(prettyName ValvTechnologies "ValvTechnologies Inc.")
+(headquarteredIn ValvTechnologies "Houston, TX")
+(annualRevenue ValvTechnologies 72)
+(employeeCount ValvTechnologies 300)
+(competitorTier ValvTechnologies Tier3-MidMarket)
+(operatesInVertical ValvTechnologies ValveServices)
+(competitorOf ValvTechnologies ISG)
+(threatLevel ValvTechnologies ISG ThreatMedium)
+
+(isa ChalmersKubeck IndustrialServiceCompany)
+(prettyName ChalmersKubeck "Chalmers & Kubeck")
+(headquarteredIn ChalmersKubeck "Aston, PA")
+(annualRevenue ChalmersKubeck 58)
+(employeeCount ChalmersKubeck 323)
+(locationCount ChalmersKubeck 13)
+(competitorTier ChalmersKubeck Tier3-MidMarket)
+(operatesInVertical ChalmersKubeck ValveServices)
+(competitorOf ChalmersKubeck ISG)
+(threatLevel ChalmersKubeck ISG ThreatHigh)
+
+(isa FloWorks IndustrialServiceCompany)
+(prettyName FloWorks "FloWorks International (Clearlake Capital)")
+(headquarteredIn FloWorks "Houston, TX")
+(annualRevenue FloWorks 89)
+(employeeCount FloWorks 1089)
+(locationCount FloWorks 50)
+(competitorTier FloWorks Tier3-MidMarket)
+(operatesInVertical FloWorks ValveServices)
+(competitorOf FloWorks ISG)
+(threatLevel FloWorks ISG ThreatMedium)
+
+(isa TotalValveSystems IndustrialServiceCompany)
+(prettyName TotalValveSystems "Total Valve Systems")
+(headquarteredIn TotalValveSystems "Broken Arrow, OK")
+(annualRevenue TotalValveSystems 40)
+(locationCount TotalValveSystems 16)
+(competitorTier TotalValveSystems Tier3-MidMarket)
+(operatesInVertical TotalValveSystems ValveServices)
+(competitorOf TotalValveSystems ISG)
+(threatLevel TotalValveSystems ISG ThreatMedium)
+
+(isa UnitedValve IndustrialServiceCompany)
+(prettyName UnitedValve "United Valve")
+(headquarteredIn UnitedValve "Houston, TX")
+(annualRevenue UnitedValve 21.1)
+(locationCount UnitedValve 2)
+(competitorTier UnitedValve Tier3-MidMarket)
+(operatesInVertical UnitedValve ValveServices)
+(competitorOf UnitedValve ISG)
+(threatLevel UnitedValve ISG ThreatMedium)
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; COMPRESSOR COMPETITORS
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+;;; --- Tier 1: Global OEMs ---
+
+(isa AtlasCopco IndustrialServiceCompany)
+(prettyName AtlasCopco "Atlas Copco")
+(headquarteredIn AtlasCopco "Stockholm, Sweden")
+(annualRevenue AtlasCopco 16800)
+(employeeCount AtlasCopco 55840)
+(locationCount AtlasCopco 140)
+(marketSharePct AtlasCopco 22)
+(competitorTier AtlasCopco Tier1-GlobalOEM)
+(operatesInVertical AtlasCopco CompressorServices)
+(competitorOf AtlasCopco ISG)
+(threatLevel AtlasCopco ISG ThreatHigh)
+(comment AtlasCopco "Global #1. SMARTLINK IoT. 36% revenue from services.")
+
+(isa IngersollRand IndustrialServiceCompany)
+(prettyName IngersollRand "Ingersoll Rand (incl. Gardner Denver)")
+(headquarteredIn IngersollRand "Davidson, NC")
+(annualRevenue IngersollRand 7460)
+(employeeCount IngersollRand 21000)
+(locationCount IngersollRand 80)
+(marketSharePct IngersollRand 20)
+(competitorTier IngersollRand Tier1-GlobalOEM)
+(operatesInVertical IngersollRand CompressorServices)
+(competitorOf IngersollRand ISG)
+(threatLevel IngersollRand ISG ThreatHigh)
+(comment IngersollRand "Global #2. 14 acquisitions worth $2.6B in 2024.")
+
+(isa KaeserUSA IndustrialServiceCompany)
+(prettyName KaeserUSA "Kaeser Compressors USA")
+(headquarteredIn KaeserUSA "Fredericksburg, VA")
+(annualRevenue KaeserUSA 1900)
+(employeeCount KaeserUSA 1213)
+(locationCount KaeserUSA 50)
+(marketSharePct KaeserUSA 10)
+(competitorTier KaeserUSA Tier1-GlobalOEM)
+(operatesInVertical KaeserUSA CompressorServices)
+(competitorOf KaeserUSA ISG)
+(threatLevel KaeserUSA ISG ThreatMedium)
+(comment KaeserUSA "SIGMA AIR UTILITY: Air-as-a-Service model.")
+
+(isa SullairHitachi IndustrialServiceCompany)
+(prettyName SullairHitachi "Sullair / Hitachi Global Air Power")
+(headquarteredIn SullairHitachi "Michigan City, IN")
+(annualRevenue SullairHitachi 700)
+(employeeCount SullairHitachi 2000)
+(locationCount SullairHitachi 100)
+(marketSharePct SullairHitachi 10)
+(competitorTier SullairHitachi Tier1-GlobalOEM)
+(operatesInVertical SullairHitachi CompressorServices)
+(competitorOf SullairHitachi ISG)
+(threatLevel SullairHitachi ISG ThreatMedium)
+(comment SullairHitachi "Actively acquiring independent distributors.")
+
+(isa QuincyCompressor IndustrialServiceCompany)
+(prettyName QuincyCompressor "Quincy Compressor (Atlas Copco)")
+(headquarteredIn QuincyCompressor "Bay Minette, AL")
+(annualRevenue QuincyCompressor 500)
+(employeeCount QuincyCompressor 530)
+(locationCount QuincyCompressor 60)
+(competitorTier QuincyCompressor Tier1-GlobalOEM)
+(operatesInVertical QuincyCompressor CompressorServices)
+(competitorOf QuincyCompressor ISG)
+(threatLevel QuincyCompressor ISG ThreatMedium)
+
+;;; --- Tier 2: Regional Distributors ---
+
+(isa BlakePendleton IndustrialServiceCompany)
+(prettyName BlakePendleton "Blake & Pendleton")
+(headquarteredIn BlakePendleton "Birmingham, AL")
+(annualRevenue BlakePendleton 40)
+(employeeCount BlakePendleton 220)
+(locationCount BlakePendleton 14)
+(competitorTier BlakePendleton Tier2-LargeRegional)
+(operatesInVertical BlakePendleton CompressorServices)
+(competitorOf BlakePendleton ISG)
+(threatLevel BlakePendleton ISG ThreatHigh)
+(geographicOverlap BlakePendleton ISG "High — AL, TN, MS, GA, AR")
+(comment BlakePendleton "Primary direct compressor competitor. Same SE territory, multi-brand, services ALL brands.")
+
+(isa OTCIndustrial IndustrialServiceCompany)
+(prettyName OTCIndustrial "OTC Industrial Technologies")
+(headquarteredIn OTCIndustrial "Columbus, OH")
+(annualRevenue OTCIndustrial 296)
+(employeeCount OTCIndustrial 2000)
+(locationCount OTCIndustrial 60)
+(competitorTier OTCIndustrial Tier2-LargeRegional)
+(operatesInVertical OTCIndustrial CompressorServices)
+(operatesInVertical OTCIndustrial PumpServices)
+(operatesInVertical OTCIndustrial MotorServices)
+(operatesInVertical OTCIndustrial MRODistribution)
+(competitorOf OTCIndustrial ISG)
+(threatLevel OTCIndustrial ISG ThreatHigh)
+(geographicOverlap OTCIndustrial ISG "Moderate — TN, KY, LA, OH")
+(comment OTCIndustrial "Most structurally analogous to ISG. PE-backed, multi-brand, comparable scale.")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; MOTOR COMPETITORS
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa IPS IndustrialServiceCompany)
+(prettyName IPS "Integrated Power Services")
+(headquarteredIn IPS "Greenville, SC")
+(annualRevenue IPS 367.1)
+(employeeCount IPS 3000)
+(locationCount IPS 100)
+(competitorTier IPS Tier1-GlobalOEM)
+(operatesInVertical IPS MotorServices)
+(competitorOf IPS ISG)
+(threatLevel IPS ISG ThreatVeryHigh)
+(comment IPS "Largest motor service network in industry. PE-backed (Riverside). 1,800 technicians, 158 engineers.")
+
+(isa FLANDERS IndustrialServiceCompany)
+(prettyName FLANDERS "FLANDERS")
+(headquarteredIn FLANDERS "Evansville, IN")
+(annualRevenue FLANDERS 100)
+(employeeCount FLANDERS 856)
+(locationCount FLANDERS 17)
+(competitorTier FLANDERS Tier1-GlobalOEM)
+(operatesInVertical FLANDERS MotorServices)
+(competitorOf FLANDERS ISG)
+(threatLevel FLANDERS ISG ThreatHigh)
+
+(isa SulzerEMS IndustrialServiceCompany)
+(prettyName SulzerEMS "Sulzer Electromechanical Services")
+(headquarteredIn SulzerEMS "Pasadena, TX")
+(annualRevenue SulzerEMS 61.8)
+(employeeCount SulzerEMS 103)
+(locationCount SulzerEMS 6)
+(competitorTier SulzerEMS Tier1-GlobalOEM)
+(operatesInVertical SulzerEMS MotorServices)
+(competitorOf SulzerEMS ISG)
+(threatLevel SulzerEMS ISG ThreatMedium)
+
+(isa TimkenPowerSystems IndustrialServiceCompany)
+(prettyName TimkenPowerSystems "Timken Power Systems")
+(headquarteredIn TimkenPowerSystems "Princeton, WV")
+(employeeCount TimkenPowerSystems 300)
+(locationCount TimkenPowerSystems 3)
+(competitorTier TimkenPowerSystems Tier1-GlobalOEM)
+(operatesInVertical TimkenPowerSystems MotorServices)
+(competitorOf TimkenPowerSystems ISG)
+(threatLevel TimkenPowerSystems ISG ThreatMedium)
+(comment TimkenPowerSystems "Largest independent motor repair facility under one roof (180K sqft).")
+
+(isa NationalElectricCoil IndustrialServiceCompany)
+(prettyName NationalElectricCoil "National Electric Coil")
+(headquarteredIn NationalElectricCoil "Columbus, OH")
+(annualRevenue NationalElectricCoil 140.9)
+(employeeCount NationalElectricCoil 750)
+(locationCount NationalElectricCoil 2)
+(competitorTier NationalElectricCoil Tier1-GlobalOEM)
+(operatesInVertical NationalElectricCoil MotorServices)
+(competitorOf NationalElectricCoil ISG)
+(threatLevel NationalElectricCoil ISG ThreatMedium)
+
+(isa LSElectric IndustrialServiceCompany)
+(prettyName LSElectric "L&S Electric")
+(headquarteredIn LSElectric "Schofield, WI")
+(annualRevenue LSElectric 69.8)
+(employeeCount LSElectric 330)
+(locationCount LSElectric 6)
+(competitorTier LSElectric Tier2-LargeRegional)
+(operatesInVertical LSElectric MotorServices)
+(competitorOf LSElectric ISG)
+(threatLevel LSElectric ISG ThreatMedium)
+
+(isa BrandonClark IndustrialServiceCompany)
+(prettyName BrandonClark "Brandon and Clark")
+(headquarteredIn BrandonClark "Lubbock, TX")
+(annualRevenue BrandonClark 53.7)
+(employeeCount BrandonClark 168)
+(locationCount BrandonClark 6)
+(competitorTier BrandonClark Tier2-LargeRegional)
+(operatesInVertical BrandonClark MotorServices)
+(competitorOf BrandonClark ISG)
+(threatLevel BrandonClark ISG ThreatMedium)
+
+(isa JayIndustrial IndustrialServiceCompany)
+(prettyName JayIndustrial "Jay Industrial Repair")
+(headquarteredIn JayIndustrial "Birmingham, AL")
+(annualRevenue JayIndustrial 46.4)
+(employeeCount JayIndustrial 166)
+(locationCount JayIndustrial 5)
+(competitorTier JayIndustrial Tier2-LargeRegional)
+(operatesInVertical JayIndustrial MotorServices)
+(competitorOf JayIndustrial ISG)
+(threatLevel JayIndustrial ISG ThreatHigh)
+(geographicOverlap JayIndustrial ISG "High — Direct ISG Alabama territory")
+
+(isa HECO IndustrialServiceCompany)
+(prettyName HECO "HECO Inc.")
+(headquarteredIn HECO "Kalamazoo, MI")
+(annualRevenue HECO 33.8)
+(employeeCount HECO 147)
+(locationCount HECO 4)
+(competitorTier HECO Tier2-LargeRegional)
+(operatesInVertical HECO MotorServices)
+(competitorOf HECO ISG)
+(threatLevel HECO ISG ThreatMedium)
+
+(isa Dreisilker IndustrialServiceCompany)
+(prettyName Dreisilker "Dreisilker Electric Motors")
+(headquarteredIn Dreisilker "Glen Ellyn, IL")
+(annualRevenue Dreisilker 30)
+(locationCount Dreisilker 7)
+(competitorTier Dreisilker Tier2-LargeRegional)
+(operatesInVertical Dreisilker MotorServices)
+(competitorOf Dreisilker ISG)
+(threatLevel Dreisilker ISG ThreatMedium)
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; PUMP COMPETITORS
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+;;; Flowserve already declared above — adding pump vertical
+(operatesInVertical Flowserve PumpServices)
+
+(isa Sulzer IndustrialServiceCompany)
+(prettyName Sulzer "Sulzer Ltd")
+(headquarteredIn Sulzer "Winterthur, Switzerland")
+(annualRevenue Sulzer 3900)
+(employeeCount Sulzer 13500)
+(locationCount Sulzer 12)
+(competitorTier Sulzer Tier1-GlobalOEM)
+(operatesInVertical Sulzer PumpServices)
+(operatesInVertical Sulzer SpecialtyTurboServices)
+(competitorOf Sulzer ISG)
+(threatLevel Sulzer ISG ThreatHigh)
+
+(isa Xylem IndustrialServiceCompany)
+(prettyName Xylem "Xylem Inc. (Goulds Water Technology)")
+(headquarteredIn Xylem "Washington, DC")
+(annualRevenue Xylem 8600)
+(employeeCount Xylem 23000)
+(competitorTier Xylem Tier1-GlobalOEM)
+(operatesInVertical Xylem PumpServices)
+(competitorOf Xylem ISG)
+(threatLevel Xylem ISG ThreatMedium)
+
+(isa DXPEnterprises IndustrialServiceCompany)
+(prettyName DXPEnterprises "DXP Enterprises")
+(headquarteredIn DXPEnterprises "Houston, TX")
+(annualRevenue DXPEnterprises 1800)
+(employeeCount DXPEnterprises 5500)
+(locationCount DXPEnterprises 228)
+(competitorTier DXPEnterprises Tier1-GlobalOEM)
+(operatesInVertical DXPEnterprises PumpServices)
+(operatesInVertical DXPEnterprises MRODistribution)
+(competitorOf DXPEnterprises ISG)
+(threatLevel DXPEnterprises ISG ThreatVeryHigh)
+(geographicOverlap DXPEnterprises ISG "National")
+(comment DXPEnterprises "Strongest rotating equipment focus among public distributors. 6x ISG scale. Innovative Pumping Solutions division.")
+(partsMarkupPct DXPEnterprises 20 60)
+
+(isa FCXPerformance IndustrialServiceCompany)
+(prettyName FCXPerformance "FCX Performance (Applied Industrial)")
+(headquarteredIn FCXPerformance "Columbus, OH")
+(annualRevenue FCXPerformance 600)
+(employeeCount FCXPerformance 1000)
+(locationCount FCXPerformance 65)
+(competitorTier FCXPerformance Tier2-LargeRegional)
+(operatesInVertical FCXPerformance PumpServices)
+(operatesInVertical FCXPerformance ValveServices)
+(operatesInVertical FCXPerformance MRODistribution)
+(competitorOf FCXPerformance ISG)
+(threatLevel FCXPerformance ISG ThreatVeryHigh)
+(comment FCXPerformance "Largest specialty flow control distributor in the US. 250+ service/repair technicians.")
+(partsMarkupPct FCXPerformance 30 60)
+
+(isa HydraService IndustrialServiceCompany)
+(prettyName HydraService "Hydra Service Inc.")
+(headquarteredIn HydraService "Warrior, AL")
+(competitorTier HydraService Tier4-LocalNiche)
+(operatesInVertical HydraService PumpServices)
+(competitorOf HydraService ISG)
+(threatLevel HydraService ISG ThreatMedium)
+(geographicOverlap HydraService ISG "High — AL, MS, GA, FL")
+
+(isa JohnBouchardSons IndustrialServiceCompany)
+(prettyName JohnBouchardSons "John Bouchard & Sons")
+(headquarteredIn JohnBouchardSons "Tennessee")
+(competitorTier JohnBouchardSons Tier4-LocalNiche)
+(operatesInVertical JohnBouchardSons PumpServices)
+(competitorOf JohnBouchardSons ISG)
+(threatLevel JohnBouchardSons ISG ThreatMedium)
+(geographicOverlap JohnBouchardSons ISG "High — TN, KY, N. Alabama")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; MRO DISTRIBUTION COMPETITORS
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa Grainger IndustrialServiceCompany)
+(prettyName Grainger "W.W. Grainger")
+(headquarteredIn Grainger "Lake Forest, IL")
+(annualRevenue Grainger 17200)
+(employeeCount Grainger 26000)
+(locationCount Grainger 365)
+(marketSharePct Grainger 7)
+(competitorTier Grainger Tier1-GlobalOEM)
+(operatesInVertical Grainger MRODistribution)
+(competitorOf Grainger ISG)
+(threatLevel Grainger ISG ThreatMedium)
+(grossMarginPct Grainger 39.4)
+
+(isa MotionIndustries IndustrialServiceCompany)
+(prettyName MotionIndustries "Motion Industries (Genuine Parts)")
+(headquarteredIn MotionIndustries "Birmingham, AL")
+(annualRevenue MotionIndustries 8700)
+(employeeCount MotionIndustries 12000)
+(locationCount MotionIndustries 550)
+(marketSharePct MotionIndustries 13)
+(competitorTier MotionIndustries Tier1-GlobalOEM)
+(operatesInVertical MotionIndustries MRODistribution)
+(competitorOf MotionIndustries ISG)
+(threatLevel MotionIndustries ISG ThreatHigh)
+(grossMarginPct MotionIndustries 31)
+(partsMarkupPct MotionIndustries 20 40)
+(skuCount MotionIndustries 18000000)
+
+(isa AppliedIndustrial IndustrialServiceCompany)
+(prettyName AppliedIndustrial "Applied Industrial Technologies")
+(headquarteredIn AppliedIndustrial "Cleveland, OH")
+(annualRevenue AppliedIndustrial 4600)
+(employeeCount AppliedIndustrial 6800)
+(locationCount AppliedIndustrial 600)
+(marketSharePct AppliedIndustrial 5)
+(competitorTier AppliedIndustrial Tier1-GlobalOEM)
+(operatesInVertical AppliedIndustrial MRODistribution)
+(competitorOf AppliedIndustrial ISG)
+(threatLevel AppliedIndustrial ISG ThreatHigh)
+(grossMarginPct AppliedIndustrial 30)
+(partsMarkupPct AppliedIndustrial 20 35)
+
+(isa Fastenal IndustrialServiceCompany)
+(prettyName Fastenal "Fastenal Company")
+(headquarteredIn Fastenal "Winona, MN")
+(annualRevenue Fastenal 7540)
+(employeeCount Fastenal 23000)
+(locationCount Fastenal 1700)
+(marketSharePct Fastenal 8)
+(competitorTier Fastenal Tier1-GlobalOEM)
+(operatesInVertical Fastenal MRODistribution)
+(competitorOf Fastenal ISG)
+(threatLevel Fastenal ISG ThreatLow)
+(grossMarginPct Fastenal 45)
+
+(isa MSCIndustrial IndustrialServiceCompany)
+(prettyName MSCIndustrial "MSC Industrial Direct")
+(headquarteredIn MSCIndustrial "Melville, NY")
+(annualRevenue MSCIndustrial 3770)
+(competitorTier MSCIndustrial Tier1-GlobalOEM)
+(operatesInVertical MSCIndustrial MRODistribution)
+(competitorOf MSCIndustrial ISG)
+(threatLevel MSCIndustrial ISG ThreatLow)
+
+(isa WescoInternational IndustrialServiceCompany)
+(prettyName WescoInternational "Wesco International")
+(headquarteredIn WescoInternational "Pittsburgh, PA")
+(annualRevenue WescoInternational 21810)
+(locationCount WescoInternational 500)
+(competitorTier WescoInternational Tier1-GlobalOEM)
+(operatesInVertical WescoInternational MRODistribution)
+(competitorOf WescoInternational ISG)
+(threatLevel WescoInternational ISG ThreatLow)
+
+;;; DXP, FCX, OTC already declared above
+
+(isa IBTIndustrial IndustrialServiceCompany)
+(prettyName IBTIndustrial "IBT Industrial Solutions")
+(headquarteredIn IBTIndustrial "Kansas City, KS")
+(annualRevenue IBTIndustrial 93.4)
+(locationCount IBTIndustrial 40)
+(competitorTier IBTIndustrial Tier3-MidMarket)
+(operatesInVertical IBTIndustrial MRODistribution)
+(competitorOf IBTIndustrial ISG)
+(threatLevel IBTIndustrial ISG ThreatMedium)
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; SPECIALTY / TURBOMACHINERY COMPETITORS
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa GEVernova IndustrialServiceCompany)
+(prettyName GEVernova "GE Vernova (Gas Power Services)")
+(headquarteredIn GEVernova "Cambridge, MA")
+(annualRevenue GEVernova 38100)
+(employeeCount GEVernova 80000)
+(competitorTier GEVernova Tier1-GlobalOEM)
+(operatesInVertical GEVernova SpecialtyTurboServices)
+(competitorOf GEVernova ISG)
+(threatLevel GEVernova ISG ThreatHigh)
+(comment GEVernova "Services 55%+ of backlog. Dominant installed base.")
+
+(isa SiemensEnergy IndustrialServiceCompany)
+(prettyName SiemensEnergy "Siemens Energy (incl. Dresser-Rand)")
+(headquarteredIn SiemensEnergy "Munich, Germany")
+(annualRevenue SiemensEnergy 38000)
+(employeeCount SiemensEnergy 99000)
+(competitorTier SiemensEnergy Tier1-GlobalOEM)
+(operatesInVertical SiemensEnergy SpecialtyTurboServices)
+(competitorOf SiemensEnergy ISG)
+(threatLevel SiemensEnergy ISG ThreatHigh)
+
+(isa BakerHughesTPS IndustrialServiceCompany)
+(prettyName BakerHughesTPS "Baker Hughes TPS")
+(headquarteredIn BakerHughesTPS "Houston, TX")
+(annualRevenue BakerHughesTPS 38100)
+(employeeCount BakerHughesTPS 58000)
+(competitorTier BakerHughesTPS Tier1-GlobalOEM)
+(operatesInVertical BakerHughesTPS SpecialtyTurboServices)
+(competitorOf BakerHughesTPS ISG)
+(threatLevel BakerHughesTPS ISG ThreatHigh)
+
+(isa EthosEnergy IndustrialServiceCompany)
+(prettyName EthosEnergy "EthosEnergy")
+(headquarteredIn EthosEnergy "Houston, TX")
+(annualRevenue EthosEnergy 795)
+(employeeCount EthosEnergy 2000)
+(competitorTier EthosEnergy Tier2-LargeRegional)
+(operatesInVertical EthosEnergy SpecialtyTurboServices)
+(competitorOf EthosEnergy ISG)
+(threatLevel EthosEnergy ISG ThreatHigh)
+
+(isa Chromalloy IndustrialServiceCompany)
+(prettyName Chromalloy "Chromalloy Gas Turbine")
+(headquarteredIn Chromalloy "Palm Beach Gardens, FL")
+(annualRevenue Chromalloy 1100)
+(employeeCount Chromalloy 2000)
+(locationCount Chromalloy 20)
+(competitorTier Chromalloy Tier2-LargeRegional)
+(operatesInVertical Chromalloy SpecialtyTurboServices)
+(competitorOf Chromalloy ISG)
+(threatLevel Chromalloy ISG ThreatMedium)
+
+(isa BrockGroup IndustrialServiceCompany)
+(prettyName BrockGroup "Brock Group")
+(headquarteredIn BrockGroup "Houston, TX")
+(annualRevenue BrockGroup 3500)
+(employeeCount BrockGroup 15000)
+(locationCount BrockGroup 71)
+(competitorTier BrockGroup Tier2-LargeRegional)
+(operatesInVertical BrockGroup SpecialtyTurboServices)
+(competitorOf BrockGroup ISG)
+(threatLevel BrockGroup ISG ThreatMedium)
+
+(isa TurnerIndustries IndustrialServiceCompany)
+(prettyName TurnerIndustries "Turner Industries")
+(headquarteredIn TurnerIndustries "Baton Rouge, LA")
+(annualRevenue TurnerIndustries 2400)
+(employeeCount TurnerIndustries 19000)
+(competitorTier TurnerIndustries Tier2-LargeRegional)
+(operatesInVertical TurnerIndustries SpecialtyTurboServices)
+(competitorOf TurnerIndustries ISG)
+(threatLevel TurnerIndustries ISG ThreatMedium)
+
+(isa SulzerTurbo IndustrialServiceCompany)
+(prettyName SulzerTurbo "Sulzer Turbo Services")
+(headquarteredIn SulzerTurbo "Houston, TX")
+(competitorTier SulzerTurbo Tier2-LargeRegional)
+(operatesInVertical SulzerTurbo SpecialtyTurboServices)
+(competitorOf SulzerTurbo ISG)
+(threatLevel SulzerTurbo ISG ThreatHigh)
+(comment SulzerTurbo "Houston = world's largest turbomachinery service center. 32 acres, 285K sq ft, 700+ employees.")
+
+(isa MDA IndustrialServiceCompany)
+(prettyName MDA "MD&A (Mechanical Dynamics & Analysis)")
+(headquarteredIn MDA "Latham, NY")
+(annualRevenue MDA 150)
+(employeeCount MDA 500)
+(locationCount MDA 7)
+(competitorTier MDA Tier3-MidMarket)
+(operatesInVertical MDA SpecialtyTurboServices)
+(competitorOf MDA ISG)
+(threatLevel MDA ISG ThreatMedium)
+(comment MDA "Owned by Mitsubishi Power.")
+
+(isa MidsouthMechanical IndustrialServiceCompany)
+(prettyName MidsouthMechanical "Midsouth Mechanical Contractors")
+(headquarteredIn MidsouthMechanical "Alabama")
+(annualRevenue MidsouthMechanical 35)
+(competitorTier MidsouthMechanical Tier4-LocalNiche)
+(operatesInVertical MidsouthMechanical SpecialtyTurboServices)
+(competitorOf MidsouthMechanical ISG)
+(threatLevel MidsouthMechanical ISG ThreatMedium)
+(geographicOverlap MidsouthMechanical ISG "High — AL, GA, TN, Carolinas")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; MARKET TRENDS (as SIGNAL primitives)
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa MarketTrend Collection)
+(isa marketTrend Predicate)
+(arity marketTrend 3)
+(comment marketTrend "(marketTrend ?trendName ?description ?impactLevel)")
+
+(marketTrend PEConsolidation
+  "PE-backed roll-up consolidation accelerating across all industrial service verticals. ISG (TJC), Ovation (PE), FloWorks (Clearlake), Fox Innovation (Bluewater), RMS (Arcline), IPS (Riverside) all follow buy-and-build models."
+  "High")
+
+(marketTrend IoTPredictiveMaintenance
+  "60%+ of new compressor systems ship with IoT sensors. SMARTLINK (Atlas Copco), RedRaven (Flowserve), Sulzer Sense, Grundfos Machine Health, Kaeser SIGMA AIR MANAGER becoming table stakes. ISG's ServiceIQ platform competes here."
+  "Very High")
+
+(marketTrend OEMVerticalIntegration
+  "OEMs (Emerson, Flowserve, Atlas Copco, Hitachi/Sullair) expanding aftermarket services and acquiring independent distributors, squeezing independents like ISG."
+  "High")
+
+(marketTrend AirAsAService
+  "Subscription/utility models emerging: Kaeser SIGMA AIR UTILITY, DIRECTAIR. Pay-per-CFM instead of capital purchase. Threatens traditional distribution revenue."
+  "Medium")
+
+(marketTrend SkilledLaborShortage
+  "Persistent technician shortage across all verticals. Entry-level techs at $20-25/hr base, specialists at $35-50/hr. EASA membership declining. Driving wage inflation and M&A (buy the team)."
+  "High")
+
+(marketTrend AgingInfrastructure
+  "Aging installed base across US process industries driving aftermarket demand. Repair vs replace economics favor service companies. Motor rewind market growing at 5.5% CAGR."
+  "High")
+
+(marketTrend DataCenterDemand
+  "Data center power demand creating massive new customer segment for turbomachinery, motors, and cooling systems. Hyperscaler buildout accelerating."
+  "Medium")
+
+(marketTrend DOEEnergyStandards
+  "DOE 2025 energy efficiency regulations driving equipment replacement cycles and upgrade demand across motors and compressors."
+  "Medium")
+
+(marketTrend HydrogenReadiness
+  "Hydrogen-ready and decarbonization upgrades emerging in turbomachinery. New revenue stream for specialty service companies."
+  "Low-Medium")
+
+(marketTrend DigitalTwinAdoption
+  "Digital twin and remote monitoring technology adoption growing across large OEMs. Independent service providers must invest to remain competitive."
+  "Medium")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; COMPETITIVE THREAT RANKING (Top 9 most dangerous to ISG)
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa competitiveThreatRank Predicate)
+(arity competitiveThreatRank 3)
+(comment competitiveThreatRank "(competitiveThreatRank ?competitor ?rank ?rationale)")
+
+(competitiveThreatRank DXPEnterprises 1
+  "$1.8B revenue, 228 locations. VERY HIGH overlap in rotating equipment/pumps. 6x ISG scale. Innovative Pumping Solutions division. Serial acquirer.")
+
+(competitiveThreatRank IPS 2
+  "$367.1M revenue, 100 locations. Dominant in motors — largest network in industry. PE-backed (Riverside). Acquired ABB Industrial Services.")
+
+(competitiveThreatRank SetpointIS 3
+  "$211.7M revenue, 18 locations. 4-5x larger than ISG valve operations. Deepest Gulf South presence. 400+ technicians. ValvKeep tracks 1.5M+ valves.")
+
+(competitiveThreatRank FCXPerformance 4
+  "$600M+ revenue (Applied Industrial $4.6B parent), 65+ locations. Largest specialty flow control distributor. VERY HIGH overlap in valves/pumps.")
+
+(competitiveThreatRank OTCIndustrial 5
+  "$296M revenue, 60 locations. Most structurally analogous to ISG — PE-backed, multi-brand, multi-vertical, comparable scale.")
+
+(competitiveThreatRank OvationHoldings 6
+  "$150M+ revenue, 15+ locations. PE-backed valve roll-up identical to ISG model. Midwest focus. Direct strategic competitor.")
+
+(competitiveThreatRank MotionIndustries 7
+  "$8.7B revenue, 550+ locations, 18M+ SKUs. HIGH overlap in rotating equipment. Massive distribution scale dwarfs ISG.")
+
+(competitiveThreatRank BlakePendleton 8
+  "$30-50M revenue, 14 SE locations, 220+ employees. Primary direct compressor competitor in ISG's core SE territory.")
+
+(competitiveThreatRank JayIndustrial 9
+  "$46.4M revenue, 5 Alabama locations, 166 employees. Direct motor service competitor in ISG's Alabama territory.")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; ISG STRATEGIC POSITION SUMMARY
+;;; ═══════════════════════════════════════════════════════════════════════════
+
+(isa strategicPosition Predicate)
+(arity strategicPosition 3)
+
+(strategicPosition ISG "totalAddressableMarket"
+  "~$145B+ across all verticals: Valves $20.4B, Compressors $3.96B, Motors $10.5B, Pumps $6.4B, MRO $91.5B, Specialty $8.77B, Turbo $2.42B")
+
+(strategicPosition ISG "marketPenetration"
+  "ISG at $241.3M captures ~0.17% of total addressable market. Significant runway for organic and acquisitive growth.")
+
+(strategicPosition ISG "competitiveAdvantages"
+  "Multi-vertical platform (only ISG and OTC span all 5 verticals), PE backing (TJC), 259K+ SKU inventory, 40+ location network, ServiceIQ predictive AI, brand-agnostic service model")
+
+(strategicPosition ISG "vulnerabilities"
+  "Smaller than top competitors in every vertical (DXP 6x, IPS 1.5x, Setpoint 4-5x in valves). OEM vertical integration threat. No IoT platform parity with Atlas Copco/Flowserve/Sulzer yet. Geographic gaps in Deep South, Texas, West Coast.")
+
+(strategicPosition ISG "acquisitionTargets"
+  "SE/Gulf Coast valve shops (counter Setpoint), Alabama motor shops (counter Jay Industrial), pump service companies (thin vertical), Midwest compressor distributors, turbomachinery specialists")
+
+;;; ═══════════════════════════════════════════════════════════════════════════
+;;; END — ISG COMPETITIVE LANDSCAPE
+;;; Total competitors encoded: 60+ (key entities with full metrics)
+;;; Total market verticals: 6
+;;; Total pricing benchmarks: 35+
+;;; Total market trends: 10
+;;; ═══════════════════════════════════════════════════════════════════════════

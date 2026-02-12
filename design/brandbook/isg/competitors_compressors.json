@@ -1,0 +1,1416 @@
+{
+  "vertical": "Compressors",
+  "reportDate": "2026-02-12",
+  "isgBrands": [
+    "Industrial Air Power",
+    "Industrial Air Centers",
+    "Compressor & Turbine Services",
+    "Air Specialty & Equipment Co."
+  ],
+  "isgProfile": {
+    "parentCompany": "Industrial Service Group (ISG)",
+    "website": "https://isgservice.com",
+    "totalLocations": "40+",
+    "geographicCoverage": [
+      "Texas",
+      "Alabama",
+      "Illinois",
+      "Indiana",
+      "Arkansas",
+      "Tennessee",
+      "Kentucky",
+      "Louisiana",
+      "Ohio",
+      "Georgia",
+      "Mississippi",
+      "Wisconsin",
+      "West Virginia"
+    ],
+    "brands": {
+      "IndustrialAirPower": {
+        "hq": "Muskego, Wisconsin",
+        "focus": "Compressor parts, accessories, lubricants — all brands. 30+ years in business.",
+        "acquiredBy": "KCM Capital"
+      },
+      "IndustrialAirCenters": {
+        "focus": "Compressed air solutions and distribution"
+      },
+      "CompressorAndTurbineServices": {
+        "focus": "Specialty compressor and turbine repair, rebuild, and overhaul"
+      },
+      "AirSpecialtyAndEquipmentCo": {
+        "hq": "Corpus Christi, Texas",
+        "founded": 1984,
+        "locations": [
+          "Corpus Christi, TX",
+          "Gregory, TX",
+          "San Antonio (Schertz), TX",
+          "Houston (Deer Park), TX",
+          "Dallas/Fort Worth (Fort Worth), TX"
+        ],
+        "services": [
+          "Sales",
+          "Rental",
+          "Service",
+          "Air end rebuilding",
+          "Custom fabrication",
+          "Preventive maintenance",
+          "Diaphragm pump repair",
+          "Parts sales"
+        ],
+        "brandsCarried": [
+          "Atlas Copco",
+          "Champion",
+          "ZEKS",
+          "Parker Hannifin",
+          "SPX Hankinson",
+          "Sullivan Palatek"
+        ],
+        "targetIndustries": [
+          "Oil field",
+          "Industrial",
+          "Refinery",
+          "Chemical",
+          "Manufacturing"
+        ]
+      }
+    }
+  },
+  "competitors": [
+    {
+      "name": "Atlas Copco (Compressor Technique Service Division)",
+      "website": "https://www.atlascopco.com/en-us/compressors",
+      "hq": "Stockholm, Sweden (US HQ: Rock Hill, SC)",
+      "tier": "OEM — Global Leader",
+      "locations": "140+ US locations, 5 regional offices (Rock Hill SC, West Springfield MA, Elk Grove Village IL, Houston TX, Fremont CA). Operates via direct service + authorized distributor network nationwide.",
+      "locationCount": 140,
+      "services": [
+        "Equipment sales (new & used)",
+        "Preventive maintenance plans",
+        "Parts plans with genuine OEM parts",
+        "Service plans (Total Responsibility, TotalCare, Extended Warranty+)",
+        "Fixed-price service packages",
+        "System design & installation",
+        "Compressed air audits & energy analysis",
+        "Piping & installation",
+        "Remote monitoring (SMARTLINK)",
+        "Compressor rentals",
+        "Air-as-a-Service utility model",
+        "Drive line overhauls",
+        "24/7 emergency repair"
+      ],
+      "products": [
+        "Atlas Copco (own brand)",
+        "Chicago Pneumatic (subsidiary)",
+        "BOGE (subsidiary)"
+      ],
+      "pricing": {
+        "model": "Custom quotes per equipment; fixed-price service contracts",
+        "annualMaintenanceCost": "5-10% of machine investment value",
+        "serviceContractTiers": [
+          "Parts Plan",
+          "Service Plan",
+          "TotalCare",
+          "Total Responsibility Plan",
+          "Extended Warranty+"
+        ],
+        "notes": "Premium pricing justified by OEM parts, SMARTLINK monitoring, and brand trust"
+      },
+      "revenue": "$16.8B globally (168.34B SEK, 2025); ~$2.1B US/North America; ~36% of revenue from services (~$6B globally from service)",
+      "employees": "55,840 globally; 5,000+ in US; 7,500 in North America",
+      "differentiators": [
+        "World's largest compressed air company",
+        "SMARTLINK remote monitoring with predictive analytics",
+        "Broadest product portfolio including oil-free technology",
+        "Vertically integrated OEM — controls entire value chain",
+        "Air-as-a-Service / compressed air utility model",
+        "36% service revenue — deeply embedded in customer operations",
+        "Aggressive acquisition strategy (acquired Compressed Air Technologies SE US in 2024)"
+      ],
+      "customerSegments": [
+        "Automotive manufacturing",
+        "Food & beverage",
+        "Pharmaceutical",
+        "Electronics",
+        "Aerospace",
+        "Oil & gas",
+        "Mining",
+        "General manufacturing",
+        "Healthcare"
+      ],
+      "recentMoves": [
+        "Acquired Compressed Air Technologies (SE US Quincy distributor) in 2024, folded into Compressor Technique service division",
+        "Continued expansion of SMARTLINK IoT platform",
+        "DOE 2025 energy efficiency compliance driving product refresh"
+      ]
+    },
+    {
+      "name": "Ingersoll Rand (Industrial Technologies & Services)",
+      "website": "https://www.ingersollrand.com",
+      "hq": "Davidson, North Carolina, USA",
+      "tier": "OEM — Global Leader",
+      "locations": "Multiple Customer Centers across US (Los Angeles, Denver, Charlotte, Indianapolis, Detroit, San Antonio, etc.) plus extensive authorized distributor network.",
+      "locationCount": 80,
+      "services": [
+        "Equipment sales (reciprocating, rotary screw, oil-free)",
+        "Service & maintenance",
+        "System design & installation",
+        "Parts distribution",
+        "Compressed air audits",
+        "Rental programs",
+        "24/7 emergency service (via distributors)",
+        "Remote monitoring",
+        "Warranty programs"
+      ],
+      "products": [
+        "Ingersoll Rand (own brand)",
+        "Gardner Denver (acquired 2020)",
+        "CompAir",
+        "Emrax",
+        "Nash",
+        "Robuschi"
+      ],
+      "pricing": {
+        "model": "Custom quotes; maintenance contracts; parts pricing through distributor network",
+        "hourlyServiceRate": "$100-$150/hr (via authorized distributors)",
+        "notes": "Competitive OEM pricing; merged with Gardner Denver gives broader price-tier coverage"
+      },
+      "revenue": "$7.46B total (twelve months ending Sept 2025, 4.2% YoY growth); closed 14 acquisitions worth $2.6B in 2024",
+      "employees": "21,000 globally",
+      "differentiators": [
+        "Second-largest global compressed air company",
+        "Gardner Denver merger (2020) created comprehensive portfolio across price tiers",
+        "Strong brand loyalty in US industrial heartland",
+        "Aggressive M&A strategy — 14 acquisitions in 2024 alone ($2.6B)",
+        "Broad product range from budget Gardner Denver to premium Ingersoll Rand",
+        "Deep presence in oil & gas via legacy Gardner Denver"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Oil & gas",
+        "Automotive",
+        "Chemical processing",
+        "Mining",
+        "Construction",
+        "Food & beverage",
+        "Wastewater treatment"
+      ],
+      "recentMoves": [
+        "Merged with Gardner Denver (2020) — combined entity is #2 globally",
+        "14 acquisitions worth $2.6B in 2024",
+        "ILC Dover acquisition ($2.325B) for engineered containment technologies"
+      ]
+    },
+    {
+      "name": "Kaeser Compressors USA",
+      "website": "https://us.kaeser.com",
+      "hq": "Fredericksburg, Virginia, USA (Parent: Coburg, Germany)",
+      "tier": "OEM — Premium",
+      "locations": "US HQ in Fredericksburg VA, plus branch locations and authorized distributors nationwide (e.g., Compressed Air Systems in Tampa FL is an authorized Kaeser dealer).",
+      "locationCount": 50,
+      "services": [
+        "Equipment sales",
+        "System design & engineering",
+        "Installation",
+        "Preventive maintenance",
+        "24/7 emergency service",
+        "Compressed air audits",
+        "Energy management consulting",
+        "SIGMA AIR MANAGER 4.0 (IoT master controller)",
+        "Remote monitoring via KAESER SIGMA NETWORK",
+        "Predictive maintenance via Kaeser Data Center",
+        "SIGMA AIR UTILITY (Air-as-a-Service / compressed air utility model)",
+        "Parts & lubricants",
+        "Rental programs",
+        "System optimization"
+      ],
+      "products": [
+        "Kaeser (own brand — rotary screw, reciprocating, oil-free, blowers, vacuum)"
+      ],
+      "pricing": {
+        "model": "Custom quotes; Sigma Air Utility is fixed monthly rate for air consumed",
+        "sigmaAirUtility": "Fixed basic price covering agreed air quantity + per-unit rate for excess",
+        "notes": "Premium pricing — positions as Total Cost of Ownership leader through energy efficiency"
+      },
+      "revenue": "$1.9B (Kaeser USA reported); $3.5B+ globally (Kaeser Kompressoren SE)",
+      "employees": "1,213 in US; ~8,000 globally",
+      "differentiators": [
+        "Family-owned since 1919 — no shareholder pressure, long-term focus",
+        "SIGMA AIR MANAGER 4.0 — industry-leading IoT compressed air management",
+        "SIGMA AIR UTILITY — pioneering Air-as-a-Service model",
+        "Strong energy efficiency positioning (TCO approach)",
+        "German engineering reputation",
+        "Integrated KAESER DATA CENTER for predictive maintenance",
+        "Premium brand with strong distributor loyalty"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Automotive",
+        "Food & beverage",
+        "Pharmaceutical",
+        "Electronics",
+        "Chemical processing",
+        "Packaging",
+        "Plastics"
+      ],
+      "recentMoves": [
+        "Sigma Air Manager 4.0 IoT platform deployment",
+        "Expanding Sigma Air Utility (compressed air as a service) contracts",
+        "DOE 2025 energy standards compliance"
+      ]
+    },
+    {
+      "name": "Sullair / Hitachi Global Air Power",
+      "website": "https://america.sullair.com",
+      "hq": "Michigan City, Indiana, USA (Parent: Hitachi, Japan)",
+      "tier": "OEM — Major",
+      "locations": "Manufacturing in Michigan City IN; 600+ distributor locations worldwide. Rebranded US service centers to 'Hitachi Air Center' (Oct 2024). Actively acquiring distributors.",
+      "locationCount": 100,
+      "services": [
+        "Equipment sales (portable & stationary)",
+        "Parts distribution",
+        "Service & repair",
+        "24/7 emergency support via distributors",
+        "Installation",
+        "System audits",
+        "Rental programs",
+        "Preventive maintenance",
+        "Remote monitoring"
+      ],
+      "products": [
+        "Sullair (own brand — rotary screw, oil-free, portable)",
+        "Hitachi (air compressors under global brand)"
+      ],
+      "pricing": {
+        "model": "Distributor-based pricing; maintenance contracts through Hitachi Air Centers",
+        "notes": "Mid-premium pricing; competitive against Atlas Copco and Ingersoll Rand"
+      },
+      "revenue": "~$600M-$800M estimated (acquired by Hitachi for $1.245B in 2017; Hitachi has invested $45M+ since acquisition)",
+      "employees": "~2,000 estimated in US",
+      "differentiators": [
+        "Legacy US brand (founded 1965) with strong rotary screw reputation",
+        "Hitachi backing provides capital for investment and acquisitions",
+        "Rebranding to Hitachi Air Center unifying service experience",
+        "Actively acquiring distributors to build company-owned network",
+        "Strong portable compressor market presence (construction, mining)",
+        "ISO 9001 certified manufacturing"
+      ],
+      "customerSegments": [
+        "Construction",
+        "Mining",
+        "Oil & gas",
+        "General manufacturing",
+        "Automotive",
+        "Petrochemical"
+      ],
+      "recentMoves": [
+        "Rebranded US service locations to Hitachi Air Center (Oct 2024)",
+        "Acquired Air Power Sales & Service (Aug 2024)",
+        "Acquired Mountain Air Compressor Inc.",
+        "Expanded distributor territories (Mar 2025)",
+        "Launched Sullair E425H electric portable compressor"
+      ]
+    },
+    {
+      "name": "Quincy Compressor",
+      "website": "https://www.quincycompressor.com",
+      "hq": "Bay Minette, Alabama, USA (subsidiary of Atlas Copco)",
+      "tier": "OEM — Mid-Market",
+      "locations": "HQ & manufacturing in Bay Minette AL; network of authorized distributors and company stores across US.",
+      "locationCount": 60,
+      "services": [
+        "Equipment sales",
+        "After-sales service",
+        "Replacement parts",
+        "Repair & rebuild",
+        "Preventive maintenance",
+        "Warranty programs"
+      ],
+      "products": [
+        "Quincy (own brand — rotary screw, reciprocating, vacuum pumps)"
+      ],
+      "pricing": {
+        "model": "Distributor-based; competitive mid-market pricing",
+        "notes": "Positioned below Atlas Copco premium but above budget brands"
+      },
+      "revenue": "$250M-$750M estimated (sources vary; under Atlas Copco umbrella)",
+      "employees": "~500-530",
+      "differentiators": [
+        "Made in USA — manufactured in Bay Minette, Alabama",
+        "Part of Atlas Copco Group (acquired) but maintains independent brand identity",
+        "Strong reputation for durability and reliability",
+        "Competitive pricing compared to premium OEMs",
+        "Recently acquired Compressed Air Technologies to expand SE US service"
+      ],
+      "customerSegments": [
+        "General manufacturing",
+        "Automotive",
+        "Food & beverage",
+        "Healthcare",
+        "Climate control"
+      ],
+      "recentMoves": [
+        "Acquired Compressed Air Technologies (SE US distributor)",
+        "Part of Atlas Copco Group since acquisition"
+      ]
+    },
+    {
+      "name": "FS-Curtis (Curtis-Toledo)",
+      "website": "https://us.fscurtis.com",
+      "hq": "St. Louis, Missouri, USA",
+      "tier": "OEM — Mid-Market",
+      "locations": "Manufacturing in St. Louis MO. FS-Compression locations in Houston TX, Greensboro NC, Pittsburgh PA, Tampa FL, Orlando FL, Miami FL, Valdosta GA, San Diego CA, Los Angeles CA, Mid-Atlantic region.",
+      "locationCount": 12,
+      "services": [
+        "Equipment sales (rotary screw, reciprocating, oil-free)",
+        "Air dryers & filtration",
+        "Remote monitoring",
+        "OEM parts",
+        "Specialized lubricants",
+        "Preventive maintenance kits",
+        "Installation",
+        "Service & repair"
+      ],
+      "products": [
+        "FS-Curtis (own brand — rotary screw, reciprocating, oil-free)",
+        "FS-Elliott (centrifugal compressors — sister company)"
+      ],
+      "pricing": {
+        "model": "Direct and distributor-based pricing",
+        "notes": "Value-oriented pricing; appeals to cost-conscious industrial buyers"
+      },
+      "revenue": "~$50M-$100M estimated",
+      "employees": "~200-400 estimated",
+      "differentiators": [
+        "American manufacturer since 1854 — deep heritage",
+        "Synergy with FS-Elliott centrifugal compressors",
+        "Growing FS-Compression company-owned service network",
+        "Strong value proposition in mid-market segment",
+        "Southeast & Gulf Coast presence via company-owned locations"
+      ],
+      "customerSegments": [
+        "General manufacturing",
+        "Construction",
+        "Automotive",
+        "Oil & gas"
+      ],
+      "recentMoves": [
+        "Expanding FS-Compression company-owned service centers",
+        "Building presence in Florida and Southeast markets"
+      ]
+    },
+    {
+      "name": "ELGi Compressors USA",
+      "website": "https://www.elgi.com/us/",
+      "hq": "Charlotte, North Carolina, USA (Parent: ELGi Equipments, Coimbatore, India)",
+      "tier": "OEM — Emerging Challenger",
+      "locations": "US HQ in Charlotte NC. Distributes through partners including Pattons (exclusive SE US distributor).",
+      "locationCount": 15,
+      "services": [
+        "Equipment sales",
+        "Service & repair",
+        "Parts distribution",
+        "System design",
+        "Rapid response service"
+      ],
+      "products": [
+        "ELGi (own brand — EG Series rotary screw, oil-free, reciprocating, portable)"
+      ],
+      "pricing": {
+        "model": "Aggressive pricing to gain market share; positioned 10-20% below major OEMs",
+        "notes": "Indian manufacturing cost advantage; competing on TCO basis"
+      },
+      "revenue": "$5.9M US (North America); ~$500M globally",
+      "employees": "66 in US/North America; 43% employee growth last year",
+      "differentiators": [
+        "Aggressive US market entrant — celebrating 10 years in North America",
+        "Competitive pricing with Indian manufacturing cost structure",
+        "Growing rapidly (43% employee growth)",
+        "Investing heavily in US distributor network (exclusive with Pattons in SE)",
+        "Full product range from small to large industrial"
+      ],
+      "customerSegments": [
+        "Food & beverage",
+        "Pharmaceutical",
+        "Textile",
+        "Automotive",
+        "General manufacturing"
+      ],
+      "recentMoves": [
+        "Rapid expansion in North America",
+        "Building exclusive distributor relationships (Pattons in SE US)",
+        "43% employee growth in recent year"
+      ]
+    },
+    {
+      "name": "Sullivan-Palatek",
+      "website": "https://www.sullivan-palatek.com",
+      "hq": "Michigan City, Indiana, USA",
+      "tier": "OEM — Niche / Value",
+      "locations": "Manufacturing in Michigan City IN; serves through authorized distributor network across US.",
+      "locationCount": 8,
+      "services": [
+        "Equipment sales (industrial & portable rotary screw)",
+        "Parts & accessories",
+        "Service through distributor network",
+        "Technical support"
+      ],
+      "products": [
+        "Sullivan-Palatek (own brand — oil-flooded rotary screw, portable, industrial)"
+      ],
+      "pricing": {
+        "model": "Value pricing through distributor network",
+        "notes": "Positioned as affordable, high-performance alternative to premium brands"
+      },
+      "revenue": "$55.5M (2025)",
+      "employees": "~150-200 estimated",
+      "differentiators": [
+        "US-assembled machines",
+        "Strong value proposition — high performance at lower cost",
+        "Niche focus on oil-flooded rotary screw technology",
+        "Lean organization with lower overhead",
+        "Growing from engineering services roots (founded 1984)"
+      ],
+      "customerSegments": [
+        "Construction",
+        "Oil & gas",
+        "Mining",
+        "General manufacturing"
+      ],
+      "recentMoves": []
+    },
+    {
+      "name": "Kaishan Compressor USA",
+      "website": "https://kaishanusa.com",
+      "hq": "Loxley, Alabama, USA (Parent: Kaishan Holding Group, China)",
+      "tier": "OEM — Emerging / Value",
+      "locations": "65,000 sq ft manufacturing facility in Loxley, AL. Distributor network across US.",
+      "locationCount": 5,
+      "services": [
+        "Equipment sales",
+        "Parts & aftermarket",
+        "Technical support",
+        "Service through distributors"
+      ],
+      "products": [
+        "Kaishan (own brand — rotary screw, vacuum pumps, ORC power generators)"
+      ],
+      "pricing": {
+        "model": "Value/budget pricing; Chinese manufacturing cost advantage",
+        "notes": "Positioned as low-cost alternative to established brands"
+      },
+      "revenue": "$8.1M US (2025)",
+      "employees": "63-71 in US (20%+ military veterans)",
+      "differentiators": [
+        "US manufacturing in Alabama with Chinese parent company resources",
+        "Aggressive value pricing",
+        "Full stocking of 300+ finished units for rapid delivery",
+        "Growing US presence from Southeast base",
+        "Military veteran workforce"
+      ],
+      "customerSegments": [
+        "General manufacturing",
+        "Oil & gas",
+        "Mining",
+        "Construction"
+      ],
+      "recentMoves": [
+        "Building US manufacturing footprint",
+        "Expanding distributor network"
+      ]
+    },
+    {
+      "name": "Chicago Pneumatic (Atlas Copco subsidiary)",
+      "website": "https://compressors.cp.com/en-us",
+      "hq": "Part of Atlas Copco Group (Swedish parent)",
+      "tier": "OEM — Value Brand",
+      "locations": "Mobile service technicians nationwide; operates through Atlas Copco distribution infrastructure.",
+      "locationCount": 30,
+      "services": [
+        "Equipment sales",
+        "On-site service US-wide",
+        "Genuine parts",
+        "Preventive maintenance",
+        "Installation & commissioning"
+      ],
+      "products": [
+        "Chicago Pneumatic (own brand — rotary screw, reciprocating, piston)"
+      ],
+      "pricing": {
+        "model": "Positioned as value alternative within Atlas Copco portfolio",
+        "notes": "Lower price point than Atlas Copco premium brand"
+      },
+      "revenue": "Part of Atlas Copco Group (not separately reported)",
+      "employees": "Part of Atlas Copco (not separately reported)",
+      "differentiators": [
+        "Atlas Copco quality at a lower price tier",
+        "Historic US brand (became part of Atlas Copco in 1987)",
+        "Value-oriented positioning",
+        "Mobile service technicians for on-site repair"
+      ],
+      "customerSegments": [
+        "Small to mid-size manufacturing",
+        "Automotive shops",
+        "Construction",
+        "General industry"
+      ],
+      "recentMoves": []
+    },
+    {
+      "name": "Blake & Pendleton",
+      "website": "https://www.blakeandpendleton.com",
+      "hq": "Macon, Georgia, USA",
+      "tier": "Regional Distributor — Southeast",
+      "locations": "14 Sales & Service branch offices across 8 SE states: Birmingham AL, Mobile AL, Atlanta GA, Macon GA, Charlotte NC, Hickory NC, Raleigh NC, Jacksonville FL, Jackson MS, Memphis TN, Chattanooga TN, Knoxville TN, Columbia SC, and more.",
+      "locationCount": 14,
+      "services": [
+        "Equipment sales",
+        "24/7 service & repair",
+        "Preventive maintenance",
+        "Air auditing",
+        "Automation & controls",
+        "Instrumentation",
+        "Oil flooded & oil-free rotary screw technology",
+        "Oil-free scrolls & centrifugal",
+        "Large rental fleet",
+        "Rebuild & refurbishing center",
+        "Air end rebuilds & testing",
+        "System design & installation"
+      ],
+      "products": [
+        "Atlas Copco",
+        "Gardner Denver",
+        "Ingersoll Rand",
+        "Kaeser",
+        "Sullair",
+        "Sullivan-Palatek",
+        "Quincy",
+        "SPX Flow",
+        "Parker"
+      ],
+      "pricing": {
+        "model": "Multi-brand distributor pricing; service contracts; rental rates",
+        "notes": "Can offer competitive pricing across multiple OEM brands"
+      },
+      "revenue": "~$30M-$50M estimated",
+      "employees": "220+",
+      "differentiators": [
+        "Largest independent compressed air distributor in SE US",
+        "Multi-brand: services ALL major compressor brands",
+        "14 locations across 8 states — deep SE geographic coverage",
+        "Full rebuild & refurbishing center with air end testing",
+        "Largest rental fleet in the region",
+        "DIRECT COMPETITOR to ISG in SE/Central US territory"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Automotive",
+        "Aerospace",
+        "Food & beverage",
+        "Chemical processing",
+        "Textile",
+        "Paper & pulp"
+      ],
+      "recentMoves": [
+        "Territory expanded for Sullair distribution",
+        "Continued growth across SE US"
+      ],
+      "competitiveOverlap": "HIGH — Directly competes with ISG brands in Alabama, Tennessee, Mississippi, Georgia, Arkansas"
+    },
+    {
+      "name": "OTC Industrial Technologies (Air Technologies division)",
+      "website": "https://otcindustrial.com",
+      "hq": "Columbus, Ohio, USA",
+      "tier": "Regional Distributor — Multi-State",
+      "locations": "60 total company locations across South, Midwest, and Northeast. Air Technologies is North America's largest Atlas Copco distributor. Also includes IDG Compressor (TN, KY, GA), Compressed Air Systems (LA), DIRECTAIR, Laron Air Supply, UAPC.",
+      "locationCount": 60,
+      "services": [
+        "Equipment sales (Atlas Copco primary)",
+        "Compressed air system design & installation",
+        "Compressed air as utility (DIRECTAIR FOURTH UTILITY model)",
+        "Service & maintenance",
+        "Parts & filtration",
+        "Nitrogen generation",
+        "Compressor rentals",
+        "Vacuum & blower systems",
+        "Piping installation",
+        "System audits",
+        "Custom engineered systems (UAPC)"
+      ],
+      "products": [
+        "Atlas Copco (primary — Air Technologies is largest NA distributor)",
+        "Quincy (IDG Compressor division)",
+        "Multiple OEM brands"
+      ],
+      "pricing": {
+        "model": "DIRECTAIR charges only for compressed air consumed (utility model); traditional service contracts also available",
+        "notes": "Innovative pay-per-use model through DIRECTAIR; premium Atlas Copco distributor pricing"
+      },
+      "revenue": "$295.6M total company (2026)",
+      "employees": "~1,000-1,500 estimated across all divisions",
+      "differentiators": [
+        "World's largest independent air compressor distributor (Air Technologies)",
+        "North America's largest Atlas Copco distributor",
+        "DIRECTAIR 'Fourth Utility' compressed air as service model",
+        "Multi-divisional: covers compressed air, pumps, industrial equipment",
+        "Private equity backed — acquisitive growth strategy",
+        "Custom engineered systems via UAPC"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Medical",
+        "Military",
+        "Marine & offshore",
+        "Food processing",
+        "Mining",
+        "Power generation"
+      ],
+      "recentMoves": [
+        "Continued acquisitive growth via PE backing",
+        "Expanding DIRECTAIR utility model"
+      ],
+      "competitiveOverlap": "MODERATE — Overlaps with ISG in TN, KY, LA, OH via subsidiary companies"
+    },
+    {
+      "name": "Pattons Inc.",
+      "website": "https://www.pattonsinc.com",
+      "hq": "Charlotte, North Carolina, USA",
+      "tier": "Regional Distributor — Southeast",
+      "locations": "7 main SE USA locations: Charlotte NC, Raleigh NC, Richmond VA, Greenville SC, Florence SC, Atlanta GA, Birmingham AL. Plus remote service satellite locations.",
+      "locationCount": 7,
+      "services": [
+        "Equipment sales",
+        "24/7 service & maintenance",
+        "Maintenance agreements",
+        "Equipment rentals",
+        "Compressed air energy audits",
+        "Compressed air leak studies",
+        "Plant assessments",
+        "UL panel design & fabrication",
+        "CAD system design",
+        "Piping installation",
+        "Technical phone support (24/7, free)"
+      ],
+      "products": [
+        "ELGi (exclusive SE US distributor)",
+        "OEM and competitive parts for all brands"
+      ],
+      "pricing": {
+        "model": "Competitive distributor pricing; maintenance agreements; rental rates",
+        "notes": "ELGi pricing advantage passed to customers vs premium OEMs"
+      },
+      "revenue": "~$15M-$30M estimated",
+      "employees": "90+",
+      "differentiators": [
+        "Founded 1945 — 80+ year track record in SE US",
+        "Exclusive ELGi distributor in Southeast",
+        "60+ field service technicians",
+        "14 field sales system specialists",
+        "Strong energy audit & leak detection capabilities",
+        "UL panel design & fabrication in-house"
+      ],
+      "customerSegments": [
+        "Food & beverage",
+        "Pharmaceutical",
+        "Furniture",
+        "Textile",
+        "Automotive",
+        "Aerospace",
+        "General manufacturing",
+        "Medical"
+      ],
+      "recentMoves": [
+        "Exclusive partnership with ELGi",
+        "Expanding service satellite locations"
+      ],
+      "competitiveOverlap": "MODERATE — Overlaps with ISG in AL, GA"
+    },
+    {
+      "name": "Lewis Systems Inc.",
+      "website": "https://lewissystemsinc.com",
+      "hq": "Greensboro, North Carolina, USA",
+      "tier": "Regional Distributor — Carolinas/Virginia",
+      "locations": "4 locations: Charlotte NC, Greensboro NC, Rocky Mount NC, Lynchburg VA. 45,000 sq ft warehouse.",
+      "locationCount": 4,
+      "services": [
+        "Equipment sales",
+        "Air compressor repair & maintenance",
+        "24/7 emergency support",
+        "Rebuild services (restore to like-new condition)",
+        "Parts & lubricants (all major brands)",
+        "Short & long-term rentals",
+        "System design"
+      ],
+      "products": [
+        "Gardner Denver",
+        "Sullair",
+        "Quincy",
+        "Ingersoll Rand",
+        "Curtis",
+        "Rogers KNW Series (Kobelco)"
+      ],
+      "pricing": {
+        "model": "Multi-brand distributor pricing; competitive rebuild pricing",
+        "notes": "40+ years established pricing relationships"
+      },
+      "revenue": "~$10M-$20M estimated",
+      "employees": "~50-80 estimated",
+      "differentiators": [
+        "40+ year track record in Carolinas and Virginia",
+        "Multi-brand service capability",
+        "Large parts warehouse (45,000 sq ft)",
+        "Expert rebuild services extending equipment lifespan",
+        "Strong local relationships"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Automotive",
+        "Textile",
+        "Furniture",
+        "General industry"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "LOW — Primarily Carolinas/Virginia; minimal ISG territory overlap"
+    },
+    {
+      "name": "Compressed Air Systems Inc.",
+      "website": "https://www.compressedairsystems.com",
+      "hq": "Tampa, Florida, USA",
+      "tier": "Regional Distributor — Florida",
+      "locations": "30,000 sq ft Tampa FL facility + 4,000 sq ft Central Florida facility",
+      "locationCount": 2,
+      "services": [
+        "Equipment sales",
+        "24/7 service",
+        "Installation",
+        "Rentals",
+        "System design",
+        "Preventive maintenance"
+      ],
+      "products": [
+        "Kaeser (authorized dealer)"
+      ],
+      "pricing": {
+        "model": "Kaeser distributor pricing; service contracts",
+        "notes": "Focused on Kaeser product line"
+      },
+      "revenue": "~$10M-$20M estimated",
+      "employees": "55",
+      "differentiators": [
+        "59+ years in Florida market",
+        "Authorized Kaeser dealer",
+        "Aerospace clientele (SpaceX, NASA, Blue Origin)",
+        "Statewide Florida coverage from Tampa base"
+      ],
+      "customerSegments": [
+        "Aerospace (SpaceX, NASA, Blue Origin)",
+        "Electronics",
+        "Food & beverage",
+        "Medical",
+        "General manufacturing",
+        "Metal fabrication",
+        "Mining"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "LOW — Florida focused; minimal ISG territory overlap"
+    },
+    {
+      "name": "Air Centers of Florida",
+      "website": "https://aircentersofflorida.com",
+      "hq": "Tampa, Florida, USA",
+      "tier": "Regional Distributor — Florida",
+      "locations": "4 Florida offices: Tampa, Miami, Orlando, Jacksonville. Coverage in 47 counties.",
+      "locationCount": 4,
+      "services": [
+        "Equipment sales (Ingersoll Rand primary)",
+        "Service & repair (all brands)",
+        "24/7 emergency service",
+        "Preventive maintenance",
+        "Parts distribution",
+        "System design",
+        "Installation"
+      ],
+      "products": [
+        "Ingersoll Rand (primary — 30+ year partnership)",
+        "All brands serviced"
+      ],
+      "pricing": {
+        "model": "Ingersoll Rand distributor pricing; competitive service rates",
+        "notes": "Established 30+ year IR partnership provides favorable pricing"
+      },
+      "revenue": "~$20M-$40M estimated",
+      "employees": "~60-80 (40+ certified technicians)",
+      "differentiators": [
+        "30+ year Ingersoll Rand partnership",
+        "40+ certified technicians — ranked #1 in repair turn-around",
+        "47 county coverage in Florida",
+        "Services all compressor brands despite IR specialization"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Hospitality",
+        "Healthcare",
+        "Aerospace",
+        "General industry"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "LOW — Florida only"
+    },
+    {
+      "name": "Fluid-Aire Dynamics",
+      "website": "https://fluidairedynamics.com",
+      "hq": "Itasca, Illinois, USA",
+      "tier": "Regional Distributor — Midwest/Northeast",
+      "locations": "5 service centers: Chicago (Itasca IL), Milwaukee (Franklin WI), Minneapolis (Burnsville MN), Detroit (Wixom MI), Philadelphia. 90-mile service radius per center.",
+      "locationCount": 5,
+      "services": [
+        "24/7 emergency repair",
+        "Preventive maintenance",
+        "Equipment sales",
+        "Rentals",
+        "System design & installation",
+        "Compressed air audits",
+        "Piping",
+        "Parts & lubricants"
+      ],
+      "products": [
+        "Atlas Copco",
+        "Ingersoll Rand",
+        "Quincy",
+        "FS Elliott",
+        "Chicago Pneumatic",
+        "Gardner Denver",
+        "Kaeser",
+        "PneuTech",
+        "Sullair",
+        "Sullivan Palatek"
+      ],
+      "pricing": {
+        "model": "Multi-brand distributor pricing; 24/7 service contracts",
+        "notes": "Family-owned since 1983; competitive local pricing"
+      },
+      "revenue": "~$15M-$25M estimated",
+      "employees": "~50-80 estimated",
+      "differentiators": [
+        "Family-owned since 1983",
+        "Multi-brand: services all major compressor brands",
+        "Strong Midwest presence (Chicago, Milwaukee, Minneapolis, Detroit)",
+        "90-mile service radius commitment per location",
+        "24/7/365 emergency service"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Automotive",
+        "Food & beverage",
+        "Plastics",
+        "General industry"
+      ],
+      "recentMoves": [
+        "Expanded to Philadelphia market"
+      ],
+      "competitiveOverlap": "LOW-MODERATE — Some overlap with ISG in Illinois, Indiana, Wisconsin"
+    },
+    {
+      "name": "Cummins-Wagner Co.",
+      "website": "https://www.cummins-wagner.com",
+      "hq": "Annapolis Junction, Maryland, USA",
+      "tier": "Regional Distributor — Mid-Atlantic",
+      "locations": "Offices in Baltimore MD, Salisbury MD, Elizabethtown PA, Wilmington DE, Ashland VA. Covers MD, VA, DC, DE, WV, PA, NJ.",
+      "locationCount": 5,
+      "services": [
+        "Equipment sales",
+        "System design & engineering",
+        "Assembly",
+        "Installation",
+        "Service & repair",
+        "Start-up & commissioning",
+        "Warranty service",
+        "Troubleshooting",
+        "Rebuild & overhaul",
+        "Laser shaft alignment",
+        "Preventive maintenance"
+      ],
+      "products": [
+        "Sullair (primary — full range rotary screw, oil-free, dryers, vacuum)"
+      ],
+      "pricing": {
+        "model": "Sullair distributor pricing; service contracts; factory-trained technician rates",
+        "notes": "100% employee-owned (ESOP) — customer-aligned incentives"
+      },
+      "revenue": "~$30M-$50M estimated",
+      "employees": "~80-120 estimated",
+      "differentiators": [
+        "100% employee-owned (ESOP) — unique ownership model",
+        "Multi-product distributor (pumps, compressors, heat transfer)",
+        "Factory-trained technicians with fully-equipped service vans",
+        "Deep Mid-Atlantic regional expertise",
+        "Laser shaft alignment capabilities"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Government / military",
+        "Healthcare",
+        "Data centers",
+        "Water/wastewater",
+        "Building services"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "VERY LOW — Mid-Atlantic region, minimal ISG overlap"
+    },
+    {
+      "name": "C.H. Reed Inc.",
+      "website": "https://www.chreed.com",
+      "hq": "Hanover, Pennsylvania, USA",
+      "tier": "Regional Distributor — Mid-Atlantic/Ohio",
+      "locations": "5 branch locations: Hanover PA (HQ), Milton PA, Pittsburgh PA, Cleveland OH, Toledo OH. Serves 8 states: PA, MD, DE, VA, WV, NY, OH, MI.",
+      "locationCount": 5,
+      "services": [
+        "System design & installation",
+        "24/7 emergency repair",
+        "Preventive maintenance",
+        "Parts & lubricants",
+        "Compressed air audits",
+        "Paint finishing systems",
+        "Fluid handling"
+      ],
+      "products": [
+        "Quincy Compressor (authorized distributor)",
+        "Chicago Pneumatic (authorized distributor)"
+      ],
+      "pricing": {
+        "model": "Quincy/Chicago Pneumatic distributor pricing",
+        "notes": "Established since 1948; 12,000+ customer accounts"
+      },
+      "revenue": "~$20M-$35M estimated",
+      "employees": "~60-100 estimated",
+      "differentiators": [
+        "Since 1948 — 75+ year track record",
+        "12,000+ customer accounts across 8 states",
+        "Dual focus: compressed air + paint finishing (cross-sell opportunity)",
+        "Authorized Quincy + Chicago Pneumatic distributor",
+        "Strong Mid-Atlantic and Ohio coverage"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Automotive",
+        "Utilities",
+        "Healthcare",
+        "General industry"
+      ],
+      "recentMoves": [
+        "Opened Toledo OH branch (2020)",
+        "Expanding into Michigan"
+      ],
+      "competitiveOverlap": "LOW — Primarily PA, OH; some overlap with ISG in WV, OH"
+    },
+    {
+      "name": "Total Equipment Company",
+      "website": "https://www.totalequipment.com",
+      "hq": "Coraopolis, Pennsylvania, USA",
+      "tier": "Regional Distributor — PA/WV",
+      "locations": "2 stocking facilities: Pittsburgh PA (30,000 sq ft) and St. Albans WV (15,000 sq ft)",
+      "locationCount": 2,
+      "services": [
+        "Equipment sales",
+        "Service & repair",
+        "Parts distribution",
+        "System design",
+        "Installation"
+      ],
+      "products": [
+        "Ingersoll Rand (primary)",
+        "Hankison (dryers & filters)",
+        "Roots (blowers)",
+        "Dekker (vacuum pumps)"
+      ],
+      "pricing": {
+        "model": "IR distributor pricing; competitive regional rates",
+        "notes": "35+ year relationships"
+      },
+      "revenue": "$38.9M (2025)",
+      "employees": "~80-120 estimated",
+      "differentiators": [
+        "35+ year track record in PA/WV region",
+        "Largest pump, compressor, and blower inventory in region",
+        "Multi-product capability (pumps + compressors + blowers + seals)"
+      ],
+      "customerSegments": [
+        "Construction",
+        "Mining",
+        "Water/wastewater",
+        "Manufacturing"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "LOW — WV overlap with ISG only"
+    },
+    {
+      "name": "Harris Equipment",
+      "website": "https://harrisequipment.com",
+      "hq": "Midwest USA",
+      "tier": "Regional Distributor — Midwest",
+      "locations": "Midwest US coverage",
+      "locationCount": 3,
+      "services": [
+        "Equipment sales",
+        "Service & repair (all brands)",
+        "Parts & lubricants",
+        "Air compressor rebuilds (5-year airend warranty)",
+        "Vacuum pump service (MD-Kinney authorized)"
+      ],
+      "products": [
+        "Atlas Copco",
+        "Gardner Denver",
+        "Sullair",
+        "Ingersoll Rand",
+        "Quincy",
+        "MD-Kinney (authorized service center)"
+      ],
+      "pricing": {
+        "model": "Multi-brand service pricing; rebuild pricing",
+        "notes": "5-year airend warranty on rebuilds is industry-leading"
+      },
+      "revenue": "~$10M-$20M estimated",
+      "employees": "~30-60 estimated",
+      "differentiators": [
+        "Since 1936 — 90-year track record",
+        "Multi-brand service capability",
+        "5-year airend rebuild warranty",
+        "MD-Kinney authorized service center (vacuum niche)"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "General industry"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "LOW-MODERATE — Midwest overlap with ISG in IL, IN"
+    },
+    {
+      "name": "I&M Industrials",
+      "website": "https://iandmindustrials.com",
+      "hq": "South Carolina, USA",
+      "tier": "Regional Distributor — Carolinas/Georgia",
+      "locations": "Serves Greenville SC, Columbia SC, Charleston SC, Augusta GA",
+      "locationCount": 3,
+      "services": [
+        "Compressor repair & maintenance",
+        "24/7 emergency service",
+        "Parts distribution",
+        "Preventive maintenance contracts",
+        "System design"
+      ],
+      "products": [
+        "Multiple brands serviced"
+      ],
+      "pricing": {
+        "model": "Regional service pricing",
+        "notes": "Competitive SE pricing"
+      },
+      "revenue": "~$5M-$15M estimated",
+      "employees": "~30-50 estimated",
+      "differentiators": [
+        "24/7 emergency service coverage",
+        "Strong Carolinas and Georgia presence",
+        "Multi-division industrial service company"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Automotive",
+        "General industry"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "LOW — Carolinas focus; minimal ISG overlap"
+    },
+    {
+      "name": "Hitachi Air Centers (formerly independent Sullair distributors)",
+      "website": "https://www.hitachiaircenters.com",
+      "hq": "Various locations (unified brand under Hitachi Global Air Power)",
+      "tier": "Regional Distributor Network — Multi-Region",
+      "locations": "Multiple consolidated centers: Mountain Air Compressor (NE TN, SW VA, SE OH, WV), Compressor Pump & Service (UT, NV, ID — Salt Lake City), Midwest/Kansas City (NE KS, NW MO), Pumps & Service (NM, N TX — Farmington, Albuquerque, Lubbock), Air Power Sales & Service (NE TX — Longview, Euless)",
+      "locationCount": 15,
+      "services": [
+        "Sullair equipment sales",
+        "Service & repair",
+        "Parts distribution",
+        "Preventive maintenance",
+        "Rentals",
+        "24/7 emergency service"
+      ],
+      "products": [
+        "Sullair / Hitachi (primary)",
+        "Hitachi branded products"
+      ],
+      "pricing": {
+        "model": "Sullair/Hitachi distributor pricing; service contracts",
+        "notes": "Transitioning to unified Hitachi pricing structure"
+      },
+      "revenue": "Combined ~$50M-$100M estimated across all centers",
+      "employees": "~200-400 estimated across all centers",
+      "differentiators": [
+        "Consolidation of independent Sullair distributors under Hitachi brand",
+        "Corporate backing from Hitachi (Japanese conglomerate)",
+        "Unified service standards across previously independent operations",
+        "Growing through acquisition of independent distributors"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Mining",
+        "Oil & gas",
+        "Construction",
+        "General industry"
+      ],
+      "recentMoves": [
+        "Rebranded to Hitachi Air Center (Oct 2024)",
+        "Hitachi acquiring independent Sullair distributors",
+        "Territory expansion for existing centers (Mar 2025)"
+      ],
+      "competitiveOverlap": "MODERATE — NE TX and TN/WV overlap with ISG territories"
+    },
+    {
+      "name": "Industrial Supply & Service LLC (PneuPower)",
+      "website": "http://www.pneupower.com",
+      "hq": "Arkansas/Louisiana/Texas region",
+      "tier": "Regional Distributor — South Central",
+      "locations": "3 sales & service centers covering Arkansas, Louisiana, and Texas",
+      "locationCount": 3,
+      "services": [
+        "Compressed air equipment sales",
+        "Service & repair",
+        "Parts distribution"
+      ],
+      "products": [
+        "Multiple compressed air brands"
+      ],
+      "pricing": {
+        "model": "Regional pricing",
+        "notes": "Serves AR, LA, TX — overlaps with ISG South Central territory"
+      },
+      "revenue": "~$5M-$10M estimated",
+      "employees": "~20-40 estimated",
+      "differentiators": [
+        "Focused on Arkansas/Louisiana/Texas tri-state area",
+        "Local presence in ISG's South Central territory"
+      ],
+      "customerSegments": [
+        "Oil & gas",
+        "Manufacturing",
+        "Agriculture"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "HIGH — Directly overlaps with ISG in AR, LA, TX"
+    },
+    {
+      "name": "Alabama Compressed Air Service",
+      "website": "https://alabamacompressedairservice.com",
+      "hq": "Alabama, USA",
+      "tier": "Regional Distributor — Alabama",
+      "locations": "Alabama statewide coverage",
+      "locationCount": 1,
+      "services": [
+        "Compressed air equipment service",
+        "Parts distribution",
+        "Repair & maintenance"
+      ],
+      "products": [
+        "Multiple brands serviced"
+      ],
+      "pricing": {
+        "model": "Local competitive pricing",
+        "notes": "Founded 1959 — 100+ years combined team experience"
+      },
+      "revenue": "~$3M-$8M estimated",
+      "employees": "~15-30 estimated",
+      "differentiators": [
+        "Founded 1959 — deep Alabama roots",
+        "100+ years combined personnel experience",
+        "Local Alabama focus"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "General industry"
+      ],
+      "recentMoves": [],
+      "competitiveOverlap": "HIGH — Directly competes with ISG in Alabama (Saraland, Sylacauga, Axis)"
+    }
+  ],
+  "marketInsights": {
+    "marketSize": {
+      "globalIndustrialAirCompressor2025": "$19.97B",
+      "globalIndustrialAirCompressor2026": "$20.87B",
+      "usAirCompressorMarket2024": "$3.96B",
+      "globalAirCompressorMarket2025": "$39.57B",
+      "globalAirCompressorMarket2030Projected": "$49.76B",
+      "usManufacturingIndustry2025": "$9.8B (air & gas compressor manufacturing)",
+      "compressedAirTreatmentEquipment2025": "$11.19B globally",
+      "compressorRebuildingServiceMarket": "Growing at 12% CAGR through 2032"
+    },
+    "growthRate": {
+      "globalIndustrialAirCompressorCAGR": "4.5% (2026-2033)",
+      "northAmericaCompressorCAGR": "3.8% (5-year outlook)",
+      "usAirCompressorCAGR": "3.56% (2024-2033)",
+      "globalAirCompressorCAGR": "4.69% (2025-2030)",
+      "compressedAirTreatmentCAGR": "4.27% (2025-2031)",
+      "usManufacturingCAGR": "1.0% (5-year trailing)"
+    },
+    "trends": [
+      {
+        "trend": "IoT & Predictive Maintenance",
+        "description": "Over 60% of new compressed air systems in 2025 ship with embedded IoT sensors for real-time monitoring of dew point, pressure, and filter status. Atlas Copco SMARTLINK, Kaeser SIGMA AIR MANAGER 4.0, and Ingersoll Rand remote monitoring lead adoption.",
+        "impactOnISG": "ISG must develop or partner for IoT monitoring capabilities to remain competitive with OEM service offerings"
+      },
+      {
+        "trend": "Air-as-a-Service (Compressed Air Utility Model)",
+        "description": "Kaeser SIGMA AIR UTILITY and OTC/DIRECTAIR 'Fourth Utility' model gaining traction. Customers pay per unit of air consumed rather than owning equipment. Fixed monthly costs with no capex.",
+        "impactOnISG": "Potential threat to traditional equipment sales and service revenue; opportunity to develop ISG's own utility model"
+      },
+      {
+        "trend": "Energy Efficiency Regulations",
+        "description": "US DOE energy efficiency standards effective Jan 10, 2025 require all manufactured/imported compressors to meet new efficiency standards. Nearly 50% of compressed air operational costs are energy. Companies reducing energy use by up to 30% with modern equipment.",
+        "impactOnISG": "Drives replacement cycle and upgrade demand — opportunity for ISG service and sales"
+      },
+      {
+        "trend": "OEM Distributor Consolidation",
+        "description": "Major OEMs aggressively acquiring independent distributors. Hitachi rebranding Sullair distributors to Hitachi Air Center. Atlas Copco acquired Compressed Air Technologies. Ingersoll Rand closed 14 acquisitions in 2024. Independents being squeezed.",
+        "impactOnISG": "ISG's multi-brand independence is increasingly valuable as OEMs consolidate; but ISG brands could become acquisition targets"
+      },
+      {
+        "trend": "Oil-Free Compressor Demand",
+        "description": "Rising demand for oil-free compressors in food/beverage, pharmaceutical, and electronics driven by environmental regulations and contamination prevention requirements.",
+        "impactOnISG": "Opportunity to expand oil-free service capabilities and capture premium pricing"
+      },
+      {
+        "trend": "Advanced Service Contracts",
+        "description": "Early adopters of predictive/data-driven service models report 35-45% higher customer retention and 20-30% higher contract values vs standard rebuild contracts.",
+        "impactOnISG": "ISG should invest in data-driven service capabilities to capture higher-value contracts"
+      },
+      {
+        "trend": "Electrification of Portable Compressors",
+        "description": "Sullair launched E425H electric portable compressor. Growing demand for electric alternatives in construction and mining to meet emissions targets.",
+        "impactOnISG": "New service skill requirements for electric portable compressor maintenance"
+      },
+      {
+        "trend": "Variable Speed Drive (VSD) Technology",
+        "description": "VSD compressors reducing energy consumption 20-50% vs fixed-speed units. Driving replacement demand and premium service opportunities.",
+        "impactOnISG": "Requires technician training on VSD technology; premium service billing opportunity"
+      }
+    ],
+    "keyPlayers": [
+      {
+        "name": "Atlas Copco",
+        "tier": "Global Leader #1",
+        "estimatedUSMarketShare": "20-25%",
+        "strategy": "Vertical integration + acquisitions + SMARTLINK IoT + Air-as-Service"
+      },
+      {
+        "name": "Ingersoll Rand (incl. Gardner Denver)",
+        "tier": "Global Leader #2",
+        "estimatedUSMarketShare": "18-23%",
+        "strategy": "M&A consolidation + multi-tier branding + broad channel coverage"
+      },
+      {
+        "name": "Kaeser Compressors",
+        "tier": "Premium Challenger",
+        "estimatedUSMarketShare": "8-12%",
+        "strategy": "Energy efficiency leadership + SIGMA AIR UTILITY + family-owned stability"
+      },
+      {
+        "name": "Sullair / Hitachi Global Air Power",
+        "tier": "Major Player",
+        "estimatedUSMarketShare": "8-12%",
+        "strategy": "Hitachi investment + distributor acquisition + brand unification"
+      },
+      {
+        "name": "Quincy Compressor (Atlas Copco sub)",
+        "tier": "Mid-Market US",
+        "estimatedUSMarketShare": "5-8%",
+        "strategy": "Made-in-USA positioning + Atlas Copco resources + SE US expansion"
+      },
+      {
+        "name": "FS-Curtis",
+        "tier": "Mid-Market US",
+        "estimatedUSMarketShare": "2-4%",
+        "strategy": "Heritage US brand + company-owned FS-Compression service centers"
+      },
+      {
+        "name": "ELGi",
+        "tier": "Emerging Challenger",
+        "estimatedUSMarketShare": "1-2%",
+        "strategy": "Price disruption + exclusive distributor partnerships + rapid growth"
+      },
+      {
+        "name": "Kaishan",
+        "tier": "Emerging / Value",
+        "estimatedUSMarketShare": "<1%",
+        "strategy": "Low-cost manufacturing + US assembly + value positioning"
+      }
+    ],
+    "competitiveDynamics": {
+      "summary": "The US industrial compressed air service market is moderately fragmented with two dominant OEMs (Atlas Copco and Ingersoll Rand) controlling ~40-48% combined market share. The service aftermarket is estimated at 30-40% of total market value, representing $1.2-1.6B in the US alone. Independent multi-brand service companies like ISG face increasing pressure from OEM vertical integration and distributor consolidation, but their brand-agnostic service capability and local presence remain strong differentiators.",
+      "isgPositioning": {
+        "strengths": [
+          "Multi-brand independence — can service any OEM equipment without brand bias",
+          "40+ locations concentrated in SE/Central US — deep local relationships",
+          "Diversified ISG platform (valves, motors, pumps, compressors) enables cross-selling",
+          "Air Specialty & Equipment's 5-location Texas presence targets oil field, refinery, and chemical — high-value segments",
+          "KCM Capital backing provides acquisition capital"
+        ],
+        "threats": [
+          "OEM distributor consolidation squeezing independent service providers",
+          "Atlas Copco and Hitachi actively acquiring SE US distributors",
+          "IoT/remote monitoring platforms creating OEM lock-in",
+          "Air-as-a-Service models shifting revenue from service to utility contracts",
+          "Blake & Pendleton (14 locations, 220+ employees) is the primary direct competitor in ISG's SE territory"
+        ],
+        "opportunities": [
+          "OEM consolidation alienates customers who want brand-agnostic service",
+          "DOE 2025 energy standards driving upgrade/replacement cycle",
+          "Predictive maintenance services command 20-30% higher contract values",
+          "Oil-free compressor demand growing in food/pharma — premium service opportunity",
+          "Regional players like Alabama Compressed Air Service and PneuPower are acquisition targets for ISG"
+        ]
+      }
+    },
+    "pricingBenchmarks": {
+      "fieldServiceHourlyRate": "$85-$150/hr (varies by region and emergency vs scheduled)",
+      "technicianBasePay": "$26.49/hr average (cost basis for service companies)",
+      "annualMaintenanceContract": "$1,000-$3,000/yr for scheduled maintenance (small-mid compressors); $5,000-$15,000+/yr for large industrial systems",
+      "intermediateService": "$300-$600 (pressure check, cleaning, inspection)",
+      "emergencyRepair": "$500-$1,500+ (depending on issue and parts)",
+      "partsMarkup": "25-50% typical for OEM parts; 15-30% for aftermarket/generic",
+      "annualMaintenanceCostPercentOfEquipmentValue": "5-10% of original equipment investment",
+      "advancedServiceContractPremium": "20-30% higher than standard service contracts (for IoT/predictive maintenance)",
+      "airAsAServiceModel": "Fixed monthly base + per-unit consumption charge; typically competitive with total cost of ownership"
+    }
+  },
+  "sources": [
+    "https://www.atlascopco.com/en-us/compressors",
+    "https://www.ingersollrand.com",
+    "https://us.kaeser.com",
+    "https://america.sullair.com",
+    "https://www.quincycompressor.com",
+    "https://us.fscurtis.com",
+    "https://www.elgi.com/us/",
+    "https://www.sullivan-palatek.com",
+    "https://kaishanusa.com",
+    "https://compressors.cp.com/en-us",
+    "https://www.blakeandpendleton.com",
+    "https://otcindustrial.com",
+    "https://www.pattonsinc.com",
+    "https://lewissystemsinc.com",
+    "https://www.compressedairsystems.com",
+    "https://aircentersofflorida.com",
+    "https://fluidairedynamics.com",
+    "https://www.cummins-wagner.com",
+    "https://www.chreed.com",
+    "https://www.totalequipment.com",
+    "https://harrisequipment.com",
+    "https://iandmindustrials.com",
+    "https://www.hitachiaircenters.com",
+    "https://airspecialty.com",
+    "https://isgservice.com",
+    "https://alabamacompressedairservice.com",
+    "https://www.grandviewresearch.com/industry-analysis/industrial-air-compressor-market-report",
+    "https://www.marketsandmarkets.com/Market-Reports/industrial-air-compressor-market-78986532.html",
+    "https://www.mordorintelligence.com/industry-reports/industrial-air-compressors-market",
+    "https://www.ibisworld.com/united-states/industry/air-gas-compressor-manufacturing/5643/"
+  ]
+}

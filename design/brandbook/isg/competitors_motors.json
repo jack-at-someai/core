@@ -1,0 +1,1095 @@
+{
+  "vertical": "Motors",
+  "reportDate": "2026-02-12",
+  "isgBrands": ["Soles Electric", "Illinois Electric Works"],
+  "isgOverview": {
+    "parentCompany": "Industrial Service Group (ISG)",
+    "hq": "Cape Coral, FL",
+    "totalRevenue": "$241.3M (all brands/verticals)",
+    "totalEmployees": 1340,
+    "totalLocations": "40+",
+    "acquiredBy": "The Jordan Company (Dec 2022)",
+    "totalAcquisitions": 6,
+    "motorBrands": {
+      "solesElectric": {
+        "founded": 1960,
+        "hq": "Fairmont, WV",
+        "website": "https://soleselectric.com",
+        "estimatedRevenue": "$15M",
+        "employees": "50-100",
+        "services": [
+          "AC/DC motor repair & rewind",
+          "Pump & gearbox repair",
+          "Predictive & preventive maintenance",
+          "Electric & diesel rail equipment rebuilds",
+          "Fan repair",
+          "Field services"
+        ],
+        "industries": [
+          "Steel", "Aluminum", "Oil & Gas", "Manufacturing",
+          "Hospitals", "Government", "Power Plants",
+          "Chemical Plants", "Coal", "Public Service Districts"
+        ],
+        "differentiators": [
+          "Leading electric repair facility East of the Mississippi",
+          "Part of ISG network with capital investment and resources",
+          "Autonomous brand identity within ISG family"
+        ]
+      },
+      "illinoisElectricWorks": {
+        "founded": 1931,
+        "hq": "Granite City, IL",
+        "website": "https://www.illinoiselectric.com",
+        "estimatedRevenue": "$17.2M",
+        "employees": "28-38",
+        "services": [
+          "AC/DC motor rewinding and repairs to 10,000 HP",
+          "Babbitt bearing spin casting",
+          "Laser coupling alignment",
+          "Metalizing",
+          "Selective plating",
+          "Predictive maintenance",
+          "On-site services",
+          "Pump repairs",
+          "Related machining",
+          "Welding"
+        ],
+        "differentiators": [
+          "Midwest industry leader since 1931",
+          "Repairs up to 10,000 HP",
+          "Full-service thermography, laser alignment, and vibration analysis"
+        ]
+      }
+    }
+  },
+  "competitors": [
+    {
+      "name": "Integrated Power Services (IPS)",
+      "website": "https://www.ips.co",
+      "hq": "Greenville, SC",
+      "founded": null,
+      "locations": 100,
+      "locationDetails": "Largest network in the industry spanning North America, UK, and Caribbean. 1M+ sq ft of climate-controlled storage.",
+      "services": [
+        "In-shop remanufacturing",
+        "Electric motor & generator repair",
+        "Transformer services",
+        "Power distribution equipment",
+        "Engineering & technical field services",
+        "Asset management & equipment recovery",
+        "Switchgear & circuit breaker services",
+        "Custom equipment manufacturing",
+        "Generator installations (Rehlko brand)",
+        "Inventory management"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Generators",
+        "Transformers",
+        "Switchgear",
+        "Circuit breakers",
+        "Power distribution equipment",
+        "Rehlko industrial generators"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Enterprise/contract pricing; not publicly listed"
+      },
+      "revenue": "$367.1M (2026)",
+      "employees": "3,000+ (1,800 technicians incl. 500+ field service, 158 engineers)",
+      "differentiators": [
+        "Largest network in the industry (100 locations)",
+        "Single-source power partner across electromechanical and power management",
+        "Recently acquired ABB Industrial Services business assets",
+        "EASA accredited service centers",
+        "Backed by Riverside Company (PE)",
+        "Serves 30,000+ customer locations"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Utilities",
+        "Water & wastewater",
+        "Petrochemicals",
+        "Oil & gas",
+        "Mining & metals",
+        "Pulp & paper",
+        "Aggregates & cement",
+        "Data centers",
+        "Hospitals & universities",
+        "Commercial buildings"
+      ],
+      "tier": "Tier 1 - National/Global"
+    },
+    {
+      "name": "FLANDERS",
+      "website": "https://www.flandersinc.com",
+      "hq": "Evansville, IN",
+      "founded": 1947,
+      "locations": 17,
+      "locationDetails": "Regional Service Centers across 4 continents. US: Evansville IN (HQ), Lakeland FL, Tucson AZ. Nearly 1M sq ft of advanced facilities.",
+      "services": [
+        "Motor repairs, rebuilds & upgrades",
+        "Custom motor manufacturing",
+        "Advanced engineering & systems integration",
+        "Field services (24/7/365)",
+        "Testing & diagnostics",
+        "Technical training",
+        "Tooling & assembly machines",
+        "Controls & software for heavy machines",
+        "Lifecycle maintenance & predictive reliability"
+      ],
+      "products": [
+        "AC/DC motors (traction, drilling, industrial)",
+        "Drives",
+        "Control systems",
+        "Custom-engineered power solutions"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Project-based and contract pricing; heavy industry focus"
+      },
+      "revenue": "Not publicly disclosed (estimated $100M+)",
+      "employees": 856,
+      "differentiators": [
+        "70+ year heritage in heavy industrial motors",
+        "In-house R&D, manufacturing, and integration",
+        "CNC mills, laser cutting, 110-ton cranes, 5.1 MW generator, dynamometer for largest motors",
+        "Global footprint across 4 continents",
+        "Specialized in mining (drills, draglines, shovels, haul trucks)",
+        "2026 roadmap: hybrid architecture, fleet-wide data intelligence, modular electrification kits"
+      ],
+      "customerSegments": [
+        "Mining (primary)",
+        "Mills",
+        "Oil & gas",
+        "Power generation & utilities",
+        "Marine",
+        "Specialty industrial"
+      ],
+      "tier": "Tier 1 - National/Global"
+    },
+    {
+      "name": "Sulzer Electromechanical Services",
+      "website": "https://www.sulzer.com/en/shared/services/em-services",
+      "hq": "Winterthur, Switzerland (US operations: Pasadena, TX)",
+      "founded": 1834,
+      "locations": 6,
+      "locationDetails": "US: Pasadena TX, La Porte TX, Orange TX, Colton CA (ex-Brithinee), Phoenix AZ. Global network.",
+      "services": [
+        "Motor repair & rewind",
+        "Generator services",
+        "In-house coil manufacturing",
+        "Custom-built electrical control systems",
+        "On-site engineering support",
+        "New motor replacement",
+        "Mechanical & machining services",
+        "Welding & fabrication",
+        "24/7 emergency service"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Generators",
+        "Electrical control systems",
+        "High-voltage coils"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Enterprise pricing; global corporate structure"
+      },
+      "revenue": "$61.8M (US electromechanical services division)",
+      "employees": "103 (US operations)",
+      "differentiators": [
+        "Global Swiss engineering company (CHF 3.3B+ total revenue)",
+        "Acquired Brithinee Electric (2018) for Southern CA expansion",
+        "Strong in petrochemical and mining sectors",
+        "Integrated with global pump and rotating equipment services"
+      ],
+      "customerSegments": [
+        "Mining",
+        "Power generation",
+        "Petrochemicals",
+        "Steel & heavy manufacturing",
+        "Municipalities & utilities",
+        "Wind farms",
+        "OEMs"
+      ],
+      "tier": "Tier 1 - National/Global"
+    },
+    {
+      "name": "Timken Power Systems (Smith Services / Schulz Group)",
+      "website": "https://www.timkenpowersystems.com",
+      "hq": "North Canton, OH (parent); Princeton, WV (Smith Services); East Haven, CT (Schulz)",
+      "founded": null,
+      "locations": 3,
+      "locationDetails": "Princeton WV (180,000 sq ft - largest independent motor repair facility under one roof in US), East Haven CT, Portland ME (Stultz). Serves 15-state region.",
+      "services": [
+        "Electric motor repair & rewind (200-50,000 HP)",
+        "Switchgear repair & testing",
+        "Gearbox repair & upgrade",
+        "Custom control system integration",
+        "On-site diagnostic assessments",
+        "Complete power train repair",
+        "Nuclear motor repair",
+        "Vibration analysis",
+        "Laser alignment",
+        "Dynamic balancing"
+      ],
+      "products": [
+        "Rebuilt motors (200-3,500 HP in-house, up to 50,000 HP via network)",
+        "Switchgear",
+        "Custom controls & panels",
+        "Gearboxes"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Backed by Timken 1-year warranty on all repairs"
+      },
+      "revenue": "$5M (Schulz Group standalone; parent Timken Co. is $4.6B+)",
+      "employees": "51 (Schulz Group); 300+ at Smith Services facility",
+      "differentiators": [
+        "Largest independent motor repair facility under one roof (Smith Services, 180,000 sq ft)",
+        "Part of The Timken Company ($4.6B industrial conglomerate)",
+        "Handles rewinds up to 50,000 HP",
+        "1-year warranty on all repairs",
+        "100+ year history (Schulz Group)",
+        "Nuclear motor repair capability",
+        "Northeast & Mid-Atlantic coverage"
+      ],
+      "customerSegments": [
+        "Power generation (incl. nuclear)",
+        "Manufacturing",
+        "Pulp & paper",
+        "Mining",
+        "Water & wastewater",
+        "Steel mills"
+      ],
+      "tier": "Tier 1 - National"
+    },
+    {
+      "name": "L&S Electric",
+      "website": "https://lselectric.com",
+      "hq": "Schofield, WI",
+      "founded": null,
+      "locations": 6,
+      "locationDetails": "Schofield WI (corporate), Appleton WI, Fond du Lac WI, Chippewa Falls WI, Sturtevant WI, Iron Mountain MI",
+      "services": [
+        "Rotating apparatus repair",
+        "Complete rewind services",
+        "Bearing analysis",
+        "Load testing",
+        "Gearbox repairs",
+        "Power system commissioning & testing",
+        "Predictive & preventative maintenance",
+        "Rail equipment repair (traction motors, main alternators)",
+        "On-site rotating apparatus services",
+        "Industrial automation",
+        "Excitation & governor sales",
+        "Power control solutions"
+      ],
+      "products": [
+        "Electric motors & generators",
+        "Drives & controls",
+        "Gearboxes (worm & helical)",
+        "Excitation systems",
+        "Governor controls",
+        "Power distribution equipment",
+        "Servo motors",
+        "Milwaukee Tool products"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "24/7 emergency service available at 800-283-8332"
+      },
+      "revenue": "$69.8M",
+      "employees": "245-415",
+      "differentiators": [
+        "Strong Upper Midwest presence with 6 locations",
+        "20+ years in rail transportation (Class I and short-line)",
+        "Hydroelectric power generation expertise",
+        "ISO certified",
+        "24/7 emergency service"
+      ],
+      "customerSegments": [
+        "Agriculture & food",
+        "Industrial & manufacturing",
+        "Mining & aggregate",
+        "Municipal utilities",
+        "OEMs",
+        "Power generation & hydroelectric",
+        "Pulp & paper",
+        "Rail transportation"
+      ],
+      "tier": "Tier 2 - Regional (Upper Midwest)"
+    },
+    {
+      "name": "EMC (Electric Motor & Contracting Co.)",
+      "website": "https://www.emc-co.com",
+      "hq": "Chesapeake, VA",
+      "founded": 1960,
+      "locations": 2,
+      "locationDetails": "Chesapeake VA (primary), Courtland VA",
+      "services": [
+        "Electric motor repair & rewind",
+        "Pump repair",
+        "Troubleshooting & advanced testing",
+        "Removal & reinstallation of pumps and motors",
+        "Laser alignment",
+        "Vibration analysis",
+        "Cryogenic/dry ice blasting",
+        "Preventative maintenance",
+        "Ship repair services"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Pumps",
+        "Generators"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Contact for quotes"
+      },
+      "revenue": "$63.5M",
+      "employees": "260-270",
+      "differentiators": [
+        "Family-owned since 1960 (King Family)",
+        "Strong ship repair heritage",
+        "Serves US and Canada",
+        "Cryogenic/dry ice blasting capability",
+        "Located in major naval/shipyard region"
+      ],
+      "customerSegments": [
+        "Ship repair & marine",
+        "Power generation",
+        "Pulp & paper",
+        "Steel",
+        "Chemical",
+        "Water treatment"
+      ],
+      "tier": "Tier 2 - Regional (Mid-Atlantic/Southeast)"
+    },
+    {
+      "name": "Brandon and Clark",
+      "website": "https://brandonclark.com",
+      "hq": "Lubbock, TX",
+      "founded": 1950,
+      "locations": 6,
+      "locationDetails": "6 locations across Texas Panhandle, Permian Basin, and East Texas. HQ: 916 E 50th St, Lubbock TX 79404",
+      "services": [
+        "Electric motor repair, rebuild & testing",
+        "Transformer services (full rebuilds, vacuum filling, core inspection)",
+        "Custom controls & automation",
+        "24/7 emergency service",
+        "On-site motor services (diagnostics, repair, maintenance)",
+        "Preventative & predictive maintenance",
+        "Renewable energy services (wind generators & transformers)"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Transformers",
+        "Custom control panels",
+        "Wind energy generators"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Emergency service available 24/7"
+      },
+      "revenue": "$53.7M",
+      "employees": "137-200+",
+      "differentiators": [
+        "75+ year heritage in Southwestern US",
+        "EASA member since 1953",
+        "Strong in oil & gas / Permian Basin region",
+        "Renewable energy (wind) capability",
+        "Family-owned legacy company"
+      ],
+      "customerSegments": [
+        "Oil & gas (Permian Basin)",
+        "Wind energy",
+        "Utilities",
+        "Manufacturing",
+        "Agriculture"
+      ],
+      "tier": "Tier 2 - Regional (Southwest/Texas)"
+    },
+    {
+      "name": "Jay Industrial Repair",
+      "website": "https://jayindustrial.com",
+      "hq": "Birmingham, AL",
+      "founded": null,
+      "locations": 5,
+      "locationDetails": "Birmingham AL (HQ), Sheffield/Docena AL, Montgomery AL, Mobile AL",
+      "services": [
+        "AC/DC motor & generator repair",
+        "Gearbox repair",
+        "Servo motor repair",
+        "Steam turbine inspections & repair",
+        "Turbine generator repair & rewinds",
+        "On-site balancing & alignment",
+        "Vibration analysis",
+        "Infrared services",
+        "In-field rewinds & motor change outs",
+        "Constant condition monitoring"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Generators",
+        "Gearboxes",
+        "Servo motors",
+        "Steam turbines"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Formerly Flanders Electric Motor Service (Alabama division)"
+      },
+      "revenue": "$46.4M",
+      "employees": 166,
+      "differentiators": [
+        "ABB authorized value provider",
+        "SKF certified rebuilder",
+        "UL certified for explosion-proof motor repair",
+        "EASA accredited service center",
+        "Strong Alabama/Southeast coverage with 4+ service centers",
+        "Steam turbine and turbine generator capability"
+      ],
+      "customerSegments": [
+        "Heavy manufacturing",
+        "Mining",
+        "Steel & metals",
+        "Power generation",
+        "Chemical processing",
+        "Paper & pulp"
+      ],
+      "tier": "Tier 2 - Regional (Southeast/Alabama)"
+    },
+    {
+      "name": "HECO Inc.",
+      "website": "https://hecoinc.com",
+      "hq": "Kalamazoo, MI",
+      "founded": 1959,
+      "locations": 4,
+      "locationDetails": "Kalamazoo MI (corporate HQ), Detroit MI, Lexington KY, Wheeling WV (Warwood Armature)",
+      "services": [
+        "AC/DC motor repair",
+        "High-voltage rewinding",
+        "Pump repair",
+        "Gearbox repair",
+        "Hydroelectric generator repair",
+        "Vibration analysis & motion amplification",
+        "Ultrasound & infrared thermography",
+        "Balancing & alignment",
+        "Motor/pump/VFD field services",
+        "Equipment management (spares tracking, vendor management)",
+        "Predictive maintenance programs"
+      ],
+      "products": [
+        "New motors",
+        "Surplus motors",
+        "Pumps",
+        "Seals",
+        "Liquid rheostats",
+        "VFDs",
+        "Controls",
+        "Motor accessories"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "24-hour emergency line: 800-432-2645"
+      },
+      "revenue": "$33.8M",
+      "employees": "120-174",
+      "differentiators": [
+        "EASA member and Knower Network founding member",
+        "Warwood Armature acquisition expanded tri-state (PA/OH/WV) coverage",
+        "Strong equipment management and predictive maintenance focus",
+        "Motion amplification diagnostic technology",
+        "Gearbox repair up to 25 tons"
+      ],
+      "customerSegments": [
+        "Power generation",
+        "Steel & metals",
+        "Chemical processing",
+        "Pharmaceutical",
+        "Pulp & paper",
+        "Wastewater/freshwater treatment",
+        "Aggregate & cement",
+        "OEMs",
+        "Coal & shale"
+      ],
+      "tier": "Tier 2 - Regional (Great Lakes/Ohio Valley)"
+    },
+    {
+      "name": "Dreisilker Electric Motors",
+      "website": "https://dreisilker.com",
+      "hq": "Glen Ellyn, IL",
+      "founded": 1955,
+      "locations": 7,
+      "locationDetails": "IL: Alsip, Chicago, Crystal Lake, Elk Grove Village, Glen Ellyn (HQ). GA: Marietta. TX: Carrollton.",
+      "services": [
+        "AC/DC motor repair",
+        "Blower & centrifugal motor repair",
+        "Generator & servo motor repair",
+        "Armature rewinding & commutator repair",
+        "In-house machining & balancing",
+        "Dynamic balancing & vibration analysis",
+        "Motor diagnostic testing",
+        "Laser shaft alignment",
+        "Preventative maintenance programs",
+        "Electronics repair",
+        "Infrared inspection",
+        "Electric motor contract manufacturing"
+      ],
+      "products": [
+        "Century",
+        "Fasco",
+        "Genteq",
+        "Lau",
+        "Leeson",
+        "Marathon Electric",
+        "Optibelt",
+        "Packard",
+        "Siemens",
+        "Yaskawa VFD",
+        "Teco Westinghouse"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Online shop available at shop.dreisilker.com for parts and accessories"
+      },
+      "revenue": "$15-45M (estimates vary)",
+      "employees": "60-120",
+      "differentiators": [
+        "Strong Chicagoland presence with 5 local branches",
+        "Online e-commerce shop for parts",
+        "Contract manufacturing capability",
+        "Expanding into Atlanta and Dallas markets",
+        "Broad HVAC and industrial motor coverage",
+        "70+ year heritage"
+      ],
+      "customerSegments": [
+        "HVAC contractors",
+        "Industrial maintenance",
+        "Facility managers",
+        "Heat treating",
+        "Crane & hoist operations",
+        "Landfill gas recovery",
+        "Manufacturing",
+        "Printing",
+        "Plastics",
+        "Steel mills"
+      ],
+      "tier": "Tier 2 - Regional (Chicago/Midwest)"
+    },
+    {
+      "name": "Joliet Electric Motors (now Hitachi)",
+      "website": "https://www.jolietelectricmotors.com",
+      "hq": "Joliet, IL",
+      "founded": 1935,
+      "locations": 1,
+      "locationDetails": "1 Doris Avenue, Joliet IL 60433. 100,000+ sq ft facility. Acquired by Hitachi Ltd. in January 2025.",
+      "services": [
+        "Large AC/DC motor repair, rebuilding & rewinding",
+        "Traction & drilling motor specialization",
+        "Dynamic balancing",
+        "Full machine shop services",
+        "Maintenance training",
+        "Motor sales (rebuilt & new)"
+      ],
+      "products": [
+        "Oil field traction motors",
+        "Large AC/DC electric motors",
+        "Severe duty motors",
+        "2-speed electric motors",
+        "High-efficiency motors",
+        "High-torque motors",
+        "Motors up to 10,000 HP"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Now Hitachi subsidiary; enterprise pricing"
+      },
+      "revenue": "$10-50M (estimated)",
+      "employees": "29-50",
+      "differentiators": [
+        "90-year track record in large motor repair",
+        "Acquired by Hitachi (2025) - access to global OEM resources",
+        "Specialization in traction and drilling motors",
+        "Handles motors up to 10,000 HP",
+        "Strong oil & gas sector expertise"
+      ],
+      "customerSegments": [
+        "Paper mills",
+        "Steel mills",
+        "Chemical plants",
+        "OEM manufacturing",
+        "Oil & gas (traction/drilling)",
+        "Energy sector"
+      ],
+      "tier": "Tier 2 - Regional (Midwest)"
+    },
+    {
+      "name": "Whelco Industrial",
+      "website": "https://whelco.com",
+      "hq": "Perrysburg, OH",
+      "founded": null,
+      "locations": 1,
+      "locationDetails": "28210 Cedar Park Blvd, Perrysburg OH 43551. 80,000 sq ft facility with 40+ ton crane capacity.",
+      "services": [
+        "AC/DC motor rebuild & rewind",
+        "Machine shop services",
+        "Predictive maintenance",
+        "24-hour emergency service (7 days/week)",
+        "Local pick-up & delivery",
+        "New motor sales"
+      ],
+      "products": [
+        "AC/DC motors",
+        "New replacement motors"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Call (800) 952-4345 for quotes"
+      },
+      "revenue": "$18.8M",
+      "employees": "17-23",
+      "differentiators": [
+        "80,000 sq ft facility with 40+ ton crane capacity",
+        "Sister company ACT (Automation & Control Technologies)",
+        "24/7 emergency service",
+        "Tri-state (OH/IN/MI) coverage"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Utilities",
+        "Processing plants",
+        "Industrial facilities"
+      ],
+      "tier": "Tier 3 - Local (Northwest Ohio)"
+    },
+    {
+      "name": "National Electric Coil (NEC)",
+      "website": "https://www.national-electric-coil.com",
+      "hq": "Columbus, OH",
+      "founded": 1917,
+      "locations": 2,
+      "locationDetails": "Columbus OH (265,000 sq ft HQ + Rotating Equipment Service Facility, ~300 employees across 3 shifts) and Brownsville TX",
+      "services": [
+        "Large motor & generator repair/refurbishment/upgrade",
+        "Replacement high-voltage windings",
+        "Turbogenerator rotor balancing",
+        "Pump & motor repair (high voltage / very large HP)",
+        "Stator & rotor manufacturing",
+        "On-site field services"
+      ],
+      "products": [
+        "High-voltage generator & motor windings",
+        "Turbogenerator stators & rotors",
+        "Synchronous motors & generators"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Specialized large-scale project pricing"
+      },
+      "revenue": "$140.9M",
+      "employees": "500-1,000",
+      "differentiators": [
+        "107-year heritage since 1917",
+        "Specialist in high-voltage coils and large rotating equipment",
+        "265,000 sq ft Columbus facility with 3-shift operation",
+        "Manufacturer AND service provider",
+        "Deep utility/power generation expertise"
+      ],
+      "customerSegments": [
+        "Power generation (primary)",
+        "Utilities",
+        "Heavy industrial"
+      ],
+      "tier": "Tier 1 - National (specialized)"
+    },
+    {
+      "name": "Electric Motor Shop (EMS)",
+      "website": "https://www.electricmotorshopnc.com",
+      "hq": "Wake Forest, NC",
+      "founded": null,
+      "locations": 2,
+      "locationDetails": "Wake Forest NC, Rocky Mount NC. 70+ year history.",
+      "services": [
+        "Electric motor repair & rebuilding",
+        "Electromechanical repair",
+        "Power transmission repair",
+        "Retrofit services"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Power transmission equipment"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Contact for quotes"
+      },
+      "revenue": "$10.8M",
+      "employees": null,
+      "differentiators": [
+        "One of the largest and most technically advanced in the Southeast",
+        "ISO 9001:2015 certified",
+        "EASA member",
+        "Serves VA, NC, SC, GA, FL, TN"
+      ],
+      "customerSegments": [
+        "Industrial manufacturers",
+        "Processors",
+        "Utilities",
+        "Municipalities"
+      ],
+      "tier": "Tier 3 - Regional (Southeast/Carolinas)"
+    },
+    {
+      "name": "Electrical Repair Service Company (ERSC)",
+      "website": "https://www.electricalrepairserviceco.com",
+      "hq": "Birmingham, AL",
+      "founded": null,
+      "locations": 1,
+      "locationDetails": "Birmingham, Alabama",
+      "services": [
+        "Electric motor repair",
+        "Certified warranty center for major manufacturers",
+        "24/7 emergency service"
+      ],
+      "products": [
+        "AC/DC motors (authorized warranty center)"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Warranty center for major OEMs"
+      },
+      "revenue": null,
+      "employees": null,
+      "differentiators": [
+        "First SKF certified rebuilder of electric motors",
+        "EASA accredited service center",
+        "Certified warranty center for all major motor manufacturers"
+      ],
+      "customerSegments": [
+        "Industrial manufacturing",
+        "Heavy industry"
+      ],
+      "tier": "Tier 3 - Local (Alabama)"
+    },
+    {
+      "name": "Tekwell Services",
+      "website": "https://www.tekwellservices.com",
+      "hq": "Knoxville, TN",
+      "founded": null,
+      "locations": 3,
+      "locationDetails": "Knoxville TN, Cartersville GA (near Atlanta), Chattanooga TN",
+      "services": [
+        "Electric motor rebuilds",
+        "Bearing replacement",
+        "Rewinding services",
+        "Dynamometer load testing",
+        "VFD repair",
+        "Gearbox repair",
+        "Pump repair",
+        "Industrial electronics repair"
+      ],
+      "products": [
+        "AC/DC motors",
+        "VFDs",
+        "Gearboxes",
+        "Pumps"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Growing regional provider"
+      },
+      "revenue": "$3M",
+      "employees": "42-50+",
+      "differentiators": [
+        "SKF Certified Rebuilder status",
+        "Growing Southeast presence",
+        "Dynamometer load testing capability",
+        "Serving TN, GA, and surrounding states"
+      ],
+      "customerSegments": [
+        "Manufacturing",
+        "Processing",
+        "Utilities",
+        "General industrial"
+      ],
+      "tier": "Tier 3 - Regional (Southeast/TN-GA)"
+    },
+    {
+      "name": "Moline Electric Motor & Machine",
+      "website": "https://molineelectric.com",
+      "hq": "Atlantic Beach, FL",
+      "founded": 2011,
+      "locations": 1,
+      "locationDetails": "1420-3 Mayport Road, Atlantic Beach, FL",
+      "services": [
+        "Electric motor repair & rewind (fractional to 250+ HP)",
+        "Pump repair",
+        "Machine shop services",
+        "Custom fabrication",
+        "In-shop/field balancing",
+        "Mobile welding",
+        "Laser alignment",
+        "Crane truck service",
+        "Thermal imaging",
+        "Motor & pump sales"
+      ],
+      "products": [
+        "Electric motors",
+        "Electric pumps"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Contact for quotes"
+      },
+      "revenue": "$4M",
+      "employees": null,
+      "differentiators": [
+        "75+ years combined team experience",
+        "Southeastern US coverage from Florida base",
+        "Crane truck service for heavy removal",
+        "Family-owned, responsive service"
+      ],
+      "customerSegments": [
+        "Industrial",
+        "Municipal",
+        "Commercial"
+      ],
+      "tier": "Tier 3 - Local (Northeast Florida)"
+    },
+    {
+      "name": "Continental Electric Motors",
+      "website": "https://www.cecoinc.com",
+      "hq": "Marlboro, NJ",
+      "founded": 1921,
+      "locations": 2,
+      "locationDetails": "Marlboro NJ (manufacturing), Clifton NJ (parts & repairs)",
+      "services": [
+        "Motor repair & refurbishment",
+        "Motor testing & evaluation",
+        "Technical support & consultation",
+        "Application engineering",
+        "On-site installation, maintenance & emergency repair",
+        "Motor manufacturing (100-10,000 HP)"
+      ],
+      "products": [
+        "Industrial electric motors (100-10,000 HP)",
+        "Custom-built motors",
+        "Severe duty motors"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "OEM manufacturer + service"
+      },
+      "revenue": "$5-10M (estimated)",
+      "employees": "4-7",
+      "differentiators": [
+        "100+ year heritage (since 1921)",
+        "OEM motor manufacturer AND service provider",
+        "Custom motors up to 10,000 HP",
+        "Selected by US military",
+        "Niche manufacturer for specialized applications"
+      ],
+      "customerSegments": [
+        "Military/defense",
+        "Heavy industrial",
+        "OEM applications",
+        "Specialized custom motor needs"
+      ],
+      "tier": "Tier 3 - Niche (Northeast/National)"
+    },
+    {
+      "name": "Renown Electric Motors & Repair",
+      "website": "https://renown-electric.com",
+      "hq": "Concord, Ontario, Canada",
+      "founded": 1984,
+      "locations": 1,
+      "locationDetails": "3 facilities in Concord, Ontario: 25,000 sq ft main repair, 34,000 sq ft large motor repair (50-ton cranes), 12,000 sq ft warehouse. Serves US and Canada.",
+      "services": [
+        "AC/DC motor & generator repair",
+        "Motor remanufacturing",
+        "On-site field services",
+        "Motor management & inventory",
+        "24/7/365 service"
+      ],
+      "products": [
+        "AC/DC motors",
+        "Generators",
+        "New motor sales"
+      ],
+      "pricing": {
+        "available": false,
+        "notes": "Serves US & Canada from Ontario"
+      },
+      "revenue": "$5M",
+      "employees": 38,
+      "differentiators": [
+        "71,000 sq ft across 3 specialized facilities",
+        "50-ton crane capacity in large motor shop",
+        "40+ year heritage",
+        "Mining industry specialization",
+        "Cross-border US/Canada service"
+      ],
+      "customerSegments": [
+        "Mining (primary)",
+        "Manufacturing",
+        "Oil & gas",
+        "Pulp & paper",
+        "Utilities"
+      ],
+      "tier": "Tier 3 - Regional (Canada/Northeast US)"
+    }
+  ],
+  "marketInsights": {
+    "marketSize": {
+      "usMotorRepairService2024": "$10.5B",
+      "usMotorRepairService2032Projected": "$16.29B",
+      "globalMotorRewindingService2024": "$3.5B",
+      "globalMotorRewindingService2033Projected": "$5.2B",
+      "usElectricMotorMarket2025": "$24.35B",
+      "usElectricMotorMarket2030Projected": "$31.82B"
+    },
+    "growthRate": {
+      "usMotorRepairServiceCAGR": "5.50% (2026-2032)",
+      "globalMotorRewindingCAGR": "5.1% (2026-2033)",
+      "usElectricMotorMarketCAGR": "5.49% (2025-2030)"
+    },
+    "trends": [
+      "Predictive maintenance adoption: IoT-enabled sensors monitoring temperature, vibration, and current conditions in real-time are becoming standard",
+      "AI-powered diagnostics: Key players leveraging AI analytics for equipment health monitoring and preventive repairs",
+      "Shift from reactive to preventive maintenance: Preventive programs account for 57% of 2025 expenditure; predictive analytics growing at 6.82% CAGR",
+      "Energy efficiency mandates: DOE regulations driving motor upgrades; rewind-vs-replace decision threshold at 65% of new motor cost",
+      "Sustainability focus: Increased demand for refurbishment and remanufacturing to reduce waste and extend motor lifespan",
+      "Aging motor fleet: Growing old infrastructure and excessive replacement costs boost repair demand",
+      "Industry consolidation: PE-backed platforms (IPS/Riverside, ISG/Jordan Company, Timken acquisitions, Hitachi acquiring Joliet) driving rollup activity",
+      "North America holds 28% of global repair centers and 32% of service volumes",
+      "Data center growth: Rapid expansion creating new demand for power management and motor services",
+      "Electrification of mining: Transition from diesel to electric drivetrains in mining equipment",
+      "Supply chain reshoring: Domestic manufacturing growth driving increased demand for motor maintenance infrastructure"
+    ],
+    "keyPlayers": [
+      {
+        "name": "Integrated Power Services (IPS)",
+        "tier": "Market Leader",
+        "revenue": "$367.1M",
+        "locations": 100,
+        "notes": "Largest network; PE-backed (Riverside Company)"
+      },
+      {
+        "name": "ISG (Industrial Service Group)",
+        "tier": "Major Regional Platform",
+        "revenue": "$241.3M",
+        "locations": "40+",
+        "notes": "PE-backed (Jordan Company); multi-vertical"
+      },
+      {
+        "name": "National Electric Coil",
+        "tier": "Specialized Leader",
+        "revenue": "$140.9M",
+        "locations": 2,
+        "notes": "High-voltage coils and large rotating equipment specialist"
+      },
+      {
+        "name": "FLANDERS",
+        "tier": "Global Specialist",
+        "revenue": "$100M+ (est)",
+        "locations": 17,
+        "notes": "Mining and heavy industry focus; global"
+      },
+      {
+        "name": "L&S Electric",
+        "tier": "Strong Regional",
+        "revenue": "$69.8M",
+        "locations": 6,
+        "notes": "Upper Midwest leader; rail expertise"
+      },
+      {
+        "name": "EMC (Electric Motor & Contracting)",
+        "tier": "Strong Regional",
+        "revenue": "$63.5M",
+        "locations": 2,
+        "notes": "Mid-Atlantic; ship repair heritage"
+      },
+      {
+        "name": "Sulzer EMS (US)",
+        "tier": "Global Parent / Regional Operations",
+        "revenue": "$61.8M (US)",
+        "locations": 6,
+        "notes": "Swiss parent; acquired Brithinee"
+      },
+      {
+        "name": "Brandon and Clark",
+        "tier": "Strong Regional",
+        "revenue": "$53.7M",
+        "locations": 6,
+        "notes": "Southwest/Texas; oil & gas, wind energy"
+      },
+      {
+        "name": "Jay Industrial Repair",
+        "tier": "Strong Regional",
+        "revenue": "$46.4M",
+        "locations": 5,
+        "notes": "Alabama/Southeast; ABB authorized, SKF certified"
+      },
+      {
+        "name": "HECO Inc.",
+        "tier": "Regional",
+        "revenue": "$33.8M",
+        "locations": 4,
+        "notes": "Great Lakes/Ohio Valley; predictive maintenance focus"
+      }
+    ],
+    "pricingBenchmarks": {
+      "rewindCostPerHP": {
+        "smallMotors_under5HP": "$95-475+ per HP (high labor-to-size ratio)",
+        "mediumMotors_5to25HP": "$40-63 per HP",
+        "largeMotors_50to100HP": "$25-30 per HP",
+        "veryLargeMotors_100plusHP": "$15-25 per HP (economies of scale)"
+      },
+      "rewindExamples": {
+        "quarterHP": "$475",
+        "oneHP": "$575",
+        "tenHP": "$625",
+        "hundredHP": "$2,500-2,700"
+      },
+      "repairVsReplaceThreshold": "Rewind cost > 65% of new motor price = recommend replacement",
+      "rewindCostBreakdown": "10% materials, 90% labor",
+      "notes": "Pricing varies significantly by geography, motor type (AC/DC, voltage class), urgency, and shop certifications. Large shops command premium for quality assurance and warranties."
+    },
+    "competitiveDynamics": {
+      "consolidationTrend": "PE-backed platforms (IPS, ISG) are actively acquiring regional motor shops to build national networks. Hitachi's 2025 acquisition of Joliet Electric signals OEM interest in recurring service revenue.",
+      "barrierToEntry": "EASA accreditation, SKF certification, UL explosion-proof certification create quality barriers. Large facility investment ($5-80M) needed for heavy motor work.",
+      "customerRetention": "24/7 emergency service, predictive maintenance contracts, and equipment management programs create switching costs and recurring revenue.",
+      "geographicOpportunity": "Southeast US, Gulf Coast, and Ohio Valley remain fragmented markets with acquisition targets for platform companies like ISG."
+    }
+  },
+  "sources": [
+    "https://www.verifiedmarketreports.com/product/electric-motor-rewinding-service-market/",
+    "https://www.businessresearchinsights.com/market-reports/electric-motor-repair-service-market-121502",
+    "https://www.grandviewresearch.com/industry-analysis/us-electric-motor-market-report",
+    "https://www.ips.co/",
+    "https://lselectric.com/",
+    "https://dreisilker.com/",
+    "https://hecoinc.com/",
+    "https://www.flandersinc.com/",
+    "https://brandonclark.com/",
+    "https://soleselectric.com/",
+    "https://isgservice.com/",
+    "https://www.emc-co.com/",
+    "https://www.jolietelectricmotors.com/",
+    "https://whelco.com/",
+    "https://www.national-electric-coil.com/",
+    "https://www.electricmotorshopnc.com/",
+    "https://jayindustrial.com/",
+    "https://www.tekwellservices.com/",
+    "https://molineelectric.com/",
+    "https://www.cecoinc.com/",
+    "https://renown-electric.com/",
+    "https://schulzgroupusa.com/",
+    "https://www.timkenpowersystems.com/",
+    "https://www.sulzer.com/en/shared/services/em-services",
+    "https://www.electricalrepairserviceco.com/"
+  ]
+}
