@@ -1,0 +1,259 @@
+;;; The Wendt Group — Charlotte OS Knowledge Graph
+;;; Domain: Livestock auction, show pig sale management, agricultural services
+;;; Generated: February 2026
+;;; Context: Sounder partnership assessment
+
+(in-microtheory WendtGroupMt)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 1: Company Identity
+;;; ═══════════════════════════════════════════════
+
+(isa WendtGroupInc Company)
+(companyName WendtGroupInc "The Wendt Group, Inc.")
+(foundedYear WendtGroupInc 1986)
+(headquartersAddress WendtGroupInc "121 Jackson St, Plain City, OH 43064")
+(industry WendtGroupInc "Agricultural Auction & Livestock Services")
+(businessModel WendtGroupInc "Full-service auction, brokerage, and technology")
+(phone WendtGroupInc "614.626.SOLD")
+(websiteURL WendtGroupInc "thewendtgroup.com")
+(totalLiveAuctions WendtGroupInc 6500)
+(totalOnlineAuctions WendtGroupInc 12000)
+(liveAuctionsPerYear WendtGroupInc 125)
+(emailSubscribers WendtGroupInc 20000)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 2: Platforms
+;;; ═══════════════════════════════════════════════
+
+(isa ShowPigCom Platform)
+(platformName ShowPigCom "ShowPig.com")
+(platformURL ShowPigCom "showpig.com")
+(platformPurpose ShowPigCom "Online show pig auction platform")
+(launchYear ShowPigCom 2004)
+(firstOnlineShowPigAuction ShowPigCom "2004-03-21")
+(hostingProvider ShowPigCom "Microsoft Azure")
+(authMethod ShowPigCom "JWT (HS256)")
+(identitySystem ShowPigCom "Email-based unified accounts")
+(operatedBy ShowPigCom WendtGroupInc)
+
+(isa CattleConnectCom Platform)
+(platformName CattleConnectCom "CattleConnect.com")
+(platformURL CattleConnectCom "cattleconnect.com")
+(platformPurpose CattleConnectCom "Online cattle auction platform")
+(operatedBy CattleConnectCom WendtGroupInc)
+
+(isa ShowpigLive Platform)
+(platformName ShowpigLive "Showpig LIVE")
+(platformPurpose ShowpigLive "Live + online hybrid auction")
+(technologyPartner ShowpigLive "CCi.live")
+(operatedBy ShowpigLive WendtGroupInc)
+
+(isa TWGAuctions Platform)
+(platformName TWGAuctions "TWG Auctions")
+(platformURL TWGAuctions "auctions.thewendtgroup.com")
+(platformPurpose TWGAuctions "Equipment and general auctions")
+(operatedBy TWGAuctions WendtGroupInc)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 3: Leadership
+;;; ═══════════════════════════════════════════════
+
+(isa KevinWendt Person)
+(fullName KevinWendt "Kevin Wendt, CAI")
+(roleAt KevinWendt WendtGroupInc "President & CEO")
+(credential KevinWendt "Ohio Auctioneers Hall of Fame (2015)")
+(credential KevinWendt "OSU Distinguished Alumni Award")
+(credential KevinWendt "Former NSR Board Member (ended 2017)")
+(credential KevinWendt "Co-Director Ohio State Fair Open Swine Division")
+(yearsExperience KevinWendt 40)
+(auctionsPerYear KevinWendt 125)
+
+(isa MeganWendt Person)
+(fullName MeganWendt "Megan Wendt")
+(roleAt MeganWendt WendtGroupInc "Vice President & COO")
+(credential MeganWendt "Ohio Youth Swine Committee Board Member")
+(education MeganWendt "OSU 1999, History")
+
+(isa AmySmith Person)
+(fullName AmySmith "Amy Smith")
+(roleAt AmySmith WendtGroupInc "Director of Finance / CFO")
+(yearsExperience AmySmith 25)
+
+(isa KristiStevens Person)
+(fullName KristiStevens "Kristi Stevens")
+(roleAt KristiStevens WendtGroupInc "Director of Operations")
+(location KristiStevens "Burnet, TX")
+
+(isa JackieLackey Person)
+(fullName JackieLackey "Jackie Lackey")
+(roleAt JackieLackey WendtGroupInc "Director of Marketing")
+(education JackieLackey "Texas A&M, Animal Science + Master of Agribusiness")
+(previousRole JackieLackey "Encore Visions, Owner (15 years)")
+
+(isa MichelleScholl Person)
+(fullName MichelleScholl "Michelle Scholl")
+(roleAt MichelleScholl WendtGroupInc "Auction Admin / Customer Service")
+
+;;; Auctioneers
+(isa DaleEvans Person)
+(fullName DaleEvans "Dale Evans")
+(roleAt DaleEvans WendtGroupInc "Auctioneer / Indiana Broker")
+
+(isa TylerWilt Person)
+(fullName TylerWilt "Tyler Wilt")
+(roleAt TylerWilt WendtGroupInc "Auctioneer / Real Estate Agent")
+
+(isa KaseySmith Person)
+(fullName KaseySmith "Kasey Smith")
+(roleAt KaseySmith WendtGroupInc "Auctioneer / Real Estate Agent")
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 4: Auction Types
+;;; ═══════════════════════════════════════════════
+
+(isa BrandedAuction AuctionType)
+(auctionTypeName BrandedAuction "Branded Production Sale")
+(description BrandedAuction "Individual breeder sale with custom branding and marketing")
+(offeredBy BrandedAuction ShowPigCom)
+
+(isa TheOpen AuctionType)
+(auctionTypeName TheOpen "The Open")
+(description TheOpen "Consignment auction for breeders testing online or with few head")
+(offeredBy TheOpen ShowPigCom)
+
+(isa TheDebut AuctionType)
+(auctionTypeName TheDebut "The Debut")
+(description TheDebut "New/rebranding breeders. $25/head, 5-8 entries, 10% commission")
+(offeredBy TheDebut ShowPigCom)
+
+(isa BuyNowEvent AuctionType)
+(auctionTypeName BuyNowEvent "The Buy Now Event")
+(description BuyNowEvent "Weekly offering at set prices or horserace-style close")
+(offeredBy BuyNowEvent ShowPigCom)
+
+(isa FoundOnFarm AuctionType)
+(auctionTypeName FoundOnFarm "Found on the Farm")
+(description FoundOnFarm "Farm memorabilia and collectibles")
+(offeredBy FoundOnFarm ShowPigCom)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 5: Partners
+;;; ═══════════════════════════════════════════════
+
+(isa KennedyVentures Partner)
+(partnerName KennedyVentures "Kennedy Ventures")
+(partnerType KennedyVentures "Strategic — Showpig LIVE")
+(location KennedyVentures "Oklahoma")
+(partnerOf KennedyVentures WendtGroupInc)
+
+(isa MurrayWise Partner)
+(partnerName MurrayWise "Murray Wise Associates")
+(partnerType MurrayWise "Financial Advisory — Wendt-Wise")
+(note MurrayWise "$5B+ in completed land/ag transactions")
+(partnerOf MurrayWise WendtGroupInc)
+
+(isa AmericanShorthorn Partner)
+(partnerName AmericanShorthorn "American Shorthorn Association")
+(partnerType AmericanShorthorn "~10-year CattleConnect partnership")
+(partnerOf AmericanShorthorn WendtGroupInc)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 6: Competitors
+;;; ═══════════════════════════════════════════════
+
+(isa SCOnlineSales Competitor)
+(companyName SCOnlineSales "Show Circuit Online Sales")
+(websiteURL SCOnlineSales "sconlinesales.com")
+(competitorType SCOnlineSales "Multi-species online auction platform")
+(competesDirectlyWith SCOnlineSales WendtGroupInc)
+
+(isa StockShowAuctions Competitor)
+(companyName StockShowAuctions "StockShowAuctions.com")
+(websiteURL StockShowAuctions "stockshowauctions.com")
+(competitorType StockShowAuctions "Show pig online auction platform")
+(competesDirectlyWith StockShowAuctions WendtGroupInc)
+
+(isa SaleRingLive Competitor)
+(companyName SaleRingLive "SaleRing.Live")
+(websiteURL SaleRingLive "salering.live")
+(competitorType SaleRingLive "Online livestock auction platform")
+(competesDirectlyWith SaleRingLive WendtGroupInc)
+
+(isa EZ2Bid Competitor)
+(companyName EZ2Bid "EZ2Bid")
+(websiteURL EZ2Bid "ez2bid.com")
+(competitorType EZ2Bid "Live auction broadcast platform")
+(competesDirectlyWith EZ2Bid WendtGroupInc)
+
+(isa SullivanSupply Competitor)
+(companyName SullivanSupply "Sullivan Supply / The Pulse")
+(competitorType SullivanSupply "Stock show media and supply — adjacent competitor")
+(competesIndirectlyWith SullivanSupply WendtGroupInc)
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 7: Industry Context
+;;; ═══════════════════════════════════════════════
+
+(isa ShowPigIndustry Industry)
+(industryName ShowPigIndustry "Show Pig / Youth Livestock Exhibition")
+(parentIndustry ShowPigIndustry "US Hog & Pig Farming ($25.4B)")
+(avgSalePrice ShowPigIndustry "$963 (ShowPig.com 2013)")
+(highEndPrice ShowPigIndustry "$5,000-$8,000+")
+(nsrYouthMembers ShowPigIndustry 12400)
+(cardsGradedEquivalent ShowPigIndustry "26.8M cards graded = similar niche boom dynamics")
+
+(isa NSR TradeAssociation)
+(associationName NSR "National Swine Registry")
+(location NSR "West Lafayette, IN")
+(ceo NSR "Clay Zwilling")
+(breeds NSR "Hampshire, Duroc, Yorkshire, Landrace")
+
+(isa CPS TradeAssociation)
+(associationName CPS "Certified Pedigreed Swine")
+
+;;; ═══════════════════════════════════════════════
+;;; SECTION 8: Charlotte Protocol Mapping
+;;; ═══════════════════════════════════════════════
+
+;;; NODE types for Wendt Group / Sounder integration
+(charlotteNodeType WendtGroupInc "Breeder")
+(charlotteNodeType WendtGroupInc "Buyer")
+(charlotteNodeType WendtGroupInc "Animal")
+(charlotteNodeType WendtGroupInc "AuctionLot")
+(charlotteNodeType WendtGroupInc "Sale")
+(charlotteNodeType WendtGroupInc "Sire")
+(charlotteNodeType WendtGroupInc "Dam")
+
+;;; EDGE types
+(charlotteEdgeType WendtGroupInc "consignedTo")
+(charlotteEdgeType WendtGroupInc "bidOn")
+(charlotteEdgeType WendtGroupInc "wonBy")
+(charlotteEdgeType WendtGroupInc "siredBy")
+(charlotteEdgeType WendtGroupInc "outOf")
+(charlotteEdgeType WendtGroupInc "bredBy")
+(charlotteEdgeType WendtGroupInc "soldThrough")
+
+;;; METRIC types
+(charlotteMetricType WendtGroupInc "Sale Average")
+(charlotteMetricType WendtGroupInc "Top Lot Price")
+(charlotteMetricType WendtGroupInc "Lot Count")
+(charlotteMetricType WendtGroupInc "Bidder Count")
+(charlotteMetricType WendtGroupInc "Genetic Premium")
+(charlotteMetricType WendtGroupInc "Breeder Lifetime Revenue")
+
+;;; SIGNAL types
+(charlotteSignalType WendtGroupInc "Lot Listed")
+(charlotteSignalType WendtGroupInc "Bid Placed")
+(charlotteSignalType WendtGroupInc "Sale Closed")
+(charlotteSignalType WendtGroupInc "Settlement Completed")
+(charlotteSignalType WendtGroupInc "Pedigree Attached")
+(charlotteSignalType WendtGroupInc "New Breeder Registered")
+
+;;; PROTOCOL types
+(charlotteProtocolType WendtGroupInc "Auction Booking Workflow")
+(charlotteProtocolType WendtGroupInc "Lot Submission Protocol")
+(charlotteProtocolType WendtGroupInc "Bidder Verification")
+(charlotteProtocolType WendtGroupInc "Settlement & Pork Checkoff")
+(charlotteProtocolType WendtGroupInc "Pedigree Verification")
+(charlotteProtocolType WendtGroupInc "Sale Day Production")

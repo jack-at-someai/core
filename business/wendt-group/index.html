@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wendt Group — Sounder Partnership Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --auction-500:#C0392B;--auction-600:#9E2E22;--auction-700:#7A231A;--auction-800:#561812;--auction-900:#2E0D09;
+  --wheat-500:#D4A76A;--wheat-400:#E4C88A;--wheat-300:#F8ECDA;
+  --pasture-500:#4A7C59;--pasture-400:#7BAF8A;
+  --barn-500:#58585E;--barn-700:#38383C;--barn-800:#28282B;--barn-900:#1C1C1E;
+  --text:#E8EAEB;--text-dim:#9C9CA1;--border:#444;
+  --glass-bg:rgba(28,28,30,0.92);--glass-border:rgba(192,57,43,0.18);
+}
+html{scroll-behavior:smooth}
+body{background:var(--barn-900);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* === KG BACKGROUND === */
+#kg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.35}
+
+/* === SCROLL CONTENT === */
+#scroll-content{position:relative;z-index:10;pointer-events:none}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;pointer-events:none}
+.section.auto-h{min-height:auto}
+.section-inner{max-width:960px;width:100%;pointer-events:auto}
+
+/* Glass */
+.glass{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  padding:48px;
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.8s ease,transform 0.8s ease;
+}
+.glass.visible{opacity:1;transform:translateY(0)}
+
+/* === TYPOGRAPHY === */
+h1.hero-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(36px,8vw,72px);font-weight:700;letter-spacing:4px;
+  background:linear-gradient(135deg,var(--auction-500),var(--wheat-500));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.1;margin-bottom:8px;
+}
+.hero-sub{font-family:'Oswald',sans-serif;font-size:clamp(14px,2.5vw,20px);font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--wheat-500);margin-bottom:24px}
+.hero-desc{font-size:15px;color:var(--text-dim);max-width:650px;margin-bottom:32px}
+.hero-badge{display:inline-block;padding:6px 16px;border:1px solid var(--auction-500);border-radius:20px;font-size:11px;letter-spacing:2px;color:var(--auction-500);text-transform:uppercase;margin-bottom:20px}
+
+h2.section-title{
+  font-family:'Oswald',sans-serif;font-size:clamp(26px,4.5vw,40px);font-weight:600;letter-spacing:2px;
+  color:var(--text);margin-bottom:8px;line-height:1.2;
+}
+h2.section-title span.accent{color:var(--auction-500)}
+h2.section-title span.wheat{color:var(--wheat-500)}
+h2.section-title span.pasture{color:var(--pasture-500)}
+.section-subtitle{font-size:13px;color:var(--auction-500);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.section-body{font-size:15px;color:var(--text-dim);line-height:1.8;margin-bottom:24px}
+.section-body strong{color:var(--text)}
+
+/* === BEFORE/AFTER SPLIT === */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.split-panel{border-radius:12px;padding:24px}
+.split-before{background:rgba(88,88,94,0.12);border:1px solid rgba(88,88,94,0.25)}
+.split-after{background:rgba(192,57,43,0.08);border:1px solid var(--glass-border)}
+.split-label{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.split-label.before{color:var(--barn-500)}
+.split-label.after{color:var(--wheat-500)}
+.split-list{list-style:none;padding:0}
+.split-list li{padding:6px 0;font-size:13px;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,0.03)}
+.split-list li strong{color:var(--text)}
+
+/* === STAT BAR === */
+.stat-bar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--glass-border);border-radius:10px;overflow:hidden;margin-top:8px}
+.stat-item{flex:1;min-width:100px;padding:14px 10px;text-align:center;border-right:1px solid var(--glass-border);background:rgba(192,57,43,0.04)}
+.stat-item:last-child{border-right:none}
+.stat-val{display:block;font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--text)}
+.stat-lbl{display:block;font-size:9px;letter-spacing:2px;color:var(--text-dim);margin-top:4px;text-transform:uppercase}
+
+/* === TEAM GRID === */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+.team-card{background:rgba(192,57,43,0.06);border:1px solid var(--glass-border);border-radius:10px;padding:16px;text-align:center}
+.team-initials{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--auction-700),var(--auction-500));display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--text);margin:0 auto 10px}
+.team-card h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.team-card p{font-size:11px;color:var(--text-dim)}
+.team-card .tenure{font-size:10px;color:var(--wheat-500);margin-top:4px}
+
+/* === TIMELINE === */
+.timeline{position:relative;padding-left:28px;margin-top:20px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--glass-border)}
+.timeline-item{position:relative;margin-bottom:20px}
+.timeline-dot{position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--auction-500);background:var(--barn-900)}
+.timeline-item.active .timeline-dot{background:var(--wheat-500);border-color:var(--wheat-500)}
+.timeline-year{font-family:'Oswald',sans-serif;font-size:14px;color:var(--auction-500);font-weight:600;letter-spacing:1px}
+.timeline-desc{font-size:13px;color:var(--text-dim);margin-top:2px}
+
+/* === PLATFORM GRID === */
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+.platform-card{background:rgba(212,167,106,0.04);border:1px solid rgba(212,167,106,0.12);border-radius:10px;padding:20px;text-align:center}
+.platform-card h4{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--wheat-500);letter-spacing:1px;margin-bottom:6px}
+.platform-card p{font-size:12px;color:var(--text-dim);line-height:1.5}
+.platform-card .url{font-size:10px;color:var(--text-dim);font-family:'Courier New',monospace;margin-top:8px;padding:6px;background:rgba(0,0,0,0.3);border-radius:4px}
+
+/* === PRIMITIVE CARDS === */
+.prim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:24px}
+.prim-card{background:rgba(192,57,43,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:20px 16px;text-align:center;transition:border-color 0.3s,transform 0.3s}
+.prim-card:hover{border-color:var(--auction-500);transform:translateY(-2px)}
+.prim-icon{font-size:24px;margin-bottom:8px;display:block}
+.prim-name{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;letter-spacing:2px;margin-bottom:8px}
+.prim-name.c-auction{color:var(--auction-500)}.prim-name.c-wheat{color:var(--wheat-500)}.prim-name.c-pasture{color:var(--pasture-500)}
+.prim-examples{font-size:11px;color:var(--text-dim);line-height:1.6}
+.prim-examples strong{color:var(--text);font-weight:500}
+
+/* === COMPETITOR TABLE === */
+.comp-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
+.comp-table th{text-align:left;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;color:var(--auction-500);padding:10px 12px;border-bottom:1px solid var(--glass-border);text-transform:uppercase}
+.comp-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-dim)}
+.comp-table td:first-child{color:var(--text);font-weight:500}
+.comp-table tr:hover td{background:rgba(192,57,43,0.04)}
+
+/* === CONTRACT CARDS === */
+.contract-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:24px}
+.contract-card{background:rgba(192,57,43,0.06);border:1px solid var(--glass-border);border-radius:12px;padding:24px;position:relative;overflow:hidden}
+.contract-card.recommended{border-color:var(--wheat-500)}
+.contract-card.recommended::before{content:'RECOMMENDED';position:absolute;top:12px;right:-30px;background:var(--wheat-500);color:var(--barn-900);font-size:9px;letter-spacing:2px;font-weight:700;padding:3px 36px;transform:rotate(45deg)}
+.contract-card h4{font-family:'Oswald',sans-serif;font-size:18px;color:var(--text);letter-spacing:1px;margin-bottom:4px}
+.contract-card .price{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:var(--wheat-500);margin-bottom:12px}
+.contract-card .price span{font-size:14px;color:var(--text-dim);font-weight:400}
+.contract-card ul{list-style:none;padding:0}
+.contract-card ul li{padding:6px 0;font-size:12px;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,0.03)}
+.contract-card ul li::before{content:'\2713';color:var(--pasture-500);margin-right:8px;font-weight:700}
+
+/* === CLOSING === */
+.closing-line{font-family:'Oswald',sans-serif;font-size:clamp(16px,2.5vw,22px);color:var(--text-dim);letter-spacing:1px;line-height:1.6;margin-top:24px}
+.closing-line strong{color:var(--text)}
+
+/* === SPACER === */
+.spacer{height:40vh;pointer-events:none}
+
+/* === MOBILE === */
+@media(max-width:640px){
+  .glass{padding:28px 20px}
+  .split{grid-template-columns:1fr}
+  .prim-grid{grid-template-columns:repeat(2,1fr)}
+  .contract-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .platform-grid{grid-template-columns:1fr}
+  .stat-item{min-width:80px;padding:10px 6px}
+  .stat-val{font-size:18px}
+  .comp-table{font-size:11px}
+  .comp-table th,.comp-table td{padding:6px 8px}
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--auction-700);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--auction-600)}
+</style>
+</head>
+<body>
+
+<!-- KG BACKGROUND -->
+<canvas id="kg-canvas"></canvas>
+
+<!-- SCROLL CONTENT -->
+<div id="scroll-content">
+
+  <div class="spacer"></div>
+
+  <!-- SECTION 1: HERO -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="hero-badge">Sounder Partnership Assessment</div>
+        <h1 class="hero-title">THE WENDT GROUP</h1>
+        <div class="hero-sub">Real People. Real Livestock. Period.</div>
+        <p class="hero-desc">The dominant online show pig auction platform in North America. ShowPig.com hosted the first-ever online show pig auction in 2004 and has since built the industry's primary digital marketplace. This assessment maps the current state of the operation and shows what a Sounder technology partnership looks like deployed here.</p>
+        <div class="stat-bar">
+          <div class="stat-item"><span class="stat-val">1986</span><span class="stat-lbl">Founded</span></div>
+          <div class="stat-item"><span class="stat-val">6,500+</span><span class="stat-lbl">Live Auctions</span></div>
+          <div class="stat-item"><span class="stat-val">12,000+</span><span class="stat-lbl">Online Auctions</span></div>
+          <div class="stat-item"><span class="stat-val">20K+</span><span class="stat-lbl">Subscribers</span></div>
+          <div class="stat-item"><span class="stat-val">4</span><span class="stat-lbl">Platforms</span></div>
+          <div class="stat-item"><span class="stat-val">125/yr</span><span class="stat-lbl">Live Events</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: COMPANY PROFILE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Company Profile</div>
+        <h2 class="section-title">40 years of the <span class="accent">auction hammer</span></h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">1986</div>
+            <div class="timeline-desc"><strong>Kevin Wendt</strong> begins conducting live livestock auctions in Ohio. Builds reputation as one of the top auctioneers in the swine industry.</div>
+          </div>
+          <div class="timeline-item active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2004</div>
+            <div class="timeline-desc"><strong>ShowPig.com launches</strong> &mdash; the first-ever online show pig auction (March 21, 2004). Transforms how breeders buy and sell genetics.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2010s</div>
+            <div class="timeline-desc">ShowPig.com doubles auction count. <strong>CattleConnect.com</strong> launches for online cattle auctions. American Shorthorn Association partnership begins (~10 years running).</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2015</div>
+            <div class="timeline-desc"><strong>Kevin Wendt inducted into Ohio Auctioneers Hall of Fame.</strong> OSU Distinguished Alumni Award.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2020</div>
+            <div class="timeline-desc">COVID accelerates online auction adoption. Industry goes digital. ShowPig.com becomes essential infrastructure.</div>
+          </div>
+          <div class="timeline-item active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2024</div>
+            <div class="timeline-desc"><strong>Sales Advisor Team launched.</strong> Kennedy Ventures partnership brings <strong>Showpig LIVE</strong> &mdash; hybrid live+online auctions via CCi.live.</div>
+          </div>
+          <div class="timeline-item active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2026</div>
+            <div class="timeline-desc"><strong>Today</strong> &mdash; 6,500+ live auctions, 12,000+ online auctions conducted. 20K+ email subscribers. 4 platforms. Ready for Charlotte infrastructure.</div>
+          </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top:36px">The <span class="wheat">Team</span></h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-initials">KW</div>
+            <h4>Kevin Wendt, CAI</h4>
+            <p>President &amp; CEO</p>
+            <div class="tenure">Ohio Hall of Fame. 40+ years. 125+ auctions/yr.</div>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">MW</div>
+            <h4>Megan Wendt</h4>
+            <p>Vice President &amp; COO</p>
+            <div class="tenure">OSU grad. Ohio Youth Swine Committee.</div>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">AS</div>
+            <h4>Amy Smith</h4>
+            <p>Director of Finance / CFO</p>
+            <div class="tenure">25 years in ag industry</div>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">KS</div>
+            <h4>Kristi Stevens</h4>
+            <p>Director of Operations</p>
+            <div class="tenure">Burnet, TX. IT specialist.</div>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">JL</div>
+            <h4>Jackie Lackey</h4>
+            <p>Director of Marketing</p>
+            <div class="tenure">Texas A&amp;M. Former Encore Visions owner.</div>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">MS</div>
+            <h4>Michelle Scholl</h4>
+            <p>Auction Admin / Customer Service</p>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">DE</div>
+            <h4>Dale Evans</h4>
+            <p>Auctioneer / Indiana Broker</p>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">TW</div>
+            <h4>Tyler Wilt</h4>
+            <p>Auctioneer / Real Estate Agent</p>
+          </div>
+          <div class="team-card">
+            <div class="team-initials">KS</div>
+            <h4>Kasey Smith</h4>
+            <p>Auctioneer / Real Estate Agent</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: PLATFORMS -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Platforms</div>
+        <h2 class="section-title">Four platforms, <span class="accent">one company</span></h2>
+        <p class="section-body">The Wendt Group operates four distinct platforms covering show pigs, cattle, live hybrid auctions, and equipment. ShowPig.com is the flagship &mdash; the first online show pig auction platform ever built &mdash; running on Microsoft Azure with JWT authentication and email-based unified accounts.</p>
+        <div class="platform-grid">
+          <div class="platform-card">
+            <h4>ShowPig.com</h4>
+            <p>The original. Online show pig auctions since 2004. Branded sales, consignment, The Open, The Debut, Buy Now events.</p>
+            <div class="url">showpig.com &middot; Azure &middot; JWT</div>
+          </div>
+          <div class="platform-card">
+            <h4>CattleConnect.com</h4>
+            <p>Online cattle auctions. ~10-year American Shorthorn Association partnership. Expanding species coverage.</p>
+            <div class="url">cattleconnect.com</div>
+          </div>
+          <div class="platform-card">
+            <h4>Showpig LIVE</h4>
+            <p>Hybrid live + online auctions. Kennedy Ventures / CCi.live partnership. Ring-side streaming with real-time online bidding.</p>
+            <div class="url">Kennedy Ventures / CCi.live</div>
+          </div>
+          <div class="platform-card">
+            <h4>TWG Auctions</h4>
+            <p>Equipment and general auctions. Farm equipment, memorabilia, collectibles. Found on the Farm series.</p>
+            <div class="url">auctions.thewendtgroup.com</div>
+          </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top:36px">Auction <span class="wheat">Types</span></h2>
+        <table class="comp-table">
+          <thead><tr><th>Format</th><th>Description</th><th>Model</th></tr></thead>
+          <tbody>
+            <tr><td>Branded Production Sale</td><td>Individual breeder sale with custom branding and marketing</td><td>Premium service</td></tr>
+            <tr><td>The Open</td><td>Consignment auction for breeders testing online or with few head</td><td>Low barrier entry</td></tr>
+            <tr><td>The Debut</td><td>New/rebranding breeders. $25/head, 5&ndash;8 entries, 10% commission</td><td>Starter package</td></tr>
+            <tr><td>Buy Now Event</td><td>Weekly offering at set prices or horserace-style close</td><td>Fixed/hybrid pricing</td></tr>
+            <tr><td>Found on the Farm</td><td>Farm memorabilia and collectibles</td><td>Niche/adjacent</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: BEFORE / AFTER -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Digital Assessment</div>
+        <h2 class="section-title">Before <span class="accent">&amp;</span> After</h2>
+        <p class="section-body">ShowPig.com is a functional platform &mdash; it processes transactions and manages auctions. But the data it generates is trapped in a legacy system with no graph infrastructure, no pedigree integration, and no cross-platform analytics. The opportunity is enormous.</p>
+        <div class="split">
+          <div class="split-panel split-before">
+            <div class="split-label before">Current State</div>
+            <ul class="split-list">
+              <li><strong>Platform:</strong> Azure-hosted monolith, JWT auth, email identity</li>
+              <li><strong>Pedigree:</strong> Sire/dam names in sale catalogs &mdash; no graph</li>
+              <li><strong>Analytics:</strong> Basic sale results &mdash; no cross-sale intelligence</li>
+              <li><strong>Breeder CRM:</strong> Email list (20K+) &mdash; no behavior tracking</li>
+              <li><strong>Show data:</strong> Not connected to breeding or sale outcomes</li>
+              <li><strong>Crossbred tracking:</strong> None &mdash; 60%+ of show pigs unregistered</li>
+              <li><strong>Competitor intel:</strong> Informal &mdash; no systematic tracking</li>
+              <li><strong>Registry integration:</strong> None &mdash; manual pedigree verification</li>
+              <li><strong>Multi-platform:</strong> 4 platforms operating independently</li>
+              <li><strong>Sale intelligence:</strong> Historical averages only</li>
+            </ul>
+          </div>
+          <div class="split-panel split-after">
+            <div class="split-label after">With Sounder + Charlotte</div>
+            <ul class="split-list">
+              <li><strong>Platform:</strong> Charlotte substrate layered on existing Azure infra</li>
+              <li><strong>Pedigree:</strong> Full ancestry graph &mdash; registered AND crossbred</li>
+              <li><strong>Analytics:</strong> Per-sale, per-breeder, per-sire, per-buyer intelligence</li>
+              <li><strong>Breeder CRM:</strong> Every breeder is a NODE with full lifecycle</li>
+              <li><strong>Show data:</strong> Linked to breeding, sale, and genetic outcomes</li>
+              <li><strong>Crossbred tracking:</strong> Charlotte reconstructs lineage from data</li>
+              <li><strong>Competitor intel:</strong> Charlotte monitors SC Online, StockShow, etc.</li>
+              <li><strong>Registry integration:</strong> Automated NSR/CPS/ABA data exchange</li>
+              <li><strong>Multi-platform:</strong> Unified graph across all 4 platforms</li>
+              <li><strong>Sale intelligence:</strong> Predictive pricing, buyer matching, timing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: COMPETITIVE LANDSCAPE -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Competitive Landscape</div>
+        <h2 class="section-title">Who else runs <span class="wheat">auctions</span></h2>
+        <p class="section-body">The US hog and pig farming industry is a <strong>$25.4B market</strong>. The show pig segment represents an estimated <strong>$500M&ndash;$800M</strong> in annual transactions. The Wendt Group competes at <strong>Layer 3</strong> of the supply chain: auction and sale management. They facilitate the transaction between breeder and buyer.</p>
+        <table class="comp-table">
+          <thead>
+            <tr><th>Competitor</th><th>Focus</th><th>Advantage</th><th>vs Wendt Group</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Show Circuit Online Sales</td>
+              <td>Multi-species online auctions</td>
+              <td>Cattle, hogs, goats &mdash; broad species coverage</td>
+              <td>Breadth; Wendt deeper in swine</td>
+            </tr>
+            <tr>
+              <td>StockShowAuctions.com</td>
+              <td>Show pig online auction</td>
+              <td>Growing platform, newer technology</td>
+              <td>Less established brand/network</td>
+            </tr>
+            <tr>
+              <td>SaleRing.Live</td>
+              <td>Online livestock auctions</td>
+              <td>Live streaming + online bidding tech</td>
+              <td>Tech-forward, less service depth</td>
+            </tr>
+            <tr>
+              <td>EZ2Bid</td>
+              <td>Live auction broadcast</td>
+              <td>Ring-side video streaming platform</td>
+              <td>Broadcast only, not full service</td>
+            </tr>
+            <tr>
+              <td>Sullivan Supply / The Pulse</td>
+              <td>Stock show media &amp; supply</td>
+              <td>Media reach, show supply distribution</td>
+              <td>Adjacent &mdash; media, not auctions</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="section-body" style="margin-top:20px"><strong>The critical insight:</strong> Every competitor operates a transaction platform. Nobody has a data strategy. Sale records, pedigree data, show results, and breeder behavior exist in separate silos across every platform. <strong>Charlotte connects the silos.</strong></p>
+        <p class="section-body"><strong>Wendt Group's moat:</strong> 40 years of industry relationships. Ohio Hall of Fame auctioneer. First-ever online show pig auction. 20K email subscribers. Former NSR Board member. The Wendt name IS the industry's trust layer. The technology just hasn't caught up yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: CHARLOTTE PRIMITIVES -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Charlotte Mapping</div>
+        <h2 class="section-title">Five primitives applied to <span class="accent">livestock auctions</span></h2>
+        <p class="section-body">The same infrastructure powering industrial equipment service and sports collectibles retail &mdash; mapped to the swine auction industry.</p>
+        <div class="prim-grid">
+          <div class="prim-card">
+            <span class="prim-icon">&#x25C9;</span>
+            <div class="prim-name c-auction">NODE</div>
+            <div class="prim-examples"><strong>Breeder</strong> (herdmark)<br><strong>Buyer</strong><br><strong>Animal</strong> (ear notch)<br><strong>Sire</strong> &middot; <strong>Dam</strong><br><strong>Auction Lot</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x2194;</span>
+            <div class="prim-name c-wheat">EDGE</div>
+            <div class="prim-examples"><strong>consignedTo</strong><br><strong>bidOn</strong> &middot; <strong>wonBy</strong><br><strong>siredBy</strong> &middot; <strong>outOf</strong><br><strong>bredBy</strong><br><strong>soldThrough</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x25B2;</span>
+            <div class="prim-name c-pasture">METRIC</div>
+            <div class="prim-examples"><strong>Sale Average</strong><br><strong>Top Lot Price</strong><br><strong>Bidder Count</strong><br><strong>Genetic Premium</strong><br><strong>Breeder Lifetime Rev</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x26A1;</span>
+            <div class="prim-name" style="color:#EF4444">SIGNAL</div>
+            <div class="prim-examples"><strong>Lot Listed</strong><br><strong>Bid Placed</strong><br><strong>Sale Closed</strong><br><strong>Settlement Done</strong><br><strong>Pedigree Attached</strong></div>
+          </div>
+          <div class="prim-card">
+            <span class="prim-icon">&#x2696;</span>
+            <div class="prim-name" style="color:#E9C46A">PROTOCOL</div>
+            <div class="prim-examples"><strong>Auction Booking</strong><br><strong>Lot Submission</strong><br><strong>Bidder Verification</strong><br><strong>Settlement / Checkoff</strong><br><strong>Pedigree Verification</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: INDUSTRY CONTEXT -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Industry</div>
+        <h2 class="section-title">The show pig <span class="accent">ecosystem</span></h2>
+        <p class="section-body">The US show pig industry is a <strong>$500M&ndash;$800M segment</strong> within the $25.4B hog and pig farming market. 12,400 NSR youth members. 77,000+ registered breeders across NSR, CPS, and ABA. Average sale price of $963 on ShowPig.com (2013 data) with elite genetics reaching <strong>$275,000</strong>. The industry runs on relationships, pedigrees, and sale rings &mdash; and the data layer connecting them doesn't exist yet.</p>
+        <div class="stat-bar">
+          <div class="stat-item"><span class="stat-val">$25.4B</span><span class="stat-lbl">US Hog Industry</span></div>
+          <div class="stat-item"><span class="stat-val">77K+</span><span class="stat-lbl">Registered Breeders</span></div>
+          <div class="stat-item"><span class="stat-val">12,400</span><span class="stat-lbl">NSR Youth Members</span></div>
+          <div class="stat-item"><span class="stat-val">$963</span><span class="stat-lbl">Avg Sale Price</span></div>
+        </div>
+        <p class="section-body" style="margin-top:20px"><strong>Key technology gap:</strong> Most auction platforms in livestock are PHP/MySQL monoliths built 15&ndash;20 years ago. Pedigree data lives in siloed registry databases with no cross-registry integration. Sale records exist in PDF catalogs and Facebook posts. Genetic testing data (GeneSeek, stress gene status) is disconnected from breeding and sale records. There is no standardized data format across the industry. <strong>Sounder fixes this.</strong></p>
+        <p class="section-body"><strong>The crossbred problem:</strong> Over 60% of show pigs have no registered pedigree. Their lineage exists only in breeder memory, sale catalog sire/dam listings, and handshake deals. Charlotte reconstructs these ancestry trees by connecting data points across sales, breeding records, and show results. This is the single most valuable capability Sounder brings to the industry.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: CONTRACT SIZING -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Partnership</div>
+        <h2 class="section-title">What this <span class="accent">looks like</span></h2>
+        <p class="section-body">Sounder deploys Charlotte infrastructure as a technology partnership. Not a vendor contract &mdash; a strategic alliance where Sounder provides the data layer and The Wendt Group provides industry access and distribution.</p>
+        <div class="contract-grid">
+          <div class="contract-card">
+            <h4>Foundation</h4>
+            <div class="price">$3,500<span>/mo</span></div>
+            <ul>
+              <li>Brand identity &amp; digital presence</li>
+              <li>ShowPig.com platform audit</li>
+              <li>Knowledge graph seeding (breeders, buyers, animals)</li>
+              <li>Auction data pipeline into KRF format</li>
+              <li>Breeder CRM &mdash; every breeder is a NODE</li>
+              <li>Pedigree integration baseline (NSR/CPS)</li>
+              <li>Competitive intelligence</li>
+              <li>On-site visits to Plain City + live auctions</li>
+            </ul>
+          </div>
+          <div class="contract-card recommended">
+            <h4>Operations</h4>
+            <div class="price">$7,500<span>/mo</span></div>
+            <ul>
+              <li>Everything in Foundation</li>
+              <li>Crossbred pedigree engine</li>
+              <li>Sale intelligence (predictive pricing, buyer matching)</li>
+              <li>Breeder analytics dashboard</li>
+              <li>Auction performance metrics</li>
+              <li>Show result integration (NSR events)</li>
+              <li>Registry integration pipeline (NSR/CPS/ABA)</li>
+              <li>Protocol management (booking &rarr; settlement)</li>
+              <li>Drift alerts &amp; weekly analytics</li>
+              <li>Quarterly on-site strategic review</li>
+            </ul>
+          </div>
+          <div class="contract-card">
+            <h4>Revenue Share</h4>
+            <div class="price">50/50<span> split</span></div>
+            <ul>
+              <li>Pedigree-as-a-Service (60/40 Sounder/Wendt)</li>
+              <li>Premium analytics products (50/50)</li>
+              <li>Registry processing referral (15% of net)</li>
+              <li>New capabilities enabled by Charlotte</li>
+              <li>Joint products marketed through ShowPig.com</li>
+              <li>Cross-platform data products</li>
+            </ul>
+          </div>
+        </div>
+        <p class="section-body" style="margin-top:20px"><strong>Total 24-month partnership value: $156,000</strong> &mdash; $3,500/mo foundation (6 months) + $7,500/mo operations (18 months). Plus revenue sharing on new capabilities. Governed by Ohio law. Arbitration in Columbus.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: VISION -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="glass">
+        <div class="section-subtitle">Vision</div>
+        <h2 class="section-title">The auction platform becomes the <span class="accent">industry graph</span></h2>
+        <p class="section-body">ShowPig.com has 20 years of sale data: who sold what, to whom, at what price, with what genetics. That data is the foundation for everything Sounder needs to build &mdash; but today it's locked in a legacy platform with no graph infrastructure.</p>
+        <p class="section-body">The registries own pedigree data. The breeders own genetic knowledge. The auction platforms own sale data. The show systems own performance data. <strong>Nobody connects them.</strong></p>
+        <p class="section-body">Sounder's Charlotte substrate connects all five layers. Every animal, breeder, sale, show result, and pedigree becomes a node in a unified graph. The Wendt Group partnership gives Sounder distribution (20K subscribers, 125+ auctions/year) and data (20 years of sale records). Sounder gives The Wendt Group the technology layer that transforms ShowPig.com from a transaction platform into the <strong>industry's data infrastructure</strong>.</p>
+        <p class="closing-line">The same engine powering a <strong>$1.4M industrial service contract</strong> and a <strong>12-location sports collectibles chain</strong> &mdash; deployed to the company that invented online show pig auctions.<br><br>ShowPig.com + Charlotte = <strong>the platform every breeder, buyer, and registry needs.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+</div>
+
+<!-- SCROLL ANIMATION -->
+<script>
+(function(){
+  var panels = document.querySelectorAll('.glass');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  panels.forEach(function(p){ observer.observe(p); });
+})();
+</script>
+
+<!-- KNOWLEDGE GRAPH BACKGROUND (Canvas 2D) -->
+<script>
+(function(){
+  var c = document.getElementById('kg-canvas');
+  var ctx = c.getContext('2d');
+  var W, H;
+  function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var nodeData = [
+    // Company
+    {id:'TWG', x:0.5, y:0.5, r:8, color:'#C0392B', label:'The Wendt Group'},
+    // Platforms
+    {id:'SPC', x:0.4, y:0.28, r:6, color:'#D4A76A', label:'ShowPig.com'},
+    {id:'CC', x:0.6, y:0.28, r:5, color:'#D4A76A', label:'CattleConnect'},
+    {id:'SPL', x:0.35, y:0.72, r:5, color:'#D4A76A', label:'Showpig LIVE'},
+    {id:'TWA', x:0.65, y:0.72, r:4, color:'#D4A76A', label:'TWG Auctions'},
+    // People
+    {id:'KW', x:0.3, y:0.4, r:5, color:'#C0392B', label:'Kevin Wendt'},
+    {id:'MWP', x:0.7, y:0.4, r:4, color:'#C0392B', label:'Megan Wendt'},
+    {id:'ASM', x:0.25, y:0.55, r:3, color:'#C0392B', label:'Amy Smith'},
+    {id:'KST', x:0.75, y:0.55, r:3, color:'#C0392B', label:'Kristi Stevens'},
+    {id:'JL', x:0.2, y:0.68, r:3, color:'#C0392B', label:'Jackie Lackey'},
+    // Auction Types
+    {id:'BPS', x:0.3, y:0.18, r:3, color:'#4A7C59', label:'Branded Sale'},
+    {id:'OPN', x:0.45, y:0.15, r:3, color:'#4A7C59', label:'The Open'},
+    {id:'DBT', x:0.55, y:0.15, r:3, color:'#4A7C59', label:'The Debut'},
+    {id:'BNE', x:0.7, y:0.18, r:3, color:'#4A7C59', label:'Buy Now'},
+    // Competitors
+    {id:'SCOS', x:0.12, y:0.15, r:3, color:'#58585E', label:'SC Online Sales'},
+    {id:'SSA', x:0.88, y:0.15, r:3, color:'#58585E', label:'StockShowAuctions'},
+    {id:'SRL', x:0.08, y:0.5, r:3, color:'#58585E', label:'SaleRing.Live'},
+    {id:'E2B', x:0.92, y:0.5, r:3, color:'#58585E', label:'EZ2Bid'},
+    {id:'SS', x:0.1, y:0.85, r:3, color:'#58585E', label:'Sullivan Supply'},
+    // Partners
+    {id:'KV', x:0.8, y:0.68, r:3, color:'#7BAF8A', label:'Kennedy Ventures'},
+    {id:'MWA', x:0.15, y:0.35, r:3, color:'#7BAF8A', label:'Murray Wise'},
+    {id:'ASH', x:0.85, y:0.35, r:3, color:'#7BAF8A', label:'Am. Shorthorn'},
+    // Industry
+    {id:'NSR', x:0.9, y:0.85, r:4, color:'#9E2E22', label:'NSR'},
+    {id:'CPS', x:0.5, y:0.88, r:3, color:'#9E2E22', label:'CPS'},
+  ];
+
+  var edgeData = [
+    ['TWG','SPC'],['TWG','CC'],['TWG','SPL'],['TWG','TWA'],
+    ['TWG','KW'],['TWG','MWP'],['TWG','ASM'],['TWG','KST'],['TWG','JL'],
+    ['SPC','BPS'],['SPC','OPN'],['SPC','DBT'],['SPC','BNE'],
+    ['TWG','SCOS'],['TWG','SSA'],['TWG','SRL'],['TWG','E2B'],['TWG','SS'],
+    ['SPL','KV'],['TWG','MWA'],['CC','ASH'],
+    ['TWG','NSR'],['TWG','CPS'],
+    ['KW','MWP'],['KW','SPC'],['MWP','CC'],
+    ['BPS','OPN'],['OPN','DBT'],['DBT','BNE'],
+    ['NSR','CPS'],['NSR','ASH'],
+    ['SCOS','SSA'],['SRL','E2B'],
+  ];
+
+  var nodes = nodeData.map(function(n){
+    return {
+      id: n.id,
+      x: n.x * W + (Math.random()-0.5)*60,
+      y: n.y * H + (Math.random()-0.5)*60,
+      r: n.r, color: n.color, label: n.label,
+      vx: (Math.random()-0.5)*0.3,
+      vy: (Math.random()-0.5)*0.3,
+      baseX: n.x, baseY: n.y
+    };
+  });
+
+  var nodeMap = {};
+  nodes.forEach(function(n){ nodeMap[n.id] = n; });
+
+  function animate(){
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, W, H);
+
+    nodes.forEach(function(n){
+      n.x += n.vx;
+      n.y += n.vy;
+      n.vx += (n.baseX * W - n.x) * 0.0003;
+      n.vy += (n.baseY * H - n.y) * 0.0003;
+      n.vx *= 0.995;
+      n.vy *= 0.995;
+    });
+
+    ctx.lineWidth = 0.5;
+    edgeData.forEach(function(e){
+      var a = nodeMap[e[0]], b = nodeMap[e[1]];
+      if(!a || !b) return;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = 'rgba(192,57,43,0.15)';
+      ctx.stroke();
+    });
+
+    nodes.forEach(function(n){
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI * 2);
+      var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3);
+      g.addColorStop(0, n.color + '20');
+      g.addColorStop(1, n.color + '00');
+      ctx.fillStyle = g;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(232,234,235,0.4)';
+      ctx.font = '9px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y - n.r - 6);
+    });
+  }
+
+  animate();
+})();
+</script>
+</body>
+</html>
