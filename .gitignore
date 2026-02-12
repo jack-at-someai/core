@@ -1,3 +1,7 @@
+# Python
+**/__pycache__/
+**/*.pyc
+
 # Firebase credentials
 **/google-services.json
 **/GoogleService-Info.plist

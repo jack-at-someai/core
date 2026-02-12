@@ -1,0 +1,72 @@
+{
+  "meeting": "ISG ServiceIQ — Charlotte Demo",
+  "date": "2026-02-23",
+  "location": "Boardroom",
+  "expected_attendees": 8,
+  "phases": [
+    {
+      "id": "welcome",
+      "label": "Welcome & Introductions",
+      "duration_minutes": 5,
+      "expected_engagement": 0.60,
+      "expected_attention_convergence": 0.40,
+      "description": "Charlotte identifies each person, builds the room graph"
+    },
+    {
+      "id": "isg_overview",
+      "label": "ISG Portfolio Overview",
+      "duration_minutes": 10,
+      "expected_engagement": 0.70,
+      "expected_attention_convergence": 0.75,
+      "description": "16 brands, 40+ locations, 259K SKUs — the operational landscape"
+    },
+    {
+      "id": "charlotte_intro",
+      "label": "Charlotte Architecture",
+      "duration_minutes": 15,
+      "expected_engagement": 0.80,
+      "expected_attention_convergence": 0.85,
+      "description": "Five primitives, the KG + heuristic layer, protocol engine"
+    },
+    {
+      "id": "live_demo",
+      "label": "Live Demo — Charlotte Watching This Room",
+      "duration_minutes": 15,
+      "expected_engagement": 0.90,
+      "expected_attention_convergence": 0.90,
+      "description": "Show the visualization: faces identified, emotions tracked, signals flowing"
+    },
+    {
+      "id": "serviceiq",
+      "label": "ServiceIQ Application",
+      "duration_minutes": 10,
+      "expected_engagement": 0.85,
+      "expected_attention_convergence": 0.80,
+      "description": "Predictive distribution powered by Charlotte — the $1.4M contract"
+    },
+    {
+      "id": "vision",
+      "label": "Vision — barnOS, officeOS, houseOS",
+      "duration_minutes": 10,
+      "expected_engagement": 0.75,
+      "expected_attention_convergence": 0.70,
+      "description": "Same substrate, different games. Pig farms to boardrooms."
+    },
+    {
+      "id": "discussion",
+      "label": "Open Discussion",
+      "duration_minutes": 15,
+      "expected_engagement": 0.70,
+      "expected_attention_convergence": 0.50,
+      "description": "Q&A, divergent attention expected as people process"
+    },
+    {
+      "id": "closing",
+      "label": "Closing & Next Steps",
+      "duration_minutes": 5,
+      "expected_engagement": 0.65,
+      "expected_attention_convergence": 0.80,
+      "description": "Charlotte distributes minutes and marching orders"
+    }
+  ]
+}

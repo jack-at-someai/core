@@ -1,0 +1,9 @@
+# Charlotte Demo — Pi 5 Dependencies
+# Install: pip install -r requirements.txt
+
+opencv-python-headless>=4.8
+face-recognition>=1.3.0
+fer>=22.5.0
+websockets>=12.0
+numpy>=1.24
+Pillow>=10.0

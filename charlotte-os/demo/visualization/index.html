@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlotte OS — Live</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#141414;--surface:#1A1A1A;--card:#222222;--border:#333333;
+  --text:#E8E0E0;--dim:#888;--red:#E53E3E;--red-light:#F56565;
+  --mauve:#C4A8A8;--mauve-dark:#9B7878;--mauve-deep:#6B4F4F;
+  --amber:#F6AD55;--green:#68D391;--blue:#63B3ED;
+  --glass-bg:rgba(30,30,30,0.6);--glass-border:rgba(255,255,255,0.08);
+  --radius:12px;--font:Inter,-apple-system,system-ui,sans-serif;
+  --mono:'SF Mono','Cascadia Code',monospace;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);overflow:hidden}
+
+/* ── Layout ── */
+.container{display:grid;grid-template-columns:1fr 320px;grid-template-rows:56px 1fr 200px;height:100vh;gap:1px;background:var(--border)}
+.header{grid-column:1/-1;background:var(--surface);display:flex;align-items:center;padding:0 20px;gap:16px}
+.graph-area{background:var(--bg);position:relative;overflow:hidden}
+.sidebar{background:var(--surface);overflow-y:auto;padding:12px}
+.timeline{grid-column:1/-1;background:var(--surface);padding:12px 20px;overflow:hidden}
+
+/* ── Header ── */
+.header h1{font-size:16px;font-weight:600;letter-spacing:0.5px}
+.header .dot{width:8px;height:8px;border-radius:50%;background:#555;transition:background 0.3s}
+.header .dot.live{background:var(--red);box-shadow:0 0 8px rgba(229,62,62,0.5);animation:pulse-dot 2s infinite}
+.header .status{font-size:12px;color:var(--dim);margin-left:auto;font-family:var(--mono)}
+.header .controls{display:flex;gap:8px}
+.btn{padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:12px;cursor:pointer;font-family:var(--font);transition:all 0.15s}
+.btn:hover{border-color:var(--red);color:var(--red)}
+.btn.active{background:var(--red);border-color:var(--red);color:#fff}
+
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ── Graph Area (main canvas) ── */
+canvas#graph{width:100%;height:100%}
+
+/* ── Sidebar: Person Cards ── */
+.person-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:var(--radius);padding:12px;margin-bottom:8px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:border-color 0.3s
+}
+.person-card.active{border-color:rgba(229,62,62,0.3)}
+.person-card .name{font-size:13px;font-weight:600;margin-bottom:6px}
+.person-card .emotion{font-size:11px;color:var(--mauve);margin-bottom:4px}
+.person-card .engagement-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px}
+.person-card .engagement-fill{height:100%;border-radius:2px;transition:width 0.5s,background 0.3s}
+.person-card .metric-row{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:4px}
+.sparkline{display:flex;align-items:end;gap:1px;height:24px;margin-top:6px}
+.sparkline .bar{width:3px;background:var(--red);border-radius:1px;transition:height 0.3s;opacity:0.6}
+
+/* ── Timeline ── */
+.timeline-track{display:flex;height:100%;gap:2px;align-items:stretch}
+.phase-block{flex:1;background:var(--card);border-radius:8px;padding:8px 12px;position:relative;display:flex;flex-direction:column;justify-content:space-between;border:1px solid transparent;transition:border-color 0.3s}
+.phase-block.current{border-color:var(--red);background:rgba(229,62,62,0.08)}
+.phase-block .phase-label{font-size:10px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phase-block .phase-dur{font-size:9px;color:var(--dim)}
+.phase-block .phase-bar{height:3px;background:var(--border);border-radius:2px;margin-top:auto}
+.phase-block .phase-expected{height:100%;border-radius:2px;background:var(--mauve-dark);opacity:0.4}
+.phase-block .phase-actual{height:3px;background:var(--red);border-radius:2px;margin-top:2px;transition:width 1s}
+.phase-block .divergence{font-size:9px;font-family:var(--mono);margin-top:4px}
+.phase-block .divergence.positive{color:var(--green)}
+.phase-block .divergence.negative{color:var(--amber)}
+.timeline-header{display:flex;justify-content:space-between;margin-bottom:8px}
+.timeline-header h3{font-size:12px;font-weight:600}
+.timeline-header .time{font-size:11px;color:var(--dim);font-family:var(--mono)}
+
+/* ── Fact stream overlay ── */
+.fact-stream{position:absolute;bottom:12px;left:12px;right:12px;pointer-events:none}
+.fact-line{font-size:10px;font-family:var(--mono);color:var(--dim);padding:2px 0;opacity:0;animation:fact-in 0.3s forwards;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fact-line .type{font-weight:600;margin-right:6px}
+.fact-line .type.NODE{color:var(--red)}
+.fact-line .type.EDGE{color:var(--mauve)}
+.fact-line .type.METRIC{color:var(--amber)}
+.fact-line .type.SIGNAL{color:var(--blue)}
+.fact-line .type.PROTOCOL{color:var(--green)}
+@keyframes fact-in{from{opacity:0;transform:translateY(8px)}to{opacity:0.7;transform:translateY(0)}}
+
+/* ── Room engagement gauge ── */
+.room-gauge{position:absolute;top:16px;left:16px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.gauge-ring{width:80px;height:80px;border-radius:50%;border:3px solid var(--border);position:relative;display:flex;align-items:center;justify-content:center}
+.gauge-ring svg{position:absolute;top:-3px;left:-3px;width:86px;height:86px;transform:rotate(-90deg)}
+.gauge-ring circle{fill:none;stroke-width:3;stroke-linecap:round}
+.gauge-ring .track{stroke:var(--border)}
+.gauge-ring .fill{stroke:var(--red);transition:stroke-dashoffset 1s;filter:drop-shadow(0 0 4px rgba(229,62,62,0.4))}
+.gauge-value{font-size:20px;font-weight:700;font-family:var(--mono)}
+.gauge-label{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+
+/* ── Connection status ── */
+.connection-status{position:absolute;top:16px;right:16px;font-size:10px;padding:4px 10px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-family:var(--mono)}
+.connection-status.connected{color:var(--green);border-color:rgba(104,211,145,0.3)}
+.connection-status.disconnected{color:var(--amber);border-color:rgba(246,173,85,0.3)}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="dot" id="liveDot"></div>
+    <h1>CHARLOTTE OS</h1>
+    <div class="status" id="statusText">Connecting...</div>
+    <div class="controls">
+      <button class="btn" id="btnStart" onclick="startMeeting()">Start Meeting</button>
+      <button class="btn" id="btnEnd" onclick="endMeeting()">End Meeting</button>
+      <button class="btn" id="btnMinutes" onclick="getMinutes()">Minutes</button>
+    </div>
+  </div>
+
+  <!-- Main graph area -->
+  <div class="graph-area">
+    <canvas id="graph"></canvas>
+
+    <!-- Room engagement gauge -->
+    <div class="room-gauge">
+      <div class="gauge-ring">
+        <svg viewBox="0 0 86 86">
+          <circle class="track" cx="43" cy="43" r="40" stroke-dasharray="251.3" stroke-dashoffset="0"/>
+          <circle class="fill" id="gaugeCircle" cx="43" cy="43" r="40" stroke-dasharray="251.3" stroke-dashoffset="251.3"/>
+        </svg>
+        <span class="gauge-value" id="gaugeValue">—</span>
+      </div>
+      <span class="gauge-label">Room Engagement</span>
+    </div>
+
+    <!-- Connection status -->
+    <div class="connection-status disconnected" id="connStatus">disconnected</div>
+
+    <!-- Fact stream -->
+    <div class="fact-stream" id="factStream"></div>
+  </div>
+
+  <!-- Sidebar: person cards -->
+  <div class="sidebar" id="sidebar">
+    <div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding:0 4px">Attendees</div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-header">
+      <h3>Meeting Protocol</h3>
+      <div class="time" id="meetingTime">00:00</div>
+    </div>
+    <div class="timeline-track" id="timelineTrack"></div>
+  </div>
+
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// Charlotte OS — Live Visualization
+// ════════════════════════════════════════════════════════════
+
+const WS_URL = `ws://${location.hostname || 'localhost'}:8765`;
+const CIRC = 251.3; // 2 * PI * 40 (gauge circle circumference)
+
+// ── State ──
+let ws = null;
+let persons = {};          // name -> {emotion, engagement, sparkline[], x, y, vx, vy, color}
+let edges = [];            // [{from, to, type, age}]
+let roomEngagement = 0;
+let meetingActive = false;
+let meetingStart = 0;
+let protocol = null;
+let currentPhaseIdx = -1;
+let factLines = [];
+
+// ── Colors ──
+const COLORS = {
+  red: '#E53E3E', redLight: '#F56565',
+  mauve: '#C4A8A8', mauveDark: '#9B7878',
+  amber: '#F6AD55', green: '#68D391', blue: '#63B3ED',
+  text: '#E8E0E0', dim: '#888', bg: '#141414',
+  card: '#222222', border: '#333333'
+};
+
+const EMOTION_COLORS = {
+  happy: COLORS.green, surprise: COLORS.amber,
+  neutral: COLORS.mauve, sad: COLORS.blue,
+  angry: COLORS.red, fear: '#D69E2E', disgust: '#9B7878'
+};
+
+// ════════════════════════════════════════════════════════════
+// WebSocket
+// ════════════════════════════════════════════════════════════
+
+function connect() {
+  ws = new WebSocket(WS_URL);
+
+  ws.onopen = () => {
+    document.getElementById('connStatus').textContent = 'connected';
+    document.getElementById('connStatus').className = 'connection-status connected';
+    document.getElementById('statusText').textContent = 'Charlotte is watching';
+    document.getElementById('liveDot').classList.add('live');
+  };
+
+  ws.onclose = () => {
+    document.getElementById('connStatus').textContent = 'disconnected';
+    document.getElementById('connStatus').className = 'connection-status disconnected';
+    document.getElementById('statusText').textContent = 'Reconnecting...';
+    document.getElementById('liveDot').classList.remove('live');
+    setTimeout(connect, 3000);
+  };
+
+  ws.onerror = () => ws.close();
+
+  ws.onmessage = (e) => {
+    try {
+      const msg = JSON.parse(e.data);
+      handleMessage(msg);
+    } catch (err) {}
+  };
+}
+
+function handleMessage(msg) {
+  if (msg.type === 'STATE_SYNC') {
+    meetingActive = msg.meeting_active;
+    msg.persons?.forEach(name => ensurePerson(name));
+    loadProtocol();
+    return;
+  }
+
+  if (msg.type === 'MEETING_STARTED') {
+    meetingActive = true;
+    meetingStart = msg.timestamp;
+    document.getElementById('btnStart').classList.add('active');
+    return;
+  }
+
+  if (msg.type === 'MEETING_ENDED') {
+    meetingActive = false;
+    document.getElementById('btnStart').classList.remove('active');
+    if (msg.minutes_html) {
+      const w = window.open('', '_blank');
+      w.document.write(msg.minutes_html);
+    }
+    return;
+  }
+
+  // KRF facts
+  if (msg.type === 'NODE' && msg.data) {
+    ensurePerson(msg.data.id);
+    addFactLine('NODE', msg.krf);
+  }
+
+  if (msg.type === 'SIGNAL' && msg.data) {
+    const p = persons[msg.data.node];
+    if (p) {
+      p.emotion = msg.data.emotion;
+      p.emotionScores = msg.data.scores || {};
+      p.color = EMOTION_COLORS[msg.data.emotion] || COLORS.mauve;
+      updatePersonCard(msg.data.node);
+    }
+    addFactLine('SIGNAL', msg.krf);
+  }
+
+  if (msg.type === 'METRIC' && msg.data) {
+    if (msg.data.node === 'ROOM') {
+      roomEngagement = msg.data.value;
+      updateGauge(roomEngagement);
+    } else {
+      const p = persons[msg.data.node];
+      if (p) {
+        p.engagement = msg.data.value;
+        p.sparkline.push(msg.data.value);
+        if (p.sparkline.length > 40) p.sparkline.shift();
+        updatePersonCard(msg.data.node);
+      }
+    }
+    addFactLine('METRIC', msg.krf);
+  }
+
+  if (msg.type === 'EDGE' && msg.data) {
+    edges.push({ from: msg.data.from, to: msg.data.to, type: msg.data.type, age: 0 });
+    if (edges.length > 30) edges.shift();
+    addFactLine('EDGE', msg.krf);
+  }
+
+  if (msg.type === 'PROTOCOL' && msg.data) {
+    updatePhase(msg.data);
+    addFactLine('PROTOCOL', msg.krf);
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// Person management
+// ════════════════════════════════════════════════════════════
+
+function ensurePerson(name) {
+  if (persons[name]) return;
+
+  const angle = Object.keys(persons).length * (Math.PI * 2 / 8);
+  const cx = canvas.width / 2 / dpr;
+  const cy = canvas.height / 2 / dpr;
+  const r = Math.min(cx, cy) * 0.45;
+
+  persons[name] = {
+    emotion: 'neutral',
+    emotionScores: {},
+    engagement: 0.5,
+    sparkline: [0.5],
+    color: COLORS.mauve,
+    x: cx + Math.cos(angle) * r,
+    y: cy + Math.sin(angle) * r,
+    vx: 0, vy: 0,
+    targetX: cx + Math.cos(angle) * r,
+    targetY: cy + Math.sin(angle) * r,
+    pulseRadius: 0,
+    pulseAlpha: 0
+  };
+
+  createPersonCard(name);
+}
+
+function createPersonCard(name) {
+  const sidebar = document.getElementById('sidebar');
+  const card = document.createElement('div');
+  card.className = 'person-card';
+  card.id = `card-${name}`;
+  card.innerHTML = `
+    <div class="name">${name}</div>
+    <div class="emotion" id="emotion-${name}">neutral</div>
+    <div class="engagement-bar"><div class="engagement-fill" id="engfill-${name}" style="width:50%;background:${COLORS.mauve}"></div></div>
+    <div class="metric-row"><span>Engagement</span><span id="engval-${name}">0.50</span></div>
+    <div class="sparkline" id="spark-${name}"></div>
+  `;
+  sidebar.appendChild(card);
+}
+
+function updatePersonCard(name) {
+  const p = persons[name];
+  if (!p) return;
+
+  const emotionEl = document.getElementById(`emotion-${name}`);
+  const fillEl = document.getElementById(`engfill-${name}`);
+  const valEl = document.getElementById(`engval-${name}`);
+  const sparkEl = document.getElementById(`spark-${name}`);
+  const cardEl = document.getElementById(`card-${name}`);
+
+  if (emotionEl) emotionEl.textContent = `${p.emotion} ${(p.emotionScores[p.emotion] || 0).toFixed(2)}`;
+  if (fillEl) {
+    fillEl.style.width = `${p.engagement * 100}%`;
+    fillEl.style.background = p.engagement > 0.7 ? COLORS.green : p.engagement > 0.4 ? COLORS.amber : COLORS.red;
+  }
+  if (valEl) valEl.textContent = p.engagement.toFixed(2);
+  if (cardEl) {
+    cardEl.classList.toggle('active', p.engagement > 0.7);
+  }
+
+  // Sparkline
+  if (sparkEl) {
+    sparkEl.innerHTML = '';
+    const data = p.sparkline.slice(-30);
+    data.forEach(v => {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.height = `${v * 24}px`;
+      bar.style.background = v > 0.7 ? COLORS.green : v > 0.4 ? COLORS.amber : COLORS.red;
+      sparkEl.appendChild(bar);
+    });
+  }
+
+  // Trigger pulse on graph node
+  p.pulseRadius = 0;
+  p.pulseAlpha = 0.6;
+}
+
+// ════════════════════════════════════════════════════════════
+// Graph rendering (Canvas)
+// ════════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+let dpr = window.devicePixelRatio || 1;
+let animFrame;
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  ctx.scale(dpr, dpr);
+
+  // Recompute positions
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+  const r = Math.min(cx, cy) * 0.45;
+  const names = Object.keys(persons);
+  names.forEach((name, i) => {
+    const angle = i * (Math.PI * 2 / Math.max(names.length, 1));
+    persons[name].targetX = cx + Math.cos(angle) * r;
+    persons[name].targetY = cy + Math.sin(angle) * r;
+  });
+}
+
+function drawGraph() {
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  ctx.clearRect(0, 0, w, h);
+
+  // ── Edges ──
+  edges.forEach(e => {
+    const from = persons[e.from];
+    const to = persons[e.to];
+    if (!from || !to) return;
+    e.age++;
+    const alpha = Math.max(0, 0.3 - e.age * 0.005);
+    ctx.beginPath();
+    ctx.moveTo(from.x, from.y);
+    ctx.lineTo(to.x, to.y);
+    ctx.strokeStyle = `rgba(196,168,168,${alpha})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // Remove dead edges
+  edges = edges.filter(e => e.age < 60);
+
+  // ── Nodes ──
+  const names = Object.keys(persons);
+  names.forEach(name => {
+    const p = persons[name];
+
+    // Drift toward target
+    p.x += (p.targetX - p.x) * 0.05;
+    p.y += (p.targetY - p.y) * 0.05;
+
+    const nodeRadius = 20 + p.engagement * 15;
+
+    // Pulse ring
+    if (p.pulseAlpha > 0) {
+      p.pulseRadius += 1.5;
+      p.pulseAlpha -= 0.012;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, nodeRadius + p.pulseRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(229,62,62,${p.pulseAlpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // Glow
+    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, nodeRadius * 1.8);
+    grad.addColorStop(0, p.color + '30');
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.fillRect(p.x - nodeRadius * 2, p.y - nodeRadius * 2, nodeRadius * 4, nodeRadius * 4);
+
+    // Circle
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, nodeRadius, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + '20';
+    ctx.fill();
+    ctx.strokeStyle = p.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Engagement ring
+    const engAngle = p.engagement * Math.PI * 2;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, nodeRadius + 4, -Math.PI / 2, -Math.PI / 2 + engAngle);
+    ctx.strokeStyle = p.engagement > 0.7 ? COLORS.green : p.engagement > 0.4 ? COLORS.amber : COLORS.red;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    ctx.lineCap = 'butt';
+
+    // Name
+    ctx.font = '600 12px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = COLORS.text;
+    ctx.fillText(name, p.x, p.y + nodeRadius + 20);
+
+    // Emotion label
+    ctx.font = '10px Inter, sans-serif';
+    ctx.fillStyle = p.color;
+    ctx.fillText(p.emotion, p.x, p.y + 4);
+  });
+
+  animFrame = requestAnimationFrame(drawGraph);
+}
+
+// ════════════════════════════════════════════════════════════
+// Gauge
+// ════════════════════════════════════════════════════════════
+
+function updateGauge(value) {
+  const circle = document.getElementById('gaugeCircle');
+  const label = document.getElementById('gaugeValue');
+  const offset = CIRC * (1 - value);
+  circle.style.strokeDashoffset = offset;
+  label.textContent = (value * 100).toFixed(0);
+}
+
+// ════════════════════════════════════════════════════════════
+// Timeline
+// ════════════════════════════════════════════════════════════
+
+async function loadProtocol() {
+  try {
+    const res = await fetch('/meeting_protocol.json');
+    protocol = await res.json();
+    renderTimeline();
+  } catch {
+    // Protocol not available via HTTP — use hardcoded phases
+    protocol = { phases: [
+      {id:'welcome',label:'Welcome',duration_minutes:5,expected_engagement:0.6},
+      {id:'isg_overview',label:'ISG Overview',duration_minutes:10,expected_engagement:0.7},
+      {id:'charlotte_intro',label:'Charlotte',duration_minutes:15,expected_engagement:0.8},
+      {id:'live_demo',label:'Live Demo',duration_minutes:15,expected_engagement:0.9},
+      {id:'serviceiq',label:'ServiceIQ',duration_minutes:10,expected_engagement:0.85},
+      {id:'vision',label:'Vision',duration_minutes:10,expected_engagement:0.75},
+      {id:'discussion',label:'Discussion',duration_minutes:15,expected_engagement:0.7},
+      {id:'closing',label:'Closing',duration_minutes:5,expected_engagement:0.65}
+    ]};
+    renderTimeline();
+  }
+}
+
+function renderTimeline() {
+  if (!protocol) return;
+  const track = document.getElementById('timelineTrack');
+  track.innerHTML = '';
+  protocol.phases.forEach((phase, i) => {
+    const block = document.createElement('div');
+    block.className = 'phase-block';
+    block.id = `phase-${phase.id}`;
+    block.innerHTML = `
+      <div class="phase-label">${phase.label}</div>
+      <div class="phase-dur">${phase.duration_minutes}m</div>
+      <div class="phase-bar"><div class="phase-expected" style="width:${phase.expected_engagement * 100}%"></div></div>
+      <div class="phase-actual" id="actual-${phase.id}" style="width:0%"></div>
+      <div class="divergence" id="div-${phase.id}"></div>
+    `;
+    track.appendChild(block);
+  });
+}
+
+function updatePhase(data) {
+  if (!data.phase) return;
+  const actual = document.getElementById(`actual-${data.phase}`);
+  const div = document.getElementById(`div-${data.phase}`);
+  const block = document.getElementById(`phase-${data.phase}`);
+
+  if (actual) actual.style.width = `${(data.actual || 0) * 100}%`;
+  if (div) {
+    const d = data.divergence || 0;
+    div.textContent = (d >= 0 ? '+' : '') + d.toFixed(2);
+    div.className = 'divergence ' + (d >= 0 ? 'positive' : 'negative');
+  }
+
+  // Highlight current phase
+  document.querySelectorAll('.phase-block').forEach(b => b.classList.remove('current'));
+  if (block) block.classList.add('current');
+}
+
+// ════════════════════════════════════════════════════════════
+// Fact stream
+// ════════════════════════════════════════════════════════════
+
+function addFactLine(type, krf) {
+  const stream = document.getElementById('factStream');
+  const line = document.createElement('div');
+  line.className = 'fact-line';
+  const short = krf ? krf.substring(0, 90) : type;
+  line.innerHTML = `<span class="type ${type}">${type}</span>${short}`;
+  stream.appendChild(line);
+
+  // Keep only last 6 lines
+  while (stream.children.length > 6) stream.removeChild(stream.firstChild);
+}
+
+// ════════════════════════════════════════════════════════════
+// Meeting timer
+// ════════════════════════════════════════════════════════════
+
+setInterval(() => {
+  if (!meetingActive || !meetingStart) return;
+  const elapsed = (Date.now() / 1000) - meetingStart;
+  const m = Math.floor(elapsed / 60);
+  const s = Math.floor(elapsed % 60);
+  document.getElementById('meetingTime').textContent =
+    String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}, 1000);
+
+// ════════════════════════════════════════════════════════════
+// Controls
+// ════════════════════════════════════════════════════════════
+
+function startMeeting() {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ action: 'start_meeting' }));
+    meetingStart = Date.now() / 1000;
+  }
+}
+
+function endMeeting() {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ action: 'end_meeting' }));
+  }
+}
+
+function getMinutes() {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ action: 'get_minutes' }));
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// Init
+// ════════════════════════════════════════════════════════════
+
+window.addEventListener('resize', () => {
+  dpr = window.devicePixelRatio || 1;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  resizeCanvas();
+});
+
+resizeCanvas();
+drawGraph();
+connect();
+loadProtocol();
+
+// Pause rendering when tab is hidden
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    cancelAnimationFrame(animFrame);
+  } else {
+    resizeCanvas();
+    drawGraph();
+  }
+});
+</script>
+</body>
+</html>
