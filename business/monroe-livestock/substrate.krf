@@ -1,0 +1,347 @@
+;;; ============================================================
+;;; MONROE LIVESTOCK AUCTION — Charlotte Knowledge Graph Substrate
+;;; Domain: Agriculture / Livestock Auction / Agricultural Marketplace
+;;; Generated: 2026-02-13
+;;; Scope: Company profile, employees, sale categories, competitors,
+;;;        supply chain, industry, and Charlotte primitive mapping
+;;; ============================================================
+
+(in-microtheory MonroeLivestockAuctionMt)
+
+;;; ============================================================
+;;; NODES — Company Identity
+;;; ============================================================
+
+(isa MonroeLivestockAuction Company)
+(companyName MonroeLivestockAuction "Monroe Livestock Auction")
+(shortName MonroeLivestockAuction "MLA")
+(headquarters MonroeLivestockAuction "1871 E 200 S, Monroe, IN 46772")
+(phone MonroeLivestockAuction "260-216-5489")
+(email MonroeLivestockAuction "monroelivestock@gmail.com")
+(website MonroeLivestockAuction "https://www.monroelivestockauction.com")
+(facebook MonroeLivestockAuction "Monroe Livestock Auction")
+(county MonroeLivestockAuction "Adams County, Indiana")
+(revenueEstimate MonroeLivestockAuction "$500K-$1.5M")
+(employeeCount MonroeLivestockAuction "3-8")
+(naicsCode MonroeLivestockAuction "112990")
+(naicsCodeAlt MonroeLivestockAuction "424520")
+(industryClassification MonroeLivestockAuction "Livestock Auction")
+(domainTag MonroeLivestockAuction "Agriculture")
+
+;;; ============================================================
+;;; NODES — People
+;;; ============================================================
+
+(isa TylerBluhm Person)
+(fullName TylerBluhm "Tyler Bluhm")
+(role TylerBluhm MonroeLivestockAuction "Primary Contact / Operations Manager")
+(phone TylerBluhm "260-849-2635")
+(affiliatedWith TylerBluhm "Bluhm and Reber LLC")
+(affiliatedWith TylerBluhm "D & L Bluhm Farms Inc")
+(affiliationRegion TylerBluhm "Adams County, Indiana")
+(runsSpecialtySale TylerBluhm "Feeder Calf Special")
+
+(isa MelHorseCoordinator Person)
+(fullName MelHorseCoordinator "Mel")
+(role MelHorseCoordinator MonroeLivestockAuction "Horse Consignment Coordinator")
+(phone MelHorseCoordinator "260-301-1793")
+(manages MelHorseCoordinator "Horse consignment bookings")
+
+;;; ============================================================
+;;; NODES — Products / Services (Sale Categories)
+;;; ============================================================
+
+(isa WeeklyLivestockAuction SaleCategory)
+(saleName WeeklyLivestockAuction "Weekly Livestock Auction")
+(saleDay WeeklyLivestockAuction "Tuesday")
+(saleTime WeeklyLivestockAuction "11:00 AM")
+(species WeeklyLivestockAuction "Cattle")
+(includes WeeklyLivestockAuction "Feeder calves, bred stock, cow-calf pairs")
+(operator WeeklyLivestockAuction MonroeLivestockAuction)
+
+(isa WeeklySmallAnimalSale SaleCategory)
+(saleName WeeklySmallAnimalSale "Weekly Small Animal Sale")
+(saleDay WeeklySmallAnimalSale "Tuesday")
+(saleTime WeeklySmallAnimalSale "5:00 PM")
+(species WeeklySmallAnimalSale "Poultry, Rabbits, Small Livestock")
+(operator WeeklySmallAnimalSale MonroeLivestockAuction)
+
+(isa FeederCalfSpecial SaleCategory)
+(saleName FeederCalfSpecial "Feeder Calf Special")
+(schedule FeederCalfSpecial "1st Friday monthly")
+(saleTime FeederCalfSpecial "2:00 PM")
+(species FeederCalfSpecial "Cattle")
+(requirement FeederCalfSpecial "Vaccine verified")
+(operator FeederCalfSpecial MonroeLivestockAuction)
+
+(isa DrivingHorseSale SaleCategory)
+(saleName DrivingHorseSale "Driving Horse Sale")
+(scheduleDates DrivingHorseSale "Mar 20, May 15, Aug 14, Sep 18")
+(species DrivingHorseSale "Horses")
+(operator DrivingHorseSale MonroeLivestockAuction)
+
+(isa DraftHorseSale SaleCategory)
+(saleName DraftHorseSale "Draft Horse Sale")
+(scheduleDates DraftHorseSale "Apr 6, Sep 17")
+(species DraftHorseSale "Horses")
+(operator DraftHorseSale MonroeLivestockAuction)
+
+(isa PonySale SaleCategory)
+(saleName PonySale "Pony Sale")
+(scheduleDates PonySale "Apr 16, Aug 13, Sep 10")
+(species PonySale "Horses")
+(operator PonySale MonroeLivestockAuction)
+
+(isa ExoticAnimalSale SaleCategory)
+(saleName ExoticAnimalSale "Exotic Animal Sale")
+(scheduleDates ExoticAnimalSale "Apr 16-18")
+(duration ExoticAnimalSale "3-day event")
+(species ExoticAnimalSale "Exotics")
+(operator ExoticAnimalSale MonroeLivestockAuction)
+
+(isa StallionPresentation SaleCategory)
+(saleName StallionPresentation "Stallion Presentation")
+(scheduleDates StallionPresentation "Nov 12-13")
+(species StallionPresentation "Horses")
+(operator StallionPresentation MonroeLivestockAuction)
+
+;;; ============================================================
+;;; NODES — Technology Platforms
+;;; ============================================================
+
+(isa DVAuctionPlatform TechPlatform)
+(orgName DVAuctionPlatform "DVAuction")
+(location DVAuctionPlatform "Norfolk, NE")
+(role DVAuctionPlatform "Live broadcast and online bidding platform")
+(monthlyVisits DVAuctionPlatform 240200)
+(integratedWith MonroeLivestockAuction DVAuctionPlatform)
+
+(isa NationalBeefWire TechPlatform)
+(orgName NationalBeefWire "National Beef Wire")
+(role NationalBeefWire "Marketing and broadcast network")
+(channelId MonroeLivestockAuction NationalBeefWire "6145")
+(integratedWith MonroeLivestockAuction NationalBeefWire)
+
+(isa USDAMarketReports IndustryService)
+(orgName USDAMarketReports "USDA Market Reports")
+(role USDAMarketReports "Weekly market price PDF reporting")
+
+;;; ============================================================
+;;; NODES — Competitors
+;;; ============================================================
+
+(isa TopekaLivestockAuction Competitor)
+(companyName TopekaLivestockAuction "Topeka Livestock Auction")
+(headquarters TopekaLivestockAuction "601 E Lake St, Topeka, IN 46571")
+(saleDay TopekaLivestockAuction "Tuesday")
+(competesIn TopekaLivestockAuction "Livestock Auction")
+(differentiation TopekaLivestockAuction "World's largest draft horse auction, USDA-reported")
+(competitorType TopekaLivestockAuction "DIRECT — same Tuesday sale day")
+
+(isa ShipshewanaTradingPlace Competitor)
+(companyName ShipshewanaTradingPlace "Shipshewana Trading Place")
+(headquarters ShipshewanaTradingPlace "345 S Van Buren St, Shipshewana, IN 46565")
+(saleDays ShipshewanaTradingPlace "Wednesday, Friday")
+(competesIn ShipshewanaTradingPlace "Horse Auction / Multi-Category Livestock")
+(differentiation ShipshewanaTradingPlace "Founded 1922, 100+ years, largest multi-category in Indiana")
+
+(isa StonyPikeLivestockAuction Competitor)
+(companyName StonyPikeLivestockAuction "Stony Pike Livestock Auction")
+(headquarters StonyPikeLivestockAuction "Logansport, IN 46947")
+(saleDay StonyPikeLivestockAuction "Thursday")
+(competesIn StonyPikeLivestockAuction "Livestock Auction")
+(differentiation StonyPikeLivestockAuction "Weekly Thursdays, USDA-reported")
+
+(isa DVAuctionCompetitor Competitor)
+(companyName DVAuctionCompetitor "DVAuction")
+(headquarters DVAuctionCompetitor "Norfolk, NE")
+(competesIn DVAuctionCompetitor "Online Livestock Broadcast / Bidding Platform")
+(differentiation DVAuctionCompetitor "240,200 monthly visits, market leader online livestock broadcast")
+
+(isa KnightstownSaleBarn Competitor)
+(companyName KnightstownSaleBarn "Knightstown Sale Barn")
+(headquarters KnightstownSaleBarn "Knightstown, IN")
+(saleDay KnightstownSaleBarn "Saturday")
+(competesIn KnightstownSaleBarn "Livestock Auction")
+(differentiation KnightstownSaleBarn "Every Saturday, facility built 1890")
+
+(isa DinkysAuctionCenter Competitor)
+(companyName DinkysAuctionCenter "Dinky's Auction Center")
+(headquarters DinkysAuctionCenter "Montgomery, IN")
+(saleDay DinkysAuctionCenter "Friday")
+(competesIn DinkysAuctionCenter "Livestock Auction / Multi-Ring")
+(differentiation DinkysAuctionCenter "Friday nights, heart of Daviess County Amish, 8+ rings")
+
+;;; ============================================================
+;;; NODES — Industry / Supply Chain
+;;; ============================================================
+
+;;; Upstream suppliers
+(isa LocalFarmers SupplySource)
+(orgName LocalFarmers "Local Farmers")
+(role LocalFarmers "Primary livestock consignors")
+(suppliesTo LocalFarmers MonroeLivestockAuction)
+
+(isa AmishBreeders SupplySource)
+(orgName AmishBreeders "Amish Breeders")
+(role AmishBreeders "Horse and small animal consignors")
+(suppliesTo AmishBreeders MonroeLivestockAuction)
+
+(isa FourHFFAExhibitors SupplySource)
+(orgName FourHFFAExhibitors "4-H / FFA Exhibitors")
+(role FourHFFAExhibitors "Youth livestock exhibitors and sellers")
+(suppliesTo FourHFFAExhibitors MonroeLivestockAuction)
+
+(isa RegionalFeedlotOperators SupplySource)
+(orgName RegionalFeedlotOperators "Regional Feedlot Operators")
+(role RegionalFeedlotOperators "Feeder calf suppliers and buyers")
+(suppliesTo RegionalFeedlotOperators MonroeLivestockAuction)
+
+;;; Downstream buyers
+(isa AmishBuyers BuyerSegment)
+(orgName AmishBuyers "Amish Buyers")
+(role AmishBuyers "Cash buyers, primarily horses and small animals")
+(buysFrom AmishBuyers MonroeLivestockAuction)
+
+(isa FeedlotBuyers BuyerSegment)
+(orgName FeedlotBuyers "Feedlot Operators")
+(role FeedlotBuyers "Feeder calf buyers for finishing operations")
+(buysFrom FeedlotBuyers MonroeLivestockAuction)
+
+(isa OrderBuyers BuyerSegment)
+(orgName OrderBuyers "Order Buyers")
+(role OrderBuyers "Agents buying on behalf of feedlots and ranches")
+(buysFrom OrderBuyers MonroeLivestockAuction)
+
+(isa DirectConsumers BuyerSegment)
+(orgName DirectConsumers "Direct Consumers")
+(role DirectConsumers "End consumers purchasing livestock directly")
+(buysFrom DirectConsumers MonroeLivestockAuction)
+
+(isa OnlineBidders BuyerSegment)
+(orgName OnlineBidders "Online Bidders")
+(role OnlineBidders "Remote buyers via DVAuction platform")
+(buysFrom OnlineBidders MonroeLivestockAuction)
+
+;;; Adjacent industry
+(isa USDAAMS IndustryBody)
+(orgName USDAAMS "USDA Agricultural Marketing Service")
+(role USDAAMS "Federal market reporting and livestock grading")
+
+(isa ISDA IndustryBody)
+(orgName ISDA "Indiana State Department of Agriculture")
+(role ISDA "State-level market reporting")
+
+;;; ============================================================
+;;; NODES — Geography
+;;; ============================================================
+
+(isa MonroeIN Location)
+(locationName MonroeIN "Monroe, Indiana")
+(state MonroeIN "Indiana")
+(county MonroeIN "Adams County")
+(locatedIn MonroeLivestockAuction MonroeIN)
+(nearRoute MonroeIN "US Route 27")
+(region MonroeIN "NE Indiana Amish Corridor")
+
+(isa AdamsCountyIN Location)
+(locationName AdamsCountyIN "Adams County, Indiana")
+(amishSettlement AdamsCountyIN "World's largest Swiss Amish settlement")
+(amishEstablished AdamsCountyIN "1840")
+(amishAdherents AdamsCountyIN "~11,000")
+(amishPercentOfCounty AdamsCountyIN "24%")
+(equineCount AdamsCountyIN 2400)
+(equineOperations AdamsCountyIN 13)
+
+;;; ============================================================
+;;; EDGES — Employment
+;;; ============================================================
+
+(employs MonroeLivestockAuction TylerBluhm)
+(employs MonroeLivestockAuction MelHorseCoordinator)
+
+;;; ============================================================
+;;; EDGES — Product → Category → Market
+;;; ============================================================
+
+(servesMarket MonroeLivestockAuction "Cattle Auction")
+(servesMarket MonroeLivestockAuction "Horse Auction")
+(servesMarket MonroeLivestockAuction "Small Animal Auction")
+(servesMarket MonroeLivestockAuction "Exotic Animal Auction")
+
+(operates MonroeLivestockAuction WeeklyLivestockAuction)
+(operates MonroeLivestockAuction WeeklySmallAnimalSale)
+(operates MonroeLivestockAuction FeederCalfSpecial)
+(operates MonroeLivestockAuction DrivingHorseSale)
+(operates MonroeLivestockAuction DraftHorseSale)
+(operates MonroeLivestockAuction PonySale)
+(operates MonroeLivestockAuction ExoticAnimalSale)
+(operates MonroeLivestockAuction StallionPresentation)
+
+;;; ============================================================
+;;; EDGES — Competitive
+;;; ============================================================
+
+(competesDirectlyWith MonroeLivestockAuction TopekaLivestockAuction)
+(competesDirectlyWith MonroeLivestockAuction ShipshewanaTradingPlace)
+(competesDirectlyWith MonroeLivestockAuction StonyPikeLivestockAuction)
+(competesDirectlyWith MonroeLivestockAuction KnightstownSaleBarn)
+(competesDirectlyWith MonroeLivestockAuction DinkysAuctionCenter)
+(competesOnPlatform MonroeLivestockAuction DVAuctionCompetitor)
+
+;;; ============================================================
+;;; EDGES — Supply Chain
+;;; ============================================================
+
+(hasSupplySource MonroeLivestockAuction LocalFarmers)
+(hasSupplySource MonroeLivestockAuction AmishBreeders)
+(hasSupplySource MonroeLivestockAuction FourHFFAExhibitors)
+(hasSupplySource MonroeLivestockAuction RegionalFeedlotOperators)
+(sellsTo MonroeLivestockAuction AmishBuyers)
+(sellsTo MonroeLivestockAuction FeedlotBuyers)
+(sellsTo MonroeLivestockAuction OrderBuyers)
+(sellsTo MonroeLivestockAuction DirectConsumers)
+(sellsTo MonroeLivestockAuction OnlineBidders)
+(usesPlatform MonroeLivestockAuction DVAuctionPlatform)
+(usesPlatform MonroeLivestockAuction NationalBeefWire)
+
+;;; ============================================================
+;;; SIGNALS — Historical Events
+;;; ============================================================
+
+(hasEvent MonroeLivestockAuction "founding" "~2023-2024" "Monroe Livestock Auction opens as newer market facility in Adams County")
+(hasEvent MonroeLivestockAuction "platform-integration" "~2025" "Joined DVAuction for live broadcast and online bidding capability")
+(hasEvent MonroeLivestockAuction "network-join" "~2025" "Joined National Beef Wire marketing network as channel 6145")
+(hasEvent MonroeLivestockAuction "reporting-gap" "current" "NOT yet participating in USDA/ISDA market reporting program")
+
+;;; ============================================================
+;;; METRICS — Business
+;;; ============================================================
+
+(metric MonroeLivestockAuction "sale_day" "Tuesday")
+(metric MonroeLivestockAuction "weekly_livestock_time" "11:00 AM")
+(metric MonroeLivestockAuction "weekly_small_animal_time" "5:00 PM")
+(metric MonroeLivestockAuction "specialty_sales_per_year" 12)
+(metric MonroeLivestockAuction "species_divisions" 4)
+(metric MonroeLivestockAuction "usda_reported" false)
+(metric MonroeLivestockAuction "dvauction_integrated" true)
+(metric MonroeLivestockAuction "amish_buyer_percentage_est" "40-60%")
+(metric MonroeLivestockAuction "revenue_estimate" "$500K-$1.5M")
+(metric MonroeLivestockAuction "employee_count_est" "3-8")
+
+;;; ============================================================
+;;; PROTOCOLS — Charlotte Mapping
+;;; ============================================================
+
+;; What Charlotte would observe in this domain:
+;; NODE:     Animal (Lot), Seller/Consignor, Buyer/Bidder, Sale (Event), Species, Breed, SaleCategory
+;; EDGE:     consignedBy, soldTo, boughtAt, breedOf, speciesOf, vaccineVerified, broadcastOn
+;; METRIC:   headCount, saleAverage, clearanceRate, pricePerCWT, bidderAttendance, repeatBuyerRate, onlineVsFloorRatio
+;; SIGNAL:   lotConsigned, bidPlaced, hammerFall, paymentReceived, marketReportFiled, dvAuctionBroadcastStarted, specialtySaleScheduled
+;; PROTOCOL: consignmentIntake, auctionSequence, feederVaccineVerification, DVAuctionBroadcast, USDAMarketReport, settlementProcess, horseConsignmentBooking
+
+(charlottePrimitive MonroeLivestockAuction NODE "Animal (Lot), Seller/Consignor, Buyer/Bidder, Sale (Event), Species, Breed, SaleCategory")
+(charlottePrimitive MonroeLivestockAuction EDGE "consignedBy, soldTo, boughtAt, breedOf, speciesOf, vaccineVerified, broadcastOn")
+(charlottePrimitive MonroeLivestockAuction METRIC "headCount, saleAverage, clearanceRate, pricePerCWT, bidderAttendance, repeatBuyerRate, onlineVsFloorRatio")
+(charlottePrimitive MonroeLivestockAuction SIGNAL "lotConsigned, bidPlaced, hammerFall, paymentReceived, marketReportFiled, dvAuctionBroadcastStarted, specialtySaleScheduled")
+(charlottePrimitive MonroeLivestockAuction PROTOCOL "consignmentIntake, auctionSequence, feederVaccineVerification, DVAuctionBroadcast, USDAMarketReport, settlementProcess, horseConsignmentBooking")
