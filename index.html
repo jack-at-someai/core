@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SomeAI</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' fill='none' stroke='%23E53E3E' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='translate(120,120)'%3E%3Cline x1='0' y1='0' x2='0' y2='-108'/%3E%3Cline x1='0' y1='0' x2='65' y2='-87'/%3E%3Cline x1='0' y1='0' x2='103' y2='-33'/%3E%3Cline x1='0' y1='0' x2='95' y2='50'/%3E%3Cline x1='0' y1='0' x2='40' y2='100'/%3E%3Cline x1='0' y1='0' x2='-40' y2='100'/%3E%3Cline x1='0' y1='0' x2='-95' y2='50'/%3E%3Cline x1='0' y1='0' x2='-103' y2='-33'/%3E%3Cline x1='0' y1='0' x2='-65' y2='-87'/%3E%3Cpath d='M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z'/%3E%3Cpath d='M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z'/%3E%3Cpath d='M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js"></script>
   <style>
     /* === Reset === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,12 +35,13 @@
       height: 120vmax;
     }
     .web-strands {
-      animation: web-breathe 8s ease-in-out infinite;
+      animation: neural-idle 12s ease-in-out infinite;
     }
-    @keyframes web-breathe {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+    @keyframes neural-idle {
+      0%, 100% { opacity: 0.04; }
+      50% { opacity: 0.07; }
     }
+    .junction { opacity: 0; transition: opacity 0.1s; }
 
     /* === Hero + Particle Canvas (Layer 2) === */
     #hero {
@@ -115,15 +116,6 @@
     .abstract p:last-child { margin-bottom: 0; }
     .abstract strong { color: #E8E0E0; font-weight: 600; }
     .abstract .highlight { color: #E53E3E; font-weight: 500; }
-
-    /* === Lottie Accents (Layer 4) === */
-    .lottie-accent {
-      display: flex;
-      justify-content: center;
-      margin: -8px auto 32px;
-      pointer-events: none;
-      opacity: 0.15;
-    }
 
     /* === Five Primitives (Layer 3) === */
     .primitives-section {
@@ -496,7 +488,6 @@
     @media (prefers-reduced-motion: reduce) {
       #web-bg { display: none !important; }
       #particle-canvas { display: none !important; }
-      .lottie-accent { display: none !important; }
       .card, .thesis-card, .thesis-wide, .abstract, .primitives-section, .primitive-card, #hex-map {
         opacity: 1 !important;
         transform: none !important;
@@ -506,12 +497,160 @@
       .card::before { display: none !important; }
       .flow-arrow { animation: none !important; }
       .web-strands { animation: none !important; }
+      .junction, .npulse { display: none !important; }
       .live-badge { animation: none !important; }
       .hero-overlay h1 {
         -webkit-text-fill-color: #E8E0E0;
         background: none;
       }
     }
+
+    /* === Inline Knowledge Graph Panel === */
+    #kg-panel {
+      max-width: 1200px;
+      margin: 0 auto;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+      opacity: 0;
+    }
+    #kg-panel.open {
+      max-height: 620px;
+      opacity: 1;
+    }
+    .kg-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 4px 12px;
+      flex-wrap: wrap;
+    }
+    .kg-stats {
+      font-size: 12px;
+      color: #666666;
+      font-weight: 500;
+    }
+    .kg-stats strong { color: #E8E0E0; }
+    .kg-search {
+      background: #1A1A1A;
+      border: 1px solid #333333;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #E8E0E0;
+      font-family: inherit;
+      outline: none;
+      width: 180px;
+      transition: border-color 0.2s;
+    }
+    .kg-search:focus { border-color: #E53E3E; }
+    .kg-search::placeholder { color: #555; }
+    .kg-toggle-btn {
+      background: rgba(229,62,62,0.12);
+      border: 1px solid rgba(229,62,62,0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 11px;
+      color: #F56565;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .kg-toggle-btn:hover { background: rgba(229,62,62,0.2); border-color: #E53E3E; }
+    .kg-toggle-btn.active { background: rgba(229,62,62,0.25); border-color: #E53E3E; color: #E8E0E0; }
+    .kg-fullview {
+      margin-left: auto;
+      font-size: 11px;
+      color: #666666;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .kg-fullview:hover { color: #E53E3E; }
+    #kg-svg-container {
+      width: 100%;
+      height: 500px;
+      background: #111;
+      border: 1px solid #333333;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    #kg-svg-container svg { width: 100%; height: 100%; display: block; }
+    #kg-tooltip {
+      position: fixed;
+      padding: 12px 16px;
+      background: #1A1A1A;
+      border: 1px solid #444;
+      border-radius: 10px;
+      color: #E8E0E0;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 200;
+      max-width: 280px;
+      line-height: 1.5;
+    }
+    #kg-tooltip.show { opacity: 1; }
+    #kg-tooltip .kg-tip-name { font-weight: 600; margin-bottom: 4px; }
+    #kg-tooltip .kg-tip-badge {
+      display: inline-block;
+      font-size: 9px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    #kg-tooltip .kg-tip-desc { font-size: 11px; color: #999; }
+    #kg-tooltip .kg-tip-conn { font-size: 10px; color: #666; margin-top: 4px; }
+    .card-kg { cursor: pointer; }
+    .card-kg.active { border-color: #E53E3E; box-shadow: 0 0 16px rgba(229,62,62,0.2); }
+    .kg-arrow {
+      display: inline-block;
+      font-size: 10px;
+      margin-left: 4px;
+      transition: transform 0.3s ease;
+    }
+    .card-kg.active .kg-arrow { transform: rotate(180deg); }
+
+    /* === Substrate Panels (Temporal + Spatial) === */
+    .substrate-panel {
+      max-width: 1200px;
+      margin: 0 auto;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    }
+    .substrate-panel.open { max-height: 700px; opacity: 1; }
+    .substrate-cols { display: flex; gap: 24px; padding: 16px 4px; }
+    .substrate-col { flex: 1; min-width: 0; }
+    .substrate-title { font-size: 16px; font-weight: 700; color: #E8E0E0; margin-bottom: 4px; }
+    .substrate-stats { font-size: 12px; color: #666; margin-bottom: 12px; }
+    .substrate-desc { font-size: 13px; color: #999; line-height: 1.6; margin-bottom: 16px; }
+    .substrate-fullview { font-size: 11px; color: #666; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .substrate-fullview:hover { color: #E53E3E; }
+    .res-bar { height: 22px; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+    .res-bar-fill { height: 12px; border-radius: 3px; min-width: 2px; opacity: 0.85; }
+    .res-bar-label { font-size: 10px; color: #888; white-space: nowrap; width: 82px; text-align: right; }
+    .res-bar-count { font-size: 10px; color: #555; margin-left: auto; white-space: nowrap; }
+    .res-group-label { font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 1px; margin: 6px 0 2px 0; font-weight: 600; }
+    .card-temporal, .card-spatial { cursor: pointer; }
+    .card-temporal.active, .card-spatial.active { border-color: #E53E3E; box-shadow: 0 0 16px rgba(229,62,62,0.2); }
+    .substrate-arrow { display: inline-block; font-size: 10px; margin-left: 4px; transition: transform 0.3s ease; }
+    .card-temporal.active .substrate-arrow,
+    .card-spatial.active .substrate-arrow { transform: rotate(180deg); }
+    .region-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .region-dot { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #888; }
+    .region-dot span { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .compass-svg { display: block; margin: 0 auto 16px; }
+    .hierarchy-svg { display: block; margin: 0 auto; }
 
     /* === Mobile (Layer 6) === */
     @media (max-width: 700px) {
@@ -527,21 +666,30 @@
       .primitives-grid { grid-template-columns: repeat(2, 1fr); }
       .thesis-grid { grid-template-columns: 1fr; }
       .thesis-wide { padding: 20px; }
-      .lottie-accent { display: none; }
+      #kg-svg-container { height: 350px; }
+      .kg-search { width: 140px; }
+      .kg-header { gap: 8px; }
+      .substrate-cols { flex-direction: column; }
+      .substrate-panel.open { max-height: 1200px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════ LAYER 1: Spider Web Background ═══════════ -->
+<!-- ═══════════ LAYER 1: Neural Synapse Web Background ═══════════ -->
 <div id="web-bg">
   <svg id="web-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
     <defs>
-      <filter id="pulse-glow" x="-100%" y="-100%" width="300%" height="300%">
-        <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#E53E3E" flood-opacity="0.5"/>
+      <filter id="synapse-glow" x="-200%" y="-200%" width="500%" height="500%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="junction-fire" x="-200%" y="-200%" width="500%" height="500%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
       </filter>
     </defs>
-    <g class="web-strands" transform="translate(120,120)" stroke="#E53E3E" stroke-width="1" fill="none" stroke-opacity="0.08">
+    <g class="web-strands" transform="translate(120,120)" stroke="#E53E3E" stroke-width="1.5" fill="none" stroke-opacity="0.08" stroke-linecap="round" stroke-linejoin="round">
       <!-- 9 radial threads -->
       <line x1="0" y1="0" x2="0" y2="-108"/>
       <line x1="0" y1="0" x2="65" y2="-87"/>
@@ -559,16 +707,53 @@
       <!-- Inner ring -->
       <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
     </g>
-    <!-- 8 signal pulses traveling along radial strands -->
-    <g transform="translate(120,120)">
-      <circle id="pulse-0" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-1" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-2" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-3" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-4" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-5" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-6" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
-      <circle id="pulse-7" r="2.5" fill="#E53E3E" opacity="0" filter="url(#pulse-glow)"/>
+    <!-- 27 junction nodes at radial-ring intersections -->
+    <g id="neural-junctions" transform="translate(120,120)">
+      <!-- Outer ring junctions (0-8) -->
+      <circle class="junction" cx="0" cy="-108" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="65" cy="-87" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="103" cy="-33" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="95" cy="50" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="40" cy="100" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-40" cy="100" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-95" cy="50" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-103" cy="-33" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-65" cy="-87" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <!-- Middle ring junctions (9-17) -->
+      <circle class="junction" cx="0" cy="-70" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="42" cy="-56" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="67" cy="-21" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="62" cy="32" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="26" cy="65" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-26" cy="65" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-62" cy="32" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-67" cy="-21" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-42" cy="-56" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <!-- Inner ring junctions (18-26) -->
+      <circle class="junction" cx="0" cy="-38" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="23" cy="-30" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="36" cy="-11" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="34" cy="18" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="14" cy="35" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-14" cy="35" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-34" cy="18" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-36" cy="-11" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-23" cy="-30" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+    </g>
+    <!-- Neural pulse pool (12 signal circles) -->
+    <g id="neural-pulses" transform="translate(120,120)">
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
     </g>
   </svg>
 </div>
@@ -655,15 +840,6 @@
   </div>
 </section>
 
-<!-- Lottie accent: hero → abstract transition -->
-<div class="lottie-accent" aria-hidden="true">
-  <dotlottie-wc
-    src="https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.lottie"
-    autoplay loop
-    style="width:120px;height:120px">
-  </dotlottie-wc>
-</div>
-
 <!-- ═══════════ Abstract ═══════════ -->
 <div class="abstract">
   <h2>Abstract</h2>
@@ -676,15 +852,6 @@
   <p>
     The result is not one product. It is an <strong>infinite number of products</strong> &mdash; each one custom, each one small enough to be invisible, each one powerful enough to run an entire operation &mdash; all stacked on the same kernel, all sharing the same temporal spine, all speaking the same language at the bottom. The correct measure of technological progress is not how much technology people use. It is <strong>how little they notice</strong>.
   </p>
-</div>
-
-<!-- Lottie accent: abstract → primitives transition -->
-<div class="lottie-accent" aria-hidden="true">
-  <dotlottie-wc
-    src="https://lottie.host/b2d44b82-fd7e-401f-a4fa-77999147c0be/vqNwJryGBp.lottie"
-    autoplay loop
-    style="width:80px;height:80px">
-  </dotlottie-wc>
 </div>
 
 <!-- ═══════════ LAYER 3: Five Primitives ═══════════ -->
@@ -779,20 +946,11 @@
     </p>
   </div>
 
-  <!-- Lottie accent: signal pulse divider between thesis cards -->
-  <div class="lottie-accent" aria-hidden="true">
-    <dotlottie-wc
-      src="https://lottie.host/1cf72a35-6d88-4d9a-9961-f1bb88087f2c/miJIHiyH4Q.lottie"
-      autoplay loop
-      style="width:60px;height:60px">
-    </dotlottie-wc>
-  </div>
-
   <div class="thesis-grid">
     <div class="thesis-card">
       <h3 class="blue">The Research Lab</h3>
       <p>
-        Every project on this page is a <strong>containerized instance</strong> &mdash; a game Charlotte facilitates. The lab has produced <strong>13 research papers</strong> across Nature, IEEE, ACM, NeurIPS, Cognitive Science, and Research Policy. Charlotte is validated across <strong>seven domains</strong>: human behavior, biological systems, industrial equipment, cultural artifacts, marine ecosystems, logistics, and swarm intelligence. The production dataset contains <span class="val-highlight blue">27,200 nodes</span> and <span class="val-highlight blue">46,100 edges</span>. Each domain proves that a single kernel can compile into a completely different operating system &mdash; different instruction sets, different rhythms, same five primitives underneath.
+        Every project on this page is a <strong>containerized instance</strong> &mdash; a game Charlotte facilitates. The lab has produced <strong>13 research papers</strong> across Nature, IEEE, ACM, NeurIPS, Cognitive Science, and Research Policy. Charlotte is validated across <strong>eight domains</strong>: industrial equipment, premium retail, manufacturing, livestock auctions, swine genetics, rare instruments, moving logistics, and marine ecosystems. The production dataset contains <span class="val-highlight blue">27,200 nodes</span> and <span class="val-highlight blue">46,100 edges</span>. Each domain proves that a single kernel can compile into a completely different operating system &mdash; different instruction sets, different rhythms, same five primitives underneath.
       </p>
     </div>
     <div class="thesis-card">
@@ -909,19 +1067,43 @@
 
 <!-- ═══════════ KERNEL & INFRASTRUCTURE ═══════════ -->
 <div class="section-group">
-  <div class="section-label kernel"><h2>Kernel &amp; Infrastructure</h2><span class="count">5 modules</span></div>
+  <div class="section-label kernel"><h2>Kernel &amp; Infrastructure</h2><span class="count">11 modules</span></div>
   <div class="grid">
     <a class="card card-kernel" href="https://jack-at-someai.github.io/core/research-lab/">
       <span class="icon">&#x1F9E0;</span>
       <div class="card-text"><h2>Research Lab</h2><p>The entire project as a knowledge graph</p><span class="tag tag-kernel">Meta</span></div>
     </a>
+    <div class="card card-kernel card-kg" onclick="toggleKG()">
+      <span class="icon">&#x1F4DA;</span>
+      <div class="card-text"><h2>Knowledge Graph <span class="kg-arrow">&#x25BC;</span></h2><p>Consolidated research library &mdash; every resource, document &amp; project</p><span class="tag tag-kernel">Library</span></div>
+    </div>
     <a class="card card-kernel" href="https://jack-at-someai.github.io/core/charlotte-os/">
       <span class="icon">&#x2699;</span>
-      <div class="card-text"><h2>Charlotte OS</h2><p>Boot image &mdash; 28 KRF fact stacks in first-order logic</p><span class="tag tag-kernel">Kernel</span></div>
+      <div class="card-text"><h2>Charlotte OS</h2><p>Boot image &mdash; 31 KRF fact stacks in first-order logic</p><span class="tag tag-kernel">Kernel</span></div>
+    </a>
+    <a class="card card-kernel" href="https://jack-at-someai.github.io/core/charlotte/temporal/">
+      <span class="icon">&#x1F553;</span>
+      <div class="card-text"><h2>Temporal Spine</h2><p>15 granularity lanes from Millennium to Hour &mdash; 22.6M nodes, 4 compass directions, 1,123 lines KRF</p><span class="tag tag-kernel">Substrate</span></div>
+    </a>
+    <a class="card card-kernel" href="https://jack-at-someai.github.io/core/charlotte/spatial/">
+      <span class="icon">&#x1F5FA;</span>
+      <div class="card-text"><h2>Spatial Substrate</h2><p>51 state nodes, 1,275 directional edges &mdash; convex hulls, centroids, 4,604 lines KRF</p><span class="tag tag-kernel">Substrate</span></div>
     </a>
     <a class="card card-kernel" href="https://jack-at-someai.github.io/core/workbench/">
       <span class="icon">&#x1F3A8;</span>
       <div class="card-text"><h2>Workbench</h2><p>Asset studio &mdash; Lottie, SVG &amp; design assets across all entities</p><span class="tag tag-kernel">Studio</span></div>
+    </a>
+    <a class="card card-kernel" href="https://jack-at-someai.github.io/core/tools/pitch-engine/">
+      <span class="icon">&#x1F4CA;</span>
+      <div class="card-text"><h2>Pitch Engine</h2><p>Presentation substrate &mdash; 21 widgets, 5 narrative arcs, deck generation</p><span class="tag tag-kernel">Studio</span></div>
+    </a>
+    <a class="card card-kernel" href="https://jack-at-someai.github.io/core/tools/pitch-engine/decks/">
+      <span class="icon">&#x1F4BD;</span>
+      <div class="card-text"><h2>Pitch Decks</h2><p>8 businesses &times; 3 narratives &mdash; before/after Charlotte, gradient AI-centric slides</p><span class="tag tag-kernel">Studio</span></div>
+    </a>
+    <a class="card card-kernel" href="https://jack-at-someai.github.io/core/charlotte/charts/showcase/">
+      <span class="icon">&#x1F4C9;</span>
+      <div class="card-text"><h2>Charlotte Charts</h2><p>Chart library v3.3 &mdash; 34 types, 6 brand themes, mobile-first, zero dependencies</p><span class="tag tag-kernel">Library</span></div>
     </a>
     <a class="card card-kernel" href="https://jack-at-someai.github.io/core/papers/">
       <span class="icon">&#x1F4C4;</span>
@@ -929,18 +1111,266 @@
     </a>
     <a class="card card-kernel" href="https://jack-at-someai.github.io/core/business/forecast.html">
       <span class="icon">&#x1F4C8;</span>
-      <div class="card-text"><h2>Pipeline &amp; Forecast</h2><p>Series A materials &mdash; client timeline, LTV/CAC, revenue projection</p><span class="tag tag-kernel">Business</span></div>
+      <div class="card-text"><h2>Pipeline &amp; Forecast</h2><p>Series A materials &mdash; 9-entity pipeline, $2.4M MSAs, 5yr trajectory to $8.2M ARR</p><span class="tag tag-kernel">Business</span></div>
     </a>
+    <a class="card card-kernel" href="https://jack-at-someai.github.io/core/charlotte/docs/artifacts/business_model.krf">
+      <span class="icon">&#x1F4BE;</span>
+      <div class="card-text"><h2>Business Model KRF</h2><p>Revenue model in Charlotte primitives &mdash; NODEs, EDGEs, METRICs, PROTOCOLs for the entire pipeline</p><span class="tag tag-kernel">Substrate</span></div>
+    </a>
+  </div>
+
+  <!-- Inline Knowledge Graph Panel -->
+  <div id="kg-panel">
+    <div class="kg-header">
+      <span class="kg-stats" id="kg-stats"></span>
+      <input class="kg-search" type="text" placeholder="Search nodes..." oninput="kgSearch(this.value)">
+      <button class="kg-toggle-btn" id="kg-toggle-all" onclick="kgToggleAll()">Show All</button>
+      <a class="kg-fullview" href="knowledge-graph/">Full View &rarr;</a>
+    </div>
+    <div id="kg-svg-container"></div>
+  </div>
+  <div id="kg-tooltip"></div>
+
+  <!-- Inline Temporal Spine Panel -->
+  <div id="temporal-panel" class="substrate-panel">
+    <div class="substrate-cols">
+      <div class="substrate-col">
+        <div class="substrate-title">Temporal Spine</div>
+        <div class="substrate-stats">15 granularity levels &middot; 22.6M nodes &middot; 4 compass directions</div>
+        <p class="substrate-desc">The temporal substrate decomposes all of time into a navigable hierarchy &mdash; from Millennium down to Hour. Every node in Charlotte exists on this spine. The four compass directions (Coarser, Finer, Earlier, Later) let any observer move through time at any resolution. Each level contains every instance of that granularity from epoch to present.</p>
+        <div class="res-group-label">Macro</div>
+        <div class="res-bar"><span class="res-bar-label">Millennium</span><div class="res-bar-fill" style="width:6px;background:#E53E3E"></div><span class="res-bar-count">3</span></div>
+        <div class="res-bar"><span class="res-bar-label">Century</span><div class="res-bar-fill" style="width:10px;background:#F56565"></div><span class="res-bar-count">21</span></div>
+        <div class="res-bar"><span class="res-bar-label">Decade</span><div class="res-bar-fill" style="width:18px;background:#F59E0B"></div><span class="res-bar-count">204</span></div>
+        <div class="res-group-label">Annual</div>
+        <div class="res-bar"><span class="res-bar-label">Year</span><div class="res-bar-fill" style="width:30px;background:#68D391"></div><span class="res-bar-count">2,026</span></div>
+        <div class="res-bar"><span class="res-bar-label">HalfYear</span><div class="res-bar-fill" style="width:34px;background:#34D399"></div><span class="res-bar-count">4,052</span></div>
+        <div class="res-bar"><span class="res-bar-label">Trimester</span><div class="res-bar-fill" style="width:38px;background:#2DD4BF"></div><span class="res-bar-count">6,078</span></div>
+        <div class="res-group-label">Periodic</div>
+        <div class="res-bar"><span class="res-bar-label">Quarter</span><div class="res-bar-fill" style="width:40px;background:#4A9EE5"></div><span class="res-bar-count">8,104</span></div>
+        <div class="res-bar"><span class="res-bar-label">Month</span><div class="res-bar-fill" style="width:52px;background:#A855F7"></div><span class="res-bar-count">24,312</span></div>
+        <div class="res-bar"><span class="res-bar-label">Week</span><div class="res-bar-fill" style="width:70px;background:#EC4899"></div><span class="res-bar-count">105,664</span></div>
+        <div class="res-group-label">Daily</div>
+        <div class="res-bar"><span class="res-bar-label">Day</span><div class="res-bar-fill" style="width:95px;background:#F56565"></div><span class="res-bar-count">739,649</span></div>
+        <div class="res-bar"><span class="res-bar-label">HalfDay</span><div class="res-bar-fill" style="width:105px;background:#FB923C"></div><span class="res-bar-count">1,479,298</span></div>
+        <div class="res-bar"><span class="res-bar-label">Shift</span><div class="res-bar-fill" style="width:115px;background:#F59E0B"></div><span class="res-bar-count">2,218,947</span></div>
+        <div class="res-bar"><span class="res-bar-label">Hour</span><div class="res-bar-fill" style="width:140px;background:#E53E3E"></div><span class="res-bar-count">17,751,576</span></div>
+        <div style="margin-top:12px"><a class="substrate-fullview" href="charlotte/temporal/">Full View &rarr;</a></div>
+      </div>
+      <div class="substrate-col" style="max-width:280px">
+        <!-- Temporal Compass -->
+        <svg class="compass-svg" viewBox="0 0 160 160" width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="80" cy="80" r="55" fill="none" stroke="#333" stroke-width="1"/>
+          <circle cx="80" cy="80" r="3" fill="#E53E3E"/>
+          <!-- Coarser (up) -->
+          <line x1="80" y1="80" x2="80" y2="30" stroke="#E53E3E" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon points="80,22 76,32 84,32" fill="#E53E3E"/>
+          <text x="80" y="16" text-anchor="middle" fill="#E8E0E0" font-size="9" font-family="Inter,sans-serif" font-weight="600">COARSER</text>
+          <!-- Finer (down) -->
+          <line x1="80" y1="80" x2="80" y2="130" stroke="#68D391" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon points="80,138 76,128 84,128" fill="#68D391"/>
+          <text x="80" y="152" text-anchor="middle" fill="#68D391" font-size="9" font-family="Inter,sans-serif" font-weight="600">FINER</text>
+          <!-- Earlier (left) -->
+          <line x1="80" y1="80" x2="30" y2="80" stroke="#4A9EE5" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon points="22,80 32,76 32,84" fill="#4A9EE5"/>
+          <text x="10" y="72" text-anchor="middle" fill="#4A9EE5" font-size="8" font-family="Inter,sans-serif" font-weight="600">EARLIER</text>
+          <!-- Later (right) -->
+          <line x1="80" y1="80" x2="130" y2="80" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon points="138,80 128,76 128,84" fill="#F59E0B"/>
+          <text x="150" y="72" text-anchor="middle" fill="#F59E0B" font-size="8" font-family="Inter,sans-serif" font-weight="600">LATER</text>
+        </svg>
+        <!-- Hierarchy Diagram -->
+        <svg class="hierarchy-svg" viewBox="0 0 240 280" width="240" height="280" xmlns="http://www.w3.org/2000/svg">
+          <style>
+            .h-node { fill: #1A1A1A; stroke: #444; stroke-width: 1; }
+            .h-text { fill: #999; font-size: 8px; font-family: Inter,sans-serif; text-anchor: middle; font-weight: 500; }
+            .h-text-active { fill: #E8E0E0; }
+            .h-line { stroke: #333; stroke-width: 1; fill: none; }
+            .h-group { fill: #444; font-size: 7px; font-family: Inter,sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+          </style>
+          <!-- Group labels -->
+          <text class="h-group" x="8" y="20">MACRO</text>
+          <text class="h-group" x="8" y="90">ANNUAL</text>
+          <text class="h-group" x="8" y="160">PERIODIC</text>
+          <text class="h-group" x="8" y="230">DAILY</text>
+          <!-- Millennium -->
+          <rect class="h-node" x="90" y="10" width="60" height="18" rx="4"/>
+          <text class="h-text h-text-active" x="120" y="22">Millennium</text>
+          <!-- Century -->
+          <line class="h-line" x1="120" y1="28" x2="120" y2="40"/>
+          <rect class="h-node" x="90" y="40" width="60" height="18" rx="4"/>
+          <text class="h-text h-text-active" x="120" y="52">Century</text>
+          <!-- Decade -->
+          <line class="h-line" x1="120" y1="58" x2="120" y2="70"/>
+          <rect class="h-node" x="90" y="70" width="60" height="18" rx="4"/>
+          <text class="h-text h-text-active" x="120" y="82">Decade</text>
+          <!-- Year -->
+          <line class="h-line" x1="120" y1="88" x2="120" y2="100"/>
+          <rect class="h-node" x="90" y="100" width="60" height="18" rx="4" style="stroke:#68D391"/>
+          <text class="h-text h-text-active" x="120" y="112">Year</text>
+          <!-- Branch: HalfYear + Trimester -->
+          <line class="h-line" x1="120" y1="118" x2="70" y2="130"/>
+          <line class="h-line" x1="120" y1="118" x2="170" y2="130"/>
+          <rect class="h-node" x="40" y="130" width="60" height="18" rx="4"/>
+          <text class="h-text" x="70" y="142">HalfYear</text>
+          <rect class="h-node" x="140" y="130" width="60" height="18" rx="4"/>
+          <text class="h-text" x="170" y="142">Trimester</text>
+          <!-- Converge to Month -->
+          <line class="h-line" x1="70" y1="148" x2="120" y2="160"/>
+          <line class="h-line" x1="170" y1="148" x2="120" y2="160"/>
+          <rect class="h-node" x="90" y="160" width="60" height="18" rx="4" style="stroke:#A855F7"/>
+          <text class="h-text h-text-active" x="120" y="172">Month</text>
+          <!-- Week -->
+          <line class="h-line" x1="120" y1="178" x2="120" y2="190"/>
+          <rect class="h-node" x="90" y="190" width="60" height="18" rx="4"/>
+          <text class="h-text" x="120" y="202">Week</text>
+          <!-- Day -->
+          <line class="h-line" x1="120" y1="208" x2="120" y2="220"/>
+          <rect class="h-node" x="90" y="220" width="60" height="18" rx="4" style="stroke:#F56565"/>
+          <text class="h-text h-text-active" x="120" y="232">Day</text>
+          <!-- Branch: HalfDay + Shift -->
+          <line class="h-line" x1="120" y1="238" x2="70" y2="248"/>
+          <line class="h-line" x1="120" y1="238" x2="170" y2="248"/>
+          <rect class="h-node" x="40" y="248" width="60" height="18" rx="4"/>
+          <text class="h-text" x="70" y="260">HalfDay</text>
+          <rect class="h-node" x="140" y="248" width="60" height="18" rx="4"/>
+          <text class="h-text" x="170" y="260">Shift</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inline Spatial Substrate Panel -->
+  <div id="spatial-panel" class="substrate-panel">
+    <div class="substrate-cols">
+      <div class="substrate-col">
+        <div class="substrate-title">Spatial Substrate</div>
+        <div class="substrate-stats">51 states &middot; 1,275 edges &middot; 8 directions &middot; 5 regions</div>
+        <p class="substrate-desc">The spatial substrate maps all 50 US states plus DC as a directional graph. Every state connects to its neighbors along 8 cardinal/intercardinal directions (N, NE, E, SE, S, SW, W, NW). Five geographic regions provide clustering. Combined with the temporal spine, this gives Charlotte a complete spatiotemporal coordinate system for placing any signal.</p>
+        <div class="region-legend">
+          <div class="region-dot"><span style="background:#4A9EE5"></span>West (13)</div>
+          <div class="region-dot"><span style="background:#68D391"></span>Midwest (12)</div>
+          <div class="region-dot"><span style="background:#A855F7"></span>Northeast (9)</div>
+          <div class="region-dot"><span style="background:#F56565"></span>Southeast (12)</div>
+          <div class="region-dot"><span style="background:#F59E0B"></span>Southwest (5)</div>
+        </div>
+        <a class="substrate-fullview" href="charlotte/spatial/">Full View &rarr;</a>
+      </div>
+      <div class="substrate-col" style="max-width:420px">
+        <!-- Spatial Compass -->
+        <svg class="compass-svg" viewBox="0 0 160 160" width="130" height="130" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="80" cy="80" r="55" fill="none" stroke="#333" stroke-width="1"/>
+          <circle cx="80" cy="80" r="3" fill="#E53E3E"/>
+          <!-- N --><line x1="80" y1="80" x2="80" y2="30" stroke="#E53E3E" stroke-width="1.5" stroke-linecap="round"/><polygon points="80,23 77,31 83,31" fill="#E53E3E"/><text x="80" y="17" text-anchor="middle" fill="#E8E0E0" font-size="8" font-family="Inter,sans-serif" font-weight="600">N</text>
+          <!-- S --><line x1="80" y1="80" x2="80" y2="130" stroke="#E53E3E" stroke-width="1.5" stroke-linecap="round"/><polygon points="80,137 77,129 83,129" fill="#E53E3E"/><text x="80" y="150" text-anchor="middle" fill="#E8E0E0" font-size="8" font-family="Inter,sans-serif" font-weight="600">S</text>
+          <!-- E --><line x1="80" y1="80" x2="130" y2="80" stroke="#E53E3E" stroke-width="1.5" stroke-linecap="round"/><polygon points="137,80 129,77 129,83" fill="#E53E3E"/><text x="148" y="83" text-anchor="middle" fill="#E8E0E0" font-size="8" font-family="Inter,sans-serif" font-weight="600">E</text>
+          <!-- W --><line x1="80" y1="80" x2="30" y2="80" stroke="#E53E3E" stroke-width="1.5" stroke-linecap="round"/><polygon points="23,80 31,77 31,83" fill="#E53E3E"/><text x="12" y="83" text-anchor="middle" fill="#E8E0E0" font-size="8" font-family="Inter,sans-serif" font-weight="600">W</text>
+          <!-- NE --><line x1="80" y1="80" x2="115" y2="45" stroke="#666" stroke-width="1" stroke-linecap="round"/><text x="124" y="40" text-anchor="middle" fill="#666" font-size="7" font-family="Inter,sans-serif">NE</text>
+          <!-- SE --><line x1="80" y1="80" x2="115" y2="115" stroke="#666" stroke-width="1" stroke-linecap="round"/><text x="124" y="122" text-anchor="middle" fill="#666" font-size="7" font-family="Inter,sans-serif">SE</text>
+          <!-- SW --><line x1="80" y1="80" x2="45" y2="115" stroke="#666" stroke-width="1" stroke-linecap="round"/><text x="36" y="122" text-anchor="middle" fill="#666" font-size="7" font-family="Inter,sans-serif">SW</text>
+          <!-- NW --><line x1="80" y1="80" x2="45" y2="45" stroke="#666" stroke-width="1" stroke-linecap="round"/><text x="36" y="40" text-anchor="middle" fill="#666" font-size="7" font-family="Inter,sans-serif">NW</text>
+        </svg>
+        <!-- Mini US Map: 51 state dots at approximate centroids, colored by region -->
+        <svg id="us-mini-map" viewBox="-130 22 68 32" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-height:300px">
+          <style>
+            .st-dot { r: 0.6; opacity: 0.85; }
+            .st-dot:hover { r: 1; opacity: 1; }
+            .st-edge { stroke: #333; stroke-width: 0.15; opacity: 0.3; }
+            .st-label { font-size: 1.2px; fill: #666; font-family: Inter,sans-serif; text-anchor: middle; pointer-events: none; }
+          </style>
+          <!-- Region hull outlines -->
+          <polygon points="-124,42 -124,33 -117,33 -111,37 -104,35 -104,42 -109,47 -118,49 -122,48" fill="none" stroke="rgba(74,158,229,0.15)" stroke-width="0.3"/>
+          <polygon points="-104,37 -97,37 -90,37 -87,39 -87,44 -93,44 -100,44 -104,42" fill="none" stroke="rgba(104,211,145,0.15)" stroke-width="0.3"/>
+          <polygon points="-76,39 -70,39 -67,40 -67,43 -72,43 -76,42" fill="none" stroke="rgba(168,85,247,0.15)" stroke-width="0.3"/>
+          <polygon points="-92,44 -82,43 -76,43 -76,47 -80,50 -86,50 -92,47" fill="none" stroke="rgba(245,101,101,0.15)" stroke-width="0.3"/>
+          <polygon points="-112,44 -106,44 -100,46 -100,49 -109,49 -112,47" fill="none" stroke="rgba(245,158,11,0.15)" stroke-width="0.3"/>
+          <!-- Representative adjacency edges -->
+          <line class="st-edge" x1="-122.5" y1="37" x2="-117" y2="37"/>
+          <line class="st-edge" x1="-117" y1="37" x2="-111.5" y2="40"/>
+          <line class="st-edge" x1="-104" y1="40" x2="-100" y2="40"/>
+          <line class="st-edge" x1="-100" y1="40" x2="-96" y2="39"/>
+          <line class="st-edge" x1="-96" y1="39" x2="-93" y2="41"/>
+          <line class="st-edge" x1="-93" y1="41" x2="-90" y2="42"/>
+          <line class="st-edge" x1="-90" y1="42" x2="-87" y2="41"/>
+          <line class="st-edge" x1="-87" y1="41" x2="-84" y2="40"/>
+          <line class="st-edge" x1="-84" y1="40" x2="-80" y2="41"/>
+          <line class="st-edge" x1="-80" y1="41" x2="-76" y2="41"/>
+          <line class="st-edge" x1="-76" y1="41" x2="-73" y2="41"/>
+          <line class="st-edge" x1="-73" y1="41" x2="-71" y2="42"/>
+          <line class="st-edge" x1="-96" y1="44" x2="-93" y2="44"/>
+          <line class="st-edge" x1="-90" y1="45" x2="-87" y2="44"/>
+          <line class="st-edge" x1="-84" y1="44" x2="-80" y2="46"/>
+          <!-- West (blue) -->
+          <circle class="st-dot" cx="-122.5" cy="37" fill="#4A9EE5"/><text class="st-label" x="-122.5" y="35.5">WA</text>
+          <circle class="st-dot" cx="-122.5" cy="40" fill="#4A9EE5"/><text class="st-label" x="-122.5" y="38.5">OR</text>
+          <circle class="st-dot" cx="-121" cy="44" fill="#4A9EE5"/><text class="st-label" x="-121" y="42.5">CA</text>
+          <circle class="st-dot" cx="-119" cy="47" fill="#4A9EE5"/><text class="st-label" x="-119" y="48.5">HI</text>
+          <circle class="st-dot" cx="-126" cy="33" fill="#4A9EE5"/><text class="st-label" x="-126" y="31.5">AK</text>
+          <circle class="st-dot" cx="-117" cy="37" fill="#4A9EE5"/><text class="st-label" x="-117" y="35.5">ID</text>
+          <circle class="st-dot" cx="-115" cy="40" fill="#4A9EE5"/><text class="st-label" x="-115" y="38.5">NV</text>
+          <circle class="st-dot" cx="-113" cy="44" fill="#4A9EE5"/><text class="st-label" x="-113" y="42.5">UT</text>
+          <circle class="st-dot" cx="-111.5" cy="40" fill="#4A9EE5"/><text class="st-label" x="-111.5" y="38.5">MT</text>
+          <circle class="st-dot" cx="-109" cy="37" fill="#4A9EE5"/><text class="st-label" x="-109" y="35.5">WY</text>
+          <circle class="st-dot" cx="-108" cy="41" fill="#4A9EE5"/><text class="st-label" x="-108" y="39.5">CO</text>
+          <circle class="st-dot" cx="-116" cy="34" fill="#4A9EE5"/><text class="st-label" x="-116" y="32.5">WA</text>
+          <!-- Midwest (green) -->
+          <circle class="st-dot" cx="-104" cy="37" fill="#68D391"/><text class="st-label" x="-104" y="35.5">ND</text>
+          <circle class="st-dot" cx="-104" cy="39" fill="#68D391"/><text class="st-label" x="-104" y="37.5">SD</text>
+          <circle class="st-dot" cx="-103" cy="41" fill="#68D391"/><text class="st-label" x="-103" y="39.5">NE</text>
+          <circle class="st-dot" cx="-101" cy="43" fill="#68D391"/><text class="st-label" x="-101" y="41.5">KS</text>
+          <circle class="st-dot" cx="-100" cy="40" fill="#68D391"/><text class="st-label" x="-100" y="38.5">MN</text>
+          <circle class="st-dot" cx="-96" cy="39" fill="#68D391"/><text class="st-label" x="-96" y="37.5">WI</text>
+          <circle class="st-dot" cx="-96" cy="41" fill="#68D391"/><text class="st-label" x="-96" y="42.5">IA</text>
+          <circle class="st-dot" cx="-96" cy="44" fill="#68D391"/><text class="st-label" x="-96" y="45.5">MO</text>
+          <circle class="st-dot" cx="-93" cy="41" fill="#68D391"/><text class="st-label" x="-93" y="39.5">IL</text>
+          <circle class="st-dot" cx="-90" cy="40" fill="#68D391"/><text class="st-label" x="-90" y="38.5">MI</text>
+          <circle class="st-dot" cx="-90" cy="42" fill="#68D391"/><text class="st-label" x="-90" y="43.5">IN</text>
+          <circle class="st-dot" cx="-87" cy="41" fill="#68D391"/><text class="st-label" x="-87" y="39.5">OH</text>
+          <!-- Northeast (purple) -->
+          <circle class="st-dot" cx="-84" cy="40" fill="#A855F7"/><text class="st-label" x="-84" y="38.5">PA</text>
+          <circle class="st-dot" cx="-80" cy="41" fill="#A855F7"/><text class="st-label" x="-80" y="39.5">NJ</text>
+          <circle class="st-dot" cx="-78" cy="39" fill="#A855F7"/><text class="st-label" x="-78" y="37.5">NY</text>
+          <circle class="st-dot" cx="-76" cy="41" fill="#A855F7"/><text class="st-label" x="-76" y="39.5">CT</text>
+          <circle class="st-dot" cx="-74" cy="40" fill="#A855F7"/><text class="st-label" x="-74" y="38.5">RI</text>
+          <circle class="st-dot" cx="-73" cy="39" fill="#A855F7"/><text class="st-label" x="-73" y="37.5">MA</text>
+          <circle class="st-dot" cx="-72" cy="37.5" fill="#A855F7"/><text class="st-label" x="-72" y="36">VT</text>
+          <circle class="st-dot" cx="-70" cy="37.5" fill="#A855F7"/><text class="st-label" x="-70" y="36">NH</text>
+          <circle class="st-dot" cx="-68" cy="37" fill="#A855F7"/><text class="st-label" x="-68" y="35.5">ME</text>
+          <!-- Southeast (red) -->
+          <circle class="st-dot" cx="-87" cy="44" fill="#F56565"/><text class="st-label" x="-87" y="45.5">KY</text>
+          <circle class="st-dot" cx="-84" cy="44" fill="#F56565"/><text class="st-label" x="-84" y="45.5">WV</text>
+          <circle class="st-dot" cx="-82" cy="43" fill="#F56565"/><text class="st-label" x="-82" y="44.5">VA</text>
+          <circle class="st-dot" cx="-80" cy="44.5" fill="#F56565"/><text class="st-label" x="-80" y="46">NC</text>
+          <circle class="st-dot" cx="-80" cy="47" fill="#F56565"/><text class="st-label" x="-80" y="48.5">SC</text>
+          <circle class="st-dot" cx="-82" cy="49" fill="#F56565"/><text class="st-label" x="-82" y="50.5">GA</text>
+          <circle class="st-dot" cx="-83" cy="51" fill="#F56565"/><text class="st-label" x="-83" y="52.5">FL</text>
+          <circle class="st-dot" cx="-90" cy="45" fill="#F56565"/><text class="st-label" x="-90" y="46.5">TN</text>
+          <circle class="st-dot" cx="-92" cy="47" fill="#F56565"/><text class="st-label" x="-92" y="48.5">AL</text>
+          <circle class="st-dot" cx="-94" cy="47" fill="#F56565"/><text class="st-label" x="-94" y="48.5">MS</text>
+          <circle class="st-dot" cx="-96" cy="46" fill="#F56565"/><text class="st-label" x="-96" y="47.5">AR</text>
+          <circle class="st-dot" cx="-94" cy="49" fill="#F56565"/><text class="st-label" x="-94" y="50.5">LA</text>
+          <!-- Southwest (amber) -->
+          <circle class="st-dot" cx="-112" cy="47" fill="#F59E0B"/><text class="st-label" x="-112" y="48.5">AZ</text>
+          <circle class="st-dot" cx="-108" cy="47" fill="#F59E0B"/><text class="st-label" x="-108" y="48.5">NM</text>
+          <circle class="st-dot" cx="-100" cy="47" fill="#F59E0B"/><text class="st-label" x="-100" y="48.5">OK</text>
+          <circle class="st-dot" cx="-100" cy="50" fill="#F59E0B"/><text class="st-label" x="-100" y="51.5">TX</text>
+          <!-- DE, MD, DC -->
+          <circle class="st-dot" cx="-78" cy="42" fill="#A855F7"/><text class="st-label" x="-78" y="43.5">DE</text>
+          <circle class="st-dot" cx="-80" cy="43" fill="#F56565"/><text class="st-label" x="-80" y="42">MD</text>
+          <circle class="st-dot" cx="-79" cy="43.5" fill="#F56565"/><text class="st-label" x="-79" y="45">DC</text>
+        </svg>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- ═══════════ VALIDATION DOMAINS ═══════════ -->
 <div class="section-group">
-  <div class="section-label domain"><h2>Validation Domains</h2><span class="count">15 operations</span></div>
+  <div class="section-label domain"><h2>Validation Domains</h2><span class="count">16 operations</span></div>
   <div class="grid">
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/sounder/">
       <span class="icon">&#x1F417;</span>
-      <div class="card-text"><h2>Sounder</h2><p>Unified swine genetics infrastructure &mdash; 3 registries, 77K breeders, crossbred pedigree</p><span class="tag tag-domain">Biological</span></div>
+      <div class="card-text"><h2>Sounder</h2><p>Unified swine genetics infrastructure &mdash; 401K KRF facts, 3 registries, 77K breeders, crossbred pedigree</p><span class="tag tag-domain">Biological</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/sounder/nsr/">
       <span class="icon">&#x1F4DC;</span>
@@ -954,33 +1384,33 @@
       <span class="icon">&#x1F4DC;</span>
       <div class="card-text"><h2>TSA Partnership</h2><p>Tamworth Swine Association &mdash; 113 breeders, heritage bacon breed, pasture-raised</p><span class="tag tag-domain">Partnership</span></div>
     </a>
-    <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/isg/">
+    <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/industrial-service-group/">
       <span class="icon">&#x1F3ED;</span>
-      <div class="card-text"><h2>ISG</h2><p>16 brands, $241M rev, 259K+ SKUs &mdash; ServiceIQ platform, e-commerce, CRM, knowledge graph</p><span class="tag tag-domain">Mechanical</span></div>
+      <div class="card-text"><h2>ISG</h2><p>16 brands, $450M rev, 259K+ SKUs &mdash; equipment graph, dispatch intelligence, PE reporting</p><span class="tag tag-domain">Mechanical</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/violins/">
       <span class="icon">&#x1F3BB;</span>
-      <div class="card-text"><h2>Prier Violins</h2><p>Rare instrument fund &amp; Charlotte substrate</p><span class="tag tag-domain">Cultural</span></div>
+      <div class="card-text"><h2>PPP Instruments</h2><p>$5.3M rare string portfolio &mdash; 21 instruments, 88.3% avg appreciation, provenance graph</p><span class="tag tag-domain">Cultural</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/top-tier-moving/">
       <span class="icon">&#x1F69A;</span>
-      <div class="card-text"><h2>Top Tier Moving</h2><p>Moving company baseball cards &amp; substrate</p><span class="tag tag-domain">Logistics</span></div>
+      <div class="card-text"><h2>Top Tier Moving</h2><p>$14.4M billed, 98 crew, 10,606 jobs &mdash; baseball cards, collection analytics, route intelligence</p><span class="tag tag-domain">Logistics</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/allstate-manufacturing/">
       <span class="icon">&#x2692;</span>
-      <div class="card-text"><h2>All State Manufacturing</h2><p>Metal fabrication assessment &mdash; micro market fixtures, 50yr American manufacturer</p><span class="tag tag-domain">Manufacturing</span></div>
+      <div class="card-text"><h2>All State Manufacturing</h2><p>$2.2M micro market fixtures &mdash; 50yr manufacturer, $105K MSA, zero-to-observable transformation</p><span class="tag tag-domain">Manufacturing</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/cardvault/">
       <span class="icon">&#x1F3C6;</span>
-      <div class="card-text"><h2>CardVault by Tom Brady</h2><p>Sports collectibles retail chain &mdash; 12 locations, $33B market, 338% growth</p><span class="tag tag-domain">Collectibles</span></div>
+      <div class="card-text"><h2>CardVault by Tom Brady</h2><p>12 locations, 338% growth, $510K MSA &mdash; collector intelligence, grading pipeline, cross-store CRM</p><span class="tag tag-domain">Collectibles</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/wendt-group/">
       <span class="icon">&#x1F3AA;</span>
-      <div class="card-text"><h2>The Wendt Group</h2><p>Show pig auction platform &mdash; ShowPig.com, 12K+ online auctions, 6,500+ live events</p><span class="tag tag-domain">Livestock</span></div>
+      <div class="card-text"><h2>The Wendt Group</h2><p>ShowPig.com &mdash; 12K+ auctions, $156K MSA, first crossbred pedigree engine in the industry</p><span class="tag tag-domain">Livestock</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/sc-online-sales/">
       <span class="icon">&#x1F3A4;</span>
-      <div class="card-text"><h2>SC Online Sales</h2><p>Multi-species livestock auctions &mdash; cattle, sheep, goats, pigs, 40K+ auctions, Show Circuit Magazine</p><span class="tag tag-domain">Livestock</span></div>
+      <div class="card-text"><h2>SC Online Sales</h2><p>5-species livestock platform &mdash; 40K+ auctions, $135K MSA, cross-species buyer intelligence</p><span class="tag tag-domain">Livestock</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/business/lineleap/">
       <span class="icon">&#x1F378;</span>
@@ -1007,7 +1437,7 @@
 
 <!-- ═══════════ CONVEX HULL — REFERENCE LIBRARY ═══════════ -->
 <div class="section-group">
-  <div class="section-label reference"><h2>Convex Hull &mdash; Reference Library</h2><span class="count">26 references</span></div>
+  <div class="section-label reference"><h2>Convex Hull &mdash; Reference Library</h2><span class="count">25 references</span></div>
   <div class="grid">
     <a class="card" href="https://jack-at-someai.github.io/core/references/knowledge/">
       <span class="icon">&#x1F4D6;</span>
@@ -1114,7 +1544,7 @@
 
 <!-- ═══════════ RESEARCH INSTRUMENTS ═══════════ -->
 <div class="section-group">
-  <div class="section-label research"><h2>Research Instruments</h2><span class="count">21 modules</span></div>
+  <div class="section-label research"><h2>Research Instruments</h2><span class="count">25 modules</span></div>
   <div class="grid">
     <a class="card card-research" href="https://jack-at-someai.github.io/core/math/swarm-intelligence/">
       <span class="icon">&#x1F41D;</span>
@@ -1168,10 +1598,6 @@
       <span class="icon">&#x26AB;</span>
       <div class="card-text"><h2>Go</h2><p>The ancient board game of Go</p><span class="tag tag-instrument">Game</span></div>
     </a>
-    <a class="card" href="https://jack-at-someai.github.io/core/games/pig-simulator/">
-      <span class="icon">&#x1F416;</span>
-      <div class="card-text"><h2>Pig Simulator</h2><p>Pixel art show pig breeding &amp; exhibition</p><span class="tag tag-instrument">Game</span></div>
-    </a>
     <a class="card" href="https://jack-at-someai.github.io/core/games/against-the-storm/">
       <span class="icon">&#x1F3F0;</span>
       <div class="card-text"><h2>Against the Storm</h2><p>Settlement management companion</p><span class="tag tag-instrument">Game</span></div>
@@ -1179,6 +1605,10 @@
     <a class="card" href="https://jack-at-someai.github.io/core/games/maplestory/">
       <span class="icon">&#x1F41F;</span>
       <div class="card-text"><h2>MapleStory Bazaar</h2><p>Fish market vendor simulation</p><span class="tag tag-instrument">Game</span></div>
+    </a>
+    <a class="card" href="https://jack-at-someai.github.io/core/games/somelocks/">
+      <span class="icon">&#x1F510;</span>
+      <div class="card-text"><h2>SomeLocks</h2><p>2048-level lockpicking puzzle &mdash; hex grid, $3.99 IAP, first consumer revenue product</p><span class="tag tag-instrument">Game</span></div>
     </a>
     <a class="card" href="https://jack-at-someai.github.io/core/games/starfield/">
       <span class="icon">&#x2728;</span>
@@ -1227,11 +1657,11 @@
 
 <!-- ═══════════ BRAND BOOKS ═══════════ -->
 <div class="section-group">
-  <div class="section-label domain"><h2>Brand Books</h2><span class="count">13 brands</span></div>
+  <div class="section-label domain"><h2>Brand Books &amp; Design Systems</h2><span class="count">13 brands &middot; 10 design systems</span></div>
   <div class="grid">
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/someai/">
       <span class="icon"><img src="design/brandbook/someai/assets/LOGO.png" alt="SomeAI" style="width:32px;height:32px;object-fit:contain"></span>
-      <div class="card-text"><h2>SomeAI</h2><p>Research lab &mdash; spider web mark, red/mauve palette</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>SomeAI</h2><p>Research lab &mdash; spider web mark, red/mauve palette</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/isg/">
       <span class="icon"><img src="design/brandbook/isg/assets/logo_and_name.png" alt="ISG" style="width:32px;height:32px;object-fit:contain"></span>
@@ -1239,35 +1669,35 @@
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/richard-enterprises/">
       <span class="icon"><img src="design/brandbook/richard-enterprises/assets/logo_and_name.png" alt="Richard Enterprises" style="width:32px;height:32px;object-fit:contain"></span>
-      <div class="card-text"><h2>Richard Enterprises</h2><p>Family holding company &mdash; umbrella entity, charcoal/gold/navy palette</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>Richard Enterprises</h2><p>Family holding company &mdash; umbrella entity, charcoal/gold/navy palette</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/sounder/">
       <span class="icon"><img src="design/brandbook/sounder/assets/SOUNDER_BRAND_ICON.png" alt="Sounder" style="width:32px;height:32px;object-fit:contain;border-radius:4px"></span>
-      <div class="card-text"><h2>Sounder</h2><p>Swine genetics platform &mdash; stacked chevrons, purple/magenta/cyan</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>Sounder</h2><p>Swine genetics platform &mdash; stacked chevrons, purple/magenta/cyan</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/allstate-manufacturing/">
       <span class="icon">&#x2692;</span>
-      <div class="card-text"><h2>All State Mfg</h2><p>Metal fabrication &mdash; steel blue/forge orange, industrial identity</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>All State Mfg</h2><p>Metal fabrication &mdash; steel blue/forge orange, industrial identity</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/cardvault/">
       <span class="icon">&#x1F3C6;</span>
-      <div class="card-text"><h2>CardVault</h2><p>Sports collectibles &mdash; vault black/championship gold, premium identity</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>CardVault</h2><p>Sports collectibles &mdash; vault black/championship gold, premium identity</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/wendt-group/">
       <span class="icon">&#x1F3AA;</span>
-      <div class="card-text"><h2>The Wendt Group</h2><p>Livestock auction &mdash; auction red/wheat gold, agricultural identity</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>The Wendt Group</h2><p>Livestock auction &mdash; auction red/wheat gold, agricultural identity</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/sc-online-sales/">
       <span class="icon">&#x1F3A4;</span>
-      <div class="card-text"><h2>SC Online Sales</h2><p>Livestock auction &mdash; circuit copper/arena navy, multi-species identity</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>SC Online Sales</h2><p>Livestock auction &mdash; circuit copper/arena navy, multi-species identity</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/ppp-instruments/">
       <span class="icon">&#x1F3BB;</span>
-      <div class="card-text"><h2>PPP Instruments</h2><p>Rare string instrument fund &mdash; SomeAI red palette, provenance intelligence</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>PPP Instruments</h2><p>Rare instrument fractional investment platform &mdash; Masterworks model, 21 instruments, $5.3M portfolio</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/top-tier-moving/">
       <span class="icon">&#x1F69B;</span>
-      <div class="card-text"><h2>Top Tier Moving</h2><p>Interstate moving logistics &mdash; route blue/cargo green, crew intelligence</p><span class="tag tag-domain">Brand</span></div>
+      <div class="card-text"><h2>Top Tier Moving</h2><p>Interstate moving logistics &mdash; route blue/cargo green, crew intelligence</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
     </a>
     <a class="card card-domain" href="https://jack-at-someai.github.io/core/design/brandbook/sea-lion/">
       <span class="icon">&#x1F9AD;</span>
@@ -1333,41 +1763,156 @@
     scrollObserver.observe(scrollElements[i]);
   }
 
-  // === LAYER 1: Spider Web Pulse Animation ===
-  var radials = [
-    [0, -108], [65, -87], [103, -33], [95, 50],
-    [40, 100], [-40, 100], [-95, 50], [-103, -33], [-65, -87]
+  // === LAYER 1: Neural Synapse Web Animation ===
+  // 27 junction positions: outer(0-8), middle(9-17), inner(18-26)
+  var junctions = [
+    // Outer ring
+    [0,-108],[65,-87],[103,-33],[95,50],[40,100],[-40,100],[-95,50],[-103,-33],[-65,-87],
+    // Middle ring
+    [0,-70],[42,-56],[67,-21],[62,32],[26,65],[-26,65],[-62,32],[-67,-21],[-42,-56],
+    // Inner ring
+    [0,-38],[23,-30],[36,-11],[34,18],[14,35],[-14,35],[-34,18],[-36,-11],[-23,-30]
   ];
-  var NUM_PULSES = IS_MOBILE ? 4 : 8;
-  var pulses = [];
 
-  for (var i = 0; i < NUM_PULSES; i++) {
-    var el = document.getElementById('pulse-' + i);
-    if (!el) continue;
-    pulses.push({
-      el: el,
-      strand: Math.floor(Math.random() * radials.length),
-      duration: 3000 + Math.random() * 3000,
-      elapsed: Math.random() * 6000
+  // Adjacency: radial connections (inner↔middle↔outer per spoke) + ring connections
+  var adjList = [];
+  for (var i = 0; i < 27; i++) adjList.push([]);
+  // Radial connections: spoke i connects outer[i], middle[i+9], inner[i+18]
+  for (var i = 0; i < 9; i++) {
+    adjList[i].push(i + 9); adjList[i + 9].push(i);       // outer ↔ middle
+    adjList[i + 9].push(i + 18); adjList[i + 18].push(i + 9); // middle ↔ inner
+  }
+  // Ring connections: adjacent nodes on same ring
+  for (var ring = 0; ring < 3; ring++) {
+    var base = ring * 9;
+    for (var i = 0; i < 9; i++) {
+      var next = base + (i + 1) % 9;
+      adjList[base + i].push(next);
+      adjList[next].push(base + i);
+    }
+  }
+
+  var junctionEls = document.querySelectorAll('#neural-junctions .junction');
+  var pulseEls = document.querySelectorAll('#neural-pulses .npulse');
+  var MAX_SIGNALS = IS_MOBILE ? 3 : 6;
+  var signals = []; // active signal chains
+  var junctionFlashes = []; // {idx, opacity, decay}
+  var nextFireTime = 1000 + Math.random() * 2000;
+  var fireAccum = 0;
+
+  function fireNewSignal() {
+    if (signals.length >= MAX_SIGNALS) return;
+    var startIdx = Math.floor(Math.random() * 27);
+    signals.push({
+      from: startIdx,
+      to: adjList[startIdx][Math.floor(Math.random() * adjList[startIdx].length)],
+      t: 0,
+      speed: 0.002 + Math.random() * 0.002,
+      intensity: 0.8 + Math.random() * 0.2,
+      hops: 0,
+      maxHops: 4 + Math.floor(Math.random() * 3),
+      pulseIdx: -1
     });
   }
 
-  function updatePulses(dt) {
-    for (var i = 0; i < pulses.length; i++) {
-      var p = pulses[i];
-      p.elapsed += dt;
-      if (p.elapsed >= p.duration) {
-        p.elapsed = 0;
-        p.strand = Math.floor(Math.random() * radials.length);
-        p.duration = 3000 + Math.random() * 3000;
+  function updateNeuralWeb(dt) {
+    // Fire new signals periodically
+    fireAccum += dt;
+    if (fireAccum >= nextFireTime) {
+      fireAccum = 0;
+      nextFireTime = 2000 + Math.random() * 3000;
+      fireNewSignal();
+    }
+
+    // Allocate pulse elements to signals
+    var usedPulses = new Set();
+    for (var i = 0; i < signals.length; i++) {
+      if (signals[i].pulseIdx >= 0) usedPulses.add(signals[i].pulseIdx);
+    }
+    for (var i = 0; i < signals.length; i++) {
+      if (signals[i].pulseIdx < 0) {
+        for (var p = 0; p < pulseEls.length; p++) {
+          if (!usedPulses.has(p)) {
+            signals[i].pulseIdx = p;
+            usedPulses.add(p);
+            break;
+          }
+        }
       }
-      var t = p.elapsed / p.duration;
-      var end = radials[p.strand];
-      p.el.setAttribute('cx', end[0] * t);
-      p.el.setAttribute('cy', end[1] * t);
-      // Fade in first 10%, fade out last 15%
-      var opacity = t < 0.1 ? t / 0.1 : (t > 0.85 ? (1 - t) / 0.15 : 1);
-      p.el.setAttribute('opacity', Math.max(0, Math.min(1, opacity)).toFixed(2));
+    }
+
+    // Update signals
+    for (var i = signals.length - 1; i >= 0; i--) {
+      var s = signals[i];
+      s.t += s.speed * dt;
+
+      if (s.t >= 1) {
+        // Arrived at destination junction — flash it
+        junctionFlashes.push({ idx: s.to, opacity: 0.8, decay: 0.001 });
+        s.hops++;
+        s.intensity *= 0.75;
+
+        // Die if too many hops or too dim
+        if (s.hops >= s.maxHops || s.intensity < 0.15) {
+          if (s.pulseIdx >= 0) {
+            pulseEls[s.pulseIdx].setAttribute('opacity', '0');
+          }
+          signals.splice(i, 1);
+          continue;
+        }
+
+        // Branch chance: 20% to spawn a second signal
+        if (Math.random() < 0.2 && signals.length < MAX_SIGNALS) {
+          var branchNeighbors = adjList[s.to].filter(function(n) { return n !== s.from; });
+          if (branchNeighbors.length > 0) {
+            signals.push({
+              from: s.to,
+              to: branchNeighbors[Math.floor(Math.random() * branchNeighbors.length)],
+              t: 0,
+              speed: s.speed,
+              intensity: s.intensity * 0.7,
+              hops: s.hops,
+              maxHops: s.maxHops,
+              pulseIdx: -1
+            });
+          }
+        }
+
+        // Move to next junction
+        var neighbors = adjList[s.to].filter(function(n) { return n !== s.from; });
+        if (neighbors.length === 0) {
+          if (s.pulseIdx >= 0) pulseEls[s.pulseIdx].setAttribute('opacity', '0');
+          signals.splice(i, 1);
+          continue;
+        }
+        s.from = s.to;
+        s.to = neighbors[Math.floor(Math.random() * neighbors.length)];
+        s.t = 0;
+      }
+
+      // Interpolate position
+      if (s.pulseIdx >= 0 && s.pulseIdx < pulseEls.length) {
+        var fromJ = junctions[s.from];
+        var toJ = junctions[s.to];
+        var cx = fromJ[0] + (toJ[0] - fromJ[0]) * s.t;
+        var cy = fromJ[1] + (toJ[1] - fromJ[1]) * s.t;
+        var el = pulseEls[s.pulseIdx];
+        el.setAttribute('cx', cx.toFixed(1));
+        el.setAttribute('cy', cy.toFixed(1));
+        el.setAttribute('opacity', (s.intensity * 0.9).toFixed(2));
+      }
+    }
+
+    // Update junction flashes
+    for (var i = junctionFlashes.length - 1; i >= 0; i--) {
+      var f = junctionFlashes[i];
+      f.opacity -= f.decay * dt;
+      if (f.opacity <= 0) {
+        if (junctionEls[f.idx]) junctionEls[f.idx].setAttribute('opacity', '0');
+        junctionFlashes.splice(i, 1);
+      } else {
+        if (junctionEls[f.idx]) junctionEls[f.idx].setAttribute('opacity', f.opacity.toFixed(2));
+      }
     }
   }
 
@@ -1486,7 +2031,7 @@
     var dt = lastTime ? Math.min(time - lastTime, 50) : 16;
     lastTime = time;
 
-    updatePulses(dt);
+    updateNeuralWeb(dt);
     if (canvas && !IS_MOBILE) drawParticles();
 
     requestAnimationFrame(loop);
@@ -1511,19 +2056,23 @@
       instrument: { f: 'rgba(102,102,102,0.08)', s: '#444',   t: '#999' }
     };
 
-    // All 68 projects in spiral order: center → ring1 → ring2 → ring3 → ring4 → ring5(partial)
+    // All 75 projects in spiral order: center → ring1 → ring2 → ring3 → ring4 → ring5(partial)
     var P = [
       // Ring 0 — Center
       {n:'Charlotte',i:'\u{1F578}',u:null,c:'center'},
-      // Ring 1 — Kernel (6)
+      // Ring 1 — Kernel (8)
       {n:'Research Lab',i:'\u{1F9E0}',u:B+'research-lab/',c:'kernel'},
+      {n:'Knowledge Graph',i:'\u{1F4DA}',u:B+'knowledge-graph/',c:'kernel'},
       {n:'Charlotte OS',i:'\u2699',u:B+'charlotte-os/',c:'kernel'},
+      {n:'Temporal Spine',i:'\u{1F553}',u:B+'charlotte/temporal/',c:'kernel'},
+      {n:'Spatial',i:'\u{1F5FA}',u:B+'charlotte/spatial/',c:'kernel'},
       {n:'Papers',i:'\u{1F4C4}',u:B+'papers/',c:'kernel'},
       {n:'Workbench',i:'\u{1F3A8}',u:B+'workbench/',c:'kernel'},
+      {n:'Pitch Engine',i:'\u{1F4CA}',u:B+'tools/pitch-engine/',c:'kernel'},
       // Ring 2 — Domains + anchors (12)
       {n:'Sounder',i:'\u{1F417}',u:B+'business/sounder/',c:'domain'},
       {n:'ISG',i:'\u{1F3ED}',u:B+'business/industrial-service-group/',c:'domain'},
-      {n:'Prier Violins',i:'\u{1F3BB}',u:B+'business/violins/',c:'domain'},
+      {n:'PPP Instruments',i:'\u{1F3BB}',u:B+'business/violins/',c:'domain'},
       {n:'Top Tier',i:'\u{1F69A}',u:B+'business/top-tier-moving/',c:'domain'},
       {n:'All State Mfg',i:'\u2692',u:B+'business/allstate-manufacturing/',c:'domain'},
       {n:'CardVault',i:'\u{1F3C6}',u:B+'business/cardvault/',c:'domain'},
@@ -1573,10 +2122,11 @@
       {n:'Aseprite',i:'\u{1F3A8}',u:B+'games/aseprite/',c:'instrument'},
       {n:'Chess',i:'\u265F',u:B+'games/chess/',c:'instrument'},
       {n:'Go',i:'\u26AB',u:B+'games/go/',c:'instrument'},
-      {n:'Pig Sim',i:'\u{1F416}',u:B+'games/pig-simulator/',c:'instrument'},
+      {n:'Pitch Decks',i:'\u{1F4BD}',u:B+'tools/pitch-engine/decks/',c:'kernel'},
       {n:'Storm',i:'\u{1F3F0}',u:B+'games/against-the-storm/',c:'instrument'},
       {n:'MapleStory',i:'\u{1F41F}',u:B+'games/maplestory/',c:'instrument'},
       {n:'Starfield',i:'\u2728',u:B+'games/starfield/',c:'instrument'},
+      {n:'SomeLocks',i:'\u{1F510}',u:B+'games/somelocks/',c:'instrument'},
       {n:'2048',i:'\u{1F522}',u:B+'games/2048/',c:'instrument'},
       {n:'Tetris',i:'\u{1F7E6}',u:B+'games/tetris/',c:'instrument'},
       {n:'Minesweeper',i:'\u{1F4A3}',u:B+'games/minesweeper/',c:'instrument'},
@@ -1587,7 +2137,10 @@
       {n:'Snake',i:'\u{1F40D}',u:B+'games/snake/',c:'instrument'},
       {n:'Pong',i:'\u{1F3D3}',u:B+'games/pong/',c:'instrument'},
       {n:'Tic-Tac-Toe',i:'\u274C',u:B+'games/tic-tac-toe/',c:'instrument'},
-      {n:'Block Dude',i:'\u{1F9F1}',u:B+'games/block-dude/',c:'instrument'}
+      {n:'Block Dude',i:'\u{1F9F1}',u:B+'games/block-dude/',c:'instrument'},
+      {n:'Charts',i:'\u{1F4C9}',u:B+'charlotte/charts/showcase/',c:'kernel'},
+      {n:'Pipeline',i:'\u{1F4C8}',u:B+'business/forecast.html',c:'kernel'},
+      {n:'Biz Model KRF',i:'\u{1F4BE}',u:B+'charlotte/docs/artifacts/business_model.krf',c:'kernel'}
     ];
 
     // Hex math — cube coordinates, pointy-top orientation
@@ -1604,12 +2157,12 @@
       return res;
     }
 
-    // Build spiral positions for all 68 projects
+    // Build spiral positions for all 75 projects
     var hexPos = hexRing(0);
     for (var r = 1; r <= 4; r++) hexPos = hexPos.concat(hexRing(r));
-    // Ring 5: 7 hexes, roughly evenly spaced around the 30-position ring
+    // Ring 5: 8 hexes, roughly evenly spaced around the 30-position ring
     var r5 = hexRing(5);
-    var r5idx = [0, 4, 8, 13, 17, 21, 26];
+    var r5idx = [0, 4, 8, 13, 17, 21, 25, 29];
     for (var i = 0; i < r5idx.length; i++) hexPos.push(r5[r5idx[i]]);
 
     // Pointy-top hex → pixel
@@ -1791,6 +2344,311 @@
     });
   }
 
+})();
+</script>
+
+<!-- ═══════════ Temporal & Spatial Panel Toggles ═══════════ -->
+<script>
+(function() {
+  var temporalOpen = false;
+  var spatialOpen = false;
+
+  window.toggleTemporal = function() {
+    var panel = document.getElementById('temporal-panel');
+    var card = document.querySelector('.card-temporal');
+    temporalOpen = !temporalOpen;
+    if (temporalOpen) {
+      card.classList.add('active');
+      panel.classList.add('open');
+    } else {
+      card.classList.remove('active');
+      panel.classList.remove('open');
+    }
+  };
+
+  window.toggleSpatial = function() {
+    var panel = document.getElementById('spatial-panel');
+    var card = document.querySelector('.card-spatial');
+    spatialOpen = !spatialOpen;
+    if (spatialOpen) {
+      card.classList.add('active');
+      panel.classList.add('open');
+    } else {
+      card.classList.remove('active');
+      panel.classList.remove('open');
+    }
+  };
+})();
+</script>
+
+<!-- ═══════════ Inline Knowledge Graph Engine ═══════════ -->
+<script>
+(function() {
+  var KG_COLORS = {
+    reference: '#E53E3E', domain: '#F56565', person: '#4A9EE5',
+    document: '#A855F7', project: '#34D399', business: '#FB923C',
+    primitive: '#EC4899', cluster: '#2DD4BF', category: '#8B8BA0'
+  };
+  var KG_SIZES = {
+    primitive: 18, cluster: 14, domain: 12, business: 10,
+    person: 9, category: 8, document: 6, project: 6, reference: 3
+  };
+  var KG_BADGE_CSS = {
+    reference: 'background:rgba(229,62,62,0.15);color:#F56565',
+    domain:    'background:rgba(245,101,101,0.15);color:#F56565',
+    person:    'background:rgba(74,158,229,0.15);color:#4A9EE5',
+    document:  'background:rgba(168,85,247,0.15);color:#A855F7',
+    project:   'background:rgba(52,211,153,0.15);color:#34D399',
+    business:  'background:rgba(251,146,60,0.15);color:#FB923C',
+    primitive: 'background:rgba(236,72,153,0.15);color:#EC4899',
+    cluster:   'background:rgba(45,212,191,0.15);color:#2DD4BF',
+    category:  'background:rgba(139,139,160,0.15);color:#8B8BA0'
+  };
+  var DEFAULT_HIDDEN = new Set(['reference']);
+
+  var kgOpen = false;
+  var kgLoaded = false;
+  var kgSim = null;
+  var kgAllNodes = [];
+  var kgAllEdges = [];
+  var kgShowAll = false;
+  var kgSearchTerm = '';
+  var kgConnMap = {};
+  var d3Loaded = false;
+
+  // Expose toggle to global scope
+  window.toggleKG = function() {
+    var panel = document.getElementById('kg-panel');
+    var card = document.querySelector('.card-kg');
+    kgOpen = !kgOpen;
+
+    if (kgOpen) {
+      card.classList.add('active');
+      panel.classList.add('open');
+      if (!kgLoaded) {
+        loadD3Then(function() { fetchAndRender(); });
+      } else if (kgSim) {
+        kgSim.alpha(0.05).restart();
+      }
+    } else {
+      card.classList.remove('active');
+      panel.classList.remove('open');
+      if (kgSim) kgSim.stop();
+    }
+  };
+
+  window.kgSearch = function(val) {
+    kgSearchTerm = val.toLowerCase().trim();
+    updateVisibility();
+  };
+
+  window.kgToggleAll = function() {
+    kgShowAll = !kgShowAll;
+    var btn = document.getElementById('kg-toggle-all');
+    if (kgShowAll) {
+      btn.textContent = 'Overview';
+      btn.classList.add('active');
+    } else {
+      btn.textContent = 'Show All';
+      btn.classList.remove('active');
+    }
+    rebuildGraph();
+  };
+
+  function loadD3Then(cb) {
+    if (d3Loaded) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://d3js.org/d3.v7.min.js';
+    s.onload = function() { d3Loaded = true; cb(); };
+    document.head.appendChild(s);
+  }
+
+  function fetchAndRender() {
+    fetch('knowledge-graph/data/graph.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        kgAllNodes = data.nodes;
+        kgAllEdges = data.edges;
+        // Build connection count map
+        kgConnMap = {};
+        kgAllEdges.forEach(function(e) {
+          kgConnMap[e.source] = (kgConnMap[e.source] || 0) + 1;
+          kgConnMap[e.target] = (kgConnMap[e.target] || 0) + 1;
+        });
+        kgLoaded = true;
+        rebuildGraph();
+      });
+  }
+
+  function getFilteredData() {
+    var nodeSet = new Set();
+    var nodes = kgAllNodes.filter(function(n) {
+      // Type filter
+      if (!kgShowAll && DEFAULT_HIDDEN.has(n.type)) return false;
+      // Search filter
+      if (kgSearchTerm) {
+        var hay = (n.label + ' ' + (n.desc || '') + ' ' + (n.type || '')).toLowerCase();
+        if (hay.indexOf(kgSearchTerm) === -1) return false;
+      }
+      nodeSet.add(n.id);
+      return true;
+    });
+    var edges = kgAllEdges.filter(function(e) {
+      return nodeSet.has(e.source.id || e.source) && nodeSet.has(e.target.id || e.target);
+    });
+    return { nodes: nodes, edges: edges };
+  }
+
+  function rebuildGraph() {
+    var container = document.getElementById('kg-svg-container');
+    container.innerHTML = '';
+    if (kgSim) { kgSim.stop(); kgSim = null; }
+
+    var data = getFilteredData();
+    var nodes = data.nodes.map(function(n) { return Object.assign({}, n); });
+    var edges = data.edges.map(function(e) {
+      return { source: e.source.id || e.source, target: e.target.id || e.target, type: e.type, strength: e.strength };
+    });
+
+    // Update stats
+    document.getElementById('kg-stats').innerHTML =
+      '<strong>' + nodes.length + '</strong> nodes &middot; <strong>' + edges.length + '</strong> edges';
+
+    var W = container.offsetWidth;
+    var H = container.offsetHeight || 500;
+
+    var svg = d3.select(container).append('svg')
+      .attr('width', W).attr('height', H);
+
+    // Defs for glow filters
+    var defs = svg.append('defs');
+    Object.keys(KG_COLORS).forEach(function(type) {
+      var filter = defs.append('filter')
+        .attr('id', 'kg-glow-' + type)
+        .attr('x', '-50%').attr('y', '-50%')
+        .attr('width', '200%').attr('height', '200%');
+      filter.append('feDropShadow')
+        .attr('dx', 0).attr('dy', 0)
+        .attr('stdDeviation', 3)
+        .attr('flood-color', KG_COLORS[type])
+        .attr('flood-opacity', 0.5);
+    });
+
+    var g = svg.append('g');
+
+    // Zoom
+    var zoom = d3.zoom()
+      .scaleExtent([0.2, 4])
+      .on('zoom', function(event) { g.attr('transform', event.transform); });
+    svg.call(zoom);
+
+    // Center the initial view
+    var initScale = Math.min(W, H) / (nodes.length > 500 ? 1800 : 1000);
+    initScale = Math.max(0.25, Math.min(initScale, 1));
+    svg.call(zoom.transform, d3.zoomIdentity.translate(W / 2, H / 2).scale(initScale));
+
+    // Links
+    var linkGroup = g.append('g').attr('class', 'kg-links');
+    var link = linkGroup.selectAll('path').data(edges).enter().append('path')
+      .attr('fill', 'none')
+      .attr('stroke', 'rgba(229,62,62,0.08)')
+      .attr('stroke-width', 0.5);
+
+    // Node glow
+    var glowGroup = g.append('g').attr('class', 'kg-glows');
+    var glow = glowGroup.selectAll('circle').data(nodes).enter().append('circle')
+      .attr('r', function(d) { return (KG_SIZES[d.type] || 5) + 3; })
+      .attr('fill', 'none')
+      .attr('stroke', function(d) { return KG_COLORS[d.type] || '#666'; })
+      .attr('stroke-width', 1.5)
+      .attr('stroke-opacity', 0.15)
+      .attr('filter', function(d) { return 'url(#kg-glow-' + d.type + ')'; });
+
+    // Nodes
+    var nodeGroup = g.append('g').attr('class', 'kg-nodes');
+    var node = nodeGroup.selectAll('circle').data(nodes).enter().append('circle')
+      .attr('r', function(d) { return KG_SIZES[d.type] || 5; })
+      .attr('fill', function(d) { return KG_COLORS[d.type] || '#666'; })
+      .attr('stroke', '#141414')
+      .attr('stroke-width', 0.5)
+      .attr('cursor', 'pointer')
+      .call(d3.drag()
+        .on('start', function(event, d) {
+          if (!event.active) kgSim.alphaTarget(0.3).restart();
+          d.fx = d.x; d.fy = d.y;
+        })
+        .on('drag', function(event, d) {
+          d.fx = event.x; d.fy = event.y;
+        })
+        .on('end', function(event, d) {
+          if (!event.active) kgSim.alphaTarget(0);
+          d.fx = null; d.fy = null;
+        })
+      );
+
+    // Hover effects
+    var tip = document.getElementById('kg-tooltip');
+    node.on('mouseover', function(event, d) {
+      d3.select(this).transition().duration(150)
+        .attr('r', (KG_SIZES[d.type] || 5) * 1.5);
+      var badge = KG_BADGE_CSS[d.type] || 'background:#333;color:#999';
+      tip.innerHTML =
+        '<div class="kg-tip-name">' + d.label + '</div>' +
+        '<span class="kg-tip-badge" style="' + badge + '">' + (d.type || 'unknown') + '</span>' +
+        (d.desc ? '<div class="kg-tip-desc">' + d.desc.substring(0, 120) + (d.desc.length > 120 ? '...' : '') + '</div>' : '') +
+        '<div class="kg-tip-conn">' + (kgConnMap[d.id] || 0) + ' connections</div>';
+      tip.classList.add('show');
+    })
+    .on('mousemove', function(event) {
+      tip.style.left = (event.clientX + 14) + 'px';
+      tip.style.top = (event.clientY - 14) + 'px';
+    })
+    .on('mouseout', function(event, d) {
+      d3.select(this).transition().duration(150)
+        .attr('r', KG_SIZES[d.type] || 5);
+      tip.classList.remove('show');
+    });
+
+    // Labels for large nodes
+    var labelGroup = g.append('g').attr('class', 'kg-labels');
+    var labelNodes = nodes.filter(function(d) { return (KG_SIZES[d.type] || 5) >= 10; });
+    var label = labelGroup.selectAll('text').data(labelNodes).enter().append('text')
+      .text(function(d) { return d.label.length > 16 ? d.label.substring(0, 15) + '\u2026' : d.label; })
+      .attr('fill', '#E8E0E0')
+      .attr('font-size', '8px')
+      .attr('font-family', 'Inter, sans-serif')
+      .attr('font-weight', '500')
+      .attr('text-anchor', 'middle')
+      .attr('dy', function(d) { return (KG_SIZES[d.type] || 5) + 12; })
+      .attr('pointer-events', 'none')
+      .attr('opacity', 0.7);
+
+    // Simulation
+    kgSim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(edges).id(function(d) { return d.id; }).distance(40).strength(0.15))
+      .force('charge', d3.forceManyBody().strength(function(d) {
+        return -(KG_SIZES[d.type] || 5) * 6;
+      }))
+      .force('center', d3.forceCenter(0, 0))
+      .force('collision', d3.forceCollide().radius(function(d) { return (KG_SIZES[d.type] || 5) + 2; }))
+      .alphaDecay(0.02)
+      .on('tick', function() {
+        link.attr('d', function(d) {
+          var dx = d.target.x - d.source.x;
+          var dy = d.target.y - d.source.y;
+          var dr = Math.sqrt(dx * dx + dy * dy) * 1.5;
+          return 'M' + d.source.x + ',' + d.source.y + 'A' + dr + ',' + dr + ' 0 0,1 ' + d.target.x + ',' + d.target.y;
+        });
+        node.attr('cx', function(d) { return d.x; }).attr('cy', function(d) { return d.y; });
+        glow.attr('cx', function(d) { return d.x; }).attr('cy', function(d) { return d.y; });
+        label.attr('x', function(d) { return d.x; }).attr('y', function(d) { return d.y; });
+      });
+  }
+
+  function updateVisibility() {
+    if (!kgLoaded || !d3Loaded) return;
+    rebuildGraph();
+  }
 })();
 </script>
 

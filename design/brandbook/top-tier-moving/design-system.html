@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Tier Moving Design System — Atomic Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* Route Blue — Primary */
+  --route-50:#EFF6FF;--route-100:#DBEAFE;--route-200:#BFDBFE;--route-300:#93C5FD;
+  --route-400:#60A5FA;--route-500:#3B82F6;--route-600:#2563EB;--route-700:#1D4ED8;
+  --route-800:#1E3A8A;--route-900:#0F1A2E;--route-950:#080E1C;
+  /* Safety Orange — Dispatch */
+  --safety-50:#FFF7ED;--safety-100:#FFEDD5;--safety-200:#FED7AA;--safety-300:#FDBA74;
+  --safety-400:#FB923C;--safety-500:#F97316;--safety-600:#EA580C;--safety-700:#C2410C;
+  --safety-800:#9A3412;--safety-900:#7C2D12;
+  /* Cargo Green — Secondary */
+  --cargo-50:#ECFDF5;--cargo-100:#D1FAE5;--cargo-200:#A7F3D0;--cargo-300:#6EE7B7;
+  --cargo-500:#10B981;--cargo-600:#059669;--cargo-700:#047857;
+  /* Dispatch Amber — Accent */
+  --amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-300:#FCD34D;--amber-500:#F59E0B;
+  --amber-600:#D97706;
+  /* Night — Neutral */
+  --night-50:#F8FAFC;--night-100:#E2E8F0;--night-200:#CBD5E1;--night-300:#94A3B8;
+  --night-500:#64748B;--night-600:#475569;--night-700:#334155;--night-800:#1E293B;
+  --night-900:#0B1120;--night-950:#060A14;
+  /* Tier Colors */
+  --tier-mvp:#FCD34D;--tier-allstar:#A78BFA;--tier-starter:#60A5FA;--tier-rookie:#34D399;
+  /* Semantic */
+  --success:#10B981;--warning:#F59E0B;--danger:#EF4444;--info:#3B82F6;
+  /* Surfaces */
+  --bg:#0B1120;--surface:#111827;--surface2:#1E293B;--border:#1E293B;--border-light:#334155;
+  --text:#E2E8F0;--dim:#64748B;--dim2:#94A3B8;
+  /* System */
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:20px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.3);--shadow-md:0 4px 12px rgba(0,0,0,0.4);--shadow-lg:0 8px 32px rgba(0,0,0,0.5);
+  --shadow-glow-blue:0 0 20px rgba(59,130,246,0.3);--shadow-glow-orange:0 0 20px rgba(249,115,22,0.3);
+  --font-display:'Oswald',sans-serif;--font-body:'Inter',-apple-system,sans-serif;--font-mono:'Cascadia Code','Fira Code','SF Mono',monospace;
+  --space-unit:4px;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 96px}
+
+/* Header */
+.sys-header{text-align:center;padding:72px 0 56px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden}
+.sys-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,78,216,0.12),rgba(249,115,22,0.06),rgba(11,17,32,0.9))}
+.sys-header *{position:relative;z-index:1}
+.sys-header h1{font-family:var(--font-display);font-size:48px;font-weight:700;letter-spacing:4px;background:linear-gradient(135deg,var(--route-500),var(--safety-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.sys-header .sub{font-size:15px;color:var(--dim2);max-width:640px;margin:0 auto}
+.sys-header .version{display:inline-block;margin-top:16px;font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(59,130,246,0.12);color:var(--route-300);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.stats-bar{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-top:24px}
+.stat{text-align:center}
+.stat .stat-value{font-size:20px;font-weight:800;color:var(--route-300);letter-spacing:-0.5px}
+.stat .stat-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-top:2px}
+
+/* Navigation */
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:48px;padding:8px;background:var(--surface);border-radius:var(--radius-md);border:1px solid var(--border)}
+.nav a{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.active{background:var(--route-600);color:#fff}
+
+/* Sections */
+section{margin-bottom:64px}
+section h2{font-family:var(--font-display);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--route-500);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+section p{color:var(--dim);max-width:680px;margin-bottom:12px;line-height:1.7;font-size:13px}
+
+/* Token display */
+.token-section{margin-bottom:28px}
+.token-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-bottom:12px}
+.token-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.token-swatch{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);min-width:72px}
+.token-swatch .color{height:48px}
+.token-swatch .info{padding:5px 7px;background:var(--surface)}
+.token-swatch .info .name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.token-swatch .info .hex{font-size:8px;color:var(--dim);font-family:var(--font-mono)}
+.token-swatch .info .var{font-size:7px;color:var(--dim);font-family:var(--font-mono);opacity:0.7}
+
+/* Gradient row */
+.gradient-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.gradient-strip{height:72px;border-radius:12px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+.gradient-strip .g-label{position:absolute;bottom:10px;left:14px;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:rgba(255,255,255,0.7)}
+
+/* Opacity demo */
+.opacity-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.opacity-chip{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;font-family:var(--font-mono);color:#fff}
+
+/* CSS var table */
+.var-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.var-table th{text-align:left;padding:8px 10px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--route-500);font-weight:700;border-bottom:2px solid var(--border)}
+.var-table td{padding:8px 10px;border-bottom:1px solid rgba(30,41,59,0.5);vertical-align:middle}
+.var-table .mono{font-family:var(--font-mono);font-size:11px;color:var(--route-300)}
+.var-table .swatch-inline{width:24px;height:14px;border-radius:3px;display:inline-block;margin-right:8px;vertical-align:middle;border:1px solid rgba(255,255,255,0.06)}
+
+/* Typography specimen */
+.type-specimen{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.type-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--route-500);font-weight:600;margin-bottom:4px}
+.type-row{display:flex;align-items:baseline;gap:16px;padding:8px 0;border-bottom:1px solid rgba(30,41,59,0.4)}
+.type-row:last-child{border-bottom:none}
+.type-meta{min-width:120px;flex-shrink:0}
+.type-meta .size{font-size:11px;font-weight:700;color:var(--text)}
+.type-meta .props{font-size:9px;color:var(--dim);font-family:var(--font-mono)}
+.type-sample{flex:1}
+
+/* Spacing */
+.spacing-grid{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-top:12px}
+.space-block{display:flex;flex-direction:column;align-items:center;gap:4px}
+.space-bar{background:var(--route-500);border-radius:3px;opacity:0.6;min-width:8px}
+.space-label{font-size:9px;font-weight:700;color:var(--dim2);font-family:var(--font-mono)}
+.space-value{font-size:8px;color:var(--dim);font-family:var(--font-mono)}
+
+/* Radius / Shadow demo */
+.demo-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
+.radius-demo{width:80px;height:80px;background:var(--surface);border:1px solid var(--border-light);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.radius-demo .label{font-size:9px;font-weight:700;color:var(--dim2)}
+.radius-demo .value{font-size:8px;color:var(--dim);font-family:var(--font-mono)}
+.shadow-demo{width:120px;height:80px;background:var(--surface);border-radius:var(--radius-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.shadow-demo .label{font-size:9px;font-weight:700;color:var(--dim2)}
+.shadow-demo .value{font-size:8px;color:var(--dim);font-family:var(--font-mono)}
+
+/* Component cards */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.comp-preview{padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px;background:var(--bg);position:relative}
+.comp-info{padding:16px}
+.comp-info h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.comp-info .tag{font-size:10px;font-family:var(--font-mono);color:var(--route-400);margin-bottom:6px}
+.comp-info p{font-size:11px;color:var(--dim);line-height:1.5;margin:0}
+.comp-info .props{margin-top:8px;font-size:10px;font-family:var(--font-mono);color:var(--dim2);line-height:1.7}
+
+/* ---- Button atoms ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 24px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all .2s;letter-spacing:0.3px}
+.btn-primary{background:var(--route-600);color:#fff}.btn-primary:hover{background:var(--route-700);box-shadow:var(--shadow-glow-blue)}
+.btn-safety{background:var(--safety-500);color:#fff}.btn-safety:hover{background:var(--safety-600);box-shadow:var(--shadow-glow-orange)}
+.btn-outline{background:transparent;color:var(--route-300);border:1px solid var(--route-600)}.btn-outline:hover{background:rgba(59,130,246,0.1)}
+.btn-ghost{background:transparent;color:var(--dim2)}.btn-ghost:hover{color:var(--text);background:var(--surface2)}
+.btn-success{background:var(--cargo-600);color:#fff}.btn-success:hover{background:var(--cargo-700)}
+.btn-danger{background:var(--danger);color:#fff;opacity:0.9}.btn-danger:hover{opacity:1}
+.btn-sm{padding:6px 14px;font-size:11px;border-radius:6px}
+.btn-lg{padding:14px 32px;font-size:15px;border-radius:var(--radius-md)}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+
+/* ---- Input atoms ---- */
+.input{background:var(--bg);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color .2s;width:100%}
+.input:focus{border-color:var(--route-500);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
+.input::placeholder{color:var(--dim)}
+.input-error{border-color:var(--danger)}
+.input-success{border-color:var(--success)}
+.input-group{display:flex;flex-direction:column;gap:6px}
+.input-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim2)}
+
+/* ---- Badge atoms ---- */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.3px;text-transform:uppercase}
+.badge-mvp{background:rgba(252,211,77,0.15);color:var(--tier-mvp);border:1px solid rgba(252,211,77,0.3)}
+.badge-allstar{background:rgba(167,139,250,0.15);color:var(--tier-allstar);border:1px solid rgba(167,139,250,0.3)}
+.badge-starter{background:rgba(96,165,250,0.15);color:var(--tier-starter);border:1px solid rgba(96,165,250,0.3)}
+.badge-rookie{background:rgba(52,211,153,0.15);color:var(--tier-rookie);border:1px solid rgba(52,211,153,0.3)}
+.badge-active{background:rgba(16,185,129,0.15);color:var(--success);border:1px solid rgba(16,185,129,0.3)}
+.badge-warning{background:rgba(245,158,11,0.15);color:var(--warning);border:1px solid rgba(245,158,11,0.3)}
+.badge-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.3)}
+.badge-neutral{background:rgba(100,116,139,0.15);color:var(--dim2);border:1px solid rgba(100,116,139,0.3)}
+
+/* ---- Card organism ---- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;transition:all .2s}
+.card:hover{border-color:var(--border-light);box-shadow:var(--shadow-md)}
+.card-header{padding:16px;border-bottom:1px solid var(--border)}
+.card-body{padding:16px}
+.card-footer{padding:12px 16px;border-top:1px solid var(--border);background:rgba(17,24,39,0.5)}
+
+/* ---- Crew baseball card ---- */
+.crew-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;width:240px;transition:all .2s}
+.crew-card:hover{border-color:var(--border-light);box-shadow:var(--shadow-lg)}
+.crew-card .crew-header{padding:20px 16px 12px;text-align:center;position:relative}
+.crew-card .crew-avatar{width:64px;height:64px;border-radius:50%;background:var(--route-700);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--route-200);margin:0 auto 10px;border:2px solid var(--route-500)}
+.crew-card .crew-name{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:1px;margin-bottom:2px}
+.crew-card .crew-tier{margin-top:6px}
+.crew-card .crew-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.crew-card .crew-stat{background:var(--surface);padding:10px 8px;text-align:center}
+.crew-card .crew-stat .s-val{font-size:16px;font-weight:800;color:var(--text);letter-spacing:-0.5px}
+.crew-card .crew-stat .s-label{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);font-weight:600;margin-top:2px}
+.crew-card .crew-bar{padding:8px 12px;background:rgba(11,17,32,0.5)}
+.crew-card .crew-bar-track{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.crew-card .crew-bar-fill{height:100%;border-radius:2px}
+.crew-card .crew-bar-label{display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-top:4px}
+
+/* ---- Job card ---- */
+.job-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;width:280px;transition:all .2s}
+.job-card:hover{border-color:var(--border-light)}
+.job-card .job-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.job-card .job-id{font-family:var(--font-mono);font-size:11px;color:var(--route-300);font-weight:600}
+.job-card .job-route{margin-bottom:10px}
+.job-card .job-route .origin,.job-card .job-route .dest{font-size:13px;font-weight:600}
+.job-card .job-route .arrow{color:var(--dim);font-size:11px;margin:2px 0;display:flex;align-items:center;gap:6px}
+.job-card .job-route .arrow::before{content:'';flex:1;height:1px;background:var(--border-light);margin:0 4px}
+.job-card .job-meta{display:flex;gap:12px;font-size:11px;color:var(--dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.job-card .job-meta span{display:flex;align-items:center;gap:4px}
+
+/* ---- Route indicator ---- */
+.route-indicator{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.route-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.route-line{flex:1;height:2px;position:relative}
+.route-line::before{content:'';position:absolute;inset:0;border-radius:1px}
+.route-line.solid::before{background:var(--route-500)}
+.route-line.dashed::before{background:repeating-linear-gradient(90deg,var(--route-500) 0 6px,transparent 6px 12px)}
+.route-label{font-size:10px;font-weight:600;color:var(--dim2);text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
+
+/* ---- Vehicle status ---- */
+.vehicle-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;border:1px solid}
+.vehicle-badge .v-icon{font-size:14px}
+.vehicle-transit{background:rgba(59,130,246,0.1);color:var(--route-300);border-color:rgba(59,130,246,0.3)}
+.vehicle-loading{background:rgba(249,115,22,0.1);color:var(--safety-400);border-color:rgba(249,115,22,0.3)}
+.vehicle-delivered{background:rgba(16,185,129,0.1);color:var(--cargo-300);border-color:rgba(16,185,129,0.3)}
+.vehicle-idle{background:rgba(100,116,139,0.1);color:var(--dim2);border-color:rgba(100,116,139,0.3)}
+.vehicle-maintenance{background:rgba(239,68,68,0.1);color:#F87171;border-color:rgba(239,68,68,0.3)}
+
+/* ---- Revenue stat card ---- */
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;min-width:160px;transition:all .2s}
+.stat-card:hover{border-color:var(--border-light)}
+.stat-card .sc-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-bottom:8px}
+.stat-card .sc-value{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:4px}
+.stat-card .sc-delta{font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.stat-card .sc-delta.up{color:var(--success)}
+.stat-card .sc-delta.down{color:var(--danger)}
+.stat-card .sc-spark{margin-top:8px;height:24px;display:flex;align-items:flex-end;gap:2px}
+.stat-card .sc-spark .bar{flex:1;background:var(--route-600);border-radius:2px 2px 0 0;min-width:4px;opacity:0.6}
+.stat-card .sc-spark .bar.active{opacity:1;background:var(--route-400)}
+
+/* ---- Collection rate indicator ---- */
+.collection-rate{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.collection-gauge{width:48px;height:48px;position:relative}
+.collection-gauge svg{width:100%;height:100%}
+.collection-gauge .cg-value{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--text)}
+.collection-info{flex:1}
+.collection-info .ci-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600}
+.collection-info .ci-amounts{font-size:12px;color:var(--dim2);margin-top:2px}
+.collection-info .ci-amounts strong{color:var(--text)}
+
+/* ---- Calendar / Schedule block ---- */
+.schedule-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;width:280px}
+.schedule-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border)}
+.schedule-header .sh-month{font-family:var(--font-display);font-size:14px;font-weight:600;letter-spacing:1px;color:var(--route-300)}
+.schedule-days{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:8px}
+.schedule-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;font-size:11px;font-weight:600;color:var(--dim);cursor:pointer;transition:all .15s;position:relative}
+.schedule-day:hover{background:var(--surface2)}
+.schedule-day.today{background:var(--route-600);color:#fff;border-radius:50%}
+.schedule-day.has-jobs::after{content:'';position:absolute;bottom:2px;width:4px;height:4px;border-radius:50%;background:var(--safety-500)}
+.schedule-day.has-jobs.high::after{background:var(--danger)}
+.schedule-day.header{font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);cursor:default}
+.schedule-day.header:hover{background:transparent}
+
+/* ---- Navigation bar ---- */
+.nav-bar{display:flex;align-items:center;gap:16px;padding:10px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.nav-bar .nb-logo{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:2px;background:linear-gradient(135deg,var(--route-500),var(--safety-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-bar .nb-links{display:flex;gap:4px;margin-left:auto}
+.nav-bar .nb-link{padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;transition:all .15s;text-transform:uppercase;letter-spacing:0.5px}
+.nav-bar .nb-link:hover{color:var(--text);background:var(--surface2)}
+.nav-bar .nb-link.active{background:var(--route-600);color:#fff}
+.nav-bar .nb-action{margin-left:8px}
+
+/* Principle cards */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.principle{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px}
+.principle .num{font-family:var(--font-display);font-size:36px;font-weight:700;color:rgba(59,130,246,0.15);margin-bottom:8px;line-height:1;letter-spacing:2px}
+.principle h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.principle p{font-size:11px;color:var(--dim);margin:0}
+
+/* Rule grid */
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.rule{padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rule .code{font-size:10px;font-family:var(--font-mono);color:var(--route-400);margin-bottom:4px}
+.rule .desc{font-size:11px;color:var(--dim)}
+
+/* Responsive */
+@media(max-width:700px){
+  .comp-grid{grid-template-columns:1fr}
+  .principle-grid{grid-template-columns:1fr}
+  .rule-grid{grid-template-columns:1fr}
+  .gradient-row{grid-template-columns:1fr}
+  .stats-bar{gap:20px}
+  .demo-row{justify-content:center}
+  .nav{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ================================================================ -->
+<!-- HEADER                                                           -->
+<!-- ================================================================ -->
+<header class="sys-header">
+  <h1>TOP TIER MOVING DESIGN SYSTEM</h1>
+  <p class="sub">Atomic component reference for crew-based interstate moving intelligence &mdash; every button, card, and indicator maps to operational data on Charlotte OS.</p>
+  <span class="version">Design System v1.0 &middot; 2026</span>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-value">10,606</div><div class="stat-label">Jobs</div></div>
+    <div class="stat"><div class="stat-value">$14.4M</div><div class="stat-label">Billed</div></div>
+    <div class="stat"><div class="stat-value">98</div><div class="stat-label">Crew</div></div>
+    <div class="stat"><div class="stat-value">52</div><div class="stat-label">States</div></div>
+    <div class="stat"><div class="stat-value">3,675</div><div class="stat-label">Cities</div></div>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="#principles" class="active">Principles</a>
+  <a href="#colors">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radii-shadows">Radii &amp; Shadows</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#inputs">Inputs</a>
+  <a href="#badges">Badges</a>
+  <a href="#cards">Cards</a>
+  <a href="#navigation">Navigation</a>
+  <a href="#domain">Domain Components</a>
+  <a href="index.html">Brand Book</a>
+</nav>
+
+<!-- ================================================================ -->
+<!-- 1. DESIGN PRINCIPLES                                             -->
+<!-- ================================================================ -->
+<section id="principles">
+  <h2>Design Principles</h2>
+  <div class="principle-grid">
+    <div class="principle">
+      <div class="num">01</div>
+      <h4>Operational Clarity</h4>
+      <p>Every pixel serves a dispatch decision. If a crew member, job, or route cannot be acted upon from the element, it does not belong. No decorative overhead.</p>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <h4>Navy + Orange Contrast</h4>
+      <p>Route Blue anchors structure and trust. Safety Orange signals action, urgency, and dispatch calls. The interplay between the two is the brand's visual pulse.</p>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <h4>Tier-Driven Hierarchy</h4>
+      <p>MVP gold, All-Star purple, Starter blue, Rookie green. Tier colors are semantic &mdash; they appear on cards, badges, tables, and dispatch queues. Performance determines color.</p>
+    </div>
+    <div class="principle">
+      <div class="num">04</div>
+      <h4>Dark-First Legibility</h4>
+      <p>Operations run at 5AM and midnight. Dark backgrounds (#0B1120) with high-contrast text (#E2E8F0) reduce eye strain for dispatchers in any lighting condition.</p>
+    </div>
+    <div class="principle">
+      <div class="num">05</div>
+      <h4>Data Density</h4>
+      <p>Crew cards pack 6+ stats into 240px. Stat cards show value, delta, and sparkline in 160px. Moving operations generate signals fast &mdash; the UI must keep up.</p>
+    </div>
+    <div class="principle">
+      <div class="num">06</div>
+      <h4>Collection as First Metric</h4>
+      <p>Collection rate (billed vs. collected) is the health signal. Every crew card, job card, and stat card surfaces collection data. Green above 80%, amber 50&ndash;80%, red below 50%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 2. COLOR PALETTE                                                 -->
+<!-- ================================================================ -->
+<section id="colors">
+  <h2>Color Palette</h2>
+
+  <div class="token-section">
+    <div class="token-label">Route Blue &mdash; Primary</div>
+    <p>Structural color for navigation, headers, primary actions, and data visualization. Anchors the professional, logistical identity.</p>
+    <div class="token-row">
+      <div class="token-swatch"><div class="color" style="background:#EFF6FF"></div><div class="info"><div class="name">50</div><div class="hex">#EFF6FF</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#DBEAFE"></div><div class="info"><div class="name">100</div><div class="hex">#DBEAFE</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#BFDBFE"></div><div class="info"><div class="name">200</div><div class="hex">#BFDBFE</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#93C5FD"></div><div class="info"><div class="name">300</div><div class="hex">#93C5FD</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#60A5FA"></div><div class="info"><div class="name">400</div><div class="hex">#60A5FA</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#3B82F6"></div><div class="info"><div class="name">500</div><div class="hex">#3B82F6</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#2563EB"></div><div class="info"><div class="name">600</div><div class="hex">#2563EB</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#1D4ED8"></div><div class="info"><div class="name">700</div><div class="hex">#1D4ED8</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#1E3A8A"></div><div class="info"><div class="name">800</div><div class="hex">#1E3A8A</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#0F1A2E"></div><div class="info"><div class="name">900</div><div class="hex">#0F1A2E</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#080E1C"></div><div class="info"><div class="name">950</div><div class="hex">#080E1C</div></div></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Safety Orange &mdash; Dispatch Action</div>
+    <p>High-energy accent for CTAs, dispatch alerts, loading states, and urgent signals. Pulls from highway safety and DOT signage conventions.</p>
+    <div class="token-row">
+      <div class="token-swatch"><div class="color" style="background:#FFF7ED"></div><div class="info"><div class="name">50</div><div class="hex">#FFF7ED</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#FFEDD5"></div><div class="info"><div class="name">100</div><div class="hex">#FFEDD5</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#FED7AA"></div><div class="info"><div class="name">200</div><div class="hex">#FED7AA</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#FDBA74"></div><div class="info"><div class="name">300</div><div class="hex">#FDBA74</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#FB923C"></div><div class="info"><div class="name">400</div><div class="hex">#FB923C</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#F97316"></div><div class="info"><div class="name">500</div><div class="hex">#F97316</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#EA580C"></div><div class="info"><div class="name">600</div><div class="hex">#EA580C</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#C2410C"></div><div class="info"><div class="name">700</div><div class="hex">#C2410C</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#9A3412"></div><div class="info"><div class="name">800</div><div class="hex">#9A3412</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#7C2D12"></div><div class="info"><div class="name">900</div><div class="hex">#7C2D12</div></div></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Cargo Green &mdash; Secondary / Success</div>
+    <div class="token-row">
+      <div class="token-swatch"><div class="color" style="background:#ECFDF5"></div><div class="info"><div class="name">50</div><div class="hex">#ECFDF5</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#D1FAE5"></div><div class="info"><div class="name">100</div><div class="hex">#D1FAE5</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#A7F3D0"></div><div class="info"><div class="name">200</div><div class="hex">#A7F3D0</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#6EE7B7"></div><div class="info"><div class="name">300</div><div class="hex">#6EE7B7</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#10B981"></div><div class="info"><div class="name">500</div><div class="hex">#10B981</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#059669"></div><div class="info"><div class="name">600</div><div class="hex">#059669</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#047857"></div><div class="info"><div class="name">700</div><div class="hex">#047857</div></div></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Dispatch Amber &mdash; Accent / Warning</div>
+    <div class="token-row">
+      <div class="token-swatch"><div class="color" style="background:#FFFBEB"></div><div class="info"><div class="name">50</div><div class="hex">#FFFBEB</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#FEF3C7"></div><div class="info"><div class="name">100</div><div class="hex">#FEF3C7</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#FCD34D"></div><div class="info"><div class="name">300</div><div class="hex">#FCD34D</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#F59E0B"></div><div class="info"><div class="name">500</div><div class="hex">#F59E0B</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#D97706"></div><div class="info"><div class="name">600</div><div class="hex">#D97706</div></div></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Night &mdash; Neutral / Surface</div>
+    <div class="token-row">
+      <div class="token-swatch"><div class="color" style="background:#F8FAFC"></div><div class="info"><div class="name">50</div><div class="hex">#F8FAFC</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#E2E8F0"></div><div class="info"><div class="name">100</div><div class="hex">#E2E8F0</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#CBD5E1"></div><div class="info"><div class="name">200</div><div class="hex">#CBD5E1</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#94A3B8"></div><div class="info"><div class="name">300</div><div class="hex">#94A3B8</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#64748B"></div><div class="info"><div class="name">500</div><div class="hex">#64748B</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#475569"></div><div class="info"><div class="name">600</div><div class="hex">#475569</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#334155"></div><div class="info"><div class="name">700</div><div class="hex">#334155</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#1E293B"></div><div class="info"><div name="name">800</div><div class="hex">#1E293B</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#0B1120"></div><div class="info"><div class="name">900</div><div class="hex">#0B1120</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#060A14"></div><div class="info"><div class="name">950</div><div class="hex">#060A14</div></div></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Tier Colors &mdash; Performance Mapping</div>
+    <div class="token-row">
+      <div class="token-swatch"><div class="color" style="background:#FCD34D"></div><div class="info"><div class="name">MVP</div><div class="hex">#FCD34D</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#A78BFA"></div><div class="info"><div class="name">All-Star</div><div class="hex">#A78BFA</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#60A5FA"></div><div class="info"><div class="name">Starter</div><div class="hex">#60A5FA</div></div></div>
+      <div class="token-swatch"><div class="color" style="background:#34D399"></div><div class="info"><div class="name">Rookie</div><div class="hex">#34D399</div></div></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Brand Gradients</div>
+    <div class="gradient-row">
+      <div class="gradient-strip" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6,#F97316)"><span class="g-label">Route &rarr; Safety</span></div>
+      <div class="gradient-strip" style="background:linear-gradient(135deg,#0F1A2E,#3B82F6,#10B981)"><span class="g-label">Night &rarr; Cargo</span></div>
+    </div>
+    <div class="gradient-row" style="margin-top:8px">
+      <div class="gradient-strip" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6,#10B981)"><span class="g-label">Route &rarr; Cargo</span></div>
+      <div class="gradient-strip" style="background:linear-gradient(90deg,#FCD34D,#A78BFA,#60A5FA,#34D399)"><span class="g-label">Tier Spectrum</span></div>
+    </div>
+  </div>
+
+  <div class="token-section">
+    <div class="token-label">Opacity Variants</div>
+    <p>Use route-blue with opacity for overlay backgrounds, hover states, and focus rings.</p>
+    <div class="opacity-row">
+      <div class="opacity-chip" style="background:rgba(59,130,246,1.0)">100%</div>
+      <div class="opacity-chip" style="background:rgba(59,130,246,0.8)">80%</div>
+      <div class="opacity-chip" style="background:rgba(59,130,246,0.6)">60%</div>
+      <div class="opacity-chip" style="background:rgba(59,130,246,0.4)">40%</div>
+      <div class="opacity-chip" style="background:rgba(59,130,246,0.2)">20%</div>
+      <div class="opacity-chip" style="background:rgba(59,130,246,0.1)">10%</div>
+      <div class="opacity-chip" style="background:rgba(59,130,246,0.05);color:var(--dim2)">5%</div>
+    </div>
+    <div class="opacity-row" style="margin-top:6px">
+      <div class="opacity-chip" style="background:rgba(249,115,22,1.0)">100%</div>
+      <div class="opacity-chip" style="background:rgba(249,115,22,0.8)">80%</div>
+      <div class="opacity-chip" style="background:rgba(249,115,22,0.6)">60%</div>
+      <div class="opacity-chip" style="background:rgba(249,115,22,0.4)">40%</div>
+      <div class="opacity-chip" style="background:rgba(249,115,22,0.2)">20%</div>
+      <div class="opacity-chip" style="background:rgba(249,115,22,0.1)">10%</div>
+      <div class="opacity-chip" style="background:rgba(249,115,22,0.05);color:var(--dim2)">5%</div>
+    </div>
+  </div>
+
+  <h3>CSS Custom Properties</h3>
+  <table class="var-table">
+    <thead><tr><th>Variable</th><th>Value</th><th>Usage</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">--bg</td><td><span class="swatch-inline" style="background:#0B1120"></span>#0B1120</td><td>Page background</td></tr>
+      <tr><td class="mono">--surface</td><td><span class="swatch-inline" style="background:#111827"></span>#111827</td><td>Card backgrounds</td></tr>
+      <tr><td class="mono">--surface2</td><td><span class="swatch-inline" style="background:#1E293B"></span>#1E293B</td><td>Elevated surfaces, hovers</td></tr>
+      <tr><td class="mono">--border</td><td><span class="swatch-inline" style="background:#1E293B"></span>#1E293B</td><td>Default borders</td></tr>
+      <tr><td class="mono">--border-light</td><td><span class="swatch-inline" style="background:#334155"></span>#334155</td><td>Hover/active borders</td></tr>
+      <tr><td class="mono">--text</td><td><span class="swatch-inline" style="background:#E2E8F0"></span>#E2E8F0</td><td>Primary text</td></tr>
+      <tr><td class="mono">--dim</td><td><span class="swatch-inline" style="background:#64748B"></span>#64748B</td><td>Secondary text, labels</td></tr>
+      <tr><td class="mono">--dim2</td><td><span class="swatch-inline" style="background:#94A3B8"></span>#94A3B8</td><td>Tertiary text, meta</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================================================================ -->
+<!-- 3. TYPOGRAPHY SCALE                                              -->
+<!-- ================================================================ -->
+<section id="typography">
+  <h2>Typography Scale</h2>
+
+  <h3>Display &amp; Heading &mdash; Oswald</h3>
+  <p>Used for all display text, page headers, section labels, and stat values. Uppercase with generous letter-spacing reinforces the logistical, industrial tone.</p>
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Display</div><div class="props">52px / 700 / +4px</div></div>
+      <div class="type-sample" style="font-family:var(--font-display);font-size:52px;font-weight:700;letter-spacing:4px">TOP TIER</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">H1</div><div class="props">36px / 700 / +2px</div></div>
+      <div class="type-sample" style="font-family:var(--font-display);font-size:36px;font-weight:700;letter-spacing:2px">CREW DISPATCH</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">H2</div><div class="props">24px / 600 / +1px</div></div>
+      <div class="type-sample" style="font-family:var(--font-display);font-size:24px;font-weight:600;letter-spacing:1px">ROUTE INTELLIGENCE</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">H3</div><div class="props">18px / 600 / +0.5px</div></div>
+      <div class="type-sample" style="font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:0.5px">Collection Analytics</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">H4</div><div class="props">14px / 600 / +1.5px</div></div>
+      <div class="type-sample" style="font-family:var(--font-display);font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase">Section Label</div>
+    </div>
+  </div>
+
+  <h3>Body &amp; UI &mdash; Inter</h3>
+  <p>All body copy, table data, form labels, and interactive text. Variable weight for hierarchy within running text.</p>
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Body Large</div><div class="props">16px / 400 / 1.7</div></div>
+      <div class="type-sample" style="font-size:16px;font-weight:400;line-height:1.7">Crew-based dispatch intelligence for long-distance interstate moving operations.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Body</div><div class="props">14px / 400 / 1.6</div></div>
+      <div class="type-sample" style="font-size:14px;font-weight:400;line-height:1.6">Samuel Henrik completed 824 jobs across 50 states, generating $2.38M in total billings with a 71.6% collection rate.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Body Small</div><div class="props">13px / 400 / 1.5</div></div>
+      <div class="type-sample" style="font-size:13px;font-weight:400;line-height:1.5;color:var(--dim2)">Origin: Boynton Beach, FL &mdash; Destination: Austin, TX &mdash; Weight: 8,400 lbs</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Caption</div><div class="props">11px / 600 / +1px</div></div>
+      <div class="type-sample" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--dim2)">Revenue &middot; Jobs &middot; Collection Rate</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Overline</div><div class="props">9px / 700 / +1.5px</div></div>
+      <div class="type-sample" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--route-500)">TIER: MVP</div>
+    </div>
+  </div>
+
+  <h3>Mono &mdash; Cascadia Code / Fira Code</h3>
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Code</div><div class="props">13px / 400</div></div>
+      <div class="type-sample" style="font-family:var(--font-mono);font-size:13px;color:var(--cargo-500)">crew.samuel_henrik.jobs = 824</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta"><div class="size">Data</div><div class="props">11px / 400</div></div>
+      <div class="type-sample" style="font-family:var(--font-mono);font-size:11px;color:var(--dim2)">JOB-2026-00847 | $3,200 billed | $2,560 collected | 80.0%</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 4. SPACING SYSTEM                                                -->
+<!-- ================================================================ -->
+<section id="spacing">
+  <h2>Spacing System</h2>
+  <p>4px base unit. All spacing values are multiples of 4. Used for padding, margins, gaps, and component sizing.</p>
+
+  <div class="spacing-grid">
+    <div class="space-block"><div class="space-bar" style="width:16px;height:4px"></div><div class="space-label">1</div><div class="space-value">4px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:8px"></div><div class="space-label">2</div><div class="space-value">8px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:12px"></div><div class="space-label">3</div><div class="space-value">12px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:16px"></div><div class="space-label">4</div><div class="space-value">16px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:20px"></div><div class="space-label">5</div><div class="space-value">20px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:24px"></div><div class="space-label">6</div><div class="space-value">24px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:32px"></div><div class="space-label">8</div><div class="space-value">32px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:40px"></div><div class="space-label">10</div><div class="space-value">40px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:48px"></div><div class="space-label">12</div><div class="space-value">48px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:64px"></div><div class="space-label">16</div><div class="space-value">64px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:80px"></div><div class="space-label">20</div><div class="space-value">80px</div></div>
+    <div class="space-block"><div class="space-bar" style="width:16px;height:96px"></div><div class="space-label">24</div><div class="space-value">96px</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Usage Reference</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">--space-1: 4px</div><div class="desc">Inline gaps, icon margins</div></div>
+    <div class="rule"><div class="code">--space-2: 8px</div><div class="desc">Tight padding, nav gaps</div></div>
+    <div class="rule"><div class="code">--space-3: 12px</div><div class="desc">Input padding, small cards</div></div>
+    <div class="rule"><div class="code">--space-4: 16px</div><div class="desc">Card padding, grid gaps</div></div>
+    <div class="rule"><div class="code">--space-6: 24px</div><div class="desc">Section inner spacing</div></div>
+    <div class="rule"><div class="code">--space-8: 32px</div><div class="desc">Page padding, section gaps</div></div>
+    <div class="rule"><div class="code">--space-12: 48px</div><div class="desc">Section margins</div></div>
+    <div class="rule"><div class="code">--space-16: 64px</div><div class="desc">Major section dividers</div></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5. BORDER RADIUS & SHADOWS                                       -->
+<!-- ================================================================ -->
+<section id="radii-shadows">
+  <h2>Border Radius &amp; Shadows</h2>
+
+  <h3>Border Radius</h3>
+  <div class="demo-row">
+    <div class="radius-demo" style="border-radius:var(--radius-sm)"><div class="label">SM</div><div class="value">8px</div></div>
+    <div class="radius-demo" style="border-radius:var(--radius-md)"><div class="label">MD</div><div class="value">12px</div></div>
+    <div class="radius-demo" style="border-radius:var(--radius-lg)"><div class="label">LG</div><div class="value">16px</div></div>
+    <div class="radius-demo" style="border-radius:var(--radius-xl)"><div class="label">XL</div><div class="value">20px</div></div>
+    <div class="radius-demo" style="border-radius:50%"><div class="label">Full</div><div class="value">50%</div></div>
+    <div class="radius-demo" style="border-radius:9999px;width:120px"><div class="label">Pill</div><div class="value">9999px</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Shadows</h3>
+  <div class="demo-row">
+    <div class="shadow-demo" style="box-shadow:var(--shadow-sm)"><div class="label">SM</div><div class="value">0 1px 2px</div></div>
+    <div class="shadow-demo" style="box-shadow:var(--shadow-md)"><div class="label">MD</div><div class="value">0 4px 12px</div></div>
+    <div class="shadow-demo" style="box-shadow:var(--shadow-lg)"><div class="label">LG</div><div class="value">0 8px 32px</div></div>
+    <div class="shadow-demo" style="box-shadow:var(--shadow-glow-blue)"><div class="label">Glow Blue</div><div class="value">0 0 20px</div></div>
+    <div class="shadow-demo" style="box-shadow:var(--shadow-glow-orange)"><div class="label">Glow Orange</div><div class="value">0 0 20px</div></div>
+  </div>
+
+  <div class="rule-grid" style="margin-top:20px">
+    <div class="rule"><div class="code">--shadow-sm</div><div class="desc">Subtle lift for badges, chips</div></div>
+    <div class="rule"><div class="code">--shadow-md</div><div class="desc">Cards, dropdowns, popovers</div></div>
+    <div class="rule"><div class="code">--shadow-lg</div><div class="desc">Modals, floating panels</div></div>
+    <div class="rule"><div class="code">--shadow-glow-blue</div><div class="desc">Primary focus ring, active nav</div></div>
+    <div class="rule"><div class="code">--shadow-glow-orange</div><div class="desc">Dispatch CTA, urgent actions</div></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 6. BUTTONS                                                       -->
+<!-- ================================================================ -->
+<section id="buttons">
+  <h2>Buttons</h2>
+  <p>Six variants, three sizes. Primary (route blue) for standard actions. Safety (orange) for dispatch calls and urgent operations. Outline and ghost for secondary and tertiary hierarchy.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary">Dispatch</button>
+        <button class="btn btn-safety">Urgent</button>
+        <button class="btn btn-outline">Details</button>
+        <button class="btn btn-ghost">Cancel</button>
+        <button class="btn btn-success">Confirm</button>
+        <button class="btn btn-danger">Remove</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button Variants</h4>
+        <div class="tag">btn-primary | btn-safety | btn-outline | btn-ghost | btn-success | btn-danger</div>
+        <p>Primary = route-600 fill. Safety = safety-500 fill. Outline = route border only. Ghost = no bg. Success = cargo-600. Danger = red.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-direction:column;align-items:center">
+        <button class="btn btn-primary btn-sm">Small 6/14px</button>
+        <button class="btn btn-primary">Default 10/24px</button>
+        <button class="btn btn-primary btn-lg">Large 14/32px</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button Sizes</h4>
+        <div class="tag">btn-sm | default | btn-lg</div>
+        <p>Small for table actions and inline controls. Default for forms and cards. Large for hero CTAs and dispatch confirmations.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" disabled>Disabled</button>
+        <button class="btn btn-safety" style="box-shadow:var(--shadow-glow-orange)">Active Glow</button>
+        <button class="btn btn-primary" style="width:200px">Full Width Action</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button States</h4>
+        <div class="tag">:disabled | :hover (glow) | full-width</div>
+        <p>Disabled at 40% opacity. Hover adds glow shadow matching variant color. Full width for mobile/modal contexts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 7. INPUTS                                                        -->
+<!-- ================================================================ -->
+<section id="inputs">
+  <h2>Inputs</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;width:100%">
+        <div class="input-group">
+          <label class="input-label">Crew Name</label>
+          <input class="input" type="text" placeholder="Search crew members..." value="Samuel Henrik">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Job ID</label>
+          <input class="input" type="text" placeholder="JOB-2026-XXXXX">
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Text Input</h4>
+        <div class="tag">.input + .input-group + .input-label</div>
+        <p>Background: --bg. Border: --border-light. Focus: route-500 border + 3px glow ring. Label is uppercase 11px caption.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;width:100%">
+        <div class="input-group">
+          <label class="input-label">Origin City</label>
+          <input class="input input-success" type="text" value="Boynton Beach, FL" readonly>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Weight (lbs)</label>
+          <input class="input input-error" type="text" value="-500" style="color:var(--danger)">
+          <span style="font-size:10px;color:var(--danger);margin-top:2px">Weight must be positive</span>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Validation States</h4>
+        <div class="tag">.input-success | .input-error</div>
+        <p>Success: green border. Error: red border + inline error message. Validation is immediate on crew, job, and route forms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 8. BADGES                                                        -->
+<!-- ================================================================ -->
+<section id="badges">
+  <h2>Badges</h2>
+
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:10px;flex-wrap:wrap;padding:24px">
+      <span class="badge badge-mvp">MVP</span>
+      <span class="badge badge-allstar">All-Star</span>
+      <span class="badge badge-starter">Starter</span>
+      <span class="badge badge-rookie">Rookie</span>
+      <span class="badge badge-active">Delivered</span>
+      <span class="badge badge-warning">In Transit</span>
+      <span class="badge badge-danger">Overdue</span>
+      <span class="badge badge-neutral">Pending</span>
+    </div>
+    <div class="comp-info">
+      <h4>Badge Variants</h4>
+      <div class="tag">Tier: badge-mvp | badge-allstar | badge-starter | badge-rookie</div>
+      <div class="tag">Status: badge-active | badge-warning | badge-danger | badge-neutral</div>
+      <p>15% background opacity + matching text + 30% border. 20px pill radius. 10px uppercase text. Tier badges map 1:1 to the crew performance classification system.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 9. CARDS                                                         -->
+<!-- ================================================================ -->
+<section id="cards">
+  <h2>Cards</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:24px">
+        <div class="card" style="width:100%">
+          <div class="card-header">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div style="font-weight:700;font-size:14px">Revenue Overview</div>
+              <span class="badge badge-active">Live</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div style="font-size:32px;font-weight:800;letter-spacing:-1px">$14.4M</div>
+            <div style="font-size:12px;color:var(--dim);margin-top:4px">Total billed across 10,606 jobs</div>
+          </div>
+          <div class="card-footer">
+            <div style="font-size:10px;color:var(--dim)">Updated 2 min ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Base Card</h4>
+        <div class="tag">.card > .card-header + .card-body + .card-footer</div>
+        <p>Surface background. Border. Header/body/footer separation with 1px borders. Hover lifts with shadow-md.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:24px">
+        <div class="card" style="width:100%;border-left:3px solid var(--route-500)">
+          <div class="card-body">
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--route-500);font-weight:700;margin-bottom:6px">Dispatch Alert</div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:4px">Samuel Henrik assigned to JOB-2026-00847</div>
+            <div style="font-size:12px;color:var(--dim)">Boynton Beach, FL &rarr; Austin, TX &mdash; 8,400 lbs</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Alert Card</h4>
+        <div class="tag">.card with border-left: 3px solid [color]</div>
+        <p>Left border accent for notifications, dispatch alerts, and timeline events. Color matches severity or category.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 10. NAVIGATION                                                   -->
+<!-- ================================================================ -->
+<section id="navigation">
+  <h2>Navigation</h2>
+
+  <div class="comp-card" style="max-width:900px">
+    <div class="comp-preview" style="padding:24px;width:100%">
+      <div class="nav-bar" style="width:100%">
+        <span class="nb-logo">TOP TIER</span>
+        <div class="nb-links">
+          <a class="nb-link active" href="#">Dashboard</a>
+          <a class="nb-link" href="#">Crew</a>
+          <a class="nb-link" href="#">Jobs</a>
+          <a class="nb-link" href="#">Routes</a>
+          <a class="nb-link" href="#">Collection</a>
+        </div>
+        <button class="btn btn-safety btn-sm nb-action">Dispatch</button>
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Top Navigation Bar</h4>
+      <div class="tag">.nav-bar > .nb-logo + .nb-links + .nb-action</div>
+      <p>Surface background with border. Logo uses brand gradient clip. Links are uppercase 11px, active state = route-600 fill. CTA action button in safety orange sits at the end.</p>
+    </div>
+  </div>
+
+  <div class="comp-card" style="max-width:400px;margin-top:16px">
+    <div class="comp-preview" style="padding:24px;flex-direction:column;gap:2px;align-items:stretch">
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--route-600);color:#fff;text-decoration:none;font-size:12px;font-weight:600">
+        <span style="width:20px;text-align:center">&#x25A0;</span> Dashboard
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);color:var(--dim2);text-decoration:none;font-size:12px;font-weight:500;transition:all .15s">
+        <span style="width:20px;text-align:center">&#x25CB;</span> Crew Members
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);color:var(--dim2);text-decoration:none;font-size:12px;font-weight:500">
+        <span style="width:20px;text-align:center">&#x25B7;</span> Jobs
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);color:var(--dim2);text-decoration:none;font-size:12px;font-weight:500">
+        <span style="width:20px;text-align:center">&#x2014;</span> Routes
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);color:var(--dim2);text-decoration:none;font-size:12px;font-weight:500">
+        <span style="width:20px;text-align:center">$</span> Collection
+      </a>
+    </div>
+    <div class="comp-info">
+      <h4>Side Navigation</h4>
+      <div class="tag">Vertical link list with icon + label</div>
+      <p>Active = route-600 fill, white text. Inactive = dim2 text. Hover lifts to surface2. Icons are placeholder &mdash; replace with actual SVG icons in implementation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 11. DOMAIN-SPECIFIC COMPONENTS                                   -->
+<!-- ================================================================ -->
+<section id="domain">
+  <h2>Domain Components</h2>
+  <p>Components specific to the Top Tier Moving / Vanguard Moving Group operational domain. These map directly to entities in the Charlotte substrate: crew members, jobs, routes, vehicles, revenue, and collection.</p>
+
+  <!-- Crew Baseball Cards -->
+  <h3 style="margin-top:24px">Crew Member Cards (Baseball Card Style)</h3>
+  <p>The primary crew identity component. Packs avatar, name, tier badge, 4 key stats, and a collection rate bar into a 240px card. Every crew member in the system gets one.</p>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px">
+    <div class="crew-card">
+      <div class="crew-header">
+        <div class="crew-avatar">SH</div>
+        <div class="crew-name" style="color:var(--tier-mvp)">Samuel Henrik</div>
+        <div class="crew-tier"><span class="badge badge-mvp">MVP</span></div>
+      </div>
+      <div class="crew-stats">
+        <div class="crew-stat"><div class="s-val">824</div><div class="s-label">Jobs</div></div>
+        <div class="crew-stat"><div class="s-val">$2.38M</div><div class="s-label">Revenue</div></div>
+        <div class="crew-stat"><div class="s-val">50</div><div class="s-label">States</div></div>
+        <div class="crew-stat"><div class="s-val">71.6%</div><div class="s-label">Collection</div></div>
+      </div>
+      <div class="crew-bar">
+        <div class="crew-bar-track"><div class="crew-bar-fill" style="width:71.6%;background:linear-gradient(90deg,var(--amber-500),var(--safety-500))"></div></div>
+        <div class="crew-bar-label"><span>Collection Rate</span><span style="color:var(--amber-500)">71.6%</span></div>
+      </div>
+    </div>
+
+    <div class="crew-card">
+      <div class="crew-header">
+        <div class="crew-avatar" style="background:var(--tier-allstar);border-color:var(--tier-allstar);color:#1a1a2e">BB</div>
+        <div class="crew-name" style="color:var(--tier-allstar)">Brandon Brandon</div>
+        <div class="crew-tier"><span class="badge badge-allstar">All-Star</span></div>
+      </div>
+      <div class="crew-stats">
+        <div class="crew-stat"><div class="s-val">311</div><div class="s-label">Jobs</div></div>
+        <div class="crew-stat"><div class="s-val">$637K</div><div class="s-label">Revenue</div></div>
+        <div class="crew-stat"><div class="s-val">49</div><div class="s-label">States</div></div>
+        <div class="crew-stat"><div class="s-val">95.1%</div><div class="s-label">Collection</div></div>
+      </div>
+      <div class="crew-bar">
+        <div class="crew-bar-track"><div class="crew-bar-fill" style="width:95.1%;background:linear-gradient(90deg,var(--cargo-500),var(--cargo-300))"></div></div>
+        <div class="crew-bar-label"><span>Collection Rate</span><span style="color:var(--cargo-500)">95.1%</span></div>
+      </div>
+    </div>
+
+    <div class="crew-card">
+      <div class="crew-header">
+        <div class="crew-avatar" style="background:var(--tier-rookie);border-color:var(--tier-rookie);color:#1a1a2e;font-size:18px">NR</div>
+        <div class="crew-name" style="color:var(--tier-rookie)">New Recruit</div>
+        <div class="crew-tier"><span class="badge badge-rookie">Rookie</span></div>
+      </div>
+      <div class="crew-stats">
+        <div class="crew-stat"><div class="s-val">12</div><div class="s-label">Jobs</div></div>
+        <div class="crew-stat"><div class="s-val">$18K</div><div class="s-label">Revenue</div></div>
+        <div class="crew-stat"><div class="s-val">8</div><div class="s-label">States</div></div>
+        <div class="crew-stat"><div class="s-val">42.0%</div><div class="s-label">Collection</div></div>
+      </div>
+      <div class="crew-bar">
+        <div class="crew-bar-track"><div class="crew-bar-fill" style="width:42%;background:linear-gradient(90deg,var(--danger),var(--safety-500))"></div></div>
+        <div class="crew-bar-label"><span>Collection Rate</span><span style="color:var(--danger)">42.0%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job Cards -->
+  <h3 style="margin-top:40px">Job Cards</h3>
+  <p>Interstate job summary with origin/destination route, crew assignment, weight, and billing. Status badge communicates current lifecycle stage.</p>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px">
+    <div class="job-card">
+      <div class="job-header">
+        <span class="job-id">JOB-2026-00847</span>
+        <span class="badge badge-warning">In Transit</span>
+      </div>
+      <div class="job-route">
+        <div class="origin">Boynton Beach, FL</div>
+        <div class="arrow">&#x2193;</div>
+        <div class="dest">Austin, TX</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--route-700);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--route-200);border:1px solid var(--route-500)">SH</div>
+        <span style="font-size:12px;font-weight:600">Samuel Henrik</span>
+        <span class="badge badge-mvp" style="font-size:8px;padding:2px 6px">MVP</span>
+      </div>
+      <div class="job-meta">
+        <span>8,400 lbs</span>
+        <span>$3,200</span>
+        <span>1,287 mi</span>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="job-header">
+        <span class="job-id">JOB-2026-00846</span>
+        <span class="badge badge-active">Delivered</span>
+      </div>
+      <div class="job-route">
+        <div class="origin">Portland, OR</div>
+        <div class="arrow">&#x2193;</div>
+        <div class="dest">Denver, CO</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:28px;height:28px;border-radius:50%;background:rgba(167,139,250,0.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--tier-allstar);border:1px solid var(--tier-allstar)">RP</div>
+        <span style="font-size:12px;font-weight:600">Ricky Phil</span>
+        <span class="badge badge-mvp" style="font-size:8px;padding:2px 6px">MVP</span>
+      </div>
+      <div class="job-meta">
+        <span>12,100 lbs</span>
+        <span>$4,800</span>
+        <span>1,238 mi</span>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="job-header">
+        <span class="job-id">JOB-2026-00845</span>
+        <span class="badge badge-danger">Overdue</span>
+      </div>
+      <div class="job-route">
+        <div class="origin">Miami, FL</div>
+        <div class="arrow">&#x2193;</div>
+        <div class="dest">Seattle, WA</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:28px;height:28px;border-radius:50%;background:rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--tier-rookie);border:1px solid var(--tier-rookie)">NR</div>
+        <span style="font-size:12px;font-weight:600">New Recruit</span>
+        <span class="badge badge-rookie" style="font-size:8px;padding:2px 6px">Rookie</span>
+      </div>
+      <div class="job-meta">
+        <span>6,200 lbs</span>
+        <span>$5,100</span>
+        <span>3,305 mi</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Route Indicators -->
+  <h3 style="margin-top:40px">Route Indicators</h3>
+  <p>Visual route status between origin and destination. Solid line for confirmed routes, dashed for estimated. Color encodes route status.</p>
+
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:480px;margin-top:16px">
+    <div class="route-indicator">
+      <div class="route-dot" style="background:var(--safety-500)"></div>
+      <div class="route-label">Boynton Beach, FL</div>
+      <div class="route-line solid" style="min-width:60px"></div>
+      <div class="route-label">Austin, TX</div>
+      <div class="route-dot" style="background:var(--cargo-500)"></div>
+    </div>
+    <div class="route-indicator">
+      <div class="route-dot" style="background:var(--route-400)"></div>
+      <div class="route-label">Portland, OR</div>
+      <div class="route-line dashed" style="min-width:60px"></div>
+      <div class="route-label">Denver, CO</div>
+      <div class="route-dot" style="background:var(--dim)"></div>
+    </div>
+    <div class="route-indicator" style="border-color:rgba(239,68,68,0.3)">
+      <div class="route-dot" style="background:var(--danger)"></div>
+      <div class="route-label" style="color:var(--danger)">Miami, FL</div>
+      <div class="route-line solid" style="min-width:60px">
+        <span style="position:absolute;inset:0;background:var(--danger);border-radius:1px"></span>
+      </div>
+      <div class="route-label" style="color:var(--danger)">Seattle, WA</div>
+      <div class="route-dot" style="background:var(--danger)"></div>
+    </div>
+  </div>
+
+  <!-- Vehicle Status Badges -->
+  <h3 style="margin-top:40px">Vehicle Status Badges</h3>
+  <p>Fleet status at a glance. Five states covering the full vehicle lifecycle from idle to maintenance.</p>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+    <div class="vehicle-badge vehicle-transit"><span class="v-icon">&#x1F69B;</span> In Transit</div>
+    <div class="vehicle-badge vehicle-loading"><span class="v-icon">&#x1F4E6;</span> Loading</div>
+    <div class="vehicle-badge vehicle-delivered"><span class="v-icon">&#x2713;</span> Delivered</div>
+    <div class="vehicle-badge vehicle-idle"><span class="v-icon">&#x23F8;</span> Idle</div>
+    <div class="vehicle-badge vehicle-maintenance"><span class="v-icon">&#x1F527;</span> Maintenance</div>
+  </div>
+
+  <!-- Revenue Stat Cards -->
+  <h3 style="margin-top:40px">Revenue Stat Cards</h3>
+  <p>Key operational metrics with value, delta indicator, and sparkline mini-chart. Designed for dashboard header rows.</p>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px">
+    <div class="stat-card">
+      <div class="sc-label">Total Billed</div>
+      <div class="sc-value" style="color:var(--text)">$14.4M</div>
+      <div class="sc-delta up">&#x25B2; 8.2% YoY</div>
+      <div class="sc-spark">
+        <div class="bar" style="height:40%"></div>
+        <div class="bar" style="height:65%"></div>
+        <div class="bar" style="height:80%"></div>
+        <div class="bar" style="height:95%"></div>
+        <div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:55%"></div>
+        <div class="bar active" style="height:85%"></div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="sc-label">Collection Rate</div>
+      <div class="sc-value" style="color:var(--amber-500)">75.7%</div>
+      <div class="sc-delta down">&#x25BC; 2.1% MoM</div>
+      <div class="sc-spark">
+        <div class="bar" style="height:85%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:80%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:75%;background:var(--amber-500)"></div>
+        <div class="bar" style="height:70%;background:var(--amber-500)"></div>
+        <div class="bar" style="height:78%;background:var(--amber-500)"></div>
+        <div class="bar" style="height:72%;background:var(--amber-500)"></div>
+        <div class="bar active" style="height:65%;background:var(--safety-500)"></div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="sc-label">Active Jobs</div>
+      <div class="sc-value" style="color:var(--route-300)">247</div>
+      <div class="sc-delta up">&#x25B2; 12 this week</div>
+      <div class="sc-spark">
+        <div class="bar" style="height:30%"></div>
+        <div class="bar" style="height:45%"></div>
+        <div class="bar" style="height:60%"></div>
+        <div class="bar" style="height:50%"></div>
+        <div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:85%"></div>
+        <div class="bar active" style="height:90%"></div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="sc-label">Active Crew</div>
+      <div class="sc-value" style="color:var(--cargo-300)">98</div>
+      <div class="sc-delta up">&#x25B2; 3 new</div>
+      <div class="sc-spark">
+        <div class="bar" style="height:70%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:72%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:75%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:80%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:82%;background:var(--cargo-600)"></div>
+        <div class="bar" style="height:85%;background:var(--cargo-600)"></div>
+        <div class="bar active" style="height:90%;background:var(--cargo-500)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collection Rate Indicators -->
+  <h3 style="margin-top:40px">Collection Rate Indicators</h3>
+  <p>Circular gauge with billed vs. collected amounts. Color encodes health: green above 80%, amber 50-80%, red below 50%.</p>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px">
+    <div class="collection-rate">
+      <div class="collection-gauge">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="19" fill="none" stroke="var(--surface2)" stroke-width="4"/>
+          <circle cx="24" cy="24" r="19" fill="none" stroke="var(--cargo-500)" stroke-width="4" stroke-dasharray="107 120" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+        </svg>
+        <div class="cg-value" style="color:var(--cargo-500)">89%</div>
+      </div>
+      <div class="collection-info">
+        <div class="ci-label">Edwin Teddy</div>
+        <div class="ci-amounts"><strong>$750K</strong> / $847K billed</div>
+      </div>
+    </div>
+
+    <div class="collection-rate">
+      <div class="collection-gauge">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="19" fill="none" stroke="var(--surface2)" stroke-width="4"/>
+          <circle cx="24" cy="24" r="19" fill="none" stroke="var(--amber-500)" stroke-width="4" stroke-dasharray="86 120" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+        </svg>
+        <div class="cg-value" style="color:var(--amber-500)">72%</div>
+      </div>
+      <div class="collection-info">
+        <div class="ci-label">Samuel Henrik</div>
+        <div class="ci-amounts"><strong>$1.71M</strong> / $2.38M billed</div>
+      </div>
+    </div>
+
+    <div class="collection-rate">
+      <div class="collection-gauge">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="19" fill="none" stroke="var(--surface2)" stroke-width="4"/>
+          <circle cx="24" cy="24" r="19" fill="none" stroke="var(--danger)" stroke-width="4" stroke-dasharray="28 120" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+        </svg>
+        <div class="cg-value" style="color:var(--danger)">23%</div>
+      </div>
+      <div class="collection-info">
+        <div class="ci-label">Leroy Smith</div>
+        <div class="ci-amounts"><strong>$110K</strong> / $470K billed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar / Schedule Blocks -->
+  <h3 style="margin-top:40px">Calendar / Schedule Blocks</h3>
+  <p>Dispatch calendar for job scheduling and crew availability. Dots indicate job load, today is highlighted, high-load days flag with red.</p>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px">
+    <div class="schedule-block">
+      <div class="schedule-header">
+        <span class="sh-month">FEBRUARY 2026</span>
+        <span style="font-size:11px;color:var(--dim)">W6&ndash;W9</span>
+      </div>
+      <div class="schedule-days">
+        <div class="schedule-day header">Su</div>
+        <div class="schedule-day header">Mo</div>
+        <div class="schedule-day header">Tu</div>
+        <div class="schedule-day header">We</div>
+        <div class="schedule-day header">Th</div>
+        <div class="schedule-day header">Fr</div>
+        <div class="schedule-day header">Sa</div>
+        <div class="schedule-day">1</div>
+        <div class="schedule-day has-jobs">2</div>
+        <div class="schedule-day has-jobs">3</div>
+        <div class="schedule-day has-jobs">4</div>
+        <div class="schedule-day">5</div>
+        <div class="schedule-day has-jobs">6</div>
+        <div class="schedule-day">7</div>
+        <div class="schedule-day">8</div>
+        <div class="schedule-day has-jobs high">9</div>
+        <div class="schedule-day has-jobs">10</div>
+        <div class="schedule-day has-jobs">11</div>
+        <div class="schedule-day has-jobs">12</div>
+        <div class="schedule-day today has-jobs">13</div>
+        <div class="schedule-day">14</div>
+        <div class="schedule-day">15</div>
+        <div class="schedule-day has-jobs">16</div>
+        <div class="schedule-day has-jobs high">17</div>
+        <div class="schedule-day has-jobs">18</div>
+        <div class="schedule-day">19</div>
+        <div class="schedule-day has-jobs">20</div>
+        <div class="schedule-day">21</div>
+        <div class="schedule-day">22</div>
+        <div class="schedule-day has-jobs">23</div>
+        <div class="schedule-day has-jobs">24</div>
+        <div class="schedule-day">25</div>
+        <div class="schedule-day has-jobs">26</div>
+        <div class="schedule-day">27</div>
+        <div class="schedule-day">28</div>
+      </div>
+    </div>
+
+    <div style="flex:1;min-width:280px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden">
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:1px;color:var(--route-300)">FEB 13 &mdash; TODAY</span>
+          <span class="badge badge-warning">8 Jobs</span>
+        </div>
+        <div style="padding:8px">
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--radius-sm);background:var(--bg);margin-bottom:4px">
+            <div style="width:4px;height:32px;background:var(--safety-500);border-radius:2px;flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:11px;font-weight:600">JOB-00847 &mdash; SH</div>
+              <div style="font-size:10px;color:var(--dim)">FL &rarr; TX &middot; 8,400 lbs</div>
+            </div>
+            <span class="badge badge-warning" style="font-size:8px;padding:2px 6px">Transit</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--radius-sm);background:var(--bg);margin-bottom:4px">
+            <div style="width:4px;height:32px;background:var(--cargo-500);border-radius:2px;flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:11px;font-weight:600">JOB-00846 &mdash; RP</div>
+              <div style="font-size:10px;color:var(--dim)">OR &rarr; CO &middot; 12,100 lbs</div>
+            </div>
+            <span class="badge badge-active" style="font-size:8px;padding:2px 6px">Delivered</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--radius-sm);background:var(--bg)">
+            <div style="width:4px;height:32px;background:var(--danger);border-radius:2px;flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:11px;font-weight:600">JOB-00845 &mdash; NR</div>
+              <div style="font-size:10px;color:var(--dim)">FL &rarr; WA &middot; 6,200 lbs</div>
+            </div>
+            <span class="badge badge-danger" style="font-size:8px;padding:2px 6px">Overdue</span>
+          </div>
+        </div>
+        <div style="padding:8px 16px;border-top:1px solid var(--border);font-size:10px;color:var(--dim);display:flex;justify-content:space-between">
+          <span>5 more jobs</span>
+          <span style="color:var(--route-400);font-weight:600;cursor:pointer">View All</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- CSS VARIABLE REFERENCE                                           -->
+<!-- ================================================================ -->
+<section>
+  <h2>CSS Variable Quick Reference</h2>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;font-family:var(--font-mono);font-size:11px;line-height:2;color:var(--dim2)">
+    <div style="color:var(--route-400)">/* Primary */</div>
+    <div>--route-{50..950} &nbsp; <span style="color:var(--dim)">Route Blue scale</span></div>
+    <div>--safety-{50..900} &nbsp; <span style="color:var(--dim)">Safety Orange scale</span></div>
+    <div>--cargo-{50..700} &nbsp; <span style="color:var(--dim)">Cargo Green scale</span></div>
+    <div>--amber-{50..600} &nbsp; <span style="color:var(--dim)">Dispatch Amber scale</span></div>
+    <div>--night-{50..950} &nbsp; <span style="color:var(--dim)">Night neutral scale</span></div>
+    <div style="margin-top:8px;color:var(--safety-400)">/* Tiers */</div>
+    <div>--tier-mvp: #FCD34D &nbsp; --tier-allstar: #A78BFA &nbsp; --tier-starter: #60A5FA &nbsp; --tier-rookie: #34D399</div>
+    <div style="margin-top:8px;color:var(--cargo-300)">/* Semantic */</div>
+    <div>--success: #10B981 &nbsp; --warning: #F59E0B &nbsp; --danger: #EF4444 &nbsp; --info: #3B82F6</div>
+    <div style="margin-top:8px;color:var(--dim)">/* Surface */</div>
+    <div>--bg: #0B1120 &nbsp; --surface: #111827 &nbsp; --surface2: #1E293B</div>
+    <div>--border: #1E293B &nbsp; --border-light: #334155</div>
+    <div>--text: #E2E8F0 &nbsp; --dim: #64748B &nbsp; --dim2: #94A3B8</div>
+    <div style="margin-top:8px;color:var(--dim)">/* System */</div>
+    <div>--radius-sm: 8px &nbsp; --radius-md: 12px &nbsp; --radius-lg: 16px &nbsp; --radius-xl: 20px</div>
+    <div>--shadow-sm | --shadow-md | --shadow-lg | --shadow-glow-blue | --shadow-glow-orange</div>
+    <div>--font-display: Oswald &nbsp; --font-body: Inter &nbsp; --font-mono: Cascadia Code</div>
+    <div>--space-unit: 4px &nbsp; <span style="color:var(--dim)">multiply by N for all spacing</span></div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

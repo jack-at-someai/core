@@ -50,3 +50,6 @@ business/sounder/sounder_scripts/
 
 # Generated KRF output (re-create by running converter.py)
 business/sounder/substrate/output/
+
+# State silhouette PNGs (generated, large)
+/[A-Z][A-Z].png

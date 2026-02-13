@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wendt Group Design System — Atomic Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1C1C1E;--surface:#28282B;--surface2:#333336;--border:#444;
+  --text:#E2E2E4;--dim:#9C9CA1;--dim2:#B8B8BC;
+  --auction-50:#FEF2F0;--auction-100:#FCDBD6;--auction-200:#F5AFA5;--auction-300:#E8766A;
+  --auction-400:#D4523F;--auction-500:#C0392B;--auction-600:#9E2E22;--auction-700:#7A231A;
+  --auction-800:#5C1A13;--auction-900:#2E0D09;
+  --wheat-100:#F8ECDA;--wheat-300:#E4C88A;--wheat-500:#D4A76A;--wheat-700:#8C6838;--wheat-900:#302313;
+  --pasture-100:#D6E8DA;--pasture-400:#7BAF8A;--pasture-500:#4A7C59;--pasture-800:#1C3224;
+  --barn-100:#E2E2E4;--barn-300:#9C9CA1;--barn-500:#58585E;--barn-700:#38383C;--barn-800:#28282B;--barn-900:#1C1C1E;
+  --blue:#2196F3;--green:#4CAF50;--teal:#009688;--pink:#E91E63;
+  --orange:#FF9800;--amber:#F59E0B;--gray:#9E9E9E;
+  --glass-blur:24px;--glass-fill:0.15;--glass-border:0.18;
+  --radius-sm:10px;--radius-md:16px;--radius-lg:22px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 96px}
+
+/* Header */
+.sys-header{text-align:center;padding:64px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden}
+.sys-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,57,43,0.08),rgba(212,167,106,0.04),rgba(28,28,30,0.9))}
+.sys-header *{position:relative;z-index:1}
+.sys-header h1{font-family:'Oswald',sans-serif;font-size:42px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#C0392B,#D4A76A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.sys-header .sub{font-size:15px;color:var(--dim);max-width:600px;margin:0 auto}
+.sys-header .version{display:inline-block;margin-top:16px;font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(192,57,43,0.12);color:var(--auction-500);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+/* Navigation */
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:48px;padding:8px;background:var(--surface);border-radius:var(--radius-md);border:1px solid var(--border)}
+.nav a{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.active{background:var(--auction-500);color:#fff}
+
+/* Sections */
+section{margin-bottom:64px}
+section h2{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--auction-500);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+section p{color:var(--dim);max-width:680px;margin-bottom:12px;line-height:1.7;font-size:13px}
+
+/* Component cards */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.comp-preview{padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px;background:var(--bg);position:relative}
+.comp-info{padding:16px}
+.comp-info h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.comp-info .dart{font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--auction-500);margin-bottom:6px}
+.comp-info p{font-size:11px;color:var(--dim);line-height:1.5;margin:0}
+.comp-info .props{margin-top:8px;font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--dim2);line-height:1.7}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:0.5px}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--auction-500);color:#fff;padding:10px 20px}
+.btn-primary:hover{background:var(--auction-600);box-shadow:0 4px 16px rgba(192,57,43,0.3)}
+.btn-secondary{background:transparent;color:var(--wheat-500);border:1px solid var(--wheat-500);padding:9px 19px}
+.btn-secondary:hover{background:rgba(212,167,106,0.1)}
+.btn-success{background:var(--pasture-500);color:#fff;padding:10px 20px}
+.btn-success:hover{background:var(--pasture-800)}
+.btn-ghost{background:transparent;color:var(--dim);padding:10px 20px}
+.btn-ghost:hover{color:var(--text);background:var(--surface2)}
+.btn-sm{font-size:11px;padding:6px 14px}
+.btn-lg{font-size:15px;padding:14px 28px}
+.btn-icon{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--dim);cursor:pointer;transition:all .2s}
+.btn-icon:hover{color:var(--text);border-color:var(--auction-500);background:rgba(192,57,43,0.1)}
+
+/* Inputs */
+.input{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;width:100%}
+.input:focus{border-color:var(--auction-500);box-shadow:0 0 0 3px rgba(192,57,43,0.15)}
+.input::placeholder{color:var(--dim)}
+.input-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:6px;display:block}
+.input-group{margin-bottom:16px}
+.input-error{border-color:#F44336}
+.input-error-msg{font-size:11px;color:#F44336;margin-top:4px}
+.input-success{border-color:var(--pasture-500)}
+.select{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239C9CA1' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") right 12px center no-repeat;border:1px solid var(--border);border-radius:8px;padding:10px 32px 10px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;cursor:pointer;width:100%}
+.select:focus{border-color:var(--auction-500)}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.badge-auction{background:rgba(192,57,43,0.15);color:var(--auction-500);border:1px solid rgba(192,57,43,0.3)}
+.badge-wheat{background:rgba(212,167,106,0.15);color:var(--wheat-500);border:1px solid rgba(212,167,106,0.3)}
+.badge-pasture{background:rgba(74,124,89,0.15);color:var(--pasture-400);border:1px solid rgba(74,124,89,0.3)}
+.badge-barn{background:rgba(156,156,161,0.12);color:var(--barn-300);border:1px solid rgba(156,156,161,0.25)}
+.badge-live{background:rgba(229,62,62,0.2);color:#F56565;border:1px solid rgba(229,62,62,0.35);animation:pulse-live 2s infinite}
+@keyframes pulse-live{0%,100%{opacity:1}50%{opacity:0.7}}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--auction-600);box-shadow:0 4px 24px rgba(0,0,0,0.3)}
+.card-header{padding:16px;border-bottom:1px solid var(--border)}
+.card-body{padding:16px}
+.card-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+
+/* Auction lot card */
+.lot-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;width:280px}
+.lot-card .lot-img{height:160px;background:var(--surface2);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:11px;position:relative}
+.lot-card .lot-img .lot-number{position:absolute;top:8px;left:8px;background:var(--auction-500);color:#fff;font-weight:700;font-size:11px;padding:2px 8px;border-radius:4px}
+.lot-card .lot-img .lot-badge{position:absolute;top:8px;right:8px}
+.lot-card .lot-body{padding:14px}
+.lot-card .lot-name{font-weight:700;font-size:14px;margin-bottom:2px}
+.lot-card .lot-breeder{font-size:11px;color:var(--dim);margin-bottom:8px}
+.lot-card .lot-price-row{display:flex;justify-content:space-between;align-items:baseline}
+.lot-card .lot-price{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--auction-500)}
+.lot-card .lot-bids{font-size:11px;color:var(--dim)}
+.lot-card .lot-timer{font-size:10px;color:var(--wheat-500);margin-top:6px;font-weight:600}
+.lot-card .lot-actions{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:8px}
+
+/* Bid widget */
+.bid-widget{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;width:300px}
+.bid-current{text-align:center;margin-bottom:16px}
+.bid-current .bid-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600}
+.bid-current .bid-amount{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;color:var(--auction-500)}
+.bid-current .bid-count{font-size:11px;color:var(--dim);margin-top:2px}
+.bid-increment{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.bid-increment .bid-minus,.bid-increment .bid-plus{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.bid-increment .bid-minus:hover,.bid-increment .bid-plus:hover{border-color:var(--auction-500);color:var(--auction-500)}
+.bid-increment .bid-value{flex:1;text-align:center;font-family:'Oswald',sans-serif;font-size:18px;font-weight:600}
+
+/* Sale timeline */
+.sale-timeline{display:flex;align-items:center;gap:0;width:100%}
+.sale-phase{flex:1;text-align:center;padding:8px 4px;position:relative}
+.sale-phase .phase-dot{width:12px;height:12px;border-radius:50%;margin:0 auto 6px;border:2px solid var(--border);background:var(--bg)}
+.sale-phase .phase-label{font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);font-weight:600}
+.sale-phase .phase-date{font-size:8px;color:var(--dim);margin-top:2px}
+.sale-phase.completed .phase-dot{background:var(--pasture-500);border-color:var(--pasture-500)}
+.sale-phase.completed .phase-label{color:var(--pasture-400)}
+.sale-phase.active .phase-dot{background:var(--auction-500);border-color:var(--auction-500);box-shadow:0 0 8px rgba(192,57,43,0.4)}
+.sale-phase.active .phase-label{color:var(--auction-500)}
+.sale-phase-connector{width:100%;height:2px;background:var(--border);position:absolute;top:14px;left:50%;z-index:0}
+.sale-phase.completed .sale-phase-connector{background:var(--pasture-500)}
+
+/* Breeder profile card */
+.breeder-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;width:320px}
+.breeder-card .breeder-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.breeder-card .breeder-avatar{width:48px;height:48px;border-radius:50%;background:var(--auction-700);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--auction-100)}
+.breeder-card .breeder-name{font-weight:700;font-size:15px}
+.breeder-card .breeder-farm{font-size:11px;color:var(--dim)}
+.breeder-card .breeder-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.breeder-card .b-stat{text-align:center;padding:8px;background:var(--bg);border-radius:6px}
+.breeder-card .b-stat .b-val{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--wheat-500)}
+.breeder-card .b-stat .b-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-top:2px}
+
+/* Settlement table */
+.settlement-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(68,68,68,0.3);font-size:12px;align-items:center}
+.settlement-row.header{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border)}
+.settlement-row .lot{color:var(--text);font-weight:500}
+.settlement-row .amount{font-family:'Oswald',sans-serif;color:var(--wheat-500);font-weight:600;font-size:14px}
+.settlement-row .status{font-size:10px}
+
+/* Navigation bar */
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.navbar .nav-brand{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;background:linear-gradient(135deg,var(--auction-500),var(--wheat-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.navbar .nav-links{display:flex;gap:4px}
+.navbar .nav-link{padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;transition:all .2s}
+.navbar .nav-link:hover{color:var(--text);background:var(--surface2)}
+.navbar .nav-link.active{color:var(--auction-500);background:rgba(192,57,43,0.1)}
+
+/* Principle cards */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.principle{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px}
+.principle .num{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;color:rgba(192,57,43,0.2);margin-bottom:8px;line-height:1}
+.principle h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.principle p{font-size:11px;color:var(--dim);margin:0}
+
+/* Hierarchy diagram */
+.hierarchy{display:flex;flex-direction:column;gap:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.hier-level{display:flex;align-items:center;gap:16px}
+.hier-label{min-width:120px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.hier-items{display:flex;gap:6px;flex-wrap:wrap}
+.hier-item{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;border:1px solid}
+.hier-atoms .hier-label{color:var(--auction-500)}
+.hier-atoms .hier-item{border-color:var(--auction-500);color:var(--auction-500);background:rgba(192,57,43,0.08)}
+.hier-molecules .hier-label{color:var(--wheat-500)}
+.hier-molecules .hier-item{border-color:var(--wheat-500);color:var(--wheat-500);background:rgba(212,167,106,0.08)}
+.hier-organisms .hier-label{color:var(--pasture-400)}
+.hier-organisms .hier-item{border-color:var(--pasture-500);color:var(--pasture-400);background:rgba(74,124,89,0.08)}
+
+/* Token display */
+.token-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.token-swatch{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);min-width:72px}
+.token-swatch .color{height:48px}
+.token-swatch .info{padding:4px 6px;background:var(--surface)}
+.token-swatch .info .name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.token-swatch .info .hex{font-size:8px;color:var(--dim);font-family:'SF Mono','Cascadia Code',monospace}
+
+/* Glass */
+.glass{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));background:rgba(40,40,43,var(--glass-fill));border:1px solid rgba(255,255,255,var(--glass-border));border-radius:var(--radius-md)}
+.glass-subtle{backdrop-filter:blur(12px);background:rgba(40,40,43,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm)}
+.glass-frosted{backdrop-filter:blur(40px);background:rgba(40,40,43,0.2);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-lg)}
+.glass-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.glass-demo{padding:20px;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.glass-demo .label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-bottom:4px}
+.glass-demo .value{font-size:11px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--text)}
+
+/* Layout rules */
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:12px}
+.rule{padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rule .code{font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--auction-500);margin-bottom:4px}
+.rule .desc{font-size:11px;color:var(--dim)}
+
+/* Spacing display */
+.spacing-demo{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.spacing-block{display:flex;flex-direction:column;align-items:center;gap:4px}
+.spacing-block .bar{background:var(--auction-500);border-radius:3px;width:24px;opacity:0.6}
+.spacing-block .sp-label{font-size:8px;color:var(--dim);font-weight:600;text-transform:uppercase}
+
+/* Responsive */
+@media(max-width:700px){
+  .comp-grid{grid-template-columns:1fr}
+  .glass-demos{grid-template-columns:1fr}
+  .principle-grid{grid-template-columns:1fr}
+  .rule-grid{grid-template-columns:1fr}
+  .hier-level{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="sys-header">
+  <h1>WENDT GROUP DESIGN SYSTEM</h1>
+  <p class="sub">Atomic components for the dominant online show pig auction platform &mdash; live auctioneering, online bidding, breeder CRM, and sale settlement</p>
+  <span class="version">HTML Reference &middot; v1.0 &middot; February 2026</span>
+</header>
+
+<nav class="nav">
+  <a href="#principles" class="active">Principles</a>
+  <a href="#hierarchy">Hierarchy</a>
+  <a href="#tokens">Tokens</a>
+  <a href="#atoms">Atoms</a>
+  <a href="#molecules">Molecules</a>
+  <a href="#organisms">Organisms</a>
+  <a href="#glass">Glass</a>
+  <a href="#spacing">Spacing</a>
+  <a href="index.html">Brand Book</a>
+</nav>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <h2>Design Principles</h2>
+  <div class="principle-grid">
+    <div class="principle">
+      <div class="num">01</div>
+      <h4>Auction-First Hierarchy</h4>
+      <p>Every interface revolves around the auction lot. Lot number, current bid, time remaining, and bid action are the four elements that must be visible at all times during a live or timed sale.</p>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <h4>Agricultural Palette</h4>
+      <p>Auction Red for urgency and primary actions. Wheat Gold for warmth and trust. Pasture Green for success and confirmation. Colors that feel like the sale barn, not a SaaS dashboard.</p>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <h4>Real-Time State</h4>
+      <p>Auctions are live events. Every component must communicate its temporal state: upcoming, live, closing, sold, settled. The interface breathes with the pace of the auctioneer.</p>
+    </div>
+    <div class="principle">
+      <div class="num">04</div>
+      <h4>Breeder Trust</h4>
+      <p>Every seller sees the same professional experience. Typography is bold and readable at barn distance. Data is transparent. Settlement is visible from lot close to check deposited.</p>
+    </div>
+    <div class="principle">
+      <div class="num">05</div>
+      <h4>Multi-Platform Coherence</h4>
+      <p>ShowPig.com, CattleConnect, Showpig LIVE, TWG Auctions. Four platforms, one design language. Color anchors and typography create family resemblance across all properties.</p>
+    </div>
+    <div class="principle">
+      <div class="num">06</div>
+      <h4>Glass Morphism</h4>
+      <p>Frosted glass containers with 12-60px blur. Depth through layering. Translucent surfaces let the auction energy bleed through every panel and overlay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HIERARCHY -->
+<section id="hierarchy">
+  <h2>Component Hierarchy</h2>
+  <p>Brad Frost's atomic design applied to livestock auction infrastructure. Atoms are indivisible UI elements. Molecules combine atoms into functional units. Organisms are complete auction interface blocks.</p>
+  <div class="hierarchy">
+    <div class="hier-level hier-atoms">
+      <div class="hier-label">Atoms</div>
+      <div class="hier-items">
+        <span class="hier-item">Button</span>
+        <span class="hier-item">Input</span>
+        <span class="hier-item">Badge</span>
+        <span class="hier-item">Icon</span>
+        <span class="hier-item">Select</span>
+        <span class="hier-item">PriceTag</span>
+        <span class="hier-item">Timer</span>
+        <span class="hier-item">LotNumber</span>
+        <span class="hier-item">StatusDot</span>
+        <span class="hier-item">BreederAvatar</span>
+        <span class="hier-item">Divider</span>
+        <span class="hier-item">Progress</span>
+      </div>
+    </div>
+    <div class="hier-level hier-molecules">
+      <div class="hier-label">Molecules</div>
+      <div class="hier-items">
+        <span class="hier-item">BidWidget</span>
+        <span class="hier-item">LotCard</span>
+        <span class="hier-item">SearchBar</span>
+        <span class="hier-item">NavBar</span>
+        <span class="hier-item">FormGroup</span>
+        <span class="hier-item">PriceWithLabel</span>
+        <span class="hier-item">BreederRow</span>
+        <span class="hier-item">SalePhase</span>
+        <span class="hier-item">FilterChips</span>
+      </div>
+    </div>
+    <div class="hier-level hier-organisms">
+      <div class="hier-label">Organisms</div>
+      <div class="hier-items">
+        <span class="hier-item">AuctionGrid</span>
+        <span class="hier-item">BreederProfile</span>
+        <span class="hier-item">SaleTimeline</span>
+        <span class="hier-item">SettlementTable</span>
+        <span class="hier-item">LiveAuctionBanner</span>
+        <span class="hier-item">SaleCalendar</span>
+        <span class="hier-item">BuyerDashboard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section id="tokens">
+  <h2>Design Tokens</h2>
+
+  <h3>Auction Red Scale (Primary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#FEF2F0"></div><div class="info"><div class="name">50</div><div class="hex">#FEF2F0</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#FCDBD6"></div><div class="info"><div class="name">100</div><div class="hex">#FCDBD6</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F5AFA5"></div><div class="info"><div class="name">200</div><div class="hex">#F5AFA5</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E8766A"></div><div class="info"><div class="name">300</div><div class="hex">#E8766A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D4523F"></div><div class="info"><div class="name">400</div><div class="hex">#D4523F</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C0392B"></div><div class="info"><div class="name">500</div><div class="hex">#C0392B</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#9E2E22"></div><div class="info"><div class="name">600</div><div class="hex">#9E2E22</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7A231A"></div><div class="info"><div class="name">700</div><div class="hex">#7A231A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5C1A13"></div><div class="info"><div class="name">800</div><div class="hex">#5C1A13</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2E0D09"></div><div class="info"><div class="name">900</div><div class="hex">#2E0D09</div></div></div>
+  </div>
+
+  <h3>Wheat Gold Scale (Secondary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#F8ECDA"></div><div class="info"><div class="name">100</div><div class="hex">#F8ECDA</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E4C88A"></div><div class="info"><div class="name">300</div><div class="hex">#E4C88A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D4A76A"></div><div class="info"><div class="name">500</div><div class="hex">#D4A76A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#8C6838"></div><div class="info"><div class="name">700</div><div class="hex">#8C6838</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#302313"></div><div class="info"><div class="name">900</div><div class="hex">#302313</div></div></div>
+  </div>
+
+  <h3>Pasture Green Scale (Tertiary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#D6E8DA"></div><div class="info"><div class="name">100</div><div class="hex">#D6E8DA</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7BAF8A"></div><div class="info"><div class="name">400</div><div class="hex">#7BAF8A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#4A7C59"></div><div class="info"><div class="name">500</div><div class="hex">#4A7C59</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1C3224"></div><div class="info"><div class="name">800</div><div class="hex">#1C3224</div></div></div>
+  </div>
+
+  <h3>Barn Neutral Scale</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#E2E2E4"></div><div class="info"><div class="name">100</div><div class="hex">#E2E2E4</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#9C9CA1"></div><div class="info"><div class="name">300</div><div class="hex">#9C9CA1</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#58585E"></div><div class="info"><div class="name">500</div><div class="hex">#58585E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#38383C"></div><div class="info"><div class="name">700</div><div class="hex">#38383C</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#28282B"></div><div class="info"><div class="name">800</div><div class="hex">#28282B</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1C1C1E"></div><div class="info"><div class="name">900</div><div class="hex">#1C1C1E</div></div></div>
+  </div>
+
+  <h3>Typography</h3>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:12px">
+    <div><span style="font-family:'Oswald',sans-serif;font-size:48px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#C0392B,#D4A76A);-webkit-background-clip:text;-webkit-text-fill-color:transparent">DISPLAY 48/700</span></div>
+    <div><span style="font-family:'Oswald',sans-serif;font-size:32px;font-weight:600;letter-spacing:2px">Heading 1 &mdash; Oswald 32/600</span></div>
+    <div><span style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:500;letter-spacing:1px">Heading 2 &mdash; Oswald 22/500</span></div>
+    <div><span style="font-size:15px;font-weight:400;line-height:1.7">Body &mdash; Inter 15/400 &mdash; line-height 1.7</span></div>
+    <div><span style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--auction-500)">Caption &mdash; 11/600 uppercase</span></div>
+    <div><span style="font-size:13px;font-family:'Courier New',monospace;color:var(--auction-300)">Mono &mdash; Courier New 13px</span></div>
+  </div>
+</section>
+
+<!-- ATOMS -->
+<section id="atoms">
+  <h2>Atoms &mdash; Base Elements</h2>
+
+  <h3>Buttons</h3>
+  <p>Four variants: primary (auction red), secondary (wheat outline), success (pasture), ghost. Three sizes: small, default, large. Icon buttons for compact actions.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary">Place Bid</button>
+        <button class="btn btn-secondary">Watch Sale</button>
+        <button class="btn btn-success">Sold</button>
+        <button class="btn btn-ghost">Cancel</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button Variants</h4>
+        <div class="dart">variant: primary | secondary | success | ghost</div>
+        <p>Primary for bid actions and main CTAs. Secondary for watch/follow actions. Success for confirmed states. Ghost for dismiss/cancel.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap;align-items:center">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+        <div class="btn-icon">+</div>
+        <div class="btn-icon" style="border-color:var(--auction-500);color:var(--auction-500)">&#x2764;</div>
+      </div>
+      <div class="comp-info">
+        <h4>Sizes &amp; Icons</h4>
+        <div class="dart">size: sm (6/14px) | md (10/20px) | lg (14/28px)</div>
+        <p>Small for inline/table actions. Default for standard UI. Large for hero CTAs and bid buttons. Icon buttons 36px circle.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Inputs</h3>
+  <p>Form inputs with focus ring, error, and success states. Labels above. Select dropdowns with custom arrow.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;width:100%">
+        <div class="input-group">
+          <label class="input-label">Lot Title</label>
+          <input class="input" type="text" placeholder="e.g. Gilt #247 — Duroc x Hampshire">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Opening Bid</label>
+          <input class="input input-error" type="text" value="abc">
+          <div class="input-error-msg">Must be a valid dollar amount</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Breeder Verified</label>
+          <input class="input input-success" type="text" value="Trogdon Show Pigs" readonly>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Text Input States</h4>
+        <div class="dart">state: default | focus | error | success</div>
+        <p>Focus ring uses auction-500 with 15% opacity shadow. Error border + message in red. Success border for validated fields.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;width:100%">
+        <div class="input-group">
+          <label class="input-label">Species</label>
+          <select class="select">
+            <option>Swine</option>
+            <option>Cattle</option>
+            <option>Sheep</option>
+            <option>Goat</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Auction Format</label>
+          <select class="select">
+            <option>Timed Auction</option>
+            <option>Live + Online</option>
+            <option>Buy Now</option>
+          </select>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Select Dropdown</h4>
+        <div class="dart">Custom arrow, auction-500 focus ring</div>
+        <p>Native select with custom chevron icon. Same focus behavior as text inputs. Used for species, format, and breed filters.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Badges</h3>
+  <p>Status indicators for auction state, platform identification, and category tagging. Five color variants matching the brand palette.</p>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:10px;flex-wrap:wrap">
+      <span class="badge badge-live">&#x25CF; Live Now</span>
+      <span class="badge badge-auction">Branded Sale</span>
+      <span class="badge badge-wheat">Consignment</span>
+      <span class="badge badge-pasture">Sold</span>
+      <span class="badge badge-barn">Upcoming</span>
+      <span class="badge badge-auction">ShowPig.com</span>
+      <span class="badge badge-wheat">CattleConnect</span>
+      <span class="badge badge-pasture">Settled</span>
+      <span class="badge badge-barn">Pending</span>
+    </div>
+    <div class="comp-info">
+      <h4>Badge Variants</h4>
+      <div class="dart">variant: live (animated) | auction | wheat | pasture | barn</div>
+      <p>Live badge pulses with 2s animation. All badges use 15% bg fill + 30% border opacity. 10px uppercase text. Used in lot cards, sale headers, and navigation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MOLECULES -->
+<section id="molecules">
+  <h2>Molecules &mdash; Functional Combinations</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="lot-card">
+          <div class="lot-img">
+            <span>Photo: 800 x 600</span>
+            <span class="lot-number">Lot 12</span>
+            <span class="lot-badge badge badge-live">&#x25CF; Live</span>
+          </div>
+          <div class="lot-body">
+            <div class="lot-name">Gilt #247 &mdash; Ready 2 Rock</div>
+            <div class="lot-breeder">Trogdon Show Pigs &middot; Seymour, IN</div>
+            <div class="lot-price-row">
+              <div class="lot-price">$3,200</div>
+              <div class="lot-bids">14 bids</div>
+            </div>
+            <div class="lot-timer">Closes in 2:34</div>
+          </div>
+          <div class="lot-actions">
+            <button class="btn btn-primary btn-sm" style="flex:1">Bid $3,400</button>
+            <div class="btn-icon" style="width:30px;height:30px;font-size:12px">&#x2764;</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Lot Card</h4>
+        <div class="dart">LotCard &mdash; photo + lot number + badge + pricing + actions</div>
+        <p>Core auction molecule. Photo area with lot number overlay and status badge. Name, breeder, current bid, bid count, countdown timer, and action bar. 280px wide.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="bid-widget">
+          <div class="bid-current">
+            <div class="bid-label">Current Bid</div>
+            <div class="bid-amount">$3,200</div>
+            <div class="bid-count">14 bids &middot; 3 bidders</div>
+          </div>
+          <div class="bid-increment">
+            <div class="bid-minus">&minus;</div>
+            <div class="bid-value">$200</div>
+            <div class="bid-plus">+</div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center">Bid $3,400</button>
+          <div style="text-align:center;margin-top:8px">
+            <button class="btn btn-ghost btn-sm" style="font-size:10px">Set Max Bid</button>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Bid Widget</h4>
+        <div class="dart">BidWidget &mdash; current bid + increment + action + proxy</div>
+        <p>Compact bidding interface. Current bid with count. Increment +/- controls. Primary bid button. Ghost button for max/proxy bid. Used in lot detail and live auction views.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:24px;width:100%">
+        <div class="navbar" style="width:100%">
+          <div class="nav-brand">SHOWPIG.COM</div>
+          <div class="nav-links">
+            <a class="nav-link active" href="#">Sales</a>
+            <a class="nav-link" href="#">Breeders</a>
+            <a class="nav-link" href="#">Results</a>
+            <a class="nav-link" href="#">About</a>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Navigation Bar</h4>
+        <div class="dart">NavBar &mdash; brand + links with active state</div>
+        <p>Oswald brand mark with gradient. Link items with auction-red active state (10% bg fill). Responsive: collapses to hamburger below 640px.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:24px;width:100%">
+        <div style="display:flex;align-items:center;gap:8px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px">
+          <span style="color:var(--dim);font-size:14px">&#x1F50D;</span>
+          <input class="input" type="text" placeholder="Search lots, breeders, sales..." style="border:none;padding:4px 0;background:transparent">
+          <span class="badge badge-barn">Swine</span>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Search Bar</h4>
+        <div class="dart">SearchBar &mdash; icon + input + filter badge</div>
+        <p>Search icon + borderless input + optional species filter badge. Full-width. Returns lots, breeders, and sales in grouped results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANISMS -->
+<section id="organisms">
+  <h2>Organisms &mdash; Domain Interfaces</h2>
+  <p>Complete interface blocks that power the auction platform experience. Each organism maps to a primary user workflow.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="breeder-card">
+          <div class="breeder-top">
+            <div class="breeder-avatar">ET</div>
+            <div>
+              <div class="breeder-name">Eric Trogdon</div>
+              <div class="breeder-farm">Trogdon Show Pigs &middot; Seymour, IN</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-bottom:12px">
+            <span class="badge badge-auction">ShowPig.com</span>
+            <span class="badge badge-pasture">Verified</span>
+          </div>
+          <div class="breeder-stats">
+            <div class="b-stat"><div class="b-val">47</div><div class="b-lbl">Sales</div></div>
+            <div class="b-stat"><div class="b-val">$1.2M</div><div class="b-lbl">Lifetime</div></div>
+            <div class="b-stat"><div class="b-val">$2,840</div><div class="b-lbl">Avg Lot</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Breeder Profile Card</h4>
+        <div class="dart">BreederCard &mdash; avatar + info + badges + stats</div>
+        <p>Breeder identity with avatar (initials on auction-700 bg), farm name, platform badges, and lifetime stats grid. Core CRM molecule for breeder management.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:8px;padding:20px;width:100%">
+        <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;color:var(--wheat-500);margin-bottom:4px">SALE LIFECYCLE</div>
+        <div class="sale-timeline">
+          <div class="sale-phase completed" style="position:relative">
+            <div class="sale-phase-connector"></div>
+            <div class="phase-dot"></div>
+            <div class="phase-label">Booked</div>
+            <div class="phase-date">Jan 15</div>
+          </div>
+          <div class="sale-phase completed" style="position:relative">
+            <div class="sale-phase-connector"></div>
+            <div class="phase-dot"></div>
+            <div class="phase-label">Catalog</div>
+            <div class="phase-date">Jan 28</div>
+          </div>
+          <div class="sale-phase active" style="position:relative">
+            <div class="sale-phase-connector"></div>
+            <div class="phase-dot"></div>
+            <div class="phase-label">Live</div>
+            <div class="phase-date">Feb 10</div>
+          </div>
+          <div class="sale-phase" style="position:relative">
+            <div class="phase-dot"></div>
+            <div class="phase-label">Closed</div>
+            <div class="phase-date">Feb 12</div>
+          </div>
+          <div class="sale-phase" style="position:relative">
+            <div class="phase-dot"></div>
+            <div class="phase-label">Settled</div>
+            <div class="phase-date">Feb 26</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Sale Timeline</h4>
+        <div class="dart">SaleTimeline &mdash; phase dots + connectors + dates</div>
+        <p>Five-phase lifecycle: Booked, Catalog, Live, Closed, Settled. Completed phases turn pasture green. Active phase pulses auction red. Connector lines between dots.</p>
+      </div>
+    </div>
+
+    <div class="comp-card" style="grid-column:1/-1">
+      <div class="comp-preview" style="flex-direction:column;gap:0;padding:20px;width:100%;align-items:stretch">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px">SETTLEMENT REPORT</div>
+          <span class="badge badge-wheat">Feb 2026</span>
+        </div>
+        <div class="settlement-row header">
+          <div>Lot / Buyer</div>
+          <div>Hammer</div>
+          <div>Net to Seller</div>
+          <div>Status</div>
+        </div>
+        <div class="settlement-row">
+          <div class="lot">Lot 12 &mdash; Gilt #247 &middot; Johnson Farms</div>
+          <div class="amount">$3,200</div>
+          <div class="amount">$2,880</div>
+          <div><span class="badge badge-pasture">Settled</span></div>
+        </div>
+        <div class="settlement-row">
+          <div class="lot">Lot 18 &mdash; Boar #31 &middot; Smith & Sons</div>
+          <div class="amount">$4,800</div>
+          <div class="amount">$4,320</div>
+          <div><span class="badge badge-pasture">Settled</span></div>
+        </div>
+        <div class="settlement-row">
+          <div class="lot">Lot 24 &mdash; Gilt #102 &middot; Miller Genetics</div>
+          <div class="amount">$2,600</div>
+          <div class="amount">$2,340</div>
+          <div><span class="badge badge-wheat">Pending</span></div>
+        </div>
+        <div class="settlement-row">
+          <div class="lot">Lot 29 &mdash; Pair #7 &middot; Davis Livestock</div>
+          <div class="amount">$5,100</div>
+          <div class="amount">$4,590</div>
+          <div><span class="badge badge-barn">Processing</span></div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Settlement Table</h4>
+        <div class="dart">SettlementTable &mdash; lot/buyer + hammer + net + status</div>
+        <p>Post-sale financial view. Four columns: lot with buyer, hammer price, net to seller (after commission), and status badge. Row hover effect. Used in seller dashboard and admin views.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px;flex-direction:column;gap:8px;width:100%">
+        <div style="background:linear-gradient(135deg,rgba(192,57,43,0.15),rgba(212,167,106,0.08));border:1px solid rgba(192,57,43,0.3);border-radius:var(--radius-md);padding:16px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge badge-live">&#x25CF; Live Now</span>
+              <span style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:1px">TROGDON SPRING SALE</span>
+            </div>
+            <div style="font-size:11px;color:var(--dim)">ShowPig.com &middot; 42 lots &middot; 128 registered bidders</div>
+          </div>
+          <button class="btn btn-primary">Enter Sale</button>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Live Auction Banner</h4>
+        <div class="dart">LiveAuctionBanner &mdash; gradient bg + badge + sale info + CTA</div>
+        <p>Full-width notification banner for active auctions. Gradient background (auction/wheat). Live badge with pulse. Sale name, lot count, bidder count, and entry button.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLASS -->
+<section id="glass">
+  <h2>Glass Morphism</h2>
+  <p>Three blur levels for layered depth. All containers use <code>backdrop-filter: blur()</code> with fill opacity 15% and border opacity 18%.</p>
+  <div class="glass-demos" style="background:linear-gradient(135deg,rgba(192,57,43,0.15),rgba(212,167,106,0.08),rgba(74,124,89,0.05));padding:24px;border-radius:var(--radius-lg)">
+    <div class="glass-demo glass-subtle">
+      <div class="label">Subtle</div>
+      <div class="value">blur: 12px</div>
+    </div>
+    <div class="glass-demo glass">
+      <div class="label">Standard</div>
+      <div class="value">blur: 24px</div>
+    </div>
+    <div class="glass-demo glass-frosted">
+      <div class="label">Frosted</div>
+      <div class="value">blur: 40px</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+    <div class="rule"><div class="code">fillOpacity</div><div class="desc">0.15 &mdash; container background alpha</div></div>
+    <div class="rule"><div class="code">borderOpacity</div><div class="desc">0.18 &mdash; border alpha (white)</div></div>
+    <div class="rule"><div class="code">radius-sm</div><div class="desc">10px &mdash; buttons, badges, inputs</div></div>
+    <div class="rule"><div class="code">radius-md</div><div class="desc">16px &mdash; cards, containers</div></div>
+    <div class="rule"><div class="code">radius-lg</div><div class="desc">22px &mdash; hero sections, overlays</div></div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section id="spacing">
+  <h2>Spacing &amp; Layout Rules</h2>
+  <p>8px base unit grid. All spacing values are multiples of 4px. Component padding follows a consistent scale.</p>
+
+  <h3>Spacing Scale</h3>
+  <div class="spacing-demo" style="margin-top:16px;margin-bottom:24px">
+    <div class="spacing-block"><div class="bar" style="height:4px"></div><div class="sp-label">4px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:8px"></div><div class="sp-label">8px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:12px"></div><div class="sp-label">12px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:16px"></div><div class="sp-label">16px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:24px"></div><div class="sp-label">24px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:32px"></div><div class="sp-label">32px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:48px"></div><div class="sp-label">48px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:64px"></div><div class="sp-label">64px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:96px"></div><div class="sp-label">96px</div></div>
+  </div>
+
+  <h3>Layout Configuration</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">page-max-width: 1200px</div><div class="desc">Maximum content width</div></div>
+    <div class="rule"><div class="code">page-padding: 32px</div><div class="desc">Horizontal page margins</div></div>
+    <div class="rule"><div class="code">section-gap: 64px</div><div class="desc">Between major sections</div></div>
+    <div class="rule"><div class="code">card-gap: 16px</div><div class="desc">Between grid cards</div></div>
+    <div class="rule"><div class="code">lot-card-width: 280px</div><div class="desc">Fixed lot card width</div></div>
+    <div class="rule"><div class="code">lot-grid: auto-fill, 280px</div><div class="desc">Responsive lot grid</div></div>
+    <div class="rule"><div class="code">nav-height: 52px</div><div class="desc">Fixed navigation bar height</div></div>
+    <div class="rule"><div class="code">breakpoint-mobile: 640px</div><div class="desc">Mobile breakpoint</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Shadow Scale</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">shadow-sm</div><div class="desc">0 2px 8px rgba(0,0,0,0.15)</div></div>
+    <div class="rule"><div class="code">shadow-md</div><div class="desc">0 4px 24px rgba(0,0,0,0.3)</div></div>
+    <div class="rule"><div class="code">shadow-lg</div><div class="desc">0 8px 40px rgba(0,0,0,0.4)</div></div>
+    <div class="rule"><div class="code">shadow-glow</div><div class="desc">0 0 16px rgba(192,57,43,0.3)</div></div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

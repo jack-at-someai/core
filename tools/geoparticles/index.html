@@ -1,0 +1,2880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoParticles — Brand Identity Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #060910;
+  --bg-card: #0d1117;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  padding: 40px 40px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.header h1 span { opacity: 0.4; font-weight: 300; }
+
+.header p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-top: 6px;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.toolbar button, .toolbar select {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.toolbar button:hover, .toolbar select:hover { border-color: #22d3ee; }
+.toolbar button:active { background: #22d3ee; color: #000; }
+
+.toolbar label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toolbar input[type="range"] { width: 80px; accent-color: #22d3ee; }
+.toolbar .val { font-size: 0.7rem; color: #22d3ee; font-variant-numeric: tabular-nums; }
+
+/* Brand sections */
+.brands { padding: 20px 40px 60px; }
+
+.brand-section {
+  margin-bottom: 48px;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.brand-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.brand-header .brand-palette {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.brand-header .brand-palette span {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.brand-header .brand-surface-name {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tile grid */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.tile {
+  position: relative;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.tile:hover {
+  transform: scale(1.02);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.tile canvas {
+  width: 100%;
+  aspect-ratio: var(--tile-aspect, 1);
+  display: block;
+}
+
+.tile-label {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  pointer-events: none;
+}
+
+/* Expanded overlay */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.overlay.active { display: flex; }
+
+.overlay canvas {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 8px;
+}
+
+.overlay .close-hint {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.overlay .surface-label {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .header, .brands { padding-left: 20px; padding-right: 20px; }
+  .tile-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .header h1 { font-size: 1.3rem; }
+  .chat-panel { width: calc(100% - 20px) !important; right: 10px !important; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Chat Panel
+   ═══════════════════════════════════════════════════════ */
+
+.chat-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22d3ee, #6366f1);
+  border: none;
+  cursor: pointer;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.chat-toggle:hover { transform: scale(1.08); box-shadow: 0 4px 28px rgba(34, 211, 238, 0.5); }
+.chat-toggle svg { width: 24px; height: 24px; fill: #000; }
+.chat-toggle.hidden { display: none; }
+
+.chat-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 420px;
+  height: 560px;
+  background: #0d1117;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+.chat-panel.open { display: flex; }
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #1e293b;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.chat-header .chat-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.chat-header .chat-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  flex: 1;
+}
+
+.chat-header .chat-model {
+  font-size: 0.6rem;
+  color: #64748b;
+  background: #1e293b;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0 4px;
+  transition: color 0.15s;
+}
+.chat-header button:hover { color: #e2e8f0; }
+
+/* API Key bar */
+.chat-key-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  border-bottom: 1px solid #1e293b;
+  background: #0a0e14;
+  flex-shrink: 0;
+}
+.chat-key-bar.hidden { display: none; }
+.chat-key-bar input {
+  flex: 1;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+}
+.chat-key-bar input::placeholder { color: #475569; }
+.chat-key-bar button {
+  background: #22d3ee;
+  color: #000;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.chat-key-bar .key-status {
+  font-size: 0.6rem;
+  color: #22c55e;
+}
+
+/* Messages */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+
+.chat-msg {
+  max-width: 88%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+  background: #1e3a5f;
+  color: #e2e8f0;
+  border-bottom-right-radius: 3px;
+}
+
+.chat-msg.assistant {
+  align-self: flex-start;
+  background: #1e293b;
+  color: #cbd5e1;
+  border-bottom-left-radius: 3px;
+}
+
+.chat-msg.system {
+  align-self: center;
+  background: transparent;
+  color: #475569;
+  font-size: 0.65rem;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+.chat-msg.tool-result {
+  align-self: flex-start;
+  background: #0f1d15;
+  border: 1px solid #16432a;
+  color: #4ade80;
+  font-size: 0.7rem;
+  font-family: monospace;
+}
+
+.chat-msg .thinking {
+  color: #64748b;
+  font-style: italic;
+  font-size: 0.7rem;
+}
+
+/* Input */
+.chat-input-area {
+  display: flex;
+  padding: 10px 12px;
+  border-top: 1px solid #1e293b;
+  gap: 8px;
+  flex-shrink: 0;
+  background: #0a0e14;
+}
+
+.chat-input-area textarea {
+  flex: 1;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  resize: none;
+  height: 38px;
+  max-height: 100px;
+  line-height: 1.4;
+}
+.chat-input-area textarea::placeholder { color: #475569; }
+.chat-input-area textarea:focus { outline: none; border-color: #22d3ee; }
+
+.chat-input-area button {
+  background: linear-gradient(135deg, #22d3ee, #6366f1);
+  color: #000;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.chat-input-area button:disabled { opacity: 0.4; cursor: not-allowed; }
+.chat-input-area button svg { width: 18px; height: 18px; fill: #000; }
+
+/* ═══════════════════════════════════════════════════════
+   Discovery Mode — Presets, Options, Descent
+   ═══════════════════════════════════════════════════════ */
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+
+.preset-card {
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.preset-card:hover { border-color: #22d3ee; background: #162030; }
+.preset-card:active { transform: scale(0.96); }
+
+.preset-card .preset-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 2px;
+}
+
+.preset-card .preset-desc {
+  font-size: 0.55rem;
+  color: #64748b;
+  line-height: 1.3;
+}
+
+.preset-card .preset-swatch {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.preset-card .preset-swatch span {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* Descent timeline */
+.descent-bar {
+  display: none;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 4px;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+  overflow-x: auto;
+  background: #080c14;
+}
+.descent-bar.visible { display: flex; }
+
+.descent-bar .descent-label {
+  font-size: 0.55rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.descent-step {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid #1e293b;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.descent-step:hover { border-color: #22d3ee; }
+.descent-step.current { border-color: #22d3ee; box-shadow: 0 0 6px rgba(34,211,238,0.3); }
+.descent-step canvas { width: 100%; height: 100%; display: block; }
+
+.descent-connector {
+  width: 12px;
+  height: 2px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #334155, #22d3ee);
+  border-radius: 1px;
+}
+
+/* Option tiles in chat */
+.chat-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 4px 0;
+  width: 100%;
+}
+
+.chat-option {
+  position: relative;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chat-option:hover { border-color: rgba(34,211,238,0.5); transform: scale(1.03); }
+.chat-option:active { transform: scale(0.97); }
+
+.chat-option canvas {
+  width: 100%;
+  aspect-ratio: var(--tile-aspect, 1);
+  display: block;
+}
+
+.chat-option .opt-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3px 6px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.chat-option .opt-letter {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+}
+
+.lock-row {
+  display: flex;
+  gap: 6px;
+  padding: 4px 0;
+  align-items: center;
+}
+
+.lock-btn {
+  background: linear-gradient(135deg, #22d3ee, #6366f1);
+  color: #000;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.lock-btn:hover { box-shadow: 0 0 12px rgba(34,211,238,0.4); }
+
+.refine-hint {
+  font-size: 0.6rem;
+  color: #475569;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Animation Studio Overlay
+   ═══════════════════════════════════════════════════════ */
+
+.studio {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #000;
+  z-index: 1000;
+  display: none;
+}
+.studio.open { display: block; }
+
+.studio canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.studio-hud {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.studio-hud-top {
+  position: absolute;
+  top: 20px; left: 24px; right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+.studio-hud-top h3 {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(226,232,240,0.5);
+  letter-spacing: 0.5px;
+}
+.studio-hud-top .studio-close {
+  background: none;
+  border: none;
+  color: rgba(100,116,139,0.6);
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.studio-hud-top .studio-close:hover { color: #e2e8f0; }
+
+.studio-hud-controls {
+  position: absolute;
+  bottom: 24px; right: 24px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.studio-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(34,211,238,0.2);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(226,232,240,0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.studio-btn:hover {
+  border-color: rgba(34,211,238,0.5);
+  color: #e2e8f0;
+  box-shadow: 0 0 12px rgba(34,211,238,0.15);
+}
+
+.studio-hud-sliders {
+  position: absolute;
+  bottom: 24px; left: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  pointer-events: auto;
+}
+.studio-hud-sliders label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6rem;
+  color: rgba(148,163,184,0.5);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.studio-hud-sliders input[type="range"] {
+  width: 80px;
+  accent-color: rgba(34,211,238,0.5);
+}
+.studio-hud-sliders .val {
+  font-size: 0.6rem;
+  color: rgba(34,211,238,0.5);
+  min-width: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+.algo-stats {
+  position: absolute;
+  top: 20px; right: 80px;
+  font-size: 0.6rem;
+  color: rgba(100,116,139,0.4);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+  text-align: right;
+  pointer-events: none;
+}
+.algo-stats .stat-val { color: rgba(34,211,238,0.5); }
+.algo-stats .stat-explored { color: rgba(236,72,153,0.5); }
+.algo-stats .stat-final { color: rgba(240,200,80,0.5); }
+
+.studio-info {
+  font-size: 0.6rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .studio-hud-sliders { flex-wrap: wrap; gap: 10px; }
+  .studio-hud-sliders input[type="range"] { width: 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GeoParticles <span>/ Brand Identity Generator</span></h1>
+  <p>Parametric 3D math surfaces rendered as particle point clouds in each brand's design system. Every business gets unique mathematical identity art — same geometry engine, distinct visual DNA.</p>
+  <div class="toolbar">
+    <button id="btn-generate">Generate All</button>
+    <label>Particles <input type="range" id="ctrl-particles" min="3000" max="20000" value="8000" step="1000"> <span class="val" id="val-particles">8K</span></label>
+    <label>Style
+      <select id="ctrl-style">
+        <option value="neon" selected>Neon Dual-Tone</option>
+        <option value="mono">Monochrome</option>
+        <option value="gradient">Depth Gradient</option>
+      </select>
+    </label>
+    <label>Tiles/Brand
+      <select id="ctrl-tiles">
+        <option value="3">3</option>
+        <option value="4" selected>4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+      </select>
+    </label>
+    <label>Aspect
+      <select id="ctrl-aspect">
+        <option value="1:1" selected>1:1</option>
+        <option value="16:9">16:9</option>
+        <option value="9:16">9:16</option>
+        <option value="4:3">4:3</option>
+        <option value="3:4">3:4</option>
+        <option value="21:9">21:9 Ultra</option>
+        <option value="3:2">3:2</option>
+        <option value="2:3">2:3</option>
+      </select>
+    </label>
+    <button id="btn-export">Export All PNGs</button>
+  </div>
+</div>
+
+<div class="brands" id="brandsContainer"></div>
+
+<div class="overlay" id="overlay">
+  <span class="close-hint">click anywhere to close</span>
+  <canvas id="overlayCanvas" width="1200" height="1200"></canvas>
+  <div class="surface-label" id="overlayLabel"></div>
+</div>
+
+<!-- Dive Studio — full bleed SPA background preview -->
+<div class="studio" id="studio">
+  <canvas id="studioCanvas"></canvas>
+  <div class="studio-hud">
+    <div class="studio-hud-top">
+      <h3 id="studioTitle"></h3>
+      <div class="algo-stats" id="algoStats"></div>
+      <button class="studio-close" id="studioClose">&times;</button>
+    </div>
+    <div class="studio-hud-sliders">
+      <label>Nodes <input type="range" id="studio-particles" min="100" max="2000" value="600" step="50"> <span class="val" id="studio-particles-val">600</span></label>
+      <label>Neighbors <input type="range" id="studio-k" min="3" max="12" value="6" step="1"> <span class="val" id="studio-k-val">6</span></label>
+      <label>Speed <input type="range" id="studio-speed" min="0.05" max="3" value="0.4" step="0.05"> <span class="val" id="studio-speed-val">0.4</span></label>
+    </div>
+    <div class="studio-hud-controls">
+      <button class="studio-btn" id="studio-export-lottie">Export Lottie</button>
+      <button class="studio-btn" id="studio-export-png">Export PNG</button>
+    </div>
+  </div>
+  <input type="hidden" id="studio-w" value="1920">
+  <input type="hidden" id="studio-h" value="1080">
+  <p class="studio-info" id="studio-info" style="display:none"></p>
+</div>
+
+<!-- Chat Toggle Button -->
+<button class="chat-toggle" id="chatToggle" title="Open Discovery Panel">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
+</button>
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-dot"></div>
+    <span class="chat-title">Discovery</span>
+    <span class="chat-model" id="chatModelLabel">claude-sonnet-4-5</span>
+    <button id="chatKeyToggle" title="API Key">&#128273;</button>
+    <button id="chatClose" title="Close">&times;</button>
+  </div>
+
+  <div class="chat-key-bar" id="chatKeyBar">
+    <input type="password" id="chatApiKey" placeholder="sk-ant-... (Anthropic API key)" autocomplete="off">
+    <button id="chatKeySave">Save</button>
+    <span class="key-status" id="chatKeyStatus"></span>
+  </div>
+
+  <!-- Preset mood cards -->
+  <div class="preset-grid" id="presetGrid"></div>
+
+  <!-- Descent timeline -->
+  <div class="descent-bar" id="descentBar">
+    <span class="descent-label">Path</span>
+  </div>
+
+  <!-- Messages + Options -->
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg system">Tap a vibe to start. Keep tapping to converge. Type to steer.</div>
+  </div>
+
+  <div class="chat-input-area">
+    <textarea id="chatInput" placeholder="or describe the feeling you want..." rows="1"></textarea>
+    <button id="chatSend" title="Send">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// Brand Palettes (from design system files)
+// ═══════════════════════════════════════════════════════
+
+const BRANDS = [
+  {
+    id: 'someai', name: 'SomeAI',
+    primary: '#E53E3E', secondary: '#9B7878', accent: '#C4A8A8', bg: '#141414'
+  },
+  {
+    id: 'isg', name: 'Industrial Service Group',
+    primary: '#8FAADC', secondary: '#E2A532', accent: '#90CDF4', bg: '#000F2E'
+  },
+  {
+    id: 'sounder', name: 'Sounder',
+    primary: '#F000D2', secondary: '#7200CB', accent: '#21D6C6', bg: '#0e0b12'
+  },
+  {
+    id: 'richard-enterprises', name: 'Richard Enterprises',
+    primary: '#E53E3E', secondary: '#C4A8A8', accent: '#F59E0B', bg: '#0C0C0E'
+  },
+  {
+    id: 'allstate', name: 'All State Manufacturing',
+    primary: '#D44040', secondary: '#E8A830', accent: '#3D7AB6', bg: '#181C1F'
+  },
+  {
+    id: 'top-tier', name: 'Top Tier Moving',
+    primary: '#10B981', secondary: '#F59E0B', accent: '#3B82F6', bg: '#0B1120'
+  },
+  {
+    id: 'cardvault', name: 'CardVault',
+    primary: '#00A651', secondary: '#9C27B0', accent: '#E91E63', bg: '#0A0A0A'
+  },
+  {
+    id: 'sc-online', name: 'SC Online Sales',
+    primary: '#E74C3C', secondary: '#F39C12', accent: '#3498DB', bg: '#1A1714'
+  },
+  {
+    id: 'wendt', name: 'Wendt Group',
+    primary: '#2196F3', secondary: '#FF9800', accent: '#9B59B6', bg: '#1C1C1E'
+  },
+  {
+    id: 'ppp', name: 'PPP Instruments',
+    primary: '#7B2040', secondary: '#D4A76A', accent: '#4CAF50', bg: '#141414'
+  },
+];
+
+// ═══════════════════════════════════════════════════════
+// Parametric 3D Surfaces
+// ═══════════════════════════════════════════════════════
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return [r, g, b];
+}
+
+const SURFACES = {
+  'Lorenz Attractor': {
+    type: 'ode',
+    generate(N) {
+      const pts = [];
+      let x = 1, y = 1, z = 1;
+      const sigma = 10, rho = 28, beta = 8/3, dt = 0.003;
+      for (let i = 0; i < N; i++) {
+        const dx = sigma * (y - x), dy = x * (rho - z) - y, dz = x * y - beta * z;
+        x += dx * dt; y += dy * dt; z += dz * dt;
+        pts.push([x / 25, y / 25, (z - 25) / 25]);
+      }
+      return pts;
+    }
+  },
+
+  'Trefoil Knot': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const t = (i / N) * Math.PI * 2;
+        const r = 0.3 + Math.random() * 0.08;
+        const phi = Math.random() * Math.PI * 2;
+        const cx = Math.sin(t) + 2 * Math.sin(2*t);
+        const cy = Math.cos(t) - 2 * Math.cos(2*t);
+        const cz = -Math.sin(3*t);
+        // Tube around curve
+        const tx = -Math.cos(t) - 4*Math.cos(2*t);
+        const ty = Math.sin(t) + 4*Math.sin(2*t);
+        const tz = -3*Math.cos(3*t);
+        const tlen = Math.sqrt(tx*tx+ty*ty+tz*tz) || 1;
+        const nx = ty*cz - tz*cy, ny = tz*cx - tx*cz, nz = tx*cy - ty*cx;
+        const nlen = Math.sqrt(nx*nx+ny*ny+nz*nz) || 1;
+        const bx = ty*nz-tz*ny, by = tz*nx-tx*nz, bz = tx*ny-ty*nx;
+        const blen = Math.sqrt(bx*bx+by*by+bz*bz) || 1;
+        pts.push([
+          (cx + r*(Math.cos(phi)*nx/nlen + Math.sin(phi)*bx/blen)) / 5,
+          (cy + r*(Math.cos(phi)*ny/nlen + Math.sin(phi)*by/blen)) / 5,
+          (cz + r*(Math.cos(phi)*nz/nlen + Math.sin(phi)*bz/blen)) / 5
+        ]);
+      }
+      return pts;
+    }
+  },
+
+  'Möbius Strip': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = (Math.random()) * Math.PI * 2;
+        const v = (Math.random() - 0.5) * 0.8;
+        const x = (1 + v * Math.cos(u/2)) * Math.cos(u);
+        const y = (1 + v * Math.cos(u/2)) * Math.sin(u);
+        const z = v * Math.sin(u/2);
+        pts.push([x * 0.6, y * 0.6, z * 0.6]);
+      }
+      return pts;
+    }
+  },
+
+  'Klein Bottle': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI * 2;
+        const v = Math.random() * Math.PI * 2;
+        const r = 4 * (1 - Math.cos(u) / 2);
+        let x, y, z;
+        if (u < Math.PI) {
+          x = 6*Math.cos(u)*(1+Math.sin(u)) + r*Math.cos(u)*Math.cos(v);
+          y = 16*Math.sin(u) + r*Math.sin(u)*Math.cos(v);
+        } else {
+          x = 6*Math.cos(u)*(1+Math.sin(u)) + r*Math.cos(v+Math.PI);
+          y = 16*Math.sin(u);
+        }
+        z = r * Math.sin(v);
+        pts.push([x/20, y/20, z/20]);
+      }
+      return pts;
+    }
+  },
+
+  'Torus Knot (3,5)': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [], p = 3, q = 5, R = 1, r = 0.4;
+      for (let i = 0; i < N; i++) {
+        const t = (i / N) * Math.PI * 2;
+        const tubeR = 0.1 + Math.random() * 0.05;
+        const phi = Math.random() * Math.PI * 2;
+        const cr = R + r * Math.cos(q * t);
+        const cx = cr * Math.cos(p * t);
+        const cy = cr * Math.sin(p * t);
+        const cz = r * Math.sin(q * t);
+        // Jitter perpendicular to curve
+        const jx = (Math.random()-0.5)*tubeR;
+        const jy = (Math.random()-0.5)*tubeR;
+        const jz = (Math.random()-0.5)*tubeR;
+        pts.push([cx*0.6+jx, cy*0.6+jy, cz*0.6+jz]);
+      }
+      return pts;
+    }
+  },
+
+  "Dini's Surface": {
+    type: 'parametric',
+    generate(N) {
+      const pts = [], a = 0.3;
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI * 4;
+        const v = 0.01 + Math.random() * 1.8;
+        const x = a * Math.cos(u) * Math.sin(v);
+        const y = a * Math.sin(u) * Math.sin(v);
+        const z = a * (Math.cos(v) + Math.log(Math.tan(v/2))) + 0.2 * u;
+        pts.push([x*2, z*0.3 - 0.5, y*2]);
+      }
+      return pts;
+    }
+  },
+
+  'Enneper Surface': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = (Math.random() - 0.5) * 3;
+        const v = (Math.random() - 0.5) * 3;
+        const x = u - u*u*u/3 + u*v*v;
+        const y = v - v*v*v/3 + v*u*u;
+        const z = u*u - v*v;
+        pts.push([x*0.12, y*0.12, z*0.12]);
+      }
+      return pts;
+    }
+  },
+
+  'Spherical Harmonics': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [], l = 4, m = 3;
+      for (let i = 0; i < N; i++) {
+        const theta = Math.random() * Math.PI;
+        const phi = Math.random() * Math.PI * 2;
+        const r = Math.abs(Math.pow(Math.sin(theta), Math.abs(m)) *
+                  Math.cos(m * phi) * Math.sin(l * theta));
+        const x = r * Math.sin(theta) * Math.cos(phi);
+        const y = r * Math.sin(theta) * Math.sin(phi);
+        const z = r * Math.cos(theta);
+        pts.push([x, y, z]);
+      }
+      return pts;
+    }
+  },
+
+  'Catenoid': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI * 2;
+        const v = (Math.random() - 0.5) * 3;
+        const x = Math.cosh(v) * Math.cos(u);
+        const y = Math.cosh(v) * Math.sin(u);
+        const z = v;
+        pts.push([x * 0.3, y * 0.3, z * 0.5]);
+      }
+      return pts;
+    }
+  },
+
+  'Helicoid': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI * 4;
+        const v = (Math.random() - 0.5) * 2;
+        const x = v * Math.cos(u);
+        const y = v * Math.sin(u);
+        const z = u * 0.15;
+        pts.push([x * 0.5, y * 0.5, z - 0.5]);
+      }
+      return pts;
+    }
+  },
+
+  'Seashell': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const t = Math.random() * Math.PI * 6;
+        const s = Math.random() * Math.PI * 2;
+        const r = Math.exp(t * 0.1);
+        const tubeR = r * 0.3;
+        const x = r * Math.cos(t) + tubeR * Math.cos(s) * Math.cos(t);
+        const y = r * Math.sin(t) + tubeR * Math.cos(s) * Math.sin(t);
+        const z = tubeR * Math.sin(s) + t * 0.3;
+        const sc = 0.08;
+        pts.push([x*sc - 0.4, z*sc - 0.8, y*sc]);
+      }
+      return pts;
+    }
+  },
+
+  'Breather Surface': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [], a = 0.4, w = Math.sqrt(1 - a*a);
+      for (let i = 0; i < N; i++) {
+        const u = (Math.random() - 0.5) * 28;
+        const v = (Math.random() - 0.5) * Math.PI * 1.5;
+        const denom = a * ((w*Math.cosh(a*u))*(w*Math.cosh(a*u)) + (a*Math.sin(w*v))*(a*Math.sin(w*v)));
+        if (Math.abs(denom) < 0.001) continue;
+        const x = -u + (2*(1-a*a)*Math.cosh(a*u)*Math.sinh(a*u)) / denom;
+        const y = (2*w*Math.cosh(a*u)*(-(w*Math.cos(v)*Math.cos(w*v)) - Math.sin(v)*Math.sin(w*v))) / denom;
+        const z = (2*w*Math.cosh(a*u)*(-(w*Math.sin(v)*Math.cos(w*v)) + Math.cos(v)*Math.sin(w*v))) / denom;
+        pts.push([x*0.06, y*0.06, z*0.06]);
+      }
+      return pts;
+    }
+  },
+
+  'Roman Surface': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI;
+        const v = Math.random() * Math.PI;
+        const x = Math.sin(2*u) * Math.cos(v) * Math.cos(v);
+        const y = Math.sin(u) * Math.sin(2*v);
+        const z = Math.cos(u) * Math.sin(2*v);
+        pts.push([x * 0.8, y * 0.8, z * 0.8]);
+      }
+      return pts;
+    }
+  },
+
+  'Heart Surface': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI;
+        const v = Math.random() * Math.PI * 2;
+        const x = Math.sin(u) * Math.cos(v);
+        const y = Math.sin(u) * Math.sin(v);
+        const z = Math.cos(u) * (1 - Math.sin(u)) * 0.5 + Math.cos(u) * 0.5;
+        const r = 0.9;
+        pts.push([x*r, z*r - 0.2, y*r]);
+      }
+      return pts;
+    }
+  },
+
+  'Figure-8 Knot': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const t = (i / N) * Math.PI * 2;
+        const r = 0.08 + Math.random() * 0.04;
+        const phi = Math.random() * Math.PI * 2;
+        const cx = (2 + Math.cos(2*t)) * Math.cos(3*t);
+        const cy = (2 + Math.cos(2*t)) * Math.sin(3*t);
+        const cz = Math.sin(4*t);
+        const jx = (Math.random()-0.5)*r;
+        const jy = (Math.random()-0.5)*r;
+        const jz = (Math.random()-0.5)*r;
+        pts.push([(cx+jx)*0.3, (cy+jy)*0.3, (cz+jz)*0.3]);
+      }
+      return pts;
+    }
+  },
+
+  'Gyroid (Approx)': {
+    type: 'implicit',
+    generate(N) {
+      const pts = [], scale = 2.5;
+      let found = 0, attempts = 0;
+      while (found < N && attempts < N * 20) {
+        attempts++;
+        const x = (Math.random()-0.5)*scale*2;
+        const y = (Math.random()-0.5)*scale*2;
+        const z = (Math.random()-0.5)*scale*2;
+        const val = Math.cos(x*2)*Math.sin(y*2) + Math.cos(y*2)*Math.sin(z*2) + Math.cos(z*2)*Math.sin(x*2);
+        if (Math.abs(val) < 0.3) {
+          pts.push([x*0.35, y*0.35, z*0.35]);
+          found++;
+        }
+      }
+      return pts;
+    }
+  },
+
+  'Mandelbulb': {
+    type: 'fractal',
+    generate(N) {
+      const pts = [], power = 8;
+      let found = 0, attempts = 0;
+      while (found < N && attempts < N * 30) {
+        attempts++;
+        let x = (Math.random()-0.5)*3, y = (Math.random()-0.5)*3, z = (Math.random()-0.5)*3;
+        const cx = x, cy = y, cz = z;
+        let r = 0, escaped = false;
+        for (let iter = 0; iter < 10; iter++) {
+          r = Math.sqrt(x*x + y*y + z*z);
+          if (r > 2) { escaped = true; break; }
+          const theta = Math.acos(z / r);
+          const phi = Math.atan2(y, x);
+          const rn = Math.pow(r, power);
+          x = rn * Math.sin(theta*power) * Math.cos(phi*power) + cx;
+          y = rn * Math.sin(theta*power) * Math.sin(phi*power) + cy;
+          z = rn * Math.cos(theta*power) + cz;
+        }
+        if (!escaped && r < 2 && r > 0.5) {
+          pts.push([cx*0.5, cy*0.5, cz*0.5]);
+          found++;
+        }
+      }
+      return pts;
+    }
+  },
+
+  'Spring Helix': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [], R = 0.7, r = 0.15, coils = 5;
+      for (let i = 0; i < N; i++) {
+        const t = (i / N) * Math.PI * 2 * coils;
+        const phi = Math.random() * Math.PI * 2;
+        const tubeR = r * (0.6 + Math.random() * 0.4);
+        const cx = R * Math.cos(t);
+        const cy = R * Math.sin(t);
+        const cz = t / (Math.PI * 2 * coils) * 2 - 1;
+        // Normal/binormal for tube
+        const nx = -Math.cos(t), ny = -Math.sin(t);
+        pts.push([
+          cx + tubeR * Math.cos(phi) * nx,
+          cy + tubeR * Math.cos(phi) * ny,
+          cz + tubeR * Math.sin(phi)
+        ]);
+      }
+      return pts;
+    }
+  },
+
+  'Cross-Cap': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI;
+        const v = Math.random() * Math.PI * 2;
+        const x = Math.cos(u) * Math.sin(2*v) * 0.5;
+        const y = Math.sin(u) * Math.sin(2*v) * 0.5;
+        const z = (Math.cos(v)*Math.cos(v) - Math.cos(u)*Math.cos(u)*Math.sin(v)*Math.sin(v));
+        pts.push([x, y, z * 0.5]);
+      }
+      return pts;
+    }
+  },
+
+  'Clifford Torus': {
+    type: 'parametric',
+    generate(N) {
+      const pts = [];
+      for (let i = 0; i < N; i++) {
+        const u = Math.random() * Math.PI * 2;
+        const v = Math.random() * Math.PI * 2;
+        // Stereographic projection of Clifford torus from S3
+        const w0 = Math.cos(u) * 0.707;
+        const w1 = Math.sin(u) * 0.707;
+        const w2 = Math.cos(v) * 0.707;
+        const w3 = Math.sin(v) * 0.707;
+        const denom = 1 - w3 + 0.001;
+        pts.push([w0/denom * 0.5, w1/denom * 0.5, w2/denom * 0.5]);
+      }
+      return pts;
+    }
+  },
+};
+
+const SURFACE_NAMES = Object.keys(SURFACES);
+
+// ═══════════════════════════════════════════════════════
+// Renderer
+// ═══════════════════════════════════════════════════════
+
+// Project 3D points for a given rotation — returns [{px, py, z, r, g, b, alpha}]
+function projectPoints(points, cw, ch, brand, style, rotation) {
+  const halfW = cw / 2, halfH = ch / 2;
+  const scale = Math.min(halfW, halfH);
+  const cosA = Math.cos(rotation), sinA = Math.sin(rotation);
+  const cosB = Math.cos(0.3), sinB = Math.sin(0.3);
+  const primaryRgb = hexToRgb(brand.primary);
+  const secondaryRgb = hexToRgb(brand.secondary);
+  const accentRgb = hexToRgb(brand.accent);
+
+  const projected = [];
+  for (const [x, y, z] of points) {
+    const rx = x * cosA - z * sinA;
+    const rz = x * sinA + z * cosA;
+    const ry = y * cosB - rz * sinB;
+    const rz2 = y * sinB + rz * cosB;
+    const perspective = 3 / (3 + rz2);
+    const px = halfW + rx * scale * 0.75 * perspective;
+    const py = halfH + ry * scale * 0.75 * perspective;
+    const depthNorm = Math.max(0, Math.min(1, (rz2 + 1.5) / 3));
+    let r, g, b, alpha;
+
+    if (style === 'neon') {
+      const t = depthNorm;
+      if (t > 0.6) {
+        r = Math.round(primaryRgb[0]*(1-t) + accentRgb[0]*t);
+        g = Math.round(primaryRgb[1]*(1-t) + accentRgb[1]*t);
+        b = Math.round(primaryRgb[2]*(1-t) + accentRgb[2]*t);
+      } else {
+        r = Math.round(secondaryRgb[0]*(1-t) + primaryRgb[0]*t);
+        g = Math.round(secondaryRgb[1]*(1-t) + primaryRgb[1]*t);
+        b = Math.round(secondaryRgb[2]*(1-t) + primaryRgb[2]*t);
+      }
+      alpha = 80 + depthNorm * 160;
+    } else if (style === 'mono') {
+      r = primaryRgb[0]; g = primaryRgb[1]; b = primaryRgb[2];
+      alpha = 40 + depthNorm * 180;
+    } else {
+      const t = depthNorm;
+      if (t < 0.33) {
+        const lt = t/0.33;
+        r = Math.round(secondaryRgb[0]*(1-lt)+primaryRgb[0]*lt);
+        g = Math.round(secondaryRgb[1]*(1-lt)+primaryRgb[1]*lt);
+        b = Math.round(secondaryRgb[2]*(1-lt)+primaryRgb[2]*lt);
+      } else if (t < 0.66) {
+        const lt = (t-0.33)/0.33;
+        r = Math.round(primaryRgb[0]*(1-lt)+accentRgb[0]*lt);
+        g = Math.round(primaryRgb[1]*(1-lt)+accentRgb[1]*lt);
+        b = Math.round(primaryRgb[2]*(1-lt)+accentRgb[2]*lt);
+      } else {
+        const lt = (t-0.66)/0.34;
+        r = Math.round(accentRgb[0]*(1-lt)+primaryRgb[0]*lt);
+        g = Math.round(accentRgb[1]*(1-lt)+primaryRgb[1]*lt);
+        b = Math.round(accentRgb[2]*(1-lt)+primaryRgb[2]*lt);
+      }
+      alpha = 60 + depthNorm * 180;
+    }
+    projected.push({ px, py, z: rz2, r, g, b, alpha, depthNorm });
+  }
+  projected.sort((a, b) => a.z - b.z);
+  return projected;
+}
+
+function renderParticles(canvas, points, brand, style, rotation) {
+  const cw = canvas.width, ch = canvas.height;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = brand.bg;
+  ctx.fillRect(0, 0, cw, ch);
+
+  const projected = projectPoints(points, cw, ch, brand, style, rotation);
+  const imageData = ctx.getImageData(0, 0, cw, ch);
+  const data = imageData.data;
+
+  for (const pt of projected) {
+    const ix = Math.floor(pt.px), iy = Math.floor(pt.py);
+    if (ix < 0 || ix >= cw || iy < 0 || iy >= ch) continue;
+    const a = pt.alpha / 255;
+    const idx = (iy * cw + ix) * 4;
+    data[idx]     = Math.min(255, data[idx]     + pt.r * a);
+    data[idx + 1] = Math.min(255, data[idx + 1] + pt.g * a);
+    data[idx + 2] = Math.min(255, data[idx + 2] + pt.b * a);
+    data[idx + 3] = 255;
+    // Sub-pixel glow
+    const glowA = a * 0.3;
+    for (const [dx, dy] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+      const gx = ix+dx, gy = iy+dy;
+      if (gx < 0 || gx >= cw || gy < 0 || gy >= ch) continue;
+      const gi = (gy * cw + gx) * 4;
+      data[gi]     = Math.min(255, data[gi]     + pt.r * glowA);
+      data[gi + 1] = Math.min(255, data[gi + 1] + pt.g * glowA);
+      data[gi + 2] = Math.min(255, data[gi + 2] + pt.b * glowA);
+      data[gi + 3] = 255;
+    }
+  }
+  ctx.putImageData(imageData, 0, 0);
+}
+
+// ═══════════════════════════════════════════════════════
+// Lottie Generator + Animation Studio
+// ═══════════════════════════════════════════════════════
+
+// Algorithm color is always brand primary — set per-session in openStudio
+
+// ─── Graph Construction ─────────────────────────────
+// Build k-nearest-neighbors adjacency list from 3D points
+function buildKnnGraph(pts, k) {
+  const n = pts.length;
+  const adj = Array.from({ length: n }, () => []);
+  // For each point, find k nearest neighbors
+  for (let i = 0; i < n; i++) {
+    const dists = [];
+    for (let j = 0; j < n; j++) {
+      if (i === j) continue;
+      const dx = pts[j][0] - pts[i][0];
+      const dy = pts[j][1] - pts[i][1];
+      const dz = pts[j][2] - pts[i][2];
+      dists.push({ idx: j, d: dx * dx + dy * dy + dz * dz });
+    }
+    dists.sort((a, b) => a.d - b.d);
+    for (let m = 0; m < Math.min(k, dists.length); m++) {
+      const j = dists[m].idx;
+      if (!adj[i].includes(j)) adj[i].push(j);
+      if (!adj[j].includes(i)) adj[j].push(i); // undirected
+    }
+  }
+  return adj;
+}
+
+// Find two most distant points (start/end for traversals)
+function findExtremes(pts) {
+  let maxD = 0, a = 0, b = 1;
+  // Sample-based for speed — check every 4th point pair
+  const step = Math.max(1, Math.floor(pts.length / 200));
+  for (let i = 0; i < pts.length; i += step) {
+    for (let j = i + 1; j < pts.length; j += step) {
+      const dx = pts[j][0] - pts[i][0];
+      const dy = pts[j][1] - pts[i][1];
+      const dz = pts[j][2] - pts[i][2];
+      const d = dx * dx + dy * dy + dz * dz;
+      if (d > maxD) { maxD = d; a = i; b = j; }
+    }
+  }
+  return [a, b];
+}
+
+// ─── Algorithm Recording ────────────────────────────
+// Each returns { explored: [[from, to], ...], final: [[from, to], ...], visited: [idx, ...] }
+// "explored" = every edge checked, "final" = the resulting structure
+
+function runAStar(pts, adj, startIdx, endIdx) {
+  const n = pts.length;
+  const explored = [];
+  const dist3d = (a, b) => {
+    const dx = pts[b][0] - pts[a][0], dy = pts[b][1] - pts[a][1], dz = pts[b][2] - pts[a][2];
+    return Math.sqrt(dx * dx + dy * dy + dz * dz);
+  };
+
+  const gScore = new Float64Array(n).fill(Infinity);
+  const fScore = new Float64Array(n).fill(Infinity);
+  const cameFrom = new Int32Array(n).fill(-1);
+  gScore[startIdx] = 0;
+  fScore[startIdx] = dist3d(startIdx, endIdx);
+
+  const openSet = new Set([startIdx]);
+  const closedSet = new Set();
+
+  while (openSet.size > 0) {
+    // Get node with lowest fScore
+    let cur = -1, bestF = Infinity;
+    for (const idx of openSet) {
+      if (fScore[idx] < bestF) { bestF = fScore[idx]; cur = idx; }
+    }
+    if (cur === endIdx) break;
+
+    openSet.delete(cur);
+    closedSet.add(cur);
+
+    for (const j of adj[cur]) {
+      explored.push([cur, j]);
+      if (closedSet.has(j)) continue;
+      const tentG = gScore[cur] + dist3d(cur, j);
+      if (tentG < gScore[j]) {
+        cameFrom[j] = cur;
+        gScore[j] = tentG;
+        fScore[j] = tentG + dist3d(j, endIdx);
+        openSet.add(j);
+      }
+    }
+  }
+
+  // Reconstruct path
+  const path = [];
+  let cur = endIdx;
+  while (cur !== -1 && cur !== startIdx) {
+    path.unshift(cur);
+    cur = cameFrom[cur];
+  }
+  if (cur === startIdx) path.unshift(startIdx);
+
+  const finalEdges = [];
+  for (let i = 1; i < path.length; i++) {
+    finalEdges.push([path[i - 1], path[i]]);
+  }
+
+  return { explored, final: finalEdges, visited: path };
+}
+
+// ─── Lottie Generator (cave dive constellation) ─────
+function generateLottie(points3d, brand, style, algoResult, lottieW, lottieH, particleCount) {
+  const totalFrames = 300;
+  const fr = 30;
+
+  // Subsample points
+  const step = Math.max(1, Math.floor(points3d.length / particleCount));
+  const pts = [];
+  for (let i = 0; i < points3d.length && pts.length < particleCount; i += step) {
+    pts.push(points3d[i]);
+  }
+
+  const primaryRgb = hexToRgb(brand.primary);
+  const secondaryRgb = hexToRgb(brand.secondary);
+
+  const halfW = lottieW / 2, halfH = lottieH / 2;
+  const scale = Math.min(halfW, halfH);
+  const shapes = [];
+
+  // Project all points statically (no rotation)
+  const angle = 0.3; // slight tilt for depth
+  const cosA = Math.cos(0), sinA = Math.sin(0);
+  const cosB = Math.cos(angle), sinB = Math.sin(angle);
+
+  const projPts = pts.map(([px, py, pz]) => {
+    const rx = px * cosA - pz * sinA;
+    const rz = px * sinA + pz * cosA;
+    const ry2 = py * cosB - rz * sinB;
+    const rz2 = py * sinB + rz * cosB;
+    const persp = 3 / (3 + rz2);
+    return {
+      sx: halfW + rx * scale * 0.75 * persp,
+      sy: halfH + ry2 * scale * 0.75 * persp,
+      depth: Math.max(0, Math.min(1, (rz2 + 1.5) / 3)),
+    };
+  });
+
+  // Particle dot shapes (always visible, dim)
+  for (let i = 0; i < pts.length; i++) {
+    const p = projPts[i];
+    const t = p.depth;
+    const cr = Math.round(secondaryRgb[0] * (1 - t) + primaryRgb[0] * t);
+    const cg = Math.round(secondaryRgb[1] * (1 - t) + primaryRgb[1] * t);
+    const cb = Math.round(secondaryRgb[2] * (1 - t) + primaryRgb[2] * t);
+    const dotSize = 2 + t * 2;
+
+    shapes.push({
+      ty: 'gr', nm: `p${i}`,
+      it: [
+        { ty: 'el', nm: 'd', p: { a: 0, k: [0, 0] }, s: { a: 0, k: [dotSize, dotSize] } },
+        { ty: 'fl', nm: 'f', c: { a: 0, k: [cr / 255, cg / 255, cb / 255, 1] }, o: { a: 0, k: 25 } },
+        { ty: 'tr', p: { a: 0, k: [p.sx, p.sy] }, a: { a: 0, k: [0, 0] }, s: { a: 0, k: [100, 100] }, r: { a: 0, k: 0 }, o: { a: 0, k: 100 } }
+      ]
+    });
+  }
+
+  // Edge shapes from algorithm result — appear sequentially
+  const explored = algoResult.explored;
+  const edgesPerFrame = Math.max(1, Math.floor(explored.length / totalFrames));
+  const algoColor = hexToRgb(brand.primary);
+
+  for (let e = 0; e < Math.min(explored.length, 400); e++) {
+    const [fromIdx, toIdx] = explored[e];
+    if (fromIdx >= pts.length || toIdx >= pts.length) continue;
+    const a = projPts[fromIdx], b = projPts[toIdx];
+    const appearFrame = Math.min(totalFrames - 2, Math.floor((e / explored.length) * totalFrames));
+
+    shapes.push({
+      ty: 'gr', nm: `e${e}`,
+      it: [
+        {
+          ty: 'sh', nm: 'l',
+          ks: { a: 0, k: { c: false, v: [[a.sx, a.sy], [b.sx, b.sy]], i: [[0, 0], [0, 0]], o: [[0, 0], [0, 0]] } }
+        },
+        { ty: 'st', nm: 's', c: { a: 0, k: [algoColor[0] / 255, algoColor[1] / 255, algoColor[2] / 255, 1] }, o: { a: 0, k: 30 }, w: { a: 0, k: 0.5 } },
+        {
+          ty: 'tr',
+          p: { a: 0, k: [0, 0] }, a: { a: 0, k: [0, 0] }, s: { a: 0, k: [100, 100] }, r: { a: 0, k: 0 },
+          o: { a: 1, k: [
+            { t: 0, s: [0], i: { x: [0.42], y: [1] }, o: { x: [0.58], y: [0] } },
+            { t: appearFrame, s: [0], i: { x: [0.42], y: [1] }, o: { x: [0.58], y: [0] } },
+            { t: Math.min(appearFrame + 3, totalFrames), s: [100] }
+          ]}
+        }
+      ]
+    });
+  }
+
+  return {
+    v: '5.7.1', fr, ip: 0, op: totalFrames, w: lottieW, h: lottieH, nm: 'GeoConstellation', ddd: 0, assets: [],
+    layers: [
+      { ty: 4, nm: 'constellation', ddd: 0, ip: 0, op: totalFrames, st: 0, sr: 1,
+        ks: { o: { a: 0, k: 100 }, r: { a: 0, k: 0 }, p: { a: 0, k: [0, 0, 0] }, a: { a: 0, k: [0, 0, 0] }, s: { a: 0, k: [100, 100, 100] } },
+        shapes },
+      { ty: 1, nm: 'bg', ddd: 0, ip: 0, op: totalFrames, st: 0, sr: 1,
+        ks: { o: { a: 0, k: 100 }, p: { a: 0, k: [lottieW / 2, lottieH / 2, 0] }, a: { a: 0, k: [lottieW / 2, lottieH / 2, 0] }, s: { a: 0, k: [100, 100, 100] } },
+        sc: '#000000', sw: lottieW, sh: lottieH }
+    ],
+  };
+}
+
+// ═══════════════════════════════════════════════════════
+// Generator (callable by both UI and chat tools)
+// ═══════════════════════════════════════════════════════
+
+let allTiles = [];
+let overlayAnim = null;
+
+function parseAspect(str) {
+  const [w, h] = str.split(':').map(Number);
+  return { w, h, ratio: w / h };
+}
+
+function getSettings() {
+  const aspect = parseAspect(document.getElementById('ctrl-aspect').value);
+  return {
+    particles: parseInt(document.getElementById('ctrl-particles').value),
+    style: document.getElementById('ctrl-style').value,
+    tilesPerBrand: parseInt(document.getElementById('ctrl-tiles').value),
+    aspect,
+  };
+}
+
+function applySettings(opts) {
+  if (opts.particles) {
+    const el = document.getElementById('ctrl-particles');
+    el.value = opts.particles;
+    document.getElementById('val-particles').textContent = (opts.particles / 1000).toFixed(0) + 'K';
+  }
+  if (opts.style) {
+    document.getElementById('ctrl-style').value = opts.style;
+  }
+  if (opts.tilesPerBrand) {
+    document.getElementById('ctrl-tiles').value = opts.tilesPerBrand;
+  }
+}
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function findBrand(query) {
+  const q = query.toLowerCase().replace(/[_\-\s]/g, '');
+  return BRANDS.find(b =>
+    b.id.replace(/[_\-\s]/g, '').includes(q) ||
+    b.name.toLowerCase().replace(/[_\-\s]/g, '').includes(q)
+  );
+}
+
+function findSurface(query) {
+  const q = query.toLowerCase();
+  return SURFACE_NAMES.find(s => s.toLowerCase().includes(q));
+}
+
+// Build a brand section with specific surfaces
+function buildBrandSection(brand, surfaceNames, settings) {
+  const section = document.createElement('div');
+  section.className = 'brand-section';
+  section.dataset.brandId = brand.id;
+
+  const header = document.createElement('div');
+  header.className = 'brand-header';
+  header.innerHTML = `
+    <div class="brand-swatch" style="background:${brand.primary}"></div>
+    <h2>${brand.name}</h2>
+    <div class="brand-palette">
+      <span style="background:${brand.primary}" title="Primary"></span>
+      <span style="background:${brand.secondary}" title="Secondary"></span>
+      <span style="background:${brand.accent}" title="Accent"></span>
+      <span style="background:${brand.bg}" title="Background"></span>
+    </div>
+  `;
+  section.appendChild(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'tile-grid';
+  const newTiles = [];
+
+  for (const surfaceName of surfaceNames) {
+    const surface = SURFACES[surfaceName];
+    if (!surface) continue;
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    const canvas = document.createElement('canvas');
+    const baseSize = 600;
+    const aspect = settings.aspect || { w: 1, h: 1, ratio: 1 };
+    if (aspect.ratio >= 1) {
+      canvas.width = baseSize;
+      canvas.height = Math.round(baseSize / aspect.ratio);
+    } else {
+      canvas.width = Math.round(baseSize * aspect.ratio);
+      canvas.height = baseSize;
+    }
+    canvas.style.aspectRatio = `${aspect.w} / ${aspect.h}`;
+    tile.appendChild(canvas);
+    const label = document.createElement('div');
+    label.className = 'tile-label';
+    label.textContent = surfaceName;
+    tile.appendChild(label);
+    grid.appendChild(tile);
+    const rotation = Math.random() * Math.PI * 2;
+    const tileData = { canvas, surface, surfaceName, brand, rotation, settings };
+    allTiles.push(tileData);
+    newTiles.push(tileData);
+    tile.addEventListener('click', () => openOverlay(surface, surfaceName, brand, settings));
+  }
+
+  section.appendChild(grid);
+  return { section, tiles: newTiles };
+}
+
+// Generate for all brands with random surfaces
+function generateAll(opts) {
+  if (opts) applySettings(opts);
+  const container = document.getElementById('brandsContainer');
+  container.innerHTML = '';
+  allTiles = [];
+  const settings = getSettings();
+
+  let surfacePool = shuffleArray(SURFACE_NAMES);
+  let poolIdx = 0;
+
+  for (const brand of BRANDS) {
+    const surfaces = [];
+    for (let t = 0; t < settings.tilesPerBrand; t++) {
+      if (poolIdx >= surfacePool.length) { surfacePool = shuffleArray(SURFACE_NAMES); poolIdx = 0; }
+      surfaces.push(surfacePool[poolIdx++]);
+    }
+    const { section } = buildBrandSection(brand, surfaces, settings);
+    container.appendChild(section);
+  }
+
+  renderBatch(0);
+  return `Generated ${allTiles.length} tiles across ${BRANDS.length} brands`;
+}
+
+// Generate for specific brands with specific surfaces
+function generateForBrands(brandIds, surfaceNames, opts) {
+  if (opts) applySettings(opts);
+  const container = document.getElementById('brandsContainer');
+  const settings = getSettings();
+  let count = 0;
+  const useBrands = brandIds[0] === 'all' ? BRANDS : brandIds.map(findBrand).filter(Boolean);
+
+  // If appending, keep existing; if replacing everything, clear
+  if (useBrands.length === BRANDS.length) {
+    container.innerHTML = '';
+    allTiles = [];
+  } else {
+    // Remove existing sections for these brands
+    for (const b of useBrands) {
+      const existing = container.querySelector(`[data-brand-id="${b.id}"]`);
+      if (existing) existing.remove();
+    }
+  }
+
+  for (const brand of useBrands) {
+    let surfaces;
+    if (surfaceNames && surfaceNames.length > 0 && surfaceNames[0] !== 'random') {
+      surfaces = surfaceNames.map(findSurface).filter(Boolean);
+      if (surfaces.length === 0) surfaces = shuffleArray(SURFACE_NAMES).slice(0, settings.tilesPerBrand);
+    } else {
+      surfaces = shuffleArray(SURFACE_NAMES).slice(0, settings.tilesPerBrand);
+    }
+
+    const startIdx = allTiles.length;
+    const { section } = buildBrandSection(brand, surfaces, settings);
+    container.appendChild(section);
+    count += surfaces.length;
+
+    // Render these tiles
+    for (let i = startIdx; i < allTiles.length; i++) {
+      const t = allTiles[i];
+      const pts = t.surface.generate(settings.particles);
+      renderParticles(t.canvas, pts, t.brand, settings.style, t.rotation);
+    }
+  }
+
+  return `Generated ${count} tiles for ${useBrands.map(b => b.name).join(', ')}`;
+}
+
+function renderBatch(startIdx) {
+  const batchSize = 3;
+  const end = Math.min(startIdx + batchSize, allTiles.length);
+  for (let i = startIdx; i < end; i++) {
+    const t = allTiles[i];
+    const pts = t.surface.generate(t.settings.particles);
+    renderParticles(t.canvas, pts, t.brand, t.settings.style, t.rotation);
+  }
+  if (end < allTiles.length) {
+    requestAnimationFrame(() => renderBatch(end));
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Overlay (quick preview — click goes to Animation Studio)
+// ═══════════════════════════════════════════════════════
+
+function openOverlay(surface, surfaceName, brand, settings) {
+  // Go straight to animation studio
+  openStudio(surface, surfaceName, brand, settings);
+}
+
+// Legacy overlay close (still works if someone lands here)
+document.getElementById('overlay').addEventListener('click', () => {
+  document.getElementById('overlay').classList.remove('active');
+  if (overlayAnim) { cancelAnimationFrame(overlayAnim); overlayAnim = null; }
+});
+
+// ═══════════════════════════════════════════════════════
+// Dive Studio — cave diver A* pathfinding visualization
+// ═══════════════════════════════════════════════════════
+
+let studioState = {
+  surface: null,
+  surfaceName: '',
+  brand: null,
+  style: 'neon',
+  points3d: null,
+  subPts: null,
+  adj: null,
+  startIdx: 0,
+  endIdx: 1,
+  algoResult: null,
+  animFrame: null,
+  playStep: 0,
+  driftAngle: 0,
+  _loopScheduled: false,
+};
+
+function openStudio(surface, surfaceName, brand, settings) {
+  const studio = document.getElementById('studio');
+  studio.classList.add('open');
+  document.getElementById('studioTitle').textContent = `${surfaceName} — ${brand.name}`;
+
+  studioState.surface = surface;
+  studioState.surfaceName = surfaceName;
+  studioState.brand = brand;
+  studioState.style = settings.style;
+
+  const maxPts = parseInt(document.getElementById('studio-particles').value) || 600;
+  studioState.points3d = surface.generate(Math.min(settings.particles, 15000));
+
+  // Subsample for graph
+  const step = Math.max(1, Math.floor(studioState.points3d.length / maxPts));
+  const sub = [];
+  for (let i = 0; i < studioState.points3d.length && sub.length < maxPts; i += step) {
+    sub.push(studioState.points3d[i]);
+  }
+  studioState.subPts = sub;
+
+  rebuildAndRun();
+  startStudioPreview();
+}
+
+function rebuildAndRun() {
+  const pts = studioState.subPts;
+  const k = parseInt(document.getElementById('studio-k').value) || 6;
+  studioState.adj = buildKnnGraph(pts, k);
+  const [a, b] = findExtremes(pts);
+  studioState.startIdx = a;
+  studioState.endIdx = b;
+  runCurrentAlgo();
+}
+
+function runCurrentAlgo() {
+  studioState.algoResult = runAStar(studioState.subPts, studioState.adj, studioState.startIdx, studioState.endIdx);
+  studioState.playStep = 0;
+  studioState._loopScheduled = false;
+}
+
+function startStudioPreview() {
+  const canvas = document.getElementById('studioCanvas');
+  // Full-bleed: match viewport
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  if (studioState.animFrame) cancelAnimationFrame(studioState.animFrame);
+
+  // Floating debris / particulate matter — random specs that drift through the water
+  const debrisCount = 300;
+  const debris = [];
+  for (let i = 0; i < debrisCount; i++) {
+    debris.push({
+      x: Math.random(), y: Math.random(),
+      size: 0.3 + Math.random() * 1.2,
+      speed: 0.00005 + Math.random() * 0.00015,
+      drift: Math.random() * Math.PI * 2,
+      alpha: 0.02 + Math.random() * 0.06,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  function previewLoop() {
+    if (!document.getElementById('studio').classList.contains('open')) return;
+
+    const ctx = canvas.getContext('2d');
+    const cw = canvas.width, ch = canvas.height;
+    const pts = studioState.subPts;
+    const result = studioState.algoResult;
+    const speed = parseFloat(document.getElementById('studio-speed').value) || 0.4;
+    const now = Date.now();
+
+    if (!pts || !result) {
+      studioState.animFrame = requestAnimationFrame(previewLoop);
+      return;
+    }
+
+    // Very gentle drift — like underwater current
+    studioState.driftAngle += 0.00015;
+    const drift = studioState.driftAngle;
+
+    // Project 3D → 2D with gentle drift
+    const halfW = cw / 2, halfH = ch / 2;
+    const scale = Math.min(halfW, halfH);
+    const cosA = Math.cos(drift), sinA = Math.sin(drift);
+    const tiltA = 0.25;
+    const cosB = Math.cos(tiltA), sinB = Math.sin(tiltA);
+
+    const proj = pts.map(([px, py, pz]) => {
+      const rx = px * cosA - pz * sinA;
+      const rz = px * sinA + pz * cosA;
+      const ry2 = py * cosB - rz * sinB;
+      const rz2 = py * sinB + rz * cosB;
+      const persp = 3 / (3 + rz2);
+      return {
+        x: halfW + rx * scale * 0.7 * persp,
+        y: halfH + ry2 * scale * 0.7 * persp,
+        depth: Math.max(0, Math.min(1, (rz2 + 1.5) / 3)),
+      };
+    });
+
+    const primaryRgb = hexToRgb(studioState.brand.primary);
+    const secondaryRgb = hexToRgb(studioState.brand.secondary);
+    const accentRgb = hexToRgb(studioState.brand.accent || studioState.brand.primary);
+
+    // ── Dark water background ──
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, cw, ch);
+
+    // ── Floating particulate / bioluminescent specs ──
+    for (let i = 0; i < debris.length; i++) {
+      const d = debris[i];
+      d.x += Math.cos(d.drift) * d.speed;
+      d.y += Math.sin(d.drift) * d.speed + d.speed * 0.3; // slight downward drift
+      d.drift += (Math.random() - 0.5) * 0.02; // wobble
+      // Wrap around
+      if (d.x < -0.05) d.x = 1.05;
+      if (d.x > 1.05) d.x = -0.05;
+      if (d.y < -0.05) d.y = 1.05;
+      if (d.y > 1.05) d.y = -0.05;
+
+      const sx = d.x * cw, sy = d.y * ch;
+      // Gentle bioluminescent twinkle
+      const twinkle = 0.5 + 0.5 * Math.sin(now * 0.002 + d.phase);
+      const a = d.alpha * (0.6 + twinkle * 0.4);
+      ctx.fillStyle = `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},${a})`;
+      ctx.beginPath();
+      ctx.arc(sx, sy, d.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    studioState.playStep += speed;
+    const maxStep = result.explored.length;
+    const currentStep = Math.min(studioState.playStep, maxStep);
+    const progress = maxStep > 0 ? currentStep / maxStep : 0;
+
+    // Find the "diver" position — the most recently explored node
+    let diverIdx = studioState.startIdx;
+    const stepInt = Math.floor(currentStep);
+    if (stepInt > 0 && result.explored.length > 0) {
+      const lastExplored = result.explored[Math.min(stepInt - 1, result.explored.length - 1)];
+      diverIdx = lastExplored[0];
+    }
+    const diverPos = proj[diverIdx];
+
+    // Flashlight radius
+    const flashRadius = Math.max(cw, ch) * 0.3;
+
+    // ── Draw particles (bioluminescent nodes) ──
+    const visitedSet = new Set();
+    const visitedProgress = Math.floor(progress * result.visited.length);
+    for (let v = 0; v < visitedProgress; v++) visitedSet.add(result.visited[v]);
+
+    for (let i = 0; i < proj.length; i++) {
+      const p = proj[i];
+      const dx = p.x - diverPos.x, dy = p.y - diverPos.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const flashlight = Math.max(0, 1 - (dist / flashRadius));
+      const flash2 = flashlight * flashlight;
+
+      const t = p.depth;
+      const r = Math.round(secondaryRgb[0] * (1 - t) + primaryRgb[0] * t);
+      const g = Math.round(secondaryRgb[1] * (1 - t) + primaryRgb[1] * t);
+      const b = Math.round(secondaryRgb[2] * (1 - t) + primaryRgb[2] * t);
+
+      if (visitedSet.has(i)) {
+        // Discovered — bioluminescent glow, stays lit
+        const alpha = Math.max(0.12, 0.18 + flash2 * 0.5);
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5 + t, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Undiscovered — dim but present, brighter near diver
+        const baseAlpha = 0.04 + t * 0.02; // slightly visible even in dark
+        const alpha = baseAlpha + flash2 * 0.15;
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1 + t * 0.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // ── Explored edges (checked dive lines — each leaves a small persistent glow) ──
+    ctx.lineWidth = 0.4;
+    for (let e = 0; e < currentStep; e++) {
+      const [fromIdx, toIdx] = result.explored[e];
+      if (fromIdx >= proj.length || toIdx >= proj.length) continue;
+      const a = proj[fromIdx], b = proj[toIdx];
+
+      const recency = 1 - ((currentStep - e) / maxStep);
+      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      const edgeDist = Math.sqrt((mx - diverPos.x) ** 2 + (my - diverPos.y) ** 2);
+      const edgeFlash = Math.max(0, 1 - edgeDist / flashRadius);
+
+      // Persistent glow — every checked path stays softly visible
+      const alpha = Math.max(0.04, recency * 0.08 + edgeFlash * edgeFlash * 0.12);
+      ctx.strokeStyle = `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},${alpha})`;
+      ctx.shadowColor = studioState.brand.primary;
+      ctx.shadowBlur = 2;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+
+    // ── Final path (the confirmed dive line — bright, glowing) ──
+    const finalProgress = Math.floor(progress * result.final.length);
+    ctx.lineWidth = 1.5;
+    ctx.shadowColor = studioState.brand.primary;
+    for (let e = 0; e < finalProgress; e++) {
+      const [fromIdx, toIdx] = result.final[e];
+      if (fromIdx >= proj.length || toIdx >= proj.length) continue;
+      const a = proj[fromIdx], b = proj[toIdx];
+      ctx.shadowBlur = 6;
+      ctx.strokeStyle = `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},0.7)`;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+
+    // ── Diver illumination — soft radial glow around current position ──
+    if (diverPos) {
+      const grad = ctx.createRadialGradient(diverPos.x, diverPos.y, 0, diverPos.x, diverPos.y, flashRadius * 0.25);
+      grad.addColorStop(0, `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},0.06)`);
+      grad.addColorStop(0.4, `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},0.02)`);
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, cw, ch);
+
+      // Diver head — brand primary glow
+      ctx.fillStyle = `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},0.9)`;
+      ctx.shadowColor = studioState.brand.primary;
+      ctx.shadowBlur = 16;
+      ctx.beginPath();
+      ctx.arc(diverPos.x, diverPos.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // ── Waypoints (start + end) — both primary color, wayfinding not dichotomy ──
+    const sp = proj[studioState.startIdx];
+    const ep = proj[studioState.endIdx];
+    const wpPulse = 0.4 + Math.sin(now * 0.002) * 0.15;
+
+    if (sp) {
+      ctx.fillStyle = `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},${wpPulse})`;
+      ctx.shadowColor = studioState.brand.primary;
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+    if (ep) {
+      ctx.fillStyle = `rgba(${primaryRgb[0]},${primaryRgb[1]},${primaryRgb[2]},${wpPulse})`;
+      ctx.shadowColor = studioState.brand.primary;
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      ctx.arc(ep.x, ep.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // ── HUD stats (very subtle) ──
+    const statsEl = document.getElementById('algoStats');
+    const pct = Math.round(progress * 100);
+    statsEl.innerHTML = `
+      <div>Nodes <span class="stat-val">${pts.length}</span></div>
+      <div>Searched <span class="stat-explored">${Math.min(currentStep, maxStep)}</span></div>
+      <div>Dive line <span class="stat-final">${finalProgress} edges</span></div>
+      <div><span class="stat-val">${pct}%</span></div>
+    `;
+
+    // ── Loop after completion ──
+    if (currentStep >= maxStep && !studioState._loopScheduled) {
+      studioState._loopScheduled = true;
+      setTimeout(() => {
+        if (document.getElementById('studio').classList.contains('open')) {
+          studioState.playStep = 0;
+          studioState._loopScheduled = false;
+        }
+      }, 4000);
+    }
+
+    studioState.animFrame = requestAnimationFrame(previewLoop);
+  }
+  previewLoop();
+}
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+  if (document.getElementById('studio').classList.contains('open')) {
+    const canvas = document.getElementById('studioCanvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+});
+
+function closeStudio() {
+  document.getElementById('studio').classList.remove('open');
+  if (studioState.animFrame) { cancelAnimationFrame(studioState.animFrame); studioState.animFrame = null; }
+}
+
+document.getElementById('studioClose').addEventListener('click', closeStudio);
+
+// Studio control listeners
+for (const id of ['studio-particles', 'studio-k', 'studio-speed']) {
+  const el = document.getElementById(id);
+  const valEl = document.getElementById(id + '-val');
+  el.addEventListener('input', () => {
+    valEl.textContent = el.value;
+    if (id === 'studio-particles') {
+      // Rebuild subsample
+      const maxPts = parseInt(el.value);
+      const step = Math.max(1, Math.floor(studioState.points3d.length / maxPts));
+      const sub = [];
+      for (let i = 0; i < studioState.points3d.length && sub.length < maxPts; i += step) {
+        sub.push(studioState.points3d[i]);
+      }
+      studioState.subPts = sub;
+      rebuildAndRun();
+    }
+    if (id === 'studio-k') {
+      rebuildAndRun();
+    }
+  });
+}
+
+// Export Lottie
+document.getElementById('studio-export-lottie').addEventListener('click', () => {
+  const particleCount = parseInt(document.getElementById('studio-particles').value);
+  const outW = window.innerWidth;
+  const outH = window.innerHeight;
+
+  requestAnimationFrame(() => {
+    const lottie = generateLottie(
+      studioState.subPts,
+      studioState.brand,
+      studioState.style,
+      studioState.algoResult,
+      outW, outH,
+      particleCount
+    );
+    const json = JSON.stringify(lottie);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = `dive-${studioState.brand.id}-${studioState.surfaceName.replace(/[\s()]/g, '_')}-astar.json`;
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+});
+
+// Export PNG (captures current frame at full res)
+document.getElementById('studio-export-png').addEventListener('click', () => {
+  const canvas = document.getElementById('studioCanvas');
+  const link = document.createElement('a');
+  link.download = `dive-${studioState.brand.id}-${studioState.surfaceName.replace(/[\s()]/g, '_')}-astar.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+
+// ═══════════════════════════════════════════════════════
+// Export
+// ═══════════════════════════════════════════════════════
+
+function exportAllPngs() {
+  let count = 0;
+  for (const t of allTiles) {
+    const link = document.createElement('a');
+    link.download = `geoparticle-${t.brand.id}-${t.surfaceName.replace(/[\s()]/g,'_')}.png`;
+    link.href = t.canvas.toDataURL('image/png');
+    link.click();
+    count++;
+  }
+  return `Exported ${count} PNGs`;
+}
+
+document.getElementById('btn-export').addEventListener('click', exportAllPngs);
+
+// ═══════════════════════════════════════════════════════
+// Toolbar Controls
+// ═══════════════════════════════════════════════════════
+
+document.getElementById('ctrl-particles').addEventListener('input', (e) => {
+  document.getElementById('val-particles').textContent = (e.target.value / 1000).toFixed(0) + 'K';
+});
+
+document.getElementById('btn-generate').addEventListener('click', () => generateAll());
+
+document.getElementById('ctrl-aspect').addEventListener('change', () => {
+  const aspect = parseAspect(document.getElementById('ctrl-aspect').value);
+  document.documentElement.style.setProperty('--tile-aspect', `${aspect.w} / ${aspect.h}`);
+});
+
+// ═══════════════════════════════════════════════════════
+// Discovery Engine — Mood Presets + Convergence Loop
+// ═══════════════════════════════════════════════════════
+
+const MOODS = [
+  {
+    name: 'Organic Flow',
+    desc: 'Smooth curves, natural spirals',
+    surfaces: ['Seashell', 'Breather Surface', 'Helicoid', "Dini's Surface", 'Enneper Surface'],
+    styles: ['neon', 'gradient'],
+    particleRange: [8000, 15000],
+    colors: ['#22d3ee', '#6366f1']
+  },
+  {
+    name: 'Hard Geometry',
+    desc: 'Sharp edges, crystalline forms',
+    surfaces: ['Torus Knot (3,5)', 'Cross-Cap', 'Clifford Torus', 'Catenoid'],
+    styles: ['mono', 'neon'],
+    particleRange: [6000, 12000],
+    colors: ['#f0c850', '#ec4899']
+  },
+  {
+    name: 'Chaotic Energy',
+    desc: 'Strange attractors, fractals',
+    surfaces: ['Lorenz Attractor', 'Mandelbulb', 'Figure-8 Knot'],
+    styles: ['neon', 'gradient'],
+    particleRange: [10000, 20000],
+    colors: ['#ef4444', '#f97316']
+  },
+  {
+    name: 'Elegant Minimal',
+    desc: 'Clean surfaces, quiet beauty',
+    surfaces: ['Möbius Strip', 'Enneper Surface', 'Catenoid', 'Heart Surface'],
+    styles: ['mono'],
+    particleRange: [5000, 10000],
+    colors: ['#e2e8f0', '#94a3b8']
+  },
+  {
+    name: 'Alien Topology',
+    desc: 'Non-orientable, impossible forms',
+    surfaces: ['Klein Bottle', 'Roman Surface', 'Spherical Harmonics', 'Cross-Cap'],
+    styles: ['neon', 'gradient'],
+    particleRange: [8000, 14000],
+    colors: ['#a855f7', '#22d3ee']
+  },
+  {
+    name: 'Dense Structure',
+    desc: 'Thick meshes, heavy particles',
+    surfaces: ['Gyroid (Approx)', 'Spring Helix', 'Trefoil Knot', 'Mandelbulb'],
+    styles: ['gradient', 'mono'],
+    particleRange: [12000, 20000],
+    colors: ['#22c55e', '#14b8a6']
+  },
+];
+
+// Convergence state
+let convergenceState = {
+  mood: null,
+  currentParams: [],   // last 3 options shown
+  selectedIdx: -1,
+  history: [],         // { params, thumbnail }
+};
+
+function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function randRange(lo, hi) { return Math.round(lo + Math.random() * (hi - lo)); }
+
+function generateOption(mood, baseParams) {
+  if (!baseParams) {
+    // Initial generation from mood
+    return {
+      surface: pickRandom(mood.surfaces),
+      style: pickRandom(mood.styles),
+      particles: randRange(mood.particleRange[0], mood.particleRange[1]),
+      rotation: Math.random() * Math.PI * 2,
+      brand: pickRandom(BRANDS),
+      mood: mood.name,
+    };
+  }
+  // Variation from base — nudge parameters
+  const p = { ...baseParams };
+  const r = Math.random();
+  if (r < 0.35 && mood) {
+    // Different surface, same mood
+    p.surface = pickRandom(mood.surfaces);
+  } else if (r < 0.55) {
+    // Different brand
+    p.brand = pickRandom(BRANDS);
+  } else if (r < 0.7) {
+    // Different style
+    p.style = pickRandom(['neon', 'mono', 'gradient']);
+  }
+  // Always vary rotation and particles slightly
+  p.rotation = baseParams.rotation + (Math.random() - 0.5) * Math.PI * 0.6;
+  p.particles = Math.max(3000, Math.min(20000,
+    Math.round(baseParams.particles * (0.75 + Math.random() * 0.5))
+  ));
+  return p;
+}
+
+function renderMiniCanvas(canvas, params) {
+  const aspect = getSettings().aspect || { w: 1, h: 1, ratio: 1 };
+  const base = 300;
+  const size = base;
+  if (aspect.ratio >= 1) { canvas.width = base; canvas.height = Math.round(base / aspect.ratio); }
+  else { canvas.width = Math.round(base * aspect.ratio); canvas.height = base; }
+  const surface = SURFACES[params.surface];
+  if (!surface) return;
+  const pts = surface.generate(Math.min(params.particles, 8000)); // cap for speed in panel
+  renderParticles(canvas, pts, params.brand, params.style, params.rotation);
+}
+
+// ═══════════════════════════════════════════════════════
+// Preset Grid
+// ═══════════════════════════════════════════════════════
+
+function buildPresets() {
+  const grid = document.getElementById('presetGrid');
+  grid.innerHTML = '';
+  for (const mood of MOODS) {
+    const card = document.createElement('div');
+    card.className = 'preset-card';
+    card.innerHTML = `
+      <div class="preset-name">${mood.name}</div>
+      <div class="preset-desc">${mood.desc}</div>
+      <div class="preset-swatch">
+        ${mood.colors.map(c => `<span style="background:${c}"></span>`).join('')}
+      </div>
+    `;
+    card.addEventListener('click', () => onMoodSelect(mood));
+    grid.appendChild(card);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Descent Timeline
+// ═══════════════════════════════════════════════════════
+
+function updateDescentBar() {
+  const bar = document.getElementById('descentBar');
+  // Remove old steps (keep label)
+  while (bar.children.length > 1) bar.removeChild(bar.lastChild);
+
+  if (convergenceState.history.length === 0) {
+    bar.classList.remove('visible');
+    return;
+  }
+  bar.classList.add('visible');
+
+  convergenceState.history.forEach((step, i) => {
+    if (i > 0) {
+      const conn = document.createElement('div');
+      conn.className = 'descent-connector';
+      bar.appendChild(conn);
+    }
+    const dot = document.createElement('div');
+    dot.className = 'descent-step';
+    if (i === convergenceState.history.length - 1) dot.classList.add('current');
+    const miniCanvas = document.createElement('canvas');
+    miniCanvas.width = 64; miniCanvas.height = 64;
+    // Draw thumbnail from stored data
+    if (step.thumbnail) {
+      const ctx = miniCanvas.getContext('2d');
+      const img = new Image();
+      img.onload = () => ctx.drawImage(img, 0, 0, 64, 64);
+      img.src = step.thumbnail;
+    }
+    dot.appendChild(miniCanvas);
+    dot.title = `Step ${i + 1}: ${step.params.surface} (${step.params.brand.name})`;
+    bar.appendChild(dot);
+  });
+
+  bar.scrollLeft = bar.scrollWidth;
+}
+
+// ═══════════════════════════════════════════════════════
+// Option Display + Selection
+// ═══════════════════════════════════════════════════════
+
+function showOptions(params3, context) {
+  convergenceState.currentParams = params3;
+  const letters = ['A', 'B', 'C'];
+  const msgs = document.getElementById('chatMessages');
+
+  // Context message
+  if (context) {
+    const ctxDiv = document.createElement('div');
+    ctxDiv.className = 'chat-msg system';
+    ctxDiv.textContent = context;
+    msgs.appendChild(ctxDiv);
+  }
+
+  // Options grid
+  const grid = document.createElement('div');
+  grid.className = 'chat-options';
+
+  params3.forEach((params, idx) => {
+    const opt = document.createElement('div');
+    opt.className = 'chat-option';
+
+    const canvas = document.createElement('canvas');
+    renderMiniCanvas(canvas, params);
+    opt.appendChild(canvas);
+
+    const letter = document.createElement('div');
+    letter.className = 'opt-letter';
+    letter.textContent = letters[idx];
+    opt.appendChild(letter);
+
+    const label = document.createElement('div');
+    label.className = 'opt-label';
+    label.textContent = `${params.surface} / ${params.brand.name}`;
+    opt.appendChild(label);
+
+    opt.addEventListener('click', () => onOptionSelect(idx));
+    grid.appendChild(opt);
+  });
+
+  msgs.appendChild(grid);
+
+  // Lock row
+  const lockRow = document.createElement('div');
+  lockRow.className = 'lock-row';
+
+  const lockBtn = document.createElement('button');
+  lockBtn.className = 'lock-btn';
+  lockBtn.textContent = "That's the one";
+  lockBtn.addEventListener('click', () => {
+    // Download last selected or prompt to pick
+    if (convergenceState.selectedIdx >= 0) {
+      downloadOption(convergenceState.selectedIdx);
+    } else {
+      addChatMsg('system', 'Tap an option first, then lock it.');
+    }
+  });
+  lockRow.appendChild(lockBtn);
+
+  const hint = document.createElement('span');
+  hint.className = 'refine-hint';
+  hint.textContent = 'or tap to keep refining';
+  lockRow.appendChild(hint);
+
+  msgs.appendChild(lockRow);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function onMoodSelect(mood) {
+  convergenceState.mood = mood;
+  convergenceState.history = [];
+  convergenceState.selectedIdx = -1;
+
+  const opts = [
+    generateOption(mood),
+    generateOption(mood),
+    generateOption(mood),
+  ];
+
+  showOptions(opts, `Exploring: ${mood.name}`);
+  updateDescentBar();
+}
+
+function onOptionSelect(idx) {
+  const selected = convergenceState.currentParams[idx];
+  convergenceState.selectedIdx = idx;
+
+  // Save thumbnail for descent
+  const tempCanvas = document.createElement('canvas');
+  renderMiniCanvas(tempCanvas, selected);
+  convergenceState.history.push({
+    params: { ...selected },
+    thumbnail: tempCanvas.toDataURL('image/png'),
+  });
+
+  // Generate 3 variations from selected
+  const mood = MOODS.find(m => m.name === selected.mood) || convergenceState.mood;
+  const opts = [
+    generateOption(mood, selected),
+    generateOption(mood, selected),
+    generateOption(mood, selected),
+  ];
+
+  const step = convergenceState.history.length;
+  showOptions(opts, `Step ${step} — refining from ${selected.surface}`);
+  updateDescentBar();
+}
+
+function downloadOption(idx) {
+  const params = convergenceState.currentParams[idx];
+  if (!params) return;
+  // Render at full resolution with current aspect ratio
+  const fullCanvas = document.createElement('canvas');
+  const dlAspect = getSettings().aspect || { w: 1, h: 1, ratio: 1 };
+  if (dlAspect.ratio >= 1) { fullCanvas.width = 1200; fullCanvas.height = Math.round(1200 / dlAspect.ratio); }
+  else { fullCanvas.width = Math.round(1200 * dlAspect.ratio); fullCanvas.height = 1200; }
+  const surface = SURFACES[params.surface];
+  if (!surface) return;
+  const pts = surface.generate(Math.min(params.particles * 2, 25000));
+  renderParticles(fullCanvas, pts, params.brand, params.style, params.rotation);
+
+  const link = document.createElement('a');
+  link.download = `geoparticle-${params.brand.id}-${params.surface.replace(/[\s()]/g, '_')}.png`;
+  link.href = fullCanvas.toDataURL('image/png');
+  link.click();
+
+  addChatMsg('system', `Downloaded: ${params.surface} in ${params.brand.name} palette`);
+
+  // Save final step
+  convergenceState.history.push({
+    params: { ...params },
+    thumbnail: fullCanvas.toDataURL('image/png'),
+  });
+  updateDescentBar();
+}
+
+// ═══════════════════════════════════════════════════════
+// Claude Chat — Free Text Steering
+// ═══════════════════════════════════════════════════════
+
+const chatPanel = document.getElementById('chatPanel');
+const chatToggle = document.getElementById('chatToggle');
+const chatClose = document.getElementById('chatClose');
+const chatMessages = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatKeyBar = document.getElementById('chatKeyBar');
+const chatKeyToggle = document.getElementById('chatKeyToggle');
+const chatApiKeyInput = document.getElementById('chatApiKey');
+const chatKeySave = document.getElementById('chatKeySave');
+const chatKeyStatus = document.getElementById('chatKeyStatus');
+
+let chatHistory = [];
+let chatBusy = false;
+
+chatToggle.addEventListener('click', () => {
+  chatPanel.classList.add('open');
+  chatToggle.classList.add('hidden');
+  chatInput.focus();
+  if (!getApiKey()) chatKeyBar.classList.remove('hidden');
+});
+
+chatClose.addEventListener('click', () => {
+  chatPanel.classList.remove('open');
+  chatToggle.classList.remove('hidden');
+});
+
+chatKeyToggle.addEventListener('click', () => chatKeyBar.classList.toggle('hidden'));
+
+function getApiKey() { return localStorage.getItem('anthropic_api_key') || ''; }
+
+chatKeySave.addEventListener('click', () => {
+  const key = chatApiKeyInput.value.trim();
+  if (key) {
+    localStorage.setItem('anthropic_api_key', key);
+    chatKeyStatus.textContent = 'Saved';
+    chatApiKeyInput.value = '';
+    setTimeout(() => chatKeyBar.classList.add('hidden'), 800);
+  }
+});
+
+if (getApiKey()) { chatKeyStatus.textContent = 'Key saved'; chatKeyBar.classList.add('hidden'); }
+
+function addChatMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = `chat-msg ${role}`;
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return div;
+}
+
+chatInput.addEventListener('input', () => {
+  chatInput.style.height = '38px';
+  chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+});
+
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+chatSend.addEventListener('click', sendMessage);
+
+// System prompt includes current convergence context
+function buildSystemPrompt() {
+  const state = convergenceState;
+  const currentCtx = state.history.length > 0
+    ? `\n\nCURRENT CONVERGENCE STATE:
+Steps taken: ${state.history.length}
+Last selection: ${state.history[state.history.length-1]?.params.surface || 'none'} / ${state.history[state.history.length-1]?.params.brand?.name || 'none'} / ${state.history[state.history.length-1]?.params.style || 'none'}
+Mood: ${state.mood?.name || 'none'}`
+    : '\n\nUser has not started converging yet.';
+
+  return `You are the GeoParticle discovery assistant. The user is exploring generative particle art through a convergence loop — they tap moods, see 3 options, refine by tapping favorites, and eventually lock one to download.
+
+When the user types free text, interpret their qualitative/aesthetic intent and return a tool call with 3 option configurations that match their description. Think about which mathematical surfaces FEEL like what they're describing.
+
+Surface → Feel mapping:
+- Lorenz Attractor: chaotic, butterfly, unpredictable, turbulent
+- Trefoil/Figure-8 Knot: tangled, knotted, complex, intertwined
+- Möbius Strip: twisted, infinite, paradoxical, loop
+- Klein Bottle: impossible, alien, non-orientable, inside-out
+- Torus Knot: braided, woven, DNA, helical
+- Dini's Surface: spiral, nautilus, horn, tapering
+- Enneper Surface: saddle, ruffled, fabric, wave
+- Spherical Harmonics: spiky, crystal, atomic, resonance
+- Catenoid: hourglass, bridge, minimal, arch
+- Helicoid: spiral staircase, drill, tornado
+- Seashell: organic, nautical, growth, fibonacci
+- Breather Surface: breathing, pulsing, soliton, wave
+- Roman Surface: geometric, self-intersecting, cubic
+- Heart Surface: romantic, organic, soft
+- Gyroid: lattice, network, porous, foam
+- Mandelbulb: fractal, recursive, infinite detail, cosmic
+- Spring Helix: bouncy, coiled, mechanical, spring
+- Cross-Cap: pinched, folded, topological
+- Clifford Torus: 4D, hypersurface, ethereal, symmetric
+
+Style mapping: "neon" = vibrant dual-tone, "mono" = elegant single-color, "gradient" = full palette sweep
+
+BRANDS: ${BRANDS.map(b => `${b.id} (${b.name})`).join(', ')}
+SURFACES: ${SURFACE_NAMES.join(', ')}
+${currentCtx}
+
+IMPORTANT: Always use the suggest_options tool to show the user 3 visual options. Be concise — 1 sentence max before calling the tool. Match the FEELING of their words to surfaces.`;
+}
+
+const CHAT_TOOLS = [
+  {
+    name: 'suggest_options',
+    description: 'Show the user 3 particle art options based on their description. Each option specifies a surface, brand, style, particle count, and rotation.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        context_message: { type: 'string', description: 'Short message shown above the options' },
+        options: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              surface: { type: 'string', description: 'Exact surface name from the available list' },
+              brand_id: { type: 'string', description: 'Brand ID for color palette' },
+              style: { type: 'string', enum: ['neon', 'mono', 'gradient'] },
+              particles: { type: 'number', description: '3000-20000' },
+            },
+            required: ['surface', 'brand_id', 'style', 'particles']
+          },
+          minItems: 3,
+          maxItems: 3,
+        }
+      },
+      required: ['options', 'context_message']
+    }
+  },
+  {
+    name: 'generate_for_main_grid',
+    description: 'Apply generation to the main page grid behind the chat. Use when user wants to populate the full page.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        brand_ids: { type: 'array', items: { type: 'string' }, description: 'Brand IDs or ["all"]' },
+        surface_names: { type: 'array', items: { type: 'string' }, description: 'Surface names or ["random"]' },
+        style: { type: 'string', enum: ['neon', 'mono', 'gradient'] },
+        particles: { type: 'number' },
+      },
+      required: ['brand_ids']
+    }
+  },
+];
+
+function executeToolCall(name, input) {
+  if (name === 'suggest_options') {
+    const params = input.options.map(o => ({
+      surface: findSurface(o.surface) || o.surface,
+      brand: findBrand(o.brand_id) || pickRandom(BRANDS),
+      style: o.style || 'neon',
+      particles: o.particles || 8000,
+      rotation: Math.random() * Math.PI * 2,
+      mood: convergenceState.mood?.name || null,
+    }));
+    showOptions(params, input.context_message);
+    return `Showing 3 options: ${params.map(p => p.surface).join(', ')}`;
+  }
+  if (name === 'generate_for_main_grid') {
+    const opts = {};
+    if (input.style) opts.style = input.style;
+    if (input.particles) opts.particles = input.particles;
+    return generateForBrands(
+      input.brand_ids || ['all'],
+      input.surface_names || ['random'],
+      Object.keys(opts).length ? opts : null
+    );
+  }
+  return `Unknown tool: ${name}`;
+}
+
+async function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text || chatBusy) return;
+
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    // Fallback: local keyword matching (no API needed for basic commands)
+    addChatMsg('user', text);
+    localFallback(text);
+    chatInput.value = '';
+    chatInput.style.height = '38px';
+    return;
+  }
+
+  chatBusy = true;
+  chatSend.disabled = true;
+  chatInput.value = '';
+  chatInput.style.height = '38px';
+
+  addChatMsg('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  const thinkingEl = addChatMsg('assistant', '...');
+
+  try {
+    let response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5-20250929',
+        max_tokens: 1024,
+        system: buildSystemPrompt(),
+        tools: CHAT_TOOLS,
+        messages: chatHistory,
+      }),
+    });
+
+    if (!response.ok) throw new Error(`API ${response.status}`);
+    let data = await response.json();
+    let content = data.content;
+
+    // Tool use loop
+    while (data.stop_reason === 'tool_use') {
+      const textParts = content.filter(b => b.type === 'text').map(b => b.text).join('');
+      if (textParts) thinkingEl.textContent = textParts;
+      chatHistory.push({ role: 'assistant', content });
+
+      const toolResults = [];
+      for (const block of content) {
+        if (block.type !== 'tool_use') continue;
+        const result = executeToolCall(block.name, block.input);
+        toolResults.push({ type: 'tool_result', tool_use_id: block.id, content: result });
+      }
+      chatHistory.push({ role: 'user', content: toolResults });
+
+      const res2 = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5-20250929',
+          max_tokens: 1024,
+          system: buildSystemPrompt(),
+          tools: CHAT_TOOLS,
+          messages: chatHistory,
+        }),
+      });
+      if (!res2.ok) throw new Error(`API ${res2.status}`);
+      data = await res2.json();
+      content = data.content;
+    }
+
+    const finalText = content.filter(b => b.type === 'text').map(b => b.text).join('');
+    thinkingEl.textContent = finalText || '';
+    if (!finalText) thinkingEl.remove();
+    chatHistory.push({ role: 'assistant', content });
+
+  } catch (err) {
+    thinkingEl.textContent = `Error: ${err.message}`;
+    thinkingEl.style.color = '#ef4444';
+  }
+
+  chatBusy = false;
+  chatSend.disabled = false;
+  chatInput.focus();
+}
+
+// Local fallback when no API key — keyword matching for basic commands
+function localFallback(text) {
+  const lower = text.toLowerCase();
+  // Try to match a mood
+  const moodMatch = MOODS.find(m => lower.includes(m.name.toLowerCase().split(' ')[0]));
+  if (moodMatch) {
+    onMoodSelect(moodMatch);
+    return;
+  }
+  // Try keywords
+  const keywordMap = {
+    'organic': 0, 'flow': 0, 'smooth': 0, 'spiral': 0, 'natural': 0,
+    'sharp': 1, 'geometric': 1, 'crystal': 1, 'hard': 1, 'angular': 1,
+    'chaos': 2, 'chaotic': 2, 'wild': 2, 'energy': 2, 'fractal': 2, 'explosive': 2,
+    'elegant': 3, 'minimal': 3, 'clean': 3, 'quiet': 3, 'simple': 3, 'calm': 3,
+    'alien': 4, 'weird': 4, 'impossible': 4, 'strange': 4, 'topology': 4,
+    'dense': 5, 'thick': 5, 'heavy': 5, 'mesh': 5, 'structure': 5,
+  };
+  for (const [kw, idx] of Object.entries(keywordMap)) {
+    if (lower.includes(kw)) {
+      onMoodSelect(MOODS[idx]);
+      return;
+    }
+  }
+  // No match — show all moods
+  addChatMsg('system', 'Not sure what you mean. Try tapping a vibe above, or describe the feeling: organic, chaotic, geometric, elegant, alien, dense...');
+}
+
+// ═══════════════════════════════════════════════════════
+// Boot
+// ═══════════════════════════════════════════════════════
+
+buildPresets();
+generateAll();
+
+</script>
+</body>
+</html>

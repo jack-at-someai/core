@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SC Online Sales Design System — Atomic Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1A1714;--surface:#2A2520;--surface2:#3A3530;--border:#444;
+  --text:#E4DFDA;--dim:#A09890;--dim2:#C4BDB5;
+  --copper-50:#FDF5EE;--copper-100:#F8E4CF;--copper-200:#E8C9A0;--copper-300:#D4A060;
+  --copper-400:#C68A45;--copper-500:#B87333;--copper-600:#9A5E28;--copper-700:#7A4A1F;
+  --copper-800:#5C3717;--copper-900:#2E1B0B;
+  --navy-50:#EEF1F7;--navy-100:#D2DAE8;--navy-300:#7089B3;--navy-500:#2C3E6B;--navy-700:#1A253F;--navy-900:#0A0E18;
+  --clover-100:#D6E8D6;--clover-400:#7BAF7B;--clover-500:#3D7A3D;--clover-800:#183018;
+  --sawdust-100:#E4DFDA;--sawdust-300:#A09890;--sawdust-500:#625A52;--sawdust-700:#3E3830;--sawdust-800:#2A2520;--sawdust-900:#1A1714;
+  --danger:#E74C3C;--warning:#F39C12;--info:#3498DB;
+  --glass-blur:24px;--glass-fill:0.15;--glass-border:0.18;
+  --radius-sm:10px;--radius-md:16px;--radius-lg:22px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 96px}
+
+/* Header */
+.sys-header{text-align:center;padding:64px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden}
+.sys-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,115,51,0.08),rgba(44,62,107,0.04),rgba(26,23,20,0.9))}
+.sys-header *{position:relative;z-index:1}
+.sys-header h1{font-family:'Oswald',sans-serif;font-size:42px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#B87333,#2C3E6B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.sys-header .sub{font-size:15px;color:var(--dim);max-width:640px;margin:0 auto}
+.sys-header .version{display:inline-block;margin-top:16px;font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(184,115,51,0.12);color:var(--copper-500);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+/* Navigation */
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:48px;padding:8px;background:var(--surface);border-radius:var(--radius-md);border:1px solid var(--border)}
+.nav a{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.active{background:var(--copper-500);color:#fff}
+
+/* Sections */
+section{margin-bottom:64px}
+section h2{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--copper-500);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+section p{color:var(--dim);max-width:680px;margin-bottom:12px;line-height:1.7;font-size:13px}
+
+/* Component cards */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.comp-preview{padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px;background:var(--bg);position:relative}
+.comp-info{padding:16px}
+.comp-info h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.comp-info .dart{font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--copper-500);margin-bottom:6px}
+.comp-info p{font-size:11px;color:var(--dim);line-height:1.5;margin:0}
+.comp-info .props{margin-top:8px;font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--dim2);line-height:1.7}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;letter-spacing:0.3px}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--copper-500);color:#fff;padding:10px 20px}
+.btn-primary:hover{background:var(--copper-600);box-shadow:0 4px 16px rgba(184,115,51,0.3)}
+.btn-secondary{background:var(--navy-500);color:#fff;padding:10px 20px}
+.btn-secondary:hover{background:var(--navy-700)}
+.btn-outline{background:transparent;color:var(--copper-500);border:1px solid var(--copper-500);padding:9px 19px}
+.btn-outline:hover{background:rgba(184,115,51,0.1)}
+.btn-success{background:var(--clover-500);color:#fff;padding:10px 20px}
+.btn-success:hover{background:var(--clover-800)}
+.btn-ghost{background:transparent;color:var(--dim);padding:10px 20px}
+.btn-ghost:hover{color:var(--text);background:var(--surface2)}
+.btn-danger{background:var(--danger);color:#fff;padding:10px 20px}
+.btn-danger:hover{background:#C0392B}
+.btn-sm{font-size:11px;padding:6px 14px}
+.btn-lg{font-size:15px;padding:14px 28px}
+.btn-icon{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--dim);cursor:pointer;transition:all .2s;font-size:14px}
+.btn-icon:hover{color:var(--text);border-color:var(--copper-500);background:rgba(184,115,51,0.1)}
+
+/* Inputs */
+.input{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;width:100%}
+.input:focus{border-color:var(--copper-500);box-shadow:0 0 0 3px rgba(184,115,51,0.15)}
+.input::placeholder{color:var(--dim)}
+.input-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:6px;display:block}
+.input-group{margin-bottom:16px}
+.input-error{border-color:var(--danger)}
+.input-error-msg{font-size:11px;color:var(--danger);margin-top:4px}
+.input-success{border-color:var(--clover-500)}
+.select{appearance:none;background:var(--bg) url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23A09890' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") right 12px center no-repeat;border:1px solid var(--border);border-radius:8px;padding:10px 32px 10px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;cursor:pointer;width:100%}
+.select:focus{border-color:var(--copper-500)}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.badge-copper{background:rgba(184,115,51,0.15);color:var(--copper-500);border:1px solid rgba(184,115,51,0.3)}
+.badge-navy{background:rgba(44,62,107,0.2);color:var(--navy-300);border:1px solid rgba(44,62,107,0.4)}
+.badge-clover{background:rgba(61,122,61,0.15);color:var(--clover-400);border:1px solid rgba(61,122,61,0.3)}
+.badge-sawdust{background:rgba(160,152,144,0.12);color:var(--sawdust-300);border:1px solid rgba(160,152,144,0.25)}
+.badge-live{background:rgba(231,76,60,0.2);color:#E74C3C;border:1px solid rgba(231,76,60,0.35);animation:pulse-live 2s infinite}
+.badge-species{border-radius:6px;font-size:9px;padding:2px 8px;font-weight:700}
+.badge-swine{background:rgba(233,30,99,0.15);color:#E91E63;border:1px solid rgba(233,30,99,0.3)}
+.badge-cattle{background:rgba(139,69,19,0.2);color:#D4A060;border:1px solid rgba(139,69,19,0.3)}
+.badge-sheep{background:rgba(160,152,144,0.2);color:#C4BDB5;border:1px solid rgba(160,152,144,0.3)}
+.badge-goat{background:rgba(155,89,182,0.15);color:#BB8FCE;border:1px solid rgba(155,89,182,0.3)}
+.badge-equine{background:rgba(41,128,185,0.15);color:#5DADE2;border:1px solid rgba(41,128,185,0.3)}
+@keyframes pulse-live{0%,100%{opacity:1}50%{opacity:0.7}}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--copper-600);box-shadow:0 4px 24px rgba(0,0,0,0.3)}
+
+/* Lot card */
+.lot-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;width:280px}
+.lot-card .lot-img{height:160px;background:var(--surface2);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:11px;position:relative}
+.lot-card .lot-img .lot-number{position:absolute;top:8px;left:8px;background:var(--copper-500);color:#fff;font-weight:700;font-size:11px;padding:2px 8px;border-radius:4px}
+.lot-card .lot-img .lot-badge{position:absolute;top:8px;right:8px}
+.lot-card .lot-img .lot-species{position:absolute;bottom:8px;left:8px}
+.lot-card .lot-body{padding:14px}
+.lot-card .lot-name{font-weight:700;font-size:14px;margin-bottom:2px}
+.lot-card .lot-seller{font-size:11px;color:var(--dim);margin-bottom:8px}
+.lot-card .lot-price-row{display:flex;justify-content:space-between;align-items:baseline}
+.lot-card .lot-price{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--copper-500)}
+.lot-card .lot-bids{font-size:11px;color:var(--dim)}
+.lot-card .lot-timer{font-size:10px;color:var(--warning);margin-top:6px;font-weight:600}
+.lot-card .lot-actions{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:8px}
+
+/* Watch list indicator */
+.watch-indicator{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
+.watch-winning{background:rgba(61,122,61,0.15);color:var(--clover-400)}
+.watch-outbid{background:rgba(231,76,60,0.15);color:var(--danger)}
+.watch-watching{background:rgba(184,115,51,0.15);color:var(--copper-500)}
+
+/* Bid panel */
+.bid-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;width:300px}
+.bid-current{text-align:center;margin-bottom:16px}
+.bid-current .bid-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600}
+.bid-current .bid-amount{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;color:var(--copper-500)}
+.bid-current .bid-count{font-size:11px;color:var(--dim);margin-top:2px}
+.bid-formats{display:flex;gap:4px;margin-bottom:12px}
+.bid-format{flex:1;text-align:center;padding:6px;border-radius:6px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:var(--bg);color:var(--dim);border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.bid-format.active{background:rgba(184,115,51,0.12);color:var(--copper-500);border-color:var(--copper-500)}
+.bid-format:hover{border-color:var(--copper-500)}
+
+/* Species filter bar */
+.species-bar{display:flex;gap:6px;flex-wrap:wrap;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.species-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;background:var(--bg);border:1px solid var(--border);color:var(--dim);cursor:pointer;transition:all .2s}
+.species-chip:hover{border-color:var(--copper-500);color:var(--text)}
+.species-chip.active{background:rgba(184,115,51,0.12);border-color:var(--copper-500);color:var(--copper-500)}
+.species-chip .count{font-size:9px;color:var(--dim);font-weight:400}
+
+/* Seller dashboard card */
+.seller-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;width:340px}
+.seller-card .seller-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.seller-card .seller-avatar{width:48px;height:48px;border-radius:50%;background:var(--copper-700);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--copper-100)}
+.seller-card .seller-name{font-weight:700;font-size:15px}
+.seller-card .seller-location{font-size:11px;color:var(--dim)}
+.seller-card .seller-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.seller-card .s-stat{text-align:center;padding:8px;background:var(--bg);border-radius:6px}
+.seller-card .s-stat .s-val{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--copper-500)}
+.seller-card .s-stat .s-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-top:2px}
+
+/* Sale performance row */
+.perf-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(68,68,68,0.3);font-size:12px;align-items:center}
+.perf-row.header{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--border)}
+.perf-row .sale-name{color:var(--text);font-weight:500}
+.perf-row .amount{font-family:'Oswald',sans-serif;color:var(--copper-500);font-weight:600;font-size:14px}
+
+/* Magazine integration card */
+.magazine-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.magazine-card .mag-header{padding:16px;background:linear-gradient(135deg,rgba(44,62,107,0.2),rgba(184,115,51,0.08));border-bottom:1px solid var(--border)}
+.magazine-card .mag-body{padding:16px}
+.magazine-card .mag-stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(68,68,68,0.2)}
+.magazine-card .mag-stat:last-child{border-bottom:none}
+.magazine-card .mag-stat .label{font-size:12px;color:var(--dim)}
+.magazine-card .mag-stat .value{font-size:12px;font-weight:600;color:var(--text)}
+
+/* Navigation bar */
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.navbar .nav-brand{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;background:linear-gradient(135deg,var(--copper-500),var(--navy-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.navbar .nav-links{display:flex;gap:4px}
+.navbar .nav-link{padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;transition:all .2s}
+.navbar .nav-link:hover{color:var(--text);background:var(--surface2)}
+.navbar .nav-link.active{color:var(--copper-500);background:rgba(184,115,51,0.1)}
+
+/* Principle cards */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.principle{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px}
+.principle .num{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;color:rgba(184,115,51,0.2);margin-bottom:8px;line-height:1}
+.principle h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.principle p{font-size:11px;color:var(--dim);margin:0}
+
+/* Hierarchy diagram */
+.hierarchy{display:flex;flex-direction:column;gap:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.hier-level{display:flex;align-items:center;gap:16px}
+.hier-label{min-width:120px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.hier-items{display:flex;gap:6px;flex-wrap:wrap}
+.hier-item{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;border:1px solid}
+.hier-atoms .hier-label{color:var(--copper-500)}
+.hier-atoms .hier-item{border-color:var(--copper-500);color:var(--copper-500);background:rgba(184,115,51,0.08)}
+.hier-molecules .hier-label{color:var(--navy-300)}
+.hier-molecules .hier-item{border-color:var(--navy-500);color:var(--navy-300);background:rgba(44,62,107,0.08)}
+.hier-organisms .hier-label{color:var(--clover-400)}
+.hier-organisms .hier-item{border-color:var(--clover-500);color:var(--clover-400);background:rgba(61,122,61,0.08)}
+
+/* Token display */
+.token-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.token-swatch{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);min-width:72px}
+.token-swatch .color{height:48px}
+.token-swatch .info{padding:4px 6px;background:var(--surface)}
+.token-swatch .info .name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.token-swatch .info .hex{font-size:8px;color:var(--dim);font-family:'SF Mono','Cascadia Code',monospace}
+
+/* Glass */
+.glass{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));background:rgba(42,37,32,var(--glass-fill));border:1px solid rgba(255,255,255,var(--glass-border));border-radius:var(--radius-md)}
+.glass-subtle{backdrop-filter:blur(12px);background:rgba(42,37,32,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm)}
+.glass-frosted{backdrop-filter:blur(40px);background:rgba(42,37,32,0.2);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-lg)}
+.glass-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.glass-demo{padding:20px;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.glass-demo .label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-bottom:4px}
+.glass-demo .value{font-size:11px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--text)}
+
+/* Layout rules */
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:12px}
+.rule{padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rule .code{font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--copper-500);margin-bottom:4px}
+.rule .desc{font-size:11px;color:var(--dim)}
+
+/* Spacing */
+.spacing-demo{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.spacing-block{display:flex;flex-direction:column;align-items:center;gap:4px}
+.spacing-block .bar{background:var(--copper-500);border-radius:3px;width:24px;opacity:0.6}
+.spacing-block .sp-label{font-size:8px;color:var(--dim);font-weight:600;text-transform:uppercase}
+
+/* Responsive */
+@media(max-width:700px){
+  .comp-grid{grid-template-columns:1fr}
+  .glass-demos{grid-template-columns:1fr}
+  .principle-grid{grid-template-columns:1fr}
+  .rule-grid{grid-template-columns:1fr}
+  .hier-level{flex-direction:column;align-items:flex-start}
+  .species-bar{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="sys-header">
+  <h1>SC ONLINE SALES DESIGN SYSTEM</h1>
+  <p class="sub">Atomic components for the leading multi-species online livestock auction platform &mdash; cattle, sheep, goats, pigs, equine. Five species, one design language.</p>
+  <span class="version">HTML Reference &middot; v1.0 &middot; February 2026</span>
+</header>
+
+<nav class="nav">
+  <a href="#principles" class="active">Principles</a>
+  <a href="#hierarchy">Hierarchy</a>
+  <a href="#tokens">Tokens</a>
+  <a href="#atoms">Atoms</a>
+  <a href="#molecules">Molecules</a>
+  <a href="#organisms">Organisms</a>
+  <a href="#glass">Glass</a>
+  <a href="#spacing">Spacing</a>
+  <a href="index.html">Brand Book</a>
+</nav>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <h2>Design Principles</h2>
+  <div class="principle-grid">
+    <div class="principle">
+      <div class="num">01</div>
+      <h4>Multi-Species First</h4>
+      <p>Every component must work across cattle, sheep, goats, pigs, and equine. Species identification through color-coded badges, never through hardcoded layout assumptions. One lot card fits all five.</p>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <h4>Copper Trust</h4>
+      <p>Circuit Copper for primary actions and brand identity. Arena Navy for depth and data surfaces. Clover Green for success. The palette evokes the sale ring under warm barn lights.</p>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <h4>Bid State Clarity</h4>
+      <p>Three bid states must be instantly distinguishable: Winning (green), Outbid (red), Watching (copper). The buyer never has to read text to know their position in an auction.</p>
+    </div>
+    <div class="principle">
+      <div class="num">04</div>
+      <h4>Self-Service Booking</h4>
+      <p>Sellers book and manage their own sales. Every form flow must be completable without a phone call. Field rep assignment is automatic. Settlement is visible from close to deposit.</p>
+    </div>
+    <div class="principle">
+      <div class="num">05</div>
+      <h4>Magazine Convergence</h4>
+      <p>The Show Circuit Magazine and SC Online Sales share an audience. Design language bridges print editorial and digital commerce. Readership data informs auction targeting.</p>
+    </div>
+    <div class="principle">
+      <div class="num">06</div>
+      <h4>Auction Format Flexibility</h4>
+      <p>Timed, racehorse-style, C2C, proxy bid, live view. The bid widget adapts its controls to the active format without changing the lot card or surrounding layout.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HIERARCHY -->
+<section id="hierarchy">
+  <h2>Component Hierarchy</h2>
+  <p>Atomic design for multi-species online livestock commerce. Atoms are individual UI elements. Molecules combine atoms into sale-specific units. Organisms are complete platform interfaces.</p>
+  <div class="hierarchy">
+    <div class="hier-level hier-atoms">
+      <div class="hier-label">Atoms</div>
+      <div class="hier-items">
+        <span class="hier-item">Button</span>
+        <span class="hier-item">Input</span>
+        <span class="hier-item">Badge</span>
+        <span class="hier-item">SpeciesChip</span>
+        <span class="hier-item">PriceTag</span>
+        <span class="hier-item">Timer</span>
+        <span class="hier-item">WatchIndicator</span>
+        <span class="hier-item">LotNumber</span>
+        <span class="hier-item">SellerAvatar</span>
+        <span class="hier-item">BidFormat</span>
+        <span class="hier-item">Select</span>
+        <span class="hier-item">Progress</span>
+      </div>
+    </div>
+    <div class="hier-level hier-molecules">
+      <div class="hier-label">Molecules</div>
+      <div class="hier-items">
+        <span class="hier-item">LotCard</span>
+        <span class="hier-item">BidPanel</span>
+        <span class="hier-item">SpeciesFilterBar</span>
+        <span class="hier-item">SearchBar</span>
+        <span class="hier-item">NavBar</span>
+        <span class="hier-item">FormGroup</span>
+        <span class="hier-item">WatchListRow</span>
+        <span class="hier-item">SellerRow</span>
+        <span class="hier-item">SaleBookingForm</span>
+      </div>
+    </div>
+    <div class="hier-level hier-organisms">
+      <div class="hier-label">Organisms</div>
+      <div class="hier-items">
+        <span class="hier-item">AuctionGrid</span>
+        <span class="hier-item">SellerDashboard</span>
+        <span class="hier-item">SalePerformance</span>
+        <span class="hier-item">WatchListPanel</span>
+        <span class="hier-item">MagazineIntegration</span>
+        <span class="hier-item">FieldRepView</span>
+        <span class="hier-item">SettlementReport</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section id="tokens">
+  <h2>Design Tokens</h2>
+
+  <h3>Circuit Copper Scale (Primary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#FDF5EE"></div><div class="info"><div class="name">50</div><div class="hex">#FDF5EE</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F8E4CF"></div><div class="info"><div class="name">100</div><div class="hex">#F8E4CF</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E8C9A0"></div><div class="info"><div class="name">200</div><div class="hex">#E8C9A0</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D4A060"></div><div class="info"><div class="name">300</div><div class="hex">#D4A060</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C68A45"></div><div class="info"><div class="name">400</div><div class="hex">#C68A45</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#B87333"></div><div class="info"><div class="name">500</div><div class="hex">#B87333</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#9A5E28"></div><div class="info"><div class="name">600</div><div class="hex">#9A5E28</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7A4A1F"></div><div class="info"><div class="name">700</div><div class="hex">#7A4A1F</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5C3717"></div><div class="info"><div class="name">800</div><div class="hex">#5C3717</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2E1B0B"></div><div class="info"><div class="name">900</div><div class="hex">#2E1B0B</div></div></div>
+  </div>
+
+  <h3>Arena Navy Scale (Secondary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#EEF1F7"></div><div class="info"><div class="name">50</div><div class="hex">#EEF1F7</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D2DAE8"></div><div class="info"><div class="name">100</div><div class="hex">#D2DAE8</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7089B3"></div><div class="info"><div class="name">300</div><div class="hex">#7089B3</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2C3E6B"></div><div class="info"><div class="name">500</div><div class="hex">#2C3E6B</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1A253F"></div><div class="info"><div class="name">700</div><div class="hex">#1A253F</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#0A0E18"></div><div class="info"><div class="name">900</div><div class="hex">#0A0E18</div></div></div>
+  </div>
+
+  <h3>Clover Green Scale (Tertiary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#D6E8D6"></div><div class="info"><div class="name">100</div><div class="hex">#D6E8D6</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7BAF7B"></div><div class="info"><div class="name">400</div><div class="hex">#7BAF7B</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#3D7A3D"></div><div class="info"><div class="name">500</div><div class="hex">#3D7A3D</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#183018"></div><div class="info"><div class="name">800</div><div class="hex">#183018</div></div></div>
+  </div>
+
+  <h3>Species Colors</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#E91E63"></div><div class="info"><div class="name">Swine</div><div class="hex">#E91E63</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D4A060"></div><div class="info"><div class="name">Cattle</div><div class="hex">#D4A060</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C4BDB5"></div><div class="info"><div class="name">Sheep</div><div class="hex">#C4BDB5</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#BB8FCE"></div><div class="info"><div class="name">Goat</div><div class="hex">#BB8FCE</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5DADE2"></div><div class="info"><div class="name">Equine</div><div class="hex">#5DADE2</div></div></div>
+  </div>
+
+  <h3>Sawdust Neutral Scale</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#E4DFDA"></div><div class="info"><div class="name">100</div><div class="hex">#E4DFDA</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#A09890"></div><div class="info"><div class="name">300</div><div class="hex">#A09890</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#625A52"></div><div class="info"><div class="name">500</div><div class="hex">#625A52</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#3E3830"></div><div class="info"><div class="name">700</div><div class="hex">#3E3830</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2A2520"></div><div class="info"><div class="name">800</div><div class="hex">#2A2520</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1A1714"></div><div class="info"><div class="name">900</div><div class="hex">#1A1714</div></div></div>
+  </div>
+
+  <h3>Typography</h3>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:12px">
+    <div><span style="font-family:'Oswald',sans-serif;font-size:48px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#B87333,#2C3E6B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">DISPLAY 48/700</span></div>
+    <div><span style="font-family:'Oswald',sans-serif;font-size:32px;font-weight:600;letter-spacing:2px">Heading 1 &mdash; Oswald 32/600</span></div>
+    <div><span style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:500;letter-spacing:1px">Heading 2 &mdash; Oswald 22/500</span></div>
+    <div><span style="font-size:15px;font-weight:400;line-height:1.7">Body &mdash; Inter 15/400 &mdash; line-height 1.7</span></div>
+    <div><span style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--copper-500)">Caption &mdash; 11/600 uppercase</span></div>
+    <div><span style="font-size:13px;font-family:'Courier New',monospace;color:var(--copper-300)">Mono &mdash; Courier New 13px</span></div>
+  </div>
+</section>
+
+<!-- ATOMS -->
+<section id="atoms">
+  <h2>Atoms &mdash; Base Elements</h2>
+
+  <h3>Buttons</h3>
+  <p>Six variants: primary (copper), secondary (navy), outline, success (clover), ghost, danger. Three sizes. Icon buttons for compact actions.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary">Place Bid</button>
+        <button class="btn btn-secondary">View Sale</button>
+        <button class="btn btn-outline">Watch</button>
+        <button class="btn btn-success">Sold</button>
+        <button class="btn btn-ghost">Cancel</button>
+        <button class="btn btn-danger">Remove</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button Variants</h4>
+        <div class="dart">variant: primary | secondary | outline | success | ghost | danger</div>
+        <p>Primary for bid and main CTAs. Secondary for navigation. Outline for watchlist. Success for confirmed. Ghost for dismiss. Danger for destructive.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;align-items:center">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+        <div class="btn-icon">&#x2764;</div>
+        <div class="btn-icon" style="border-color:var(--copper-500);color:var(--copper-500)">&#x1F514;</div>
+      </div>
+      <div class="comp-info">
+        <h4>Sizes &amp; Icon Buttons</h4>
+        <div class="dart">size: sm (6/14px) | md (10/20px) | lg (14/28px)</div>
+        <p>Small for table/inline. Default for standard. Large for hero CTAs. Icon buttons are 36px circles for watchlist and alert actions.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Inputs &amp; Select</h3>
+  <p>Form controls with focus, error, and success states. Used across sale booking, registration, and account forms.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;width:100%">
+        <div class="input-group">
+          <label class="input-label">Sale Name</label>
+          <input class="input" type="text" placeholder="e.g. Spring Bred Heifer Sale">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Reserve Price</label>
+          <input class="input input-error" type="text" value="invalid">
+          <div class="input-error-msg">Enter a valid dollar amount</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Species</label>
+          <select class="select">
+            <option>All Species</option>
+            <option>Cattle</option>
+            <option>Sheep</option>
+            <option>Goats</option>
+            <option>Swine</option>
+            <option>Equine</option>
+          </select>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Input States</h4>
+        <div class="dart">state: default | focus | error | success</div>
+        <p>Copper focus ring with 15% opacity. Error with red border and message. Select with custom chevron. Labels always uppercase 11px.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Badges &amp; Species Tags</h3>
+  <p>Status badges for auction state and species identification tags. Species colors are used consistently across the entire platform.</p>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:8px;flex-wrap:wrap">
+      <span class="badge badge-live">&#x25CF; Live</span>
+      <span class="badge badge-copper">Timed</span>
+      <span class="badge badge-navy">Racehorse</span>
+      <span class="badge badge-clover">Sold</span>
+      <span class="badge badge-sawdust">Upcoming</span>
+      <span style="width:100%;height:1px"></span>
+      <span class="badge badge-species badge-swine">Swine</span>
+      <span class="badge badge-species badge-cattle">Cattle</span>
+      <span class="badge badge-species badge-sheep">Sheep</span>
+      <span class="badge badge-species badge-goat">Goat</span>
+      <span class="badge badge-species badge-equine">Equine</span>
+      <span style="width:100%;height:1px"></span>
+      <span class="watch-indicator watch-winning">&#x2713; Winning</span>
+      <span class="watch-indicator watch-outbid">&#x2191; Outbid</span>
+      <span class="watch-indicator watch-watching">&#x25CF; Watching</span>
+    </div>
+    <div class="comp-info">
+      <h4>Badges, Species Tags &amp; Watch Indicators</h4>
+      <div class="dart">badge: status | species | watch-state</div>
+      <p>Top row: auction format badges. Middle row: species identification with unique colors. Bottom row: watch list indicators (winning/outbid/watching). Watch indicators are the buyer's primary feedback loop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MOLECULES -->
+<section id="molecules">
+  <h2>Molecules &mdash; Functional Combinations</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="lot-card">
+          <div class="lot-img">
+            <span>Photo: 800 x 600</span>
+            <span class="lot-number">Lot 7</span>
+            <span class="lot-badge badge badge-live">&#x25CF; Live</span>
+            <span class="lot-species badge badge-species badge-cattle">Cattle</span>
+          </div>
+          <div class="lot-body">
+            <div class="lot-name">Bred Heifer &mdash; Angus x Hereford</div>
+            <div class="lot-seller">Miller Ranch &middot; Robinson, IL</div>
+            <div class="lot-price-row">
+              <div class="lot-price">$4,800</div>
+              <div class="lot-bids">22 bids</div>
+            </div>
+            <div class="lot-timer">Closes in 4:12</div>
+          </div>
+          <div class="lot-actions">
+            <button class="btn btn-primary btn-sm" style="flex:1">Bid $5,000</button>
+            <div class="btn-icon" style="width:30px;height:30px;font-size:12px">&#x2764;</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Lot Card</h4>
+        <div class="dart">LotCard &mdash; photo + lot# + species badge + pricing + bid</div>
+        <p>Universal lot card across all five species. Photo with lot number, status badge, and species tag overlay. Seller info, current bid, countdown, and action bar. 280px fixed width.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="bid-panel">
+          <div class="bid-current">
+            <div class="bid-label">Current Bid</div>
+            <div class="bid-amount">$4,800</div>
+            <div class="bid-count">22 bids &middot; 5 bidders</div>
+          </div>
+          <div class="bid-formats">
+            <div class="bid-format active">Timed</div>
+            <div class="bid-format">Racehorse</div>
+            <div class="bid-format">Proxy</div>
+          </div>
+          <div style="margin-bottom:12px">
+            <input class="input" type="text" placeholder="$5,000" style="text-align:center;font-family:'Oswald',sans-serif;font-size:18px;font-weight:600">
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center">Place Bid</button>
+          <div style="text-align:center;margin-top:8px">
+            <button class="btn btn-ghost btn-sm" style="font-size:10px">Set Maximum Bid</button>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Bid Panel</h4>
+        <div class="dart">BidPanel &mdash; current + format tabs + input + action</div>
+        <p>Auction format tabs switch between timed, racehorse, and proxy bidding modes. Bid input with Oswald formatting. Max bid option. Used in lot detail view.</p>
+      </div>
+    </div>
+
+    <div class="comp-card" style="grid-column:1/-1">
+      <div class="comp-preview" style="padding:24px;width:100%">
+        <div class="species-bar" style="width:100%">
+          <span class="species-chip active">All Species <span class="count">2,140</span></span>
+          <span class="species-chip">&#x1F404; Cattle <span class="count">890</span></span>
+          <span class="species-chip">&#x1F411; Sheep <span class="count">340</span></span>
+          <span class="species-chip">&#x1F410; Goats <span class="count">280</span></span>
+          <span class="species-chip">&#x1F416; Swine <span class="count">420</span></span>
+          <span class="species-chip">&#x1F40E; Equine <span class="count">210</span></span>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Species Filter Bar</h4>
+        <div class="dart">SpeciesFilterBar &mdash; chip per species + count + active state</div>
+        <p>Horizontal chip bar for species filtering. Each chip shows species emoji, name, and active lot count. Single-select with "All" default. Appears at top of auction grid.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:24px;width:100%">
+        <div class="navbar" style="width:100%">
+          <div class="nav-brand">SC ONLINE SALES</div>
+          <div class="nav-links">
+            <a class="nav-link active" href="#">Auctions</a>
+            <a class="nav-link" href="#">Sellers</a>
+            <a class="nav-link" href="#">Watch List</a>
+            <a class="nav-link" href="#">Magazine</a>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Navigation Bar</h4>
+        <div class="dart">NavBar &mdash; brand + links + active state</div>
+        <p>Oswald brand mark with copper-navy gradient. Links with copper active state. "Magazine" link bridges to The Show Circuit content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANISMS -->
+<section id="organisms">
+  <h2>Organisms &mdash; Platform Interfaces</h2>
+  <p>Complete interface blocks for the multi-species auction platform. Each organism maps to a primary user workflow: browsing, bidding, selling, or analyzing.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="seller-card">
+          <div class="seller-top">
+            <div class="seller-avatar">DG</div>
+            <div>
+              <div class="seller-name">Dave Guyer</div>
+              <div class="seller-location">Robinson, IL &middot; Field Rep: Clint Petzold</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-bottom:12px">
+            <span class="badge badge-species badge-cattle">Cattle</span>
+            <span class="badge badge-species badge-sheep">Sheep</span>
+            <span class="badge badge-copper">Top Seller</span>
+          </div>
+          <div class="seller-stats">
+            <div class="s-stat"><div class="s-val">128</div><div class="s-lbl">Sales</div></div>
+            <div class="s-stat"><div class="s-val">$840K</div><div class="s-lbl">Lifetime</div></div>
+            <div class="s-stat"><div class="s-val">$3,200</div><div class="s-lbl">Avg Lot</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Seller Dashboard Card</h4>
+        <div class="dart">SellerCard &mdash; avatar + info + species badges + stats</div>
+        <p>Seller identity with initials avatar, location, assigned field rep, active species badges, and lifetime stats grid. Multi-species sellers show all active species.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="magazine-card" style="width:300px">
+          <div class="mag-header">
+            <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px">THE SHOW CIRCUIT</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">Magazine Integration</div>
+          </div>
+          <div class="mag-body">
+            <div class="mag-stat"><span class="label">Print Reach</span><span class="value">50,000+</span></div>
+            <div class="mag-stat"><span class="label">eBlast Subscribers</span><span class="value">12,400</span></div>
+            <div class="mag-stat"><span class="label">Instagram</span><span class="value">23,000</span></div>
+            <div class="mag-stat"><span class="label">Auction Referrals</span><span class="value">34%</span></div>
+            <div class="mag-stat"><span class="label">Full Page Ad</span><span class="value">$595</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Magazine Integration Card</h4>
+        <div class="dart">MagazineCard &mdash; Show Circuit data + attribution</div>
+        <p>Bridges editorial and commerce data. Print reach, digital subscribers, social followers, auction referral rate, and ad pricing. Used in seller analytics and partnership views.</p>
+      </div>
+    </div>
+
+    <div class="comp-card" style="grid-column:1/-1">
+      <div class="comp-preview" style="flex-direction:column;gap:0;padding:20px;width:100%;align-items:stretch">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px">SALE PERFORMANCE</div>
+          <div style="display:flex;gap:6px">
+            <span class="badge badge-copper">This Month</span>
+            <span class="badge badge-sawdust">All Species</span>
+          </div>
+        </div>
+        <div class="perf-row header">
+          <div>Sale / Seller</div>
+          <div>Lots</div>
+          <div>Gross</div>
+          <div>Avg Lot</div>
+          <div>Sold %</div>
+        </div>
+        <div class="perf-row">
+          <div class="sale-name">Miller Ranch Spring Bred Heifer Sale</div>
+          <div>42</div>
+          <div class="amount">$186K</div>
+          <div class="amount">$4,428</div>
+          <div><span class="badge badge-clover">97%</span></div>
+        </div>
+        <div class="perf-row">
+          <div class="sale-name">Tri-State Lamb Consignment</div>
+          <div>68</div>
+          <div class="amount">$102K</div>
+          <div class="amount">$1,500</div>
+          <div><span class="badge badge-clover">91%</span></div>
+        </div>
+        <div class="perf-row">
+          <div class="sale-name">Johnson Genetics Show Pig Sale</div>
+          <div>36</div>
+          <div class="amount">$94K</div>
+          <div class="amount">$2,611</div>
+          <div><span class="badge badge-copper">85%</span></div>
+        </div>
+        <div class="perf-row">
+          <div class="sale-name">Heartland Boer Goat Production</div>
+          <div>54</div>
+          <div class="amount">$78K</div>
+          <div class="amount">$1,444</div>
+          <div><span class="badge badge-clover">93%</span></div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Sale Performance Table</h4>
+        <div class="dart">SalePerformance &mdash; multi-species analytics with per-sale rows</div>
+        <p>Post-sale analytics across all species. Columns: sale name, lot count, gross revenue, average lot price, sold percentage. Badge-colored sold rate. Filter by month and species.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:6px;padding:20px;width:100%;align-items:stretch">
+        <div style="font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;color:var(--copper-500);margin-bottom:4px">WATCH LIST</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="badge badge-species badge-cattle" style="font-size:8px;padding:1px 6px">C</span>
+            <span style="font-size:12px;font-weight:600">Lot 7 &mdash; Bred Heifer</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--copper-500)">$4,800</span>
+            <span class="watch-indicator watch-winning">Winning</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="badge badge-species badge-swine" style="font-size:8px;padding:1px 6px">S</span>
+            <span style="font-size:12px;font-weight:600">Lot 14 &mdash; Show Gilt</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--copper-500)">$2,200</span>
+            <span class="watch-indicator watch-outbid">Outbid</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="badge badge-species badge-sheep" style="font-size:8px;padding:1px 6px">SH</span>
+            <span style="font-size:12px;font-weight:600">Lot 3 &mdash; Ram Lamb</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--copper-500)">$1,600</span>
+            <span class="watch-indicator watch-watching">Watching</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Watch List Panel</h4>
+        <div class="dart">WatchListPanel &mdash; rows with species tag + price + bid state</div>
+        <p>Buyer's watchlist with color-coded bid state. Each row shows species badge, lot info, current price, and winning/outbid/watching indicator. Green for winning, red for outbid, copper for watching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLASS -->
+<section id="glass">
+  <h2>Glass Morphism</h2>
+  <p>Three blur levels for depth layering. Warm-toned fills match the sawdust palette. Used for overlays, panels, and floating UI.</p>
+  <div class="glass-demos" style="background:linear-gradient(135deg,rgba(184,115,51,0.15),rgba(44,62,107,0.08),rgba(61,122,61,0.05));padding:24px;border-radius:var(--radius-lg)">
+    <div class="glass-demo glass-subtle">
+      <div class="label">Subtle</div>
+      <div class="value">blur: 12px</div>
+    </div>
+    <div class="glass-demo glass">
+      <div class="label">Standard</div>
+      <div class="value">blur: 24px</div>
+    </div>
+    <div class="glass-demo glass-frosted">
+      <div class="label">Frosted</div>
+      <div class="value">blur: 40px</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+    <div class="rule"><div class="code">fillOpacity</div><div class="desc">0.15 &mdash; container background alpha</div></div>
+    <div class="rule"><div class="code">borderOpacity</div><div class="desc">0.18 &mdash; border alpha (white)</div></div>
+    <div class="rule"><div class="code">radius-sm</div><div class="desc">10px &mdash; buttons, badges, inputs</div></div>
+    <div class="rule"><div class="code">radius-md</div><div class="desc">16px &mdash; cards, containers</div></div>
+    <div class="rule"><div class="code">radius-lg</div><div class="desc">22px &mdash; hero sections, overlays</div></div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section id="spacing">
+  <h2>Spacing &amp; Layout Rules</h2>
+  <p>8px base unit. All spacing multiples of 4px. Consistent padding scale across all platform surfaces.</p>
+
+  <h3>Spacing Scale</h3>
+  <div class="spacing-demo" style="margin-top:16px;margin-bottom:24px">
+    <div class="spacing-block"><div class="bar" style="height:4px"></div><div class="sp-label">4px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:8px"></div><div class="sp-label">8px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:12px"></div><div class="sp-label">12px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:16px"></div><div class="sp-label">16px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:24px"></div><div class="sp-label">24px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:32px"></div><div class="sp-label">32px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:48px"></div><div class="sp-label">48px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:64px"></div><div class="sp-label">64px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:96px"></div><div class="sp-label">96px</div></div>
+  </div>
+
+  <h3>Layout Configuration</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">page-max-width: 1200px</div><div class="desc">Maximum content width</div></div>
+    <div class="rule"><div class="code">page-padding: 32px</div><div class="desc">Horizontal page margins</div></div>
+    <div class="rule"><div class="code">section-gap: 64px</div><div class="desc">Between major sections</div></div>
+    <div class="rule"><div class="code">card-gap: 16px</div><div class="desc">Between grid cards</div></div>
+    <div class="rule"><div class="code">lot-card-width: 280px</div><div class="desc">Fixed lot card width</div></div>
+    <div class="rule"><div class="code">lot-grid: auto-fill, 280px</div><div class="desc">Responsive lot grid</div></div>
+    <div class="rule"><div class="code">species-bar-gap: 6px</div><div class="desc">Between species filter chips</div></div>
+    <div class="rule"><div class="code">breakpoint-mobile: 640px</div><div class="desc">Mobile breakpoint</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Shadow Scale</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">shadow-sm</div><div class="desc">0 2px 8px rgba(0,0,0,0.15)</div></div>
+    <div class="rule"><div class="code">shadow-md</div><div class="desc">0 4px 24px rgba(0,0,0,0.3)</div></div>
+    <div class="rule"><div class="code">shadow-lg</div><div class="desc">0 8px 40px rgba(0,0,0,0.4)</div></div>
+    <div class="rule"><div class="code">shadow-glow</div><div class="desc">0 0 16px rgba(184,115,51,0.3)</div></div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

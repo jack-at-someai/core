@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richard Enterprises Design System — Atomic Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0C0C0E;--surface:#141418;--surface2:#1C1C22;--border:#282830;
+  --text:#F0F0F2;--dim:#888890;--dim2:#B0B0B8;
+  --charcoal-100:#0C0C0E;--charcoal-200:#141418;--charcoal-300:#1C1C22;--charcoal-400:#282830;
+  --silver-100:#F0F0F2;--silver-200:#D8D8DC;--silver-300:#B0B0B8;--silver-400:#888890;--silver-500:#68686E;
+  --gold-light:#F0D080;--gold-primary:#C8A040;--gold-dark:#987020;--gold-glow:rgba(200,160,64,0.4);
+  --navy-light:#3060A0;--navy-primary:#1A2B5F;--navy-dark:#0A1628;
+  --green:#4CAF50;--red:#E53E3E;--amber:#F59E0B;--teal:#009688;--blue:#2196F3;
+  --glass-blur:24px;--glass-fill:0.15;--glass-border:0.12;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.3);--shadow-md:0 4px 24px rgba(0,0,0,0.4);--shadow-lg:0 8px 48px rgba(0,0,0,0.5);
+  --shadow-gold:0 0 24px rgba(200,160,64,0.15);
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'SF Mono','Cascadia Code','Fira Code',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 96px}
+
+/* Header */
+.sys-header{text-align:center;padding:64px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden}
+.sys-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,160,64,0.08),rgba(26,43,95,0.06),transparent)}
+.sys-header *{position:relative;z-index:1}
+.sys-header h1{font-size:42px;font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,#C8A040,#F0D080);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.sys-header .sub{font-size:15px;color:var(--dim);max-width:600px;margin:0 auto}
+.sys-header .version{display:inline-block;margin-top:16px;font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(200,160,64,0.12);color:var(--gold-primary);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+/* Navigation */
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:48px;padding:8px;background:var(--surface);border-radius:var(--radius-md);border:1px solid var(--border)}
+.nav a{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.active{background:var(--gold-primary);color:#0C0C0E}
+
+/* Sections */
+section{margin-bottom:64px}
+section h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-primary);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+section p{color:var(--dim);max-width:680px;margin-bottom:12px;line-height:1.7;font-size:13px}
+
+/* Component cards */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.comp-preview{padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px;background:var(--bg);position:relative}
+.comp-info{padding:16px}
+.comp-info h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.comp-info .ref{font-size:10px;font-family:var(--font-mono);color:var(--gold-primary);margin-bottom:6px}
+.comp-info p{font-size:11px;color:var(--dim);line-height:1.5;margin:0}
+.comp-info .props{margin-top:8px;font-size:10px;font-family:var(--font-mono);color:var(--dim2);line-height:1.7}
+
+/* Principle cards */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.principle{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px}
+.principle .num{font-size:32px;font-weight:800;color:rgba(200,160,64,0.2);margin-bottom:8px;line-height:1}
+.principle h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.principle p{font-size:11px;color:var(--dim);margin:0}
+
+/* Hierarchy */
+.hierarchy{display:flex;flex-direction:column;gap:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.hier-level{display:flex;align-items:center;gap:16px}
+.hier-label{min-width:120px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.hier-items{display:flex;gap:6px;flex-wrap:wrap}
+.hier-item{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;border:1px solid}
+.hier-atoms .hier-label{color:var(--gold-primary)}
+.hier-atoms .hier-item{border-color:var(--gold-primary);color:var(--gold-primary);background:rgba(200,160,64,0.08)}
+.hier-molecules .hier-label{color:var(--navy-light)}
+.hier-molecules .hier-item{border-color:var(--navy-light);color:var(--navy-light);background:rgba(48,96,160,0.08)}
+.hier-organisms .hier-label{color:var(--silver-200)}
+.hier-organisms .hier-item{border-color:var(--silver-400);color:var(--silver-200);background:rgba(216,216,220,0.06)}
+
+/* Token display */
+.token-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.token-swatch{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);min-width:72px}
+.token-swatch .color{height:48px}
+.token-swatch .info{padding:4px 6px;background:var(--surface)}
+.token-swatch .info .name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.token-swatch .info .hex{font-size:8px;color:var(--dim);font-family:var(--font-mono)}
+
+/* Glass containers */
+.glass{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));background:rgba(20,20,24,var(--glass-fill));border:1px solid rgba(200,160,64,var(--glass-border));border-radius:var(--radius-md)}
+.glass-subtle{backdrop-filter:blur(12px);background:rgba(20,20,24,0.1);border:1px solid rgba(200,160,64,0.06);border-radius:var(--radius-sm)}
+.glass-frosted{backdrop-filter:blur(40px);background:rgba(20,20,24,0.2);border:1px solid rgba(200,160,64,0.15);border-radius:var(--radius-lg)}
+.glass-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.glass-demo{padding:20px;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.glass-demo .label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-bottom:4px}
+.glass-demo .value{font-size:11px;font-family:var(--font-mono);color:var(--text)}
+
+/* Rule grid */
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:12px}
+.rule{padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rule .code{font-size:10px;font-family:var(--font-mono);color:var(--gold-primary);margin-bottom:4px}
+.rule .desc{font-size:11px;color:var(--dim)}
+
+/* ═══════════ BUTTONS ═══════════ */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;font-family:var(--font-sans);border:none;cursor:pointer;transition:all .2s;letter-spacing:0.2px}
+.btn-primary{background:var(--gold-primary);color:#0C0C0E}
+.btn-primary:hover{background:var(--gold-light);box-shadow:var(--shadow-gold)}
+.btn-secondary{background:var(--navy-primary);color:var(--silver-100);border:1px solid var(--navy-light)}
+.btn-secondary:hover{background:var(--navy-light);border-color:var(--navy-light)}
+.btn-outline{background:transparent;color:var(--gold-primary);border:1px solid var(--gold-primary)}
+.btn-outline:hover{background:rgba(200,160,64,0.1)}
+.btn-ghost{background:transparent;color:var(--dim2);border:1px solid transparent}
+.btn-ghost:hover{color:var(--text);background:var(--surface2)}
+.btn-sm{padding:6px 14px;font-size:11px;border-radius:6px}
+.btn-lg{padding:14px 32px;font-size:15px;border-radius:var(--radius-md)}
+.btn-icon{width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--dim2);cursor:pointer;transition:all .2s}
+.btn-icon:hover{border-color:var(--gold-primary);color:var(--gold-primary)}
+
+/* ═══════════ CARDS ═══════════ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:rgba(200,160,64,0.25);box-shadow:var(--shadow-gold)}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.card-title{font-size:15px;font-weight:700;letter-spacing:-0.2px}
+.card-subtitle{font-size:11px;color:var(--dim)}
+.card-body{font-size:13px;color:var(--dim2);line-height:1.7}
+.card-footer{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* ═══════════ INPUTS ═══════════ */
+.input-group{margin-bottom:16px}
+.input-label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:6px}
+.input{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:var(--font-sans);transition:border-color .2s;outline:none}
+.input:focus{border-color:var(--gold-primary);box-shadow:0 0 0 3px rgba(200,160,64,0.1)}
+.input::placeholder{color:var(--silver-500)}
+.input-search{padding-left:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888890' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px center}
+textarea.input{min-height:80px;resize:vertical}
+
+/* ═══════════ BADGES ═══════════ */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.badge-gold{background:rgba(200,160,64,0.15);color:var(--gold-primary);border:1px solid rgba(200,160,64,0.3)}
+.badge-navy{background:rgba(26,43,95,0.3);color:var(--navy-light);border:1px solid rgba(48,96,160,0.3)}
+.badge-green{background:rgba(76,175,80,0.15);color:var(--green);border:1px solid rgba(76,175,80,0.3)}
+.badge-red{background:rgba(229,62,62,0.15);color:var(--red);border:1px solid rgba(229,62,62,0.3)}
+.badge-silver{background:rgba(176,176,184,0.1);color:var(--dim2);border:1px solid rgba(176,176,184,0.2)}
+.badge-outline{background:transparent;color:var(--dim);border:1px solid var(--border)}
+
+/* ═══════════ NAVIGATION ═══════════ */
+.navbar{display:flex;align-items:center;padding:12px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);gap:8px}
+.navbar-brand{font-size:15px;font-weight:800;color:var(--gold-primary);letter-spacing:-0.5px;margin-right:auto}
+.navbar-link{padding:6px 14px;font-size:12px;font-weight:500;color:var(--dim);text-decoration:none;border-radius:6px;transition:all .2s;cursor:pointer}
+.navbar-link:hover{color:var(--text);background:var(--surface2)}
+.navbar-link.active{color:var(--gold-primary);background:rgba(200,160,64,0.1)}
+
+.tabs{display:flex;gap:2px;padding:4px;background:var(--surface);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.tab{padding:8px 18px;font-size:11px;font-weight:600;color:var(--dim);border-radius:6px;cursor:pointer;transition:all .2s;border:none;background:none;font-family:var(--font-sans)}
+.tab:hover{color:var(--text)}
+.tab.active{background:var(--gold-primary);color:#0C0C0E}
+
+/* ═══════════ DOMAIN: PORTFOLIO CARD ═══════════ */
+.portfolio-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;transition:all .3s}
+.portfolio-card:hover{border-color:rgba(200,160,64,0.3);box-shadow:var(--shadow-gold)}
+.portfolio-card .p-header{padding:20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
+.portfolio-card .p-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(200,160,64,0.1);border:1px solid rgba(200,160,64,0.2)}
+.portfolio-card .p-name{font-size:16px;font-weight:700;letter-spacing:-0.3px}
+.portfolio-card .p-type{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.portfolio-card .p-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.portfolio-card .p-stat{padding:14px;text-align:center;background:var(--surface)}
+.portfolio-card .p-stat-value{font-size:18px;font-weight:800;color:var(--gold-primary);letter-spacing:-0.5px}
+.portfolio-card .p-stat-label{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-top:2px}
+.portfolio-card .p-footer{padding:14px 20px;display:flex;gap:6px}
+
+/* ═══════════ DOMAIN: ENTITY HIERARCHY ═══════════ */
+.entity-tree{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.entity-node{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);transition:background .2s;cursor:pointer}
+.entity-node:hover{background:var(--surface2)}
+.entity-node .e-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.entity-node .e-name{font-size:13px;font-weight:600}
+.entity-node .e-role{font-size:10px;color:var(--dim);margin-left:auto}
+.entity-children{margin-left:24px;border-left:2px solid var(--border);padding-left:12px}
+.entity-children .entity-children{border-left-color:rgba(200,160,64,0.2)}
+
+/* ═══════════ DOMAIN: INVESTMENT SUMMARY ═══════════ */
+.investment-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.investment-card .i-header{padding:20px;background:linear-gradient(135deg,rgba(200,160,64,0.06),transparent);border-bottom:1px solid var(--border)}
+.investment-card .i-title{font-size:15px;font-weight:700}
+.investment-card .i-subtitle{font-size:11px;color:var(--dim)}
+.investment-card .i-body{padding:20px}
+.investment-card .i-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(40,40,48,0.5)}
+.investment-card .i-row:last-child{border-bottom:none}
+.investment-card .i-label{font-size:12px;color:var(--dim)}
+.investment-card .i-value{font-size:13px;font-weight:700}
+.investment-card .i-bar{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-top:4px}
+.investment-card .i-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-primary))}
+
+/* ═══════════ DOMAIN: MEETING/EVENT CARD ═══════════ */
+.meeting-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;display:flex;gap:16px;transition:all .2s}
+.meeting-card:hover{border-color:rgba(200,160,64,0.2)}
+.meeting-card .m-date{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:56px;height:56px;background:rgba(200,160,64,0.1);border:1px solid rgba(200,160,64,0.2);border-radius:var(--radius-sm)}
+.meeting-card .m-month{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold-primary)}
+.meeting-card .m-day{font-size:22px;font-weight:800;color:var(--text);line-height:1;margin-top:2px}
+.meeting-card .m-content{flex:1}
+.meeting-card .m-title{font-size:14px;font-weight:700;margin-bottom:2px}
+.meeting-card .m-meta{font-size:11px;color:var(--dim)}
+.meeting-card .m-attendees{display:flex;gap:-4px;margin-top:8px}
+.meeting-card .m-avatar{width:24px;height:24px;border-radius:50%;border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-4px}
+.meeting-card .m-avatar:first-child{margin-left:0}
+
+/* Progress bar */
+.progress{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width .4s}
+.progress-gold{background:linear-gradient(90deg,var(--gold-dark),var(--gold-primary))}
+.progress-navy{background:linear-gradient(90deg,var(--navy-dark),var(--navy-light))}
+
+/* Stat card */
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px}
+.stat-card .s-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-bottom:6px}
+.stat-card .s-value{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--gold-primary)}
+.stat-card .s-trend{font-size:11px;font-weight:600;margin-top:4px}
+.s-trend-up{color:var(--green)}
+.s-trend-down{color:var(--red)}
+
+/* Table */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;padding:8px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);border-bottom:1px solid var(--border);font-weight:600}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(40,40,48,0.5);color:var(--dim2)}
+.data-table td:first-child{color:var(--text);font-weight:500}
+.data-table tr:hover td{background:rgba(200,160,64,0.03)}
+
+/* Responsive */
+@media(max-width:700px){
+  .comp-grid{grid-template-columns:1fr}
+  .glass-demos{grid-template-columns:1fr}
+  .principle-grid{grid-template-columns:1fr}
+  .rule-grid{grid-template-columns:1fr}
+  .hier-level{flex-direction:column;align-items:flex-start}
+  .portfolio-card .p-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="sys-header">
+  <h1>Richard Enterprises Design System</h1>
+  <p class="sub">Atomic component reference for the holding company &mdash; gold prestige, navy authority, charcoal foundation. PE interface, portfolio intelligence, family office.</p>
+  <span class="version">Design System v1.0 &middot; February 2026</span>
+</header>
+
+<nav class="nav">
+  <a href="#principles" class="active">Principles</a>
+  <a href="#hierarchy">Hierarchy</a>
+  <a href="#tokens">Tokens</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#cards">Cards</a>
+  <a href="#inputs">Inputs</a>
+  <a href="#badges">Badges</a>
+  <a href="#navigation">Navigation</a>
+  <a href="#domain">Domain</a>
+  <a href="#glass">Glass</a>
+  <a href="#layout">Layout</a>
+  <a href="index.html">Brand Book</a>
+</nav>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <h2>Design Principles</h2>
+  <div class="principle-grid">
+    <div class="principle">
+      <div class="num">01</div>
+      <h4>Institutional Restraint</h4>
+      <p>Every surface earns its place. No decoration without function. The holding company speaks through absence of noise &mdash; charcoal backgrounds, minimal borders, maximum data density.</p>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <h4>Gold as Signal</h4>
+      <p>Gold is never decorative. It marks: primary actions, active states, financial values, and hierarchy anchors. One gold element per viewport focus area. Restraint amplifies prestige.</p>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <h4>Navy Authority</h4>
+      <p>Navy conveys institutional depth &mdash; secondary actions, data containers, active navigation. The Wayne side of the DNA. Paired with gold for the full brand signature.</p>
+    </div>
+    <div class="principle">
+      <div class="num">04</div>
+      <h4>Entity-First Architecture</h4>
+      <p>Every component answers: what entity is this, what is its status, and where does it sit in the hierarchy? Portfolio cards, entity trees, investment summaries &mdash; structure mirrors corporate structure.</p>
+    </div>
+    <div class="principle">
+      <div class="num">05</div>
+      <h4>Glass Depth</h4>
+      <p>Frosted glass surfaces layer information without hiding context. The substrate is visible beneath every container. Blur 12-40px, gold-tinted borders at low opacity.</p>
+    </div>
+    <div class="principle">
+      <div class="num">06</div>
+      <h4>Three-Generation Scalability</h4>
+      <p>Components must serve today's three subsidiaries and tomorrow's twenty. The grid system, card patterns, and hierarchy displays scale from family office to institutional PE without redesign.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HIERARCHY -->
+<section id="hierarchy">
+  <h2>Component Hierarchy</h2>
+  <p>Atomic design mapped to the holding company domain. Atoms are indivisible tokens and controls. Molecules combine atoms into functional clusters. Organisms are the views that power portfolio management, entity oversight, and capital allocation.</p>
+  <div class="hierarchy">
+    <div class="hier-level hier-atoms">
+      <div class="hier-label">Atoms</div>
+      <div class="hier-items">
+        <span class="hier-item">Button</span>
+        <span class="hier-item">Badge</span>
+        <span class="hier-item">Input</span>
+        <span class="hier-item">Label</span>
+        <span class="hier-item">Icon</span>
+        <span class="hier-item">Divider</span>
+        <span class="hier-item">Progress</span>
+        <span class="hier-item">Avatar</span>
+        <span class="hier-item">EntityDot</span>
+        <span class="hier-item">TrendIndicator</span>
+        <span class="hier-item">StatValue</span>
+      </div>
+    </div>
+    <div class="hier-level hier-molecules">
+      <div class="hier-label">Molecules</div>
+      <div class="hier-items">
+        <span class="hier-item">StatCard</span>
+        <span class="hier-item">NavBar</span>
+        <span class="hier-item">Tabs</span>
+        <span class="hier-item">SearchBar</span>
+        <span class="hier-item">InputGroup</span>
+        <span class="hier-item">EntityNode</span>
+        <span class="hier-item">InvestmentRow</span>
+        <span class="hier-item">MeetingDate</span>
+        <span class="hier-item">DataTableRow</span>
+      </div>
+    </div>
+    <div class="hier-level hier-organisms">
+      <div class="hier-label">Organisms</div>
+      <div class="hier-items">
+        <span class="hier-item">PortfolioCard</span>
+        <span class="hier-item">EntityHierarchy</span>
+        <span class="hier-item">InvestmentSummary</span>
+        <span class="hier-item">MeetingCard</span>
+        <span class="hier-item">CapitalDashboard</span>
+        <span class="hier-item">AcquisitionPipeline</span>
+        <span class="hier-item">BoardMaterials</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section id="tokens">
+  <h2>Design Tokens</h2>
+
+  <h3>Charcoal Scale (Foundation)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#0C0C0E"></div><div class="info"><div class="name">100</div><div class="hex">#0C0C0E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#141418"></div><div class="info"><div class="name">200</div><div class="hex">#141418</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1C1C22"></div><div class="info"><div class="name">300</div><div class="hex">#1C1C22</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#282830"></div><div class="info"><div class="name">400</div><div class="hex">#282830</div></div></div>
+  </div>
+
+  <h3>Silver Scale (Neutrals)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#F0F0F2"></div><div class="info"><div class="name">100</div><div class="hex">#F0F0F2</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D8D8DC"></div><div class="info"><div class="name">200</div><div class="hex">#D8D8DC</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#B0B0B8"></div><div class="info"><div class="name">300</div><div class="hex">#B0B0B8</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#888890"></div><div class="info"><div class="name">400</div><div class="hex">#888890</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#68686E"></div><div class="info"><div class="name">500</div><div class="hex">#68686E</div></div></div>
+  </div>
+
+  <h3>Gold Scale (Primary &mdash; Prestige)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#F0D080"></div><div class="info"><div class="name">Light</div><div class="hex">#F0D080</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C8A040"></div><div class="info"><div class="name">Primary</div><div class="hex">#C8A040</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#987020"></div><div class="info"><div class="name">Dark</div><div class="hex">#987020</div></div></div>
+  </div>
+
+  <h3>Navy Scale (Secondary &mdash; Authority)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#3060A0"></div><div class="info"><div class="name">Light</div><div class="hex">#3060A0</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1A2B5F"></div><div class="info"><div class="name">Primary</div><div class="hex">#1A2B5F</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#0A1628"></div><div class="info"><div class="name">Dark</div><div class="hex">#0A1628</div></div></div>
+  </div>
+
+  <h3>Semantic Colors</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#4CAF50"></div><div class="info"><div class="name">Growth</div><div class="hex">#4CAF50</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E53E3E"></div><div class="info"><div class="name">Risk</div><div class="hex">#E53E3E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F59E0B"></div><div class="info"><div class="name">Caution</div><div class="hex">#F59E0B</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2196F3"></div><div class="info"><div class="name">Info</div><div class="hex">#2196F3</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#009688"></div><div class="info"><div class="name">Stable</div><div class="hex">#009688</div></div></div>
+  </div>
+
+  <h3>Typography</h3>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:12px">
+    <div><span style="font-size:48px;font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,#C8A040,#F0D080);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Display 48/800</span></div>
+    <div><span style="font-size:32px;font-weight:700;letter-spacing:-1px">Heading 1 &mdash; 32/700</span></div>
+    <div><span style="font-size:22px;font-weight:600;letter-spacing:-0.5px">Heading 2 &mdash; 22/600</span></div>
+    <div><span style="font-size:16px;font-weight:700;letter-spacing:-0.3px">Heading 3 &mdash; 16/700</span></div>
+    <div><span style="font-size:15px;font-weight:400;line-height:1.7">Body &mdash; 15/400 &mdash; Inter, -apple-system, sans-serif, line-height 1.7</span></div>
+    <div><span style="font-size:13px;font-weight:500;color:var(--dim2)">Body Small &mdash; 13/500 &mdash; data descriptions, meta text</span></div>
+    <div><span style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-primary)">Caption &mdash; 11/600 uppercase &mdash; section labels, stat labels</span></div>
+    <div><span style="font-size:13px;font-family:var(--font-mono);color:var(--gold-primary)">Mono &mdash; 13px &mdash; SF Mono, Cascadia Code &mdash; values, codes, variables</span></div>
+  </div>
+
+  <h3 style="margin-top:24px">Spacing</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">4px</div><div class="desc">Micro &mdash; badge padding, icon gaps</div></div>
+    <div class="rule"><div class="code">8px</div><div class="desc">Tight &mdash; inline element spacing</div></div>
+    <div class="rule"><div class="code">12px</div><div class="desc">Compact &mdash; card internal padding</div></div>
+    <div class="rule"><div class="code">16px</div><div class="desc">Default &mdash; grid gaps, section spacing</div></div>
+    <div class="rule"><div class="code">24px</div><div class="desc">Relaxed &mdash; card padding, group spacing</div></div>
+    <div class="rule"><div class="code">32px</div><div class="desc">Section &mdash; page padding, major groups</div></div>
+    <div class="rule"><div class="code">48px</div><div class="desc">Region &mdash; section margins</div></div>
+    <div class="rule"><div class="code">64px</div><div class="desc">Page &mdash; header/footer padding</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Radius &amp; Shadows</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">radius-sm: 8px</div><div class="desc">Inputs, badges, small elements</div></div>
+    <div class="rule"><div class="code">radius-md: 12px</div><div class="desc">Cards, containers, modals</div></div>
+    <div class="rule"><div class="code">radius-lg: 20px</div><div class="desc">Hero sections, feature cards</div></div>
+    <div class="rule"><div class="code">shadow-sm</div><div class="desc">0 2px 8px rgba(0,0,0,0.3) &mdash; subtle lift</div></div>
+    <div class="rule"><div class="code">shadow-md</div><div class="desc">0 4px 24px rgba(0,0,0,0.4) &mdash; cards on hover</div></div>
+    <div class="rule"><div class="code">shadow-gold</div><div class="desc">0 0 24px rgba(200,160,64,0.15) &mdash; gold glow</div></div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section id="buttons">
+  <h2>Buttons</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary">Primary Action</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button Variants</h4>
+        <div class="ref">.btn .btn-primary | .btn-secondary | .btn-outline | .btn-ghost</div>
+        <p>Primary = gold fill (main CTA). Secondary = navy (institutional actions). Outline = gold border (alternative CTA). Ghost = transparent (tertiary/inline).</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+        <button class="btn-icon"><span style="font-size:14px">+</span></button>
+        <button class="btn-icon" style="border-color:var(--gold-primary);color:var(--gold-primary)"><span style="font-size:14px">&#x2192;</span></button>
+      </div>
+      <div class="comp-info">
+        <h4>Sizes &amp; Icon Buttons</h4>
+        <div class="ref">.btn-sm | .btn-lg | .btn-icon</div>
+        <p>Three sizes: sm (6/14px), default (10/24px), lg (14/32px). Icon buttons are 40px circles for toolbar/inline actions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section id="cards">
+  <h2>Cards</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px">
+        <div class="card" style="width:100%">
+          <div class="card-header">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(200,160,64,0.1);border:1px solid rgba(200,160,64,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">&#x1F3ED;</div>
+            <div>
+              <div class="card-title">ISG Operations</div>
+              <div class="card-subtitle">Industrial services division</div>
+            </div>
+          </div>
+          <div class="card-body">16+ industrial brands across cleaning, maintenance, and facility operations. $450M revenue, 80K+ employees nationwide.</div>
+          <div class="card-footer">
+            <span class="badge badge-green">Active</span>
+            <span class="badge badge-gold">Core</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Standard Card</h4>
+        <div class="ref">.card > .card-header + .card-body + .card-footer</div>
+        <p>Base container for all content. Gold-tinted border on hover. Composed of header (icon + title), body, and footer (badges/actions).</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%">
+          <div class="stat-card">
+            <div class="s-label">Portfolio Revenue</div>
+            <div class="s-value">$450M</div>
+            <div class="s-trend s-trend-up">+12.3% YoY</div>
+          </div>
+          <div class="stat-card">
+            <div class="s-label">Instruments</div>
+            <div class="s-value">37</div>
+            <div class="s-trend s-trend-up">+5 this quarter</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Stat Card</h4>
+        <div class="ref">.stat-card > .s-label + .s-value + .s-trend</div>
+        <p>KPI display. Value in 28px bold gold. Trend indicator below in semantic color (green/red). Label in 10px uppercase.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INPUTS -->
+<section id="inputs">
+  <h2>Inputs</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;align-items:stretch">
+        <div class="input-group">
+          <label class="input-label">Target Company</label>
+          <input class="input" type="text" placeholder="Enter company name">
+        </div>
+        <div class="input-group">
+          <label class="input-label">EBITDA ($M)</label>
+          <input class="input" type="number" placeholder="e.g. 25">
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Text Input</h4>
+        <div class="ref">.input-group > .input-label + .input</div>
+        <p>Charcoal background, border transitions to gold on focus with 3px glow ring. Label is 11px uppercase. Placeholder in silver-500.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;align-items:stretch">
+        <input class="input input-search" type="search" placeholder="Search portfolio, instruments, papers...">
+        <textarea class="input" placeholder="Meeting notes, due diligence observations..." style="min-height:60px"></textarea>
+      </div>
+      <div class="comp-info">
+        <h4>Search &amp; Textarea</h4>
+        <div class="ref">.input.input-search | textarea.input</div>
+        <p>Search input has built-in SVG magnifying glass icon via background-image. Textarea uses same base styles with resize: vertical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<section id="badges">
+  <h2>Badges</h2>
+
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:8px;flex-wrap:wrap;padding:24px">
+      <span class="badge badge-gold">Active</span>
+      <span class="badge badge-navy">Subsidiary</span>
+      <span class="badge badge-green">+12% Growth</span>
+      <span class="badge badge-red">At Risk</span>
+      <span class="badge badge-silver">Pending</span>
+      <span class="badge badge-outline">Q1 2026</span>
+      <span class="badge badge-gold">$5-50M EBITDA</span>
+      <span class="badge badge-navy">PE Interface</span>
+      <span class="badge badge-green">On Track</span>
+      <span class="badge badge-red">Overdue</span>
+      <span class="badge badge-outline">Board Review</span>
+      <span class="badge badge-silver">Draft</span>
+    </div>
+    <div class="comp-info">
+      <h4>Badge Variants</h4>
+      <div class="ref">.badge .badge-gold | .badge-navy | .badge-green | .badge-red | .badge-silver | .badge-outline</div>
+      <p>20px pill radius. 10px uppercase text. Six semantic variants: gold (active/primary), navy (institutional), green (positive), red (risk), silver (neutral), outline (meta/date).</p>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIGATION -->
+<section id="navigation">
+  <h2>Navigation</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px;width:100%">
+        <div class="navbar" style="width:100%">
+          <span class="navbar-brand">RE</span>
+          <span class="navbar-link active">Portfolio</span>
+          <span class="navbar-link">Operations</span>
+          <span class="navbar-link">Research</span>
+          <span class="navbar-link">Capital</span>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Navigation Bar</h4>
+        <div class="ref">.navbar > .navbar-brand + .navbar-link*</div>
+        <p>Horizontal nav with gold brand mark. Active link has gold text + 10% gold background. Surface background with border radius for contained feel.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px;width:100%">
+        <div class="tabs" style="width:100%">
+          <button class="tab active">ISG</button>
+          <button class="tab">Serengeti</button>
+          <button class="tab">SomeAI</button>
+          <button class="tab">Pipeline</button>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Tabs</h4>
+        <div class="ref">.tabs > .tab*</div>
+        <p>Pill-style tabs inside surface container. Active tab has gold fill with dark text. 2px gap between tabs. Used for subsidiary/section switching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAIN-SPECIFIC COMPONENTS -->
+<section id="domain">
+  <h2>Domain Components &mdash; Holding Company</h2>
+
+  <h3>Portfolio Card</h3>
+  <p>Primary entity card for subsidiaries, acquisitions, and portfolio companies. Header with icon and entity type, stat grid for KPIs, footer with status badges.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="portfolio-card" style="width:100%">
+          <div class="p-header">
+            <div class="p-icon">&#x1F3ED;</div>
+            <div>
+              <div class="p-name">ISG</div>
+              <div class="p-type">Industrial Operations</div>
+            </div>
+          </div>
+          <div class="p-stats">
+            <div class="p-stat">
+              <div class="p-stat-value">$450M</div>
+              <div class="p-stat-label">Revenue</div>
+            </div>
+            <div class="p-stat">
+              <div class="p-stat-value">80K</div>
+              <div class="p-stat-label">Employees</div>
+            </div>
+            <div class="p-stat">
+              <div class="p-stat-value">16+</div>
+              <div class="p-stat-label">Brands</div>
+            </div>
+          </div>
+          <div class="p-footer">
+            <span class="badge badge-green">Active</span>
+            <span class="badge badge-gold">Core Subsidiary</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Portfolio Card &mdash; ISG</h4>
+        <div class="ref">.portfolio-card > .p-header + .p-stats + .p-footer</div>
+        <p>Gold glow on hover. Stat grid uses 1px border-gap trick for clean dividers. Footer badges communicate status and classification.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="portfolio-card" style="width:100%">
+          <div class="p-header">
+            <div class="p-icon">&#x1F578;</div>
+            <div>
+              <div class="p-name">SomeAI</div>
+              <div class="p-type">Research &amp; Development</div>
+            </div>
+          </div>
+          <div class="p-stats">
+            <div class="p-stat">
+              <div class="p-stat-value">37</div>
+              <div class="p-stat-label">Instruments</div>
+            </div>
+            <div class="p-stat">
+              <div class="p-stat-value">13</div>
+              <div class="p-stat-label">Papers</div>
+            </div>
+            <div class="p-stat">
+              <div class="p-stat-value">$1.4M</div>
+              <div class="p-stat-label">ISG Contract</div>
+            </div>
+          </div>
+          <div class="p-footer">
+            <span class="badge badge-green">Active</span>
+            <span class="badge badge-navy">Charlotte OS</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Portfolio Card &mdash; SomeAI</h4>
+        <div class="ref">.portfolio-card (variant)</div>
+        <p>Same pattern, different entity. The card format normalizes vastly different subsidiaries into a consistent visual format for board-level comparison.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Entity Hierarchy</h3>
+  <p>Tree view of the corporate structure. Collapsible nodes with color-coded dots. Indentation and left-border lines show parent-child relationships. Hover highlights the full branch.</p>
+  <div class="comp-card" style="max-width:560px">
+    <div class="comp-preview" style="padding:16px">
+      <div class="entity-tree" style="width:100%">
+        <div class="entity-node">
+          <div class="e-dot" style="background:var(--gold-primary)"></div>
+          <div class="e-name">Richard Enterprises</div>
+          <div class="e-role">Holding Company</div>
+        </div>
+        <div class="entity-children">
+          <div class="entity-node">
+            <div class="e-dot" style="background:var(--blue)"></div>
+            <div class="e-name">ISG</div>
+            <div class="e-role">Operations</div>
+          </div>
+          <div class="entity-children">
+            <div class="entity-node">
+              <div class="e-dot" style="background:var(--teal)"></div>
+              <div class="e-name">ServiceMaster Clean</div>
+              <div class="e-role">Brand</div>
+            </div>
+            <div class="entity-node">
+              <div class="e-dot" style="background:var(--teal)"></div>
+              <div class="e-name">ABM Industries</div>
+              <div class="e-role">Brand</div>
+            </div>
+          </div>
+          <div class="entity-node">
+            <div class="e-dot" style="background:var(--amber)"></div>
+            <div class="e-name">Serengeti Enterprises</div>
+            <div class="e-role">PE Interface</div>
+          </div>
+          <div class="entity-children">
+            <div class="entity-node">
+              <div class="e-dot" style="background:var(--green)"></div>
+              <div class="e-name">Farms</div>
+              <div class="e-role">Asset</div>
+            </div>
+            <div class="entity-node">
+              <div class="e-dot" style="background:var(--green)"></div>
+              <div class="e-name">Oasis</div>
+              <div class="e-role">Vision</div>
+            </div>
+          </div>
+          <div class="entity-node">
+            <div class="e-dot" style="background:var(--red)"></div>
+            <div class="e-name">SomeAI</div>
+            <div class="e-role">R&amp;D Lab</div>
+          </div>
+          <div class="entity-children">
+            <div class="entity-node">
+              <div class="e-dot" style="background:rgba(229,62,62,0.5)"></div>
+              <div class="e-name">Charlotte OS</div>
+              <div class="e-role">Substrate</div>
+            </div>
+            <div class="entity-node">
+              <div class="e-dot" style="background:rgba(229,62,62,0.5)"></div>
+              <div class="e-name">Sounder</div>
+              <div class="e-role">First Client</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Entity Hierarchy Tree</h4>
+      <div class="ref">.entity-tree > .entity-node + .entity-children*</div>
+      <p>Recursive nesting with 24px indent + 2px left border. Color-coded dots: gold (holding), blue (operations), amber (PE), red (R&amp;D), teal (brands), green (assets).</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Investment Summary Card</h3>
+  <p>Financial overview for acquisitions and capital allocation tracking. Header with gradient tint, row-based data display, progress bar for deployment status.</p>
+  <div class="comp-card" style="max-width:500px">
+    <div class="comp-preview" style="padding:16px">
+      <div class="investment-card" style="width:100%">
+        <div class="i-header">
+          <div class="i-title">Q1 2026 Capital Allocation</div>
+          <div class="i-subtitle">Across ISG, Serengeti, SomeAI</div>
+        </div>
+        <div class="i-body">
+          <div class="i-row">
+            <span class="i-label">Total Deployed</span>
+            <span class="i-value" style="color:var(--gold-primary)">$24.5M</span>
+          </div>
+          <div class="i-row">
+            <span class="i-label">ISG Operations</span>
+            <span class="i-value">$18.2M</span>
+          </div>
+          <div class="i-row">
+            <span class="i-label">SomeAI R&amp;D</span>
+            <span class="i-value">$3.8M</span>
+          </div>
+          <div class="i-row">
+            <span class="i-label">Serengeti Reserve</span>
+            <span class="i-value">$2.5M</span>
+          </div>
+          <div style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-bottom:4px">
+              <span>Deployment Progress</span>
+              <span style="color:var(--gold-primary);font-weight:600">67%</span>
+            </div>
+            <div class="i-bar"><div class="i-bar-fill" style="width:67%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Investment Summary</h4>
+      <div class="ref">.investment-card > .i-header + .i-body > .i-row* + .i-bar</div>
+      <p>Gold gradient header tint. Key-value rows with border separators. Progress bar shows deployment status with gold gradient fill.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Meeting / Event Card</h3>
+  <p>Calendar-aware event display for board meetings, acquisitions reviews, and portfolio check-ins. Date block with month/day, content area, and attendee avatars.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="meeting-card" style="width:100%">
+          <div class="m-date">
+            <div class="m-month">Feb</div>
+            <div class="m-day">23</div>
+          </div>
+          <div class="m-content">
+            <div class="m-title">ISG Board Review</div>
+            <div class="m-meta">10:00 AM &mdash; Charlotte OS Demo &middot; Conference Room A</div>
+            <div class="m-attendees">
+              <div class="m-avatar" style="background:var(--gold-primary)">JR</div>
+              <div class="m-avatar" style="background:var(--navy-primary)">JR</div>
+              <div class="m-avatar" style="background:var(--blue)">JR</div>
+              <div class="m-avatar" style="background:var(--dim)">+4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Meeting Card</h4>
+        <div class="ref">.meeting-card > .m-date + .m-content</div>
+        <p>Date block with gold-tinted background. Month in 9px uppercase, day in 22px bold. Attendee avatars overlap with 2px surface border. Gold border on hover.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="meeting-card" style="width:100%">
+          <div class="m-date" style="background:rgba(76,175,80,0.1);border-color:rgba(76,175,80,0.2)">
+            <div class="m-month" style="color:var(--green)">Mar</div>
+            <div class="m-day">15</div>
+          </div>
+          <div class="m-content">
+            <div class="m-title">Acquisition Pipeline Review</div>
+            <div class="m-meta">2:00 PM &mdash; $5-50M EBITDA Targets &middot; Virtual</div>
+            <div class="m-attendees">
+              <div class="m-avatar" style="background:var(--gold-primary)">JR</div>
+              <div class="m-avatar" style="background:var(--amber)">DG</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Meeting Card (Variant)</h4>
+        <div class="ref">.meeting-card with custom date-block color</div>
+        <p>Date block color can be overridden for event types: gold (board), green (growth/acquisition), navy (operations), red (urgent). Same internal structure.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Data Table</h3>
+  <p>Tabular data display for acquisition pipelines, financial summaries, and entity comparison. Header row in uppercase gold, hover rows with subtle gold tint.</p>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="padding:16px">
+      <table class="data-table" style="width:100%">
+        <thead>
+          <tr><th>Entity</th><th>Type</th><th>Revenue</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ISG</td>
+            <td>Industrial Operations</td>
+            <td style="font-family:var(--font-mono);color:var(--gold-primary)">$450M</td>
+            <td><span class="badge badge-green" style="font-size:9px">Active</span></td>
+          </tr>
+          <tr>
+            <td>Serengeti</td>
+            <td>PE Interface</td>
+            <td style="font-family:var(--font-mono);color:var(--gold-primary)">&mdash;</td>
+            <td><span class="badge badge-gold" style="font-size:9px">Building</span></td>
+          </tr>
+          <tr>
+            <td>SomeAI</td>
+            <td>R&amp;D Lab</td>
+            <td style="font-family:var(--font-mono);color:var(--gold-primary)">$1.4M</td>
+            <td><span class="badge badge-green" style="font-size:9px">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="comp-info">
+      <h4>Data Table</h4>
+      <div class="ref">.data-table > thead + tbody</div>
+      <p>Minimal chrome. 9px uppercase gold headers. Financial values in mono gold. Inline badges for status. Subtle gold row highlight on hover.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GLASS -->
+<section id="glass">
+  <h2>Glass Morphism</h2>
+  <p>Three blur levels. All containers use <code>backdrop-filter: blur()</code> with gold-tinted borders. The institutional palette shifts glass toward warm neutrality.</p>
+  <div class="glass-demos" style="background:linear-gradient(135deg,rgba(200,160,64,0.1),rgba(26,43,95,0.08),rgba(152,112,32,0.05));padding:24px;border-radius:var(--radius-lg)">
+    <div class="glass-demo glass-subtle">
+      <div class="label">Subtle</div>
+      <div class="value">blur: 12px</div>
+    </div>
+    <div class="glass-demo glass">
+      <div class="label">Standard</div>
+      <div class="value">blur: 24px</div>
+    </div>
+    <div class="glass-demo glass-frosted">
+      <div class="label">Frosted</div>
+      <div class="value">blur: 40px</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+    <div class="rule"><div class="code">fillOpacity</div><div class="desc">0.15 &mdash; container background alpha</div></div>
+    <div class="rule"><div class="code">borderOpacity</div><div class="desc">0.12 &mdash; gold-tinted border alpha</div></div>
+    <div class="rule"><div class="code">borderColor</div><div class="desc">rgba(200,160,64,*) &mdash; gold tint</div></div>
+    <div class="rule"><div class="code">radius-sm</div><div class="desc">8px &mdash; small components</div></div>
+    <div class="rule"><div class="code">radius-md</div><div class="desc">12px &mdash; cards, containers</div></div>
+    <div class="rule"><div class="code">radius-lg</div><div class="desc">20px &mdash; hero sections</div></div>
+  </div>
+</section>
+
+<!-- LAYOUT -->
+<section id="layout">
+  <h2>Layout System</h2>
+  <p>Grid-based layout for portfolio dashboards, entity views, and financial reports. Responsive breakpoints at 700px and 1000px.</p>
+
+  <h3>Grid Rules</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">max-width: 1200px</div><div class="desc">Page container, centered</div></div>
+    <div class="rule"><div class="code">grid: repeat(auto-fill, minmax(340px, 1fr))</div><div class="desc">Card grid &mdash; 2-3 columns</div></div>
+    <div class="rule"><div class="code">grid: repeat(4, 1fr)</div><div class="desc">Stat row &mdash; 4 equal columns</div></div>
+    <div class="rule"><div class="code">grid: 280px 1fr</div><div class="desc">Sidebar + content layout</div></div>
+    <div class="rule"><div class="code">gap: 16px</div><div class="desc">Default grid gap</div></div>
+    <div class="rule"><div class="code">padding: 32px</div><div class="desc">Page horizontal padding</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Dashboard Composition</h3>
+  <div class="comp-grid">
+    <div class="comp-card" style="border-left:3px solid var(--gold-primary)">
+      <div class="comp-info">
+        <h4>Tier 1: Stat Bar</h4>
+        <p>4-column grid of StatCards at top of dashboard. Portfolio revenue, employee count, active instruments, deployment %. First thing the board sees.</p>
+      </div>
+    </div>
+    <div class="comp-card" style="border-left:3px solid var(--navy-light)">
+      <div class="comp-info">
+        <h4>Tier 2: Portfolio Grid</h4>
+        <p>PortfolioCards in auto-fill grid (340px min). One per subsidiary/entity. Tabs above to filter by type. This is the operational overview.</p>
+      </div>
+    </div>
+    <div class="comp-card" style="border-left:3px solid var(--silver-200)">
+      <div class="comp-info">
+        <h4>Tier 3: Detail Panel</h4>
+        <p>EntityHierarchy + InvestmentSummary + MeetingCards in sidebar or below-fold. Deep drill-down context. Triggered by selecting a PortfolioCard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CSS VARIABLES -->
+<section>
+  <h2>CSS Custom Properties</h2>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;font-family:var(--font-mono);font-size:11px;line-height:2;color:var(--gold-primary);overflow-x:auto">
+<pre>:root {
+  /* Foundation */
+  --re-bg: #0C0C0E;
+  --re-surface: #141418;
+  --re-surface2: #1C1C22;
+  --re-border: #282830;
+  --re-text: #F0F0F2;
+  --re-dim: #888890;
+
+  /* Charcoal Scale */
+  --re-charcoal-100: #0C0C0E;
+  --re-charcoal-200: #141418;
+  --re-charcoal-300: #1C1C22;
+  --re-charcoal-400: #282830;
+
+  /* Silver Scale */
+  --re-silver-100: #F0F0F2;
+  --re-silver-200: #D8D8DC;
+  --re-silver-300: #B0B0B8;
+  --re-silver-400: #888890;
+  --re-silver-500: #68686E;
+
+  /* Gold (Primary) */
+  --re-gold-light: #F0D080;
+  --re-gold-primary: #C8A040;
+  --re-gold-dark: #987020;
+
+  /* Navy (Secondary) */
+  --re-navy-light: #3060A0;
+  --re-navy-primary: #1A2B5F;
+  --re-navy-dark: #0A1628;
+
+  /* Radius */
+  --re-radius-sm: 8px;
+  --re-radius-md: 12px;
+  --re-radius-lg: 20px;
+
+  /* Shadows */
+  --re-shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --re-shadow-md: 0 4px 24px rgba(0,0,0,0.4);
+  --re-shadow-gold: 0 0 24px rgba(200,160,64,0.15);
+}</pre>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematical Animations — Charlotte Reference Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-canvas: #060910;
+  --bg-panel: #0a0e17;
+  --bg-card: #1e293b;
+  --cyan: #22d3ee;
+  --purple: #6366f1;
+  --magenta: #ec4899;
+  --gold: #f0c850;
+  --green: #22c55e;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --border: #334155;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-canvas);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Nav dots */
+.scene-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.scene-nav .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+.scene-nav .dot.active {
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  transform: scale(1.3);
+}
+
+.scene-nav .dot:hover { background: var(--cyan); }
+
+.scene-nav .dot .tooltip {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.scene-nav .dot:hover .tooltip { opacity: 1; }
+
+/* Scene sections */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.scene canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-text {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+  pointer-events: none;
+  max-width: 400px;
+}
+
+.scene-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.scene-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 4px 0;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.scene-text p {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.scene-desc {
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+  margin-top: 8px !important;
+  line-height: 1.5;
+}
+
+/* Controls panel */
+.scene-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.scene-controls label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scene-controls select,
+.scene-controls button {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.scene-controls select:hover,
+.scene-controls button:hover {
+  border-color: var(--cyan);
+}
+
+.scene-controls button:active {
+  background: var(--cyan);
+  color: var(--bg-canvas);
+}
+
+.scene-controls input[type="range"] {
+  width: 100px;
+  accent-color: var(--cyan);
+  height: 4px;
+}
+
+.scene-controls .val {
+  font-size: 0.7rem;
+  color: var(--cyan);
+  min-width: 28px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer a { color: var(--cyan); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .scene-text { top: 20px; left: 20px; max-width: 70%; }
+  .scene-text h2 { font-size: 1.4rem; }
+  .scene-controls { left: 20px; bottom: 20px; }
+  .scene-nav { right: 10px; gap: 8px; }
+  .scene-nav .dot { width: 8px; height: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="scene-nav" id="sceneNav"></nav>
+
+<section class="scene" id="scene-0">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">01 / 10</span>
+    <h2>Linear Algebra</h2>
+    <p>Grid Transformation</p>
+    <p class="scene-desc">A 2D grid of points transformed by matrices in real-time. Eigenvectors remain fixed as space warps around them.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Transform
+      <select id="ctrl-matrix">
+        <option value="shear">Shear</option>
+        <option value="rotation">Rotation</option>
+        <option value="scale">Scale</option>
+        <option value="determinant">Det → 0</option>
+        <option value="cycle" selected>Auto Cycle</option>
+      </select>
+    </label>
+  </div>
+</section>
+
+<section class="scene" id="scene-1">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">02 / 10</span>
+    <h2>Fourier Series</h2>
+    <p>Epicycles</p>
+    <p class="scene-desc">Rotating circles whose radii follow a Fourier decomposition. More harmonics yield sharper approximation of the target wave.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Harmonics <input type="range" id="ctrl-harmonics" min="1" max="30" value="8"> <span class="val" id="val-harmonics">8</span></label>
+    <label>Speed <input type="range" id="ctrl-fourier-speed" min="1" max="10" value="3"> <span class="val" id="val-fourier-speed">3</span></label>
+  </div>
+</section>
+
+<section class="scene" id="scene-2">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">03 / 10</span>
+    <h2>Topology</h2>
+    <p>Surface Morphing</p>
+    <p class="scene-desc">A coffee mug continuously deforms into a torus — both have genus 1. Vertices glow as they traverse the homeomorphism.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Morph <input type="range" id="ctrl-morph" min="0" max="100" value="50"> <span class="val" id="val-morph">50%</span></label>
+  </div>
+</section>
+
+<section class="scene" id="scene-3">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">04 / 10</span>
+    <h2>Graph Theory</h2>
+    <p>Force-Directed Layout</p>
+    <p class="scene-desc">Nodes self-organize under spring forces. Click "Find Path" to highlight shortest route via Dijkstra's algorithm.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Nodes <input type="range" id="ctrl-nodes" min="10" max="60" value="30"> <span class="val" id="val-nodes">30</span></label>
+    <button id="ctrl-find-path">Find Path</button>
+  </div>
+</section>
+
+<section class="scene" id="scene-4">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">05 / 10</span>
+    <h2>Signal Processing</h2>
+    <p>Frequency Domain</p>
+    <p class="scene-desc">A composite waveform decomposes into frequency components. Watch each sinusoid peel off from the time-domain signal.</p>
+  </div>
+  <div class="scene-controls">
+    <label><input type="checkbox" id="ctrl-freq1" checked> 2 Hz</label>
+    <label><input type="checkbox" id="ctrl-freq2" checked> 5 Hz</label>
+    <label><input type="checkbox" id="ctrl-freq3" checked> 11 Hz</label>
+    <label><input type="checkbox" id="ctrl-freq4"> 23 Hz</label>
+  </div>
+</section>
+
+<section class="scene" id="scene-5">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">06 / 10</span>
+    <h2>Calculus</h2>
+    <p>Riemann Sums</p>
+    <p class="scene-desc">Rectangles approximate the area under a curve. As N increases, the sum converges to the true integral.</p>
+  </div>
+  <div class="scene-controls">
+    <label>N <input type="range" id="ctrl-riemann-n" min="4" max="200" value="10"> <span class="val" id="val-riemann-n">10</span></label>
+    <label>Method
+      <select id="ctrl-riemann-method">
+        <option value="left">Left</option>
+        <option value="right">Right</option>
+        <option value="midpoint" selected>Midpoint</option>
+        <option value="trapezoid">Trapezoid</option>
+        <option value="cycle">Auto Cycle</option>
+      </select>
+    </label>
+  </div>
+</section>
+
+<section class="scene" id="scene-6">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">07 / 10</span>
+    <h2>Convex Hull</h2>
+    <p>Graham Scan</p>
+    <p class="scene-desc">A sweep line wraps around a point cloud, collecting hull vertices. Interior points dim as the boundary emerges.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Points <input type="range" id="ctrl-hull-pts" min="20" max="200" value="60"> <span class="val" id="val-hull-pts">60</span></label>
+    <button id="ctrl-hull-regen">Regenerate</button>
+  </div>
+</section>
+
+<section class="scene" id="scene-7">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">08 / 10</span>
+    <h2>Neural Network</h2>
+    <p>Forward Propagation</p>
+    <p class="scene-desc">Signals flow through a 4-layer network. Neurons activate via sigmoid squish; edge brightness encodes weight magnitude.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Input 1 <input type="range" id="ctrl-nn-i1" min="0" max="100" value="70"> <span class="val" id="val-nn-i1">0.7</span></label>
+    <label>Input 2 <input type="range" id="ctrl-nn-i2" min="0" max="100" value="30"> <span class="val" id="val-nn-i2">0.3</span></label>
+    <button id="ctrl-nn-fire">Forward Pass</button>
+  </div>
+</section>
+
+<section class="scene" id="scene-8">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">09 / 10</span>
+    <h2>Chaos Theory</h2>
+    <p>Strange Attractor</p>
+    <p class="scene-desc">The Lorenz system: three particles with nearly identical initial conditions diverge exponentially, tracing butterfly wings.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Offset <input type="range" id="ctrl-chaos-offset" min="1" max="100" value="10"> <span class="val" id="val-chaos-offset">0.010</span></label>
+    <label>Rotation <input type="range" id="ctrl-chaos-rot" min="0" max="100" value="30"> <span class="val" id="val-chaos-rot">0.3</span></label>
+  </div>
+</section>
+
+<section class="scene" id="scene-9">
+  <canvas></canvas>
+  <div class="scene-text">
+    <span class="scene-number">10 / 10</span>
+    <h2>Charlotte Spatial</h2>
+    <p>US State Graph</p>
+    <p class="scene-desc">51 nodes at geographic centroids, edges for adjacency. A BFS wave spreads from the selected seed state.</p>
+  </div>
+  <div class="scene-controls">
+    <label>Seed
+      <select id="ctrl-seed-state">
+        <option value="KS">Kansas</option>
+        <option value="MO">Missouri</option>
+        <option value="IN">Indiana</option>
+        <option value="TX">Texas</option>
+        <option value="CA">California</option>
+        <option value="NY">New York</option>
+        <option value="FL">Florida</option>
+      </select>
+    </label>
+    <label>Speed <input type="range" id="ctrl-bfs-speed" min="1" max="10" value="4"> <span class="val" id="val-bfs-speed">4</span></label>
+    <button id="ctrl-bfs-reset">Reset</button>
+  </div>
+</section>
+
+<div class="footer">
+  Charlotte Reference Library — <a href="../../index.html">Research Lab</a> — 10 Mathematical Animations
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// Shared Utilities
+// ═══════════════════════════════════════════════════════
+
+const CYAN = '#22d3ee', PURPLE = '#6366f1', MAGENTA = '#ec4899', GOLD = '#f0c850', GREEN = '#22c55e';
+const BG = '#060910';
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w: rect.width, h: rect.height };
+}
+
+function clearCanvas(ctx, w, h) {
+  ctx.fillStyle = BG;
+  ctx.fillRect(0, 0, w, h);
+}
+
+function trailClear(ctx, w, h, alpha) {
+  ctx.fillStyle = `rgba(6, 9, 16, ${alpha})`;
+  ctx.fillRect(0, 0, w, h);
+}
+
+function glowLine(ctx, x1, y1, x2, y2, color, width, blur) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = blur || 10;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function glowCircle(ctx, x, y, r, color, blur) {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = blur || 12;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function hexToRgba(hex, a) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+// ═══════════════════════════════════════════════════════
+// Scene Manager
+// ═══════════════════════════════════════════════════════
+
+class SceneManager {
+  constructor() {
+    this.scenes = [];
+    this.active = new Set();
+    this.lastTime = 0;
+    this.navDots = [];
+    this.buildNav();
+    this.initObserver();
+    this.loop = this.loop.bind(this);
+    requestAnimationFrame(this.loop);
+    window.addEventListener('resize', () => this.onResize());
+  }
+
+  register(scene) {
+    const idx = this.scenes.length;
+    scene.index = idx;
+    const section = document.getElementById(`scene-${idx}`);
+    const canvas = section.querySelector('canvas');
+    const { ctx, w, h } = setupCanvas(canvas);
+    scene.canvas = canvas;
+    scene.ctx = ctx;
+    scene.w = w;
+    scene.h = h;
+    scene.section = section;
+    scene.initialized = false;
+    this.scenes.push(scene);
+  }
+
+  buildNav() {
+    const nav = document.getElementById('sceneNav');
+    const names = ['Linear Algebra','Fourier','Topology','Graph Theory','Signal Processing','Calculus','Convex Hull','Neural Network','Chaos Theory','Charlotte Spatial'];
+    for (let i = 0; i < 10; i++) {
+      const a = document.createElement('a');
+      a.href = `#scene-${i}`;
+      a.className = 'dot';
+      a.innerHTML = `<span class="tooltip">${names[i]}</span>`;
+      nav.appendChild(a);
+      this.navDots.push(a);
+    }
+  }
+
+  initObserver() {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const idx = parseInt(e.target.id.split('-')[1]);
+        if (e.isIntersecting) {
+          this.active.add(idx);
+          if (!this.scenes[idx].initialized) {
+            this.scenes[idx].init();
+            this.scenes[idx].initialized = true;
+          }
+        } else {
+          this.active.delete(idx);
+        }
+        this.updateNav();
+      });
+    }, { threshold: 0.3 });
+
+    for (let i = 0; i < 10; i++) {
+      obs.observe(document.getElementById(`scene-${i}`));
+    }
+  }
+
+  updateNav() {
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', this.active.has(i));
+    });
+  }
+
+  onResize() {
+    this.scenes.forEach(s => {
+      const { ctx, w, h } = setupCanvas(s.canvas);
+      s.ctx = ctx; s.w = w; s.h = h;
+      if (s.initialized && s.onResize) s.onResize();
+    });
+  }
+
+  loop(ts) {
+    const dt = Math.min((ts - this.lastTime) / 1000, 0.05);
+    this.lastTime = ts;
+    this.active.forEach(idx => {
+      const s = this.scenes[idx];
+      s.update(dt);
+      s.draw(s.ctx, s.w, s.h);
+    });
+    requestAnimationFrame(this.loop);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Scene 1: Linear Algebra — Grid Transformation
+// ═══════════════════════════════════════════════════════
+
+const scene1 = {
+  time: 0,
+  matrix: [1,0,0,1],
+  targetMatrix: [1,0,0,1],
+  transitionTime: 0,
+  cycleIdx: 0,
+  cycleTimer: 0,
+
+  matrices: {
+    identity: [1,0,0,1],
+    shear:    [1,0.8,0,1],
+    rotation: [Math.cos(0.8),-Math.sin(0.8),Math.sin(0.8),Math.cos(0.8)],
+    scale:    [1.5,0,0,0.5],
+    determinant: [1,1,0.5,0.5],
+  },
+
+  init() {
+    const sel = document.getElementById('ctrl-matrix');
+    sel.addEventListener('change', () => {
+      if (sel.value !== 'cycle') {
+        this.targetMatrix = this.matrices[sel.value] || this.matrices.identity;
+        this.transitionTime = 0;
+      }
+    });
+  },
+
+  update(dt) {
+    this.time += dt;
+    this.transitionTime = Math.min(this.transitionTime + dt * 0.8, 1);
+    const sel = document.getElementById('ctrl-matrix');
+
+    if (sel.value === 'cycle') {
+      this.cycleTimer += dt;
+      if (this.cycleTimer > 3) {
+        this.cycleTimer = 0;
+        const keys = ['shear','rotation','scale','determinant','identity'];
+        this.cycleIdx = (this.cycleIdx + 1) % keys.length;
+        this.targetMatrix = this.matrices[keys[this.cycleIdx]];
+        this.transitionTime = 0;
+      }
+    }
+
+    const t = easeInOut(this.transitionTime);
+    for (let i = 0; i < 4; i++) {
+      this.matrix[i] = lerp(this.matrix[i], this.targetMatrix[i], t * 0.05 + 0.02);
+    }
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const cx = w / 2, cy = h / 2;
+    const spacing = 40;
+    const range = 8;
+    const m = this.matrix;
+
+    // Grid lines
+    ctx.globalAlpha = 0.15;
+    ctx.strokeStyle = CYAN;
+    ctx.lineWidth = 0.5;
+    for (let i = -range; i <= range; i++) {
+      ctx.beginPath();
+      const x1 = m[0]*(-range*spacing) + m[1]*(i*spacing) + cx;
+      const y1 = m[2]*(-range*spacing) + m[3]*(i*spacing) + cy;
+      const x2 = m[0]*(range*spacing) + m[1]*(i*spacing) + cx;
+      const y2 = m[2]*(range*spacing) + m[3]*(i*spacing) + cy;
+      ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.beginPath();
+      const x3 = m[0]*(i*spacing) + m[1]*(-range*spacing) + cx;
+      const y3 = m[2]*(i*spacing) + m[3]*(-range*spacing) + cy;
+      const x4 = m[0]*(i*spacing) + m[1]*(range*spacing) + cx;
+      const y4 = m[2]*(i*spacing) + m[3]*(range*spacing) + cy;
+      ctx.moveTo(x3, y3); ctx.lineTo(x4, y4);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    // Grid dots
+    for (let i = -range; i <= range; i++) {
+      for (let j = -range; j <= range; j++) {
+        const ox = i * spacing, oy = j * spacing;
+        const tx = m[0]*ox + m[1]*oy + cx;
+        const ty = m[2]*ox + m[3]*oy + cy;
+        const dist = Math.sqrt(i*i + j*j) / range;
+        const alpha = 0.3 + 0.7 * (1 - dist);
+        ctx.fillStyle = hexToRgba(CYAN, alpha);
+        ctx.beginPath();
+        ctx.arc(tx, ty, 2, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    // Basis vectors / eigenvectors
+    const arrowLen = 150;
+    // e1
+    const e1x = m[0]*arrowLen + cx, e1y = m[2]*arrowLen + cy;
+    glowLine(ctx, cx, cy, e1x, e1y, MAGENTA, 2.5, 15);
+    glowCircle(ctx, e1x, e1y, 5, MAGENTA, 15);
+    // e2
+    const e2x = m[1]*arrowLen + cx, e2y = m[3]*arrowLen + cy;
+    glowLine(ctx, cx, cy, e2x, e2y, GOLD, 2.5, 15);
+    glowCircle(ctx, e2x, e2y, 5, GOLD, 15);
+
+    // Origin
+    glowCircle(ctx, cx, cy, 4, '#fff', 8);
+
+    // Det readout
+    const det = m[0]*m[3] - m[1]*m[2];
+    ctx.fillStyle = var_color(det);
+    ctx.font = '500 13px Inter';
+    ctx.fillText(`det = ${det.toFixed(3)}`, w - 120, h - 30);
+
+    function var_color(d) {
+      return Math.abs(d) < 0.1 ? MAGENTA : (d < 0 ? GOLD : CYAN);
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 2: Fourier Series — Epicycles
+// ═══════════════════════════════════════════════════════
+
+const scene2 = {
+  time: 0,
+  trail: [],
+  maxTrail: 800,
+
+  init() {
+    this.trail = [];
+    const hSlider = document.getElementById('ctrl-harmonics');
+    const sSlider = document.getElementById('ctrl-fourier-speed');
+    hSlider.addEventListener('input', () => document.getElementById('val-harmonics').textContent = hSlider.value);
+    sSlider.addEventListener('input', () => document.getElementById('val-fourier-speed').textContent = sSlider.value);
+  },
+
+  update(dt) {
+    const speed = parseInt(document.getElementById('ctrl-fourier-speed').value);
+    this.time += dt * speed * 0.3;
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const n = parseInt(document.getElementById('ctrl-harmonics').value);
+    const cx = w * 0.3, cy = h * 0.5;
+    const baseR = Math.min(w, h) * 0.15;
+
+    let x = cx, y = cy;
+
+    // Draw epicycles (square wave Fourier coefficients)
+    for (let i = 0; i < n; i++) {
+      const k = 2 * i + 1; // odd harmonics
+      const r = baseR * (4 / (Math.PI * k));
+      const angle = k * this.time;
+      const prevX = x, prevY = y;
+
+      // Circle
+      ctx.strokeStyle = hexToRgba(PURPLE, 0.25);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(prevX, prevY, r, 0, Math.PI * 2);
+      ctx.stroke();
+
+      x += r * Math.cos(angle);
+      y += r * Math.sin(angle);
+
+      // Radius line
+      ctx.strokeStyle = hexToRgba(CYAN, 0.4);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(prevX, prevY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+    // Tip
+    glowCircle(ctx, x, y, 3, CYAN, 15);
+
+    // Add to trail
+    this.trail.unshift({ x, y });
+    if (this.trail.length > this.maxTrail) this.trail.pop();
+
+    // Draw connecting line to wave
+    const waveX = w * 0.55;
+    ctx.strokeStyle = hexToRgba(CYAN, 0.3);
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(waveX, y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Draw wave trace
+    ctx.beginPath();
+    ctx.strokeStyle = CYAN;
+    ctx.lineWidth = 2;
+    ctx.shadowColor = CYAN;
+    ctx.shadowBlur = 10;
+    for (let i = 0; i < this.trail.length; i++) {
+      const tx = waveX + i * 0.8;
+      if (tx > w + 10) break;
+      if (i === 0) ctx.moveTo(tx, this.trail[i].y);
+      else ctx.lineTo(tx, this.trail[i].y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 3: Topology — Surface Morphing
+// ═══════════════════════════════════════════════════════
+
+const scene3 = {
+  time: 0,
+  autoMorph: true,
+
+  init() {
+    const slider = document.getElementById('ctrl-morph');
+    slider.addEventListener('input', () => {
+      this.autoMorph = false;
+      document.getElementById('val-morph').textContent = slider.value + '%';
+    });
+  },
+
+  update(dt) {
+    this.time += dt;
+    if (this.autoMorph) {
+      const v = (Math.sin(this.time * 0.5) * 0.5 + 0.5) * 100;
+      document.getElementById('ctrl-morph').value = v;
+      document.getElementById('val-morph').textContent = Math.round(v) + '%';
+    }
+  },
+
+  // Torus parametric
+  torus(u, v, R, r) {
+    return {
+      x: (R + r * Math.cos(v)) * Math.cos(u),
+      y: (R + r * Math.cos(v)) * Math.sin(u),
+      z: r * Math.sin(v)
+    };
+  },
+
+  // Mug parametric (simplified)
+  mug(u, v, R, r) {
+    const bodyT = v < Math.PI * 1.5;
+    if (bodyT) {
+      // Cylinder body
+      const vn = v / (Math.PI * 1.5);
+      const radius = R * 0.6;
+      const height = r * 3;
+      return {
+        x: radius * Math.cos(u),
+        y: -height/2 + height * vn,
+        z: radius * Math.sin(u)
+      };
+    } else {
+      // Handle
+      const vn = (v - Math.PI * 1.5) / (Math.PI * 0.5);
+      const handleAngle = vn * Math.PI;
+      const handleR = r * 1.2;
+      return {
+        x: R * 0.6 + handleR * Math.cos(handleAngle),
+        y: -r + handleR * Math.sin(handleAngle) * 2,
+        z: 0
+      };
+    }
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const t = parseInt(document.getElementById('ctrl-morph').value) / 100;
+    const cx = w / 2, cy = h / 2;
+    const scale = Math.min(w, h) * 0.2;
+    const rotY = this.time * 0.4;
+    const rotX = 0.4;
+    const R = 1.2, r = 0.5;
+    const uSteps = 32, vSteps = 20;
+
+    const project = (p3) => {
+      // Rotate Y
+      const x1 = p3.x * Math.cos(rotY) - p3.z * Math.sin(rotY);
+      const z1 = p3.x * Math.sin(rotY) + p3.z * Math.cos(rotY);
+      // Rotate X
+      const y1 = p3.y * Math.cos(rotX) - z1 * Math.sin(rotX);
+      const z2 = p3.y * Math.sin(rotX) + z1 * Math.cos(rotX);
+      const perspective = 4 / (4 + z2);
+      return { x: cx + x1 * scale * perspective, y: cy + y1 * scale * perspective, z: z2 };
+    };
+
+    // Generate vertices
+    const verts = [];
+    for (let i = 0; i <= uSteps; i++) {
+      const row = [];
+      const u = (i / uSteps) * Math.PI * 2;
+      for (let j = 0; j <= vSteps; j++) {
+        const v = (j / vSteps) * Math.PI * 2;
+        const pTorus = this.torus(u, v, R, r);
+        const pMug = this.mug(u, v, R, r);
+        const p = {
+          x: lerp(pMug.x, pTorus.x, t),
+          y: lerp(pMug.y, pTorus.y, t),
+          z: lerp(pMug.z, pTorus.z, t)
+        };
+        row.push(project(p));
+      }
+      verts.push(row);
+    }
+
+    // Draw wireframe
+    for (let i = 0; i < uSteps; i++) {
+      for (let j = 0; j < vSteps; j++) {
+        const a = verts[i][j], b = verts[i+1][j];
+        const c = verts[i][j+1];
+        const depth = (a.z + b.z) / 2;
+        const alpha = clamp(0.1 + (depth + 2) * 0.15, 0.05, 0.6);
+        const col = t < 0.5 ? PURPLE : CYAN;
+        ctx.strokeStyle = hexToRgba(col, alpha);
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y); ctx.lineTo(c.x, c.y);
+        ctx.stroke();
+      }
+    }
+
+    // Highlight some vertices
+    for (let i = 0; i < uSteps; i += 4) {
+      for (let j = 0; j < vSteps; j += 4) {
+        const v = verts[i][j];
+        const pulse = Math.sin(this.time * 3 + i + j) * 0.3 + 0.7;
+        glowCircle(ctx, v.x, v.y, 2 * pulse, MAGENTA, 8);
+      }
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 4: Graph Theory — Force-Directed Layout
+// ═══════════════════════════════════════════════════════
+
+const scene4 = {
+  nodes: [],
+  edges: [],
+  path: [],
+  pathAnim: 0,
+  lastNodeCount: 30,
+
+  init() {
+    this.generateGraph(30);
+    const slider = document.getElementById('ctrl-nodes');
+    slider.addEventListener('input', () => {
+      document.getElementById('val-nodes').textContent = slider.value;
+    });
+    slider.addEventListener('change', () => {
+      this.generateGraph(parseInt(slider.value));
+    });
+    document.getElementById('ctrl-find-path').addEventListener('click', () => {
+      this.findPath();
+    });
+  },
+
+  generateGraph(n) {
+    this.nodes = [];
+    this.edges = [];
+    this.path = [];
+    this.pathAnim = 0;
+    const w = this.w, h = this.h;
+    for (let i = 0; i < n; i++) {
+      this.nodes.push({
+        x: w * 0.2 + Math.random() * w * 0.6,
+        y: h * 0.2 + Math.random() * h * 0.6,
+        vx: 0, vy: 0,
+        community: Math.floor(Math.random() * 3),
+      });
+    }
+    // Random edges with distance bias
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const dx = this.nodes[i].x - this.nodes[j].x;
+        const dy = this.nodes[i].y - this.nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 200 && Math.random() < 0.3) {
+          this.edges.push({ a: i, b: j, weight: dist });
+        }
+      }
+    }
+    // Ensure connected
+    for (let i = 1; i < n; i++) {
+      if (!this.edges.some(e => e.a === i || e.b === i)) {
+        const closest = this.nodes.reduce((best, nd, idx) => {
+          if (idx === i) return best;
+          const d = Math.hypot(nd.x - this.nodes[i].x, nd.y - this.nodes[i].y);
+          return d < best.d ? { idx, d } : best;
+        }, { idx: 0, d: Infinity });
+        this.edges.push({ a: Math.min(i, closest.idx), b: Math.max(i, closest.idx), weight: closest.d });
+      }
+    }
+  },
+
+  findPath() {
+    if (this.nodes.length < 2) return;
+    const n = this.nodes.length;
+    const adj = Array.from({length: n}, () => []);
+    this.edges.forEach(e => {
+      adj[e.a].push({ to: e.b, w: e.weight });
+      adj[e.b].push({ to: e.a, w: e.weight });
+    });
+    const src = 0, dst = n - 1;
+    const dist = new Array(n).fill(Infinity);
+    const prev = new Array(n).fill(-1);
+    const visited = new Set();
+    dist[src] = 0;
+    for (let step = 0; step < n; step++) {
+      let u = -1, best = Infinity;
+      for (let i = 0; i < n; i++) {
+        if (!visited.has(i) && dist[i] < best) { best = dist[i]; u = i; }
+      }
+      if (u === -1) break;
+      visited.add(u);
+      for (const { to, w } of adj[u]) {
+        if (dist[u] + w < dist[to]) {
+          dist[to] = dist[u] + w;
+          prev[to] = u;
+        }
+      }
+    }
+    this.path = [];
+    let cur = dst;
+    while (cur !== -1) { this.path.unshift(cur); cur = prev[cur]; }
+    if (this.path[0] !== src) this.path = [];
+    this.pathAnim = 0;
+  },
+
+  update(dt) {
+    const n = this.nodes;
+    const repulsion = 8000, spring = 0.005, damping = 0.85;
+    const w = this.w, h = this.h;
+
+    // Force simulation
+    for (let i = 0; i < n.length; i++) {
+      let fx = 0, fy = 0;
+      for (let j = 0; j < n.length; j++) {
+        if (i === j) continue;
+        const dx = n[i].x - n[j].x, dy = n[i].y - n[j].y;
+        const d2 = dx*dx + dy*dy + 1;
+        fx += (dx / d2) * repulsion;
+        fy += (dy / d2) * repulsion;
+      }
+      for (const e of this.edges) {
+        const other = e.a === i ? e.b : (e.b === i ? e.a : -1);
+        if (other === -1) continue;
+        const dx = n[other].x - n[i].x, dy = n[other].y - n[i].y;
+        fx += dx * spring;
+        fy += dy * spring;
+      }
+      // Center gravity
+      fx += (w/2 - n[i].x) * 0.001;
+      fy += (h/2 - n[i].y) * 0.001;
+      n[i].vx = (n[i].vx + fx * dt) * damping;
+      n[i].vy = (n[i].vy + fy * dt) * damping;
+      n[i].x = clamp(n[i].x + n[i].vx, 50, w - 50);
+      n[i].y = clamp(n[i].y + n[i].vy, 80, h - 80);
+    }
+
+    if (this.path.length > 1) {
+      this.pathAnim = Math.min(this.pathAnim + dt * 1.5, this.path.length - 1);
+    }
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const communityColors = [CYAN, PURPLE, MAGENTA];
+    const pathSet = new Set(this.path);
+
+    // Edges
+    for (const e of this.edges) {
+      const a = this.nodes[e.a], b = this.nodes[e.b];
+      ctx.strokeStyle = hexToRgba('#fff', 0.08);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+
+    // Path edges
+    for (let i = 0; i < Math.floor(this.pathAnim); i++) {
+      const a = this.nodes[this.path[i]], b = this.nodes[this.path[i+1]];
+      const progress = i < this.pathAnim - 1 ? 1 : (this.pathAnim - i);
+      const mx = lerp(a.x, b.x, progress), my = lerp(a.y, b.y, progress);
+      glowLine(ctx, a.x, a.y, mx, my, GOLD, 3, 15);
+    }
+
+    // Nodes
+    for (let i = 0; i < this.nodes.length; i++) {
+      const nd = this.nodes[i];
+      const onPath = pathSet.has(i);
+      const r = onPath ? 7 : 4;
+      const col = onPath ? GOLD : communityColors[nd.community];
+      glowCircle(ctx, nd.x, nd.y, r, col, onPath ? 15 : 6);
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 5: Signal Processing — Frequency Domain
+// ═══════════════════════════════════════════════════════
+
+const scene5 = {
+  time: 0,
+  freqs: [
+    { hz: 2, amp: 1.0, color: CYAN },
+    { hz: 5, amp: 0.6, color: PURPLE },
+    { hz: 11, amp: 0.3, color: MAGENTA },
+    { hz: 23, amp: 0.15, color: GOLD },
+  ],
+
+  init() {
+    // Checkbox listeners set in HTML
+  },
+
+  getActive() {
+    return [
+      document.getElementById('ctrl-freq1').checked,
+      document.getElementById('ctrl-freq2').checked,
+      document.getElementById('ctrl-freq3').checked,
+      document.getElementById('ctrl-freq4').checked,
+    ];
+  },
+
+  update(dt) {
+    this.time += dt;
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const active = this.getActive();
+    const midY = h * 0.33;
+    const botY = h * 0.72;
+    const padL = 80, padR = 40;
+    const plotW = w - padL - padR;
+    const ampScale = h * 0.12;
+    const t = this.time;
+
+    // Axes
+    ctx.strokeStyle = hexToRgba('#fff', 0.15);
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, midY); ctx.lineTo(padL + plotW, midY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(padL, botY); ctx.lineTo(padL + plotW, botY); ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = var_textDim();
+    ctx.font = '500 11px Inter';
+    ctx.fillText('TIME DOMAIN', padL, midY - ampScale - 15);
+    ctx.fillText('FREQUENCY DOMAIN', padL, botY - h * 0.12 - 15);
+
+    // Draw individual components
+    for (let fi = 0; fi < this.freqs.length; fi++) {
+      if (!active[fi]) continue;
+      const f = this.freqs[fi];
+      ctx.strokeStyle = hexToRgba(f.color, 0.3);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let px = 0; px < plotW; px++) {
+        const x = px / plotW * 4 * Math.PI;
+        const y = midY - Math.sin(x * f.hz + t * f.hz * 0.5) * f.amp * ampScale;
+        px === 0 ? ctx.moveTo(padL + px, y) : ctx.lineTo(padL + px, y);
+      }
+      ctx.stroke();
+    }
+
+    // Composite wave
+    ctx.strokeStyle = CYAN;
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = CYAN;
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    for (let px = 0; px < plotW; px++) {
+      const x = px / plotW * 4 * Math.PI;
+      let y = 0;
+      for (let fi = 0; fi < this.freqs.length; fi++) {
+        if (!active[fi]) continue;
+        y += Math.sin(x * this.freqs[fi].hz + t * this.freqs[fi].hz * 0.5) * this.freqs[fi].amp;
+      }
+      const py = midY - y * ampScale;
+      px === 0 ? ctx.moveTo(padL + px, py) : ctx.lineTo(padL + px, py);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Frequency bars
+    const barW = plotW / 30;
+    const barMaxH = h * 0.12;
+    for (let fi = 0; fi < this.freqs.length; fi++) {
+      const f = this.freqs[fi];
+      const barX = padL + (f.hz / 30) * plotW;
+      const barH = active[fi] ? f.amp * barMaxH : 0;
+      const pulse = active[fi] ? Math.sin(t * 2 + fi) * 0.1 + 0.9 : 0;
+      ctx.fillStyle = hexToRgba(f.color, 0.8 * pulse);
+      ctx.shadowColor = f.color;
+      ctx.shadowBlur = active[fi] ? 12 : 0;
+      ctx.fillRect(barX - barW/2, botY - barH, barW, barH);
+      ctx.shadowBlur = 0;
+      // Label
+      ctx.fillStyle = f.color;
+      ctx.font = '600 10px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText(`${f.hz}Hz`, barX, botY + 15);
+      ctx.textAlign = 'left';
+    }
+
+    function var_textDim() { return '#94a3b8'; }
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 6: Calculus — Riemann Sums
+// ═══════════════════════════════════════════════════════
+
+const scene6 = {
+  time: 0,
+  cycleIdx: 0,
+  cycleTimer: 0,
+  methods: ['left', 'right', 'midpoint', 'trapezoid'],
+
+  f(x) { return Math.sin(x) + 0.5 * Math.sin(3 * x) + 1.2; },
+
+  init() {
+    const slider = document.getElementById('ctrl-riemann-n');
+    slider.addEventListener('input', () => {
+      document.getElementById('val-riemann-n').textContent = slider.value;
+    });
+  },
+
+  update(dt) {
+    this.time += dt;
+    const sel = document.getElementById('ctrl-riemann-method');
+    if (sel.value === 'cycle') {
+      this.cycleTimer += dt;
+      if (this.cycleTimer > 2.5) {
+        this.cycleTimer = 0;
+        this.cycleIdx = (this.cycleIdx + 1) % 4;
+      }
+    }
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const N = parseInt(document.getElementById('ctrl-riemann-n').value);
+    const sel = document.getElementById('ctrl-riemann-method');
+    const method = sel.value === 'cycle' ? this.methods[this.cycleIdx] : sel.value;
+    const padL = 80, padR = 40, padT = 120, padB = 80;
+    const plotW = w - padL - padR;
+    const plotH = h - padT - padB;
+    const a = 0, b = Math.PI * 2;
+
+    const toX = (v) => padL + ((v - a) / (b - a)) * plotW;
+    const toY = (v) => padT + plotH - (v / 3) * plotH;
+
+    // Axes
+    ctx.strokeStyle = hexToRgba('#fff', 0.2);
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, padT + plotH); ctx.lineTo(padL + plotW, padT + plotH); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + plotH); ctx.stroke();
+
+    // Rectangles
+    const dx = (b - a) / N;
+    let totalArea = 0;
+    const methodColors = { left: CYAN, right: PURPLE, midpoint: GREEN, trapezoid: GOLD };
+    const col = methodColors[method];
+
+    for (let i = 0; i < N; i++) {
+      const xi = a + i * dx;
+      let sample;
+      if (method === 'left') sample = this.f(xi);
+      else if (method === 'right') sample = this.f(xi + dx);
+      else if (method === 'midpoint') sample = this.f(xi + dx / 2);
+      else sample = (this.f(xi) + this.f(xi + dx)) / 2;
+
+      totalArea += sample * dx;
+      const rx = toX(xi), rw = toX(xi + dx) - rx;
+      const ry = toY(sample), rh = toY(0) - ry;
+
+      ctx.fillStyle = hexToRgba(col, 0.2);
+      ctx.strokeStyle = hexToRgba(col, 0.5);
+      ctx.lineWidth = 1;
+
+      if (method === 'trapezoid') {
+        const y1 = toY(this.f(xi)), y2 = toY(this.f(xi + dx));
+        const baseY = toY(0);
+        ctx.beginPath();
+        ctx.moveTo(rx, baseY);
+        ctx.lineTo(rx, y1);
+        ctx.lineTo(rx + rw, y2);
+        ctx.lineTo(rx + rw, baseY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.fillRect(rx, ry, rw, rh);
+        ctx.strokeRect(rx, ry, rw, rh);
+      }
+    }
+
+    // Curve
+    ctx.strokeStyle = MAGENTA;
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = MAGENTA;
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    for (let px = 0; px <= plotW; px++) {
+      const xv = a + (px / plotW) * (b - a);
+      const yv = toY(this.f(xv));
+      px === 0 ? ctx.moveTo(padL + px, yv) : ctx.lineTo(padL + px, yv);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Area readout
+    ctx.fillStyle = col;
+    ctx.font = '600 14px Inter';
+    ctx.fillText(`${method.toUpperCase()}  N=${N}  Area ≈ ${totalArea.toFixed(4)}`, padL, h - 30);
+    // True integral
+    ctx.fillStyle = hexToRgba('#fff', 0.4);
+    ctx.font = '400 11px Inter';
+    ctx.fillText(`True: ∫ = ${(2.4 * Math.PI).toFixed(4)}`, padL + 300, h - 30);
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 7: Convex Hull — Graham Scan
+// ═══════════════════════════════════════════════════════
+
+const scene7 = {
+  points: [],
+  hull: [],
+  scanStep: 0,
+  scanTimer: 0,
+  scanning: false,
+
+  init() {
+    this.generate(60);
+    const slider = document.getElementById('ctrl-hull-pts');
+    slider.addEventListener('input', () => {
+      document.getElementById('val-hull-pts').textContent = slider.value;
+    });
+    slider.addEventListener('change', () => this.generate(parseInt(slider.value)));
+    document.getElementById('ctrl-hull-regen').addEventListener('click', () => {
+      this.generate(parseInt(document.getElementById('ctrl-hull-pts').value));
+    });
+  },
+
+  generate(n) {
+    const w = this.w, h = this.h;
+    const cx = w / 2, cy = h / 2;
+    const spread = Math.min(w, h) * 0.35;
+    this.points = [];
+    for (let i = 0; i < n; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const r = Math.random() * spread * (0.3 + Math.random() * 0.7);
+      this.points.push({ x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r });
+    }
+    this.computeHull();
+    this.scanStep = 0;
+    this.scanning = true;
+  },
+
+  cross(O, A, B) {
+    return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+  },
+
+  computeHull() {
+    const pts = [...this.points].sort((a, b) => a.x - b.x || a.y - b.y);
+    if (pts.length < 3) { this.hull = pts; return; }
+    const lower = [];
+    for (const p of pts) {
+      while (lower.length >= 2 && this.cross(lower[lower.length-2], lower[lower.length-1], p) <= 0) lower.pop();
+      lower.push(p);
+    }
+    const upper = [];
+    for (let i = pts.length - 1; i >= 0; i--) {
+      const p = pts[i];
+      while (upper.length >= 2 && this.cross(upper[upper.length-2], upper[upper.length-1], p) <= 0) upper.pop();
+      upper.push(p);
+    }
+    upper.pop(); lower.pop();
+    this.hull = lower.concat(upper);
+  },
+
+  update(dt) {
+    if (this.scanning) {
+      this.scanTimer += dt;
+      if (this.scanTimer > 0.06) {
+        this.scanTimer = 0;
+        this.scanStep = Math.min(this.scanStep + 1, this.hull.length);
+        if (this.scanStep >= this.hull.length) this.scanning = false;
+      }
+    }
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const hullSet = new Set(this.hull.slice(0, this.scanStep));
+
+    // All points
+    for (const p of this.points) {
+      const onHull = hullSet.has(p);
+      ctx.fillStyle = onHull ? CYAN : hexToRgba(PURPLE, 0.3);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, onHull ? 4 : 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Hull edges
+    if (this.scanStep > 1) {
+      ctx.strokeStyle = CYAN;
+      ctx.lineWidth = 2;
+      ctx.shadowColor = CYAN;
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      const vis = this.hull.slice(0, this.scanStep);
+      ctx.moveTo(vis[0].x, vis[0].y);
+      for (let i = 1; i < vis.length; i++) {
+        ctx.lineTo(vis[i].x, vis[i].y);
+      }
+      if (this.scanStep >= this.hull.length) ctx.closePath();
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    // Sweep line
+    if (this.scanning && this.scanStep < this.hull.length && this.scanStep > 0) {
+      const last = this.hull[this.scanStep - 1];
+      const next = this.scanStep < this.hull.length ? this.hull[this.scanStep] : this.hull[0];
+      ctx.strokeStyle = hexToRgba(MAGENTA, 0.6);
+      ctx.lineWidth = 1;
+      ctx.setLineDash([6, 4]);
+      ctx.beginPath();
+      ctx.moveTo(last.x, last.y);
+      ctx.lineTo(next.x, next.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      glowCircle(ctx, last.x, last.y, 6, MAGENTA, 15);
+    }
+
+    // Hull vertex glow
+    for (let i = 0; i < Math.min(this.scanStep, this.hull.length); i++) {
+      glowCircle(ctx, this.hull[i].x, this.hull[i].y, 5, CYAN, 12);
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 8: Neural Network — Forward Propagation
+// ═══════════════════════════════════════════════════════
+
+const scene8 = {
+  layers: [3, 5, 4, 2],
+  weights: [],
+  activations: [],
+  pulses: [],
+  autoFire: true,
+  fireTimer: 0,
+
+  init() {
+    this.initWeights();
+    this.fire();
+
+    const s1 = document.getElementById('ctrl-nn-i1');
+    const s2 = document.getElementById('ctrl-nn-i2');
+    s1.addEventListener('input', () => { document.getElementById('val-nn-i1').textContent = (s1.value/100).toFixed(1); });
+    s2.addEventListener('input', () => { document.getElementById('val-nn-i2').textContent = (s2.value/100).toFixed(1); });
+    document.getElementById('ctrl-nn-fire').addEventListener('click', () => this.fire());
+  },
+
+  initWeights() {
+    this.weights = [];
+    for (let l = 0; l < this.layers.length - 1; l++) {
+      const w = [];
+      for (let i = 0; i < this.layers[l]; i++) {
+        const row = [];
+        for (let j = 0; j < this.layers[l+1]; j++) {
+          row.push((Math.random() - 0.5) * 2);
+        }
+        w.push(row);
+      }
+      this.weights.push(w);
+    }
+  },
+
+  sigmoid(x) { return 1 / (1 + Math.exp(-x)); },
+
+  fire() {
+    const i1 = parseInt(document.getElementById('ctrl-nn-i1').value) / 100;
+    const i2 = parseInt(document.getElementById('ctrl-nn-i2').value) / 100;
+    this.activations = [[i1, i2, (i1+i2)/2]];
+    this.pulses = [];
+
+    for (let l = 0; l < this.weights.length; l++) {
+      const prev = this.activations[l];
+      const next = [];
+      for (let j = 0; j < this.layers[l+1]; j++) {
+        let sum = 0;
+        for (let i = 0; i < prev.length; i++) {
+          sum += prev[i] * this.weights[l][i][j];
+        }
+        next.push(this.sigmoid(sum));
+      }
+      this.activations.push(next);
+    }
+
+    // Create pulse animations
+    for (let l = 0; l < this.weights.length; l++) {
+      for (let i = 0; i < this.layers[l]; i++) {
+        for (let j = 0; j < this.layers[l+1]; j++) {
+          this.pulses.push({
+            fromLayer: l, fromIdx: i,
+            toLayer: l+1, toIdx: j,
+            t: 0,
+            delay: l * 0.6,
+            weight: this.weights[l][i][j],
+            active: true,
+          });
+        }
+      }
+    }
+  },
+
+  getPos(layer, idx, w, h) {
+    const nLayers = this.layers.length;
+    const x = w * 0.2 + (layer / (nLayers - 1)) * w * 0.6;
+    const nNodes = this.layers[layer];
+    const spacing = Math.min(60, (h * 0.6) / nNodes);
+    const y = h / 2 - (nNodes - 1) * spacing / 2 + idx * spacing;
+    return { x, y };
+  },
+
+  update(dt) {
+    this.fireTimer += dt;
+    if (this.fireTimer > 4) {
+      this.fireTimer = 0;
+      this.fire();
+    }
+    for (const p of this.pulses) {
+      if (p.delay > 0) { p.delay -= dt; continue; }
+      p.t = Math.min(p.t + dt * 2.5, 1);
+    }
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+
+    // Draw edges
+    for (let l = 0; l < this.weights.length; l++) {
+      for (let i = 0; i < this.layers[l]; i++) {
+        for (let j = 0; j < this.layers[l+1]; j++) {
+          const from = this.getPos(l, i, w, h);
+          const to = this.getPos(l+1, j, w, h);
+          const wt = Math.abs(this.weights[l][i][j]);
+          ctx.strokeStyle = hexToRgba(this.weights[l][i][j] > 0 ? CYAN : MAGENTA, wt * 0.3);
+          ctx.lineWidth = wt * 1.5;
+          ctx.beginPath();
+          ctx.moveTo(from.x, from.y);
+          ctx.lineTo(to.x, to.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw pulses
+    for (const p of this.pulses) {
+      if (p.delay > 0 || p.t === 0) continue;
+      const from = this.getPos(p.fromLayer, p.fromIdx, w, h);
+      const to = this.getPos(p.toLayer, p.toIdx, w, h);
+      const t = easeOut(p.t);
+      const px = lerp(from.x, to.x, t);
+      const py = lerp(from.y, to.y, t);
+      const alpha = p.t < 0.8 ? 1 : (1 - p.t) * 5;
+      if (alpha > 0) {
+        glowCircle(ctx, px, py, 3, hexToRgba(GOLD, alpha), 8);
+      }
+    }
+
+    // Draw neurons
+    for (let l = 0; l < this.layers.length; l++) {
+      for (let i = 0; i < this.layers[l]; i++) {
+        const pos = this.getPos(l, i, w, h);
+        const act = this.activations[l] ? this.activations[l][i] : 0;
+        const r = 12 + act * 6;
+        // Fill based on activation
+        ctx.fillStyle = hexToRgba(CYAN, act * 0.6 + 0.1);
+        ctx.strokeStyle = hexToRgba(CYAN, 0.5);
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        // Activation value
+        ctx.fillStyle = '#fff';
+        ctx.font = '500 9px Inter';
+        ctx.textAlign = 'center';
+        ctx.fillText(act.toFixed(2), pos.x, pos.y + 3);
+        ctx.textAlign = 'left';
+      }
+    }
+
+    // Layer labels
+    const labels = ['Input', 'Hidden 1', 'Hidden 2', 'Output'];
+    ctx.font = '500 11px Inter';
+    ctx.fillStyle = hexToRgba('#fff', 0.4);
+    ctx.textAlign = 'center';
+    for (let l = 0; l < this.layers.length; l++) {
+      const pos = this.getPos(l, 0, w, h);
+      ctx.fillText(labels[l], pos.x, h - 50);
+    }
+    ctx.textAlign = 'left';
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 9: Chaos Theory — Lorenz Strange Attractor
+// ═══════════════════════════════════════════════════════
+
+const scene9 = {
+  particles: [],
+  trails: [],
+  maxTrail: 1500,
+  rotAngle: 0,
+
+  init() {
+    this.particles = [];
+    this.trails = [];
+    const colors = [CYAN, MAGENTA, GOLD];
+    for (let i = 0; i < 3; i++) {
+      const offset = i * 0.01;
+      this.particles.push({ x: 1 + offset, y: 1, z: 1, color: colors[i] });
+      this.trails.push([]);
+    }
+    const offSlider = document.getElementById('ctrl-chaos-offset');
+    offSlider.addEventListener('input', () => {
+      document.getElementById('val-chaos-offset').textContent = (offSlider.value / 1000).toFixed(3);
+    });
+    const rotSlider = document.getElementById('ctrl-chaos-rot');
+    rotSlider.addEventListener('input', () => {
+      document.getElementById('val-chaos-rot').textContent = (rotSlider.value / 100).toFixed(1);
+    });
+  },
+
+  update(dt) {
+    const sigma = 10, rho = 28, beta = 8/3;
+    const step = 0.005;
+    const rotSpeed = parseInt(document.getElementById('ctrl-chaos-rot').value) / 100;
+    this.rotAngle += dt * rotSpeed * 0.3;
+
+    for (let p = 0; p < this.particles.length; p++) {
+      const pt = this.particles[p];
+      for (let s = 0; s < 8; s++) {
+        const dx = sigma * (pt.y - pt.x) * step;
+        const dy = (pt.x * (rho - pt.z) - pt.y) * step;
+        const dz = (pt.x * pt.y - beta * pt.z) * step;
+        pt.x += dx; pt.y += dy; pt.z += dz;
+      }
+      this.trails[p].push({ x: pt.x, y: pt.y, z: pt.z });
+      if (this.trails[p].length > this.maxTrail) this.trails[p].shift();
+    }
+  },
+
+  project(x, y, z, w, h) {
+    const angle = this.rotAngle;
+    const rx = x * Math.cos(angle) - y * Math.sin(angle);
+    const ry = x * Math.sin(angle) + y * Math.cos(angle);
+    const scale = Math.min(w, h) / 60;
+    const perspective = 80 / (80 + z - 20);
+    return {
+      px: w / 2 + rx * scale * perspective,
+      py: h / 2 + (z - 25) * scale * perspective * -1
+    };
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+
+    for (let p = 0; p < this.trails.length; p++) {
+      const trail = this.trails[p];
+      const color = this.particles[p].color;
+      if (trail.length < 2) continue;
+
+      for (let i = 1; i < trail.length; i++) {
+        const a = this.project(trail[i-1].x, trail[i-1].y, trail[i-1].z, w, h);
+        const b = this.project(trail[i].x, trail[i].y, trail[i].z, w, h);
+        const alpha = (i / trail.length) * 0.8;
+        ctx.strokeStyle = hexToRgba(color, alpha);
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(a.px, a.py);
+        ctx.lineTo(b.px, b.py);
+        ctx.stroke();
+      }
+
+      // Head glow
+      const last = trail[trail.length - 1];
+      const head = this.project(last.x, last.y, last.z, w, h);
+      glowCircle(ctx, head.px, head.py, 4, color, 15);
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Scene 10: Charlotte Spatial — US State Graph
+// ═══════════════════════════════════════════════════════
+
+const scene10 = {
+  states: {},
+  edges: [],
+  bfsOrder: [],
+  bfsStep: 0,
+  bfsTimer: 0,
+  bfsRunning: false,
+
+  init() {
+    this.buildGraph();
+    this.startBFS('KS');
+
+    document.getElementById('ctrl-seed-state').addEventListener('change', (e) => {
+      this.startBFS(e.target.value);
+    });
+    document.getElementById('ctrl-bfs-reset').addEventListener('click', () => {
+      this.startBFS(document.getElementById('ctrl-seed-state').value);
+    });
+    const spd = document.getElementById('ctrl-bfs-speed');
+    spd.addEventListener('input', () => {
+      document.getElementById('val-bfs-speed').textContent = spd.value;
+    });
+  },
+
+  buildGraph() {
+    // State centroids (approximate lon/lat, will be projected)
+    const raw = {
+      AL:[-86.8,32.8],AK:[-153.5,64.2],AZ:[-111.7,34.3],AR:[-92.4,34.8],CA:[-119.7,37.2],
+      CO:[-105.5,39.0],CT:[-72.7,41.6],DE:[-75.5,39.0],FL:[-81.7,28.7],GA:[-83.4,32.7],
+      HI:[-155.5,19.9],IA:[-93.5,42.0],ID:[-114.5,44.4],IL:[-89.2,40.0],IN:[-86.1,39.8],
+      KS:[-98.3,38.5],KY:[-84.8,37.8],LA:[-92.0,31.0],ME:[-69.2,45.4],MD:[-76.6,39.0],
+      MA:[-71.8,42.4],MI:[-84.5,44.3],MN:[-94.3,46.3],MS:[-89.7,32.7],MO:[-92.5,38.6],
+      MT:[-109.6,47.0],NE:[-99.8,41.5],NV:[-116.6,39.9],NH:[-71.5,43.9],NJ:[-74.7,40.1],
+      NM:[-106.0,34.5],NY:[-75.5,42.9],NC:[-79.4,35.6],ND:[-100.5,47.5],OH:[-82.8,40.4],
+      OK:[-97.5,35.5],OR:[-120.6,44.0],PA:[-77.6,40.9],RI:[-71.5,41.7],SC:[-80.9,34.0],
+      SD:[-100.2,44.4],TN:[-86.3,35.8],TX:[-99.0,31.5],UT:[-111.7,39.3],VA:[-78.9,37.5],
+      VT:[-72.6,44.1],WA:[-120.7,47.4],WV:[-80.6,38.6],WI:[-89.6,44.6],WY:[-107.6,43.0],
+      DC:[-77.0,38.9]
+    };
+
+    // Adjacency
+    const adj = {
+      AL:['MS','TN','GA','FL'],AK:[],AZ:['CA','NV','UT','CO','NM'],AR:['MO','TN','MS','LA','TX','OK'],
+      CA:['OR','NV','AZ'],CO:['WY','NE','KS','OK','NM','AZ','UT'],CT:['NY','MA','RI'],
+      DE:['MD','PA','NJ'],FL:['AL','GA'],GA:['FL','AL','TN','NC','SC'],HI:[],
+      IA:['MN','WI','IL','MO','NE','SD'],ID:['MT','WY','UT','NV','OR','WA'],
+      IL:['IN','KY','MO','IA','WI'],IN:['MI','OH','KY','IL'],KS:['NE','MO','OK','CO'],
+      KY:['IN','OH','WV','VA','TN','MO','IL'],LA:['TX','AR','MS'],ME:['NH'],
+      MD:['VA','WV','PA','DE','DC'],MA:['RI','CT','NY','NH','VT'],MI:['WI','IN','OH'],
+      MN:['WI','IA','SD','ND'],MS:['LA','AR','TN','AL'],MO:['IA','IL','KY','TN','AR','OK','KS','NE'],
+      MT:['ND','SD','WY','ID'],NE:['SD','IA','MO','KS','CO','WY'],NV:['OR','CA','AZ','UT','ID'],
+      NH:['VT','ME','MA'],NJ:['DE','PA','NY'],NM:['AZ','UT','CO','OK','TX'],
+      NY:['NJ','PA','CT','MA','VT'],NC:['VA','TN','GA','SC'],ND:['MN','SD','MT'],
+      OH:['PA','WV','KY','IN','MI'],OK:['KS','MO','AR','TX','NM','CO'],OR:['WA','ID','NV','CA'],
+      PA:['NY','NJ','DE','MD','WV','OH'],RI:['CT','MA'],SC:['GA','NC'],SD:['ND','MN','IA','NE','WY','MT'],
+      TN:['KY','VA','NC','GA','AL','MS','AR','MO'],TX:['NM','OK','AR','LA'],UT:['ID','WY','CO','NM','AZ','NV'],
+      VA:['MD','DC','WV','KY','TN','NC'],VT:['NH','MA','NY'],WA:['ID','OR'],
+      WV:['OH','PA','MD','VA','KY'],WI:['MI','MN','IA','IL'],WY:['MT','SD','NE','CO','UT','ID'],
+      DC:['MD','VA']
+    };
+
+    this.states = {};
+    this.edges = [];
+    const w = this.w, h = this.h;
+
+    // Project lon/lat to screen (simple Mercator-ish)
+    const lons = Object.values(raw).map(c => c[0]);
+    const lats = Object.values(raw).map(c => c[1]);
+    const minLon = Math.min(...lons), maxLon = Math.max(...lons);
+    const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+    // Exclude AK/HI from bounds for continental layout
+    const contLons = Object.entries(raw).filter(([k]) => k !== 'AK' && k !== 'HI').map(([,c]) => c[0]);
+    const contLats = Object.entries(raw).filter(([k]) => k !== 'AK' && k !== 'HI').map(([,c]) => c[1]);
+    const cMinLon = Math.min(...contLons), cMaxLon = Math.max(...contLons);
+    const cMinLat = Math.min(...contLats), cMaxLat = Math.max(...contLats);
+
+    for (const [abbr, coords] of Object.entries(raw)) {
+      let sx, sy;
+      if (abbr === 'AK') {
+        sx = w * 0.12; sy = h * 0.82;
+      } else if (abbr === 'HI') {
+        sx = w * 0.22; sy = h * 0.85;
+      } else {
+        sx = w * 0.12 + ((coords[0] - cMinLon) / (cMaxLon - cMinLon)) * w * 0.76;
+        sy = h * 0.15 + (1 - (coords[1] - cMinLat) / (cMaxLat - cMinLat)) * h * 0.7;
+      }
+      this.states[abbr] = { x: sx, y: sy, visited: false, visitTime: -1 };
+    }
+
+    // Build edges
+    const edgeSet = new Set();
+    for (const [from, neighbors] of Object.entries(adj)) {
+      for (const to of neighbors) {
+        const key = [from, to].sort().join('-');
+        if (!edgeSet.has(key)) {
+          edgeSet.add(key);
+          this.edges.push({ a: from, b: to, lit: false, litTime: -1 });
+        }
+      }
+    }
+  },
+
+  startBFS(seed) {
+    for (const s of Object.values(this.states)) { s.visited = false; s.visitTime = -1; }
+    for (const e of this.edges) { e.lit = false; e.litTime = -1; }
+
+    // Build adjacency from edges
+    const adjMap = {};
+    for (const e of this.edges) {
+      if (!adjMap[e.a]) adjMap[e.a] = [];
+      if (!adjMap[e.b]) adjMap[e.b] = [];
+      adjMap[e.a].push(e.b);
+      adjMap[e.b].push(e.a);
+    }
+
+    // BFS
+    const visited = new Set();
+    const queue = [seed];
+    visited.add(seed);
+    this.bfsOrder = [{ type: 'node', id: seed, depth: 0 }];
+    let depth = 0;
+
+    while (queue.length > 0) {
+      const nextQueue = [];
+      for (const current of queue) {
+        for (const neighbor of (adjMap[current] || [])) {
+          if (!visited.has(neighbor)) {
+            visited.add(neighbor);
+            nextQueue.push(neighbor);
+            this.bfsOrder.push({ type: 'edge', a: current, b: neighbor });
+            this.bfsOrder.push({ type: 'node', id: neighbor, depth: depth + 1 });
+          }
+        }
+      }
+      queue.length = 0;
+      queue.push(...nextQueue);
+      depth++;
+    }
+
+    this.bfsStep = 0;
+    this.bfsRunning = true;
+    this.bfsTimer = 0;
+  },
+
+  update(dt) {
+    if (!this.bfsRunning) return;
+    const speed = parseInt(document.getElementById('ctrl-bfs-speed').value);
+    this.bfsTimer += dt * speed * 3;
+    while (this.bfsTimer > 0.15 && this.bfsStep < this.bfsOrder.length) {
+      this.bfsTimer -= 0.15;
+      const step = this.bfsOrder[this.bfsStep];
+      if (step.type === 'node') {
+        this.states[step.id].visited = true;
+        this.states[step.id].visitTime = performance.now() / 1000;
+      } else {
+        const edge = this.edges.find(e => (e.a === step.a && e.b === step.b) || (e.a === step.b && e.b === step.a));
+        if (edge) { edge.lit = true; edge.litTime = performance.now() / 1000; }
+      }
+      this.bfsStep++;
+    }
+    if (this.bfsStep >= this.bfsOrder.length) this.bfsRunning = false;
+  },
+
+  draw(ctx, w, h) {
+    clearCanvas(ctx, w, h);
+    const now = performance.now() / 1000;
+
+    // Edges
+    for (const e of this.edges) {
+      const sa = this.states[e.a], sb = this.states[e.b];
+      if (!sa || !sb) continue;
+      if (e.lit) {
+        const age = now - e.litTime;
+        const pulse = Math.max(0, 1 - age * 0.5);
+        ctx.strokeStyle = hexToRgba(CYAN, 0.3 + pulse * 0.5);
+        ctx.lineWidth = 1 + pulse * 2;
+        ctx.shadowColor = CYAN;
+        ctx.shadowBlur = pulse * 12;
+      } else {
+        ctx.strokeStyle = hexToRgba('#fff', 0.06);
+        ctx.lineWidth = 0.5;
+        ctx.shadowBlur = 0;
+      }
+      ctx.beginPath();
+      ctx.moveTo(sa.x, sa.y);
+      ctx.lineTo(sb.x, sb.y);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    // Nodes
+    for (const [abbr, s] of Object.entries(this.states)) {
+      if (s.visited) {
+        const age = now - s.visitTime;
+        const pulse = Math.max(0, 1 - age * 0.3);
+        const r = 5 + pulse * 4;
+        glowCircle(ctx, s.x, s.y, r, CYAN, 10 + pulse * 10);
+      } else {
+        ctx.fillStyle = hexToRgba('#fff', 0.15);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // State label
+      if (s.visited) {
+        ctx.fillStyle = hexToRgba('#fff', 0.7);
+        ctx.font = '600 8px Inter';
+        ctx.textAlign = 'center';
+        ctx.fillText(abbr, s.x, s.y - 10);
+        ctx.textAlign = 'left';
+      }
+    }
+
+    // Stats
+    const visitedCount = Object.values(this.states).filter(s => s.visited).length;
+    const total = Object.keys(this.states).length;
+    ctx.fillStyle = CYAN;
+    ctx.font = '500 12px Inter';
+    ctx.fillText(`${visitedCount} / ${total} states reached`, w - 180, h - 30);
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+// Initialize
+// ═══════════════════════════════════════════════════════
+
+const manager = new SceneManager();
+manager.register(scene1);
+manager.register(scene2);
+manager.register(scene3);
+manager.register(scene4);
+manager.register(scene5);
+manager.register(scene6);
+manager.register(scene7);
+manager.register(scene8);
+manager.register(scene9);
+manager.register(scene10);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPP Instruments Design System — Atomic Component Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#141414;--surface:#1A1A1A;--surface2:#222222;--border:#333333;
+  --text:#E8E0E0;--dim:#666666;--dim2:#999999;--warm-dim:#B0A0A0;
+  --red-50:#FFF5F5;--red-100:#FED7D7;--red-200:#FEB2B2;--red-300:#FC8181;
+  --red-400:#F56565;--red-500:#E53E3E;--red-600:#C53030;--red-700:#9B2C2C;
+  --red-800:#7B2020;--red-900:#5C1111;--red-950:#3B0A0A;
+  --mauve-dark:#6B4F4F;--mauve-mid:#9B7878;--mauve-light:#C4A8A8;--mauve-pale:#E8D5D5;
+  --burgundy:#7B2040;--burgundy-light:#A0405A;--burgundy-dark:#5C1530;
+  --gold:#D4A76A;--gold-light:#E4C88A;--gold-dark:#8C6838;
+  --cream:#F5EDE0;--cream-dark:#E8D5C0;
+  --green:#4CAF50;--green-light:#81C784;--green-dark:#2E7D32;
+  --blue:#5DADE2;--purple:#9B59B6;
+  --glass-blur:24px;--glass-fill:0.15;--glass-border:0.18;
+  --radius-sm:10px;--radius-md:16px;--radius-lg:22px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 96px}
+
+/* Header */
+.sys-header{text-align:center;padding:64px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden}
+.sys-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(123,32,64,0.08),rgba(212,167,106,0.04),rgba(20,20,20,0.9))}
+.sys-header *{position:relative;z-index:1}
+.sys-header .icon{font-size:48px;margin-bottom:16px}
+.sys-header h1{font-family:'Oswald',sans-serif;font-size:42px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#7B2040,#D4A76A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.sys-header .sub{font-size:15px;color:var(--dim);max-width:640px;margin:0 auto}
+.sys-header .version{display:inline-block;margin-top:16px;font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(123,32,64,0.15);color:var(--burgundy-light);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+/* Navigation */
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:48px;padding:8px;background:var(--surface);border-radius:var(--radius-md);border:1px solid var(--border)}
+.nav a{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.active{background:var(--burgundy);color:#fff}
+
+/* Sections */
+section{margin-bottom:64px}
+section h2{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--burgundy-light);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+section p{color:var(--warm-dim);max-width:680px;margin-bottom:12px;line-height:1.7;font-size:13px}
+
+/* Component cards */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.comp-preview{padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px;background:var(--bg);position:relative}
+.comp-info{padding:16px}
+.comp-info h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.comp-info .dart{font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--burgundy-light);margin-bottom:6px}
+.comp-info p{font-size:11px;color:var(--dim);line-height:1.5;margin:0}
+.comp-info .props{margin-top:8px;font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--dim2);line-height:1.7}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;letter-spacing:0.3px}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--burgundy);color:#fff;padding:10px 20px}
+.btn-primary:hover{background:var(--burgundy-light);box-shadow:0 4px 16px rgba(123,32,64,0.3)}
+.btn-gold{background:var(--gold);color:#1A1A1A;padding:10px 20px}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:9px 19px}
+.btn-outline:hover{background:rgba(212,167,106,0.1)}
+.btn-success{background:var(--green-dark);color:#fff;padding:10px 20px}
+.btn-success:hover{background:var(--green)}
+.btn-ghost{background:transparent;color:var(--dim);padding:10px 20px}
+.btn-ghost:hover{color:var(--text);background:var(--surface2)}
+.btn-sm{font-size:11px;padding:6px 14px}
+.btn-lg{font-size:15px;padding:14px 28px}
+.btn-icon{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--dim);cursor:pointer;transition:all .2s;font-size:14px}
+.btn-icon:hover{color:var(--text);border-color:var(--burgundy-light);background:rgba(123,32,64,0.1)}
+
+/* Inputs */
+.input{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;width:100%}
+.input:focus{border-color:var(--burgundy-light);box-shadow:0 0 0 3px rgba(123,32,64,0.15)}
+.input::placeholder{color:var(--dim)}
+.input-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:6px;display:block}
+.input-group{margin-bottom:16px}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.badge-burgundy{background:rgba(123,32,64,0.15);color:var(--burgundy-light);border:1px solid rgba(123,32,64,0.3)}
+.badge-gold{background:rgba(212,167,106,0.15);color:var(--gold);border:1px solid rgba(212,167,106,0.3)}
+.badge-green{background:rgba(76,175,80,0.15);color:var(--green-light);border:1px solid rgba(76,175,80,0.3)}
+.badge-neutral{background:rgba(153,153,153,0.12);color:var(--dim2);border:1px solid rgba(153,153,153,0.25)}
+.badge-category{border-radius:6px;font-size:9px;padding:2px 8px;font-weight:700}
+.badge-violin{background:rgba(229,62,62,0.15);color:var(--red-400);border:1px solid rgba(229,62,62,0.3)}
+.badge-bow{background:rgba(93,173,226,0.15);color:var(--blue);border:1px solid rgba(93,173,226,0.3)}
+.badge-cello{background:rgba(155,89,182,0.15);color:var(--purple);border:1px solid rgba(155,89,182,0.3)}
+.badge-viola{background:rgba(76,175,80,0.15);color:var(--green-light);border:1px solid rgba(76,175,80,0.3)}
+
+/* Maker badge */
+.maker-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:600;background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.maker-badge .maker-era{font-size:9px;color:var(--dim);font-weight:400}
+.maker-badge.tier-1{border-color:var(--gold);background:rgba(212,167,106,0.08)}
+.maker-badge.tier-1 .maker-name{color:var(--gold)}
+.maker-badge.tier-2{border-color:var(--mauve-mid);background:rgba(155,120,120,0.06)}
+.maker-badge.tier-2 .maker-name{color:var(--mauve-light)}
+.maker-badge.tier-3{border-color:var(--border)}
+.maker-badge.tier-3 .maker-name{color:var(--text)}
+
+/* Instrument card */
+.instrument-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;width:300px;transition:border-color .2s,box-shadow .2s}
+.instrument-card:hover{border-color:var(--burgundy);box-shadow:0 4px 24px rgba(0,0,0,0.3)}
+.instrument-card .inst-header{padding:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start}
+.instrument-card .inst-name{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;letter-spacing:0.5px}
+.instrument-card .inst-maker{font-size:11px;color:var(--warm-dim);margin-top:2px}
+.instrument-card .inst-body{padding:16px}
+.instrument-card .inst-prices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.instrument-card .inst-price{text-align:center;padding:8px;background:var(--bg);border-radius:6px}
+.instrument-card .inst-price .p-val{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600}
+.instrument-card .inst-price .p-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-top:2px}
+.instrument-card .inst-equity{padding:10px;background:rgba(76,175,80,0.08);border:1px solid rgba(76,175,80,0.2);border-radius:6px;text-align:center}
+.instrument-card .inst-equity .eq-val{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--green-light)}
+.instrument-card .inst-equity .eq-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--green);margin-top:2px}
+.instrument-card .inst-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.instrument-card .inst-discount{font-size:12px;font-weight:700;color:var(--gold)}
+
+/* Portfolio performance card */
+.portfolio-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;width:340px}
+.portfolio-card .port-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.portfolio-card .port-title{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px}
+.portfolio-card .port-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.portfolio-card .port-stat{text-align:center;padding:12px;background:var(--bg);border-radius:8px}
+.portfolio-card .port-stat .ps-val{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600}
+.portfolio-card .port-stat .ps-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-top:2px}
+.portfolio-card .port-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.portfolio-card .port-bar-fill{height:100%;border-radius:4px}
+.portfolio-card .port-bar-label{display:flex;justify-content:space-between;font-size:9px;color:var(--dim)}
+
+/* Investment share indicator */
+.share-indicator{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.share-indicator .share-ring{width:40px;height:40px;position:relative;flex-shrink:0}
+.share-indicator .share-ring svg{width:100%;height:100%}
+.share-indicator .share-ring .share-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--text)}
+.share-indicator .share-info{flex:1}
+.share-indicator .share-name{font-size:12px;font-weight:600}
+.share-indicator .share-amount{font-size:10px;color:var(--dim)}
+
+/* Provenance timeline */
+.provenance-timeline{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;position:relative}
+.provenance-timeline .prov-title{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;margin-bottom:16px}
+.prov-events{position:relative;padding-left:24px}
+.prov-events::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--border)}
+.prov-event{position:relative;padding-bottom:16px}
+.prov-event:last-child{padding-bottom:0}
+.prov-event .prov-dot{position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--border);background:var(--bg)}
+.prov-event.completed .prov-dot{background:var(--burgundy);border-color:var(--burgundy)}
+.prov-event.current .prov-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(212,167,106,0.4)}
+.prov-event .prov-date{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-bottom:2px}
+.prov-event .prov-desc{font-size:12px;color:var(--text);font-weight:500}
+.prov-event .prov-detail{font-size:10px;color:var(--warm-dim);margin-top:2px}
+
+/* Appreciation chart (simplified) */
+.appreciation-chart{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;overflow:hidden}
+.appreciation-chart .chart-title{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;margin-bottom:16px}
+.chart-area{height:120px;position:relative;display:flex;align-items:flex-end;gap:2px;padding-bottom:20px}
+.chart-bar{flex:1;border-radius:3px 3px 0 0;transition:height .3s;min-width:8px;position:relative}
+.chart-bar:hover{opacity:0.85}
+.chart-bar .bar-label{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:7px;color:var(--dim);white-space:nowrap}
+.chart-axis{display:flex;justify-content:space-between;font-size:8px;color:var(--dim);margin-top:4px}
+
+/* Benchmark card */
+.benchmark-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px}
+.benchmark-card .bm-name{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;margin-bottom:2px}
+.benchmark-card .bm-range{font-size:11px;color:var(--dim);margin-bottom:10px}
+.benchmark-card .bm-stats{display:flex;gap:14px}
+.benchmark-card .bm-stat{text-align:center}
+.benchmark-card .bm-stat .bm-val{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;color:var(--burgundy-light)}
+.benchmark-card .bm-stat .bm-lbl{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-top:2px}
+
+/* Principle cards */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.principle{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px}
+.principle .num{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;color:rgba(123,32,64,0.2);margin-bottom:8px;line-height:1}
+.principle h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.principle p{font-size:11px;color:var(--dim);margin:0}
+
+/* Hierarchy diagram */
+.hierarchy{display:flex;flex-direction:column;gap:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)}
+.hier-level{display:flex;align-items:center;gap:16px}
+.hier-label{min-width:120px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.hier-items{display:flex;gap:6px;flex-wrap:wrap}
+.hier-item{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;border:1px solid}
+.hier-atoms .hier-label{color:var(--burgundy-light)}
+.hier-atoms .hier-item{border-color:var(--burgundy);color:var(--burgundy-light);background:rgba(123,32,64,0.08)}
+.hier-molecules .hier-label{color:var(--gold)}
+.hier-molecules .hier-item{border-color:var(--gold);color:var(--gold);background:rgba(212,167,106,0.08)}
+.hier-organisms .hier-label{color:var(--mauve-light)}
+.hier-organisms .hier-item{border-color:var(--mauve-mid);color:var(--mauve-light);background:rgba(196,168,168,0.08)}
+
+/* Token display */
+.token-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.token-swatch{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);min-width:72px}
+.token-swatch .color{height:48px}
+.token-swatch .info{padding:4px 6px;background:var(--surface)}
+.token-swatch .info .name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.token-swatch .info .hex{font-size:8px;color:var(--dim);font-family:'SF Mono','Cascadia Code',monospace}
+
+/* Glass */
+.glass{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));background:rgba(26,26,26,var(--glass-fill));border:1px solid rgba(255,255,255,var(--glass-border));border-radius:var(--radius-md)}
+.glass-subtle{backdrop-filter:blur(12px);background:rgba(26,26,26,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm)}
+.glass-frosted{backdrop-filter:blur(40px);background:rgba(26,26,26,0.2);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-lg)}
+.glass-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.glass-demo{padding:20px;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.glass-demo .label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-bottom:4px}
+.glass-demo .value{font-size:11px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--text)}
+
+/* Layout rules */
+.rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:12px}
+.rule{padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.rule .code{font-size:10px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--burgundy-light);margin-bottom:4px}
+.rule .desc{font-size:11px;color:var(--dim)}
+
+/* Spacing */
+.spacing-demo{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.spacing-block{display:flex;flex-direction:column;align-items:center;gap:4px}
+.spacing-block .bar{background:var(--burgundy);border-radius:3px;width:24px;opacity:0.6}
+.spacing-block .sp-label{font-size:8px;color:var(--dim);font-weight:600;text-transform:uppercase}
+
+/* Responsive */
+@media(max-width:700px){
+  .comp-grid{grid-template-columns:1fr}
+  .glass-demos{grid-template-columns:1fr}
+  .principle-grid{grid-template-columns:1fr}
+  .rule-grid{grid-template-columns:1fr}
+  .hier-level{flex-direction:column;align-items:flex-start}
+  .instrument-card,.portfolio-card{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="sys-header">
+  <div class="icon">&#127931;</div>
+  <h1>PPP INSTRUMENTS DESIGN SYSTEM</h1>
+  <p class="sub">Atomic components for rare string instrument fund intelligence &mdash; provenance tracking, portfolio analytics, appreciation modeling, and maker certification</p>
+  <span class="version">HTML Reference &middot; v1.0 &middot; 2026</span>
+</header>
+
+<nav class="nav">
+  <a href="#principles" class="active">Principles</a>
+  <a href="#hierarchy">Hierarchy</a>
+  <a href="#tokens">Tokens</a>
+  <a href="#atoms">Atoms</a>
+  <a href="#molecules">Molecules</a>
+  <a href="#organisms">Organisms</a>
+  <a href="#glass">Glass</a>
+  <a href="#spacing">Spacing</a>
+  <a href="index.html">Brand Book</a>
+</nav>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <h2>Design Principles</h2>
+  <div class="principle-grid">
+    <div class="principle">
+      <div class="num">01</div>
+      <h4>Provenance as Architecture</h4>
+      <p>Every visual traces back to ownership. The provenance timeline is not a feature but the structural spine of every instrument view. Maker, owner, player, dealer, certifier &mdash; each is a node in the chain.</p>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <h4>Burgundy, Gold, Cream</h4>
+      <p>Burgundy for authority and fund identity. Gold for value and appreciation signals. Cream for warmth and historical resonance. A palette that could hang in a concert hall or a boardroom.</p>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <h4>Category Color Mapping</h4>
+      <p>Violin = red. Bow = blue. Cello = purple. Viola = green. Every instrument category has a fixed color that carries across cards, charts, timelines, and portfolio views.</p>
+    </div>
+    <div class="principle">
+      <div class="num">04</div>
+      <h4>Maker Tier Hierarchy</h4>
+      <p>Tier 1 (Stradivari, Guarneri, Amati) = gold border. Tier 2 (Vuillaume, Pressenda, Steiner) = mauve border. Tier 3 = neutral border. The maker badge tells you the investment tier at a glance.</p>
+    </div>
+    <div class="principle">
+      <div class="num">05</div>
+      <h4>Appreciation is the Story</h4>
+      <p>Every instrument exists on a curve. The design must make appreciation trajectories feel inevitable and patient. Long arcs, not spikes. Decades, not quarters.</p>
+    </div>
+    <div class="principle">
+      <div class="num">06</div>
+      <h4>Glass Morphism for Depth</h4>
+      <p>Frosted surfaces let the fund's depth show through. Portfolio layers feel stacked, not flat. The instrument is always the focal object; the data is the translucent frame around it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HIERARCHY -->
+<section id="hierarchy">
+  <h2>Component Hierarchy</h2>
+  <p>Atomic design for rare instrument fund intelligence. Atoms are the smallest units. Molecules combine atoms into instrument-specific displays. Organisms are full portfolio and provenance interfaces.</p>
+  <div class="hierarchy">
+    <div class="hier-level hier-atoms">
+      <div class="hier-label">Atoms</div>
+      <div class="hier-items">
+        <span class="hier-item">Button</span>
+        <span class="hier-item">Input</span>
+        <span class="hier-item">Badge</span>
+        <span class="hier-item">CategoryTag</span>
+        <span class="hier-item">MakerBadge</span>
+        <span class="hier-item">PriceTag</span>
+        <span class="hier-item">EquityIndicator</span>
+        <span class="hier-item">DiscountTag</span>
+        <span class="hier-item">ShareRing</span>
+        <span class="hier-item">ProvenanceDot</span>
+        <span class="hier-item">ChartBar</span>
+        <span class="hier-item">TrendArrow</span>
+      </div>
+    </div>
+    <div class="hier-level hier-molecules">
+      <div class="hier-label">Molecules</div>
+      <div class="hier-items">
+        <span class="hier-item">InstrumentCard</span>
+        <span class="hier-item">BenchmarkCard</span>
+        <span class="hier-item">ShareIndicator</span>
+        <span class="hier-item">ProvenanceEvent</span>
+        <span class="hier-item">PriceComparison</span>
+        <span class="hier-item">MakerRow</span>
+        <span class="hier-item">AppreciationBar</span>
+        <span class="hier-item">NavBar</span>
+      </div>
+    </div>
+    <div class="hier-level hier-organisms">
+      <div class="hier-label">Organisms</div>
+      <div class="hier-items">
+        <span class="hier-item">PortfolioPerformance</span>
+        <span class="hier-item">ProvenanceTimeline</span>
+        <span class="hier-item">AppreciationChart</span>
+        <span class="hier-item">InstrumentGrid</span>
+        <span class="hier-item">AllocationView</span>
+        <span class="hier-item">BenchmarkPanel</span>
+        <span class="hier-item">CertificationLog</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section id="tokens">
+  <h2>Design Tokens</h2>
+
+  <h3>SomeAI Red Scale (Primary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#FFF5F5"></div><div class="info"><div class="name">50</div><div class="hex">#FFF5F5</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#FED7D7"></div><div class="info"><div class="name">100</div><div class="hex">#FED7D7</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#FEB2B2"></div><div class="info"><div class="name">200</div><div class="hex">#FEB2B2</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#FC8181"></div><div class="info"><div class="name">300</div><div class="hex">#FC8181</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F56565"></div><div class="info"><div class="name">400</div><div class="hex">#F56565</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E53E3E"></div><div class="info"><div class="name">500</div><div class="hex">#E53E3E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C53030"></div><div class="info"><div class="name">600</div><div class="hex">#C53030</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#9B2C2C"></div><div class="info"><div class="name">700</div><div class="hex">#9B2C2C</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7B2020"></div><div class="info"><div class="name">800</div><div class="hex">#7B2020</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5C1111"></div><div class="info"><div class="name">900</div><div class="hex">#5C1111</div></div></div>
+  </div>
+
+  <h3>Burgundy &amp; Gold (Fund Identity)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#5C1530"></div><div class="info"><div class="name">Burg Dark</div><div class="hex">#5C1530</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7B2040"></div><div class="info"><div class="name">Burgundy</div><div class="hex">#7B2040</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#A0405A"></div><div class="info"><div class="name">Burg Light</div><div class="hex">#A0405A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#8C6838"></div><div class="info"><div class="name">Gold Dark</div><div class="hex">#8C6838</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D4A76A"></div><div class="info"><div class="name">Gold</div><div class="hex">#D4A76A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E4C88A"></div><div class="info"><div class="name">Gold Light</div><div class="hex">#E4C88A</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E8D5C0"></div><div class="info"><div class="name">Cream Dk</div><div class="hex">#E8D5C0</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F5EDE0"></div><div class="info"><div class="name">Cream</div><div class="hex">#F5EDE0</div></div></div>
+  </div>
+
+  <h3>Mauve Scale (Secondary)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#6B4F4F"></div><div class="info"><div class="name">Dark</div><div class="hex">#6B4F4F</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#9B7878"></div><div class="info"><div class="name">Mid</div><div class="hex">#9B7878</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C4A8A8"></div><div class="info"><div class="name">Light</div><div class="hex">#C4A8A8</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E8D5D5"></div><div class="info"><div class="name">Pale</div><div class="hex">#E8D5D5</div></div></div>
+  </div>
+
+  <h3>Category Colors</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#E53E3E"></div><div class="info"><div class="name">Violin</div><div class="hex">#E53E3E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5DADE2"></div><div class="info"><div class="name">Bow</div><div class="hex">#5DADE2</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#9B59B6"></div><div class="info"><div class="name">Cello</div><div class="hex">#9B59B6</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#4CAF50"></div><div class="info"><div class="name">Viola</div><div class="hex">#4CAF50</div></div></div>
+  </div>
+
+  <h3>Typography</h3>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:12px">
+    <div><span style="font-family:'Oswald',sans-serif;font-size:48px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#7B2040,#D4A76A);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PPP INSTRUMENTS</span></div>
+    <div><span style="font-family:'Oswald',sans-serif;font-size:32px;font-weight:600;letter-spacing:1px">Heading 1 &mdash; Oswald 32/600</span></div>
+    <div><span style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:500;letter-spacing:0.5px;color:var(--gold)">Rare String Instrument Fund</span></div>
+    <div><span style="font-size:15px;font-weight:400;line-height:1.7;color:var(--warm-dim)">Body &mdash; Inter 15/400 &mdash; line-height 1.7 &mdash; warm dim for extended reading</span></div>
+    <div><span style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--burgundy-light)">Caption &mdash; 11/600 uppercase &mdash; burgundy</span></div>
+    <div><span style="font-size:13px;font-family:'SF Mono','Cascadia Code','Courier New',monospace;color:var(--red-300)">(isa Amati1657 RareViolin) (purchasePrice Amati1657 (Dollar 2500000))</span></div>
+  </div>
+</section>
+
+<!-- ATOMS -->
+<section id="atoms">
+  <h2>Atoms &mdash; Base Elements</h2>
+
+  <h3>Buttons</h3>
+  <p>Five variants: primary (burgundy), gold, outline, success, ghost. Actions span acquisition, sale, certification, and portfolio management.</p>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary">Acquire</button>
+        <button class="btn btn-gold">Certify</button>
+        <button class="btn btn-outline">Appraise</button>
+        <button class="btn btn-success">Record Sale</button>
+        <button class="btn btn-ghost">Cancel</button>
+      </div>
+      <div class="comp-info">
+        <h4>Button Variants</h4>
+        <div class="dart">variant: primary | gold | outline | success | ghost</div>
+        <p>Primary for acquisition decisions. Gold for certification. Outline for appraisal. Success for recording sales. Ghost for dismiss/cancel.</p>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;align-items:center">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+        <div class="btn-icon">&#127931;</div>
+        <div class="btn-icon" style="border-color:var(--gold);color:var(--gold)">&#x2605;</div>
+      </div>
+      <div class="comp-info">
+        <h4>Sizes &amp; Icon Buttons</h4>
+        <div class="dart">size: sm | md | lg | icon (36px circle)</div>
+        <p>Small for table actions. Default for standard. Large for portfolio-level decisions. Icon buttons for instrument marking and favorites.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Badges &amp; Tags</h3>
+  <p>Status badges, instrument category tags, and maker badges with tier hierarchy. Category colors carry through every component.</p>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:8px;flex-wrap:wrap">
+      <span class="badge badge-burgundy">Held</span>
+      <span class="badge badge-gold">Certified</span>
+      <span class="badge badge-green">Sold</span>
+      <span class="badge badge-neutral">Appraised</span>
+      <span style="width:100%;height:1px"></span>
+      <span class="badge badge-category badge-violin">Violin</span>
+      <span class="badge badge-category badge-bow">Bow</span>
+      <span class="badge badge-category badge-cello">Cello</span>
+      <span class="badge badge-category badge-viola">Viola</span>
+    </div>
+    <div class="comp-info">
+      <h4>Status Badges &amp; Category Tags</h4>
+      <div class="dart">badge: status (burgundy|gold|green|neutral) | category (violin|bow|cello|viola)</div>
+      <p>Status badges track instrument lifecycle: Held, Certified, Sold, Appraised. Category tags use fixed colors across all views.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Maker Badges</h3>
+  <p>Three tiers of maker prestige. Border color and name color signal investment tier at a glance. Era dates provide historical context.</p>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:10px;flex-wrap:wrap">
+      <div class="maker-badge tier-1"><span class="maker-name">Stradivari</span><span class="maker-era">1644&ndash;1737</span></div>
+      <div class="maker-badge tier-1"><span class="maker-name">Guarneri del Gesu</span><span class="maker-era">1698&ndash;1744</span></div>
+      <div class="maker-badge tier-1"><span class="maker-name">Amati</span><span class="maker-era">c.1505&ndash;1740</span></div>
+      <div class="maker-badge tier-2"><span class="maker-name">Vuillaume</span><span class="maker-era">1798&ndash;1875</span></div>
+      <div class="maker-badge tier-2"><span class="maker-name">Pressenda</span><span class="maker-era">1777&ndash;1854</span></div>
+      <div class="maker-badge tier-2"><span class="maker-name">Steiner</span><span class="maker-era">1617&ndash;1683</span></div>
+      <div class="maker-badge tier-3"><span class="maker-name">Grancino</span><span class="maker-era">1637&ndash;1709</span></div>
+      <div class="maker-badge tier-3"><span class="maker-name">Soffritti</span><span class="maker-era">1860&ndash;1923</span></div>
+      <div class="maker-badge tier-3"><span class="maker-name">Peccatte</span><span class="maker-era">1817&ndash;1855</span></div>
+    </div>
+    <div class="comp-info">
+      <h4>Maker Badge Tiers</h4>
+      <div class="dart">tier: 1 (gold border) | 2 (mauve border) | 3 (neutral border)</div>
+      <p>Tier 1: Legendary Italian masters. Gold border, gold name. Tier 2: Important French/Italian makers. Mauve border. Tier 3: Notable makers. Neutral border. Era in parenthetical grey.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Inputs</h3>
+  <p>Form controls for instrument acquisition, appraisal, and portfolio data entry.</p>
+  <div class="comp-card" style="max-width:500px">
+    <div class="comp-preview" style="flex-direction:column;gap:12px;padding:24px;width:100%">
+      <div class="input-group">
+        <label class="input-label">Instrument Name</label>
+        <input class="input" type="text" placeholder="e.g. Amati 1657">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Purchase Price ($)</label>
+        <input class="input" type="text" placeholder="2,500,000">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Retail Estimate ($)</label>
+        <input class="input" type="text" placeholder="3,500,000">
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Text Inputs</h4>
+      <div class="dart">state: default | focus (burgundy ring) | error | success</div>
+      <p>Focus ring uses burgundy-light with 15% opacity. Burgundy accent throughout. Labels uppercase 11px.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MOLECULES -->
+<section id="molecules">
+  <h2>Molecules &mdash; Fund Components</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="instrument-card">
+          <div class="inst-header">
+            <div>
+              <div class="inst-name">Amati 1657</div>
+              <div class="inst-maker">Nicolo Amati &middot; Cremona</div>
+            </div>
+            <span class="badge badge-category badge-violin">Violin</span>
+          </div>
+          <div class="inst-body">
+            <div class="inst-prices">
+              <div class="inst-price">
+                <div class="p-val" style="color:var(--warm-dim)">$2.5M</div>
+                <div class="p-lbl">Purchase</div>
+              </div>
+              <div class="inst-price">
+                <div class="p-val" style="color:var(--text)">$3.5M</div>
+                <div class="p-lbl">Retail</div>
+              </div>
+            </div>
+            <div class="inst-equity">
+              <div class="eq-val">$1.0M</div>
+              <div class="eq-lbl">Instant Equity</div>
+            </div>
+          </div>
+          <div class="inst-footer">
+            <div class="maker-badge tier-1" style="padding:2px 8px;font-size:9px"><span class="maker-name">Amati</span></div>
+            <div class="inst-discount">40.0% below retail</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Instrument Card</h4>
+        <div class="dart">InstrumentCard &mdash; name + maker + category + prices + equity + discount</div>
+        <p>Core portfolio molecule. Header with name, maker, and category badge. Price comparison grid (purchase vs retail). Green equity block. Footer with maker tier badge and discount percentage.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="benchmark-card" style="width:280px">
+          <div class="bm-name">Glennie Strad 1704</div>
+          <div class="bm-range">$68K (1971) &rarr; $12M (2021)</div>
+          <div class="bm-stats">
+            <div class="bm-stat"><div class="bm-val">10.9%</div><div class="bm-lbl">Annual</div></div>
+            <div class="bm-stat"><div class="bm-val">17,547%</div><div class="bm-lbl">Total</div></div>
+            <div class="bm-stat"><div class="bm-val">50 yrs</div><div class="bm-lbl">Hold</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Benchmark Card</h4>
+        <div class="dart">BenchmarkCard &mdash; legendary instrument + appreciation stats</div>
+        <p>Historical comparison reference. Instrument name, price range with years, and three key stats: annual return, total return, hold period. Burgundy-light value text.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:8px;padding:20px;width:100%">
+        <div class="share-indicator" style="width:100%">
+          <div class="share-ring">
+            <svg viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--border)" stroke-width="3"/>
+              <circle cx="20" cy="20" r="16" fill="none" stroke="#E53E3E" stroke-width="3" stroke-dasharray="60 100" stroke-linecap="round" transform="rotate(-90 20 20)"/>
+            </svg>
+            <div class="share-val">60%</div>
+          </div>
+          <div class="share-info">
+            <div class="share-name">Violins</div>
+            <div class="share-amount">$3.2M of $5.3M portfolio</div>
+          </div>
+        </div>
+        <div class="share-indicator" style="width:100%">
+          <div class="share-ring">
+            <svg viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--border)" stroke-width="3"/>
+              <circle cx="20" cy="20" r="16" fill="none" stroke="#5DADE2" stroke-width="3" stroke-dasharray="22 100" stroke-linecap="round" transform="rotate(-90 20 20)"/>
+            </svg>
+            <div class="share-val">22%</div>
+          </div>
+          <div class="share-info">
+            <div class="share-name">Bows</div>
+            <div class="share-amount">$1.17M of $5.3M portfolio</div>
+          </div>
+        </div>
+        <div class="share-indicator" style="width:100%">
+          <div class="share-ring">
+            <svg viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--border)" stroke-width="3"/>
+              <circle cx="20" cy="20" r="16" fill="none" stroke="#9B59B6" stroke-width="3" stroke-dasharray="13 100" stroke-linecap="round" transform="rotate(-90 20 20)"/>
+            </svg>
+            <div class="share-val">13%</div>
+          </div>
+          <div class="share-info">
+            <div class="share-name">Cellos</div>
+            <div class="share-amount">$690K of $5.3M portfolio</div>
+          </div>
+        </div>
+        <div class="share-indicator" style="width:100%">
+          <div class="share-ring">
+            <svg viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--border)" stroke-width="3"/>
+              <circle cx="20" cy="20" r="16" fill="none" stroke="#4CAF50" stroke-width="3" stroke-dasharray="5 100" stroke-linecap="round" transform="rotate(-90 20 20)"/>
+            </svg>
+            <div class="share-val">5%</div>
+          </div>
+          <div class="share-info">
+            <div class="share-name">Violas</div>
+            <div class="share-amount">$265K of $5.3M portfolio</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Investment Share Indicators</h4>
+        <div class="dart">ShareIndicator &mdash; ring gauge + category name + allocation</div>
+        <p>Portfolio allocation by instrument category. SVG ring gauge with category color. Percentage, category name, and dollar allocation. Stacked vertically in the allocation view.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANISMS -->
+<section id="organisms">
+  <h2>Organisms &mdash; Fund Intelligence</h2>
+  <p>Complete interface blocks for managing the rare instrument fund. Each organism combines multiple molecules into a functional portfolio or provenance view.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="portfolio-card">
+          <div class="port-header">
+            <div class="port-title">PORTFOLIO PERFORMANCE</div>
+            <span class="badge badge-burgundy">Q1 2026</span>
+          </div>
+          <div class="port-stats">
+            <div class="port-stat">
+              <div class="ps-val" style="color:var(--warm-dim)">$3.84M</div>
+              <div class="ps-lbl">Total Cost</div>
+            </div>
+            <div class="port-stat">
+              <div class="ps-val" style="color:var(--text)">$5.32M</div>
+              <div class="ps-lbl">Retail Value</div>
+            </div>
+            <div class="port-stat">
+              <div class="ps-val" style="color:var(--green-light)">$1.48M</div>
+              <div class="ps-lbl">Total Equity</div>
+            </div>
+            <div class="port-stat">
+              <div class="ps-val" style="color:var(--gold)">27.8%</div>
+              <div class="ps-lbl">Avg Discount</div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--dim);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Allocation by Category</div>
+          <div class="port-bar">
+            <div class="port-bar-fill" style="width:60%;background:linear-gradient(90deg,#E53E3E,#F56565)"></div>
+          </div>
+          <div class="port-bar-label"><span>Violins 60%</span><span style="color:var(--blue)">Bows 22%</span></div>
+          <div class="port-bar" style="margin-top:8px">
+            <div class="port-bar-fill" style="width:82%;background:linear-gradient(90deg,#E53E3E 0%,#E53E3E 73%,#5DADE2 73%,#5DADE2 100%)"></div>
+          </div>
+          <div class="port-bar-label"><span style="color:var(--purple)">Cellos 13%</span><span style="color:var(--green)">Violas 5%</span></div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Portfolio Performance</h4>
+        <div class="dart">PortfolioPerformance &mdash; stats grid + allocation bars</div>
+        <p>Fund-level overview. Four stat blocks: cost, retail, equity, discount. Allocation bar chart by category with color fills matching category tokens. Period badge for time filtering.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="provenance-timeline" style="width:300px">
+          <div class="prov-title">PROVENANCE: AMATI 1657</div>
+          <div class="prov-events">
+            <div class="prov-event completed">
+              <div class="prov-dot"></div>
+              <div class="prov-date">c. 1657</div>
+              <div class="prov-desc">Created by Nicolo Amati</div>
+              <div class="prov-detail">Cremona, Italy &mdash; Golden Period</div>
+            </div>
+            <div class="prov-event completed">
+              <div class="prov-dot"></div>
+              <div class="prov-date">1890</div>
+              <div class="prov-desc">Acquired by Paris Conservatoire</div>
+              <div class="prov-detail">Institutional collection, documented provenance</div>
+            </div>
+            <div class="prov-event completed">
+              <div class="prov-dot"></div>
+              <div class="prov-date">2018</div>
+              <div class="prov-desc">Certified by Paul Prier</div>
+              <div class="prov-detail">Full authentication + condition report</div>
+            </div>
+            <div class="prov-event current">
+              <div class="prov-dot"></div>
+              <div class="prov-date">2024</div>
+              <div class="prov-desc">Acquired by PPP Instruments</div>
+              <div class="prov-detail">$2.5M purchase &mdash; 40% below retail</div>
+            </div>
+            <div class="prov-event">
+              <div class="prov-dot"></div>
+              <div class="prov-date">Target</div>
+              <div class="prov-desc">Sale at market appreciation</div>
+              <div class="prov-detail">Projected $4.2M+ (5-year hold)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Provenance Timeline</h4>
+        <div class="dart">ProvenanceTimeline &mdash; vertical chain of ownership events</div>
+        <p>Vertical timeline with left-aligned dots on a connecting line. Three dot states: completed (burgundy fill), current (gold fill with glow), future (hollow). Each event has date, description, and detail text.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:16px">
+        <div class="appreciation-chart" style="width:300px">
+          <div class="chart-title">APPRECIATION TRAJECTORY</div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:12px">
+            <span style="font-family:'Oswald',sans-serif;font-size:24px;font-weight:600;color:var(--green-light)">+88.3%</span>
+            <span style="font-size:11px;color:var(--dim)">avg return across 32 turns</span>
+          </div>
+          <div class="chart-area">
+            <div class="chart-bar" style="height:20%;background:var(--red-800)"><span class="bar-label">2019</span></div>
+            <div class="chart-bar" style="height:35%;background:var(--red-700)"><span class="bar-label">2020</span></div>
+            <div class="chart-bar" style="height:42%;background:var(--red-600)"><span class="bar-label">2021</span></div>
+            <div class="chart-bar" style="height:55%;background:var(--red-600)"><span class="bar-label">2022</span></div>
+            <div class="chart-bar" style="height:48%;background:var(--red-500)"><span class="bar-label">2023</span></div>
+            <div class="chart-bar" style="height:68%;background:var(--burgundy)"><span class="bar-label">2024</span></div>
+            <div class="chart-bar" style="height:78%;background:var(--burgundy-light)"><span class="bar-label">2025</span></div>
+            <div class="chart-bar" style="height:90%;background:linear-gradient(to top,var(--burgundy),var(--gold))"><span class="bar-label">2026</span></div>
+          </div>
+          <div class="chart-axis"><span>Portfolio Value Over Time</span><span style="color:var(--gold)">$5.3M</span></div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Appreciation Chart</h4>
+        <div class="dart">AppreciationChart &mdash; bar chart with year-over-year growth</div>
+        <p>Vertical bar chart showing portfolio value over time. Bars use deepening burgundy gradient from past to present, with the current year blending into gold. Overall return percentage as hero stat above.</p>
+      </div>
+    </div>
+
+    <div class="comp-card" style="grid-column:1/-1">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:20px;width:100%;align-items:stretch">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div style="font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px">INSTRUMENT HOLDINGS</div>
+          <div style="display:flex;gap:6px">
+            <span class="badge badge-category badge-violin">Violin</span>
+            <span class="badge badge-category badge-bow">Bow</span>
+            <span class="badge badge-category badge-cello">Cello</span>
+            <span class="badge badge-category badge-viola">Viola</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600">
+          <div>Instrument / Maker</div>
+          <div>Category</div>
+          <div>Purchase</div>
+          <div>Retail</div>
+          <div>Equity</div>
+        </div>
+        <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(51,51,51,0.3);font-size:12px;align-items:center">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="maker-badge tier-1" style="padding:1px 6px;font-size:8px"><span class="maker-name">Amati</span></div>
+            <span style="font-weight:600">Amati 1657</span>
+          </div>
+          <div><span class="badge badge-category badge-violin" style="font-size:8px;padding:1px 6px">Violin</span></div>
+          <div style="color:var(--warm-dim)">$2.5M</div>
+          <div style="font-weight:600">$3.5M</div>
+          <div style="color:var(--green-light);font-weight:600">$1.0M</div>
+        </div>
+        <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(51,51,51,0.3);font-size:12px;align-items:center">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="maker-badge tier-2" style="padding:1px 6px;font-size:8px"><span class="maker-name">Steiner</span></div>
+            <span style="font-weight:600">Steiner 1662</span>
+          </div>
+          <div><span class="badge badge-category badge-violin" style="font-size:8px;padding:1px 6px">Violin</span></div>
+          <div style="color:var(--warm-dim)">$360K</div>
+          <div style="font-weight:600">$450K</div>
+          <div style="color:var(--green-light);font-weight:600">$90K</div>
+        </div>
+        <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(51,51,51,0.3);font-size:12px;align-items:center">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="maker-badge tier-3" style="padding:1px 6px;font-size:8px"><span class="maker-name">Soffritti</span></div>
+            <span style="font-weight:600">Soffritti Cello</span>
+          </div>
+          <div><span class="badge badge-category badge-cello" style="font-size:8px;padding:1px 6px">Cello</span></div>
+          <div style="color:var(--warm-dim)">$205K</div>
+          <div style="font-weight:600">$275K</div>
+          <div style="color:var(--green-light);font-weight:600">$70K</div>
+        </div>
+        <div style="display:grid;grid-template-columns:3fr 1fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(51,51,51,0.3);font-size:12px;align-items:center">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="maker-badge tier-2" style="padding:1px 6px;font-size:8px"><span class="maker-name">Peccatte</span></div>
+            <span style="font-weight:600">Peccatte Bow</span>
+          </div>
+          <div><span class="badge badge-category badge-bow" style="font-size:8px;padding:1px 6px">Bow</span></div>
+          <div style="color:var(--warm-dim)">$123K</div>
+          <div style="font-weight:600">$185K</div>
+          <div style="color:var(--green-light);font-weight:600">$62K</div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Instrument Holdings Table</h4>
+        <div class="dart">InstrumentGrid &mdash; full portfolio table with maker badges + categories</div>
+        <p>Portfolio-level table of all instruments. Each row has maker tier badge, instrument name, category tag, purchase/retail/equity columns. Equity in green. Maker badge border color communicates tier instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLASS -->
+<section id="glass">
+  <h2>Glass Morphism</h2>
+  <p>Three blur levels. Warm burgundy-gold gradient backdrops give the frosted surfaces a rich, concert-hall depth.</p>
+  <div class="glass-demos" style="background:linear-gradient(135deg,rgba(123,32,64,0.15),rgba(212,167,106,0.08),rgba(155,120,120,0.05));padding:24px;border-radius:var(--radius-lg)">
+    <div class="glass-demo glass-subtle">
+      <div class="label">Subtle</div>
+      <div class="value">blur: 12px</div>
+    </div>
+    <div class="glass-demo glass">
+      <div class="label">Standard</div>
+      <div class="value">blur: 24px</div>
+    </div>
+    <div class="glass-demo glass-frosted">
+      <div class="label">Frosted</div>
+      <div class="value">blur: 40px</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+    <div class="rule"><div class="code">fillOpacity</div><div class="desc">0.15 &mdash; container background alpha</div></div>
+    <div class="rule"><div class="code">borderOpacity</div><div class="desc">0.18 &mdash; border alpha (white)</div></div>
+    <div class="rule"><div class="code">radius-sm</div><div class="desc">10px &mdash; badges, maker badges</div></div>
+    <div class="rule"><div class="code">radius-md</div><div class="desc">16px &mdash; cards, panels</div></div>
+    <div class="rule"><div class="code">radius-lg</div><div class="desc">22px &mdash; portfolio sections</div></div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section id="spacing">
+  <h2>Spacing &amp; Layout Rules</h2>
+  <p>8px base unit. All spacing multiples of 4px. Consistent padding scale across portfolio and provenance views.</p>
+
+  <h3>Spacing Scale</h3>
+  <div class="spacing-demo" style="margin-top:16px;margin-bottom:24px">
+    <div class="spacing-block"><div class="bar" style="height:4px"></div><div class="sp-label">4px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:8px"></div><div class="sp-label">8px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:12px"></div><div class="sp-label">12px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:16px"></div><div class="sp-label">16px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:24px"></div><div class="sp-label">24px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:32px"></div><div class="sp-label">32px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:48px"></div><div class="sp-label">48px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:64px"></div><div class="sp-label">64px</div></div>
+    <div class="spacing-block"><div class="bar" style="height:96px"></div><div class="sp-label">96px</div></div>
+  </div>
+
+  <h3>Layout Configuration</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">page-max-width: 1200px</div><div class="desc">Maximum content width</div></div>
+    <div class="rule"><div class="code">page-padding: 32px</div><div class="desc">Horizontal page margins</div></div>
+    <div class="rule"><div class="code">section-gap: 64px</div><div class="desc">Between major sections</div></div>
+    <div class="rule"><div class="code">card-gap: 16px</div><div class="desc">Between grid cards</div></div>
+    <div class="rule"><div class="code">instrument-card: 300px</div><div class="desc">Fixed instrument card width</div></div>
+    <div class="rule"><div class="code">portfolio-card: 340px</div><div class="desc">Portfolio panel width</div></div>
+    <div class="rule"><div class="code">provenance-line: 2px</div><div class="desc">Timeline connector line width</div></div>
+    <div class="rule"><div class="code">breakpoint-mobile: 700px</div><div class="desc">Mobile breakpoint</div></div>
+  </div>
+
+  <h3 style="margin-top:24px">Shadow Scale</h3>
+  <div class="rule-grid">
+    <div class="rule"><div class="code">shadow-sm</div><div class="desc">0 2px 8px rgba(0,0,0,0.15)</div></div>
+    <div class="rule"><div class="code">shadow-md</div><div class="desc">0 4px 24px rgba(0,0,0,0.3)</div></div>
+    <div class="rule"><div class="code">shadow-lg</div><div class="desc">0 8px 40px rgba(0,0,0,0.4)</div></div>
+    <div class="rule"><div class="code">shadow-glow-burg</div><div class="desc">0 0 16px rgba(123,32,64,0.3)</div></div>
+    <div class="rule"><div class="code">shadow-glow-gold</div><div class="desc">0 0 12px rgba(212,167,106,0.3)</div></div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

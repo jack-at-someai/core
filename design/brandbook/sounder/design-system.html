@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sounder Design System — Atomic Component Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* ── Purple (Primary — Intelligence) ── */
+  --purple-50:#F3E8FC;--purple-100:#E3CCF5;--purple-200:#C799EA;--purple-300:#AA66E0;
+  --purple-400:#8E33D5;--purple-500:#7200CB;--purple-600:#5B00A2;--purple-700:#44007A;
+  --purple-800:#2E0051;--purple-900:#170029;
+  /* ── Magenta (Secondary — Vitality) ── */
+  --magenta-50:#FEE8FB;--magenta-100:#FCCCF6;--magenta-200:#F999ED;--magenta-300:#F666E4;
+  --magenta-400:#F333DB;--magenta-500:#F000D2;--magenta-600:#C000A8;--magenta-700:#90007E;
+  --magenta-800:#600054;--magenta-900:#30002A;
+  /* ── Cyan (Accent — Clarity) ── */
+  --cyan-50:#EAFCFA;--cyan-100:#D3F7F4;--cyan-200:#A6EFE8;--cyan-300:#7AE6DD;
+  --cyan-400:#4DDED1;--cyan-500:#21D6C6;--cyan-600:#1AAB9E;--cyan-700:#148077;
+  --cyan-800:#0D564F;--cyan-900:#072B28;
+  /* ── Red (Alert — Health) ── */
+  --red-50:#FCF0F0;--red-100:#F5DCDC;--red-200:#EBB9B9;--red-300:#E29597;
+  --red-400:#D87274;--red-500:#CE4F51;--red-600:#A53F41;--red-700:#7C2F31;
+  --red-800:#522020;--red-900:#291010;
+  /* ── Neutrals ── */
+  --neutral-50:#FAFAFA;--neutral-100:#F2F2F3;--neutral-200:#ECECEC;--neutral-300:#C0BFC2;
+  --neutral-400:#8D8B90;--neutral-500:#5B575E;--neutral-600:#4A474B;--neutral-700:#3D3B3E;
+  --neutral-800:#2D2B2E;--neutral-900:#232324;
+  /* ── Semantic ── */
+  --success:#21D6C6;--warning:#F0A000;--error:#CE4F51;--info:#AA66E0;
+  /* ── Surface System ── */
+  --bg:#0e0b12;--surface:#1a1520;--surface2:#231e2a;--border:#2a2530;--border-light:#3a3540;
+  --text:#ede8f2;--text-secondary:#b8b0c4;--dim:#7a7580;--dim2:#5B575E;
+  /* ── Glass Morphism ── */
+  --glass-blur:24px;--glass-fill:0.12;--glass-border:0.18;
+  /* ── Border Radius ── */
+  --radius-sm:8px;--radius-md:14px;--radius-lg:22px;--radius-xl:32px;
+  /* ── Domain Colors ── */
+  --sow:#F000D2;--boar:#7200CB;--litter:#21D6C6;--farm:#4CAF50;--show:#FF9800;--breed:#8E33D5;
+  /* ── Spacing ── */
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-6:24px;--sp-8:32px;--sp-12:48px;--sp-16:64px;--sp-24:96px;
+}
+
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 96px}
+
+/* ── Header ── */
+.sys-header{text-align:center;padding:64px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden}
+.sys-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(114,0,203,0.15),rgba(240,0,210,0.08),rgba(33,214,198,0.05));border-radius:24px}
+.sys-header *{position:relative;z-index:1}
+.sys-header h1{font-size:42px;font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,#7200CB,#F000D2,#21D6C6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.sys-header .sub{font-size:15px;color:var(--dim);max-width:600px;margin:0 auto}
+.sys-header .version{display:inline-block;margin-top:16px;font-size:10px;padding:4px 14px;border-radius:20px;background:rgba(114,0,203,0.15);color:var(--purple-300);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+/* ── Navigation ── */
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:48px;padding:8px;background:var(--surface);border-radius:var(--radius-md);border:1px solid var(--border)}
+.nav a{padding:8px 16px;border-radius:8px;font-size:11px;font-weight:600;color:var(--dim);text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.nav a:hover{color:var(--text);background:var(--surface2)}
+.nav a.active{background:var(--purple-500);color:#fff}
+
+/* ── Sections ── */
+section{margin-bottom:64px}
+section h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--purple-300);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+section h3{font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px}
+section p.desc{color:var(--dim);max-width:680px;margin-bottom:12px;line-height:1.7;font-size:13px}
+
+/* ── Token Swatches ── */
+.token-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.token-swatch{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);min-width:72px;flex:0 0 auto}
+.token-swatch .color{height:48px}
+.token-swatch .info{padding:4px 6px;background:var(--surface)}
+.token-swatch .info .name{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.token-swatch .info .hex{font-size:8px;color:var(--dim);font-family:'SF Mono',monospace}
+.token-swatch .info .var{font-size:7px;color:var(--purple-300);font-family:'SF Mono',monospace;margin-top:1px}
+
+/* ── Typography Specimen ── */
+.type-specimen{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;display:flex;flex-direction:column;gap:16px}
+.type-row{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--border);padding-bottom:12px}
+.type-row:last-child{border-bottom:none;padding-bottom:0}
+.type-meta{min-width:140px;font-size:10px;font-family:'SF Mono',monospace;color:var(--purple-300);line-height:1.6}
+.type-meta span{display:block;color:var(--dim)}
+
+/* ── Spacing Grid ── */
+.spacing-grid{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.spacing-item{text-align:center}
+.spacing-bar{background:linear-gradient(135deg,var(--purple-500),var(--magenta-500));border-radius:4px;margin:0 auto 6px}
+.spacing-label{font-size:9px;font-weight:600;color:var(--dim)}
+.spacing-value{font-size:8px;font-family:'SF Mono',monospace;color:var(--purple-300)}
+
+/* ── Radius Demo ── */
+.radius-grid{display:flex;gap:16px;flex-wrap:wrap}
+.radius-item{text-align:center}
+.radius-box{width:80px;height:80px;background:var(--surface);border:2px solid var(--purple-500);margin-bottom:6px}
+.radius-name{font-size:10px;font-weight:600;color:var(--text)}
+.radius-val{font-size:9px;font-family:'SF Mono',monospace;color:var(--dim)}
+
+/* ── Shadow Demo ── */
+.shadow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.shadow-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.shadow-card .s-name{font-size:11px;font-weight:600;margin-bottom:4px}
+.shadow-card .s-val{font-size:9px;font-family:'SF Mono',monospace;color:var(--dim)}
+
+/* ── Component Cards ── */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.comp-preview{padding:32px;display:flex;align-items:center;justify-content:center;min-height:140px;background:var(--bg);position:relative}
+.comp-info{padding:16px}
+.comp-info h4{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-0.2px}
+.comp-info .token{font-size:10px;font-family:'SF Mono',monospace;color:var(--purple-300);margin-bottom:6px}
+.comp-info p{font-size:11px;color:var(--dim);line-height:1.5;margin:0}
+.comp-info .props{margin-top:8px;font-size:10px;font-family:'SF Mono',monospace;color:var(--dim2);line-height:1.7}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 24px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all .2s;letter-spacing:-0.1px}
+.btn-filled{background:var(--purple-500);color:#fff}
+.btn-filled:hover{background:var(--purple-400);box-shadow:0 4px 20px rgba(114,0,203,0.4)}
+.btn-filled:active{background:var(--purple-600);transform:scale(0.98)}
+.btn-filled:disabled{background:var(--neutral-600);color:var(--neutral-400);cursor:not-allowed;box-shadow:none}
+.btn-outlined{background:transparent;color:var(--purple-300);border:1.5px solid var(--purple-500)}
+.btn-outlined:hover{background:rgba(114,0,203,0.1);border-color:var(--purple-400)}
+.btn-outlined:active{background:rgba(114,0,203,0.2)}
+.btn-outlined:disabled{border-color:var(--neutral-600);color:var(--neutral-400);cursor:not-allowed}
+.btn-text{background:transparent;color:var(--purple-300);border:none;padding:10px 16px}
+.btn-text:hover{background:rgba(114,0,203,0.1)}
+.btn-text:active{background:rgba(114,0,203,0.15)}
+.btn-text:disabled{color:var(--neutral-400);cursor:not-allowed}
+.btn-icon{width:40px;height:40px;padding:0;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:16px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.btn-icon:hover{background:rgba(114,0,203,0.15);border-color:var(--purple-500);color:var(--purple-300)}
+.btn-magenta{background:var(--magenta-500);color:#fff}
+.btn-magenta:hover{background:var(--magenta-400);box-shadow:0 4px 20px rgba(240,0,210,0.4)}
+.btn-cyan{background:var(--cyan-500);color:var(--neutral-900)}
+.btn-cyan:hover{background:var(--cyan-400);box-shadow:0 4px 20px rgba(33,214,198,0.4)}
+.btn-sm{padding:6px 14px;font-size:11px;border-radius:6px}
+.btn-lg{padding:14px 32px;font-size:15px;border-radius:var(--radius-md)}
+
+/* ── Glass Containers ── */
+.glass{backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));background:rgba(26,21,32,var(--glass-fill));border:1px solid rgba(255,255,255,var(--glass-border));border-radius:var(--radius-md)}
+.glass-subtle{backdrop-filter:blur(12px);background:rgba(26,21,32,0.08);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm)}
+.glass-frosted{backdrop-filter:blur(40px);background:rgba(26,21,32,0.2);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-lg)}
+.glass-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.glass-demo{padding:24px;text-align:center;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.glass-demo .label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-bottom:4px}
+.glass-demo .value{font-size:11px;font-family:'SF Mono',monospace;color:var(--text)}
+
+/* ── Cards ── */
+.card-glass{backdrop-filter:blur(24px);background:rgba(26,21,32,0.15);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-md);padding:24px}
+.card-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px}
+.card-stat .stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-bottom:6px}
+.card-stat .stat-value{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--text)}
+.card-stat .stat-trend{font-size:11px;font-weight:600;margin-top:4px}
+.card-stat .stat-trend.up{color:var(--success)}
+.card-stat .stat-trend.down{color:var(--error)}
+.card-entity{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;display:flex;align-items:center;gap:12px}
+.card-entity .entity-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.card-entity .entity-name{font-size:13px;font-weight:600}
+.card-entity .entity-sub{font-size:11px;color:var(--dim)}
+
+/* ── Inputs ── */
+.input-wrap{margin-bottom:0}
+.input-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:600;margin-bottom:6px}
+.input-field{width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:13px;transition:all .2s;outline:none}
+.input-field:hover{border-color:var(--border-light)}
+.input-field:focus{border-color:var(--purple-500);box-shadow:0 0 0 3px rgba(114,0,203,0.15)}
+.input-field::placeholder{color:var(--dim)}
+.input-field:disabled{background:var(--neutral-700);color:var(--neutral-500);cursor:not-allowed}
+textarea.input-field{min-height:80px;resize:vertical}
+select.input-field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%237a7580'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+
+/* ── Checkbox & Toggle ── */
+.check-wrap{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text-secondary)}
+.check-box{width:18px;height:18px;border:2px solid var(--border-light);border-radius:4px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.check-box.checked{background:var(--purple-500);border-color:var(--purple-500)}
+.check-box.checked::after{content:'';width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.toggle{width:44px;height:24px;border-radius:12px;background:var(--neutral-600);position:relative;transition:all .2s;cursor:pointer;flex-shrink:0}
+.toggle::after{content:'';width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:all .2s}
+.toggle.on{background:var(--purple-500)}
+.toggle.on::after{left:23px}
+
+/* ── Badges ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.badge-purple{background:rgba(114,0,203,0.15);color:var(--purple-300);border:1px solid rgba(114,0,203,0.3)}
+.badge-magenta{background:rgba(240,0,210,0.12);color:var(--magenta-300);border:1px solid rgba(240,0,210,0.3)}
+.badge-cyan{background:rgba(33,214,198,0.12);color:var(--cyan-400);border:1px solid rgba(33,214,198,0.3)}
+.badge-success{background:rgba(33,214,198,0.12);color:var(--success);border:1px solid rgba(33,214,198,0.3)}
+.badge-warning{background:rgba(240,160,0,0.12);color:var(--warning);border:1px solid rgba(240,160,0,0.3)}
+.badge-error{background:rgba(206,79,81,0.12);color:var(--error);border:1px solid rgba(206,79,81,0.3)}
+.badge-neutral{background:var(--surface2);color:var(--dim);border:1px solid var(--border)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--purple-500);color:var(--text)}
+.chip.active{background:rgba(114,0,203,0.12);border-color:var(--purple-500);color:var(--purple-300);font-weight:600}
+
+/* ── Tabs ── */
+.tabs{display:flex;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px}
+.tab{padding:8px 18px;border-radius:6px;font-size:12px;font-weight:600;color:var(--dim);cursor:pointer;transition:all .2s;border:none;background:none;font-family:inherit}
+.tab:hover{color:var(--text);background:var(--surface2)}
+.tab.active{background:var(--purple-500);color:#fff}
+
+/* ── Breadcrumbs ── */
+.breadcrumbs{display:flex;align-items:center;gap:6px;font-size:12px}
+.breadcrumbs a{color:var(--dim);text-decoration:none;transition:color .2s}
+.breadcrumbs a:hover{color:var(--purple-300)}
+.breadcrumbs .sep{color:var(--neutral-600)}
+.breadcrumbs .current{color:var(--text);font-weight:600}
+
+/* ── Progress ── */
+.progress-bar{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.progress-purple{background:linear-gradient(90deg,var(--purple-500),var(--purple-300))}
+.progress-magenta{background:linear-gradient(90deg,var(--magenta-500),var(--magenta-300))}
+.progress-cyan{background:linear-gradient(90deg,var(--cyan-600),var(--cyan-400))}
+
+/* ── Tables ── */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;padding:8px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);border-bottom:1px solid var(--border);font-weight:600}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(42,37,48,0.6);color:var(--text-secondary)}
+.data-table tr:hover td{background:rgba(114,0,203,0.04)}
+.data-table .swatch-inline{width:20px;height:3px;border-radius:2px;display:inline-block;margin-right:6px;vertical-align:middle}
+
+/* ── Domain Nodes ── */
+.node{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:#fff;transition:all .3s;cursor:pointer;position:relative}
+.node:hover{transform:scale(1.08)}
+.node-sow{background:var(--sow);width:56px;height:56px}
+.node-boar{background:var(--boar);width:56px;height:56px}
+.node-litter{background:var(--litter);width:48px;height:48px;font-size:9px;color:var(--neutral-900)}
+.node-farm{background:var(--farm);width:48px;height:48px;font-size:9px}
+.node-show{background:var(--show);width:48px;height:48px;font-size:9px}
+.node-breed{background:var(--breed);width:52px;height:52px;font-size:9px}
+.node.focused{box-shadow:0 0 24px rgba(114,0,203,0.5)}
+.node.selected{outline:2px solid var(--purple-300);outline-offset:3px}
+.node-sm{width:36px;height:36px;font-size:8px}
+.node-lg{width:72px;height:72px;font-size:13px}
+
+/* ── Breeder Card ── */
+.breeder-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;max-width:300px}
+.breeder-card .b-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.breeder-card .b-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--purple-500),var(--magenta-500));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff}
+.breeder-card .b-name{font-size:14px;font-weight:700}
+.breeder-card .b-farm{font-size:11px;color:var(--dim)}
+.breeder-card .b-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.breeder-card .b-stat{text-align:center;padding:8px;background:var(--bg);border-radius:8px}
+.breeder-card .b-stat-val{font-size:16px;font-weight:700}
+.breeder-card .b-stat-label{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--dim);margin-top:2px}
+
+/* ── Pig Node Card ── */
+.pig-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;max-width:260px}
+.pig-card .p-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pig-card .p-tag{font-size:15px;font-weight:700}
+.pig-card .p-breed{font-size:10px;color:var(--dim)}
+.pig-card .p-metrics{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ── Herd Indicator ── */
+.herd-indicator{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:11px}
+.herd-dot{width:8px;height:8px;border-radius:50%}
+.herd-dot.open{background:var(--warning)}
+.herd-dot.bred{background:var(--magenta-500)}
+.herd-dot.gestating{background:var(--purple-500)}
+.herd-dot.nursing{background:var(--cyan-500)}
+
+/* ── Pedigree ── */
+.pedigree-node{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:11px;display:inline-flex;align-items:center;gap:6px}
+.pedigree-node .ped-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pedigree-connector{width:32px;height:2px;background:var(--border)}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .comp-grid{grid-template-columns:1fr}
+  .glass-demos{grid-template-columns:1fr}
+  .shadow-grid{grid-template-columns:1fr}
+  .tabs{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="sys-header">
+  <h1>Sounder Design System</h1>
+  <p class="sub">Atomic component reference for agricultural intelligence &mdash; breeder management, genetics tracking, and biological lifecycle operations</p>
+  <span class="version">v1.0 &middot; Atomic Reference &middot; Feb 2026</span>
+</header>
+
+<nav class="nav">
+  <a href="#colors" class="active">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radius">Radius</a>
+  <a href="#shadows">Shadows</a>
+  <a href="#glass">Glass</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#cards">Cards</a>
+  <a href="#inputs">Inputs</a>
+  <a href="#badges">Badges</a>
+  <a href="#navigation">Navigation</a>
+  <a href="#data">Data Display</a>
+  <a href="#domain">Domain</a>
+  <a href="index.html">Brand Book</a>
+</nav>
+
+<!-- ═══════════ COLOR PALETTE ═══════════ -->
+<section id="colors">
+  <h2>Color Palette</h2>
+  <p class="desc">Four semantic color ramps plus neutrals. Purple for intelligence and trust. Magenta for vitality and biological energy. Cyan for clarity and data. Red for health alerts. Each scale provides 10 stops for any context.</p>
+
+  <h3>Purple &mdash; Primary (Intelligence)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#F3E8FC"></div><div class="info"><div class="name">50</div><div class="hex">#F3E8FC</div><div class="var">--purple-50</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E3CCF5"></div><div class="info"><div class="name">100</div><div class="hex">#E3CCF5</div><div class="var">--purple-100</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C799EA"></div><div class="info"><div class="name">200</div><div class="hex">#C799EA</div><div class="var">--purple-200</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#AA66E0"></div><div class="info"><div class="name">300</div><div class="hex">#AA66E0</div><div class="var">--purple-300</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#8E33D5"></div><div class="info"><div class="name">400</div><div class="hex">#8E33D5</div><div class="var">--purple-400</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7200CB"></div><div class="info"><div class="name">500</div><div class="hex">#7200CB</div><div class="var">--purple-500</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5B00A2"></div><div class="info"><div class="name">600</div><div class="hex">#5B00A2</div><div class="var">--purple-600</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#44007A"></div><div class="info"><div class="name">700</div><div class="hex">#44007A</div><div class="var">--purple-700</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2E0051"></div><div class="info"><div class="name">800</div><div class="hex">#2E0051</div><div class="var">--purple-800</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#170029"></div><div class="info"><div class="name">900</div><div class="hex">#170029</div><div class="var">--purple-900</div></div></div>
+  </div>
+
+  <h3>Magenta &mdash; Secondary (Vitality)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#FEE8FB"></div><div class="info"><div class="name">50</div><div class="hex">#FEE8FB</div><div class="var">--magenta-50</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#FCCCF6"></div><div class="info"><div class="name">100</div><div class="hex">#FCCCF6</div><div class="var">--magenta-100</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F999ED"></div><div class="info"><div class="name">200</div><div class="hex">#F999ED</div><div class="var">--magenta-200</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F666E4"></div><div class="info"><div class="name">300</div><div class="hex">#F666E4</div><div class="var">--magenta-300</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F333DB"></div><div class="info"><div class="name">400</div><div class="hex">#F333DB</div><div class="var">--magenta-400</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F000D2"></div><div class="info"><div class="name">500</div><div class="hex">#F000D2</div><div class="var">--magenta-500</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C000A8"></div><div class="info"><div class="name">600</div><div class="hex">#C000A8</div><div class="var">--magenta-600</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#90007E"></div><div class="info"><div class="name">700</div><div class="hex">#90007E</div><div class="var">--magenta-700</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#600054"></div><div class="info"><div class="name">800</div><div class="hex">#600054</div><div class="var">--magenta-800</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#30002A"></div><div class="info"><div class="name">900</div><div class="hex">#30002A</div><div class="var">--magenta-900</div></div></div>
+  </div>
+
+  <h3>Cyan &mdash; Accent (Clarity)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#EAFCFA"></div><div class="info"><div class="name">50</div><div class="hex">#EAFCFA</div><div class="var">--cyan-50</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D3F7F4"></div><div class="info"><div class="name">100</div><div class="hex">#D3F7F4</div><div class="var">--cyan-100</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#A6EFE8"></div><div class="info"><div class="name">200</div><div class="hex">#A6EFE8</div><div class="var">--cyan-200</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7AE6DD"></div><div class="info"><div class="name">300</div><div class="hex">#7AE6DD</div><div class="var">--cyan-300</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#4DDED1"></div><div class="info"><div class="name">400</div><div class="hex">#4DDED1</div><div class="var">--cyan-400</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#21D6C6"></div><div class="info"><div class="name">500</div><div class="hex">#21D6C6</div><div class="var">--cyan-500</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#1AAB9E"></div><div class="info"><div class="name">600</div><div class="hex">#1AAB9E</div><div class="var">--cyan-600</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#148077"></div><div class="info"><div class="name">700</div><div class="hex">#148077</div><div class="var">--cyan-700</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#0D564F"></div><div class="info"><div class="name">800</div><div class="hex">#0D564F</div><div class="var">--cyan-800</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#072B28"></div><div class="info"><div class="name">900</div><div class="hex">#072B28</div><div class="var">--cyan-900</div></div></div>
+  </div>
+
+  <h3>Red &mdash; Alert (Health)</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#FCF0F0"></div><div class="info"><div class="name">50</div><div class="hex">#FCF0F0</div><div class="var">--red-50</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F5DCDC"></div><div class="info"><div class="name">100</div><div class="hex">#F5DCDC</div><div class="var">--red-100</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#EBB9B9"></div><div class="info"><div class="name">200</div><div class="hex">#EBB9B9</div><div class="var">--red-200</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#E29597"></div><div class="info"><div class="name">300</div><div class="hex">#E29597</div><div class="var">--red-300</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#D87274"></div><div class="info"><div class="name">400</div><div class="hex">#D87274</div><div class="var">--red-400</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#CE4F51"></div><div class="info"><div class="name">500</div><div class="hex">#CE4F51</div><div class="var">--red-500</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#A53F41"></div><div class="info"><div class="name">600</div><div class="hex">#A53F41</div><div class="var">--red-600</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#7C2F31"></div><div class="info"><div class="name">700</div><div class="hex">#7C2F31</div><div class="var">--red-700</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#522020"></div><div class="info"><div class="name">800</div><div class="hex">#522020</div><div class="var">--red-800</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#291010"></div><div class="info"><div class="name">900</div><div class="hex">#291010</div><div class="var">--red-900</div></div></div>
+  </div>
+
+  <h3>Neutrals</h3>
+  <div class="token-row">
+    <div class="token-swatch"><div class="color" style="background:#FAFAFA"></div><div class="info"><div class="name">50</div><div class="hex">#FAFAFA</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#F2F2F3"></div><div class="info"><div class="name">100</div><div class="hex">#F2F2F3</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#ECECEC"></div><div class="info"><div class="name">200</div><div class="hex">#ECECEC</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#C0BFC2"></div><div class="info"><div class="name">300</div><div class="hex">#C0BFC2</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#8D8B90"></div><div class="info"><div class="name">400</div><div class="hex">#8D8B90</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#5B575E"></div><div class="info"><div class="name">500</div><div class="hex">#5B575E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#4A474B"></div><div class="info"><div class="name">600</div><div class="hex">#4A474B</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#3D3B3E"></div><div class="info"><div class="name">700</div><div class="hex">#3D3B3E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#2D2B2E"></div><div class="info"><div class="name">800</div><div class="hex">#2D2B2E</div></div></div>
+    <div class="token-swatch"><div class="color" style="background:#232324"></div><div class="info"><div class="name">900</div><div class="hex">#232324</div></div></div>
+  </div>
+
+  <h3>Surface System</h3>
+  <div class="token-row">
+    <div class="token-swatch" style="min-width:100px"><div class="color" style="background:#0e0b12"></div><div class="info"><div class="name">Background</div><div class="hex">#0e0b12</div><div class="var">--bg</div></div></div>
+    <div class="token-swatch" style="min-width:100px"><div class="color" style="background:#1a1520"></div><div class="info"><div class="name">Surface</div><div class="hex">#1a1520</div><div class="var">--surface</div></div></div>
+    <div class="token-swatch" style="min-width:100px"><div class="color" style="background:#231e2a"></div><div class="info"><div class="name">Surface 2</div><div class="hex">#231e2a</div><div class="var">--surface2</div></div></div>
+    <div class="token-swatch" style="min-width:100px"><div class="color" style="background:#2a2530"></div><div class="info"><div class="name">Border</div><div class="hex">#2a2530</div><div class="var">--border</div></div></div>
+    <div class="token-swatch" style="min-width:100px"><div class="color" style="background:#3a3540"></div><div class="info"><div class="name">Border Light</div><div class="hex">#3a3540</div><div class="var">--border-light</div></div></div>
+  </div>
+
+  <h3>Semantic Colors</h3>
+  <div class="token-row">
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#21D6C6"></div><div class="info"><div class="name">Success</div><div class="hex">#21D6C6</div><div class="var">--success</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#F0A000"></div><div class="info"><div class="name">Warning</div><div class="hex">#F0A000</div><div class="var">--warning</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#CE4F51"></div><div class="info"><div class="name">Error</div><div class="hex">#CE4F51</div><div class="var">--error</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#AA66E0"></div><div class="info"><div class="name">Info</div><div class="hex">#AA66E0</div><div class="var">--info</div></div></div>
+  </div>
+
+  <h3>Domain Colors (Entity Mapping)</h3>
+  <div class="token-row">
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#F000D2"></div><div class="info"><div class="name">Sow</div><div class="hex">#F000D2</div><div class="var">--sow</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#7200CB"></div><div class="info"><div class="name">Boar</div><div class="hex">#7200CB</div><div class="var">--boar</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#21D6C6"></div><div class="info"><div class="name">Litter</div><div class="hex">#21D6C6</div><div class="var">--litter</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#4CAF50"></div><div class="info"><div class="name">Farm</div><div class="hex">#4CAF50</div><div class="var">--farm</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#FF9800"></div><div class="info"><div class="name">Show</div><div class="hex">#FF9800</div><div class="var">--show</div></div></div>
+    <div class="token-swatch" style="min-width:90px"><div class="color" style="background:#8E33D5"></div><div class="info"><div class="name">Breed</div><div class="hex">#8E33D5</div><div class="var">--breed</div></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ TYPOGRAPHY ═══════════ -->
+<section id="typography">
+  <h2>Typography Scale</h2>
+  <p class="desc">Inter is the primary typeface at all weights. SF Mono for code and data values. The type ramp uses a modular scale with precise size, weight, and line-height pairings.</p>
+
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-meta">Display<span>48px / 800 / -2px</span><span>line-height: 1.1</span></div>
+      <div style="font-size:48px;font-weight:800;letter-spacing:-2px;line-height:1.1;background:linear-gradient(135deg,#7200CB,#F000D2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Sounder</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H1<span>36px / 800 / -1.5px</span><span>line-height: 1.2</span></div>
+      <div style="font-size:36px;font-weight:800;letter-spacing:-1.5px;line-height:1.2">Herd Overview</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H2<span>28px / 700 / -1px</span><span>line-height: 1.25</span></div>
+      <div style="font-size:28px;font-weight:700;letter-spacing:-1px;line-height:1.25">Breeding Cycles</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H3<span>22px / 700 / -0.5px</span><span>line-height: 1.3</span></div>
+      <div style="font-size:22px;font-weight:700;letter-spacing:-0.5px;line-height:1.3">Sow Profile</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H4<span>18px / 600 / -0.3px</span><span>line-height: 1.35</span></div>
+      <div style="font-size:18px;font-weight:600;letter-spacing:-0.3px;line-height:1.35">Gestation Timeline</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H5<span>15px / 600 / -0.2px</span><span>line-height: 1.4</span></div>
+      <div style="font-size:15px;font-weight:600;letter-spacing:-0.2px;line-height:1.4">Litter Record #247</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H6<span>13px / 700 / 0</span><span>line-height: 1.45</span></div>
+      <div style="font-size:13px;font-weight:700;line-height:1.45">Health Check Entry</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Body<span>14px / 400 / 0</span><span>line-height: 1.7</span></div>
+      <div style="font-size:14px;font-weight:400;line-height:1.7;color:var(--text-secondary)">Sounder tracks every breeding event, health record, and show result across your entire operation. Data flows from barn to graph automatically.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Body Small<span>12px / 400 / 0</span><span>line-height: 1.6</span></div>
+      <div style="font-size:12px;font-weight:400;line-height:1.6;color:var(--dim)">Last bred: Feb 8, 2026. Due date: Jun 2, 2026. Gestation day 5 of 114.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Caption<span>11px / 600 / 1.5px</span><span>UPPERCASE</span></div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple-300)">Active Sows &middot; 247 Head</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Overline<span>9px / 700 / 1.5px</span><span>UPPERCASE</span></div>
+      <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)">Breeding Status</div>
+    </div>
+    <div class="type-row" style="border-bottom:none;padding-bottom:0">
+      <div class="type-meta">Monospace<span>12px / 400</span><span>SF Mono, Cascadia Code</span></div>
+      <div style="font-size:12px;font-family:'SF Mono','Cascadia Code',monospace;color:var(--cyan-400)">SOW-0247 | SIRED_BY BOAR-012 | LITTER-89 x11</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPACING ═══════════ -->
+<section id="spacing">
+  <h2>Spacing System</h2>
+  <p class="desc">4px base unit. All spacing tokens are multiples of 4. Used for padding, margin, and gap values throughout the system.</p>
+
+  <div class="spacing-grid">
+    <div class="spacing-item"><div class="spacing-bar" style="width:4px;height:4px"></div><div class="spacing-label">sp-1</div><div class="spacing-value">4px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:8px;height:8px"></div><div class="spacing-label">sp-2</div><div class="spacing-value">8px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:12px;height:12px"></div><div class="spacing-label">sp-3</div><div class="spacing-value">12px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:16px;height:16px"></div><div class="spacing-label">sp-4</div><div class="spacing-value">16px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:24px;height:24px"></div><div class="spacing-label">sp-6</div><div class="spacing-value">24px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:32px;height:32px"></div><div class="spacing-label">sp-8</div><div class="spacing-value">32px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:48px;height:48px"></div><div class="spacing-label">sp-12</div><div class="spacing-value">48px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:64px;height:64px"></div><div class="spacing-label">sp-16</div><div class="spacing-value">64px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="width:96px;height:96px"></div><div class="spacing-label">sp-24</div><div class="spacing-value">96px</div></div>
+  </div>
+
+  <div style="margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;font-family:'SF Mono',monospace;font-size:11px;line-height:2;color:var(--purple-300)">
+    --sp-1: 4px;&nbsp;&nbsp; --sp-2: 8px;&nbsp;&nbsp; --sp-3: 12px;&nbsp;&nbsp; --sp-4: 16px;<br>
+    --sp-6: 24px;&nbsp; --sp-8: 32px;&nbsp; --sp-12: 48px;&nbsp; --sp-16: 64px;&nbsp; --sp-24: 96px;
+  </div>
+</section>
+
+<!-- ═══════════ BORDER RADIUS ═══════════ -->
+<section id="radius">
+  <h2>Border Radius</h2>
+  <p class="desc">Four radius tokens for different component contexts. Smaller radii for dense UI elements, larger radii for hero sections and modals.</p>
+
+  <div class="radius-grid">
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:8px"></div>
+      <div class="radius-name">Small</div>
+      <div class="radius-val">8px &mdash; --radius-sm</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:14px"></div>
+      <div class="radius-name">Medium</div>
+      <div class="radius-val">14px &mdash; --radius-md</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:22px"></div>
+      <div class="radius-name">Large</div>
+      <div class="radius-val">22px &mdash; --radius-lg</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:32px"></div>
+      <div class="radius-name">XL</div>
+      <div class="radius-val">32px &mdash; --radius-xl</div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:50%"></div>
+      <div class="radius-name">Full</div>
+      <div class="radius-val">50% &mdash; avatars, nodes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SHADOWS & ELEVATION ═══════════ -->
+<section id="shadows">
+  <h2>Shadows &amp; Elevation</h2>
+  <p class="desc">Elevation system using colored glow effects rather than traditional drop shadows. Purple glow for primary actions, magenta for vitality emphasis, cyan for data highlights.</p>
+
+  <div class="shadow-grid">
+    <div class="shadow-card" style="box-shadow:0 2px 8px rgba(0,0,0,0.3)">
+      <div class="s-name">Level 1 &mdash; Subtle</div>
+      <div class="s-val">0 2px 8px rgba(0,0,0,0.3)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 4px 16px rgba(0,0,0,0.4)">
+      <div class="s-name">Level 2 &mdash; Card</div>
+      <div class="s-val">0 4px 16px rgba(0,0,0,0.4)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 8px 32px rgba(0,0,0,0.5)">
+      <div class="s-name">Level 3 &mdash; Modal</div>
+      <div class="s-val">0 8px 32px rgba(0,0,0,0.5)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 0 20px rgba(114,0,203,0.4)">
+      <div class="s-name">Purple Glow</div>
+      <div class="s-val">0 0 20px rgba(114,0,203,0.4)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 0 20px rgba(240,0,210,0.35)">
+      <div class="s-name">Magenta Glow</div>
+      <div class="s-val">0 0 20px rgba(240,0,210,0.35)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 0 20px rgba(33,214,198,0.3)">
+      <div class="s-name">Cyan Glow</div>
+      <div class="s-val">0 0 20px rgba(33,214,198,0.3)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GLASS MORPHISM ═══════════ -->
+<section id="glass">
+  <h2>Glass Morphism</h2>
+  <p class="desc">Three blur levels for layered depth. All glass containers use <code>backdrop-filter: blur()</code> with configurable fill opacity and border opacity. Saturation boosted to 180% for vibrancy.</p>
+
+  <div class="glass-demos" style="background:linear-gradient(135deg,rgba(114,0,203,0.2),rgba(240,0,210,0.1),rgba(33,214,198,0.08));padding:24px;border-radius:var(--radius-lg)">
+    <div class="glass-demo glass-subtle">
+      <div class="label">Subtle</div>
+      <div class="value">blur: 12px</div>
+    </div>
+    <div class="glass-demo glass">
+      <div class="label">Standard</div>
+      <div class="value">blur: 24px</div>
+    </div>
+    <div class="glass-demo glass-frosted">
+      <div class="label">Frosted</div>
+      <div class="value">blur: 40px</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+    <div style="padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px"><div style="font-size:10px;font-family:'SF Mono',monospace;color:var(--purple-300);margin-bottom:4px">fillOpacity</div><div style="font-size:11px;color:var(--dim)">0.12 &mdash; container background alpha</div></div>
+    <div style="padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px"><div style="font-size:10px;font-family:'SF Mono',monospace;color:var(--purple-300);margin-bottom:4px">borderOpacity</div><div style="font-size:11px;color:var(--dim)">0.18 &mdash; border alpha (white)</div></div>
+    <div style="padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px"><div style="font-size:10px;font-family:'SF Mono',monospace;color:var(--purple-300);margin-bottom:4px">saturation</div><div style="font-size:11px;color:var(--dim)">180% &mdash; backdrop-filter saturate</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ BUTTONS ═══════════ -->
+<section id="buttons">
+  <h2>Buttons</h2>
+  <p class="desc">Four button variants: filled (primary actions), outlined (secondary), text (tertiary), and icon (toolbar). All support default, hover, active, and disabled states. Accent variants available in magenta and cyan.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-filled">Add Sow</button>
+        <button class="btn btn-filled" style="background:var(--purple-400);box-shadow:0 4px 20px rgba(114,0,203,0.4)">Hover</button>
+        <button class="btn btn-filled" style="background:var(--purple-600)">Active</button>
+        <button class="btn btn-filled" disabled>Disabled</button>
+      </div>
+      <div class="comp-info">
+        <h4>Filled Button</h4>
+        <div class="token">--purple-500 bg | #fff text | radius-sm</div>
+        <p>Primary action. Purple glow on hover (0 4px 20px). Scale 0.98 on active. Disabled uses neutral-600 background.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-outlined">Health Check</button>
+        <button class="btn btn-outlined" style="background:rgba(114,0,203,0.1);border-color:var(--purple-400)">Hover</button>
+        <button class="btn btn-outlined" disabled>Disabled</button>
+      </div>
+      <div class="comp-info">
+        <h4>Outlined Button</h4>
+        <div class="token">--purple-500 border | --purple-300 text | transparent bg</div>
+        <p>Secondary action. Background fills to 10% purple on hover. Border lightens on hover state.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-text">View Lineage</button>
+        <button class="btn btn-text" style="background:rgba(114,0,203,0.1)">Hover</button>
+        <button class="btn btn-text" disabled>Disabled</button>
+      </div>
+      <div class="comp-info">
+        <h4>Text Button</h4>
+        <div class="token">--purple-300 text | no border | no bg</div>
+        <p>Tertiary action. Subtle purple background appears on hover. No border to minimize visual weight.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:16px">
+        <button class="btn-icon">+</button>
+        <button class="btn-icon" style="background:rgba(114,0,203,0.15);border-color:var(--purple-500);color:var(--purple-300)">+</button>
+        <button class="btn btn-filled btn-sm">Small</button>
+        <button class="btn btn-filled btn-lg">Large</button>
+      </div>
+      <div class="comp-info">
+        <h4>Icon &amp; Sizes</h4>
+        <div class="token">40px circle | sm: 6px 14px | lg: 14px 32px</div>
+        <p>Icon button is 40px circle with surface background. Three size variants for different contexts.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-magenta">Record Breeding</button>
+        <button class="btn btn-cyan">View Data</button>
+        <button class="btn btn-filled" style="background:linear-gradient(135deg,var(--purple-500),var(--magenta-500))">Gradient</button>
+      </div>
+      <div class="comp-info">
+        <h4>Accent Variants</h4>
+        <div class="token">--magenta-500 | --cyan-500 | gradient</div>
+        <p>Magenta for biological/vitality actions (breeding, health). Cyan for data/clarity actions (analytics, export). Gradient for hero CTAs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CARDS ═══════════ -->
+<section id="cards">
+  <h2>Cards</h2>
+  <p class="desc">Three card types: glass (layered contexts), stat (KPI display), and entity (list items). All share the same border radius and border treatment.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="background:linear-gradient(135deg,rgba(114,0,203,0.15),rgba(240,0,210,0.08));padding:24px">
+        <div class="card-glass" style="width:100%">
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">Breeding Dashboard</div>
+          <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Active cycles and upcoming farrow dates across the herd.</div>
+          <div style="display:flex;gap:6px">
+            <span class="badge badge-magenta">14 Bred</span>
+            <span class="badge badge-cyan">6 Due</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Glass Card</h4>
+        <div class="token">blur: 24px | fill: 0.15 | border: rgba(255,255,255,0.12)</div>
+        <p>Frosted glass container for layered content. Best on gradient or image backgrounds where depth is needed.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px;padding:20px">
+        <div class="card-stat" style="flex:1">
+          <div class="stat-label">Active Sows</div>
+          <div class="stat-value">247</div>
+          <div class="stat-trend up">+18 this quarter</div>
+        </div>
+        <div class="card-stat" style="flex:1">
+          <div class="stat-label">Bred Rate</div>
+          <div class="stat-value">92%</div>
+          <div class="stat-trend down">-3% vs last cycle</div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Stat Card</h4>
+        <div class="token">28px / 800 value | 10px / 600 label | trend: success/error</div>
+        <p>KPI display card. Large value dominates. Label above in uppercase caption style. Optional trend indicator below, colored by direction.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:8px;padding:16px;width:100%">
+        <div class="card-entity">
+          <div class="entity-dot" style="background:var(--sow)">S</div>
+          <div><div class="entity-name">Gilt #247</div><div class="entity-sub">Hampshire &middot; Bred &middot; Due Jun 2</div></div>
+        </div>
+        <div class="card-entity">
+          <div class="entity-dot" style="background:var(--boar)">B</div>
+          <div><div class="entity-name">Herdsman 41-2</div><div class="entity-sub">Duroc &middot; 3 active litters</div></div>
+        </div>
+        <div class="card-entity">
+          <div class="entity-dot" style="background:var(--farm)">F</div>
+          <div><div class="entity-name">Trogdon Farms</div><div class="entity-sub">Elon, NC &middot; 89 head</div></div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Entity Card</h4>
+        <div class="token">40px avatar | 13px name | 11px subtitle</div>
+        <p>List-item card for entities in the graph. Color-coded avatar maps to domain type. Name + subtitle provides identity at a glance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INPUTS ═══════════ -->
+<section id="inputs">
+  <h2>Inputs</h2>
+  <p class="desc">Form elements for data entry. All inputs share consistent sizing, border treatment, and focus behavior. Purple focus ring (3px spread) provides clear affordance.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:20px;align-items:stretch">
+        <div class="input-wrap">
+          <label class="input-label">Sow Tag</label>
+          <input class="input-field" type="text" placeholder="e.g. SOW-0247">
+        </div>
+        <div class="input-wrap">
+          <label class="input-label">Sow Tag (Focused)</label>
+          <input class="input-field" type="text" value="SOW-0247" style="border-color:var(--purple-500);box-shadow:0 0 0 3px rgba(114,0,203,0.15)">
+        </div>
+        <div class="input-wrap">
+          <label class="input-label">Sow Tag (Disabled)</label>
+          <input class="input-field" type="text" value="SOW-0247" disabled>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Text Field</h4>
+        <div class="token">--surface bg | --border border | --purple-500 focus ring</div>
+        <p>Standard text input. 10px 14px padding. Focus state adds purple border and 3px spread glow. Disabled greys out.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:20px;align-items:stretch">
+        <div class="input-wrap">
+          <label class="input-label">Notes</label>
+          <textarea class="input-field" placeholder="Health observations, breeding notes..."></textarea>
+        </div>
+        <div class="input-wrap">
+          <label class="input-label">Breed</label>
+          <select class="input-field">
+            <option>Hampshire</option>
+            <option>Duroc</option>
+            <option>Yorkshire</option>
+            <option>Berkshire</option>
+            <option>Chester White</option>
+          </select>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Textarea &amp; Select</h4>
+        <div class="token">min-height: 80px textarea | custom arrow select</div>
+        <p>Textarea uses same styling with vertical resize. Select has custom dropdown arrow via background-image SVG.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="check-wrap"><div class="check-box"></div> Open</div>
+          <div class="check-wrap"><div class="check-box checked"></div> Bred</div>
+          <div class="check-wrap"><div class="check-box checked"></div> Vaccinated</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary)"><div class="toggle"></div> Push Alerts</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary)"><div class="toggle on"></div> Auto Due Dates</div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Checkbox &amp; Toggle</h4>
+        <div class="token">18px checkbox | 44x24px toggle | --purple-500 active</div>
+        <p>Checkbox shows checkmark on checked (rotated border trick). Toggle slides knob left/right with purple fill on active.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BADGES & CHIPS ═══════════ -->
+<section id="badges">
+  <h2>Badges &amp; Chips</h2>
+  <p class="desc">Badges for status indicators and count displays. Chips for filterable category tags. Both use the semantic color system with 12-15% background opacity fills.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:8px;flex-wrap:wrap">
+        <span class="badge badge-purple">Registered</span>
+        <span class="badge badge-magenta">Bred</span>
+        <span class="badge badge-cyan">Weaned</span>
+        <span class="badge badge-success">Active</span>
+        <span class="badge badge-warning">Due Soon</span>
+        <span class="badge badge-error">Health Alert</span>
+        <span class="badge badge-neutral">Archived</span>
+      </div>
+      <div class="comp-info">
+        <h4>Status Badges</h4>
+        <div class="token">10px / 600 / uppercase | 3px 10px padding | 20px radius</div>
+        <p>Pill-shaped status indicators. Background at 12-15% opacity of the color. 1px border at 30% opacity. Used in entity cards, tables, and profile headers.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:6px;flex-wrap:wrap">
+        <div class="chip active">Hampshire</div>
+        <div class="chip active">Duroc</div>
+        <div class="chip">Yorkshire</div>
+        <div class="chip">Berkshire</div>
+        <div class="chip">Chester White</div>
+        <div class="chip">Landrace</div>
+      </div>
+      <div class="comp-info">
+        <h4>Category Chips</h4>
+        <div class="token">11px / 500 | 4px 12px padding | 8px radius</div>
+        <p>Filterable tags for breed, status, or category. Active state adds purple background and border. Hover lifts border to purple.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<section id="navigation">
+  <h2>Navigation</h2>
+  <p class="desc">Tab bars and breadcrumbs for wayfinding. Tabs use pill-style active indicators. Breadcrumbs use separator arrows with dim-to-bright hierarchy.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px">
+        <div class="tabs">
+          <button class="tab active">Herd</button>
+          <button class="tab">Breeding</button>
+          <button class="tab">Health</button>
+          <button class="tab">Sales</button>
+          <button class="tab">Shows</button>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Tabs</h4>
+        <div class="token">12px / 600 | --purple-500 active bg | 6px inner radius</div>
+        <p>Contained tab bar with pill-style active state. Surface background with border container. Hover shows surface2 background.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px">
+        <div class="breadcrumbs">
+          <a href="#">Dashboard</a>
+          <span class="sep">/</span>
+          <a href="#">Sows</a>
+          <span class="sep">/</span>
+          <span class="current">Gilt #247</span>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Breadcrumbs</h4>
+        <div class="token">12px | dim links | / separator | bold current</div>
+        <p>Path-based navigation. Links in dim color with purple hover. Forward slash separators. Current page in full text weight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DATA DISPLAY ═══════════ -->
+<section id="data">
+  <h2>Data Display</h2>
+  <p class="desc">Components for rendering herd metrics, progress tracking, and tabular data. All designed for data-dense agricultural contexts where legibility is paramount.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card" style="grid-column:span 2">
+      <div class="comp-preview" style="gap:16px;padding:20px;flex-wrap:wrap">
+        <div class="card-stat" style="flex:1;min-width:140px">
+          <div class="stat-label">Active Sows</div>
+          <div class="stat-value" style="color:var(--sow)">247</div>
+          <div class="stat-trend up">+18 this quarter</div>
+        </div>
+        <div class="card-stat" style="flex:1;min-width:140px">
+          <div class="stat-label">Litters YTD</div>
+          <div class="stat-value" style="color:var(--cyan-400)">89</div>
+          <div class="stat-trend up">+12 vs last year</div>
+        </div>
+        <div class="card-stat" style="flex:1;min-width:140px">
+          <div class="stat-label">Avg Litter Size</div>
+          <div class="stat-value" style="color:var(--purple-300)">11.4</div>
+          <div class="stat-trend up">+0.8</div>
+        </div>
+        <div class="card-stat" style="flex:1;min-width:140px">
+          <div class="stat-label">Bred Rate</div>
+          <div class="stat-value">92%</div>
+          <div class="stat-trend down">-3%</div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Stat Card Row</h4>
+        <div class="token">Flexible grid | colored values | directional trends</div>
+        <p>Stat cards adapt to grid. Values can be colored by domain type for instant recognition. Trend arrows use success/error semantic colors.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:20px;align-items:stretch">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px"><span style="color:var(--dim)">Gestation Progress</span><span style="color:var(--purple-300)">72%</span></div>
+          <div class="progress-bar"><div class="progress-fill progress-purple" style="width:72%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px"><span style="color:var(--dim)">Breeding Success</span><span style="color:var(--magenta-300)">92%</span></div>
+          <div class="progress-bar"><div class="progress-fill progress-magenta" style="width:92%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px"><span style="color:var(--dim)">Vaccination</span><span style="color:var(--cyan-400)">65%</span></div>
+          <div class="progress-bar"><div class="progress-fill progress-cyan" style="width:65%"></div></div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Progress Bars</h4>
+        <div class="token">6px height | 3px radius | gradient fills</div>
+        <p>Horizontal progress with label and percentage. Three color variants: purple (primary), magenta (vitality), cyan (data). Gradient fill for depth.</p>
+      </div>
+    </div>
+
+    <div class="comp-card" style="grid-column:span 2">
+      <div class="comp-preview" style="padding:0;align-items:stretch">
+        <table class="data-table" style="width:100%">
+          <thead>
+            <tr><th>Tag</th><th>Breed</th><th>Status</th><th>Sire</th><th>Due Date</th><th>Litter Size</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;color:var(--text)">SOW-0247</td>
+              <td>Hampshire</td>
+              <td><span class="badge badge-magenta">Bred</span></td>
+              <td>BOAR-012</td>
+              <td>Jun 2, 2026</td>
+              <td style="font-family:'SF Mono',monospace;color:var(--cyan-400)">--</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;color:var(--text)">SOW-0183</td>
+              <td>Duroc</td>
+              <td><span class="badge badge-cyan">Weaned</span></td>
+              <td>BOAR-008</td>
+              <td>--</td>
+              <td style="font-family:'SF Mono',monospace;color:var(--cyan-400)">12</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;color:var(--text)">SOW-0312</td>
+              <td>Yorkshire</td>
+              <td><span class="badge badge-warning">Due Soon</span></td>
+              <td>BOAR-015</td>
+              <td>Feb 18, 2026</td>
+              <td style="font-family:'SF Mono',monospace;color:var(--cyan-400)">--</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;color:var(--text)">SOW-0091</td>
+              <td>Berkshire</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td>--</td>
+              <td>--</td>
+              <td style="font-family:'SF Mono',monospace;color:var(--cyan-400)">--</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="comp-info">
+        <h4>Data Table</h4>
+        <div class="token">12px body | 9px uppercase headers | badge-integrated status</div>
+        <p>Dense tabular data with hover row highlighting (purple 4% bg). Status column uses inline badges. Monospace for numerical data. Header uses uppercase caption style.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DOMAIN-SPECIFIC ═══════════ -->
+<section id="domain">
+  <h2>Domain-Specific Components</h2>
+  <p class="desc">Specialized components for the swine industry: breeder cards, pig nodes, herd indicators, and pedigree tree elements. These map directly to Charlotte's FACT substrate &mdash; sows as NODEs, lineage as EDGEs, health as SIGNALs.</p>
+
+  <h3>Entity Nodes</h3>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px">
+        <div class="node node-sow">SOW</div>
+        <div class="node node-boar">BOAR</div>
+        <div class="node node-litter">LTTR</div>
+        <div class="node node-farm">FARM</div>
+        <div class="node node-show">SHOW</div>
+        <div class="node node-breed">BREED</div>
+      </div>
+      <div class="comp-info">
+        <h4>Domain Node Colors</h4>
+        <div class="token">SOW=#F000D2 | BOAR=#7200CB | LITTER=#21D6C6 | FARM=#4CAF50 | SHOW=#FF9800</div>
+        <p>Each entity type auto-assigns a domain color. Circle shape, 4-char uppercase label. Magenta for sows (vitality), purple for boars (genetics), cyan for litters (data).</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:16px">
+        <div class="node node-sow node-sm" style="opacity:0.6">SOW</div>
+        <div class="node node-sow">SOW</div>
+        <div class="node node-sow node-lg focused">SOW</div>
+        <div class="node node-sow selected">SOW</div>
+      </div>
+      <div class="comp-info">
+        <h4>Node States &amp; Sizes</h4>
+        <div class="token">sm: 36px | default: 56px | lg: 72px | focused: glow | selected: outline</div>
+        <p>Size scales with importance. Focused = purple glow shadow. Selected = purple outline ring at 3px offset. Dim at 60% opacity for background nodes.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Breeder Card</h3>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px">
+        <div class="breeder-card">
+          <div class="b-header">
+            <div class="b-avatar">ET</div>
+            <div>
+              <div class="b-name">Eric Trogdon</div>
+              <div class="b-farm">Trogdon Farms &middot; Elon, NC</div>
+            </div>
+          </div>
+          <div class="b-stats">
+            <div class="b-stat">
+              <div class="b-stat-val" style="color:var(--sow)">89</div>
+              <div class="b-stat-label">Head</div>
+            </div>
+            <div class="b-stat">
+              <div class="b-stat-val" style="color:var(--cyan-400)">34</div>
+              <div class="b-stat-label">Litters</div>
+            </div>
+            <div class="b-stat">
+              <div class="b-stat-val" style="color:var(--purple-300)">11.2</div>
+              <div class="b-stat-label">Avg Size</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Breeder Card</h4>
+        <div class="token">48px gradient avatar | name + farm | 3-column stat grid</div>
+        <p>Breeder identity card. Purple-to-magenta gradient avatar with initials. Farm location below name. Stats grid at bottom for key metrics. Used in breeder directory and collaboration views.</p>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:20px">
+        <div class="pig-card">
+          <div class="p-top">
+            <div class="node node-sow" style="width:40px;height:40px;font-size:9px">SOW</div>
+            <div>
+              <div class="p-tag">Gilt #247</div>
+              <div class="p-breed">Hampshire &middot; 285 lbs</div>
+            </div>
+          </div>
+          <div class="p-metrics">
+            <span class="badge badge-magenta">Bred</span>
+            <span class="badge badge-purple">Day 82</span>
+            <span class="badge badge-cyan">11.4 avg</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Pig Node Card</h4>
+        <div class="token">40px node + tag + breed + metric badges</div>
+        <p>Individual pig identity card. Domain-colored node avatar. Tag ID as primary identifier. Breed + weight below. Metric badges for current status. Used in sow list and profile views.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Herd Status Indicators</h3>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:12px;flex-wrap:wrap;padding:20px">
+      <div class="herd-indicator"><div class="herd-dot open"></div><span style="color:var(--warning);font-weight:600">Open</span><span style="color:var(--dim);margin-left:4px">42 head</span></div>
+      <div class="herd-indicator"><div class="herd-dot bred"></div><span style="color:var(--magenta-400);font-weight:600">Bred</span><span style="color:var(--dim);margin-left:4px">118 head</span></div>
+      <div class="herd-indicator"><div class="herd-dot gestating"></div><span style="color:var(--purple-300);font-weight:600">Gestating</span><span style="color:var(--dim);margin-left:4px">67 head</span></div>
+      <div class="herd-indicator"><div class="herd-dot nursing"></div><span style="color:var(--cyan-400);font-weight:600">Nursing</span><span style="color:var(--dim);margin-left:4px">20 head</span></div>
+    </div>
+    <div class="comp-info">
+      <h4>Herd Status Indicators</h4>
+      <div class="token">8px dot | status color | count suffix</div>
+      <p>Color-coded herd status markers. Open = warning (amber), Bred = magenta, Gestating = purple, Nursing = cyan. Used in herd overview dashboards and filter bars.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Pedigree Tree Elements</h3>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="flex-direction:column;gap:16px;padding:24px;align-items:center">
+      <!-- Pedigree tree visualization -->
+      <div style="display:flex;align-items:center;gap:0">
+        <!-- Sire side -->
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+          <div class="pedigree-node"><div class="ped-dot" style="background:var(--boar)"></div>GS-Sire <span style="color:var(--dim);font-size:9px">BOAR-003</span></div>
+          <div class="pedigree-node"><div class="ped-dot" style="background:var(--sow)"></div>GD-Sire <span style="color:var(--dim);font-size:9px">SOW-041</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+          <div style="width:2px;height:12px;background:var(--border)"></div>
+          <div style="width:32px;height:2px;background:var(--border)"></div>
+          <div style="width:2px;height:12px;background:var(--border)"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-right:16px">
+          <div class="pedigree-node" style="border-color:var(--purple-500)"><div class="ped-dot" style="background:var(--boar)"></div><strong>Sire</strong> <span style="color:var(--dim);font-size:9px">BOAR-012</span></div>
+        </div>
+        <div class="pedigree-connector"></div>
+        <!-- Subject -->
+        <div style="text-align:center;margin:0 16px">
+          <div class="node node-sow" style="margin:0 auto 6px;box-shadow:0 0 20px rgba(240,0,210,0.3)">SOW</div>
+          <div style="font-size:11px;font-weight:700">Gilt #247</div>
+          <div style="font-size:9px;color:var(--dim)">Hampshire</div>
+        </div>
+        <div class="pedigree-connector"></div>
+        <!-- Dam side -->
+        <div style="display:flex;flex-direction:column;gap:8px;margin-left:16px">
+          <div class="pedigree-node" style="border-color:var(--magenta-500)"><div class="ped-dot" style="background:var(--sow)"></div><strong>Dam</strong> <span style="color:var(--dim);font-size:9px">SOW-089</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+          <div style="width:2px;height:12px;background:var(--border)"></div>
+          <div style="width:32px;height:2px;background:var(--border)"></div>
+          <div style="width:2px;height:12px;background:var(--border)"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+          <div class="pedigree-node"><div class="ped-dot" style="background:var(--boar)"></div>GS-Dam <span style="color:var(--dim);font-size:9px">BOAR-007</span></div>
+          <div class="pedigree-node"><div class="ped-dot" style="background:var(--sow)"></div>GD-Dam <span style="color:var(--dim);font-size:9px">SOW-022</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Pedigree Tree</h4>
+      <div class="token">pedigree-node + ped-dot + connectors | sire=purple border | dam=magenta border</div>
+      <p>Three-generation pedigree layout. Subject at center with glow. Sire/Dam nodes highlighted with colored borders. Grandparents connected via vertical/horizontal line segments. Dot color indicates sex (boar=purple, sow=magenta).</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Edge Types (Relationship Lines)</h3>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="padding:24px">
+      <svg width="100%" height="120" viewBox="0 0 640 120">
+        <line x1="40" y1="30" x2="200" y2="30" stroke="#7200CB" stroke-width="2"/>
+        <text x="120" y="52" fill="#AA66E0" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter">SIRED_BY (solid)</text>
+        <line x1="230" y1="30" x2="390" y2="30" stroke="#F000D2" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="310" y="52" fill="#F666E4" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter">DAM_OF (dashed)</text>
+        <line x1="420" y1="30" x2="580" y2="30" stroke="#21D6C6" stroke-width="2"/>
+        <text x="500" y="52" fill="#4DDED1" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter">LITTER_OF (solid)</text>
+        <line x1="40" y1="85" x2="200" y2="85" stroke="#4CAF50" stroke-width="2"/>
+        <text x="120" y="107" fill="#4CAF50" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter">LOCATED_AT (solid)</text>
+        <line x1="230" y1="85" x2="390" y2="85" stroke="#FF9800" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="310" y="107" fill="#FF9800" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter">SHOWN_AT (dashed)</text>
+        <line x1="420" y1="85" x2="580" y2="85" stroke="#8D8B90" stroke-width="1"/>
+        <text x="500" y="107" fill="#8D8B90" font-size="9" font-weight="600" text-anchor="middle" font-family="Inter">MEMBER_OF (thin)</text>
+      </svg>
+    </div>
+    <div class="comp-info">
+      <h4>Edge Types</h4>
+      <table class="data-table" style="margin-top:8px">
+        <thead><tr><th>Type</th><th>Color</th><th>Style</th><th>Width</th><th>Domain Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>SIRED_BY</td><td><span class="swatch-inline" style="background:#7200CB"></span>#7200CB</td><td>Solid</td><td>2px</td><td>Sire-offspring genetic link</td></tr>
+          <tr><td>DAM_OF</td><td><span class="swatch-inline" style="background:#F000D2"></span>#F000D2</td><td>Dashed</td><td>2px</td><td>Dam-offspring maternal link</td></tr>
+          <tr><td>LITTER_OF</td><td><span class="swatch-inline" style="background:#21D6C6"></span>#21D6C6</td><td>Solid</td><td>2px</td><td>Pig-to-litter grouping</td></tr>
+          <tr><td>LOCATED_AT</td><td><span class="swatch-inline" style="background:#4CAF50"></span>#4CAF50</td><td>Solid</td><td>2px</td><td>Entity-to-farm assignment</td></tr>
+          <tr><td>SHOWN_AT</td><td><span class="swatch-inline" style="background:#FF9800"></span>#FF9800</td><td>Dashed</td><td>2px</td><td>Exhibition participation</td></tr>
+          <tr><td>MEMBER_OF</td><td><span class="swatch-inline" style="background:#8D8B90"></span>#8D8B90</td><td>Solid</td><td>1px</td><td>Breed registry membership</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Signal Types</h3>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="gap:20px;flex-wrap:wrap;padding:24px">
+      <div style="text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--purple-500);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin:0 auto">285</div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">WEIGHT</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:24px;height:24px;border-radius:50%;background:var(--success);margin:4px auto"></div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">BOOL (T)</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid var(--dim);margin:4px auto"></div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">BOOL (F)</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:40px;height:40px;position:relative;margin:0 auto">
+          <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--border)" stroke-width="3"/><circle cx="20" cy="20" r="16" fill="none" stroke="var(--success)" stroke-width="3" stroke-dasharray="92 100" stroke-linecap="round" transform="rotate(-90 20 20)"/></svg>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">92</div>
+        </div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">SCORE</div>
+      </div>
+      <div style="text-align:center">
+        <span class="badge badge-magenta" style="margin:4px 0">Bred</span>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">STATUS</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:4px;height:32px;background:var(--magenta-500);border-radius:2px;margin:0 auto"></div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">EVENT</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:rgba(33,214,198,0.2);color:var(--success);margin:0 auto">$</div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">SALE +</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:rgba(206,79,81,0.2);color:var(--error);margin:0 auto">$</div>
+        <div style="font-size:8px;color:var(--dim);margin-top:4px">COST -</div>
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Signal Value Types</h4>
+      <div class="token">WEIGHT: circle 24-40px | BOOLEAN: filled/hollow | SCORE: arc gauge | STATUS: badge | EVENT: impulse | CURRENCY: circle</div>
+      <p>Signals are observed data points on the Charlotte substrate. Each value type has a distinct visual encoding. Weight scales with value (16-40px). Score uses a donut gauge. Events are vertical impulse lines.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px">Protocol Checkpoints (Breeding Timeline)</h3>
+  <div class="comp-card" style="max-width:720px">
+    <div class="comp-preview" style="flex-direction:column;gap:8px;padding:20px;align-items:flex-start;width:100%">
+      <div style="font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1px">Gestation Protocol</div>
+      <div style="font-size:14px;font-weight:700">Gilt #247 &mdash; Hampshire</div>
+      <div style="width:100%;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden;margin:4px 0">
+        <div style="width:72%;height:100%;background:linear-gradient(90deg,var(--purple-500),var(--magenta-500));border-radius:4px"></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;width:100%;padding:4px 0;overflow-x:auto">
+        <div style="text-align:center;min-width:70px">
+          <div style="font-size:9px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:4px">Day 1</div>
+          <div style="width:28px;height:28px;margin:0 auto"><svg viewBox="0 0 32 32"><path d="M16 2 L30 16 L16 30 L2 16 Z" fill="rgba(33,214,198,0.3)" stroke="var(--success)" stroke-width="2"/><polyline points="10,16 14,20 22,12" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div style="font-size:9px;color:var(--success);margin-top:4px">Breed</div>
+        </div>
+        <div style="width:32px;height:2px;background:rgba(33,214,198,0.3);flex-shrink:0"></div>
+        <div style="text-align:center;min-width:70px">
+          <div style="font-size:9px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:4px">Day 21</div>
+          <div style="width:28px;height:28px;margin:0 auto"><svg viewBox="0 0 32 32"><path d="M16 2 L30 16 L16 30 L2 16 Z" fill="rgba(33,214,198,0.3)" stroke="var(--success)" stroke-width="2"/><polyline points="10,16 14,20 22,12" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div style="font-size:9px;color:var(--success);margin-top:4px">Confirm</div>
+        </div>
+        <div style="width:32px;height:2px;background:rgba(33,214,198,0.3);flex-shrink:0"></div>
+        <div style="text-align:center;min-width:70px">
+          <div style="font-size:9px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:4px">Day 82</div>
+          <div style="width:28px;height:28px;margin:0 auto"><svg viewBox="0 0 32 32"><path d="M16 2 L30 16 L16 30 L2 16 Z" fill="rgba(114,0,203,0.3)" stroke="var(--purple-300)" stroke-width="2"/></svg></div>
+          <div style="font-size:9px;color:var(--purple-300);font-weight:600;margin-top:4px">NOW</div>
+        </div>
+        <div style="width:32px;height:2px;background:var(--border);flex-shrink:0"></div>
+        <div style="text-align:center;min-width:70px">
+          <div style="font-size:9px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:4px">Day 110</div>
+          <div style="width:28px;height:28px;margin:0 auto"><svg viewBox="0 0 32 32"><path d="M16 2 L30 16 L16 30 L2 16 Z" fill="none" stroke="var(--dim)" stroke-width="2"/></svg></div>
+          <div style="font-size:9px;color:var(--dim);margin-top:4px">Move</div>
+        </div>
+        <div style="width:32px;height:2px;background:var(--border);flex-shrink:0"></div>
+        <div style="text-align:center;min-width:70px">
+          <div style="font-size:9px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:4px">Day 114</div>
+          <div style="width:28px;height:28px;margin:0 auto"><svg viewBox="0 0 32 32"><path d="M16 2 L30 16 L16 30 L2 16 Z" fill="none" stroke="var(--dim)" stroke-width="2"/></svg></div>
+          <div style="font-size:9px;color:var(--dim);margin-top:4px">Farrow</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;width:100%;font-size:9px;color:var(--dim);margin-top:4px">
+        <span>Feb 8, 2026</span>
+        <span style="color:var(--success);font-weight:600">On track for Jun 2</span>
+      </div>
+    </div>
+    <div class="comp-info">
+      <h4>Gestation Protocol Timeline</h4>
+      <div class="token">Diamond checkpoints | gradient progress bar | NOW marker</div>
+      <p>Breeding lifecycle as a protocol. Progress bar gradient from purple to magenta. Completed checkpoints in cyan with checkmark. Current position highlighted. Pending checkpoints in dim grey. Forecast status at bottom.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CSS CUSTOM PROPERTIES ═══════════ -->
+<section>
+  <h2>CSS Custom Properties Reference</h2>
+  <p class="desc">Complete listing of all design tokens as CSS custom properties. Copy this block into any Sounder-themed component.</p>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;font-family:'SF Mono','Cascadia Code',monospace;font-size:11px;line-height:2;color:var(--purple-300);overflow-x:auto">
+<pre style="margin:0"><span style="color:var(--dim)">/* Purple (Primary) */</span>
+--purple-500: #7200CB;  --purple-600: #5B00A2;  --purple-700: #44007A;
+
+<span style="color:var(--dim)">/* Magenta (Secondary) */</span>
+--magenta-500: #F000D2; --magenta-600: #C000A8; --magenta-700: #90007E;
+
+<span style="color:var(--dim)">/* Cyan (Accent) */</span>
+--cyan-500: #21D6C6;    --cyan-600: #1AAB9E;    --cyan-700: #148077;
+
+<span style="color:var(--dim)">/* Red (Alert) */</span>
+--red-500: #CE4F51;     --red-600: #A53F41;     --red-700: #7C2F31;
+
+<span style="color:var(--dim)">/* Surfaces */</span>
+--bg: #0e0b12;  --surface: #1a1520;  --surface2: #231e2a;
+--border: #2a2530;  --border-light: #3a3540;
+
+<span style="color:var(--dim)">/* Text */</span>
+--text: #ede8f2;  --text-secondary: #b8b0c4;  --dim: #7a7580;
+
+<span style="color:var(--dim)">/* Semantic */</span>
+--success: #21D6C6;  --warning: #F0A000;  --error: #CE4F51;  --info: #AA66E0;
+
+<span style="color:var(--dim)">/* Domain */</span>
+--sow: #F000D2;  --boar: #7200CB;  --litter: #21D6C6;
+--farm: #4CAF50;  --show: #FF9800;  --breed: #8E33D5;
+
+<span style="color:var(--dim)">/* Spacing (4px base) */</span>
+--sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;  --sp-4: 16px;
+--sp-6: 24px; --sp-8: 32px; --sp-12: 48px; --sp-16: 64px; --sp-24: 96px;
+
+<span style="color:var(--dim)">/* Radius */</span>
+--radius-sm: 8px;  --radius-md: 14px;  --radius-lg: 22px;  --radius-xl: 32px;
+
+<span style="color:var(--dim)">/* Glass */</span>
+--glass-blur: 24px;  --glass-fill: 0.12;  --glass-border: 0.18;</pre>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
