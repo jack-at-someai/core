@@ -6,7 +6,7 @@
 
 Serengeti Enterprises is the highest-level operating syndicate under **Richard Enterprises** — a private equity holding company and strategic advisory firm that operates like Wayne Enterprises with both Bruce Wayne and Tony Stark under the same roof.
 
-- **Jim Richard** (Chairman/CEO) brings the Wayne side: capital networks spanning KKR, Carlyle, BlackRock; operational scale across 80,000+ employees in 16+ industrial brands; and a mentorship-first philosophy
+- **Jim Richard** (Chairman/CEO) brings the Wayne side: capital networks spanning KKR, Carlyle, BlackRock; operational scale across ~1,200 employees across 16 industrial brands; and a mentorship-first philosophy
 - **Jack Richard** (R&D/Technology) brings the Stark side: Charlotte, a graph-native knowledge infrastructure; 37 research instruments across biomimicry, swarm intelligence, and signal processing; and a Northwestern AI pedigree (Schank → Hammond → Richard)
 - **Joseph Richard** (Operations) keeps the machine running: engineering management, internal accounting, operational discipline
 
@@ -42,7 +42,7 @@ RICHARD ENTERPRISES LLC (Jim Richard, Chairman/CEO)
 ├── THE INDUSTRIAL SERVICE GROUP (ISG)
 │   ├── 16+ portfolio brands
 │   ├── ServiceIQ (Charlotte commercial deployment)
-│   ├── 80,000+ employees
+│   ├── ~1,200 employees
 │   └── Validates Charlotte at massive scale
 │
 ├── SERENGETI ENTERPRISES, LLC (Delaware)

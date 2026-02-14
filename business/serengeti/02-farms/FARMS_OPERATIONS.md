@@ -73,7 +73,7 @@ Every Farms app is built on the **Charlotte substrate** rather than from scratch
 ### Proof of Concept
 Charlotte is already live at two scales:
 - **Sounder** (swine): 1,174 nodes, 10,045 signals, 1,919 edges — Trogdon Showpigs test deployment
-- **ServiceIQ** (industrial): Phase 1 deployed across ISG's 16+ brands and 80,000 employees
+- **ServiceIQ** (industrial): Phase 1 deployed across ISG's 16+ brands and ~1,200 employees
 
 ## Current Portfolio
 

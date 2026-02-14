@@ -7,7 +7,7 @@ RICHARD ENTERPRISES LLC (Parent — Jim Richard, Chairman/CEO)
 │
 ├── THE INDUSTRIAL SERVICE GROUP (ISG)
 │   │   16+ portfolio brands
-│   │   80,000+ employees
+│   │   ~1,200 employees
 │   │   ServiceIQ = Charlotte commercial deployment
 │   │
 │   └── [16+ subsidiary brands — industrial service & distribution]

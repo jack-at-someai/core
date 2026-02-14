@@ -60,7 +60,7 @@ As involved as you want. At minimum, you'll receive monthly updates. Founders ar
 Charlotte is a proprietary graph-native knowledge infrastructure built by Jack Richard (Northwestern MSAI). It provides the shared data substrate for every Farms portfolio app. Instead of building bespoke backends for each app, we deploy new verticals on Charlotte in 2–3 months instead of 6+. It's already live with Sounder (1,174 nodes, 10K+ signals) and deployed at ISG (80K employees, 16+ brands).
 
 ### Q: What is the relationship between Serengeti and ISG?
-ISG (Industrial Service Group) is a sister holding under Richard Enterprises with 80,000+ employees and 16+ brands. ServiceIQ, ISG's Charlotte-powered predictive distribution system, validates the Charlotte substrate at commercial scale. The $1B valuation in the Farms pipeline references an ISG-adjacent opportunity. They are separate entities with arm's-length transactions.
+ISG (Industrial Service Group) is a sister holding under Richard Enterprises with ~1,200 employees across 16 brands. ServiceIQ, ISG's Charlotte-powered predictive distribution system, validates the Charlotte substrate at commercial scale. The $1B valuation in the Farms pipeline references an ISG-adjacent opportunity. They are separate entities with arm's-length transactions.
 
 ### Q: Who built this?
 The Richard family. Jim Richard (Chairman/CEO) — decades of PE and industrial operations. Jack Richard — AI infrastructure (Charlotte, SomeAI Research Lab, 37 research projects). Joseph Richard — operations and engineering management. Advised by Kris Hammond (Northwestern MSAI Director, co-founder of Narrative Science).

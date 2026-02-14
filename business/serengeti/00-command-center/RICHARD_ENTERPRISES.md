@@ -17,7 +17,7 @@ Richard Enterprises has both. Under one roof.
 
 ### Jim Richard — Chairman & CEO ("Thomas Wayne meets Howard Stark")
 - Founder of Richard Enterprises
-- Career spanning executive leadership across 80,000+ employees
+- Career spanning executive leadership across ~1,200 employees
 - Expertise: onsite evaluation, strategy development, organic growth analysis, add-on acquisitions
 - Network includes: The Carlyle Group, Edgewater Funds, JZ Partners, KKR, BlackRock, AEA Investors
 - Role: Capital allocation, CEO coordination, acquisition strategy, Serengeti vision
@@ -51,7 +51,7 @@ RICHARD ENTERPRISES LLC
 ├── THE INDUSTRIAL SERVICE GROUP (ISG)
 │   ├── 16+ portfolio brands
 │   ├── ServiceIQ (Charlotte commercial deployment)
-│   ├── 80,000+ employees, ~40 at holding company
+│   ├── ~1,200 employees, ~40 at holding company
 │   └── Focus: industrial service, distribution, field operations
 │
 ├── SERENGETI ENTERPRISES, LLC
@@ -84,7 +84,7 @@ What makes this empire different from a typical PE shop or tech startup is the *
 
 ### The Wayne Side (Jim's Legacy)
 - **Capital networks**: KKR, Carlyle, BlackRock-tier relationships
-- **Operational scale**: 80,000 employees across 16+ industrial brands
+- **Operational scale**: ~1,200 employees across 16 industrial brands
 - **Mentorship ethic**: The entire Serengeti Prides and Founders model is built on "pay it forward"
 - **Institutional patience**: Long-term hold strategy, not pump-and-dump
 - **Community building**: Individual investors over institutional capital — deliberate choice

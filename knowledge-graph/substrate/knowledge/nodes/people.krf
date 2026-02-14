@@ -25,7 +25,7 @@
 
 (isa person_jim_richard PersonEntity)
 (hasLabel person_jim_richard "Jim Richard")
-(hasDescription person_jim_richard "Leading the predictive distribution transformation via ServiceIQ, powered by Charlotte. Managing 16+ brands across industrial service, distribution, and field operations. 80,000+ employees across the portfolio with ~40 at the holding company coordinating operations.")
+(hasDescription person_jim_richard "Leading the predictive distribution transformation via ServiceIQ, powered by Charlotte. Managing 16+ brands across industrial service, distribution, and field operations. ~1,200 employees across the portfolio with ~40 at the holding company coordinating operations.")
 (hasRole person_jim_richard "Father | Chairman, Richard Enterprises | CEO, Industrial Service Group")
 
 (isa person_joseph_richard PersonEntity)

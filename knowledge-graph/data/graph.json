@@ -25112,7 +25112,7 @@
       "id": "bizdoc_serengeti_industrial_service_group",
       "type": "document",
       "label": "Industrial Service Group (ISG) / ServiceIQ — Portfolio Profile",
-      "desc": "The Industrial Service Group is Jim Richard's existing portfolio of 16+ industrial brands spanning service, distribution, and field operations. This is not a startup — it's a **proven, operating business** with 80,000+ employees generating real revenue.",
+      "desc": "The Industrial Service Group is Jim Richard's existing portfolio of 16+ industrial brands spanning service, distribution, and field operations. This is not a startup — it's a **proven, operating business** with ~1,200 employees generating real revenue.",
       "category": "business",
       "parent_business": "serengeti",
       "source_path": "C:/dev/business/serengeti/02-farms/portfolio/INDUSTRIAL_SERVICE_GROUP.md"
@@ -25202,7 +25202,7 @@
       "id": "bizdoc_serengeti_entity_structure",
       "type": "document",
       "label": "Serengeti Enterprises — Legal & Corporate Structure",
-      "desc": "``` RICHARD ENTERPRISES LLC (Parent — Jim Richard, Chairman/CEO) │ ├── THE INDUSTRIAL SERVICE GROUP (ISG) │   │   16+ portfolio brands │   │   80,000+ employees │   │   ServiceIQ = Charlotte commercial deployment │   │ │   └── [16+ subsidiary brands — industrial service & distribution] │ ├── SERENGETI ENTERPRISES, LLC │   │   Jurisdiction: Delaware │   │   Type: Limited Liability Company │   │   Role: Holding company for all Serengeti divisions │   │ │   ├── Serengeti Farms #1, LLC │   │   │   Jurisdiction: Delaware │   │   │   Role: First investment tranche vehicle │   │   │   Units: 10–12 ownership positions │   │   │ │   │   ├── Nightlife Platform, LLC (TBD name) │   │   │       Delaware LLC │   │   │       Investor ownership: 5% per Farms #1 member │   │   │       Projected valuation: $110M │   │   │ │   │   └── Portfolio Company B (TBD), LLC │   │           Delaware LLC │   │           Investor ownership: 5% per Farms #1 member │   │ │   ├── Serengeti Farms #2, LLC (Future) │   │       Next tranche — structure mirrors Farms #1 │   │ │   └── Sounder Enterprises, LLC │           Delaware LLC │           Projected valuation: $5–10M+ │           Special: 2% ownership issued to each Farms #1 investor │           First Charlotte vertical (live with test data) │ └── SOMEAI RESEARCH LAB (Jack Richard) Charlotte IP ownership 37 research instruments Biomimicry / Nature-Inspired R&D ```",
+      "desc": "``` RICHARD ENTERPRISES LLC (Parent — Jim Richard, Chairman/CEO) │ ├── THE INDUSTRIAL SERVICE GROUP (ISG) │   │   16+ portfolio brands │   │   ~1,200 employees │   │   ServiceIQ = Charlotte commercial deployment │   │ │   └── [16+ subsidiary brands — industrial service & distribution] │ ├── SERENGETI ENTERPRISES, LLC │   │   Jurisdiction: Delaware │   │   Type: Limited Liability Company │   │   Role: Holding company for all Serengeti divisions │   │ │   ├── Serengeti Farms #1, LLC │   │   │   Jurisdiction: Delaware │   │   │   Role: First investment tranche vehicle │   │   │   Units: 10–12 ownership positions │   │   │ │   │   ├── Nightlife Platform, LLC (TBD name) │   │   │       Delaware LLC │   │   │       Investor ownership: 5% per Farms #1 member │   │   │       Projected valuation: $110M │   │   │ │   │   └── Portfolio Company B (TBD), LLC │   │           Delaware LLC │   │           Investor ownership: 5% per Farms #1 member │   │ │   ├── Serengeti Farms #2, LLC (Future) │   │       Next tranche — structure mirrors Farms #1 │   │ │   └── Sounder Enterprises, LLC │           Delaware LLC │           Projected valuation: $5–10M+ │           Special: 2% ownership issued to each Farms #1 investor │           First Charlotte vertical (live with test data) │ └── SOMEAI RESEARCH LAB (Jack Richard) Charlotte IP ownership 37 research instruments Biomimicry / Nature-Inspired R&D ```",
       "category": "business",
       "parent_business": "serengeti",
       "source_path": "C:/dev/business/serengeti/07-legal-corporate/ENTITY_STRUCTURE.md"
@@ -26408,7 +26408,7 @@
       "id": "person_jim_richard",
       "type": "person",
       "label": "Jim Richard",
-      "desc": "Leading the predictive distribution transformation via ServiceIQ, powered by Charlotte. Managing 16+ brands across industrial service, distribution, and field operations. 80,000+ employees across the portfolio with ~40 at the holding company coordinating operations.",
+      "desc": "Leading the predictive distribution transformation via ServiceIQ, powered by Charlotte. Managing 16+ brands across industrial service, distribution, and field operations. ~1,200 employees across the portfolio with ~40 at the holding company coordinating operations.",
       "role": "Father | Chairman, Richard Enterprises | CEO, Industrial Service Group",
       "source_path": "C:/dev/people/jim.md"
     },

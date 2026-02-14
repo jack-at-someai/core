@@ -28,7 +28,7 @@
 ### The Industrial Service Group (2019 – Present)
 **CEO**
 
-Leading the predictive distribution transformation via ServiceIQ, powered by Charlotte. Managing 16+ brands across industrial service, distribution, and field operations. 80,000+ employees across the portfolio with ~40 at the holding company coordinating operations.
+Leading the predictive distribution transformation via ServiceIQ, powered by Charlotte. Managing 16+ brands across industrial service, distribution, and field operations. ~1,200 employees across the portfolio with ~40 at the holding company coordinating operations.
 
 ### Richard Enterprises LLC (2016 – Present)
 **Chairman**

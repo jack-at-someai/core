@@ -53,7 +53,7 @@ body{background:#0a1628;color:#e2e8f0;font-family:'Segoe UI',system-ui,-apple-sy
 #search input{width:220px;height:36px;border-radius:8px;border:1px solid rgba(226,165,50,0.2);background:rgba(15,29,54,0.9);color:#e2e8f0;padding:0 12px;font-size:12px;outline:none;backdrop-filter:blur(8px)}
 #search input::placeholder{color:#4a5568}
 #search input:focus{border-color:#e2a532}
-#substrate-badge{position:fixed;bottom:20px;right:20px;background:rgba(15,29,54,0.92);border:1px solid rgba(226,165,50,0.2);border-radius:8px;padding:12px 16px;z-index:50;backdrop-filter:blur(10px);max-width:260px}
+#substrate-badge{position:fixed;bottom:280px;right:20px;background:rgba(15,29,54,0.92);border:1px solid rgba(226,165,50,0.2);border-radius:8px;padding:12px 16px;z-index:50;backdrop-filter:blur(10px);max-width:260px}
 #substrate-badge h3{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#e2a532;margin-bottom:8px}
 #substrate-badge .prim{display:flex;gap:6px;flex-wrap:wrap}
 #substrate-badge .prim span{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:1px}
@@ -65,6 +65,32 @@ body{background:#0a1628;color:#e2e8f0;font-family:'Segoe UI',system-ui,-apple-sy
 .node-circle{cursor:pointer;transition:r 0.2s}
 .node-label{fill:#94a3b8;font-size:10px;pointer-events:none;text-anchor:middle;dominant-baseline:central;font-family:'Segoe UI',system-ui,sans-serif}
 .node-label.highlighted{fill:#f7fafc;font-size:11px;font-weight:600}
+#roadmap{position:fixed;bottom:0;left:0;right:0;background:rgba(10,22,40,0.97);border-top:1px solid rgba(226,165,50,0.3);z-index:80;backdrop-filter:blur(12px);transition:transform 0.3s ease}
+#roadmap.collapsed{transform:translateY(calc(100% - 36px))}
+#roadmap .rm-toggle{position:absolute;top:-36px;right:20px;width:140px;height:36px;background:rgba(10,22,40,0.97);border:1px solid rgba(226,165,50,0.3);border-bottom:none;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:center;color:#e2a532;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(12px)}
+#roadmap .rm-toggle:hover{background:rgba(226,165,50,0.15)}
+#roadmap .rm-inner{padding:0 0 4px}
+#roadmap .rm-header{display:flex;align-items:center;justify-content:space-between;padding:12px 24px 8px}
+#roadmap .rm-header h3{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#e2a532;margin:0}
+#roadmap .rm-header .rm-contract{font-size:11px;color:#94a3b8}
+#roadmap .rm-header .rm-contract strong{color:#e2a532}
+#roadmap .rm-timeline{display:flex;padding:0 24px 8px;gap:4px}
+#roadmap .rm-phase{position:relative;min-width:0}
+#roadmap .rm-phase .rm-bar{height:6px;border-radius:3px}
+#roadmap .rm-phase .rm-label{font-size:9px;color:#f7fafc;font-weight:600;margin-bottom:3px;letter-spacing:1px;text-transform:uppercase}
+#roadmap .rm-phase .rm-weeks{font-size:8px;color:#64748b;margin-top:3px}
+#roadmap .rm-phase .rm-dates{font-size:8px;color:#94a3b8;margin-top:1px}
+#roadmap .rm-milestones{display:flex;padding:2px 24px 8px;gap:14px;flex-wrap:wrap}
+#roadmap .rm-ms{display:flex;align-items:center;gap:5px;font-size:9px;color:#cbd5e1}
+#roadmap .rm-ms .rm-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+#roadmap .rm-modules{display:flex;gap:8px;padding:0 24px 12px}
+#roadmap .rm-mod{flex:1;background:rgba(226,165,50,0.06);border:1px solid rgba(226,165,50,0.15);border-radius:6px;padding:8px 12px}
+#roadmap .rm-mod h4{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#e2a532;margin:0 0 5px}
+#roadmap .rm-mod ul{list-style:none;padding:0;margin:0}
+#roadmap .rm-mod li{font-size:9px;color:#cbd5e1;padding:1px 0 1px 10px;position:relative}
+#roadmap .rm-mod li::before{content:'';position:absolute;left:0;top:6px;width:3px;height:3px;border-radius:50%;background:#e2a532}
+.node-circle.charlotte-node{filter:url(#glow);animation:charlottePulse 3s ease-in-out infinite}
+@keyframes charlottePulse{0%,100%{stroke-opacity:0.4}50%{stroke-opacity:0.9}}
 </style>
 </head>
 <body>
@@ -124,6 +150,11 @@ body{background:#0a1628;color:#e2e8f0;font-family:'Segoe UI',system-ui,-apple-sy
   <div class="item" data-cat="LOCATION"><span class="dot" style="background:#14b8a6"></span>Location (NODE)</div>
   <div class="item" data-cat="VENDOR"><span class="dot" style="background:#a855f7"></span>Vendor (NODE)</div>
   <div class="item" data-cat="TECHNOLOGY"><span class="dot" style="background:#06b6d4"></span>Technology (NODE)</div>
+  <div style="border-top:1px solid rgba(226,165,50,0.15);margin:8px 0 6px;padding-top:8px">
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#22d3ee;margin-bottom:6px;font-weight:600">Charlotte Integration</div>
+    <div class="item" style="cursor:default"><span class="dot" style="background:#22d3ee"></span><span style="color:#22d3ee;font-weight:500">Bi-directional (EDGE)</span></div>
+    <div class="item" style="cursor:default"><span class="dot" style="background:#67e8f9"></span><span style="color:#67e8f9;font-weight:500">Read-only (EDGE)</span></div>
+  </div>
 </div>
 
 <div id="substrate-badge">
@@ -140,6 +171,87 @@ body{background:#0a1628;color:#e2e8f0;font-family:'Segoe UI',system-ui,-apple-sy
 <div id="sidebar">
   <button class="close" onclick="closeSidebar()">&times;</button>
   <div id="sidebar-content"></div>
+</div>
+
+<div id="roadmap">
+  <div class="rm-toggle" onclick="toggleRoadmap()">&#9650; Roadmap</div>
+  <div class="rm-inner">
+    <div class="rm-header">
+      <h3>Charlotte&#8482; Implementation Roadmap &#8212; Compressor Vertical</h3>
+      <div class="rm-contract">Year 1: <strong>$480,000</strong> ($40K/mo) &middot; Start: <strong>March 1, 2026</strong> &middot; ROI Target: <strong>5-7x</strong></div>
+    </div>
+    <div class="rm-timeline">
+      <div class="rm-phase" style="flex:2">
+        <div class="rm-label">Engage</div>
+        <div class="rm-bar" style="background:linear-gradient(90deg,#e2a532,#f0c850)"></div>
+        <div class="rm-weeks">Wk 1-2</div>
+        <div class="rm-dates">Mar 2026</div>
+      </div>
+      <div class="rm-phase" style="flex:14">
+        <div class="rm-label">Drive</div>
+        <div class="rm-bar" style="background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+        <div class="rm-weeks">Wk 3-16</div>
+        <div class="rm-dates">Mar &#8212; Jun 2026</div>
+      </div>
+      <div class="rm-phase" style="flex:24">
+        <div class="rm-label">Enable</div>
+        <div class="rm-bar" style="background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div>
+        <div class="rm-weeks">Wk 17-40</div>
+        <div class="rm-dates">Jul &#8212; Nov 2026</div>
+      </div>
+      <div class="rm-phase" style="flex:12">
+        <div class="rm-label">Stabilize</div>
+        <div class="rm-bar" style="background:linear-gradient(90deg,#14b8a6,#2dd4bf)"></div>
+        <div class="rm-weeks">Wk 41-52</div>
+        <div class="rm-dates">Dec '26 &#8212; Feb '27</div>
+      </div>
+    </div>
+    <div class="rm-milestones">
+      <div class="rm-ms"><span class="rm-dot" style="background:#e2a532"></span>Mar 1 &#8212; Contract Start</div>
+      <div class="rm-ms"><span class="rm-dot" style="background:#3b82f6"></span>Apr (Wk 8) &#8212; Pricing Intelligence Live</div>
+      <div class="rm-ms"><span class="rm-dot" style="background:#8b5cf6"></span>Jun (Wk 16) &#8212; Reactivation Campaigns Launch</div>
+      <div class="rm-ms"><span class="rm-dot" style="background:#8b5cf6"></span>Aug (Wk 24) &#8212; Full Platform Operational</div>
+      <div class="rm-ms"><span class="rm-dot" style="background:#14b8a6"></span>Feb 28 '27 &#8212; ROI Case Study Complete</div>
+    </div>
+    <div class="rm-modules">
+      <div class="rm-mod">
+        <h4>Pricing Intelligence</h4>
+        <ul>
+          <li>Competitive tracking &#8212; top 100 SKUs</li>
+          <li>Margin opportunity identification</li>
+          <li>Price optimization recommendations</li>
+          <li>Automated competitive alerts</li>
+        </ul>
+      </div>
+      <div class="rm-mod">
+        <h4>Customer Reactivation</h4>
+        <ul>
+          <li>Segmentation by purchase recency</li>
+          <li>60/90/180-day dormancy automation</li>
+          <li>Product affinity analysis</li>
+          <li>Campaign effectiveness tracking</li>
+        </ul>
+      </div>
+      <div class="rm-mod">
+        <h4>Charlotte Write-Back</h4>
+        <ul>
+          <li>NetSuite &#8212; triggers, pricing recs</li>
+          <li>BigCommerce &#8212; dynamic pricing</li>
+          <li>HubSpot &#8212; campaigns, lead scoring</li>
+          <li>200-300 bps margin improvement</li>
+        </ul>
+      </div>
+      <div class="rm-mod">
+        <h4>Contract Terms</h4>
+        <ul>
+          <li>ISG owns 100% of all data</li>
+          <li>Full export anytime (JSON/CSV/GraphML)</li>
+          <li>Service guarantee on deliverables</li>
+          <li>Year 2: $310K/yr (platform + support)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="tooltip" id="tooltip" style="display:none"></div>
@@ -247,10 +359,14 @@ const nodes = [
 
   // Technology
   {id:'TECH:NS',label:'NetSuite ERP',cat:'TECHNOLOGY',desc:'Unified ERP platform across all ISG entities. Financial consolidation, inventory, procurement.'},
-  {id:'TECH:CRM',label:'CRM Platform',cat:'TECHNOLOGY',desc:'Customer relationship management. Unified customer view across subsidiaries.'},
-  {id:'TECH:ECOM',label:'eCommerce',cat:'TECHNOLOGY',desc:'Live across 3 brands. Driving inbound quote growth. Key distribution accelerator.'},
+  {id:'TECH:HUBSPOT',label:'HubSpot CRM',cat:'TECHNOLOGY',desc:'HubSpot CRM — bi-directional Charlotte™ integration. Reactivation campaign lists, segment definitions, lead scoring. Unified customer view across ISG subsidiaries.'},
+  {id:'TECH:BIGCOM',label:'BigCommerce',cat:'TECHNOLOGY',desc:'BigCommerce e-commerce — bi-directional Charlotte™ integration. Dynamic pricing updates, personalized product recommendations. Live across 3 brands.'},
   {id:'TECH:DW',label:'Data Warehouse',cat:'TECHNOLOGY',desc:'Centralized analytics and reporting across all ISG entities and verticals.'},
-  {id:'TECH:M365',label:'Microsoft 365',cat:'TECHNOLOGY',desc:'832+ licenses across plans. ~$17K/mo. Business Premium, Standard, E3, E5. Teams, SharePoint, Exchange.'}
+  {id:'TECH:M365',label:'Microsoft 365',cat:'TECHNOLOGY',desc:'832+ licenses across plans. ~$17K/mo. Business Premium, Standard, E3, E5. Teams, SharePoint, Exchange.'},
+  {id:'TECH:AMAZON',label:'Amazon Seller Central',cat:'TECHNOLOGY',desc:'Amazon sales channel integration. Order data, product listings, competitive pricing intelligence.'},
+  {id:'TECH:PAYLOCITY',label:'Paylocity',cat:'TECHNOLOGY',desc:'Paylocity HR/Payroll — read-only Charlotte™ integration. Employee roster, timekeeping, cost allocation.'},
+  {id:'TECH:CHARLOTTE',label:'Charlotte\u2122',cat:'TECHNOLOGY',desc:'Charlotte™ knowledge graph platform — SomeAI\'s universal substrate. Bi-directional integration with NetSuite, BigCommerce, HubSpot. Pricing intelligence + customer reactivation engine. $480K Year 1 implementation.',size:22},
+  {id:'ORG:SOMEAI',label:'SomeAI',cat:'COMPANY',desc:'SomeAI — Charlotte™ technology partner. $480K/yr implementation contract. Deploys Charlotte substrate, competitive intelligence infrastructure, and reactivation protocols.',size:18}
 ];
 
 // ── EDGES ──────────────────────────────────────────
@@ -356,18 +472,33 @@ const edges = [
 
   // ISG → Technology
   {source:'ORG:ISG',target:'TECH:NS',rel:'USES'},
-  {source:'ORG:ISG',target:'TECH:CRM',rel:'USES'},
-  {source:'ORG:ISG',target:'TECH:ECOM',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:HUBSPOT',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:BIGCOM',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:AMAZON',rel:'USES'},
+  {source:'ORG:ISG',target:'TECH:PAYLOCITY',rel:'USES'},
   {source:'ORG:ISG',target:'TECH:DW',rel:'USES'},
   {source:'ORG:ISG',target:'TECH:M365',rel:'USES'},
 
   // Distribution officer
-  {source:'PER:MATT_B',target:'TECH:ECOM',rel:'OVERSEES'},
+  {source:'PER:MATT_B',target:'TECH:BIGCOM',rel:'OVERSEES'},
   {source:'PER:DAVED_K',target:'TECH:NS',rel:'OVERSEES'},
   {source:'PER:DAVED_K',target:'TECH:M365',rel:'OVERSEES'},
   {source:'PER:BART_M',target:'VER:VA',rel:'DRIVES_SALES'},
   {source:'PER:BART_M',target:'VER:PUMP',rel:'DRIVES_SALES'},
   {source:'PER:JEFF_P',target:'VER:COMP',rel:'SCOUTS_M&A'},
+
+  // Charlotte™ Integration Architecture
+  {source:'ORG:SOMEAI',target:'TECH:CHARLOTTE',rel:'DEPLOYS'},
+  {source:'ORG:SOMEAI',target:'ORG:ISG',rel:'CONTRACTED_BY'},
+  {source:'TECH:CHARLOTTE',target:'TECH:NS',rel:'INTEGRATES'},
+  {source:'TECH:CHARLOTTE',target:'TECH:HUBSPOT',rel:'INTEGRATES'},
+  {source:'TECH:CHARLOTTE',target:'TECH:BIGCOM',rel:'INTEGRATES'},
+  {source:'TECH:CHARLOTTE',target:'TECH:AMAZON',rel:'INTEGRATES'},
+  {source:'TECH:CHARLOTTE',target:'TECH:PAYLOCITY',rel:'READS_FROM'},
+  {source:'TECH:CHARLOTTE',target:'VER:COMP',rel:'TARGETS'},
+  {source:'PER:DAVED_K',target:'TECH:CHARLOTTE',rel:'OVERSEES'},
+  {source:'PER:CHRIS_S',target:'TECH:CHARLOTTE',rel:'STAKEHOLDER'},
+  {source:'PER:DAVID_S',target:'TECH:CHARLOTTE',rel:'STAKEHOLDER'},
 ];
 
 // ── METRICS (Charlotte P1=type, P2=label) ──────────
@@ -393,6 +524,23 @@ const metrics = {
     {id:'M:m365_premium',label:'Business Premium',type:'NUMBER',unit:'licenses',value:300},
     {id:'M:m365_std',label:'Business Standard',type:'NUMBER',unit:'licenses',value:342},
     {id:'M:m365_e3',label:'E3 Licenses',type:'NUMBER',unit:'licenses',value:190},
+  ],
+  'TECH:CHARLOTTE': [
+    {id:'M:ch_year1',label:'Year 1 Contract',type:'NUMBER',unit:'$K',value:480},
+    {id:'M:ch_monthly',label:'Monthly Rate',type:'NUMBER',unit:'$/mo',value:40000},
+    {id:'M:ch_waived',label:'Waived Fees',type:'NUMBER',unit:'$K',value:375},
+    {id:'M:ch_total_value',label:'Total Value Delivered',type:'NUMBER',unit:'$K',value:855},
+    {id:'M:ch_year2',label:'Year 2 Platform',type:'NUMBER',unit:'$K/yr',value:250},
+    {id:'M:ch_roi_target',label:'ROI Target',type:'NUMBER',unit:'x',value:'5-7'},
+    {id:'M:ch_margin_target',label:'Margin Improvement',type:'NUMBER',unit:'bps',value:'200-300'},
+    {id:'M:ch_reactivation',label:'Dormant Recovery Target',type:'NUMBER',unit:'%',value:'15-20'},
+    {id:'M:ch_skus',label:'Competitive SKU Tracking',type:'NUMBER',unit:'SKUs',value:100},
+    {id:'M:ch_ttfv',label:'Time to First Value',type:'NUMBER',unit:'days',value:60},
+  ],
+  'ORG:SOMEAI': [
+    {id:'M:sa_revenue',label:'ISG Contract Revenue',type:'NUMBER',unit:'$K',value:480},
+    {id:'M:sa_duration',label:'Implementation Duration',type:'NUMBER',unit:'months',value:12},
+    {id:'M:sa_start',label:'Start Date',type:'TEXT',unit:'',value:'Mar 1, 2026'},
   ]
 };
 
@@ -403,6 +551,18 @@ const protocols = {
     {id:'PR:revenue_546',title:'2026 Revenue Target: $546M',desc:'Organic growth + distribution expansion + 1-2 acquisitions'},
     {id:'PR:exit_q2',title:'Q2 2026 Strategic Exit',desc:'Target close 5/31/2026. Valuation multiple 16.5x-19.0x. MOIC 3.5x-3.8x. In-market Feb 2026.'},
     {id:'PR:1b_path',title:'Path to $1B Revenue',desc:'Organic growth + cross-vertical expansion + disciplined M&A. Adjacent verticals: process equipment, electrical, NDT, instrumentation.'},
+  ],
+  'TECH:CHARLOTTE': [
+    {id:'PR:ch_engage',title:'Phase 1: Engage (Weeks 1-2, Mar 2026)',desc:'Kickoff meeting, NetSuite data audit, define KPIs, Charlotte substrate initialization. First 2 weeks.'},
+    {id:'PR:ch_drive',title:'Phase 2: Drive (Weeks 3-16, Mar-Jun 2026)',desc:'Historical data integration (3+ years), knowledge graph construction, competitive scraping infrastructure, protocol development. First value delivery Week 8 — competitive pricing data.'},
+    {id:'PR:ch_enable',title:'Phase 3: Enable (Weeks 17-40, Jul-Nov 2026)',desc:'Launch reactivation campaigns (Week 16), pricing intelligence live, team training (3 sessions: technical, operational, executive), monthly executive reviews. Full platform operational by Week 24.'},
+    {id:'PR:ch_stabilize',title:'Phase 4: Stabilize (Weeks 41-52, Dec 2026-Feb 2027)',desc:'Performance optimization, knowledge transfer to ISG team, documented ROI case study with quantified results, Year 2 planning.'},
+    {id:'PR:ch_expand',title:'Expansion: Pinnacle & ASE',desc:'Additional implementation costs TBD. Charlotte platform cost remains fixed for Compressor Vertical. Expansion to other ISG verticals planned.'},
+  ],
+  'ORG:SOMEAI': [
+    {id:'PR:sa_contract',title:'Implementation Contract: $480K Year 1',desc:'$40,000/month x 12 months (March 1, 2026 - February 28, 2027). Net 15 payment terms. $375K in waived fees (requirements phase + Year 1 platform subscription).'},
+    {id:'PR:sa_year2',title:'Year 2 Ongoing: $310K/yr',desc:'Charlotte platform subscription $250K/yr + optional SomeAI professional support $60K/yr. Begins March 2027.'},
+    {id:'PR:sa_guarantee',title:'Service Guarantee',desc:'If deliverables not achieved due to SomeAI performance, SomeAI continues at no extra cost until complete. ISG owns 100% of all data — full export anytime.'},
   ]
 };
 
@@ -431,7 +591,9 @@ const relColors = {
   'LEADS_VERTICAL':'#8b5cf6','OPERATES_IN':'#8b5cf6','PROVIDES':'#f97316',
   'SERVES':'#ef4444','LOCATED_IN':'#14b8a6','SUPPLIES':'#a855f7',
   'USES':'#06b6d4','OVERSEES':'#06b6d4','WORKS_AT':'#e2a532',
-  'DRIVES_SALES':'#e2a532','SCOUTS_M&A':'#e2a532'
+  'DRIVES_SALES':'#e2a532','SCOUTS_M&A':'#e2a532',
+  'DEPLOYS':'#22d3ee','CONTRACTED_BY':'#22d3ee','INTEGRATES':'#22d3ee',
+  'READS_FROM':'#67e8f9','TARGETS':'#22d3ee','STAKEHOLDER':'#e2a532'
 };
 
 Object.entries(relColors).forEach(([rel,color]) => {
@@ -611,8 +773,10 @@ function openSidebar(d){
     html+=`<div class="section"><h4>Metrics &amp; Signals</h4>`;
     m.forEach(met=>{
       const fv = met.unit==='$M'?`$${met.value}M`:met.unit==='%'?`${met.value}%`:
-        met.unit==='$/mo'?`$${met.value.toLocaleString()}/mo`:
-        met.unit?`${met.value.toLocaleString()} ${met.unit}`:met.value.toLocaleString();
+        met.unit==='$/mo'?`$${Number(met.value).toLocaleString()}/mo`:
+        met.unit==='$K'?`$${met.value}K`:met.unit==='$K/yr'?`$${met.value}K/yr`:
+        met.unit?`${typeof met.value==='number'?met.value.toLocaleString():met.value} ${met.unit}`:
+        typeof met.value==='number'?met.value.toLocaleString():met.value;
       html+=`<div class="metric-row"><span class="ml">${met.label}</span><span class="mv">${fv}</span></div>`;
     });
     html+=`<div class="fact" style="margin-top:10px">
@@ -735,6 +899,24 @@ document.querySelectorAll('#legend .item').forEach(item=>{
     setTimeout(resetHighlight,4000);
   });
 });
+
+// Charlotte node pulse effect
+node.select('circle').each(function(d){
+  if(d.id==='TECH:CHARLOTTE'){
+    d3.select(this).classed('charlotte-node',true)
+      .attr('stroke','#22d3ee').attr('stroke-width',3).attr('stroke-opacity',0.6);
+  }
+  if(d.id==='ORG:SOMEAI'){
+    d3.select(this).attr('stroke','#22d3ee').attr('stroke-width',2).attr('stroke-opacity',0.5);
+  }
+});
+
+// Roadmap panel toggle
+function toggleRoadmap(){
+  const rm=document.getElementById('roadmap');
+  rm.classList.toggle('collapsed');
+  rm.querySelector('.rm-toggle').innerHTML=rm.classList.contains('collapsed')?'&#9650; Roadmap':'&#9660; Roadmap';
+}
 
 // Warm start — pin ISG to center
 const isg=nodes.find(n=>n.id==='ORG:ISG');
