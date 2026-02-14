@@ -53,3 +53,12 @@ business/sounder/substrate/output/
 
 # State silhouette PNGs (generated, large)
 /[A-Z][A-Z].png
+
+# Flutter / Dart build artifacts
+**/.dart_tool/
+**/build/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+
+# Nested git repos (managed separately)
+sounder-gh/
