@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Charlotte Nervous System — Build Plan & Shopping List</title>
+<style>
+  @page { size: letter; margin: 0.75in; }
+  @media print {
+    body { font-size: 10pt; }
+    .page-break { page-break-before: always; }
+    table { page-break-inside: avoid; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', -apple-system, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.5;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75in;
+    background: #fff;
+  }
+  h1 {
+    font-size: 24pt;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #0a0a0a;
+  }
+  h1 span { font-weight: 300; color: #666; }
+  .subtitle {
+    font-size: 11pt;
+    color: #888;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 16px;
+  }
+  h2 {
+    font-size: 16pt;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    color: #0a0a0a;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 4px;
+  }
+  h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  p, li { font-size: 10.5pt; margin-bottom: 6px; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px 0;
+    font-size: 10pt;
+  }
+  th {
+    background: #f5f5f5;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+  }
+  th.right, td.right { text-align: right; }
+  td {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+  }
+  tr:nth-child(even) { background: #fafafa; }
+  .category-header td {
+    background: #2a2a2a;
+    color: #fff;
+    font-weight: 600;
+    font-size: 10.5pt;
+    padding: 8px 10px;
+  }
+  .subtotal td {
+    background: #f0f0f0;
+    font-weight: 600;
+    border-top: 2px solid #ccc;
+  }
+  .grand-total td {
+    background: #1a1a1a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 11pt;
+    padding: 10px;
+  }
+  .diagram {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9pt;
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 12px 0;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .callout {
+    background: #f0f7ff;
+    border-left: 3px solid #3b82f6;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout-warn {
+    background: #fff8f0;
+    border-left: 3px solid #f59e0b;
+  }
+  .callout strong { display: block; margin-bottom: 4px; }
+  .phase-grid {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0;
+    margin: 12px 0;
+  }
+  .phase-num {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #3b82f6;
+    padding-top: 2px;
+  }
+  .phase-content { padding: 4px 0 16px 8px; border-left: 2px solid #e0e0e0; padding-left: 16px; }
+  .phase-content h3 { margin-top: 0; color: #1a1a1a; }
+  .tag {
+    display: inline-block;
+    font-size: 8pt;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 4px;
+  }
+  .tag-local { background: #dcfce7; color: #166534; }
+  .tag-cloud { background: #dbeafe; color: #1e40af; }
+  .tag-hw { background: #fef3c7; color: #92400e; }
+  .footer {
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 9pt;
+    color: #999;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Charlotte Nervous System <span>Build Plan</span></h1>
+<div class="subtitle">
+  SomeAI &mdash; Research Lab Infrastructure &mdash; February 2026<br>
+  Raspberry Pi 5 Hub + Pi Zero 2W Satellites + Claude API Integration
+</div>
+
+<!-- ================================================================ -->
+<h2>1. The Vision</h2>
+
+<p>Charlotte is an operating system for operations, built on first-order logic. The <strong>nervous system</strong> is Charlotte's physical embodiment: a network of sensors that observe environments and individuals in real time, process signals locally at the edge, and escalate to Claude (via API) only when general intelligence is required.</p>
+
+<div class="callout">
+<strong>The Demo</strong>
+A single boardroom instrumented with 4 satellite sensor nodes. Someone gives a presentation. Charlotte watches the room — tracking facial expressions, engagement levels, environmental comfort, and audience attention in real time. Afterward, Charlotte produces a full trace: when the audience lost interest, who was confused at which slide, when energy peaked, and what environmental factors contributed. Every claim traces through the dive line: PROTOCOL &rarr; SIGNAL &rarr; METRIC &rarr; sensor reading &rarr; specific camera frame.
+</div>
+
+<h3>What This Demonstrates</h3>
+<table>
+  <tr>
+    <th style="width:30%">Charlotte Capability</th>
+    <th>How the Demo Shows It</th>
+  </tr>
+  <tr>
+    <td><strong>Ontological Layer</strong><br>(NODE + EDGE)</td>
+    <td>The room is a NODE. Each person is a NODE. Seats, sensors, and the presentation are NODEs. Relationships (seatedAt, observedBy, presentedTo) are EDGEs. The knowledge graph is live.</td>
+  </tr>
+  <tr>
+    <td><strong>Valuation Layer</strong><br>(METRIC &rarr; SIGNAL &rarr; PROTOCOL)</td>
+    <td>Facial Action Units are METRICs. Emotion patterns (confusion, engagement, boredom) are SIGNALs fired when thresholds are crossed. Recommendations ("pause for questions") are PROTOCOLs. The pipeline runs locally on the Pi 5.</td>
+  </tr>
+  <tr>
+    <td><strong>The Dive Line</strong></td>
+    <td>"Person at Seat 3 showed confusion" traces back to: AU4 brow-lower = 0.73 (threshold 0.6), measured from MediaPipe face mesh, from SAT-A camera frame #84231 at 14:32:07.442. No confidence scores. No "the model thinks." Just measurements, thresholds, rules.</td>
+  </tr>
+  <tr>
+    <td><strong>Observer Model</strong></td>
+    <td>Charlotte observes two layers simultaneously: the room as environment (temperature, CO2, light, occupancy) and each individual person (facial expression, gaze, engagement). Two microtheories, same observer.</td>
+  </tr>
+  <tr>
+    <td><strong>Temporal Spine</strong></td>
+    <td>All metrics are time-stamped. The engagement timeline correlates with presentation slides. Charlotte can zoom from the full session view to a specific 3-second window where someone furrowed their brow.</td>
+  </tr>
+  <tr>
+    <td><strong>Spatial Spine</strong></td>
+    <td>Room-scale coordinates. Each sensor has a known position and field of view. Triangulation from opposing sensors resolves each person's 3D position. The room is a mapped environment.</td>
+  </tr>
+  <tr>
+    <td><strong>Claude Integration</strong></td>
+    <td>Voice interaction ("Hey Charlotte, summarize the meeting") goes through wake word &rarr; Whisper STT &rarr; Claude API &rarr; Piper TTS. Claude has access to the full session's metric/signal/protocol data. It reasons over Charlotte's graph, not raw video.</td>
+  </tr>
+  <tr>
+    <td><strong>Edge vs. Cloud Split</strong></td>
+    <td>90% of processing is local (sensor ingestion, face mesh, AU computation, signal detection, protocol firing). Only complex reasoning goes to Claude. The nervous system runs without internet. The brain is optional.</td>
+  </tr>
+</table>
+
+<!-- ================================================================ -->
+<div class="page-break"></div>
+<h2>2. Architecture</h2>
+
+<div class="diagram">                         RESEARCH LAB / BOARDROOM
+   ┌──────────────────────────────────────────────────────────────┐
+   │                                                              │
+   │  SAT-A (high, 2.1m)                    SAT-B (low, 0.8m)   │
+   │  ┌──────────────┐                      ┌──────────────┐     │
+   │  │ Pi Zero 2W   │                      │ Pi Zero 2W   │     │
+   │  │ Camera 120°  │                      │ Camera 120°  │     │
+   │  │ I2S Mic      │    ┌──────────┐      │ I2S Mic      │     │
+   │  │ BME680       │    │  TABLE   │      │ BME680       │     │
+   │  │ mmWave       │    │          │      │ mmWave       │     │
+   │  └──────┬───────┘    │  People  │      └──────┬───────┘     │
+   │         │ WiFi       │          │      WiFi   │             │
+   │         │            └──────────┘             │             │
+   │         │                                     │             │
+   │         └──────────────┬──────────────────────┘             │
+   │                        │                                     │
+   │                ┌───────▼────────┐                           │
+   │                │  Raspberry Pi 5 │ ◄── Hub / Central Brain  │
+   │                │  (8GB RAM)      │                           │
+   │                │                 │                           │
+   │                │  Wake Word      │ ◄── OpenWakeWord (local) │
+   │                │  STT            │ ◄── Whisper.cpp (local)  │
+   │                │  TTS            │ ◄── Piper TTS (local)    │
+   │                │  Face Mesh      │ ◄── MediaPipe (local)    │
+   │                │  Signal Engine  │ ◄── METRIC→SIGNAL→PROTO  │
+   │                │  MQTT Broker    │ ◄── Mosquitto (local)    │
+   │                │  SQLite         │ ◄── Time-series storage  │
+   │                │  Dashboard      │ ◄── Web UI (local)       │
+   │                └────────┬────────┘                           │
+   │                         │                                    │
+   └─────────────────────────┼────────────────────────────────────┘
+                             │ API (only when needed)
+                             ▼
+                    ┌────────────────┐
+                    │ Anthropic Cloud │
+                    │ Claude API      │
+                    │ (reasoning)     │
+                    └────────────────┘</div>
+
+<div class="callout">
+<strong>The Oculus Principle</strong>
+Minimum 2 sensors at varying altitudes on opposite sides of the room. High-mounted sensors (2.1m) angle down to capture faces, head tilt, and posture. Low-mounted sensors (0.8m) angle up to capture expressions from below, hand gestures, and laptop screens. Diagonal pairs ensure every seat is visible from 2+ angles. No blind spots.
+</div>
+
+<!-- ================================================================ -->
+<div class="page-break"></div>
+<h2>3. Shopping List</h2>
+
+<p>Everything needed to build the full system. You already have: 2x Pi Zero 2W, 1x Zeus car kit (Arduino).</p>
+
+<table>
+  <tr>
+    <th style="width:5%">#</th>
+    <th style="width:35%">Item</th>
+    <th style="width:30%">Search Term / Product</th>
+    <th style="width:10%" class="right">Qty</th>
+    <th style="width:10%" class="right">Est. $</th>
+    <th style="width:10%" class="right">Total</th>
+  </tr>
+
+  <!-- Pi 5 Hub -->
+  <tr class="category-header"><td colspan="6">A. Raspberry Pi 5 Hub</td></tr>
+  <tr>
+    <td>A1</td>
+    <td>Raspberry Pi 5 (8GB RAM)</td>
+    <td>"Raspberry Pi 5 8GB" (SC1112) &mdash; or CanaKit Starter Kit PRO ~$140 bundles A1-A4</td>
+    <td class="right">1</td>
+    <td class="right">$125</td>
+    <td class="right">$125</td>
+  </tr>
+  <tr>
+    <td>A2</td>
+    <td>Pi 5 Official USB-C Power Supply (27W)</td>
+    <td>"Raspberry Pi 27W USB-C Power Supply" (XYGStudy listing on Amazon)</td>
+    <td class="right">1</td>
+    <td class="right">$14</td>
+    <td class="right">$14</td>
+  </tr>
+  <tr>
+    <td>A3</td>
+    <td>Pi 5 Official Case + Active Cooler</td>
+    <td>"Official Raspberry Pi 5 Case" + "Official Raspberry Pi Active Cooler" (PWM fan + heatsink)</td>
+    <td class="right">1</td>
+    <td class="right">$15</td>
+    <td class="right">$15</td>
+  </tr>
+  <tr>
+    <td>A4</td>
+    <td>microSD Card 128GB (A2 rated)</td>
+    <td>"SanDisk Extreme 128GB A2 microSD" (SDSQXAH-128G) &mdash; A2 enables command queuing on Pi 5</td>
+    <td class="right">1</td>
+    <td class="right">$18</td>
+    <td class="right">$18</td>
+  </tr>
+  <tr>
+    <td>A5</td>
+    <td>USB Conference Speakerphone (mic + speaker)</td>
+    <td>"Anker PowerConf S3" (USB-C, 6 mics, echo cancellation) ~$55 &mdash; or "EMEET M0 Plus" ~$45 budget</td>
+    <td class="right">1</td>
+    <td class="right">$55</td>
+    <td class="right">$55</td>
+  </tr>
+  <tr>
+    <td>A6</td>
+    <td>Ethernet Cable (Cat6, 6ft)</td>
+    <td>"Cat6 Ethernet Cable 6ft"</td>
+    <td class="right">1</td>
+    <td class="right">$5</td>
+    <td class="right">$5</td>
+  </tr>
+  <tr class="subtotal">
+    <td colspan="5">Hub Subtotal</td>
+    <td class="right">$232</td>
+  </tr>
+
+  <!-- Satellites -->
+  <tr class="category-header"><td colspan="6">B. Pi Zero 2W Satellites (you have the boards &mdash; need accessories + sensors)</td></tr>
+  <tr>
+    <td>B1</td>
+    <td>GPIO Hammer Headers (no soldering)</td>
+    <td>"Pimoroni GPIO Hammer Header Full Kit" (includes jig) &mdash; reuse jig for 2nd board</td>
+    <td class="right">2</td>
+    <td class="right">$9</td>
+    <td class="right">$18</td>
+  </tr>
+  <tr>
+    <td>B2</td>
+    <td>microSD Card 64GB (A2 rated)</td>
+    <td>"Samsung EVO Select 64GB" or "SanDisk Extreme 32GB A2" &mdash; 64GB only ~$2 more</td>
+    <td class="right">2</td>
+    <td class="right">$9</td>
+    <td class="right">$18</td>
+  </tr>
+  <tr>
+    <td>B3</td>
+    <td>Micro-USB Power Supply 5V/2.5A</td>
+    <td>"CanaKit 5V 2.5A Raspberry Pi Power Supply" (UL listed, 5ft cable)</td>
+    <td class="right">2</td>
+    <td class="right">$11</td>
+    <td class="right">$22</td>
+  </tr>
+  <tr>
+    <td>B4</td>
+    <td>Pi Camera Module 3 Wide (120&deg; FOV)</td>
+    <td>"Raspberry Pi Camera Module 3 Wide" (12MP IMX708, autofocus, HDR)</td>
+    <td class="right">2</td>
+    <td class="right">$40</td>
+    <td class="right">$80</td>
+  </tr>
+  <tr>
+    <td>B5</td>
+    <td>Pi Zero Camera Cable (15-pin &rarr; 22-pin CSI adapter)</td>
+    <td>"MakerFocus Pi Zero Camera Cable 15cm" (2-pack, covers both units)</td>
+    <td class="right">1 pack</td>
+    <td class="right">$7</td>
+    <td class="right">$7</td>
+  </tr>
+  <tr>
+    <td>B6</td>
+    <td>INMP441 I2S MEMS Microphone Breakout</td>
+    <td>"AITRIP INMP441 I2S MEMS Microphone 3-Pack" (includes Dupont cables, gives 1 spare)</td>
+    <td class="right">1 pack</td>
+    <td class="right">$11</td>
+    <td class="right">$11</td>
+  </tr>
+  <tr>
+    <td>B7</td>
+    <td>BME680 Environmental Sensor Breakout</td>
+    <td>"Adafruit BME680 STEMMA QT" (#3660) &mdash; I2C, 3.3V/5V, solderless STEMMA QT option</td>
+    <td class="right">2</td>
+    <td class="right">$20</td>
+    <td class="right">$40</td>
+  </tr>
+  <tr>
+    <td>B8</td>
+    <td>HLK-LD2410B mmWave Presence Sensor</td>
+    <td>"JESSINIE HLK-LD2410B-P" (with pins + Dupont cable, Bluetooth for config via phone app)</td>
+    <td class="right">2</td>
+    <td class="right">$8</td>
+    <td class="right">$16</td>
+  </tr>
+  <tr>
+    <td>B9</td>
+    <td>Pi Zero Official Case (3 lids: plain, GPIO, camera)</td>
+    <td>"Raspberry Pi Zero Official Case" (MakerFocus on Amazon, includes camera cable)</td>
+    <td class="right">2</td>
+    <td class="right">$9</td>
+    <td class="right">$18</td>
+  </tr>
+  <tr>
+    <td>B10</td>
+    <td>USB OTG Adapter (Micro-B to USB-A)</td>
+    <td>"Micro USB OTG Adapter" (2-pack)</td>
+    <td class="right">1 pack</td>
+    <td class="right">$5</td>
+    <td class="right">$5</td>
+  </tr>
+  <tr class="subtotal">
+    <td colspan="5">Satellite Subtotal (2 units)</td>
+    <td class="right">$235</td>
+  </tr>
+
+  <!-- Wiring & Prototyping -->
+  <tr class="category-header"><td colspan="6">C. Wiring, Prototyping &amp; Tools</td></tr>
+  <tr>
+    <td>C1</td>
+    <td>Jumper Wire Kit (M-F, F-F, M-M, 120pcs)</td>
+    <td>"ELEGOO 120pcs Multicolored Dupont Wire Kit" (40 of each type, covers everything)</td>
+    <td class="right">1</td>
+    <td class="right">$7</td>
+    <td class="right">$7</td>
+  </tr>
+  <tr>
+    <td>C2</td>
+    <td>Mini Breadboards (170-tie point)</td>
+    <td>"LampVPath 170-Point Mini Breadboard 12-Pack" (self-adhesive, mount inside cases)</td>
+    <td class="right">1 pack</td>
+    <td class="right">$7</td>
+    <td class="right">$7</td>
+  </tr>
+  <tr>
+    <td>C3</td>
+    <td>Soldering Iron (USB-C powered, portable)</td>
+    <td>"FNIRSI HS-01 65W USB-C Soldering Iron" (OLED display, 6 tips) &mdash; needs 65W+ USB-C PD charger</td>
+    <td class="right">1</td>
+    <td class="right">$30</td>
+    <td class="right">$30</td>
+  </tr>
+  <tr>
+    <td>C4</td>
+    <td>Solder Wire (63/37, 0.8mm, rosin core)</td>
+    <td>"63/37 Rosin Core Solder 0.8mm" + "Brass Tip Cleaner"</td>
+    <td class="right">1</td>
+    <td class="right">$12</td>
+    <td class="right">$12</td>
+  </tr>
+  <tr>
+    <td>C5</td>
+    <td>Helping Hands (magnetic base, 4 flexible arms)</td>
+    <td>"Magnetic Helping Hands Soldering Station 4 Arms" (heavy steel base, gooseneck clips)</td>
+    <td class="right">1</td>
+    <td class="right">$18</td>
+    <td class="right">$18</td>
+  </tr>
+  <tr>
+    <td>C6</td>
+    <td>Digital Multimeter</td>
+    <td>"AstroAI Digital Multimeter 2000 Counts" (~$13) or "KAIWEETS KM200P Smart Mode" (~$18)</td>
+    <td class="right">1</td>
+    <td class="right">$14</td>
+    <td class="right">$14</td>
+  </tr>
+  <tr>
+    <td>C7</td>
+    <td>GPIO Header Pins (2x20, 2.54mm) spare</td>
+    <td>"DIKAVS 2x20 Pin Header for Pi Zero GPIO" (pack of 10)</td>
+    <td class="right">1 pack</td>
+    <td class="right">$6</td>
+    <td class="right">$6</td>
+  </tr>
+  <tr>
+    <td>C8</td>
+    <td>Heat Shrink Tubing Assortment</td>
+    <td>"MILAPEAK 650pcs Heat Shrink Tubing Kit" (8 sizes, UL rated, with case)</td>
+    <td class="right">1</td>
+    <td class="right">$8</td>
+    <td class="right">$8</td>
+  </tr>
+  <tr>
+    <td>C9</td>
+    <td>Wire Strippers (fine gauge for electronics)</td>
+    <td>"DOWELL 22-30 AWG Wire Stripper" (thin gauge, perfect for Pi wiring)</td>
+    <td class="right">1</td>
+    <td class="right">$8</td>
+    <td class="right">$8</td>
+  </tr>
+  <tr class="subtotal">
+    <td colspan="5">Tools Subtotal</td>
+    <td class="right">$110</td>
+  </tr>
+
+  <!-- Mounting -->
+  <tr class="category-header"><td colspan="6">D. Mounting &amp; Installation</td></tr>
+  <tr>
+    <td>D1</td>
+    <td>Wall Mount Brackets (adhesive or screw)</td>
+    <td>"Small Camera Wall Mount Bracket Adjustable" or "CCTV Camera Mount Bracket"</td>
+    <td class="right">2</td>
+    <td class="right">$5</td>
+    <td class="right">$10</td>
+  </tr>
+  <tr>
+    <td>D2</td>
+    <td>Cable Management (adhesive clips)</td>
+    <td>"Cable Clips Adhesive" (pack of 50+)</td>
+    <td class="right">1</td>
+    <td class="right">$6</td>
+    <td class="right">$6</td>
+  </tr>
+  <tr>
+    <td>D3</td>
+    <td>USB Extension Cables (for power run to mount point)</td>
+    <td>"Micro USB Extension Cable 10ft" or "USB Micro-B 10ft Power Cable"</td>
+    <td class="right">2</td>
+    <td class="right">$8</td>
+    <td class="right">$16</td>
+  </tr>
+  <tr class="subtotal">
+    <td colspan="5">Mounting Subtotal</td>
+    <td class="right">$32</td>
+  </tr>
+
+  <!-- Future / Scale -->
+  <tr class="category-header"><td colspan="6">E. Future Expansion (optional &mdash; for scaling to 4 satellites)</td></tr>
+  <tr>
+    <td>E1</td>
+    <td>Pi Zero 2W (additional units)</td>
+    <td>"Raspberry Pi Zero 2W"</td>
+    <td class="right">2</td>
+    <td class="right">$15</td>
+    <td class="right">$30</td>
+  </tr>
+  <tr>
+    <td>E2</td>
+    <td>Pi Camera Module 3 Wide (additional)</td>
+    <td>"Raspberry Pi Camera Module 3 Wide"</td>
+    <td class="right">2</td>
+    <td class="right">$40</td>
+    <td class="right">$80</td>
+  </tr>
+  <tr>
+    <td>E3</td>
+    <td>Additional sensors (INMP441 + BME680 + LD2410B)</td>
+    <td>(Same items as B6, B7, B8)</td>
+    <td class="right">2 ea</td>
+    <td class="right">$28</td>
+    <td class="right">$56</td>
+  </tr>
+  <tr>
+    <td>E4</td>
+    <td>Additional accessories (SD, power, cable, case, headers)</td>
+    <td>(Same items as B1, B2, B3, B5, B9)</td>
+    <td class="right">2 ea</td>
+    <td class="right">$36</td>
+    <td class="right">$72</td>
+  </tr>
+  <tr class="subtotal">
+    <td colspan="5">Expansion Subtotal (brings total to 4 satellites)</td>
+    <td class="right">$238</td>
+  </tr>
+
+  <!-- Totals -->
+  <tr class="grand-total">
+    <td colspan="5">TOTAL &mdash; Core Build (Hub + 2 Satellites + Tools)</td>
+    <td class="right">$609</td>
+  </tr>
+  <tr class="grand-total" style="background:#333;">
+    <td colspan="5">TOTAL &mdash; Full Build (Hub + 4 Satellites + Tools)</td>
+    <td class="right">$847</td>
+  </tr>
+</table>
+
+<div class="callout callout-warn">
+<strong>Note: Claude Max Subscription</strong>
+Separate from hardware costs. Claude Max ($100/month) provides high-rate API access for the reasoning layer. The nervous system runs fully without it &mdash; Claude is only needed for voice interaction and complex reasoning queries.
+</div>
+
+<h3>Compatibility Notes</h3>
+<ul>
+  <li><strong>CSI Cable is critical (B5).</strong> The Pi Zero 2W uses a 22-pin mini CSI connector (1.0mm pitch). The Camera Module 3 has a standard 22-pin connector (0.5mm pitch). The adapter cable bridges these two. Without it, the camera will not physically connect.</li>
+  <li><strong>I2C bus sharing.</strong> The BME680 uses I2C (SDA/SCL on GPIO 2/3). Multiple I2C devices can share the same bus if they have different addresses. BME680 default: 0x77 (Adafruit) or 0x76 (Pimoroni).</li>
+  <li><strong>LD2410B power.</strong> The mmWave sensor needs 5V power (draw from Pi's 5V pin) but its UART TX/RX pins output 3.3V logic &mdash; safe for direct GPIO connection, no level shifter needed.</li>
+  <li><strong>UART limitation.</strong> The Pi Zero 2W has one hardware UART (GPIO 14 TX, GPIO 15 RX). The LD2410B uses this. If you need UART for another device, you would need a USB-to-UART adapter.</li>
+  <li><strong>Power budget.</strong> Pi Zero 2W draws ~350mA, Camera Module 3 adds ~250mA, sensors ~100mA. A 2.5A supply gives plenty of headroom.</li>
+  <li><strong>Pi 5 RAM shortage (Feb 2026).</strong> LPDDR4 fabs are prioritizing AI infrastructure. Pi 5 8GB has risen from $80 MSRP to ~$125. The CanaKit Starter Kit PRO ($140) bundles board + case + cooler + PSU + SD and may save $15-20.</li>
+</ul>
+
+<!-- ================================================================ -->
+<div class="page-break"></div>
+<h2>4. Plan of Attack &mdash; Step by Step</h2>
+
+<p>Ordered by dependency. Each phase produces a working, testable system before the next begins.</p>
+
+<div class="phase-grid">
+  <div class="phase-num">1</div>
+  <div class="phase-content">
+    <h3>Flash &amp; Boot the Pi 5 Hub</h3>
+    <p><span class="tag tag-hw">HARDWARE</span> Items: A1&ndash;A4, A6</p>
+    <ul>
+      <li>Flash Raspberry Pi OS Lite (64-bit, Bookworm) onto microSD using Pi Imager</li>
+      <li>Pre-configure hostname (<code>charlotte-hub</code>), SSH, WiFi, user (<code>jack</code>)</li>
+      <li>Boot, SSH in, run full system update</li>
+      <li>Set static IP (e.g. 192.168.1.100)</li>
+      <li>Install base packages: Python 3, build tools, audio libraries, git</li>
+    </ul>
+    <p><strong>Milestone:</strong> <code>ssh jack@charlotte-hub.local</code> works from your laptop.</p>
+  </div>
+
+  <div class="phase-num">2</div>
+  <div class="phase-content">
+    <h3>Audio Stack + Wake Word on Hub</h3>
+    <p><span class="tag tag-hw">HARDWARE</span> Item: A5 (USB speakerphone)</p>
+    <ul>
+      <li>Plug in USB speakerphone, verify with <code>arecord -l</code> / <code>aplay -l</code></li>
+      <li>Test recording and playback</li>
+      <li>Install OpenWakeWord, test with built-in "hey jarvis" model</li>
+      <li>Install Piper TTS, test voice output</li>
+      <li>Install Whisper.cpp, compile for ARM, test speech-to-text</li>
+    </ul>
+    <p><strong>Milestone:</strong> Say "Hey Jarvis" &rarr; hub records your speech &rarr; Whisper transcribes it &rarr; Piper speaks the transcription back. Full voice loop working locally.</p>
+  </div>
+
+  <div class="phase-num">3</div>
+  <div class="phase-content">
+    <h3>MQTT Broker + Claude API on Hub</h3>
+    <p><span class="tag tag-local">LOCAL</span> <span class="tag tag-cloud">CLOUD</span></p>
+    <ul>
+      <li>Configure and start Mosquitto MQTT broker</li>
+      <li>Set up Charlotte topic hierarchy (<code>charlotte/metric/#</code>, <code>charlotte/signal/#</code>, <code>charlotte/protocol/#</code>)</li>
+      <li>Install Anthropic Python SDK, configure API key</li>
+      <li>Wire voice pipeline: wake word &rarr; STT &rarr; Claude API &rarr; TTS</li>
+      <li>Test: "Hey Charlotte, what time is it?" &rarr; Claude responds &rarr; spoken aloud</li>
+    </ul>
+    <p><strong>Milestone:</strong> Conversational voice interaction with Claude working. MQTT broker running and accepting messages.</p>
+  </div>
+
+  <div class="phase-num">4</div>
+  <div class="phase-content">
+    <h3>Flash &amp; Provision First Satellite (SAT-A)</h3>
+    <p><span class="tag tag-hw">HARDWARE</span> Items: B1&ndash;B5, B10 (for 1 unit)</p>
+    <ul>
+      <li>Press-fit hammer headers onto Pi Zero 2W</li>
+      <li>Flash Pi OS Lite 64-bit, hostname <code>charlotte-sat-a</code></li>
+      <li>Boot, SSH in, verify WiFi connectivity to hub</li>
+      <li>Connect Pi Camera Module 3 Wide via Zero CSI cable</li>
+      <li>Test camera: <code>libcamera-still -o test.jpg</code></li>
+      <li>Set up MJPEG streaming to hub over TCP</li>
+    </ul>
+    <p><strong>Milestone:</strong> Hub receives live camera feed from SAT-A over WiFi.</p>
+  </div>
+
+  <div class="phase-num">5</div>
+  <div class="phase-content">
+    <h3>Face Mesh + Action Unit Pipeline on Hub</h3>
+    <p><span class="tag tag-local">LOCAL</span></p>
+    <ul>
+      <li>Install MediaPipe on Pi 5 hub</li>
+      <li>Receive SAT-A video stream, run face detection + 468-point face mesh</li>
+      <li>Compute Facial Action Units (AU4, AU6, AU12, AU43, etc.) from landmark positions</li>
+      <li>Publish AU values as METRICs to MQTT: <code>charlotte/metric/person_0/au4_brow_lower</code></li>
+      <li>Verify METRIC flow with <code>mosquitto_sub -t "charlotte/metric/#" -v</code></li>
+    </ul>
+    <p><strong>Milestone:</strong> Sit in front of camera, furrow your brow, see <code>au4_brow_lower</code> spike on MQTT in real time.</p>
+  </div>
+
+  <div class="phase-num">6</div>
+  <div class="phase-content">
+    <h3>Signal Detection Engine</h3>
+    <p><span class="tag tag-local">LOCAL</span></p>
+    <ul>
+      <li>Build signal detection service: subscribes to <code>charlotte/metric/#</code></li>
+      <li>Define SIGNAL rules (confusion = AU4 &gt; 0.6 + AU7 &gt; 0.5 for 3s)</li>
+      <li>Fire SIGNALs when thresholds are sustained, publish to <code>charlotte/signal/#</code></li>
+      <li>Define PROTOCOLs triggered by signal combinations</li>
+      <li>Log full dive-line traces to SQLite</li>
+    </ul>
+    <p><strong>Milestone:</strong> Look confused at the camera for 3+ seconds &rarr; <code>confusion_detected</code> SIGNAL fires &rarr; PROTOCOL recommends action &rarr; full trace stored in SQLite.</p>
+  </div>
+
+  <div class="phase-num">7</div>
+  <div class="phase-content">
+    <h3>Add Environmental Sensors to SAT-A</h3>
+    <p><span class="tag tag-hw">HARDWARE</span> Items: B6&ndash;B8, C1&ndash;C2</p>
+    <ul>
+      <li>Wire BME680 to I2C (SDA pin 3, SCL pin 5)</li>
+      <li>Wire INMP441 mic to I2S (BCLK pin 12, LRCLK pin 35, DIN pin 38)</li>
+      <li>Wire LD2410B mmWave to UART (TX pin 8, RX pin 10)</li>
+      <li>Use breadboard + jumper wires for prototyping</li>
+      <li>Publish sensor telemetry to MQTT every 30 seconds</li>
+    </ul>
+    <p><strong>Milestone:</strong> Room temperature, humidity, air quality, and presence data flowing from SAT-A to hub over MQTT. Combined with video-derived metrics for full room observation.</p>
+  </div>
+
+  <div class="phase-num">8</div>
+  <div class="phase-content">
+    <h3>Provision Second Satellite (SAT-B) + Cross-Camera Identity</h3>
+    <p><span class="tag tag-hw">HARDWARE</span> Repeat B items for second unit</p>
+    <ul>
+      <li>Flash and provision SAT-B identically to SAT-A</li>
+      <li>Mount SAT-A high (2.1m), SAT-B low (0.8m) on opposite corners</li>
+      <li>Implement cross-camera person matching (same face in both feeds = same person)</li>
+      <li>Seat-based assignment: map bounding box positions to seat numbers</li>
+    </ul>
+    <p><strong>Milestone:</strong> Two camera angles, both feeding face mesh data. Same person tracked as one entity across both views. Triangulated positioning working.</p>
+  </div>
+
+  <div class="phase-num">9</div>
+  <div class="phase-content">
+    <h3>Dashboard + Presentation Correlation</h3>
+    <p><span class="tag tag-local">LOCAL</span></p>
+    <ul>
+      <li>Build web dashboard: Python + WebSocket + MQTT-over-WebSocket (port 9001)</li>
+      <li>Real-time engagement timeline, per-person tracking, active signal list</li>
+      <li>Protocol log with expandable dive-line traces</li>
+      <li>Correlate engagement data with presentation timestamps/slide numbers</li>
+    </ul>
+    <p><strong>Milestone:</strong> Open dashboard in browser during a presentation. See live engagement heatmap, individual tracking, and post-session dive-line report.</p>
+  </div>
+
+  <div class="phase-num">10</div>
+  <div class="phase-content">
+    <h3>Systemd Services + Hardening</h3>
+    <p><span class="tag tag-local">LOCAL</span></p>
+    <ul>
+      <li>Create systemd services for all components (auto-start on boot)</li>
+      <li>SSH key-only auth, disable password login</li>
+      <li>UFW firewall: allow SSH, MQTT (1883), WebSocket (9001)</li>
+      <li>MQTT authentication with username/password</li>
+      <li>Test full cold boot: power on hub + satellites &rarr; everything comes up automatically</li>
+    </ul>
+    <p><strong>Milestone:</strong> Unplug everything, plug it back in, and Charlotte is fully operational within 60 seconds. No manual intervention.</p>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<div class="page-break"></div>
+<h2>5. What Charlotte Sees &mdash; The Full Scope</h2>
+
+<h3>Room as Observable Environment</h3>
+<div class="diagram">NODE: BoardroomAlpha
+├── METRIC: temperature_c         = 23.4    (BME680, avg of satellites)
+├── METRIC: humidity_pct          = 42.1    (BME680)
+├── METRIC: voc_resistance        = 48200   (BME680 gas resistance)
+├── METRIC: ambient_light_lux     = 340     (camera exposure analysis)
+├── METRIC: noise_floor_db        = 42      (mic baseline)
+├── METRIC: occupancy_count       = 6       (face count + mmWave)
+├── METRIC: avg_engagement_score  = 0.72    (derived from individual scores)
+│
+├── SIGNAL: room_getting_warm            (temp > 24°C for > 5 min)
+├── SIGNAL: air_quality_declining        (VOC trend rising > 20 min)
+├── SIGNAL: collective_attention_drop    (avg engagement < 0.5 for > 2 min)
+│
+└── PROTOCOL: suggest_break              (warm + stale + low engagement)</div>
+
+<h3>Individual as Observed Subject</h3>
+<div class="diagram">NODE: Person_Seat3 (identified: "Mike")
+├── METRIC: au4_brow_lower        = 0.73   (face mesh, SAT-A + SAT-B)
+├── METRIC: au6_cheek_raise       = 0.12   (not smiling)
+├── METRIC: au7_lid_tight         = 0.61   (squinting)
+├── METRIC: au12_lip_corner_pull  = 0.08   (neutral mouth)
+├── METRIC: au43_eye_closure      = 0.15   (eyes open)
+├── METRIC: gaze_on_screen        = 0.82   (looking at presentation)
+├── METRIC: head_tilt_deg         = -4.2   (slight tilt)
+├── METRIC: blink_rate_per_min    = 18     (normal range)
+│
+├── SIGNAL: confusion_detected           (AU4 > 0.6 AND AU7 > 0.5, 3.2s)
+│
+└── PROTOCOL: flag_for_presenter
+     └── DIVE LINE:
+          PROTOCOL: flag_for_presenter
+            └── SIGNAL: confusion_detected (sustained 3.2s)
+                 ├── METRIC: au4_brow_lower = 0.73 (threshold: 0.6)
+                 │    └── SOURCE: SAT-A, frame #84231, 14:32:07.442
+                 └── METRIC: au7_lid_tight = 0.61 (threshold: 0.5)
+                      └── SOURCE: SAT-B, frame #84229, 14:32:07.318</div>
+
+<h3>Post-Session Summary (Claude-generated from structured data)</h3>
+<div class="callout">
+<strong>"Hey Charlotte, summarize the meeting."</strong>
+<br><br>
+"The presentation ran 42 minutes with 6 attendees. Engagement peaked during slides 4 through 8 &mdash; Sarah and Lisa showed sustained positive engagement (AU6 + AU12 elevated, gaze locked). Engagement dropped significantly at slide 12 when the pricing model was introduced: Mike showed confusion for 8.4 seconds, Raj's gaze drifted to his laptop for 34 seconds, and Tom showed signs of fatigue starting at minute 28.
+<br><br>
+Environmental factors: room temperature rose from 22.8&deg;C to 24.6&deg;C over the session, and air quality index declined steadily. The energy drop at minute 28 correlates with the temperature crossing 24&deg;C.
+<br><br>
+Recommendation: restructure the pricing section for clarity, and schedule a 5-minute break at the 25-minute mark for sessions in this room."
+<br><br>
+<em>Every claim in this summary traces back to specific metrics, signals, and sensor frames. Ask me to show the dive line for any point.</em>
+</div>
+
+<!-- ================================================================ -->
+<h2>6. How It All Connects to Charlotte OS</h2>
+
+<table>
+  <tr>
+    <th>Charlotte Layer</th>
+    <th>Nervous System Implementation</th>
+  </tr>
+  <tr>
+    <td><strong>Kernel</strong> (primitives.krf)</td>
+    <td>NODE, EDGE, METRIC, SIGNAL, PROTOCOL &mdash; all five primitives instantiated in the MQTT topic hierarchy and signal detection engine</td>
+  </tr>
+  <tr>
+    <td><strong>Valuation Layer</strong> (valuation-layer.krf)</td>
+    <td>The signal detection engine IS the valuation layer running at the edge. METRIC &rarr; SIGNAL &rarr; PROTOCOL, serial, deterministic, traceable.</td>
+  </tr>
+  <tr>
+    <td><strong>Observer</strong> (observer.krf)</td>
+    <td>Charlotte the observer sits on the Pi 5 hub, perceiving sensor state each cycle, placing signals on metric lines, firing protocols.</td>
+  </tr>
+  <tr>
+    <td><strong>Temporal Spine</strong></td>
+    <td>Every metric reading has a timestamp. The SQLite database IS the temporal spine. Charlotte can zoom from session-level to millisecond-level.</td>
+  </tr>
+  <tr>
+    <td><strong>Spatial Spine</strong></td>
+    <td>New RoomSpatialPlane &mdash; x, y, z coordinates within the room. Sensor positions, seat positions, triangulated person positions. Extends the existing geospatial.krf and topological.krf.</td>
+  </tr>
+  <tr>
+    <td><strong>Dive Line</strong></td>
+    <td>Every protocol firing stores its complete trace: which signals triggered it, which metrics those signals derived from, which sensor on which satellite produced the reading, down to the frame number and timestamp.</td>
+  </tr>
+  <tr>
+    <td><strong>Two-Layer Split</strong></td>
+    <td>The room and people exist in the ontological layer (NODEs + EDGEs). Measurements, detected patterns, and prescribed actions live in the valuation layer. Facts are shared. Judgments are observer-scoped.</td>
+  </tr>
+</table>
+
+<div class="callout">
+<strong>The Big Picture</strong>
+This is Charlotte operating in a physical environment &mdash; not as a chatbot, not as a dashboard, but as an observer with sensors for eyes and ears, local signal processing for a nervous system, and Claude for a brain. The same architecture scales from one boardroom to a full research campus. The same pipeline (METRIC &rarr; SIGNAL &rarr; PROTOCOL) that tracks facial expressions in a meeting room tracks equipment health at an ISG facility or pig weight at a Sounder farm. The nervous system is the same everywhere. Only the sensors change.
+</div>
+
+<div class="footer">
+  Charlotte Nervous System Build Plan &mdash; SomeAI &mdash; February 2026<br>
+  Generated for internal use. Hardware prices are estimates and may vary.
+</div>
+
+</body>
+</html>

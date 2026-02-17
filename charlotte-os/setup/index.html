@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlotte Voice Agent — Pi 5 Setup</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #1a1a2e;
+    --surface2: #16213e;
+    --purple: #7200CB;
+    --purple-light: #9d4edd;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --green: #00c853;
+    --orange: #ff9100;
+    --red: #ff1744;
+    --border: #2a2a4a;
+    --code-bg: #0f0f1a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    color: var(--purple-light);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    color: var(--purple-light);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    color: var(--text);
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  p { margin-bottom: 1rem; }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    overflow-x: auto;
+    margin: 0.8rem 0 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    color: #c5c8c6;
+  }
+  p code, li code {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.15rem 0.4rem;
+    font-size: 0.85em;
+  }
+  ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.5rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  th {
+    background: var(--surface);
+    color: var(--purple-light);
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+  }
+  .step-num {
+    display: inline-block;
+    background: var(--purple);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  .warning {
+    background: rgba(255, 145, 0, 0.1);
+    border-left: 3px solid var(--orange);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .success {
+    background: rgba(0, 200, 83, 0.1);
+    border-left: 3px solid var(--green);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .architecture {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+  .checklist li::before {
+    content: "\2610 ";
+    color: var(--purple-light);
+    font-size: 1.1em;
+  }
+  a { color: var(--purple-light); }
+  a:hover { color: white; }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Oswald:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<h1>CHARLOTTE VOICE AGENT</h1>
+<p class="subtitle">Raspberry Pi 5 Setup Guide &mdash; from bare metal to phone calls with Claude</p>
+
+<div class="architecture">Phone Call &rarr; Twilio &rarr; WebSocket &rarr; Deepgram (STT) &rarr; Claude (reasoning) &rarr; ElevenLabs (TTS) &rarr; Twilio &rarr; caller hears Charlotte</div>
+
+<hr>
+
+<h2><span class="step-num">1</span> Flash the Pi</h2>
+<ol>
+  <li>Download <strong>Raspberry Pi Imager</strong> from <a href="https://www.raspberrypi.com/software/">raspberrypi.com</a></li>
+  <li>Insert your microSD card</li>
+  <li>Select <strong>Raspberry Pi OS Lite (64-bit)</strong> &mdash; Bookworm, no desktop</li>
+  <li>Click the gear/settings icon <strong>before flashing</strong> and set:
+    <ul>
+      <li>Hostname: <code>charlotte-hub</code></li>
+      <li>Enable SSH: yes</li>
+      <li>Username: <code>jack</code></li>
+      <li>Password: something strong</li>
+      <li>WiFi: your network SSID + password</li>
+      <li>Timezone: yours</li>
+    </ul>
+  </li>
+  <li>Flash it, put the card in the Pi, power on</li>
+</ol>
+
+<h2><span class="step-num">2</span> SSH In</h2>
+<p>From your terminal (give it a minute to boot):</p>
+<pre><code>ssh jack@charlotte-hub.local</code></pre>
+<p>If that doesn't resolve, check your router for the Pi's IP and use <code>ssh jack@192.168.x.x</code>.</p>
+
+<h2><span class="step-num">3</span> System Update + Base Packages</h2>
+<pre><code>sudo apt update && sudo apt full-upgrade -y
+sudo apt install -y git python3-pip python3-venv python3-dev \
+  build-essential libffi-dev libssl-dev ffmpeg curl wget \
+  mosquitto mosquitto-clients
+sudo reboot</code></pre>
+<p>SSH back in after reboot.</p>
+
+<h2><span class="step-num">4</span> Clone the Repo</h2>
+<pre><code>mkdir -p ~/dev && cd ~/dev
+git clone https://github.com/projects-at-someai/charlotte-os.git
+cd charlotte-os/voice</code></pre>
+
+<h2><span class="step-num">5</span> Run the Install Script</h2>
+<pre><code>chmod +x setup/install.sh
+./setup/install.sh</code></pre>
+<p>This creates the Python venv at <code>~/charlotte-env</code>, installs all dependencies, and generates a <code>.env</code> template at <code>~/charlotte/voice/.env</code>.</p>
+
+<h2><span class="step-num">6</span> Get Your API Keys</h2>
+<p>You need 4 accounts. Sign up and grab the keys:</p>
+<table>
+  <tr><th>Service</th><th>Sign Up</th><th>What You Need</th><th>Free Tier</th></tr>
+  <tr><td>Anthropic</td><td><a href="https://console.anthropic.com">console.anthropic.com</a></td><td>API key</td><td>$5 credit</td></tr>
+  <tr><td>ElevenLabs</td><td><a href="https://elevenlabs.io">elevenlabs.io</a></td><td>API key + voice ID</td><td>10k chars/mo</td></tr>
+  <tr><td>Deepgram</td><td><a href="https://deepgram.com">deepgram.com</a></td><td>API key</td><td>$200 credit</td></tr>
+  <tr><td>Twilio</td><td><a href="https://twilio.com">twilio.com</a></td><td>Account SID + Auth Token + phone number</td><td>~$15 to start</td></tr>
+</table>
+<div class="warning">
+  <strong>ElevenLabs voice ID:</strong> Go to elevenlabs.io, pick a voice (or clone your own), click on the voice &mdash; the ID is in the URL or the voice settings panel.
+</div>
+
+<h2><span class="step-num">7</span> Fill in the .env</h2>
+<pre><code>nano ~/charlotte/voice/.env</code></pre>
+<p>Fill in every blank:</p>
+<pre><code>TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+DEEPGRAM_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ELEVENLABS_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
+ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxx
+TUNNEL_DOMAIN=charlotte.yourdomain.com</code></pre>
+<p>Lock it down:</p>
+<pre><code>chmod 600 ~/charlotte/voice/.env</code></pre>
+
+<h2><span class="step-num">8</span> Set Up the Tunnel</h2>
+<p>Twilio needs to reach your Pi over HTTPS. Two options:</p>
+
+<h3>Option A &mdash; Cloudflare Tunnel (recommended, permanent, free)</h3>
+<p>Requires a domain on Cloudflare. The script handles everything:</p>
+<pre><code>chmod +x setup/cloudflared.sh
+./setup/cloudflared.sh</code></pre>
+<p>It will show a browser link &mdash; copy the URL to your Windows machine to complete auth.</p>
+
+<h3>Option B &mdash; ngrok (quick for testing)</h3>
+<pre><code>curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok-v3-stable-linux-arm64.tgz | sudo tar xz -C /usr/local/bin
+ngrok http 8080</code></pre>
+<p>Copy the <code>https://xxxx.ngrok.io</code> URL it gives you.</p>
+
+<h2><span class="step-num">9</span> Test in Demo Mode</h2>
+<pre><code>source ~/charlotte-env/bin/activate
+cd ~/dev/charlotte-os/voice
+python server.py --demo</code></pre>
+<p>From another terminal:</p>
+<pre><code>curl http://localhost:8080/health</code></pre>
+<div class="success">Should return: <code>{"status": "ok", "mode": "demo"}</code></div>
+
+<h2><span class="step-num">10</span> Configure Twilio</h2>
+<ol>
+  <li>Go to your <a href="https://console.twilio.com/">Twilio console</a></li>
+  <li>Go to <strong>Phone Numbers &gt; Manage &gt; Active Numbers</strong></li>
+  <li>Click your number</li>
+  <li>Under <strong>Voice &amp; Fax &gt; A Call Comes In</strong>, set:
+    <ul>
+      <li>Webhook</li>
+      <li><code>https://charlotte.yourdomain.com/twilio/voice</code></li>
+      <li>HTTP POST</li>
+    </ul>
+  </li>
+</ol>
+
+<h2><span class="step-num">11</span> Run It For Real</h2>
+<pre><code>source ~/charlotte-env/bin/activate
+cd ~/dev/charlotte-os/voice
+python server.py</code></pre>
+<div class="success">Call your Twilio number. You should hear "Connecting to Charlotte", then you're talking to Claude through ElevenLabs' voice.</div>
+
+<h2><span class="step-num">12</span> Make It Permanent (systemd)</h2>
+<pre><code>sudo cp setup/charlotte-voice.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable charlotte-voice
+sudo systemctl start charlotte-voice</code></pre>
+<p>Check it's running:</p>
+<pre><code>sudo systemctl status charlotte-voice
+journalctl -u charlotte-voice -f</code></pre>
+
+<hr>
+
+<h2>Shopping List</h2>
+<ul class="checklist">
+  <li>microSD card (64GB+ recommended)</li>
+  <li>USB-C power supply (5V/5A for Pi 5)</li>
+  <li>Ethernet cable (optional, more reliable than WiFi)</li>
+  <li>USB speakerphone or USB mic + speaker (if you want local voice, not just phone)</li>
+  <li>Case with heatsink/fan (Pi 5 runs warm under load)</li>
+</ul>
+
+</body>
+</html>

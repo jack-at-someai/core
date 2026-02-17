@@ -1,0 +1,525 @@
+;;; ================================================================
+;;; REFERENCE / CONVEX HULL LIBRARY
+;;; The 25 reference domains bounding Charlotte's knowledge surface
+;;; ================================================================
+
+(in-microtheory CharlotteReferenceMt)
+
+;; ── Convex Hull Reference Library ──
+;;
+;; These 25 domains define the boundary of Charlotte's reference
+;; knowledge. Each domain is a point on the convex hull — together
+;; they enclose the space of knowledge Charlotte can reason about.
+;; Every domain decomposes into weighted knowledge types per the
+;; ConvexHullOfKnowledge theorem (see convex-hull.krf).
+
+;; ════════════════════════════════════════════════════════════
+;; CLUSTER 1: FOUNDATIONS
+;; Formal systems, structure, and strategy
+;; ════════════════════════════════════════════════════════════
+
+(isa FoundationsCluster ReferenceDomainCluster)
+(comment FoundationsCluster
+  "Formal logic, graph theory, topology, game theory, systems
+   architecture — the mathematical and structural bedrock.")
+
+;; ── Knowledge Primitives ──
+(isa KnowledgePrimitives ReferenceDomain)
+(hasAttribute KnowledgePrimitives ::LABEL "Knowledge Primitives")
+(hasAttribute KnowledgePrimitives ::ICON "\uD83D\uDCD6")
+(hasAttribute KnowledgePrimitives ::PATH "references/knowledge/")
+(comment KnowledgePrimitives
+  "Structural, declarative, procedural, heuristic & meta knowledge.
+   The five vertices of the convex hull itself.")
+(decomposition KnowledgePrimitives StructuralKnowledge 0.25)
+(decomposition KnowledgePrimitives DeclarativeKnowledge 0.20)
+(decomposition KnowledgePrimitives ProceduralKnowledge 0.15)
+(decomposition KnowledgePrimitives HeuristicKnowledge 0.10)
+(decomposition KnowledgePrimitives MetaKnowledge 0.30)
+(clusterMember FoundationsCluster KnowledgePrimitives)
+
+;; ── Formal Logic ──
+(isa FormalLogic ReferenceDomain)
+(hasAttribute FormalLogic ::LABEL "Formal Logic")
+(hasAttribute FormalLogic ::ICON "\u2200")
+(hasAttribute FormalLogic ::PATH "references/formal-logic/")
+(comment FormalLogic
+  "Propositional logic, first-order logic, lambda calculus & Lisp.
+   The inference engine beneath Charlotte's KRF substrate.")
+(decomposition FormalLogic StructuralKnowledge 0.35)
+(decomposition FormalLogic DeclarativeKnowledge 0.25)
+(decomposition FormalLogic ProceduralKnowledge 0.15)
+(decomposition FormalLogic HeuristicKnowledge 0.05)
+(decomposition FormalLogic MetaKnowledge 0.20)
+(clusterMember FoundationsCluster FormalLogic)
+
+;; ── Graph Theory ──
+(isa GraphTheory ReferenceDomain)
+(hasAttribute GraphTheory ::LABEL "Graph Theory")
+(hasAttribute GraphTheory ::ICON "\u229B")
+(hasAttribute GraphTheory ::PATH "references/graph-theory/")
+(comment GraphTheory
+  "Knowledge graphs, ontologies & graph databases.
+   The relational fabric of NODE-EDGE primitives.")
+(decomposition GraphTheory StructuralKnowledge 0.40)
+(decomposition GraphTheory DeclarativeKnowledge 0.20)
+(decomposition GraphTheory ProceduralKnowledge 0.15)
+(decomposition GraphTheory HeuristicKnowledge 0.05)
+(decomposition GraphTheory MetaKnowledge 0.20)
+(clusterMember FoundationsCluster GraphTheory)
+
+;; ── Topology ──
+(isa Topology ReferenceDomain)
+(hasAttribute Topology ::LABEL "Topology")
+(hasAttribute Topology ::ICON "\u25CE")
+(hasAttribute Topology ::PATH "references/topology/")
+(comment Topology
+  "Algebraic topology, topological data analysis & higher dimensions.
+   Shape-invariant reasoning for spatial substrate.")
+(decomposition Topology StructuralKnowledge 0.40)
+(decomposition Topology DeclarativeKnowledge 0.15)
+(decomposition Topology ProceduralKnowledge 0.15)
+(decomposition Topology HeuristicKnowledge 0.05)
+(decomposition Topology MetaKnowledge 0.25)
+(clusterMember FoundationsCluster Topology)
+
+;; ── Game Theory ──
+(isa GameTheory ReferenceDomain)
+(hasAttribute GameTheory ::LABEL "Game Theory")
+(hasAttribute GameTheory ::ICON "\u265F")
+(hasAttribute GameTheory ::PATH "references/game-theory/")
+(comment GameTheory
+  "Nash equilibrium, mechanism design & evolutionary strategy.
+   Multi-agent decision theory for PROTOCOL primitives.")
+(decomposition GameTheory StructuralKnowledge 0.20)
+(decomposition GameTheory DeclarativeKnowledge 0.20)
+(decomposition GameTheory ProceduralKnowledge 0.20)
+(decomposition GameTheory HeuristicKnowledge 0.25)
+(decomposition GameTheory MetaKnowledge 0.15)
+(clusterMember FoundationsCluster GameTheory)
+
+;; ── Systems Architecture ──
+(isa SystemsArchitecture ReferenceDomain)
+(hasAttribute SystemsArchitecture ::LABEL "Systems Architecture")
+(hasAttribute SystemsArchitecture ::ICON "\uD83C\uDFD7")
+(hasAttribute SystemsArchitecture ::PATH "references/systems-architecture/")
+(comment SystemsArchitecture
+  "Distributed systems, DDD & event-driven design.
+   The engineering patterns behind Charlotte's container model.")
+(decomposition SystemsArchitecture StructuralKnowledge 0.30)
+(decomposition SystemsArchitecture DeclarativeKnowledge 0.15)
+(decomposition SystemsArchitecture ProceduralKnowledge 0.30)
+(decomposition SystemsArchitecture HeuristicKnowledge 0.15)
+(decomposition SystemsArchitecture MetaKnowledge 0.10)
+(clusterMember FoundationsCluster SystemsArchitecture)
+
+;; ════════════════════════════════════════════════════════════
+;; CLUSTER 2: COGNITION & SIGNAL
+;; How observers perceive, predict, and process
+;; ════════════════════════════════════════════════════════════
+
+(isa CognitionSignalCluster ReferenceDomainCluster)
+(comment CognitionSignalCluster
+  "Cognitive science, signal processing, neuroscience — the
+   observer's internal model and how signals become meaning.")
+
+;; ── Cognitive Science ──
+(isa CognitiveScience ReferenceDomain)
+(hasAttribute CognitiveScience ::LABEL "Cognitive Science")
+(hasAttribute CognitiveScience ::ICON "\uD83E\uDDE0")
+(hasAttribute CognitiveScience ::PATH "references/cognitive-science/")
+(comment CognitiveScience
+  "Predictive coding, Bayesian brain & resonance.
+   Charlotte's observer model — perception as inference.")
+(decomposition CognitiveScience StructuralKnowledge 0.15)
+(decomposition CognitiveScience DeclarativeKnowledge 0.25)
+(decomposition CognitiveScience ProceduralKnowledge 0.15)
+(decomposition CognitiveScience HeuristicKnowledge 0.30)
+(decomposition CognitiveScience MetaKnowledge 0.15)
+(clusterMember CognitionSignalCluster CognitiveScience)
+
+;; ── Signal Processing ──
+(isa SignalProcessing ReferenceDomain)
+(hasAttribute SignalProcessing ::LABEL "Signal Processing")
+(hasAttribute SignalProcessing ::ICON "\u3030")
+(hasAttribute SignalProcessing ::PATH "references/signal-processing/")
+(comment SignalProcessing
+  "Time series, frequency domain & drift detection.
+   The math behind SIGNAL primitives and METRIC computation.")
+(decomposition SignalProcessing StructuralKnowledge 0.20)
+(decomposition SignalProcessing DeclarativeKnowledge 0.20)
+(decomposition SignalProcessing ProceduralKnowledge 0.30)
+(decomposition SignalProcessing HeuristicKnowledge 0.15)
+(decomposition SignalProcessing MetaKnowledge 0.15)
+(clusterMember CognitionSignalCluster SignalProcessing)
+
+;; ── Neuroscience ──
+(isa Neuroscience ReferenceDomain)
+(hasAttribute Neuroscience ::LABEL "Neuroscience")
+(hasAttribute Neuroscience ::ICON "\uD83E\uDDEC")
+(hasAttribute Neuroscience ::PATH "references/neuroscience/")
+(comment Neuroscience
+  "Neural geometry reference hub.
+   How biological networks encode spatial and temporal structure.")
+(decomposition Neuroscience StructuralKnowledge 0.25)
+(decomposition Neuroscience DeclarativeKnowledge 0.30)
+(decomposition Neuroscience ProceduralKnowledge 0.10)
+(decomposition Neuroscience HeuristicKnowledge 0.20)
+(decomposition Neuroscience MetaKnowledge 0.15)
+(clusterMember CognitionSignalCluster Neuroscience)
+
+;; ════════════════════════════════════════════════════════════
+;; CLUSTER 3: DATA & COMPUTE
+;; Storage, indexing, and interface patterns
+;; ════════════════════════════════════════════════════════════
+
+(isa DataComputeCluster ReferenceDomainCluster)
+(comment DataComputeCluster
+  "Temporal databases, spatial computing, knowledge primitives,
+   atomic design — how data is stored, indexed, and rendered.")
+
+;; ── Temporal Databases ──
+(isa TemporalDatabases ReferenceDomain)
+(hasAttribute TemporalDatabases ::LABEL "Temporal Databases")
+(hasAttribute TemporalDatabases ::ICON "\u23F1")
+(hasAttribute TemporalDatabases ::PATH "references/temporal-databases/")
+(comment TemporalDatabases
+  "Event sourcing, bitemporal modeling & CQRS.
+   The storage theory behind Charlotte's temporal spine.")
+(decomposition TemporalDatabases StructuralKnowledge 0.30)
+(decomposition TemporalDatabases DeclarativeKnowledge 0.20)
+(decomposition TemporalDatabases ProceduralKnowledge 0.30)
+(decomposition TemporalDatabases HeuristicKnowledge 0.10)
+(decomposition TemporalDatabases MetaKnowledge 0.10)
+(clusterMember DataComputeCluster TemporalDatabases)
+
+;; ── Spatial Computing ──
+(isa SpatialComputing ReferenceDomain)
+(hasAttribute SpatialComputing ::LABEL "Spatial Computing")
+(hasAttribute SpatialComputing ::ICON "\uD83C\uDF0D")
+(hasAttribute SpatialComputing ::PATH "references/spatial-computing/")
+(comment SpatialComputing
+  "GIS, spatial databases & geospatial algorithms.
+   The indexing theory behind Charlotte's spatial planes.")
+(decomposition SpatialComputing StructuralKnowledge 0.30)
+(decomposition SpatialComputing DeclarativeKnowledge 0.25)
+(decomposition SpatialComputing ProceduralKnowledge 0.25)
+(decomposition SpatialComputing HeuristicKnowledge 0.10)
+(decomposition SpatialComputing MetaKnowledge 0.10)
+(clusterMember DataComputeCluster SpatialComputing)
+
+;; ── Atomic Design ──
+(isa AtomicDesign ReferenceDomain)
+(hasAttribute AtomicDesign ::LABEL "Atomic Design")
+(hasAttribute AtomicDesign ::ICON "\u269B")
+(hasAttribute AtomicDesign ::PATH "references/atomic-design/")
+(comment AtomicDesign
+  "Component hierarchy & design systems.
+   Atoms-molecules-organisms for Charlotte's interface layer.")
+(decomposition AtomicDesign StructuralKnowledge 0.35)
+(decomposition AtomicDesign DeclarativeKnowledge 0.15)
+(decomposition AtomicDesign ProceduralKnowledge 0.25)
+(decomposition AtomicDesign HeuristicKnowledge 0.15)
+(decomposition AtomicDesign MetaKnowledge 0.10)
+(clusterMember DataComputeCluster AtomicDesign)
+
+;; ════════════════════════════════════════════════════════════
+;; CLUSTER 4: BIOLOGY
+;; Living systems, adaptation, and natural intelligence
+;; ════════════════════════════════════════════════════════════
+
+(isa BiologyCluster ReferenceDomainCluster)
+(comment BiologyCluster
+  "Biomimicry, entomology, livestock science, nature-inspired
+   algorithms — intelligence observed in living systems.")
+
+;; ── Biomimicry ──
+(isa Biomimicry ReferenceDomain)
+(hasAttribute Biomimicry ::LABEL "Biomimicry")
+(hasAttribute Biomimicry ::ICON "\uD83C\uDF3F")
+(hasAttribute Biomimicry ::PATH "references/biomimicry/")
+(comment Biomimicry
+  "Principles, methodology & case studies.
+   Design by emulating nature's time-tested patterns.")
+(decomposition Biomimicry StructuralKnowledge 0.15)
+(decomposition Biomimicry DeclarativeKnowledge 0.25)
+(decomposition Biomimicry ProceduralKnowledge 0.20)
+(decomposition Biomimicry HeuristicKnowledge 0.30)
+(decomposition Biomimicry MetaKnowledge 0.10)
+(clusterMember BiologyCluster Biomimicry)
+
+;; ── Entomology ──
+(isa Entomology ReferenceDomain)
+(hasAttribute Entomology ::LABEL "Entomology")
+(hasAttribute Entomology ::ICON "\uD83D\uDC1B")
+(hasAttribute Entomology ::PATH "references/entomology/")
+(comment Entomology
+  "Insect biology, pollination & biomimicry.
+   Joseph's domain — swarm behavior and emergent coordination.")
+(decomposition Entomology StructuralKnowledge 0.15)
+(decomposition Entomology DeclarativeKnowledge 0.35)
+(decomposition Entomology ProceduralKnowledge 0.10)
+(decomposition Entomology HeuristicKnowledge 0.25)
+(decomposition Entomology MetaKnowledge 0.15)
+(clusterMember BiologyCluster Entomology)
+
+;; ── Livestock Science ──
+(isa LivestockScience ReferenceDomain)
+(hasAttribute LivestockScience ::LABEL "Livestock Science")
+(hasAttribute LivestockScience ::ICON "\uD83D\uDC04")
+(hasAttribute LivestockScience ::PATH "references/livestock-science/")
+(comment LivestockScience
+  "Genetics, breeding, reproduction & show industry.
+   The domain knowledge behind Sounder and swine genetics.")
+(decomposition LivestockScience StructuralKnowledge 0.20)
+(decomposition LivestockScience DeclarativeKnowledge 0.30)
+(decomposition LivestockScience ProceduralKnowledge 0.15)
+(decomposition LivestockScience HeuristicKnowledge 0.25)
+(decomposition LivestockScience MetaKnowledge 0.10)
+(clusterMember BiologyCluster LivestockScience)
+
+;; ── Nature-Inspired Algorithms ──
+(isa NatureInspiredAlgorithms ReferenceDomain)
+(hasAttribute NatureInspiredAlgorithms ::LABEL "Nature-Inspired Algorithms")
+(hasAttribute NatureInspiredAlgorithms ::ICON "\uD83E\uDDEC")
+(hasAttribute NatureInspiredAlgorithms ::PATH "references/nature-inspired-algorithms/")
+(comment NatureInspiredAlgorithms
+  "Evolutionary computation & swarm intelligence.
+   Optimization strategies borrowed from biology.")
+(decomposition NatureInspiredAlgorithms StructuralKnowledge 0.20)
+(decomposition NatureInspiredAlgorithms DeclarativeKnowledge 0.15)
+(decomposition NatureInspiredAlgorithms ProceduralKnowledge 0.30)
+(decomposition NatureInspiredAlgorithms HeuristicKnowledge 0.25)
+(decomposition NatureInspiredAlgorithms MetaKnowledge 0.10)
+(clusterMember BiologyCluster NatureInspiredAlgorithms)
+
+;; ════════════════════════════════════════════════════════════
+;; CLUSTER 5: BIO-ENGINEERING
+;; Applied biological design — materials, structures, systems
+;; ════════════════════════════════════════════════════════════
+
+(isa BioEngineeringCluster ReferenceDomainCluster)
+(comment BioEngineeringCluster
+  "Bio-architecture, bio-robotics, bio-locomotion, bio-optics,
+   bio-surfaces, biomimetic materials, structural biomimetics,
+   spider silk, ecological systems design — engineering that
+   borrows from nature's 3.8 billion years of R&D.")
+
+;; ── Bio-Architecture ──
+(isa BioArchitecture ReferenceDomain)
+(hasAttribute BioArchitecture ::LABEL "Bio-Architecture")
+(hasAttribute BioArchitecture ::ICON "\uD83C\uDFDB")
+(hasAttribute BioArchitecture ::PATH "references/bio-architecture/")
+(comment BioArchitecture
+  "Termite ventilation, shells & tensegrity.
+   Buildings that breathe, flex, and self-regulate.")
+(decomposition BioArchitecture StructuralKnowledge 0.35)
+(decomposition BioArchitecture DeclarativeKnowledge 0.20)
+(decomposition BioArchitecture ProceduralKnowledge 0.15)
+(decomposition BioArchitecture HeuristicKnowledge 0.20)
+(decomposition BioArchitecture MetaKnowledge 0.10)
+(clusterMember BioEngineeringCluster BioArchitecture)
+
+;; ── Bio-Inspired Robotics ──
+(isa BioInspiredRobotics ReferenceDomain)
+(hasAttribute BioInspiredRobotics ::LABEL "Bio-Inspired Robotics")
+(hasAttribute BioInspiredRobotics ::ICON "\uD83E\uDD16")
+(hasAttribute BioInspiredRobotics ::PATH "references/bio-inspired-robotics/")
+(comment BioInspiredRobotics
+  "Soft robotics, legged robots & swarm systems.
+   Machines built on biological movement principles.")
+(decomposition BioInspiredRobotics StructuralKnowledge 0.25)
+(decomposition BioInspiredRobotics DeclarativeKnowledge 0.15)
+(decomposition BioInspiredRobotics ProceduralKnowledge 0.30)
+(decomposition BioInspiredRobotics HeuristicKnowledge 0.20)
+(decomposition BioInspiredRobotics MetaKnowledge 0.10)
+(clusterMember BioEngineeringCluster BioInspiredRobotics)
+
+;; ── Bio-Locomotion ──
+(isa BioLocomotion ReferenceDomain)
+(hasAttribute BioLocomotion ::LABEL "Bio-Locomotion")
+(hasAttribute BioLocomotion ::ICON "\uD83E\uDD8E")
+(hasAttribute BioLocomotion ::PATH "references/bio-locomotion/")
+(comment BioLocomotion
+  "Flight, swimming & collective motion.
+   How bodies move through fluid, air, and terrain.")
+(decomposition BioLocomotion StructuralKnowledge 0.20)
+(decomposition BioLocomotion DeclarativeKnowledge 0.20)
+(decomposition BioLocomotion ProceduralKnowledge 0.25)
+(decomposition BioLocomotion HeuristicKnowledge 0.25)
+(decomposition BioLocomotion MetaKnowledge 0.10)
+(clusterMember BioEngineeringCluster BioLocomotion)
+
+;; ── Bio-Optics & Photonics ──
+(isa BioOptics ReferenceDomain)
+(hasAttribute BioOptics ::LABEL "Bio-Optics & Photonics")
+(hasAttribute BioOptics ::ICON "\uD83D\uDD2C")
+(hasAttribute BioOptics ::PATH "references/bio-optics-photonics/")
+(comment BioOptics
+  "Structural color, bioluminescence & camouflage.
+   Light manipulation strategies evolved by nature.")
+(decomposition BioOptics StructuralKnowledge 0.25)
+(decomposition BioOptics DeclarativeKnowledge 0.30)
+(decomposition BioOptics ProceduralKnowledge 0.10)
+(decomposition BioOptics HeuristicKnowledge 0.20)
+(decomposition BioOptics MetaKnowledge 0.15)
+(clusterMember BioEngineeringCluster BioOptics)
+
+;; ── Bio-Surfaces ──
+(isa BioSurfaces ReferenceDomain)
+(hasAttribute BioSurfaces ::LABEL "Bio-Surfaces")
+(hasAttribute BioSurfaces ::ICON "\uD83E\uDDEB")
+(hasAttribute BioSurfaces ::PATH "references/bio-surfaces/")
+(comment BioSurfaces
+  "Superhydrophobicity, gecko adhesion & shark skin.
+   Surface engineering from micro-scale biology.")
+(decomposition BioSurfaces StructuralKnowledge 0.30)
+(decomposition BioSurfaces DeclarativeKnowledge 0.25)
+(decomposition BioSurfaces ProceduralKnowledge 0.10)
+(decomposition BioSurfaces HeuristicKnowledge 0.20)
+(decomposition BioSurfaces MetaKnowledge 0.15)
+(clusterMember BioEngineeringCluster BioSurfaces)
+
+;; ── Biomimetic Materials ──
+(isa BiomimeticMaterials ReferenceDomain)
+(hasAttribute BiomimeticMaterials ::LABEL "Biomimetic Materials")
+(hasAttribute BiomimeticMaterials ::ICON "\uD83E\uDDEA")
+(hasAttribute BiomimeticMaterials ::PATH "references/biomimetic-materials/")
+(comment BiomimeticMaterials
+  "Self-healing, shape memory & hierarchical composites.
+   Materials designed by studying biological structures.")
+(decomposition BiomimeticMaterials StructuralKnowledge 0.30)
+(decomposition BiomimeticMaterials DeclarativeKnowledge 0.25)
+(decomposition BiomimeticMaterials ProceduralKnowledge 0.15)
+(decomposition BiomimeticMaterials HeuristicKnowledge 0.15)
+(decomposition BiomimeticMaterials MetaKnowledge 0.15)
+(clusterMember BioEngineeringCluster BiomimeticMaterials)
+
+;; ── Structural Biomimetics ──
+(isa StructuralBiomimetics ReferenceDomain)
+(hasAttribute StructuralBiomimetics ::LABEL "Structural Biomimetics")
+(hasAttribute StructuralBiomimetics ::ICON "\uD83E\uDDB4")
+(hasAttribute StructuralBiomimetics ::PATH "references/structural-biomimetics/")
+(comment StructuralBiomimetics
+  "Natural composites, silk, nacre & bone.
+   Load-bearing architectures from biology.")
+(decomposition StructuralBiomimetics StructuralKnowledge 0.40)
+(decomposition StructuralBiomimetics DeclarativeKnowledge 0.25)
+(decomposition StructuralBiomimetics ProceduralKnowledge 0.10)
+(decomposition StructuralBiomimetics HeuristicKnowledge 0.15)
+(decomposition StructuralBiomimetics MetaKnowledge 0.10)
+(clusterMember BioEngineeringCluster StructuralBiomimetics)
+
+;; ── Spider Silk ──
+(isa SpiderSilk ReferenceDomain)
+(hasAttribute SpiderSilk ::LABEL "Spider Silk")
+(hasAttribute SpiderSilk ::ICON "\uD83D\uDD77")
+(hasAttribute SpiderSilk ::PATH "references/spider-silk/")
+(comment SpiderSilk
+  "Silk biology, biomaterials & husbandry.
+   The strongest biological fiber — tensile strength meets elasticity.")
+(decomposition SpiderSilk StructuralKnowledge 0.25)
+(decomposition SpiderSilk DeclarativeKnowledge 0.30)
+(decomposition SpiderSilk ProceduralKnowledge 0.15)
+(decomposition SpiderSilk HeuristicKnowledge 0.15)
+(decomposition SpiderSilk MetaKnowledge 0.15)
+(clusterMember BioEngineeringCluster SpiderSilk)
+
+;; ── Ecological Systems Design ──
+(isa EcologicalSystemsDesign ReferenceDomain)
+(hasAttribute EcologicalSystemsDesign ::LABEL "Ecological Systems Design")
+(hasAttribute EcologicalSystemsDesign ::ICON "\u267B")
+(hasAttribute EcologicalSystemsDesign ::PATH "references/ecological-systems-design/")
+(comment EcologicalSystemsDesign
+  "Circular economy & regenerative design.
+   Closed-loop systems that mirror ecosystem nutrient cycles.")
+(decomposition EcologicalSystemsDesign StructuralKnowledge 0.20)
+(decomposition EcologicalSystemsDesign DeclarativeKnowledge 0.15)
+(decomposition EcologicalSystemsDesign ProceduralKnowledge 0.25)
+(decomposition EcologicalSystemsDesign HeuristicKnowledge 0.25)
+(decomposition EcologicalSystemsDesign MetaKnowledge 0.15)
+(clusterMember BioEngineeringCluster EcologicalSystemsDesign)
+
+;; ════════════════════════════════════════════════════════════
+;; CROSS-DOMAIN EDGES
+;; How reference domains inform each other
+;; ════════════════════════════════════════════════════════════
+
+;; Foundations feed everything
+(informs FormalLogic GraphTheory)
+(informs FormalLogic KnowledgePrimitives)
+(informs GraphTheory Topology)
+(informs GraphTheory SystemsArchitecture)
+(informs Topology SpatialComputing)
+(informs GameTheory NatureInspiredAlgorithms)
+(informs SystemsArchitecture TemporalDatabases)
+
+;; Cognition & Signal interconnections
+(informs CognitiveScience Neuroscience)
+(informs SignalProcessing CognitiveScience)
+(informs Neuroscience NatureInspiredAlgorithms)
+
+;; Data & Compute feed from foundations
+(informs TemporalDatabases SpatialComputing)
+(informs AtomicDesign SystemsArchitecture)
+
+;; Biology feeds bio-engineering
+(informs Biomimicry BioArchitecture)
+(informs Biomimicry BioInspiredRobotics)
+(informs Biomimicry BiomimeticMaterials)
+(informs Entomology NatureInspiredAlgorithms)
+(informs Entomology Biomimicry)
+(informs LivestockScience Biomimicry)
+(informs NatureInspiredAlgorithms BioInspiredRobotics)
+
+;; Bio-engineering internal edges
+(informs BioLocomotion BioInspiredRobotics)
+(informs BioOptics BiomimeticMaterials)
+(informs BioSurfaces BiomimeticMaterials)
+(informs StructuralBiomimetics BioArchitecture)
+(informs SpiderSilk StructuralBiomimetics)
+(informs SpiderSilk BiomimeticMaterials)
+(informs EcologicalSystemsDesign BioArchitecture)
+
+;; ════════════════════════════════════════════════════════════
+;; COMPLETENESS ASSERTION
+;; ════════════════════════════════════════════════════════════
+
+;; The 25 domains define the convex hull boundary of Charlotte's
+;; reference knowledge. Any new reference domain must either
+;; decompose into existing hull vertices or extend the hull.
+
+(isa ConvexHullLibrary ReferenceLibrary)
+(hullBoundarySize ConvexHullLibrary 25)
+(comment ConvexHullLibrary
+  "25 reference domains across 5 clusters: Foundations (6),
+   Cognition & Signal (3), Data & Compute (3), Biology (4),
+   Bio-Engineering (9). Together they bound the knowledge
+   surface Charlotte can reason about. Interior points are
+   weighted combinations of these boundary domains.")
+
+(hullBoundaryMember ConvexHullLibrary KnowledgePrimitives)
+(hullBoundaryMember ConvexHullLibrary FormalLogic)
+(hullBoundaryMember ConvexHullLibrary GraphTheory)
+(hullBoundaryMember ConvexHullLibrary Topology)
+(hullBoundaryMember ConvexHullLibrary GameTheory)
+(hullBoundaryMember ConvexHullLibrary SystemsArchitecture)
+(hullBoundaryMember ConvexHullLibrary CognitiveScience)
+(hullBoundaryMember ConvexHullLibrary SignalProcessing)
+(hullBoundaryMember ConvexHullLibrary Neuroscience)
+(hullBoundaryMember ConvexHullLibrary TemporalDatabases)
+(hullBoundaryMember ConvexHullLibrary SpatialComputing)
+(hullBoundaryMember ConvexHullLibrary AtomicDesign)
+(hullBoundaryMember ConvexHullLibrary Biomimicry)
+(hullBoundaryMember ConvexHullLibrary Entomology)
+(hullBoundaryMember ConvexHullLibrary LivestockScience)
+(hullBoundaryMember ConvexHullLibrary NatureInspiredAlgorithms)
+(hullBoundaryMember ConvexHullLibrary BioArchitecture)
+(hullBoundaryMember ConvexHullLibrary BioInspiredRobotics)
+(hullBoundaryMember ConvexHullLibrary BioLocomotion)
+(hullBoundaryMember ConvexHullLibrary BioOptics)
+(hullBoundaryMember ConvexHullLibrary BioSurfaces)
+(hullBoundaryMember ConvexHullLibrary BiomimeticMaterials)
+(hullBoundaryMember ConvexHullLibrary StructuralBiomimetics)
+(hullBoundaryMember ConvexHullLibrary SpiderSilk)
+(hullBoundaryMember ConvexHullLibrary EcologicalSystemsDesign)

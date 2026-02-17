@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRF Visualizer — Charlotte OS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23A855F7' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23E53E3E' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%23E53E3E'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+  <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0F0F0F;
+      color: #E8E0E0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* ── Dropzone ── */
+    #dropzone {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; height: 100vh; gap: 20px;
+    }
+    #dropzone.dragover { background: rgba(168,85,247,0.05); }
+    .drop-icon {
+      width: 80px; height: 80px; border: 3px dashed #333; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; color: #555; transition: border-color 0.2s, color 0.2s;
+    }
+    .dragover .drop-icon { border-color: #A855F7; color: #A855F7; }
+    .drop-title { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .drop-sub { font-size: 13px; color: #666; }
+    .drop-btn {
+      padding: 10px 24px; background: #A855F7; color: #fff; border: none;
+      border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .drop-btn:hover { background: #9333EA; }
+    /* ── Main UI ── */
+    #main-ui { display: none; height: 100vh; flex-direction: column; }
+    /* ── Top Bar ── */
+    .top-bar {
+      height: 48px; background: #141414; border-bottom: 1px solid #222;
+      display: flex; align-items: center; padding: 0 16px; gap: 8px; flex-shrink: 0; z-index: 10;
+    }
+    .top-logo { font-size: 14px; font-weight: 800; color: #A855F7; letter-spacing: -0.5px; margin-right: 12px; white-space: nowrap; }
+    .tab-btn {
+      padding: 6px 14px; background: transparent; border: 1px solid transparent;
+      border-radius: 6px; color: #888; font-size: 11px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .tab-btn:hover { color: #ccc; background: #1A1A1A; }
+    .tab-btn.active { color: #E8E0E0; background: #1A1A1A; border-color: #333; }
+    .top-spacer { flex: 1; }
+    .top-btn {
+      padding: 5px 12px; background: #1A1A1A; border: 1px solid #333;
+      border-radius: 6px; color: #888; font-size: 11px; cursor: pointer;
+    }
+    .top-btn:hover { color: #ccc; border-color: #555; }
+    #dive-controls { display: none; align-items: center; gap: 8px; }
+    #dive-controls label { font-size: 11px; color: #888; }
+    #dive-select {
+      padding: 4px 8px; background: #1A1A1A; border: 1px solid #333;
+      border-radius: 4px; color: #E8E0E0; font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    }
+    /* ── Content ── */
+    .content { flex: 1; display: flex; overflow: hidden; }
+    /* ── Left Sidebar ── */
+    .left-sidebar {
+      width: 220px; background: #141414; border-right: 1px solid #222;
+      display: flex; flex-direction: column; flex-shrink: 0; overflow: hidden;
+    }
+    .ls-section { padding: 12px; border-bottom: 1px solid #1E1E1E; }
+    .ls-title { font-size: 10px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .stat-cell { background: #1A1A1A; border: 1px solid #222; border-radius: 6px; padding: 8px 6px; text-align: center; }
+    .stat-num { font-size: 16px; font-weight: 700; color: #E53E3E; }
+    .stat-label { font-size: 8px; color: #555; text-transform: uppercase; }
+    #health-gauge { display: flex; justify-content: center; padding: 4px 0; }
+    .file-tree-wrap { flex: 1; overflow-y: auto; padding: 8px 12px; }
+    .ft-dir { font-size: 10px; font-weight: 700; color: #E53E3E; margin-top: 8px; margin-bottom: 2px; font-family: 'JetBrains Mono', monospace; }
+    .ft-file {
+      font-size: 10px; color: #777; padding: 3px 6px; border-radius: 4px;
+      cursor: pointer; font-family: 'JetBrains Mono', monospace;
+      display: flex; align-items: center; gap: 4px; transition: background 0.1s;
+    }
+    .ft-file:hover { background: #1A1A1A; color: #ccc; }
+    .ft-file.active { background: #A855F720; color: #A855F7; }
+    .ft-badge { margin-left: auto; font-size: 9px; background: #222; color: #666; padding: 1px 5px; border-radius: 3px; }
+    /* ── Canvas ── */
+    .canvas-wrap { flex: 1; position: relative; overflow: hidden; }
+    #cy { width: 100%; height: 100%; }
+    #coverage-panel {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: #0F0F0F; padding: 24px; overflow-y: auto; z-index: 5;
+    }
+    #coverage-panel h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #E8E0E0; }
+    .coverage-grid { display: grid; grid-template-columns: 140px repeat(4, 1fr); gap: 2px; }
+    .cov-header { font-size: 10px; font-weight: 700; color: #666; text-transform: uppercase; padding: 8px; }
+    .cov-cell { padding: 10px 8px; font-size: 13px; background: #1A1A1A; border-radius: 4px; text-align: center; }
+    .cov-type { text-align: left; font-weight: 600; font-size: 12px; }
+    .cov-low { color: #E53E3E; }
+    .arity-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .arity-table th { text-align: left; padding: 8px; border-bottom: 1px solid #333; color: #888; font-weight: 600; }
+    .arity-table td { padding: 6px 8px; border-bottom: 1px solid #1A1A1A; }
+    .arity-table .pass { color: #68D391; }
+    .arity-table .fail { color: #E53E3E; }
+    .arity-table .arity-fail { background: #E53E3E10; }
+    /* ── Right Sidebar ── */
+    #entity-detail {
+      display: none; width: 280px; background: #141414; border-left: 1px solid #222;
+      padding: 16px; overflow-y: auto; flex-shrink: 0;
+    }
+    .ed-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; word-break: break-all; }
+    .ed-badges { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+    .ed-badge { font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+    .ed-comment { font-size: 11px; color: #999; line-height: 1.5; margin-bottom: 12px; padding: 8px; background: #1A1A1A; border-radius: 6px; border-left: 3px solid #333; }
+    .ed-field { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .ed-label { color: #666; font-weight: 600; }
+    .ed-section { font-size: 10px; font-weight: 700; color: #555; text-transform: uppercase; margin-top: 14px; margin-bottom: 6px; border-top: 1px solid #222; padding-top: 8px; }
+    .ed-issue { font-size: 10px; padding: 4px 6px; border-radius: 4px; margin-bottom: 3px; line-height: 1.4; }
+    .ed-issue-error { background: #E53E3E15; color: #F56565; }
+    .ed-issue-warning { background: #F59E0B15; color: #F59E0B; }
+    .ed-issue-info { background: #4A9EE515; color: #4A9EE5; }
+    .ed-sev { font-weight: 700; font-size: 9px; margin-right: 4px; }
+    .ed-assertion { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #777; padding: 2px 0; line-height: 1.4; word-break: break-all; }
+    /* ── Bottom Bar ── */
+    .bottom-bar {
+      height: 32px; background: #141414; border-top: 1px solid #222;
+      display: flex; align-items: center; padding: 0 16px; gap: 16px;
+      font-size: 11px; color: #666; flex-shrink: 0;
+    }
+    .bb-item { display: flex; align-items: center; gap: 4px; }
+    .bb-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .bb-error { background: #E53E3E; }
+    .bb-warning { background: #F59E0B; }
+    .bb-info { background: #4A9EE5; }
+    .bb-orphan { background: #888; }
+    .bb-spacer { flex: 1; }
+    .bb-score { font-weight: 700; color: #E8E0E0; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+    #file-input { display: none; }
+  </style>
+</head>
+<body>
+
+<div id="dropzone">
+  <div class="drop-icon">&#x25C8;</div>
+  <div class="drop-title">KRF Visualizer</div>
+  <div class="drop-sub">Drop .krf files here or click to browse</div>
+  <button class="drop-btn" id="load-btn">Load KRF Files</button>
+  <button class="drop-btn" id="auto-load-btn" style="background:#68D391;color:#000;margin-top:8px">Auto-Load charlotte-os corpus</button>
+  <div id="load-status" style="font-size:11px;color:#888;margin-top:6px;display:none"></div>
+  <input type="file" id="file-input" multiple accept=".krf">
+</div>
+
+<div id="main-ui">
+  <div class="top-bar">
+    <div class="top-logo">KRF Viz</div>
+    <button class="tab-btn active" data-view="hierarchy">Hierarchy</button>
+    <button class="tab-btn" data-view="diveline">Dive Line</button>
+    <button class="tab-btn" data-view="microtheory">Microtheory</button>
+    <button class="tab-btn" data-view="arity">Arity</button>
+    <button class="tab-btn" data-view="coverage">Coverage</button>
+    <button class="tab-btn" data-view="rules">Rules</button>
+    <div id="dive-controls">
+      <label>Protocol:</label>
+      <select id="dive-select"></select>
+    </div>
+    <div class="top-spacer"></div>
+    <button class="top-btn" id="reset-btn">Reset</button>
+    <button class="top-btn" id="fit-btn">Fit</button>
+    <button class="top-btn" id="add-files-btn">+ Files</button>
+  </div>
+  <div class="content">
+    <div class="left-sidebar">
+      <div class="ls-section">
+        <div class="ls-title">Stats</div>
+        <div class="stat-grid">
+          <div class="stat-cell"><div class="stat-num" id="stat-files">0</div><div class="stat-label">Files</div></div>
+          <div class="stat-cell"><div class="stat-num" id="stat-entities">0</div><div class="stat-label">Entities</div></div>
+          <div class="stat-cell"><div class="stat-num" id="stat-predicates">0</div><div class="stat-label">Predicates</div></div>
+          <div class="stat-cell"><div class="stat-num" id="stat-rules">0</div><div class="stat-label">Rules</div></div>
+          <div class="stat-cell"><div class="stat-num" id="stat-mts">0</div><div class="stat-label">Microtheories</div></div>
+          <div class="stat-cell"><div class="stat-num" id="stat-assertions">0</div><div class="stat-label">Assertions</div></div>
+        </div>
+      </div>
+      <div class="ls-section">
+        <div class="ls-title">Health</div>
+        <div id="health-gauge"></div>
+      </div>
+      <div class="ls-section" style="padding-bottom:4px">
+        <div class="ls-title">Files</div>
+      </div>
+      <div class="file-tree-wrap" id="file-tree"></div>
+    </div>
+    <div class="canvas-wrap">
+      <div id="cy"></div>
+      <div id="coverage-panel"></div>
+    </div>
+    <div id="entity-detail"></div>
+  </div>
+  <div class="bottom-bar">
+    <div class="bb-item"><div class="bb-dot bb-error"></div><span id="error-count">0</span> errors</div>
+    <div class="bb-item"><div class="bb-dot bb-warning"></div><span id="warning-count">0</span> warnings</div>
+    <div class="bb-item"><div class="bb-dot bb-info"></div><span id="info-count">0</span> info</div>
+    <div class="bb-item"><div class="bb-dot bb-orphan"></div><span id="orphan-count">0</span> orphans</div>
+    <div class="bb-spacer"></div>
+    <div class="bb-item">Score: <span class="bb-score" id="health-score">--</span>/100</div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// KRF PARSER
+// ════════════════════════════════════════════════════════════════
+
+class KRFParser {
+  constructor() { this.currentMicrotheory = null; }
+
+  tokenize(text) {
+    const tokens = [];
+    let i = 0;
+    while (i < text.length) {
+      const ch = text[i];
+      if (/\s/.test(ch)) { i++; continue; }
+      if (ch === ';') {
+        const start = i;
+        while (i < text.length && text[i] !== '\n') i++;
+        tokens.push({ type: 'comment', value: text.slice(start, i).replace(/^;+\s*/, '') });
+        continue;
+      }
+      if (ch === '(') { tokens.push({ type: 'lparen' }); i++; continue; }
+      if (ch === ')') { tokens.push({ type: 'rparen' }); i++; continue; }
+      if (ch === '"') {
+        i++;
+        let str = '';
+        while (i < text.length && text[i] !== '"') {
+          if (text[i] === '\\' && i + 1 < text.length) { str += text[i + 1]; i += 2; }
+          else { str += text[i]; i++; }
+        }
+        i++;
+        tokens.push({ type: 'string', value: str });
+        continue;
+      }
+      let sym = '';
+      while (i < text.length && !/[\s()";\r\n]/.test(text[i])) { sym += text[i]; i++; }
+      if (sym) {
+        if (/^-?\d+(\.\d+)?$/.test(sym)) tokens.push({ type: 'number', value: parseFloat(sym) });
+        else tokens.push({ type: 'symbol', value: sym });
+      }
+    }
+    return tokens;
+  }
+
+  parseExpr(tokens, pos) {
+    if (pos >= tokens.length) return [null, pos];
+    const tok = tokens[pos];
+    if (tok.type === 'lparen') {
+      const list = []; pos++;
+      while (pos < tokens.length && tokens[pos].type !== 'rparen') {
+        const [expr, np] = this.parseExpr(tokens, pos);
+        if (expr !== null) list.push(expr);
+        pos = np;
+      }
+      pos++;
+      return [list, pos];
+    }
+    if (tok.type === 'rparen') return [null, pos + 1];
+    if (tok.type === 'comment') return [null, pos + 1];
+    return [{ type: tok.type, value: tok.value }, pos + 1];
+  }
+
+  av(node) {
+    if (!node || Array.isArray(node)) return null;
+    return node.value !== undefined ? node.value : null;
+  }
+
+  parseFile(text, fileName) {
+    const result = { fileName, microtheory: null, assertions: [], rules: [], comments: new Map(), lineComments: [] };
+    const lines = text.split('\n');
+    const tokens = this.tokenize(text);
+    this.currentMicrotheory = null;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith(';;')) result.lineComments.push({ line: i + 1, text: line.replace(/^;+\s*/, '') });
+    }
+    let pos = 0;
+    while (pos < tokens.length) {
+      if (tokens[pos].type === 'comment') { pos++; continue; }
+      const [expr, np] = this.parseExpr(tokens, pos);
+      pos = np;
+      if (!expr || !Array.isArray(expr) || expr.length === 0) continue;
+      this._interpret(expr, result);
+    }
+    return result;
+  }
+
+  _interpret(expr, result) {
+    if (!Array.isArray(expr) || expr.length === 0) return;
+    const head = this.av(expr[0]);
+    if (!head) return;
+    if (head === 'in-microtheory' && expr.length >= 2) {
+      this.currentMicrotheory = this.av(expr[1]);
+      result.microtheory = this.currentMicrotheory;
+      return;
+    }
+    if (head === 'comment' && expr.length >= 3) {
+      const target = this.av(expr[1]), text = this.av(expr[2]);
+      if (target && text) result.comments.set(target, text);
+      result.assertions.push({ predicate: 'comment', args: expr.slice(1).map(a => this.av(a)).filter(Boolean), microtheory: this.currentMicrotheory, file: result.fileName });
+      return;
+    }
+    if (head === 'implies' && expr.length >= 3) {
+      const rule = this._parseRule(expr, result);
+      if (rule) result.rules.push(rule);
+      return;
+    }
+    if (head === 'defaultTrue' && expr.length >= 2) {
+      const inner = expr[1];
+      if (Array.isArray(inner) && this.av(inner[0]) === 'implies') {
+        const rule = this._parseRule(inner, result);
+        if (rule) { rule.isDefault = true; result.rules.push(rule); }
+      }
+      return;
+    }
+    const args = [];
+    for (let i = 1; i < expr.length; i++) {
+      const val = this.av(expr[i]);
+      if (val !== null) args.push(val);
+      else if (Array.isArray(expr[i])) args.push(this._flat(expr[i]));
+    }
+    result.assertions.push({ predicate: head, args, microtheory: this.currentMicrotheory, file: result.fileName });
+  }
+
+  _parseRule(expr, result) {
+    if (expr.length < 3) return null;
+    const ant = this._extractPreds(expr[1]), con = this._extractPreds(expr[2]);
+    const vars = new Set();
+    this._collectVars(expr, vars);
+    return { antecedent: ant, consequent: con, variables: [...vars], microtheory: this.currentMicrotheory, file: result.fileName };
+  }
+
+  _extractPreds(expr) {
+    const preds = [];
+    if (!expr || !Array.isArray(expr)) return preds;
+    const head = this.av(expr[0]);
+    if (!head) return preds;
+    if (head === 'and' || head === 'or' || head === 'not') {
+      for (let i = 1; i < expr.length; i++) preds.push(...this._extractPreds(expr[i]));
+      return preds;
+    }
+    if (head === 'thereExists') {
+      for (let i = 2; i < expr.length; i++) preds.push(...this._extractPreds(expr[i]));
+      return preds;
+    }
+    const args = [];
+    for (let i = 1; i < expr.length; i++) {
+      const v = this.av(expr[i]);
+      if (v !== null) args.push(v);
+      else if (Array.isArray(expr[i])) { preds.push(...this._extractPreds(expr[i])); args.push('[nested]'); }
+    }
+    preds.push({ predicate: head, args });
+    return preds;
+  }
+
+  _collectVars(expr, vars) {
+    if (!expr) return;
+    if (Array.isArray(expr)) { for (const item of expr) this._collectVars(item, vars); }
+    else { const v = this.av(expr); if (v && typeof v === 'string' && v.startsWith('?')) vars.add(v); }
+  }
+
+  _flat(expr) {
+    if (!expr) return '';
+    if (!Array.isArray(expr)) { const v = this.av(expr); return v !== null ? String(v) : ''; }
+    return '(' + expr.map(e => this._flat(e)).join(' ') + ')';
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// KRF MODEL
+// ════════════════════════════════════════════════════════════════
+
+class KRFKnowledgeBase {
+  constructor() {
+    this.files = new Map();
+    this.entities = new Map();
+    this.predicates = new Map();
+    this.microtheories = new Map();
+    this.rules = [];
+    this.assertions = [];
+    this.comments = new Map();
+    this.isaMap = new Map();
+    this.genlsMap = new Map();
+    this.genlMtMap = new Map();
+    this.arityMap = new Map();
+    this.argIsaMap = new Map();
+    this.disjointPairs = [];
+    this.fileContributions = new Map();
+  }
+
+  addFile(parsed) {
+    this.files.set(parsed.fileName, parsed);
+    const contrib = { assertionCount: parsed.assertions.length, ruleCount: parsed.rules.length, entities: new Set() };
+    if (parsed.microtheory) {
+      if (!this.microtheories.has(parsed.microtheory))
+        this.microtheories.set(parsed.microtheory, { name: parsed.microtheory, files: new Set(), assertionCount: 0 });
+      const mt = this.microtheories.get(parsed.microtheory);
+      mt.files.add(parsed.fileName);
+      mt.assertionCount += parsed.assertions.length;
+    }
+    for (const [key, val] of parsed.comments) this.comments.set(key, val);
+    for (const a of parsed.assertions) { this.assertions.push(a); this._indexAssertion(a, contrib); }
+    for (const r of parsed.rules) { this.rules.push(r); this._indexRule(r); }
+    this.fileContributions.set(parsed.fileName, contrib);
+  }
+
+  _indexAssertion(a, contrib) {
+    const { predicate, args } = a;
+    if (!this.predicates.has(predicate)) this.predicates.set(predicate, { name: predicate, usages: [], declaredArity: null });
+    this.predicates.get(predicate).usages.push(a);
+    if (predicate === 'isa' && args.length >= 2) {
+      const [child, parent] = args;
+      this._ensureEntity(child, a.file); this._ensureEntity(parent, a.file);
+      if (!this.isaMap.has(child)) this.isaMap.set(child, new Set());
+      this.isaMap.get(child).add(parent);
+      this.entities.get(child).isaParents.add(parent);
+      this.entities.get(parent).isaChildren.add(child);
+      contrib.entities.add(child); contrib.entities.add(parent);
+    }
+    if (predicate === 'genls' && args.length >= 2) {
+      const [child, parent] = args;
+      this._ensureEntity(child, a.file); this._ensureEntity(parent, a.file);
+      if (!this.genlsMap.has(child)) this.genlsMap.set(child, new Set());
+      this.genlsMap.get(child).add(parent);
+      this.entities.get(child).genlsParents.add(parent);
+      this.entities.get(parent).genlsChildren.add(child);
+      contrib.entities.add(child); contrib.entities.add(parent);
+    }
+    if (predicate === 'genlMt' && args.length >= 2) {
+      const [child, parent] = args;
+      if (!this.genlMtMap.has(child)) this.genlMtMap.set(child, new Set());
+      this.genlMtMap.get(child).add(parent);
+      for (const mt of [child, parent]) {
+        if (!this.microtheories.has(mt)) this.microtheories.set(mt, { name: mt, files: new Set(), assertionCount: 0 });
+      }
+    }
+    if (predicate === 'arity' && args.length >= 2) {
+      const arity = typeof args[1] === 'number' ? args[1] : parseInt(args[1]);
+      this.arityMap.set(args[0], arity);
+      if (!this.predicates.has(args[0])) this.predicates.set(args[0], { name: args[0], usages: [], declaredArity: null });
+      this.predicates.get(args[0]).declaredArity = arity;
+    }
+    const am = predicate.match(/^arg(\d)Isa$/);
+    if (am && args.length >= 2) {
+      if (!this.argIsaMap.has(args[0])) this.argIsaMap.set(args[0], {});
+      this.argIsaMap.get(args[0])['arg' + am[1] + 'Isa'] = args[1];
+    }
+    if (predicate === 'disjointWith' && args.length >= 2) this.disjointPairs.push({ a: args[0], b: args[1] });
+    if (predicate === 'comment' && args.length >= 2) this.comments.set(args[0], args[1]);
+    for (const arg of args) {
+      if (typeof arg === 'string' && !arg.startsWith('?') && !arg.startsWith('"') && arg.length > 0) contrib.entities.add(arg);
+    }
+  }
+
+  _indexRule(r) {
+    for (const pred of [...r.antecedent, ...r.consequent]) {
+      if (!this.predicates.has(pred.predicate)) this.predicates.set(pred.predicate, { name: pred.predicate, usages: [], declaredArity: null });
+    }
+  }
+
+  _ensureEntity(name, file) {
+    if (!this.entities.has(name))
+      this.entities.set(name, { name, files: new Set(), isaParents: new Set(), isaChildren: new Set(), genlsParents: new Set(), genlsChildren: new Set(), assertions: [], microtheory: null });
+    if (file) this.entities.get(name).files.add(file);
+  }
+
+  getTypes(entityName) {
+    const types = new Set(), queue = [entityName];
+    while (queue.length > 0) { const curr = queue.pop(); const parents = this.isaMap.get(curr); if (parents) for (const p of parents) if (!types.has(p)) { types.add(p); queue.push(p); } }
+    return types;
+  }
+
+  getGeneralizations(entityName) {
+    const genls = new Set(), queue = [entityName];
+    while (queue.length > 0) { const curr = queue.pop(); const parents = this.genlsMap.get(curr); if (parents) for (const p of parents) if (!genls.has(p)) { genls.add(p); queue.push(p); } }
+    return genls;
+  }
+
+  getKnowledgeType(entityName) {
+    for (const a of this.assertions) {
+      if (a.predicate === 'mapsToKnowledgeType' && a.args[0] === entityName) return a.args[1];
+    }
+    const genls = this.getGeneralizations(entityName);
+    const types = this.getTypes(entityName);
+    const all = new Set([...genls, ...types]);
+    if (all.has('EDGE') || all.has('StructuralKnowledge')) return 'StructuralKnowledge';
+    if (all.has('NODE') || all.has('DeclarativeKnowledge')) return 'DeclarativeKnowledge';
+    if (all.has('PROTOCOL') || all.has('ProceduralKnowledge')) return 'ProceduralKnowledge';
+    if (all.has('METRIC') || all.has('SIGNAL') || all.has('HeuristicKnowledge')) return 'HeuristicKnowledge';
+    if (all.has('MetaKnowledge')) return 'MetaKnowledge';
+    if (all.has('Primitive')) return 'Kernel';
+    const entity = this.entities.get(entityName);
+    if (entity) for (const f of entity.files) {
+      if (f.includes('structural')) return 'StructuralKnowledge';
+      if (f.includes('declarative')) return 'DeclarativeKnowledge';
+      if (f.includes('procedural')) return 'ProceduralKnowledge';
+      if (f.includes('heuristic')) return 'HeuristicKnowledge';
+      if (f.includes('meta')) return 'MetaKnowledge';
+      if (f.includes('kernel')) return 'Kernel';
+    }
+    return null;
+  }
+
+  getMtInheritance(mtName) {
+    const visited = new Set(), queue = [mtName];
+    while (queue.length > 0) {
+      const curr = queue.pop();
+      if (visited.has(curr)) continue;
+      visited.add(curr);
+      const parents = this.genlMtMap.get(curr);
+      if (parents) for (const p of parents) queue.push(p);
+    }
+    return visited;
+  }
+
+  getAssertionsFor(entityName) {
+    return this.assertions.filter(a => a.args.some(arg => arg === entityName) || a.predicate === entityName);
+  }
+
+  getStats() {
+    return { files: this.files.size, entities: this.entities.size, predicates: this.predicates.size, microtheories: this.microtheories.size, assertions: this.assertions.length, rules: this.rules.length, comments: this.comments.size };
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// GRAPH BUILDER
+// ════════════════════════════════════════════════════════════════
+
+const KC = { StructuralKnowledge: '#4A9EE5', DeclarativeKnowledge: '#68D391', ProceduralKnowledge: '#F59E0B', HeuristicKnowledge: '#ECC94B', MetaKnowledge: '#A855F7', Kernel: '#E53E3E', default: '#888888' };
+const KS = { StructuralKnowledge: 'Structural', DeclarativeKnowledge: 'Declarative', ProceduralKnowledge: 'Procedural', HeuristicKnowledge: 'Heuristic', MetaKnowledge: 'Meta', Kernel: 'Kernel' };
+
+function nodeStyle(name, kb) {
+  const types = kb.getTypes(name), genls = kb.getGeneralizations(name), kt = kb.getKnowledgeType(name), color = KC[kt] || KC.default;
+  if (types.has('Primitive') || name === 'FACT') return { shape: 'diamond', color: KC.Kernel, nodeType: 'primitive' };
+  if (name.endsWith('Mt') || kb.microtheories.has(name)) return { shape: 'barrel', color: KC.MetaKnowledge, nodeType: 'microtheory' };
+  if (types.has('PROTOCOL') || genls.has('PROTOCOL')) return { shape: 'octagon', color: KC.ProceduralKnowledge, nodeType: 'protocol' };
+  if (kb.arityMap.has(name) || types.has('Predicate') || types.has('MetaPredicate') || types.has('Relation')) return { shape: 'hexagon', color, nodeType: 'predicate' };
+  if (types.has('Collection') || types.has('KnowledgeType') || types.has('TemporalUnit') || types.has('SpatialDimension')) return { shape: 'round-rectangle', color, nodeType: 'collection' };
+  return { shape: 'ellipse', color, nodeType: 'entity' };
+}
+
+function buildElements(kb) {
+  const nodes = [], edges = [], ids = new Set();
+  const skip = new Set(['Thing', 'and', 'or', 'not', 'thereExists', 'implies', 'defaultTrue']);
+  const eids = new Set();
+  const addN = (id, data) => { if (ids.has(id)) return; ids.add(id); nodes.push({ data: { id, ...data } }); };
+  const addE = (s, t, data) => { const eid = s + '-' + (data.type||'e') + '-' + t; if (eids.has(eid)) return; eids.add(eid); edges.push({ data: { id: eid, source: s, target: t, ...data } }); };
+
+  for (const [name, entity] of kb.entities) {
+    if (name.startsWith('?') || name.startsWith('"') || skip.has(name)) continue;
+    const st = nodeStyle(name, kb), kt = kb.getKnowledgeType(name);
+    addN(name, { label: name, shape: st.shape, color: st.color, nodeType: st.nodeType, knowledgeType: kt || 'unknown', knowledgeTypeShort: KS[kt] || '', comment: (kb.comments.get(name) || '').substring(0, 200), file: [...entity.files].join(', '), microtheory: entity.microtheory || '', isaParents: [...entity.isaParents], genlsParents: [...entity.genlsParents] });
+  }
+  for (const [child, parents] of kb.isaMap) { if (!ids.has(child)) continue; for (const p of parents) { if (!ids.has(p)) continue; addE(child, p, { type: 'isa', label: 'isa', lineStyle: 'solid', lineColor: '#666', width: 1.5 }); } }
+  for (const [child, parents] of kb.genlsMap) { if (!ids.has(child)) continue; for (const p of parents) { if (!ids.has(p)) continue; addE(child, p, { type: 'genls', label: 'genls', lineStyle: 'solid', lineColor: '#999', width: 2 }); } }
+  for (const [child, parents] of kb.genlMtMap) {
+    if (!ids.has(child)) addN(child, { label: child, shape: 'barrel', color: KC.MetaKnowledge, nodeType: 'microtheory', knowledgeType: 'MetaKnowledge', knowledgeTypeShort: 'Meta', comment: '', file: '', microtheory: child });
+    for (const p of parents) {
+      if (!ids.has(p)) addN(p, { label: p, shape: 'barrel', color: KC.MetaKnowledge, nodeType: 'microtheory', knowledgeType: 'MetaKnowledge', knowledgeTypeShort: 'Meta', comment: '', file: '', microtheory: p });
+      addE(child, p, { type: 'genlMt', label: 'genlMt', lineStyle: 'solid', lineColor: '#A855F7', width: 3 });
+    }
+  }
+  for (const pair of kb.disjointPairs) { if (ids.has(pair.a) && ids.has(pair.b)) addE(pair.a, pair.b, { type: 'disjointWith', label: 'disjoint', lineStyle: 'dashed', lineColor: '#E53E3E', width: 1 }); }
+  const vpreds = ['hasTrigger', 'derivedFrom', 'attachedTo', 'measures', 'measuresNode'];
+  for (const a of kb.assertions) {
+    if (vpreds.includes(a.predicate) && a.args.length >= 2) {
+      const [s, t] = a.args;
+      if (typeof s === 'string' && typeof t === 'string' && !s.startsWith('?') && !t.startsWith('?') && ids.has(s) && ids.has(t))
+        addE(s, t, { type: 'valuation', label: a.predicate, lineStyle: 'solid', lineColor: '#D4A017', width: 2.5 });
+    }
+    if (a.predicate === 'inverseOf' && a.args.length >= 2) {
+      const [r1, r2] = a.args;
+      if (ids.has(r1) && ids.has(r2)) addE(r1, r2, { type: 'inverseOf', label: 'inverse', lineStyle: 'dashed', lineColor: '#888', width: 1 });
+    }
+  }
+  return { nodes, edges };
+}
+
+function buildHierarchy(kb) {
+  const el = buildElements(kb);
+  const rTypes = new Set(['isa', 'genls']);
+  const hEdges = el.edges.filter(e => rTypes.has(e.data.type));
+  const conn = new Set();
+  for (const e of hEdges) { conn.add(e.data.source); conn.add(e.data.target); }
+  return { nodes: el.nodes.filter(n => conn.has(n.data.id)), edges: hEdges };
+}
+
+function buildMtElements(kb) {
+  const nodes = [], edges = [];
+  for (const [name, mt] of kb.microtheories) {
+    nodes.push({ data: { id: name, label: name.replace('Charlotte', '').replace('Mt', ''), shape: 'barrel', color: KC.MetaKnowledge, nodeType: 'microtheory', assertionCount: mt.assertionCount, fileCount: mt.files.size, files: [...mt.files].join(', ') } });
+  }
+  for (const [child, parents] of kb.genlMtMap) {
+    for (const p of parents) edges.push({ data: { id: 'mt-' + child + '-' + p, source: child, target: p, type: 'genlMt', label: 'genlMt', lineStyle: 'solid', lineColor: '#A855F7', width: 3 } });
+  }
+  return { nodes, edges };
+}
+
+function buildRuleElements(kb) {
+  const nodes = [], edges = [], ids = new Set();
+  const skip = new Set(['and', 'or', 'not', 'thereExists', 'implies']);
+  const addN = (id, d) => { if (ids.has(id)) return; ids.add(id); nodes.push({ data: { id, ...d } }); };
+  for (const [name, pred] of kb.predicates) {
+    if (name.startsWith('?') || skip.has(name)) continue;
+    const kt = kb.getKnowledgeType(name);
+    addN(name, { label: name, shape: 'hexagon', color: KC[kt] || KC.default, nodeType: 'predicate', usageCount: pred.usages.length, declaredArity: pred.declaredArity });
+  }
+  kb.rules.forEach((rule, i) => {
+    const rid = 'rule-' + i;
+    addN(rid, { label: 'R' + i, shape: 'triangle', color: '#888', nodeType: 'rule', isDefault: rule.isDefault || false, microtheory: rule.microtheory || '' });
+    for (const p of rule.antecedent) { if (ids.has(p.predicate)) edges.push({ data: { id: p.predicate + '-ant-' + rid, source: p.predicate, target: rid, type: 'antecedent', lineColor: '#4A9EE5', lineStyle: 'solid', width: 1.5 } }); }
+    for (const p of rule.consequent) { if (ids.has(p.predicate)) edges.push({ data: { id: rid + '-con-' + p.predicate, source: rid, target: p.predicate, type: 'consequent', lineColor: '#68D391', lineStyle: 'solid', width: 1.5 } }); }
+  });
+  return { nodes, edges };
+}
+
+// ════════════════════════════════════════════════════════════════
+// ANALYZERS
+// ════════════════════════════════════════════════════════════════
+
+class KRFAnalyzer {
+  constructor(kb) { this.kb = kb; this.issues = []; }
+
+  runAll() {
+    this.issues = [];
+    this._orphans(); this._dangling(); this._arity(); this._chains(); this._mtLeaks(); this._unconnected(); this._missingComments();
+    return this.issues;
+  }
+
+  _orphans() {
+    const referenced = new Set();
+    const definitional = new Set(['isa', 'genls', 'genlMt', 'comment', 'arity', 'arg1Isa', 'arg2Isa', 'arg3Isa', 'arg4Isa', 'in-microtheory']);
+    for (const r of this.kb.rules) for (const p of [...r.antecedent, ...r.consequent]) {
+      for (const a of p.args) if (typeof a === 'string' && !a.startsWith('?')) referenced.add(a);
+      referenced.add(p.predicate);
+    }
+    for (const a of this.kb.assertions) if (!definitional.has(a.predicate)) {
+      for (const arg of a.args) if (typeof arg === 'string' && !arg.startsWith('?')) referenced.add(arg);
+      referenced.add(a.predicate);
+    }
+    for (const [name, entity] of this.kb.entities) {
+      if (name.startsWith('?') || name.startsWith(':') || name.startsWith('"') || name.endsWith('Mt') || this.kb.microtheories.has(name)) continue;
+      if (entity.isaChildren.size > 0 || entity.genlsChildren.size > 0) continue;
+      if (referenced.has(name)) continue;
+      if (entity.isaParents.size > 0 || entity.genlsParents.size > 0) {
+        const hasNonDef = this.kb.assertions.some(a => !definitional.has(a.predicate) && a.args.some(arg => arg === name));
+        if (!hasNonDef && entity.isaChildren.size === 0 && entity.genlsChildren.size === 0)
+          this.issues.push({ type: 'orphan', severity: 'warning', entity: name, message: '"' + name + '" defined but never used in rules or relationships', file: [...entity.files][0] || '' });
+      }
+    }
+  }
+
+  _dangling() {
+    const defined = new Set();
+    for (const [n] of this.kb.isaMap) defined.add(n);
+    for (const [, p] of this.kb.isaMap) for (const v of p) defined.add(v);
+    for (const [n] of this.kb.genlsMap) defined.add(n);
+    for (const [, p] of this.kb.genlsMap) for (const v of p) defined.add(v);
+    for (const [n] of this.kb.arityMap) defined.add(n);
+    for (const [n] of this.kb.microtheories) defined.add(n);
+    const sys = new Set(['isa','genls','genlMt','comment','arity','arg1Isa','arg2Isa','arg3Isa','arg4Isa','in-microtheory','disjointWith','implies','and','or','not','thereExists','defaultTrue','equals','lessThan','greaterThan','lessThanOrEqual','greaterThanOrEqual','greaterThanOrEqualTo','plus','minus','times','absoluteDifference']);
+    for (const r of this.kb.rules) for (const p of [...r.antecedent, ...r.consequent]) {
+      if (!sys.has(p.predicate) && !defined.has(p.predicate) && !p.predicate.startsWith('?')) {
+        const hasDef = this.kb.assertions.some(a => (a.predicate === 'isa' || a.predicate === 'arity') && a.args[0] === p.predicate);
+        if (!hasDef) { defined.add(p.predicate); this.issues.push({ type: 'dangling', severity: 'info', entity: p.predicate, message: 'Predicate "' + p.predicate + '" used in rules but has no isa or arity declaration', file: r.file || '' }); }
+      }
+    }
+  }
+
+  _arity() {
+    for (const [pred, arity] of this.kb.arityMap) {
+      const p = this.kb.predicates.get(pred);
+      if (!p) continue;
+      for (const u of p.usages) {
+        if (u.predicate === pred && u.args.length !== arity)
+          this.issues.push({ type: 'arity-violation', severity: 'error', entity: pred, message: '"' + pred + '" arity ' + arity + ' but used with ' + u.args.length + ' args', file: u.file || '', expected: arity, actual: u.args.length });
+      }
+    }
+  }
+
+  _chains() {
+    const protos = [];
+    for (const a of this.kb.assertions) if (a.predicate === 'isa' && a.args[1] === 'PROTOCOL') protos.push(a.args[0]);
+    for (const proto of protos) {
+      if (proto.startsWith('?')) continue;
+      const hasTrig = this.kb.assertions.some(a => a.predicate === 'hasTrigger' && a.args[0] === proto);
+      if (!hasTrig) {
+        const hasRuleTrig = this.kb.rules.some(r => r.antecedent.some(p => p.predicate === 'isa' && p.args.some(a => a === 'PROTOCOL')) && r.consequent.some(p => p.predicate === 'hasTrigger'));
+        if (!hasRuleTrig) this.issues.push({ type: 'broken-chain', severity: 'info', entity: proto, message: 'PROTOCOL "' + proto + '" has no direct hasTrigger assertion', file: this._ef(proto) });
+      }
+    }
+  }
+
+  _mtLeaks() {
+    const entityMt = new Map();
+    for (const a of this.kb.assertions) if (a.microtheory && a.predicate === 'isa' && a.args.length >= 2) {
+      if (!entityMt.has(a.args[0])) entityMt.set(a.args[0], new Set());
+      entityMt.get(a.args[0]).add(a.microtheory);
+    }
+    for (const a of this.kb.assertions) {
+      if (!a.microtheory) continue;
+      const accessible = this.kb.getMtInheritance(a.microtheory);
+      for (const arg of a.args) {
+        if (typeof arg !== 'string' || arg.startsWith('?') || arg.startsWith('"')) continue;
+        const argMts = entityMt.get(arg);
+        if (!argMts) continue;
+        let ok = false;
+        for (const mt of argMts) if (accessible.has(mt)) { ok = true; break; }
+        if (!ok) this.issues.push({ type: 'mt-leak', severity: 'warning', entity: arg, message: '"' + arg + '" (in ' + [...argMts].join(', ') + ') referenced in ' + a.microtheory + ' without inheritance', file: a.file || '' });
+      }
+    }
+  }
+
+  _unconnected() {
+    const adj = new Map();
+    const addA = (a, b) => { if (!adj.has(a)) adj.set(a, new Set()); if (!adj.has(b)) adj.set(b, new Set()); adj.get(a).add(b); adj.get(b).add(a); };
+    for (const [c, ps] of this.kb.isaMap) for (const p of ps) addA(c, p);
+    for (const [c, ps] of this.kb.genlsMap) for (const p of ps) addA(c, p);
+    const roots = ['FACT', 'Collection', 'Primitive', 'Thing'].filter(r => adj.has(r));
+    const reach = new Set(), queue = [...roots];
+    while (queue.length > 0) { const c = queue.pop(); if (reach.has(c)) continue; reach.add(c); const ns = adj.get(c); if (ns) for (const n of ns) queue.push(n); }
+    let count = 0;
+    for (const [name] of adj) {
+      if (!reach.has(name) && !name.startsWith('?') && !name.endsWith('Mt')) {
+        if (++count > 50) break;
+        this.issues.push({ type: 'unconnected', severity: 'warning', entity: name, message: '"' + name + '" has no path to kernel roots', file: this._ef(name) });
+      }
+    }
+  }
+
+  _missingComments() {
+    for (const [name, entity] of this.kb.entities) {
+      if (name.startsWith('?') || name.startsWith(':') || name.startsWith('"')) continue;
+      const types = this.kb.getTypes(name);
+      const isC = types.has('Collection') || types.has('KnowledgeType');
+      const isP = this.kb.arityMap.has(name);
+      if ((isC || isP) && !this.kb.comments.has(name))
+        this.issues.push({ type: 'missing-comment', severity: 'info', entity: name, message: (isC ? 'Collection' : 'Predicate') + ' "' + name + '" has no comment', file: [...entity.files][0] || '' });
+    }
+  }
+
+  _ef(name) { const e = this.kb.entities.get(name); return (e && e.files.size > 0) ? [...e.files][0] : ''; }
+
+  computeHealthScore() {
+    let s = 100;
+    for (const i of this.issues) { if (i.severity === 'error') s -= 5; else if (i.severity === 'warning') s -= 2; else s -= 0.5; }
+    return Math.max(0, Math.round(s * 10) / 10);
+  }
+
+  getSummary() {
+    const c = { error: 0, warning: 0, info: 0 }, tc = {};
+    for (const i of this.issues) { c[i.severity] = (c[i.severity] || 0) + 1; tc[i.type] = (tc[i.type] || 0) + 1; }
+    return { counts: c, typeCounts: tc, score: this.computeHealthScore(), total: this.issues.length };
+  }
+
+  getIssuesFor(name) { return this.issues.filter(i => i.entity === name); }
+
+  getArityResults() {
+    const results = [];
+    for (const [pred, arity] of this.kb.arityMap) {
+      const p = this.kb.predicates.get(pred);
+      if (!p) continue;
+      let valid = true; const violations = [];
+      for (const u of p.usages) if (u.predicate === pred && u.args.length !== arity) { valid = false; violations.push({ file: u.file, actual: u.args.length }); }
+      results.push({ name: pred, arity, usageCount: p.usages.filter(u => u.predicate === pred).length, valid, violations });
+    }
+    return results.sort((a, b) => a.name.localeCompare(b.name));
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// APP
+// ════════════════════════════════════════════════════════════════
+
+let cy, kb, analyzer;
+const parser = new KRFParser();
+let currentView = 'hierarchy';
+
+function initCy() {
+  cy = cytoscape({
+    container: document.getElementById('cy'),
+    wheelSensitivity: 0.3, minZoom: 0.1, maxZoom: 5, style: []
+  });
+  cy.on('tap', 'node', evt => showDetail(evt.target.data()));
+  cy.on('tap', evt => { if (evt.target === cy) document.getElementById('entity-detail').style.display = 'none'; });
+}
+
+function applyStyle() {
+  cy.style([
+    { selector: 'node', style: { 'label': 'data(label)', 'text-valign': 'center', 'text-halign': 'center', 'font-size': '10px', 'font-family': 'Inter, sans-serif', 'color': '#E8E0E0', 'text-outline-color': '#0F0F0F', 'text-outline-width': 2, 'background-color': 'data(color)', 'shape': 'data(shape)', 'width': 40, 'height': 40, 'border-width': 1, 'border-color': '#333' } },
+    { selector: 'node[nodeType="primitive"]', style: { 'width': 60, 'height': 60, 'font-size': '12px', 'font-weight': 'bold' } },
+    { selector: 'node[nodeType="microtheory"]', style: { 'width': 80, 'height': 50, 'font-size': '9px' } },
+    { selector: 'node[nodeType="protocol"]', style: { 'width': 50, 'height': 50, 'font-size': '9px' } },
+    { selector: 'node[nodeType="predicate"]', style: { 'width': 45, 'height': 45, 'font-size': '9px' } },
+    { selector: 'node[nodeType="rule"]', style: { 'width': 30, 'height': 30, 'font-size': '8px' } },
+    { selector: 'edge', style: { 'curve-style': 'bezier', 'target-arrow-shape': 'triangle', 'target-arrow-color': 'data(lineColor)', 'line-color': 'data(lineColor)', 'line-style': 'data(lineStyle)', 'width': 'data(width)', 'arrow-scale': 0.8, 'opacity': 0.7 } },
+    { selector: 'edge[type="disjointWith"]', style: { 'target-arrow-shape': 'none', 'source-arrow-shape': 'none' } },
+    { selector: '.orphan', style: { 'border-color': '#E53E3E', 'border-width': 3, 'border-opacity': 0.8 } },
+    { selector: '.dangling', style: { 'border-color': '#F59E0B', 'border-width': 3, 'border-style': 'dashed' } },
+    { selector: '.arity-error', style: { 'background-color': '#E53E3E' } },
+    { selector: '.missing-comment', style: { 'border-style': 'dotted', 'border-color': '#666', 'border-width': 2 } },
+    { selector: '.unconnected', style: { 'border-color': '#F59E0B', 'border-width': 3 } },
+    { selector: '.dimmed', style: { 'opacity': 0.15 } },
+    { selector: '.highlighted', style: { 'opacity': 1, 'border-color': '#D4A017', 'border-width': 4, 'z-index': 999 } },
+    { selector: '.chain-gold', style: { 'line-color': '#D4A017', 'target-arrow-color': '#D4A017', 'width': 4, 'opacity': 1, 'z-index': 999 } },
+    { selector: ':selected', style: { 'border-color': '#fff', 'border-width': 3 } }
+  ]);
+}
+
+async function loadFiles(fileList) {
+  kb = new KRFKnowledgeBase();
+  for (const file of fileList) {
+    const text = await file.text();
+    const name = file.webkitRelativePath || file.name;
+    kb.addFile(parser.parseFile(text, name));
+  }
+  analyzer = new KRFAnalyzer(kb);
+  analyzer.runAll();
+  applyStyle();
+  updateFileTree();
+  updateBottom();
+  updateStats();
+  populateDiveSelect();
+  switchView('hierarchy');
+  setActiveTab('hierarchy');
+  document.getElementById('dropzone').style.display = 'none';
+  document.getElementById('main-ui').style.display = 'flex';
+}
+
+function switchView(name) {
+  currentView = name;
+  cy.elements().remove();
+  document.getElementById('coverage-panel').style.display = 'none';
+  if (name === 'hierarchy') showHierarchy();
+  else if (name === 'diveline') showDiveLine();
+  else if (name === 'microtheory') showMicrotheory();
+  else if (name === 'arity') showArity();
+  else if (name === 'coverage') showCoverage();
+  else if (name === 'rules') showRules();
+  applyIssues();
+}
+
+function showHierarchy() {
+  const el = buildHierarchy(kb);
+  cy.add([...el.nodes, ...el.edges]);
+  cy.layout({ name: 'dagre', rankDir: 'BT', nodeSep: 30, rankSep: 60, padding: 30, animate: false }).run();
+  cy.fit(undefined, 40);
+}
+
+function showDiveLine(proto) {
+  const el = buildElements(kb);
+  cy.add([...el.nodes, ...el.edges]);
+  if (proto) traceDiveLine(proto);
+  cy.layout({ name: 'dagre', rankDir: 'LR', nodeSep: 40, rankSep: 80, padding: 30, animate: false }).run();
+  cy.fit(undefined, 40);
+}
+
+function traceDiveLine(proto) {
+  cy.elements().addClass('dimmed');
+  const chain = new Set([proto]);
+  const triggers = kb.assertions.filter(a => a.predicate === 'hasTrigger' && a.args[0] === proto);
+  for (const t of triggers) {
+    const sig = t.args[1];
+    if (typeof sig !== 'string' || sig.startsWith('?')) continue;
+    chain.add(sig);
+    const derivs = kb.assertions.filter(a => a.predicate === 'derivedFrom' && a.args[0] === sig);
+    for (const d of derivs) {
+      const met = d.args[1];
+      if (typeof met !== 'string' || met.startsWith('?')) continue;
+      chain.add(met);
+      const atts = kb.assertions.filter(a => (a.predicate === 'attachedTo' || a.predicate === 'measures') && a.args[0] === met);
+      for (const att of atts) { const nd = att.args[1]; if (typeof nd === 'string' && !nd.startsWith('?')) chain.add(nd); }
+    }
+  }
+  for (const n of chain) { const node = cy.getElementById(n); if (node.length) node.removeClass('dimmed').addClass('highlighted'); }
+  cy.edges().forEach(e => { if (chain.has(e.data('source')) && chain.has(e.data('target'))) e.removeClass('dimmed').addClass('chain-gold'); });
+}
+
+function showMicrotheory() {
+  const el = buildMtElements(kb);
+  cy.add([...el.nodes, ...el.edges]);
+  cy.layout({ name: 'dagre', rankDir: 'TB', nodeSep: 60, rankSep: 80, padding: 40, animate: false }).run();
+  cy.nodes().forEach(n => {
+    const c = n.data('assertionCount') || 0, s = Math.max(60, Math.min(120, 60 + c / 3));
+    n.style({ 'width': s, 'height': s * 0.6, 'font-size': '11px' });
+  });
+  cy.fit(undefined, 40);
+}
+
+function showArity() {
+  const results = analyzer.getArityResults();
+  const cols = Math.ceil(Math.sqrt(results.length));
+  const nodes = results.map((r, i) => ({
+    data: { id: 'arity-' + r.name, label: r.name + '\n(' + r.arity + ')', shape: 'hexagon', color: r.valid ? '#68D391' : '#E53E3E', nodeType: 'predicate', lineColor: '#333' },
+    position: { x: (i % cols) * 100 + 50, y: Math.floor(i / cols) * 80 + 50 }
+  }));
+  cy.add(nodes);
+  cy.fit(undefined, 40);
+  const panel = document.getElementById('coverage-panel');
+  panel.style.display = 'block';
+  panel.innerHTML = '<h3>Predicate Arity Check</h3><table class="arity-table"><thead><tr><th>Predicate</th><th>Arity</th><th>Usages</th><th>Status</th></tr></thead><tbody>' +
+    results.map(r => '<tr class="' + (r.valid ? '' : 'arity-fail') + '"><td>' + r.name + '</td><td>' + r.arity + '</td><td>' + r.usageCount + '</td><td>' + (r.valid ? '<span class="pass">OK</span>' : '<span class="fail">' + r.violations.length + ' violations</span>') + '</td></tr>').join('') + '</tbody></table>';
+}
+
+function showCoverage() {
+  const panel = document.getElementById('coverage-panel');
+  panel.style.display = 'block';
+  const types = ['StructuralKnowledge', 'DeclarativeKnowledge', 'ProceduralKnowledge', 'HeuristicKnowledge', 'MetaKnowledge'];
+  const data = {};
+  for (const t of types) data[t] = { assertions: 0, rules: 0, entities: 0, commented: 0, total: 0 };
+  for (const [name] of kb.entities) {
+    const kt = kb.getKnowledgeType(name);
+    if (kt && data[kt]) { data[kt].entities++; data[kt].total++; if (kb.comments.has(name)) data[kt].commented++; }
+  }
+  for (const a of kb.assertions) {
+    let kt = null;
+    if (a.file) { if (a.file.includes('structural')) kt = 'StructuralKnowledge'; else if (a.file.includes('declarative')) kt = 'DeclarativeKnowledge'; else if (a.file.includes('procedural')) kt = 'ProceduralKnowledge'; else if (a.file.includes('heuristic')) kt = 'HeuristicKnowledge'; else if (a.file.includes('meta')) kt = 'MetaKnowledge'; }
+    if (kt && data[kt]) data[kt].assertions++;
+  }
+  for (const r of kb.rules) {
+    let kt = null;
+    if (r.file) { if (r.file.includes('structural')) kt = 'StructuralKnowledge'; else if (r.file.includes('declarative')) kt = 'DeclarativeKnowledge'; else if (r.file.includes('procedural')) kt = 'ProceduralKnowledge'; else if (r.file.includes('heuristic')) kt = 'HeuristicKnowledge'; else if (r.file.includes('meta')) kt = 'MetaKnowledge'; }
+    if (kt && data[kt]) data[kt].rules++;
+  }
+  const maxA = Math.max(...Object.values(data).map(d => d.assertions), 1);
+  const maxR = Math.max(...Object.values(data).map(d => d.rules), 1);
+  panel.innerHTML = '<h3>Knowledge Coverage Heatmap</h3><div class="coverage-grid"><div class="cov-header">Type</div><div class="cov-header">Assertions</div><div class="cov-header">Rules</div><div class="cov-header">Entities</div><div class="cov-header">Doc %</div>' +
+    types.map(t => {
+      const d = data[t], sn = KS[t], co = KC[t];
+      const den = Math.round(d.assertions / maxA * 40 + 15);
+      const rden = Math.round(d.rules / maxR * 40 + 15);
+      const cp = d.total > 0 ? Math.round(d.commented / d.total * 100) : 0;
+      return '<div class="cov-cell cov-type" style="border-left:4px solid ' + co + '">' + sn + '</div>' +
+        '<div class="cov-cell" style="background:' + co + (den < 16 ? '0f' : den.toString(16)) + '">' + d.assertions + '</div>' +
+        '<div class="cov-cell" style="background:' + co + (rden < 16 ? '0f' : rden.toString(16)) + '">' + d.rules + '</div>' +
+        '<div class="cov-cell">' + d.entities + '</div>' +
+        '<div class="cov-cell ' + (cp < 50 ? 'cov-low' : '') + '">' + cp + '%</div>';
+    }).join('') + '</div>';
+}
+
+function showRules() {
+  const el = buildRuleElements(kb);
+  cy.add([...el.nodes, ...el.edges]);
+  // Cycle detection
+  const adj = new Map();
+  cy.edges().forEach(e => { const s = e.data('source'), t = e.data('target'); if (!adj.has(s)) adj.set(s, []); adj.get(s).push(t); });
+  const color = new Map(), cycleNodes = new Set();
+  const dfs = (u, path) => {
+    color.set(u, 1); path.push(u);
+    for (const v of (adj.get(u) || [])) {
+      if (color.get(v) === 1) { const ci = path.indexOf(v); for (let i = ci; i < path.length; i++) cycleNodes.add(path[i]); }
+      else if (!color.has(v)) dfs(v, [...path]);
+    }
+    color.set(u, 2);
+  };
+  for (const [id] of adj) if (!color.has(id)) dfs(id, []);
+  for (const id of cycleNodes) { const n = cy.getElementById(id); if (n.length) n.style({ 'border-color': '#E53E3E', 'border-width': 4 }); }
+  cy.layout({ name: 'dagre', rankDir: 'LR', nodeSep: 20, rankSep: 50, padding: 30, animate: false }).run();
+  cy.fit(undefined, 40);
+}
+
+function applyIssues() {
+  if (!analyzer) return;
+  for (const issue of analyzer.issues) {
+    const n = cy.getElementById(issue.entity);
+    if (!n.length) continue;
+    if (issue.type === 'orphan') n.addClass('orphan');
+    else if (issue.type === 'dangling') n.addClass('dangling');
+    else if (issue.type === 'arity-violation') n.addClass('arity-error');
+    else if (issue.type === 'missing-comment') n.addClass('missing-comment');
+    else if (issue.type === 'unconnected') n.addClass('unconnected');
+  }
+}
+
+function showDetail(data) {
+  const panel = document.getElementById('entity-detail');
+  panel.style.display = 'block';
+  const issues = analyzer ? analyzer.getIssuesFor(data.id || data.label) : [];
+  const asserts = kb ? kb.getAssertionsFor(data.id || data.label).slice(0, 20) : [];
+  const c = KC[data.knowledgeType] || '#888';
+  panel.innerHTML =
+    '<div class="ed-name">' + (data.label || data.id) + '</div>' +
+    '<div class="ed-badges">' +
+      (data.nodeType ? '<span class="ed-badge" style="background:' + data.color + '30;color:' + data.color + '">' + data.nodeType + '</span>' : '') +
+      (data.knowledgeTypeShort ? '<span class="ed-badge" style="background:' + c + '30;color:' + c + '">' + data.knowledgeTypeShort + '</span>' : '') +
+    '</div>' +
+    (data.comment ? '<div class="ed-comment">' + data.comment + '</div>' : '') +
+    (data.microtheory ? '<div class="ed-field"><span class="ed-label">Microtheory:</span> ' + data.microtheory + '</div>' : '') +
+    (data.file ? '<div class="ed-field"><span class="ed-label">File:</span> ' + data.file + '</div>' : '') +
+    (data.isaParents && data.isaParents.length ? '<div class="ed-field"><span class="ed-label">isa:</span> ' + data.isaParents.join(', ') + '</div>' : '') +
+    (data.genlsParents && data.genlsParents.length ? '<div class="ed-field"><span class="ed-label">genls:</span> ' + data.genlsParents.join(', ') + '</div>' : '') +
+    (data.assertionCount !== undefined ? '<div class="ed-field"><span class="ed-label">Assertions:</span> ' + data.assertionCount + '</div>' : '') +
+    (data.fileCount !== undefined ? '<div class="ed-field"><span class="ed-label">Files:</span> ' + data.fileCount + '</div>' : '') +
+    (issues.length ? '<div class="ed-section">Issues (' + issues.length + ')</div>' + issues.map(i => '<div class="ed-issue ed-issue-' + i.severity + '"><span class="ed-sev">' + i.severity.toUpperCase() + '</span>' + i.message + '</div>').join('') : '') +
+    (asserts.length ? '<div class="ed-section">Assertions (' + asserts.length + ')</div>' + asserts.map(a => '<div class="ed-assertion">(' + a.predicate + ' ' + a.args.map(x => typeof x === 'string' ? x : JSON.stringify(x)).join(' ') + ')</div>').join('') : '');
+}
+
+function updateFileTree() {
+  const tree = document.getElementById('file-tree');
+  tree.innerHTML = '';
+  const files = [...kb.files.keys()].sort();
+  const dirs = {};
+  for (const f of files) {
+    const parts = f.split('/'), dir = parts.length > 1 ? parts.slice(0, -1).join('/') : '', name = parts[parts.length - 1];
+    if (!dirs[dir]) dirs[dir] = [];
+    dirs[dir].push({ name, fullPath: f });
+  }
+  for (const [dir, list] of Object.entries(dirs).sort()) {
+    if (dir) { const d = document.createElement('div'); d.className = 'ft-dir'; d.textContent = dir + '/'; tree.appendChild(d); }
+    for (const f of list) {
+      const el = document.createElement('div');
+      el.className = 'ft-file'; el.textContent = f.name; el.title = f.fullPath;
+      const contrib = kb.fileContributions.get(f.fullPath);
+      if (contrib) { const b = document.createElement('span'); b.className = 'ft-badge'; b.textContent = contrib.assertionCount; el.appendChild(b); }
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.ft-file').forEach(x => x.classList.remove('active'));
+        el.classList.add('active');
+        highlightFile(f.fullPath);
+      });
+      tree.appendChild(el);
+    }
+  }
+}
+
+function highlightFile(fileName) {
+  cy.elements().removeClass('dimmed highlighted');
+  const contrib = kb.fileContributions.get(fileName);
+  if (!contrib) return;
+  cy.elements().addClass('dimmed');
+  for (const name of contrib.entities) { const n = cy.getElementById(name); if (n.length) n.removeClass('dimmed').addClass('highlighted'); }
+}
+
+function updateBottom() {
+  const s = analyzer.getSummary();
+  document.getElementById('error-count').textContent = s.counts.error || 0;
+  document.getElementById('warning-count').textContent = s.counts.warning || 0;
+  document.getElementById('info-count').textContent = s.counts.info || 0;
+  document.getElementById('orphan-count').textContent = s.typeCounts.orphan || 0;
+  document.getElementById('health-score').textContent = s.score;
+  drawGauge(s.score);
+}
+
+function updateStats() {
+  const s = kb.getStats();
+  document.getElementById('stat-files').textContent = s.files;
+  document.getElementById('stat-entities').textContent = s.entities;
+  document.getElementById('stat-predicates').textContent = s.predicates;
+  document.getElementById('stat-rules').textContent = s.rules;
+  document.getElementById('stat-mts').textContent = s.microtheories;
+  document.getElementById('stat-assertions').textContent = s.assertions;
+}
+
+function drawGauge(score) {
+  const g = document.getElementById('health-gauge'), r = 40, c = 2 * Math.PI * r;
+  const off = c * (1 - score / 100), co = score >= 80 ? '#68D391' : score >= 60 ? '#F59E0B' : '#E53E3E';
+  g.innerHTML = '<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="' + r + '" fill="none" stroke="#222" stroke-width="6"/><circle cx="50" cy="50" r="' + r + '" fill="none" stroke="' + co + '" stroke-width="6" stroke-dasharray="' + c + '" stroke-dashoffset="' + off + '" transform="rotate(-90 50 50)" stroke-linecap="round"/><text x="50" y="48" text-anchor="middle" fill="' + co + '" font-size="18" font-weight="700" font-family="Inter">' + score + '</text><text x="50" y="62" text-anchor="middle" fill="#666" font-size="9" font-family="Inter">/ 100</text></svg>';
+}
+
+function setActiveTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector('[data-view="' + name + '"]');
+  if (btn) btn.classList.add('active');
+  document.getElementById('dive-controls').style.display = name === 'diveline' ? 'flex' : 'none';
+}
+
+function populateDiveSelect() {
+  const sel = document.getElementById('dive-select');
+  sel.innerHTML = '<option value="">Select PROTOCOL...</option>';
+  const protos = [];
+  for (const a of kb.assertions) if (a.predicate === 'isa' && a.args[1] === 'PROTOCOL' && typeof a.args[0] === 'string' && !a.args[0].startsWith('?')) protos.push(a.args[0]);
+  for (const p of protos.sort()) { const o = document.createElement('option'); o.value = p; o.textContent = p; sel.appendChild(o); }
+}
+
+// Events
+document.addEventListener('DOMContentLoaded', () => {
+  initCy();
+  document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => {
+    const v = b.dataset.view; setActiveTab(v); if (kb) switchView(v);
+  }));
+  document.getElementById('file-input').addEventListener('change', e => { if (e.target.files.length > 0) loadFiles(e.target.files); });
+  const dz = document.getElementById('dropzone');
+  document.body.addEventListener('dragover', e => { e.preventDefault(); if (dz.style.display !== 'none') dz.classList.add('dragover'); });
+  document.body.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+  document.body.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('dragover');
+    const files = [];
+    if (e.dataTransfer.items) for (const item of e.dataTransfer.items) { if (item.kind === 'file') { const f = item.getAsFile(); if (f.name.endsWith('.krf')) files.push(f); } }
+    if (files.length > 0) loadFiles(files);
+  });
+  document.getElementById('load-btn').addEventListener('click', () => document.getElementById('file-input').click());
+  document.getElementById('add-files-btn').addEventListener('click', () => document.getElementById('file-input').click());
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (cy) cy.elements().removeClass('dimmed highlighted chain-gold');
+    document.querySelectorAll('.ft-file').forEach(x => x.classList.remove('active'));
+  });
+  document.getElementById('dive-select').addEventListener('change', e => {
+    if (kb && e.target.value) { cy.elements().remove(); showDiveLine(e.target.value); applyIssues(); }
+  });
+  document.getElementById('fit-btn').addEventListener('click', () => { if (cy) cy.fit(undefined, 40); });
+
+  // Auto-load from HTTP server
+  const KRF_MANIFEST = [
+    'README.krf',
+    'kernel/primitives.krf', 'kernel/types.krf', 'kernel/valuation-layer.krf', 'kernel/boot.krf',
+    'knowledge/structural/taxonomy.krf', 'knowledge/structural/mereology.krf', 'knowledge/structural/relations.krf',
+    'knowledge/declarative/entities.krf', 'knowledge/declarative/attributes.krf',
+    'knowledge/procedural/protocols.krf', 'knowledge/procedural/constraints.krf', 'knowledge/procedural/storytelling.krf',
+    'knowledge/procedural/pitch-narratives.krf', 'knowledge/procedural/market-intelligence.krf',
+    'knowledge/heuristic/defaults.krf', 'knowledge/heuristic/thresholds.krf',
+    'knowledge/meta/schema.krf', 'knowledge/meta/provenance.krf', 'knowledge/meta/completeness.krf',
+    'spine/temporal/epochs.krf', 'spine/temporal/units.krf', 'spine/temporal/lifecycle.krf', 'spine/temporal/encoding.krf',
+    'spine/spatial/geospatial.krf', 'spine/spatial/topological.krf', 'spine/spatial/theoretical.krf',
+    'reference/knowledge-primitives.krf', 'reference/convex-hull.krf', 'reference/convex-hull-library.krf',
+    'agent/identity.krf', 'agent/observer.krf', 'agent/directives.krf'
+  ];
+
+  async function autoLoadKRF() {
+    const status = document.getElementById('load-status');
+    status.style.display = 'block';
+    status.textContent = 'Loading 0/' + KRF_MANIFEST.length + ' files...';
+    const fakeFiles = [];
+    let loaded = 0, failed = 0;
+    for (const path of KRF_MANIFEST) {
+      try {
+        const resp = await fetch(path);
+        if (!resp.ok) throw new Error(resp.status);
+        const text = await resp.text();
+        fakeFiles.push({ name: path, text: () => Promise.resolve(text), webkitRelativePath: path });
+        loaded++;
+      } catch (e) {
+        failed++;
+        console.warn('Failed to fetch ' + path + ':', e);
+      }
+      status.textContent = 'Loading ' + (loaded + failed) + '/' + KRF_MANIFEST.length + (failed ? ' (' + failed + ' failed)' : '') + '...';
+    }
+    if (fakeFiles.length > 0) {
+      status.textContent = 'Parsing ' + fakeFiles.length + ' files...';
+      await loadFiles(fakeFiles);
+      status.textContent = 'Loaded ' + fakeFiles.length + ' files' + (failed ? ', ' + failed + ' failed' : '');
+    } else {
+      status.textContent = 'No files loaded. Are you running an HTTP server from the charlotte-os directory?';
+    }
+  }
+
+  document.getElementById('auto-load-btn').addEventListener('click', autoLoadKRF);
+
+  // Auto-load if served via HTTP (not file://)
+  if (window.location.protocol.startsWith('http')) {
+    autoLoadKRF();
+  }
+});
+
+window.krfDebug = { getKB: () => kb, getAnalyzer: () => analyzer, getCy: () => cy };
+</script>
+</body>
+</html>
