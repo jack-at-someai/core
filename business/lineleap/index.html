@@ -159,11 +159,38 @@ h2.section-title span.pink{color:var(--pink)}
 /* === BACK LINK === */
 .back-link{position:fixed;top:16px;left:24px;z-index:20;color:var(--text-dim);text-decoration:none;font-size:13px;transition:color 0.2s}
 .back-link:hover{color:var(--blue)}
+
+/* === QUICK NAV === */
+.quick-nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 24px;
+  background:rgba(10,10,26,0.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(124,58,237,0.18);
+}
+.quick-nav a{
+  font-size:12px;font-weight:500;color:var(--text-dim);text-decoration:none;
+  padding:5px 14px;border-radius:8px;
+  border:1px solid rgba(124,58,237,0.15);
+  transition:color 0.2s,background 0.2s,border-color 0.2s;
+  white-space:nowrap;
+}
+.quick-nav a:hover{
+  color:var(--neon);background:rgba(124,58,237,0.1);border-color:rgba(124,58,237,0.3);
+}
 </style>
 </head>
 <body>
 
-<a class="back-link" href="../">&larr; Portfolio</a>
+<nav class="quick-nav">
+  <a href="knowledge-graph/index.html">Knowledge Graph</a>
+  <a href="website/index.html">Website</a>
+  <a href="events/index.html">Events</a>
+  <a href="charlotte-agent/index.html">Charlotte Agent</a>
+</nav>
+
+<a class="back-link" href="../" style="top:52px">&larr; Portfolio</a>
 
 <!-- ═══ CANVAS BACKGROUND ═══ -->
 <canvas id="kg-canvas"></canvas>

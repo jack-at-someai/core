@@ -135,9 +135,33 @@ h2.section-title span.amber{color:var(--amber-500)}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--purple-800);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--purple-700)}
+
+/* === QUICK NAV === */
+.quick-nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 24px;
+  background:rgba(10,15,10,0.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(114,0,203,0.15);
+}
+.quick-nav a{
+  font-size:12px;font-weight:500;color:var(--text-dim);text-decoration:none;
+  padding:5px 14px;border-radius:8px;
+  border:1px solid rgba(114,0,203,0.15);
+  transition:color 0.2s,background 0.2s,border-color 0.2s;
+  white-space:nowrap;
+}
+.quick-nav a:hover{
+  color:var(--purple-500);background:rgba(114,0,203,0.1);border-color:rgba(114,0,203,0.3);
+}
 </style>
 </head>
 <body>
+
+<nav class="quick-nav">
+  <a href="charlotte-agent/index.html">Charlotte Agent</a>
+</nav>
 
 <!-- KG BACKGROUND -->
 <canvas id="kg-canvas"></canvas>

@@ -322,12 +322,7 @@ section p{color:var(--dim);max-width:680px;margin-bottom:16px;line-height:1.7}
   <!-- STRATEGIC PARTNERSHIP AGREEMENT — PASSWORD PROTECTED -->
   <section id="msa-gate-section">
     <h2>Strategic Partnership Agreement</h2>
-    <div id="msa-gate" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center">
-      <p style="color:var(--dim);margin-bottom:16px">This section contains the proposed Sounder strategic partnership agreement. Enter the access code to view.</p>
-      <input id="msa-pass" type="password" placeholder="Access code" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 16px;color:var(--text);font-size:14px;width:200px;text-align:center;outline:none" autocomplete="off">
-      <div id="msa-error" style="color:#F44336;font-size:12px;margin-top:8px;display:none">Incorrect code</div>
-    </div>
-    <div id="msa-content" style="display:none">
+    <div id="msa-content">
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;margin-top:16px">
         <h3 style="margin-bottom:4px">Charlotte OS &mdash; Strategic Partnership Agreement</h3>
         <p style="color:var(--copper-500);font-weight:600;margin-bottom:20px">Sounder &times; Show Circuit Online Sales, LLC</p>
@@ -423,17 +418,5 @@ section p{color:var(--dim);max-width:680px;margin-bottom:16px;line-height:1.7}
   </section>
 
 </div>
-<script>
-(function(){
-  var gate=document.getElementById('msa-gate'),content=document.getElementById('msa-content'),input=document.getElementById('msa-pass'),err=document.getElementById('msa-error');
-  if(sessionStorage.getItem('msa-auth')==='1'){gate.style.display='none';content.style.display='block';}
-  input.addEventListener('keydown',function(e){
-    if(e.key==='Enter'){
-      if(input.value.toLowerCase()==='jack'){sessionStorage.setItem('msa-auth','1');gate.style.display='none';content.style.display='block';}
-      else{err.style.display='block';input.value='';input.focus();}
-    }
-  });
-})();
-</script>
 </body>
 </html>

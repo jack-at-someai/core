@@ -817,51 +817,6 @@ a:hover { color: var(--gold-300); }
   flex-wrap: wrap; gap: 12px;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   ACCESS GATE
-   ══════════════════════════════════════════════════════════════ */
-
-.gate {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--bg);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  transition: opacity 0.5s;
-}
-.gate-icon {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 48px; font-weight: 300;
-  color: var(--gold-500);
-  margin-bottom: 8px;
-  letter-spacing: 0.05em;
-}
-.gate-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; color: var(--cream-200);
-  margin-bottom: 32px; font-weight: 400;
-}
-.gate-label {
-  font-size: 11px; letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dim); margin-bottom: 16px;
-}
-.gate-input {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 24px;
-  font-size: 18px; color: var(--cream-200);
-  text-align: center; letter-spacing: 4px;
-  width: 240px; outline: none;
-  font-family: 'Inter', sans-serif;
-  transition: border-color 0.3s;
-}
-.gate-input:focus { border-color: var(--gold-700); }
-.gate-error {
-  color: var(--red); font-size: 12px;
-  margin-top: 12px; opacity: 0;
-  transition: opacity 0.3s;
-}
 
 /* ══════════════════════════════════════════════════════════════
    RESPONSIVE
@@ -901,14 +856,6 @@ a:hover { color: var(--gold-300); }
 </head>
 <body>
 
-<!-- ═══ ACCESS GATE ═══ -->
-<div class="gate" id="gate">
-  <div class="gate-icon">PPP</div>
-  <div class="gate-name">PPP Instruments</div>
-  <p class="gate-label">Enter Access Code</p>
-  <input class="gate-input" id="gate-input" type="password" autocomplete="off" autofocus placeholder="&#x2022;&#x2022;&#x2022;&#x2022;">
-  <p class="gate-error" id="gate-error">&nbsp;</p>
-</div>
 
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="nav" id="nav">
@@ -1263,29 +1210,6 @@ a:hover { color: var(--gold-300); }
 (function () {
   'use strict';
 
-  // ── Gate ──
-  var code = 'josh';
-  var gate = document.getElementById('gate');
-  var inp = document.getElementById('gate-input');
-  var err = document.getElementById('gate-error');
-  if (sessionStorage.getItem('ppp_auth') === '1') {
-    gate.style.display = 'none';
-  }
-  inp.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      if (inp.value.toLowerCase().trim() === code) {
-        sessionStorage.setItem('ppp_auth', '1');
-        gate.style.opacity = '0';
-        setTimeout(function () { gate.style.display = 'none'; }, 500);
-      } else {
-        inp.value = '';
-        inp.style.borderColor = '#C0392B';
-        err.textContent = 'Invalid code';
-        err.style.opacity = '1';
-        setTimeout(function () { inp.style.borderColor = '#3D2E22'; err.style.opacity = '0'; }, 1500);
-      }
-    }
-  });
 
   // ── Instrument Data (from build.py) ──
 
