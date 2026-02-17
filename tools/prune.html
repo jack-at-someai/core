@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlotte Repo Pruner</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a25;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --dim: #6a6a80;
+    --accent: #ff3b3b;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --orange: #f97316;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header h1 { font-size: 15px; font-weight: 600; }
+  .header h1 span { color: var(--accent); }
+  .stats { display: flex; gap: 16px; font-size: 12px; }
+  .stat { display: flex; align-items: center; gap: 5px; }
+  .stat b { font-size: 14px; }
+  .stat-prune b { color: var(--accent); }
+  .stat-keep b { color: var(--green); }
+  .stat-skip b { color: var(--yellow); }
+  .stat-remain b { color: var(--dim); }
+
+  .progress-bar {
+    position: fixed; top: 48px; left: 0; right: 0;
+    height: 3px; background: var(--surface2);
+    z-index: 100;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent), var(--green));
+    transition: width 0.3s ease;
+  }
+
+  /* Card area */
+  .card-area {
+    position: fixed;
+    top: 60px; bottom: 140px; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+
+  .card {
+    width: 100%; max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: relative;
+  }
+  .card.swipe-left {
+    transform: translateX(-120%) rotate(-8deg);
+    opacity: 0;
+  }
+  .card.swipe-right {
+    transform: translateX(120%) rotate(8deg);
+    opacity: 0;
+  }
+  .card.entering {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  .card-tier {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--surface2);
+  }
+  .card-tier-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+
+  .card-path {
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .card-count {
+    font-size: 13px; color: var(--dim);
+    margin-bottom: 16px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .card-flags {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .card-flag {
+    font-size: 10px; font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .flag-bloat { background: rgba(255,59,59,0.15); color: var(--accent); }
+  .flag-dup { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .flag-nested-git { background: rgba(168,85,247,0.15); color: var(--purple); }
+  .flag-cache { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .flag-gitignored { background: rgba(106,106,128,0.15); color: var(--dim); }
+
+  .card-contents {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 11px;
+    color: var(--dim);
+    max-height: 160px;
+    overflow-y: auto;
+    line-height: 1.8;
+  }
+  .card-contents strong { color: var(--text); font-weight: 500; }
+
+  .card-rec {
+    margin-top: 16px;
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .rec-prune { border-color: rgba(255,59,59,0.3); color: var(--accent); background: rgba(255,59,59,0.05); }
+  .rec-keep { border-color: rgba(34,197,94,0.3); color: var(--green); background: rgba(34,197,94,0.05); }
+  .rec-review { border-color: rgba(234,179,8,0.3); color: var(--yellow); background: rgba(234,179,8,0.05); }
+
+  /* Controls */
+  .controls {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 16px 24px 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+
+  .btn-row {
+    display: flex; gap: 16px; align-items: center;
+  }
+
+  .btn-decision {
+    width: 180px; height: 54px;
+    border-radius: 14px;
+    border: 2px solid;
+    background: transparent;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-prune {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .btn-prune:hover { background: rgba(255,59,59,0.15); transform: scale(1.03); }
+  .btn-keep {
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .btn-keep:hover { background: rgba(34,197,94,0.15); transform: scale(1.03); }
+  .btn-skip {
+    width: 80px; height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--dim);
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-skip:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  .key-hints {
+    font-size: 10px; color: var(--dim);
+    display: flex; gap: 16px;
+  }
+  .key-hints kbd {
+    display: inline-block;
+    padding: 1px 6px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 10px;
+    background: var(--surface2);
+  }
+
+  /* Results */
+  .results-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,10,15,0.97);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 40px 24px;
+  }
+  .results-overlay.open { display: block; }
+
+  .results-header {
+    max-width: 700px; margin: 0 auto 24px;
+    text-align: center;
+  }
+  .results-header h2 { font-size: 22px; margin-bottom: 8px; }
+  .results-header p { color: var(--dim); font-size: 13px; }
+
+  .results-stats {
+    max-width: 700px; margin: 0 auto 24px;
+    display: flex; gap: 12px; justify-content: center;
+  }
+  .results-stat {
+    padding: 16px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .results-stat b { display: block; font-size: 28px; margin-bottom: 4px; }
+  .results-stat span { font-size: 11px; color: var(--dim); }
+
+  .results-section {
+    max-width: 700px; margin: 0 auto 20px;
+  }
+  .results-section h3 {
+    font-size: 13px; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .results-section h3.prune-h { color: var(--accent); }
+  .results-section h3.keep-h { color: var(--green); }
+  .results-section h3.skip-h { color: var(--yellow); }
+
+  .results-item {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 4px 0;
+    font-size: 12px;
+  }
+  .results-item .ri-path { font-weight: 500; }
+  .results-item .ri-count { color: var(--dim); }
+  .results-item .ri-desc { color: var(--dim); margin-left: auto; text-align: right; max-width: 40%; }
+
+  .results-export {
+    max-width: 700px; margin: 24px auto;
+    text-align: center;
+  }
+  .btn-export {
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: 2px solid var(--green);
+    background: transparent;
+    color: var(--green);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin: 0 8px;
+  }
+  .btn-export:hover { background: rgba(34,197,94,0.15); }
+  .btn-restart {
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--dim);
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin: 0 8px;
+  }
+  .btn-restart:hover { border-color: var(--text); color: var(--text); }
+
+  .export-box {
+    display: none;
+    max-width: 700px; margin: 16px auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+  }
+  .export-box.open { display: block; }
+  .export-box pre {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 11px;
+    white-space: pre-wrap;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .export-box .btn-copy {
+    margin-top: 8px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--green);
+    background: transparent;
+    color: var(--green);
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  /* Question counter */
+  .q-counter {
+    position: fixed;
+    top: 56px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; color: var(--dim);
+    z-index: 101;
+    padding: 4px 12px;
+    background: var(--surface);
+    border-radius: 0 0 8px 8px;
+    border: 1px solid var(--border);
+    border-top: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>/c/dev/</span> Pruner</h1>
+  <div class="stats">
+    <div class="stat stat-prune"><b id="s-prune">0</b> prune</div>
+    <div class="stat stat-keep"><b id="s-keep">0</b> keep</div>
+    <div class="stat stat-skip"><b id="s-skip">0</b> skip</div>
+    <div class="stat stat-remain"><b id="s-remain">0</b> left</div>
+  </div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<div class="q-counter" id="q-counter">Q 1 / ?</div>
+
+<div class="card-area" id="card-area">
+  <div class="card" id="card"></div>
+</div>
+
+<div class="controls">
+  <div class="btn-row">
+    <button class="btn-decision btn-prune" id="btn-prune" onclick="decide('prune')">
+      <span style="font-size:20px">&larr;</span> PRUNE
+    </button>
+    <button class="btn-skip" onclick="decide('skip')">SKIP</button>
+    <button class="btn-decision btn-keep" id="btn-keep" onclick="decide('keep')">
+      KEEP <span style="font-size:20px">&rarr;</span>
+    </button>
+  </div>
+  <div class="key-hints">
+    <span><kbd>&larr;</kbd> Prune</span>
+    <span><kbd>&darr;</kbd> Skip</span>
+    <span><kbd>&rarr;</kbd> Keep</span>
+    <span><kbd>U</kbd> Undo</span>
+  </div>
+</div>
+
+<div class="results-overlay" id="results"></div>
+
+<script>
+// Questions: [path, fileCount, tier, tierName, description, flags[], recommendation, contents]
+const TIER_NAMES = {
+  1: 'Engine', 2: 'Revenue', 3: 'Apps', 4: 'Proof',
+  5: 'Brand', 6: 'Foundation', 7: 'People', 8: 'Ops', 9: 'Infra'
+};
+const TIER_COLORS = {
+  1: 'var(--accent)', 2: 'var(--green)', 3: 'var(--blue)', 4: 'var(--cyan)',
+  5: 'var(--pink)', 6: 'var(--purple)', 7: 'var(--orange)', 8: 'var(--yellow)', 9: 'var(--dim)'
+};
+
+const Q = [
+  // === BIGGEST BLOAT TARGETS ===
+  {
+    path: "business/sounder/Filament Resources/",
+    count: 1691, tier: 5,
+    desc: "Old branding agency (Filament) deliverables for Sounder. Every logo format imaginable (EPS, AI, SVG, PNG, PDF, JPG), 600+ app icon variants, 576+ brand backgrounds, 60+ font files, 3D mockups, social media kits, competitor screenshots.",
+    flags: ["bloat"],
+    rec: "prune",
+    contents: "Logo Files/ (190 files in 6 formats) | Special Gifts For You/ (1,200+ icons, backgrounds, fonts) | Iconography/ (252 files) | Social Media Kit/ (35 profile images) | Landing Page/ (7 stock licenses) | Competitor screenshots/ (22)"
+  },
+  {
+    path: "business/sounder/Sounder/ (miscellaneous)",
+    count: 1195, tier: 5,
+    desc: "DUPLICATE of Filament Resources. Same icons, backgrounds, fonts, and social media images in a parallel directory structure. Identical content, different path.",
+    flags: ["bloat", "dup"],
+    rec: "prune",
+    contents: "App Icons & Favicons/ (669 in PNG/JPG/SVG/PDF) | Brand Background Images/ (576 in JPG/PNG/SVG/PDF) | Font Files/ (60 Neue Radial + Asap) | 3D Mockups View/ (10) | social_media/ (35 across FB, IG, LI, TW, YT)"
+  },
+  {
+    path: "business/sounder/sounder_scripts/.git/",
+    count: 579, tier: 9,
+    desc: "Nested .git directory inside the mono-repo. sounder_scripts was originally its own repo and was folded in. This is dead git history taking up space inside your main repo.",
+    flags: ["nested-git"],
+    rec: "prune",
+    contents: "579 git object files, hooks, refs, config — all from the old standalone sounder_scripts repo"
+  },
+  {
+    path: "maestro/.dart_tool/chrome-device/",
+    count: 200, tier: 9,
+    desc: "Chrome browser cache from Flutter web development. Session data, cookies, IndexedDB, extension state, history — none of this is project code.",
+    flags: ["cache", "bloat"],
+    rec: "prune",
+    contents: "Cookies, Sessions, IndexedDB/leveldb, Extension State, GCM Store, Safe Browsing, Sync Data, Local Storage, Service Worker cache, Preferences, Login Data"
+  },
+  {
+    path: "maestro/build/",
+    count: 15, tier: 9,
+    desc: "Flutter build artifacts. Compiled .dill files, flutter_assets, stamps, cache files. Regenerated on every build.",
+    flags: ["cache"],
+    rec: "prune",
+    contents: ".dill compiled kernel | flutter_assets/ (fonts, shaders, manifests, NOTICES) | build stamps and .filecache"
+  },
+  {
+    path: "design/brandbook/sounder/assets/drafts/",
+    count: 89, tier: 5,
+    desc: "89 iterative design draft files from Sounder brand evolution. PNGs, HEICs, MP4 screen recordings. The final brand assets are already in the parent assets/ folder.",
+    flags: ["bloat"],
+    rec: "prune",
+    contents: "~50 PNG screenshots | ~8 HEIC photos | ~4 MP4 screen recordings | Mixed: early logo concepts, UI screenshots, color explorations, app mockup iterations"
+  },
+  {
+    path: "games/starfield/.git/",
+    count: 31, tier: 9,
+    desc: "Nested .git directory. Starfield was originally a standalone repo. Now lives inside the mono-repo but kept its own git history.",
+    flags: ["nested-git"],
+    rec: "prune",
+    contents: "31 git object files, hooks, refs — old standalone repo history"
+  },
+
+  // === LARGE REVIEW TARGETS ===
+  {
+    path: "business/sounder/sounder_scripts/winners/",
+    count: 193, tier: 2,
+    desc: "Show winner photographs from NSR events. Used in the Sounder app's industry section and potentially for the show management features NSR wants built.",
+    flags: [],
+    rec: "review",
+    contents: "JUNIOR_SHOW/ (94 champion/reserve photos) | OPEN_SHOW/ (77 champion/reserve photos) | BRED_OWNED/ (20 bred & owned photos) | deploy.js + fix.js (deployment scripts)"
+  },
+  {
+    path: "business/sounder/sounder_scripts/sires_of_the_south/images/",
+    count: 38, tier: 2,
+    desc: "Sire photographs from the Sires of the South event. Show pig genetics content for the Sounder app's industry data.",
+    flags: [],
+    rec: "review",
+    contents: "38 JPGs: BERKSHIRE (3), CROSSBRED (8), DUROC (12), HAMPSHIRE (8), YORKSHIRE (7) — all breed x ear notch x farm x sire line"
+  },
+  {
+    path: "business/sounder/sounder_scripts/high_sellers/images/",
+    count: 22, tier: 2,
+    desc: "High seller photographs from major sales (Draft, Expo, STC, WTC, Foundation, Boars of Fall). Market data images for Sounder.",
+    flags: [],
+    rec: "review",
+    contents: "22 JPGs: $100K yorkshire boar STC | $85K yorkshire boar Draft | $75K yorkshire boar Expo | $28K landrace boar Expo | $26K poland china Draft | etc."
+  },
+  {
+    path: "sounder-gh/.git/",
+    count: 114, tier: 9,
+    desc: "Nested .git directory. sounder-gh is the Sounder Flutter app, originally its own repo (deployed to Firebase Hosting). Has its own git history inside the mono-repo.",
+    flags: ["nested-git"],
+    rec: "review",
+    contents: "114 git objects, hooks, refs, config — separate from main repo's .git"
+  },
+  {
+    path: "research-lab/linkedin/",
+    count: 25, tier: 7,
+    desc: "LinkedIn profile PDFs for every SumAI team member and advisor. Used for due diligence, team verification, and building the knowledge graph of capabilities.",
+    flags: [],
+    rec: "review",
+    contents: "25 PDFs: andrew_homoly, austin_neibarger, austin_salisbury, brandon_bochat, chris_kete, cj_yeh, corey_bochat, dave_ferrucci, daved_karl, diego_abad, ethan_kaese, evan_mosier, jack_richard, jet_sethi, jim_richard, jon_gilbert, joseph_richard, ken_forbus, kristen_hughes, louis_rosenberg, mason_homoly, matthew_dale, molly_mosier, patrick_wald, zachary_cao"
+  },
+
+  // === DUPLICATE REVIEW ===
+  {
+    path: "charlotte/assets/krf/ (31 files)",
+    count: 31, tier: 1,
+    desc: "Mirror of charlotte-os/ kernel KRF files bundled inside the Flutter app's assets. The app reads these at runtime. If the app loads them from charlotte-os/ directly, these are duplicates.",
+    flags: ["dup"],
+    rec: "review",
+    contents: "boot.krf, primitives.krf, types.krf, valuation-layer.krf, encoding.krf, epochs.krf, lifecycle.krf, units.krf, geospatial.krf, theoretical.krf, topological.krf, taxonomy.krf, relations.krf, mereology.krf, attributes.krf, entities.krf, defaults.krf, thresholds.krf, completeness.krf, provenance.krf, schema.krf, constraints.krf, protocols.krf, pitch-narratives.krf, storytelling.krf, directives.krf, identity.krf, observer.krf, convex-hull.krf, knowledge-primitives.krf, README.krf"
+  },
+  {
+    path: "charlotte/assets/docs/ (KRF_GUIDE, PRD, SDD)",
+    count: 3, tier: 6,
+    desc: "Copies of SomeAI technical docs also found in business/someai/docs/. Bundled in the Flutter app for offline reading.",
+    flags: ["dup"],
+    rec: "review",
+    contents: "KRF_GUIDE.md | PRD.md | SDD.md — also at business/someai/docs/"
+  },
+  {
+    path: "charlotte/assets/SOUNDER_BRAND_* (5 files)",
+    count: 5, tier: 5,
+    desc: "Sounder brand assets (background, icon, illustration SVG, image, colors+typography SVG) also found in design/brandbook/sounder/assets/.",
+    flags: ["dup"],
+    rec: "review",
+    contents: "SOUNDER_BRAND_BACKGROUND.png | SOUNDER_BRAND_ICON.png | SOUNDER_BRAND_ILLUSTRATION.svg | SOUNDER_BRAND_IMAGE.png | SOUNDER_COLORS_AND_TYPOGRAPHY.svg"
+  },
+  {
+    path: "charlotte/docs/people/ (5 bios)",
+    count: 5, tier: 7,
+    desc: "Bios for Almquist, Genger, Jack, Jim, Joseph — also exist in people/ and team/ directories.",
+    flags: ["dup"],
+    rec: "review",
+    contents: "donald_almquist.md + photos | dave_genger.md | jack.md | jim.md | joseph.md — same content exists in /people/ and /team/"
+  },
+  {
+    path: "people/ (entire directory)",
+    count: 11, tier: 7,
+    desc: "Key people deep bios. Most overlap with team/ directory. team/ has 38 files covering everyone; people/ has a subset of 9 people. Could consolidate into team/.",
+    flags: ["dup"],
+    rec: "review",
+    contents: "jack.md, jim.md, joseph.md, dave_genger.md, donald_almquist.md + 2 photos, dave_ferrucci.md, ken_forbus.md, kris_hammond.md, louis_rosenberg.md — ALL also in team/"
+  },
+  {
+    path: "business/industrial-service-group/studies/",
+    count: 4, tier: 2,
+    desc: "Market study PDFs that appear to be copies of files already in business/industrial-service-group/data/. Same filenames.",
+    flags: ["dup"],
+    rec: "prune",
+    contents: "US Air Compressor Market Study.pdf | Global Compressor Parts and Accessories.pdf | Global Industrial Air Compressor Market.pdf | compressed_air_sourcebook.pdf — all also in data/"
+  },
+
+  // === CACHES & BUILD ARTIFACTS ===
+  {
+    path: "maestro/.idea/",
+    count: 5, tier: 9,
+    desc: "IntelliJ IDEA / Android Studio project settings. Personal IDE config, not shared project code.",
+    flags: ["cache"],
+    rec: "review",
+    contents: "libraries/Dart_SDK.xml | libraries/KotlinJavaRuntime.xml | modules.xml | runConfigurations/main_dart.xml | workspace.xml"
+  },
+  {
+    path: "maestro/.dart_tool/ (non-chrome)",
+    count: 26, tier: 9,
+    desc: "Flutter build tooling cache. package_config.json, package_graph.json, hooks_runner, dartpad registrant. Regenerated on flutter pub get.",
+    flags: ["cache"],
+    rec: "review",
+    contents: "package_config.json | package_graph.json | version | hooks_runner/ (objective_c .dill, .lock, I/O json) | dartpad/web_plugin_registrant.dart"
+  },
+  {
+    path: "charlotte/.dart_tool/ + .flutter-*",
+    count: 5, tier: 9,
+    desc: "Flutter tooling for the Charlotte app. Regenerated automatically.",
+    flags: ["cache"],
+    rec: "review",
+    contents: "dartpad/web_plugin_registrant.dart | package_config.json | package_graph.json | version | .flutter-plugins-dependencies"
+  },
+
+  // === SMALLER ITEMS WORTH ASKING ===
+  {
+    path: "workbench/",
+    count: 20, tier: 9,
+    desc: "Lottie animation JSON files for various brands, plus an index.html viewer. These are motion graphics assets — spinners, logo pulses, landing animations.",
+    flags: [],
+    rec: "review",
+    contents: "assets/isg/ (7 Lottie: compressor, gear, motor, network, serviceiq, spinner, valve) | assets/someai/ (3: logo-pulse, spinner, web-build) | assets/sounder/ (2: heartbeat, lifecycle) | assets/charlotte/ (2: icon, logo-pulse) | assets/richard-enterprises/ (2: diamond-spinner, portfolio) | assets/sea-lion/ (2: ocean, sonar) | index.html + manifest.json"
+  },
+  {
+    path: "tools/clipper/",
+    count: 4, tier: 9,
+    desc: "A Python CLI clipboard tool. clipper.py with a batch wrapper and requirements.txt.",
+    flags: [],
+    rec: "review",
+    contents: "clipper (shell script) | clipper.bat (Windows) | clipper.py (Python) | requirements.txt"
+  },
+  {
+    path: "charlotte/blender/",
+    count: 4, tier: 4,
+    desc: "Blender 3D constellation files. big_bang.py script + .blend and .blend1 files. The .blend1 is an auto-backup of .blend.",
+    flags: [],
+    rec: "review",
+    contents: "big_bang.py | big_bang_constellation.blend | big_bang_constellation.blend1 (Blender auto-backup) | NEXT.md"
+  },
+  {
+    path: "design/brandbook/sea-lion/assets/",
+    count: 20, tier: 5,
+    desc: "Sea Lion logo exploration — 12 concept PNGs, 4 Midjourney generations, 1 PDF. Brand identity still being iterated.",
+    flags: [],
+    rec: "review",
+    contents: "logo-concept-1 through logo-concept-12.png | 4 jackrichard_a_lion_* Midjourney outputs | Sealion Logo Concepts.pdf (also in references/sealion/)"
+  },
+  {
+    path: "business/sounder/SDRF-BrandAwarenessCampaign_Concepts.pdf",
+    count: 1, tier: 5,
+    desc: "Old Sounder brand awareness campaign concepts PDF from an earlier branding phase.",
+    flags: [],
+    rec: "review",
+    contents: "Single PDF — early brand campaign concepts, likely superseded by current brand direction"
+  },
+  {
+    path: "research-lab/BFA234CF-*.png + IMG_9691.HEIC",
+    count: 2, tier: 7,
+    desc: "Two image files in research-lab root. A PNG with a UUID-style name and an HEIC photo. May be stray files.",
+    flags: [],
+    rec: "review",
+    contents: "BFA234CF-C1CA-4D15-99E5-B3B506F54A2F.png | IMG_9691.HEIC"
+  },
+  {
+    path: "_staging/assets/ (loose files)",
+    count: 9, tier: 9,
+    desc: "Root-level staging assets: Atlas knowledge primitives PNG, conventions doc, manifest, Northwestern capstone PPTX, 2 Serengeti drafts (PDFs), and 2 Python scripts.",
+    flags: [],
+    rec: "review",
+    contents: "ATLAS_KNOWLEDGE_PRIMITIVES.png | CONVENTIONS.md | MANIFEST.md | NORTHWESTERN_CAPSTONE.pptx | SERENGETI_DRAFT_7.pdf | SERENGETI_DRAFT_8.pdf | build_knowledge_graph.py | sort_journey.py | sort_report.json"
+  },
+
+  // === CORE KEEPER CONFIRMATIONS ===
+  {
+    path: "charlotte-os/ (all)",
+    count: 50, tier: 1,
+    desc: "The Charlotte OS kernel. Five primitives, spatiotemporal spine, knowledge architecture, agent system, demo server, nervous system plan. This IS the product.",
+    flags: [],
+    rec: "keep",
+    contents: "kernel/ (boot, primitives, types, valuation) | spine/ (spatial: geo/theoretical/topological, temporal: encoding/epochs/lifecycle/units) | knowledge/ (declarative, heuristic, meta, procedural, structural) | agent/ (directives, identity, observer) | demo/ (Python server + Canvas viz) | nervous-system/ | reference/"
+  },
+  {
+    path: "compressors/ (ISG substrate)",
+    count: 19, tier: 2,
+    desc: "The ISG compressor domain substrate. 907 product instances across 9 categories. This is Charlotte proving it can eat ISG's entire product world. Critical for Feb 24 meeting.",
+    flags: [],
+    rec: "keep",
+    contents: "kernel/ (predicates, types) | knowledge/ (specifications, pricing_intelligence, brands, retailers, taxonomy, schema) | output/nodes/ (rotary_screw, piston, vacuum, blowers, dryers, nitrogen, oilfree_scroll, engine_driven, total_air_systems, acs_competitor)"
+  },
+  {
+    path: "business/industrial-service-group/ (non-studies)",
+    count: 25, tier: 2,
+    desc: "ISG — your first real contract. Launch meeting doc, executive PDFs, market intelligence KRF + HTML, contracts, data. Everything for the Feb 24 pitch.",
+    flags: [],
+    rec: "keep",
+    contents: "LAUNCH_MEETING_2026-02-24.md | 6 executive PDFs | contracts/ (strategy docs, implementation proposal) | data/ (market studies, CSVs, competitive strategy, KRF) | market-intelligence.html + report | index.html + README.md"
+  },
+  {
+    path: "business/sounder/substrate/",
+    count: 35, tier: 2,
+    desc: "Sounder KRF substrate — Charlotte modeling the entire swine genetics domain. Predicates, types, breeding protocols, auctions, pedigrees, registries, taxonomy. Plus output nodes/edges/signals.",
+    flags: [],
+    rec: "keep",
+    contents: "kernel/ (predicates, types) | knowledge/ (metrics, valuation, schema, auctions, breeding, pedigree, registries, taxonomy) | output/nodes/ (animals, breeders_aba/cps/nsr, buyers, dams, shows, sires) | output/edges/ (ownership, pedigree, temporal) | output/signals/ (breedings, farrowings, sales) | output/metrics/ (litter metrics) | converter.py + README.krf"
+  },
+  {
+    path: "business/sounder/sounder_scripts/ (code, not images/git)",
+    count: 180, tier: 2,
+    desc: "The Sounder data ingestion pipeline. Scrapers, Firebase deployers, pedigree walkers, entry processors, event OCR. This is how data gets into Charlotte.",
+    flags: [],
+    rec: "keep",
+    contents: "artifacts2/ (95 core data files) | industry/ (NSR pedigree scrapers) | entries/ (entry management) | trogdon/ (farm data) | products/ (genetics) | events/ (OCR) | breeders/ (ABA/NSR/TSA) | services/ (fetch scripts) | launch/ | junior_entries/ | utils/ | schedule/ | storefront/ | pedigree/ | question/ | breedings/ | assets/DEPLOYED/"
+  },
+  {
+    path: "charlotte/ (Flutter app)",
+    count: 350, tier: 3,
+    desc: "The Charlotte pocket app. 17 screens, full atomic design system (glass morphism), KRF viewer, client hub, knowledge graph. Also houses 12 papers and all business artifacts.",
+    flags: [],
+    rec: "keep",
+    contents: "lib/ (98: screens, atoms, molecules, organisms, layout, widgets, services, models, theme) | docs/artifacts/ (89: papers, SVGs, MSA tiers, valuation, competitors) | docs/ (12 design docs) | spatial/ (57: 50 state PNGs + map) | temporal/ | charts/ | knowledge/ | functions/ | platform scaffolding"
+  },
+  {
+    path: "sounder-gh/ (Flutter app, non-git)",
+    count: 185, tier: 3,
+    desc: "The Sounder mobile app. 83 widgets, 12 repositories, 8 providers, 11 models. Herd management, breeding, calendar, industry data, chat agent. Multi-platform.",
+    flags: [],
+    rec: "keep",
+    contents: "lib/widgets/ (83) | lib/screens/ (12) | lib/repositories/ (12) | lib/providers/ (8) | lib/models/ (11) | lib/core/ (8) | docs/ (3) | functions/ (5) | platform scaffolding"
+  },
+  {
+    path: "maestro/ (Flutter app, non-cache)",
+    count: 66, tier: 3,
+    desc: "Maestro — Hoshin Kanri SaaS. X-matrix, bowling charts, A3 reports, PDCA cycles, catchball, kaizen boards. Data round-trip complete.",
+    flags: [],
+    rec: "keep",
+    contents: "lib/ (40: models, providers, screens, services, painters, theme, widgets) | firestore.rules | pubspec.yaml | analysis_options | web/ + platform scaffolding"
+  },
+  {
+    path: "games/ (non-git artifacts)",
+    count: 66, tier: 4,
+    desc: "16 browser games proving Charlotte's 'every project is a game' framing. Chess + Go have AI. Pig-simulator maps to Sounder's domain. HexGrid is the campus viz primitive.",
+    flags: [],
+    rec: "keep",
+    contents: "pig-simulator/ (25: full GDD) | against-the-storm/ (10: FOL proof) | chess/ go/ isometric/ hexgrid/ maplestory/ solitaire-glass/ 2048/ tetris/ pong/ snake/ minesweeper/ sudoku/ tic-tac-toe/ block-dude/ somelocks/ aseprite/ starfield/"
+  },
+  {
+    path: "references/ (23 interactive pages)",
+    count: 67, tier: 6,
+    desc: "Interactive reference library covering every intellectual domain Charlotte draws from. Biomimicry, formal logic, graph theory, neuroscience, topology, etc. Deployed to GitHub Pages.",
+    flags: [],
+    rec: "keep",
+    contents: "23 subdirectories, each with index.html + app.js (+ sometimes style.css). Biomimicry, entomology, cognitive-science, formal-logic, game-theory, graph-theory, knowledge, livestock-science, neuroscience, signal-processing, spatial-computing, temporal-databases, topology, bio-*, ecological-systems, nature-inspired-algorithms, sealion/ocean-science, spider-silk, animations"
+  },
+  {
+    path: "math/ (6 visualizations)",
+    count: 23, tier: 6,
+    desc: "Interactive math visualizations. Chaos theory, CNN, Fourier transforms, neural playground, sacred geometry, swarm intelligence, TSP.",
+    flags: [],
+    rec: "keep",
+    contents: "chaostheory/ | cnn/ (4 files) | fourier/ | neuralplayground/ | sacred-geometry/ | swarm-intelligence/ | tsp-algorithm-visualizer/"
+  },
+  {
+    path: "knowledge-graph/",
+    count: 26, tier: 4,
+    desc: "Charlotte modeling this entire repository as a knowledge graph. 97 nodes, ~200 edges. The meta-proof: Charlotte can observe itself.",
+    flags: [],
+    rec: "keep",
+    contents: "extract/ (8 Python scripts) | substrate/ (13 KRF: nodes + edges) | data/ (graph.json + resources.json) | index.html + graph.js + style.css"
+  },
+  {
+    path: "team/",
+    count: 41, tier: 7,
+    desc: "30+ team member markdown bios plus Almquist historical photos. Every SumAI member, advisor, and imagineer documented.",
+    flags: [],
+    rec: "keep",
+    contents: "38 .md files | donald_almquist_assets/ (2 photos) | imagineers/ (paul_beinhoff.md)"
+  },
+  {
+    path: "design/ (non-draft brand books + UI library)",
+    count: 143, tier: 5,
+    desc: "12+ brand books (someai, isg, sounder core, richard-enterprises, sea-lion, serengeti, apple, allstate, cardvault, monroe, ppp-instruments, sc-online, top-tier, wendt) + charlotte_ui Flutter package + liquid-glass CSS/JS.",
+    flags: [],
+    rec: "keep",
+    contents: "brandbook/ (12+ brands, each with index.html + tokens.json, some with design-system.html + theme CSS/Dart) | charlotte_ui/ (30: atoms, molecules, organisms, theme) | liquid-glass/ (4: CSS + JS) | compile-tokens.mjs"
+  },
+  {
+    path: "business/serengeti/",
+    count: 21, tier: 8,
+    desc: "Serengeti PE playbook. 8 sections: command center, founders, farms (pipeline + portfolio), prides (curriculum), summit, oasis fund, singularity thesis, legal/entity, investor relations.",
+    flags: [],
+    rec: "keep",
+    contents: "00-command-center/ (Charlotte integration, ops dashboard, research tracker, RE) | 01-founders/ | 02-farms/ (pipeline scouting, evaluation, portfolio companies, dev/deploy) | 03-prides/ (curriculum) | 04-summit/ | 05-oasis/ | 06-singularity/ (flywheel, thesis) | 07-legal-corporate/ | 08-investor-relations/ | SERENGETI.md"
+  },
+  {
+    path: "tools/cardvault-app/",
+    count: 186, tier: 3,
+    desc: "CardVault Flutter app. Sports card inventory, price tracking, store management. Multi-platform (iOS, Android, macOS, Linux, Windows, web).",
+    flags: [],
+    rec: "keep",
+    contents: "lib/ (30: app, models, providers, screens, services, theme, widgets) | platform scaffolding (ios, android, macos, linux, windows, web) | firestore.rules | pubspec.yaml"
+  },
+  {
+    path: "index.html + BRAND.md + .github/ + .git*",
+    count: 4, tier: 9,
+    desc: "Root files. Hex constellation map (GitHub Pages entry point), brand guidelines, CI/CD workflow, git config.",
+    flags: [],
+    rec: "keep",
+    contents: "index.html (root constellation map) | BRAND.md | .github/workflows/pages.yml | .gitignore | .gitattributes"
+  }
+];
+
+let current = 0;
+let decisions = []; // {index, decision}
+let history = []; // for undo
+
+function renderCard() {
+  if (current >= Q.length) {
+    showResults();
+    return;
+  }
+
+  const q = Q[current];
+  const card = document.getElementById('card');
+
+  const flagsHtml = q.flags.map(f => {
+    const cls = f === 'bloat' ? 'flag-bloat' : f === 'dup' ? 'flag-dup' : f === 'nested-git' ? 'flag-nested-git' : f === 'cache' ? 'flag-cache' : 'flag-gitignored';
+    const label = f === 'bloat' ? 'BLOAT' : f === 'dup' ? 'DUPLICATE' : f === 'nested-git' ? 'NESTED .git' : f === 'cache' ? 'CACHE' : 'GITIGNORED';
+    return `<span class="card-flag ${cls}">${label}</span>`;
+  }).join('');
+
+  const recClass = q.rec === 'prune' ? 'rec-prune' : q.rec === 'keep' ? 'rec-keep' : 'rec-review';
+  const recText = q.rec === 'prune' ? 'RECOMMENDATION: Prune it' : q.rec === 'keep' ? 'RECOMMENDATION: Keep it' : 'RECOMMENDATION: Your call';
+
+  card.innerHTML = `
+    <div class="card-tier">
+      <span class="card-tier-dot" style="background:${TIER_COLORS[q.tier]}"></span>
+      Tier ${q.tier} &mdash; ${TIER_NAMES[q.tier]}
+    </div>
+    <div class="card-path">${q.path}</div>
+    <div class="card-count">${q.count.toLocaleString()} file${q.count > 1 ? 's' : ''}</div>
+    ${flagsHtml ? '<div class="card-flags">' + flagsHtml + '</div>' : ''}
+    <div class="card-desc">${q.desc}</div>
+    <div class="card-contents"><strong>Contains:</strong> ${q.contents}</div>
+    <div class="card-rec ${recClass}">${recText}</div>
+  `;
+
+  // Animate in
+  card.classList.remove('swipe-left', 'swipe-right');
+  card.classList.add('entering');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      card.classList.remove('entering');
+    });
+  });
+
+  // Update counter
+  document.getElementById('q-counter').textContent = `Q ${current + 1} / ${Q.length}`;
+  document.getElementById('progress').style.width = ((current / Q.length) * 100) + '%';
+  updateStats();
+}
+
+function decide(d) {
+  if (current >= Q.length) return;
+
+  const card = document.getElementById('card');
+  card.classList.add(d === 'prune' ? 'swipe-left' : d === 'keep' ? 'swipe-right' : 'swipe-left');
+
+  history.push(current);
+  decisions[current] = d;
+  current++;
+
+  setTimeout(renderCard, 200);
+}
+
+function undo() {
+  if (history.length === 0) return;
+  current = history.pop();
+  delete decisions[current];
+  renderCard();
+}
+
+function updateStats() {
+  let prune = 0, keep = 0, skip = 0;
+  Object.entries(decisions).forEach(([i, d]) => {
+    const q = Q[i];
+    if (d === 'prune') prune += q.count;
+    else if (d === 'keep') keep += q.count;
+    else skip += q.count;
+  });
+  const remaining = Q.length - Object.keys(decisions).length;
+  document.getElementById('s-prune').textContent = prune.toLocaleString();
+  document.getElementById('s-keep').textContent = keep.toLocaleString();
+  document.getElementById('s-skip').textContent = skip.toLocaleString();
+  document.getElementById('s-remain').textContent = remaining;
+}
+
+function showResults() {
+  const overlay = document.getElementById('results');
+  const pruned = [], kept = [], skipped = [];
+
+  Q.forEach((q, i) => {
+    const d = decisions[i] || 'skip';
+    if (d === 'prune') pruned.push(q);
+    else if (d === 'keep') kept.push(q);
+    else skipped.push(q);
+  });
+
+  let prunedCount = pruned.reduce((s, q) => s + q.count, 0);
+  let keptCount = kept.reduce((s, q) => s + q.count, 0);
+  let skippedCount = skipped.reduce((s, q) => s + q.count, 0);
+
+  const renderList = (items, cls) => items.map(q =>
+    `<div class="results-item">
+      <span class="ri-path">${q.path}</span>
+      <span class="ri-count">${q.count.toLocaleString()} files</span>
+      <span class="ri-desc">${q.desc.substring(0, 60)}...</span>
+    </div>`
+  ).join('');
+
+  overlay.innerHTML = `
+    <div class="results-header">
+      <h2>Pruning Results</h2>
+      <p>You answered ${Q.length} questions. Here's the breakdown.</p>
+    </div>
+    <div class="results-stats">
+      <div class="results-stat"><b style="color:var(--accent)">${prunedCount.toLocaleString()}</b><span>files to prune</span></div>
+      <div class="results-stat"><b style="color:var(--green)">${keptCount.toLocaleString()}</b><span>files to keep</span></div>
+      <div class="results-stat"><b style="color:var(--yellow)">${skippedCount.toLocaleString()}</b><span>files skipped</span></div>
+      <div class="results-stat"><b style="color:var(--text)">${(6168 - prunedCount).toLocaleString()}</b><span>remaining after prune</span></div>
+    </div>
+
+    ${pruned.length ? `<div class="results-section"><h3 class="prune-h">PRUNE (${pruned.length} items, ${prunedCount.toLocaleString()} files)</h3>${renderList(pruned)}</div>` : ''}
+    ${kept.length ? `<div class="results-section"><h3 class="keep-h">KEEP (${kept.length} items, ${keptCount.toLocaleString()} files)</h3>${renderList(kept)}</div>` : ''}
+    ${skipped.length ? `<div class="results-section"><h3 class="skip-h">SKIPPED (${skipped.length} items, ${skippedCount.toLocaleString()} files)</h3>${renderList(skipped)}</div>` : ''}
+
+    <div class="results-export">
+      <button class="btn-export" onclick="showExport()">Export Prune List for Claude</button>
+      <button class="btn-restart" onclick="restart()">Start Over</button>
+    </div>
+    <div class="export-box" id="export-box">
+      <pre id="export-text"></pre>
+      <button class="btn-copy" onclick="copyExportText()">Copy to Clipboard</button>
+    </div>
+  `;
+
+  overlay.classList.add('open');
+  document.getElementById('progress').style.width = '100%';
+}
+
+function showExport() {
+  const box = document.getElementById('export-box');
+  const lines = ['# Prune List — generated by Charlotte Repo Pruner', `# Date: ${new Date().toISOString().split('T')[0]}`, '# Paste this back to Claude to execute', ''];
+
+  Q.forEach((q, i) => {
+    const d = decisions[i] || 'skip';
+    if (d === 'prune') {
+      lines.push(`DELETE  ${q.path}  (${q.count} files)`);
+      if (q.flags.length) lines.push(`        Flags: ${q.flags.join(', ')}`);
+      lines.push(`        ${q.desc.substring(0, 100)}`);
+      lines.push('');
+    }
+  });
+
+  if (lines.length <= 4) lines.push('(nothing marked for pruning)');
+
+  document.getElementById('export-text').textContent = lines.join('\n');
+  box.classList.add('open');
+}
+
+function copyExportText() {
+  const text = document.getElementById('export-text').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    event.target.textContent = 'Copied!';
+    setTimeout(() => event.target.textContent = 'Copy to Clipboard', 1500);
+  });
+}
+
+function restart() {
+  current = 0;
+  decisions = [];
+  history = [];
+  document.getElementById('results').classList.remove('open');
+  document.getElementById('results').innerHTML = '';
+  renderCard();
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('results').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') decide('prune');
+  else if (e.key === 'ArrowRight') decide('keep');
+  else if (e.key === 'ArrowDown') decide('skip');
+  else if (e.key === 'u' || e.key === 'U') undo();
+});
+
+// Init
+renderCard();
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@
   <link rel="icon"href="design/brandbook/someai/assets/LOGO.png">
   <link rel="apple-touch-icon" href="design/brandbook/someai/assets/LOGO.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* === Reset === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,14 +44,6 @@
     }
     .junction { opacity: 0; transition: opacity 0.1s; }
 
-    /* === Hero (Layer 2) === */
-    #hero {
-      position: relative;
-      width: calc(100% + 48px);
-      margin: 0 -24px 48px;
-      height: 400px;
-      overflow: hidden;
-    }
     /* === Micro-Graph Background (full page, behind everything) === */
     #particle-canvas {
       position: fixed;
@@ -61,250 +53,35 @@
       z-index: -2;
       pointer-events: none;
     }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
+
+    /* === Compact SomeAI Header === */
+    .site-header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 4px 12px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 1;
+      gap: 14px;
     }
-    .hero-overlay h1 {
-      font-size: 48px;
+    .site-header img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+    .site-header h1 {
+      font-size: 26px;
       font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 12px;
-      text-align: center;
+      letter-spacing: -1px;
       background: linear-gradient(135deg, #FFFFFF 0%, #C4A8A8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-overlay .subtitle {
-      text-align: center;
-      color: #666666;
-      font-size: 15px;
-      max-width: 600px;
-      line-height: 1.6;
-    }
-
-    /* === Abstract === */
-    .abstract {
-      max-width: 800px;
-      margin: 0 auto 48px;
-      padding: 32px;
-      background: linear-gradient(135deg, rgba(229,62,62,0.05) 0%, rgba(155,120,120,0.04) 100%);
-      border: 1px solid #333333;
-      border-radius: 16px;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .abstract.visible { opacity: 1; transform: none; }
-    .abstract h2 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #E53E3E;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .abstract p {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #999999;
-      margin-bottom: 12px;
-    }
-    .abstract p:last-child { margin-bottom: 0; }
-    .abstract strong { color: #E8E0E0; font-weight: 600; }
-    .abstract .highlight { color: #E53E3E; font-weight: 500; }
-
-    /* === Five Primitives (Layer 3) === */
-    .primitives-section {
-      max-width: 800px;
-      margin: 0 auto 48px;
-      padding: 0 4px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .primitives-section.visible { opacity: 1; transform: none; }
-    .primitives-header h2 {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 4px;
-    }
-    .primitives-header p {
+    .site-header .tagline {
       font-size: 13px;
       color: #666666;
-      margin-bottom: 32px;
+      margin-left: auto;
     }
-    .primitives-diagram {
-      margin-bottom: 32px;
-    }
-    .primitives-diagram svg {
-      width: 100%;
-      max-width: 800px;
-    }
-    .flow-arrow {
-      animation: dash-flow 1.5s linear infinite;
-    }
-    @keyframes dash-flow {
-      to { stroke-dashoffset: -10; }
-    }
-    .primitives-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-    }
-    .primitive-card {
-      background: #1A1A1A;
-      border: 1px solid #333333;
-      border-radius: 12px;
-      padding: 20px 12px;
-      text-align: center;
-    }
-    .primitive-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    .primitive-card h3 {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-    .primitive-card p {
-      font-size: 11px;
-      line-height: 1.5;
-      color: #999999;
-    }
-
-    /* === Divider === */
-    .divider {
-      max-width: 800px;
-      margin: 0 auto 40px;
-      border: none;
-      border-top: 1px solid #333333;
-    }
-
-    /* === Investment Thesis Section === */
-    .thesis {
-      max-width: 960px;
-      margin: 0 auto 48px;
-      padding: 0 24px;
-    }
-    .thesis-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    .thesis-header h2 {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #E8E0E0;
-      margin-bottom: 6px;
-    }
-    .thesis-header .tagline {
-      font-size: 13px;
-      color: #666666;
-    }
-    .thesis-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .thesis-card {
-      background: #1A1A1A;
-      border: 1px solid #333333;
-      border-radius: 14px;
-      padding: 24px;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .thesis-card.visible { opacity: 1; transform: none; }
-    .thesis-card h3 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-    }
-    .thesis-card h3.blue { color: #F56565; }
-    .thesis-card h3.green { color: #68D391; }
-    .thesis-card h3.amber { color: #F59E0B; }
-    .thesis-card h3.purple { color: #C4A8A8; }
-    .thesis-card p {
-      font-size: 13px;
-      line-height: 1.65;
-      color: #999999;
-    }
-    .thesis-card strong { color: #E8E0E0; }
-    .thesis-card .val-highlight { font-weight: 500; }
-    .thesis-card .val-highlight.blue { color: #F56565; }
-    .thesis-card .val-highlight.green { color: #68D391; }
-    .thesis-card .val-highlight.amber { color: #F59E0B; }
-    .thesis-card .val-highlight.purple { color: #C4A8A8; }
-    .thesis-wide {
-      background: linear-gradient(135deg, rgba(229,62,62,0.06) 0%, rgba(155,120,120,0.04) 50%, rgba(107,79,79,0.04) 100%);
-      border: 1px solid #333333;
-      border-radius: 14px;
-      padding: 28px 32px;
-      margin-bottom: 24px;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .thesis-wide.visible { opacity: 1; transform: none; }
-    .thesis-wide h3 {
-      font-size: 14px;
-      color: #E53E3E;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
-    }
-    .thesis-wide p {
-      font-size: 13px;
-      line-height: 1.7;
-      color: #999999;
-      margin-bottom: 10px;
-    }
-    .thesis-wide p:last-child { margin-bottom: 0; }
-    .thesis-wide strong { color: #E8E0E0; }
-    .thesis-wide .hl { color: #E53E3E; font-weight: 500; }
-    .thesis-wide .gl { color: #68D391; font-weight: 500; }
-    .thesis-wide .al { color: #F59E0B; font-weight: 500; }
-
-    /* === Tables === */
-    .val-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0 8px;
-      font-size: 12px;
-    }
-    .val-table th {
-      text-align: left;
-      color: #666666;
-      font-weight: 500;
-      padding: 6px 10px;
-      border-bottom: 1px solid #333333;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      font-size: 10px;
-    }
-    .val-table td {
-      padding: 8px 10px;
-      border-bottom: 1px solid rgba(51,51,51,0.5);
-      color: #999999;
-    }
-    .val-table td:nth-child(2), .val-table td:nth-child(3) { color: #E8E0E0; font-weight: 600; }
-    .val-table tr:last-child td { border-bottom: none; }
 
     /* === Live Badge === */
     .live-badge {
@@ -323,6 +100,14 @@
     @keyframes badge-pulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(229,62,62,0.2); }
       50% { box-shadow: 0 0 12px 2px rgba(229,62,62,0.15); }
+    }
+
+    /* === Divider === */
+    .divider {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      border: none;
+      border-top: 1px solid #333333;
     }
 
     /* === Section Labels === */
@@ -358,7 +143,6 @@
     .section-label.domain h2 { color: #68D391; }
     .section-label.reference h2 { color: #C4A8A8; }
     .section-label.research h2 { color: #F59E0B; }
-    .section-label.instrument h2 { color: #666666; }
 
     /* === Tags === */
     .tag {
@@ -377,7 +161,6 @@
     .tag-domain { background: rgba(104,211,145,0.12); color: #68D391; }
     .tag-reference { background: rgba(196,168,168,0.12); color: #C4A8A8; }
     .tag-research { background: rgba(245,158,11,0.12); color: #F59E0B; }
-    .tag-instrument { background: rgba(102,102,102,0.12); color: #999999; }
 
     /* === Cards + Grid === */
     .grid {
@@ -415,7 +198,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
 
-    /* Hover Shimmer (Layer 5) */
+    /* Hover Shimmer */
     .card::before {
       content: '';
       position: absolute;
@@ -519,41 +302,300 @@
     }
     #fg-tooltip.show { opacity: 1; }
 
-    /* === Reduced Motion (Layer 6) === */
+    /* === Charlotte Charts Section === */
+    .charts-section {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+    }
+    .charts-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 0 4px;
+    }
+    .charts-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #E53E3E;
+    }
+    .charts-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #333333;
+    }
+    .charts-theme-select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #1A1A1A;
+      color: #E8E0E0;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      margin-left: auto;
+      order: -1;
+    }
+    .charts-theme-select:focus { border-color: #E53E3E; }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .chart-card {
+      background: #1A1A1A;
+      border: 1px solid #333333;
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.2s;
+    }
+    .chart-card.visible { opacity: 1; transform: none; }
+    .chart-card:hover { border-color: #444; }
+    .chart-card-tag {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #E53E3E;
+      padding: 12px 16px 0;
+      opacity: 0.7;
+    }
+    .chart-card-head {
+      padding: 4px 16px 0;
+    }
+    .chart-card-head h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #E8E0E0;
+      letter-spacing: -0.01em;
+    }
+    .chart-card-head p {
+      font-size: 11px;
+      color: #666;
+      margin-top: 1px;
+    }
+    .chart-card-body {
+      padding: 10px 16px 16px;
+    }
+    .chart-card-body canvas { display: block; max-width: 100%; }
+    .chart-card.wide { grid-column: span 2; }
+
+    /* === RE Identity Row === */
+    .re-row {
+      max-width: 1200px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: #1A1A1A;
+      border: 1px solid #333333;
+      border-radius: 12px;
+      flex-wrap: wrap;
+    }
+    .re-row-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #C4A8A8;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    .re-brand-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(104,211,145,0.08);
+      border: 1px solid rgba(104,211,145,0.15);
+      color: #68D391;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .re-brand-chip:hover {
+      background: rgba(104,211,145,0.15);
+      border-color: rgba(104,211,145,0.3);
+    }
+    .re-brand-chip img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      border-radius: 3px;
+    }
+
+    /* === Pipeline Kanban === */
+    .pipeline-section {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+    }
+    .pipeline-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 0 4px;
+    }
+    .pipeline-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #68D391;
+    }
+    .pipeline-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #333333;
+    }
+    .kanban {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+    .kanban::-webkit-scrollbar { height: 6px; }
+    .kanban::-webkit-scrollbar-track { background: #1A1A1A; border-radius: 3px; }
+    .kanban::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    .kanban-col {
+      min-width: 220px;
+      flex: 1 0 220px;
+      scroll-snap-align: start;
+    }
+    .kanban-col-header {
+      padding: 10px 14px;
+      border-radius: 10px 10px 0 0;
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kanban-col-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .kanban-col-header h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #E8E0E0;
+    }
+    .kanban-col-header .col-count {
+      font-size: 10px;
+      color: #666;
+      margin-left: auto;
+    }
+    .kanban-col-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      background: rgba(26,26,26,0.5);
+      border: 1px solid #333;
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      min-height: 60px;
+    }
+    .kanban-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #E8E0E0;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .kanban-card:hover {
+      background: #222;
+      border-color: #444;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .kanban-card .kc-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .kanban-card .kc-icon img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      border-radius: 3px;
+    }
+    .kanban-card .kc-text h4 {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .kanban-card .kc-text p {
+      font-size: 10px;
+      color: #666;
+      margin-top: 1px;
+    }
+    .kanban-card .kc-badges {
+      margin-left: auto;
+      display: flex;
+      gap: 4px;
+    }
+    .kc-badge {
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .kc-badge-brand {
+      background: rgba(104,211,145,0.1);
+      color: #68D391;
+    }
+    .kc-badge-brand:hover { background: rgba(104,211,145,0.25); }
+    .kc-badge-domain {
+      background: rgba(229,62,62,0.1);
+      color: #F56565;
+    }
+
+    /* === Reduced Motion === */
     @media (prefers-reduced-motion: reduce) {
       #web-bg { display: none !important; }
       #particle-canvas { display: none !important; }
-      .card, .thesis-card, .thesis-wide, .abstract, .primitives-section, .primitive-card, #force-graph {
+      .card, #force-graph, .chart-card {
         opacity: 1 !important;
         transform: none !important;
         transition-duration: 0s !important;
         transition-delay: 0s !important;
       }
       .card::before { display: none !important; }
-      .flow-arrow { animation: none !important; }
       .web-strands { animation: none !important; }
       .junction, .npulse { display: none !important; }
       .live-badge { animation: none !important; }
-      .hero-overlay h1 {
-        -webkit-text-fill-color: #E8E0E0;
-        background: none;
-      }
     }
 
-    /* === Mobile (Layer 6) === */
+    /* === Mobile === */
     @media (max-width: 700px) {
-      #hero { height: auto; }
       #particle-canvas { display: none; }
-      .hero-overlay {
-        position: relative;
-        padding: 48px 0 40px;
-      }
-      .hero-overlay h1 { font-size: 32px; letter-spacing: -1px; }
-      .hero-overlay .subtitle { font-size: 13px; padding: 0 12px; }
-      .primitives-diagram { display: none; }
-      .primitives-grid { grid-template-columns: repeat(2, 1fr); }
-      .thesis-grid { grid-template-columns: 1fr; }
-      .thesis-wide { padding: 20px; }
+      .site-header .tagline { display: none; }
+      .chart-card.wide { grid-column: span 1; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .re-row { gap: 8px; padding: 12px 14px; }
     }
   </style>
 </head>
@@ -573,7 +615,6 @@
       </filter>
     </defs>
     <g class="web-strands" transform="translate(120,120)" stroke="#E53E3E" stroke-width="1.5" fill="none" stroke-opacity="0.08" stroke-linecap="round" stroke-linejoin="round">
-      <!-- 9 radial threads -->
       <line x1="0" y1="0" x2="0" y2="-108"/>
       <line x1="0" y1="0" x2="65" y2="-87"/>
       <line x1="0" y1="0" x2="103" y2="-33"/>
@@ -583,16 +624,11 @@
       <line x1="0" y1="0" x2="-95" y2="50"/>
       <line x1="0" y1="0" x2="-103" y2="-33"/>
       <line x1="0" y1="0" x2="-65" y2="-87"/>
-      <!-- Outer ring -->
       <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
-      <!-- Middle ring -->
       <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
-      <!-- Inner ring -->
       <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
     </g>
-    <!-- 27 junction nodes at radial-ring intersections -->
     <g id="neural-junctions" transform="translate(120,120)">
-      <!-- Outer ring junctions (0-8) -->
       <circle class="junction" cx="0" cy="-108" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="65" cy="-87" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="103" cy="-33" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
@@ -602,7 +638,6 @@
       <circle class="junction" cx="-95" cy="50" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="-103" cy="-33" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="-65" cy="-87" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
-      <!-- Middle ring junctions (9-17) -->
       <circle class="junction" cx="0" cy="-70" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="42" cy="-56" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="67" cy="-21" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
@@ -612,7 +647,6 @@
       <circle class="junction" cx="-62" cy="32" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="-67" cy="-21" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="-42" cy="-56" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
-      <!-- Inner ring junctions (18-26) -->
       <circle class="junction" cx="0" cy="-38" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="23" cy="-30" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="36" cy="-11" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
@@ -623,7 +657,6 @@
       <circle class="junction" cx="-36" cy="-11" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
       <circle class="junction" cx="-23" cy="-30" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
     </g>
-    <!-- Neural pulse pool (12 signal circles) -->
     <g id="neural-pulses" transform="translate(120,120)">
       <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
       <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
@@ -717,226 +750,12 @@
 <!-- ═══════════ LAYER 2: Micro-Graph Background (full page) ═══════════ -->
 <canvas id="particle-canvas"></canvas>
 
-<!-- ═══════════ Hero Section ═══════════ -->
-<section id="hero">
-  <div class="hero-overlay">
-    <h1>Charlotte</h1>
-    <p class="subtitle">An operating system for operations &mdash; from research instruments to compiled instruction sets</p>
-  </div>
-</section>
-
-<!-- ═══════════ Abstract ═══════════ -->
-<div class="abstract">
-  <h2>Abstract</h2>
-  <p>
-    <span class="highlight">Charlotte</span> is the first layer of an <strong>infinite stack of operating systems</strong>. Every business that wants to be a business gets its own OS &mdash; custom-compiled to its own operations, its own vocabulary, its own rhythm. A pig farm runs on a different instruction set than a violin dealer, which runs on a different instruction set than a moving company. But because every OS is built on top of Charlotte, they are all <strong>interoperable by construction</strong>. They can all talk to each other. They can all learn from each other. The kernel never changes.
-  </p>
-  <p>
-    Charlotte is the universal layer: five primitives &mdash; <strong>Node, Edge, Metric, Signal, Protocol</strong> &mdash; and a temporal spine running from epoch to millisecond. The observer lives on this spine in Kd-space, placing signals on metric lines. Each domain OS stacked on top <strong>shrinks the convex hull</strong> of the knowledge space &mdash; restricting the vocabulary, tightening the instruction set, compiling a full end-to-end pipeline into the <strong>smallest possible encoding</strong> for that specific business. Layer 1 is universal. Layer N is bespoke. Every layer in between is just a tighter ontology.
-  </p>
-  <p>
-    The result is not one product. It is an <strong>infinite number of products</strong> &mdash; each one custom, each one small enough to be invisible, each one powerful enough to run an entire operation &mdash; all stacked on the same kernel, all sharing the same temporal spine, all speaking the same language at the bottom. The correct measure of technological progress is not how much technology people use. It is <strong>how little they notice</strong>.
-  </p>
-</div>
-
-<!-- ═══════════ LAYER 3: Five Primitives ═══════════ -->
-<section class="primitives-section">
-  <div class="primitives-header">
-    <h2>Five Primitives</h2>
-    <p>The universal kernel</p>
-  </div>
-
-  <div class="primitives-diagram">
-    <svg viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <defs>
-        <marker id="arrow-marker" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M 0 1 L 10 5 L 0 9 z" fill="#444"/>
-        </marker>
-      </defs>
-      <!-- Flow arrows -->
-      <line class="flow-arrow" x1="118" y1="60" x2="202" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
-      <line class="flow-arrow" x1="278" y1="60" x2="362" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
-      <line class="flow-arrow" x1="438" y1="60" x2="522" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
-      <line class="flow-arrow" x1="598" y1="60" x2="682" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
-      <!-- NODE -->
-      <circle cx="80" cy="60" r="38" stroke="#C4A8A8" stroke-width="1.5"/>
-      <text x="80" y="64" text-anchor="middle" fill="#C4A8A8" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">NODE</text>
-      <!-- EDGE -->
-      <circle cx="240" cy="60" r="38" stroke="#9B7878" stroke-width="1.5"/>
-      <text x="240" y="64" text-anchor="middle" fill="#9B7878" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">EDGE</text>
-      <!-- METRIC -->
-      <circle cx="400" cy="60" r="38" stroke="#F59E0B" stroke-width="1.5"/>
-      <text x="400" y="64" text-anchor="middle" fill="#F59E0B" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">METRIC</text>
-      <!-- SIGNAL -->
-      <circle cx="560" cy="60" r="38" stroke="#E53E3E" stroke-width="1.5"/>
-      <text x="560" y="64" text-anchor="middle" fill="#E53E3E" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">SIGNAL</text>
-      <!-- PROTOCOL -->
-      <circle cx="720" cy="60" r="38" stroke="#68D391" stroke-width="1.5"/>
-      <text x="720" y="64" text-anchor="middle" fill="#68D391" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">PROTOCOL</text>
-    </svg>
-  </div>
-
-  <div class="primitives-grid">
-    <div class="primitive-card">
-      <div class="primitive-icon" style="color:#C4A8A8">&#x25CF;</div>
-      <h3 style="color:#C4A8A8">Node</h3>
-      <p>The identity. An observable entity that persists through time.</p>
-    </div>
-    <div class="primitive-card">
-      <div class="primitive-icon" style="color:#9B7878">&#x2194;</div>
-      <h3 style="color:#9B7878">Edge</h3>
-      <p>The relationship. A typed connection between two nodes.</p>
-    </div>
-    <div class="primitive-card">
-      <div class="primitive-icon" style="color:#F59E0B">&#x2261;</div>
-      <h3 style="color:#F59E0B">Metric</h3>
-      <p>The measure. A quantifiable dimension observed along.</p>
-    </div>
-    <div class="primitive-card">
-      <div class="primitive-icon" style="color:#E53E3E">&#x26A1;</div>
-      <h3 style="color:#E53E3E">Signal</h3>
-      <p>The event. A timestamped observation emitted on a metric.</p>
-    </div>
-    <div class="primitive-card">
-      <div class="primitive-icon" style="color:#68D391">&#x25C6;</div>
-      <h3 style="color:#68D391">Protocol</h3>
-      <p>The rule. A constraint governing signal propagation.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ═══════════ Investment Thesis ═══════════ -->
-<div class="thesis">
-  <div class="thesis-header">
-    <h2>Where We Are Going</h2>
-    <p class="tagline">Invisible infrastructure for the 33.2 million businesses technology forgot</p>
-  </div>
-
-  <div class="thesis-wide">
-    <h3>The 97% Thesis</h3>
-    <p>
-      There are <strong>33.2 million small businesses</strong> in the United States. <span class="al">97% were built before AI existed.</span> Most predate broadband internet. Many predate the personal computer. These businesses &mdash; corner-store libraries, family coffee shops, third-generation hardware stores &mdash; do not need more technology. They need the complexity of modernity to <strong>stop eroding them</strong> while they do what they were built to do.
-    </p>
-    <p>
-      Charlotte is <strong>titanium injected directly into the bone</strong>. The business does not change. The owner learns nothing new. No new screens. No new logins. No training. No migration. The substrate observes the signals the business already emits &mdash; transactions, schedules, inventory, deliveries &mdash; and converts them into structural intelligence. <span class="hl">Devices manage themselves. The infrastructure thinks so the owner doesn't have to.</span> The endgame is not a world with more technology everywhere. It is a world with <strong>less visible technology and more underlying intelligence</strong>.
-    </p>
-  </div>
-
-  <div class="thesis-wide">
-    <h3>First Revenue <span class="live-badge">Live Feb 23, 2026</span></h3>
-    <p>
-      The <strong>first industrial sector contract</strong> goes live February 23, 2026 &mdash; <span class="gl">$1.4M over 2 years</span> for Charlotte-powered equipment intelligence deployed into a major MRO platform across 42 locations. This is the PE beachhead &mdash; not the ceiling. Each deployment proves the substrate works across a new domain, reduces onboarding cost by 30&ndash;40%, and generates cross-client intelligence that makes every subsequent deployment faster. The pattern scales from PE portfolio companies (<span class="al">~26,000</span>) to mid-market (<span class="al">~200,000</span>) to the <strong>33 million businesses</strong> that have never had access to this kind of infrastructure and never should have needed to ask.
-    </p>
-  </div>
-
-  <div class="thesis-grid">
-    <div class="thesis-card">
-      <h3 class="blue">The Research Lab</h3>
-      <p>
-        Every project on this page is a <strong>containerized instance</strong> &mdash; a game Charlotte facilitates. The lab has produced <strong>13 research papers</strong> across Nature, IEEE, ACM, NeurIPS, Cognitive Science, and Research Policy. Charlotte is validated across <strong>eight domains</strong>: industrial equipment, premium retail, manufacturing, livestock auctions, swine genetics, rare instruments, moving logistics, and marine ecosystems. The production dataset contains <span class="val-highlight blue">27,200 nodes</span> and <span class="val-highlight blue">46,100 edges</span>. Each domain proves that a single kernel can compile into a completely different operating system &mdash; different instruction sets, different rhythms, same five primitives underneath.
-      </p>
-    </div>
-    <div class="thesis-card">
-      <h3 class="green">Serengeti Oasis</h3>
-      <p>
-        The endgame is a purpose-built <strong>50&ndash;200 acre property</strong> where dozens of businesses run side-by-side, each on its own compiled OS, all stacked on Charlotte. A coffee shop, a veterinary clinic, a co-working space, a logistics hub &mdash; each with a different instruction set, different metrics, different protocols &mdash; all sharing the same temporal spine, all visible to each other. Having them co-located allows real-time analysis of <strong>resonance between operating systems</strong>: how fast signals propagate across business boundaries, where patterns compound, what emerges when bespoke systems talk to each other. The village is simultaneously a revenue-generating commercial district, a live research environment, and a <strong>proof that infinite bespoke OSes can interoperate on one kernel</strong>.
-      </p>
-    </div>
-    <div class="thesis-card">
-      <h3 class="amber">The Absorption Model</h3>
-      <p>
-        The technology industry built one-size-fits-all software for the <strong>3% of businesses born digital</strong>. Charlotte builds an infinite number of bespoke operating systems for the other 97%. Each business gets its own OS &mdash; compiled from its own signals, shrunk to its own instruction set &mdash; without knowing it exists. The <strong>adoption tax</strong> disappears because there is nothing to adopt. The infrastructure observes what the business already does and compiles itself around it. At <span class="val-highlight amber">1% penetration</span> of American small businesses paying $1K&ndash;$10K/month for invisible infrastructure, the market generates <span class="val-highlight amber">$6B ARR</span> &mdash; exceeding Palantir, Snowflake, and MongoDB.
-      </p>
-    </div>
-    <div class="thesis-card">
-      <h3 class="purple">The PE Beachhead</h3>
-      <p>
-        PE firms manage <strong>~26,000 portfolio companies</strong> &mdash; 0.08% of all businesses. Charlotte eliminates <strong>$770K&ndash;$3.4M/year in integration tax</strong> per company. Post-acquisition integration drops from 12&ndash;24 months to <strong>hours</strong>. The fund deploys the infrastructure; portfolio companies never know it is there. From this beachhead, the same substrate extends to the <strong>33 million businesses</strong> that have never adopted enterprise software and never will. <strong>LTV:CAC exceeds 50:1.</strong> Churn is &lt;5% &mdash; not because switching is hard, but because there is nothing to switch from. The infrastructure is invisible. You cannot abandon what you never noticed.
-      </p>
-    </div>
-  </div>
-
-  <div class="thesis-wide">
-    <h3>Revenue Model: Three Layers</h3>
-    <table class="val-table">
-      <tr><th>Layer</th><th>Market</th><th>Price Point</th><th>1% Penetration ARR</th></tr>
-      <tr>
-        <td style="color:#C4A8A8;font-weight:600">PE Beachhead</td>
-        <td>~26,000 portfolio companies</td>
-        <td>$100K+/mo</td>
-        <td style="color:#C4A8A8">$312M</td>
-      </tr>
-      <tr>
-        <td style="color:#F56565;font-weight:600">Mid-Market Expansion</td>
-        <td>~200,000 companies ($10M&ndash;$1B rev)</td>
-        <td>$5K&ndash;$50K/mo</td>
-        <td style="color:#F56565">$780M</td>
-      </tr>
-      <tr>
-        <td style="color:#F59E0B;font-weight:600">The 97% &mdash; Small Business America</td>
-        <td>33,200,000 businesses</td>
-        <td>$500&ndash;$3K/mo (invisible)</td>
-        <td style="color:#F59E0B">$6.0B</td>
-      </tr>
-      <tr style="border-top:1px solid #333333">
-        <td style="color:#68D391;font-weight:700">Combined (1% penetration)</td>
-        <td></td>
-        <td></td>
-        <td style="color:#68D391;font-weight:700">$7.1B</td>
-      </tr>
-    </table>
-    <p style="margin-top:14px">
-      The 97% layer is the paradigm shift. These businesses do not buy software. They never have. Charlotte does not ask them to. The substrate observes what they already do and makes it legible &mdash; <strong>no screens, no logins, no training</strong>. At 1% penetration with invisible infrastructure pricing, the small business layer alone generates more ARR than Palantir's entire 2025 revenue.
-    </p>
-  </div>
-
-  <div class="thesis-wide">
-    <h3>Forecasted Valuation</h3>
-    <p>
-      Grounded in comparable company analysis against <strong>Palantir</strong> ($324B, 48&ndash;96x P/S), <strong>Databricks</strong> ($134B, 28x ARR), <strong>Snowflake</strong> ($75B, 12&ndash;17x), <strong>MongoDB</strong> ($34B), <strong>Toast</strong> ($20B), and <strong>Samsara</strong> ($14.5B). Charlotte's trajectory reflects a category-creating infrastructure company targeting the largest untapped market in enterprise technology &mdash; the 33 million businesses the industry has never served.
-    </p>
-    <table class="val-table">
-      <tr><th></th><th>Year 5</th><th>Year 10</th><th>Basis</th></tr>
-      <tr>
-        <td>Revenue (ARR)</td>
-        <td style="color:#68D391">$82M &ndash; $108M</td>
-        <td style="color:#68D391">$920M &ndash; $1.2B</td>
-        <td>PE + mid-market clusters &middot; 900&ndash;11K businesses</td>
-      </tr>
-      <tr>
-        <td>97% Layer (additive)</td>
-        <td style="color:#F59E0B">$0 &ndash; $500M</td>
-        <td style="color:#F59E0B">$1B &ndash; $6B</td>
-        <td>0.1%&ndash;1% small business penetration as absorption model scales</td>
-      </tr>
-      <tr>
-        <td>Gross Margin</td>
-        <td>74%</td>
-        <td>85%+</td>
-        <td>No onboarding, no training, no support tickets &mdash; pure observation</td>
-      </tr>
-      <tr>
-        <td style="color:#F56565;font-weight:600">Low-End Valuation</td>
-        <td style="color:#F56565;font-weight:700">$750M &ndash; $1.5B</td>
-        <td style="color:#F56565;font-weight:700">$4B &ndash; $16B</td>
-        <td>15&ndash;25x ARR &middot; PE + mid-market only</td>
-      </tr>
-      <tr>
-        <td style="color:#C4A8A8;font-weight:600">High-End Valuation</td>
-        <td style="color:#C4A8A8;font-weight:700">$3B &ndash; $6B</td>
-        <td style="color:#C4A8A8;font-weight:700">$25B &ndash; $50B+</td>
-        <td>30&ndash;50x ARR &middot; With 97% layer &middot; Category creation premium</td>
-      </tr>
-    </table>
-    <p style="margin-top:14px">
-      <strong>Pre-revenue seed valuation (today):</strong> <span class="hl">$25M&ndash;$50M</span> with PE network access. <span class="hl">$50M&ndash;$100M</span> with signed property LOI. The structural moat is not code &mdash; it is <strong>8 years of cross-domain research, 13 papers across 13 venues, 5 architectural innovations no competitor has replicated, and a substrate that serves 33.2 million businesses without asking a single one to change</strong>. The correct measure of technological progress is not how much technology people use. It is how little they notice.
-    </p>
-  </div>
-</div>
-
-<hr class="divider">
+<!-- ═══════════ Compact SomeAI Header ═══════════ -->
+<header class="site-header">
+  <img src="design/brandbook/someai/assets/LOGO.png" alt="SomeAI">
+  <h1>SomeAI</h1>
+  <span class="tagline">Infrastructure for observable reality</span>
+</header>
 
 <!-- ═══════════ FORCE GRAPH: Project Constellation ═══════════ -->
 <section id="force-graph">
@@ -950,9 +769,186 @@
 
 <hr class="divider">
 
+<!-- ═══════════ RE IDENTITY ROW ═══════════ -->
+<nav class="re-row">
+  <span class="re-row-label">Richard Enterprises</span>
+  <a class="re-brand-chip" href="design/brandbook/someai/">
+    <img src="design/brandbook/someai/assets/LOGO.png" alt="">SomeAI
+  </a>
+  <a class="re-brand-chip" href="design/brandbook/isg/">
+    <img src="design/brandbook/isg/assets/logo_and_name.png" alt="">ISG
+  </a>
+  <a class="re-brand-chip" href="design/brandbook/sounder/">
+    <img src="design/brandbook/sounder/assets/SOUNDER_BRAND_ICON.png" alt="">Sounder
+  </a>
+  <a class="re-brand-chip" href="design/brandbook/serengeti/">Serengeti</a>
+  <a class="re-brand-chip" href="design/brandbook/sea-lion/">Sea Lion</a>
+</nav>
+
+<!-- ═══════════ PIPELINE ═══════════ -->
+<div class="pipeline-section">
+  <div class="pipeline-header">
+    <h2>Pipeline</h2>
+  </div>
+  <div class="kanban">
+    <!-- ACTIVE -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <span class="kanban-col-dot" style="background:#68D391"></span>
+        <h3>Active</h3>
+        <span class="col-count">2</span>
+      </div>
+      <div class="kanban-col-body">
+        <a class="kanban-card" href="business/industrial-service-group/">
+          <span class="kc-icon"><img src="design/brandbook/isg/assets/logo_and_name.png" alt=""></span>
+          <div class="kc-text">
+            <h4>ISG</h4>
+            <p>16 brands, $450M rev, equipment intelligence</p>
+          </div>
+          <div class="kc-badges">
+            <span class="kc-badge kc-badge-domain">Mechanical</span>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/sounder/">
+          <span class="kc-icon"><img src="design/brandbook/sounder/assets/SOUNDER_BRAND_ICON.png" alt=""></span>
+          <div class="kc-text">
+            <h4>Sounder</h4>
+            <p>Unified swine genetics, 401K facts</p>
+          </div>
+          <div class="kc-badges">
+            <span class="kc-badge kc-badge-domain">Biological</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- PARTNERSHIPS -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <span class="kanban-col-dot" style="background:#F59E0B"></span>
+        <h3>Partnerships</h3>
+        <span class="col-count">3</span>
+      </div>
+      <div class="kanban-col-body">
+        <a class="kanban-card" href="business/sounder/nsr/">
+          <span class="kc-icon">&#x1F4DC;</span>
+          <div class="kc-text">
+            <h4>NSR</h4>
+            <p>National Swine Registry</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/sounder/cps/">
+          <span class="kc-icon">&#x1F4DC;</span>
+          <div class="kc-text">
+            <h4>CPS</h4>
+            <p>Certified Pedigree Swine</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/sounder/tsa/">
+          <span class="kc-icon">&#x1F4DC;</span>
+          <div class="kc-text">
+            <h4>TSA</h4>
+            <p>Tamworth Swine Association</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- PROPOSAL -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <span class="kanban-col-dot" style="background:#60A5FA"></span>
+        <h3>Proposal</h3>
+        <span class="col-count">9</span>
+      </div>
+      <div class="kanban-col-body">
+        <a class="kanban-card" href="business/gesdate/">
+          <span class="kc-icon">&#x1F437;</span>
+          <div class="kc-text">
+            <h4>GesDate</h4>
+            <p>Herd management intelligence</p>
+          </div>
+          <div class="kc-badges">
+            <span class="kc-badge kc-badge-domain">Biological</span>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/lineleap/">
+          <span class="kc-icon">&#x1F378;</span>
+          <div class="kc-text">
+            <h4>LineLeap</h4>
+            <p>Bar management intelligence</p>
+          </div>
+          <div class="kc-badges">
+            <span class="kc-badge kc-badge-domain">Human</span>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/allstate-manufacturing/">
+          <span class="kc-icon">&#x2692;</span>
+          <div class="kc-text">
+            <h4>All State Mfg</h4>
+            <p>Metal fixtures, micro market</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/top-tier-moving/">
+          <span class="kc-icon">&#x1F69A;</span>
+          <div class="kc-text">
+            <h4>Top Tier Moving</h4>
+            <p>$14.4M billed, 98 crew</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/cardvault/">
+          <span class="kc-icon">&#x1F3C6;</span>
+          <div class="kc-text">
+            <h4>CardVault</h4>
+            <p>12 locations, collector intelligence</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/wendt-group/">
+          <span class="kc-icon">&#x1F3AA;</span>
+          <div class="kc-text">
+            <h4>Wendt Group</h4>
+            <p>ShowPig.com, 12K+ auctions</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/violins/">
+          <span class="kc-icon">&#x1F3BB;</span>
+          <div class="kc-text">
+            <h4>PPP Instruments</h4>
+            <p>$5.3M rare string portfolio</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/monroe-livestock/">
+          <span class="kc-icon">&#x1F404;</span>
+          <div class="kc-text">
+            <h4>Monroe Livestock</h4>
+            <p>Weekly auction, Adams County</p>
+          </div>
+        </a>
+        <a class="kanban-card" href="business/sc-online-sales/">
+          <span class="kc-icon">&#x1F3A4;</span>
+          <div class="kc-text">
+            <h4>SC Online Sales</h4>
+            <p>5-species, 40K+ auctions</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- RESEARCH -->
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <span class="kanban-col-dot" style="background:#666"></span>
+        <h3>Research</h3>
+        <span class="col-count">0</span>
+      </div>
+      <div class="kanban-col-body" style="min-height:80px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
 <!-- ═══════════ KERNEL & INFRASTRUCTURE ═══════════ -->
 <div class="section-group">
-  <div class="section-label kernel"><h2>Kernel &amp; Infrastructure</h2><span class="count">11 modules</span></div>
+  <div class="section-label kernel"><h2>Kernel &amp; Infrastructure</h2><span class="count">9 modules</span></div>
   <div class="grid">
     <a class="card card-kernel" href="research-lab/">
       <span class="icon">&#x1F9E0;</span>
@@ -974,15 +970,11 @@
       <span class="icon">&#x1F5FA;</span>
       <div class="card-text"><h2>Spatial Substrate</h2><p>51 state nodes, 1,275 directional edges &mdash; convex hulls, centroids, 4,604 lines KRF</p><span class="tag tag-kernel">Substrate</span></div>
     </a>
-    <a class="card card-kernel" href="workbench/">
-      <span class="icon">&#x1F3A8;</span>
-      <div class="card-text"><h2>Workbench</h2><p>Asset studio &mdash; Lottie, SVG &amp; design assets across all entities</p><span class="tag tag-kernel">Studio</span></div>
-    </a>
     <a class="card card-kernel" href="tools/pitch-engine/">
       <span class="icon">&#x1F4CA;</span>
       <div class="card-text"><h2>Pitch Engine</h2><p>Presentation substrate &mdash; 21 widgets, 5 narrative arcs, deck generation</p><span class="tag tag-kernel">Studio</span></div>
     </a>
-    <a class="card card-kernel" href="tools/pitch-engine/decks/">
+    <a class="card card-kernel" href="tools/pitch-engine/decks/index.html">
       <span class="icon">&#x1F4BD;</span>
       <div class="card-text"><h2>Pitch Decks</h2><p>8 businesses &times; 3 narratives &mdash; before/after Charlotte, gradient AI-centric slides</p><span class="tag tag-kernel">Studio</span></div>
     </a>
@@ -994,357 +986,30 @@
       <span class="icon">&#x1F4C4;</span>
       <div class="card-text"><h2>Research Papers</h2><p>13 draft papers across 13 venues &mdash; Nature to NeurIPS</p><span class="tag tag-research">Research</span></div>
     </a>
-    <a class="card card-kernel" href="business/forecast.html">
-      <span class="icon">&#x1F4C8;</span>
-      <div class="card-text"><h2>Pipeline &amp; Forecast</h2><p>Series A materials &mdash; 9-entity pipeline, $2.4M MSAs, 5yr trajectory to $8.2M ARR</p><span class="tag tag-kernel">Business</span></div>
-    </a>
-    <a class="card card-kernel" href="charlotte/docs/artifacts/business_model.krf">
-      <span class="icon">&#x1F4BE;</span>
-      <div class="card-text"><h2>Business Model KRF</h2><p>Revenue model in Charlotte primitives &mdash; NODEs, EDGEs, METRICs, PROTOCOLs for the entire pipeline</p><span class="tag tag-kernel">Substrate</span></div>
-    </a>
-  </div>
-
-
-<!-- ═══════════ OPERATIONS & BRANDS ═══════════ -->
-<div class="section-group">
-  <div class="section-label domain"><h2>Operations &amp; Brands</h2><span class="count">21 entities &middot; 14 brand books</span></div>
-  <div class="grid">
-    <!-- SomeAI (brand book only) -->
-    <a class="card card-domain" href="design/brandbook/someai/">
-      <span class="icon"><img src="design/brandbook/someai/assets/LOGO.png" alt="SomeAI" style="width:32px;height:32px;object-fit:contain"></span>
-      <div class="card-text"><h2>SomeAI</h2><p>Research lab &mdash; spider web mark, red/mauve palette</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
-    </a>
-    <!-- Richard Enterprises (brand book only) -->
-    <a class="card card-domain" href="design/brandbook/richard-enterprises/">
-      <span class="icon"><img src="design/brandbook/richard-enterprises/assets/logo_and_name.png" alt="Richard Enterprises" style="width:32px;height:32px;object-fit:contain"></span>
-      <div class="card-text"><h2>Richard Enterprises</h2><p>Family holding company &mdash; umbrella entity, charcoal/gold/navy palette</p><span class="tag tag-domain">Brand</span><span class="tag tag-kernel" style="margin-left:4px">Design System</span></div>
-    </a>
-    <!-- ISG (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon"><img src="design/brandbook/isg/assets/logo_and_name.png" alt="ISG" style="width:32px;height:32px;object-fit:contain"></span>
-      <div class="card-text"><h2><a class="card-main" href="business/industrial-service-group/">ISG</a></h2><p>16 brands, $450M rev, 259K+ SKUs &mdash; equipment graph, dispatch intelligence, PE reporting</p><span class="tag tag-domain">Mechanical</span></div>
-      <a class="card-brand" href="design/brandbook/isg/" title="Brand Book">Brand</a>
-    </div>
-    <!-- Sounder (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon"><img src="design/brandbook/sounder/assets/SOUNDER_BRAND_ICON.png" alt="Sounder" style="width:32px;height:32px;object-fit:contain;border-radius:4px"></span>
-      <div class="card-text"><h2><a class="card-main" href="business/sounder/">Sounder</a></h2><p>Unified swine genetics infrastructure &mdash; 401K KRF facts, 3 registries, 77K breeders</p><span class="tag tag-domain">Biological</span></div>
-      <a class="card-brand" href="design/brandbook/sounder/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- NSR Partnership (domain only) -->
-    <a class="card card-domain" href="business/sounder/nsr/">
-      <span class="icon">&#x1F4DC;</span>
-      <div class="card-text"><h2>NSR Partnership</h2><p>National Swine Registry &mdash; 4 breeds, 3,763 breeders, CRM + website + threat matrix</p><span class="tag tag-domain">Partnership</span></div>
-    </a>
-    <!-- CPS Partnership (domain only) -->
-    <a class="card card-domain" href="business/sounder/cps/">
-      <span class="icon">&#x1F4DC;</span>
-      <div class="card-text"><h2>CPS Partnership</h2><p>Certified Pedigree Swine &mdash; 65,412 breeders, 10+ breeds, 5,279 herdmarks</p><span class="tag tag-domain">Partnership</span></div>
-    </a>
-    <!-- TSA Partnership (domain only) -->
-    <a class="card card-domain" href="business/sounder/tsa/">
-      <span class="icon">&#x1F4DC;</span>
-      <div class="card-text"><h2>TSA Partnership</h2><p>Tamworth Swine Association &mdash; 113 breeders, heritage bacon breed, pasture-raised</p><span class="tag tag-domain">Partnership</span></div>
-    </a>
-    <!-- PPP Instruments (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F3BB;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/violins/">PPP Instruments</a></h2><p>$5.3M rare string portfolio &mdash; 21 instruments, 88.3% avg appreciation, provenance graph</p><span class="tag tag-domain">Cultural</span></div>
-      <a class="card-brand" href="design/brandbook/ppp-instruments/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- Top Tier Moving (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F69A;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/top-tier-moving/">Top Tier Moving</a></h2><p>$14.4M billed, 98 crew, 10,606 jobs &mdash; baseball cards, collection analytics, route intelligence</p><span class="tag tag-domain">Logistics</span></div>
-      <a class="card-brand" href="design/brandbook/top-tier-moving/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- All State Manufacturing (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x2692;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/allstate-manufacturing/">All State Manufacturing</a></h2><p>$2.2M micro market fixtures &mdash; 50yr manufacturer, $105K MSA, zero-to-observable transformation</p><span class="tag tag-domain">Manufacturing</span></div>
-      <a class="card-brand" href="design/brandbook/allstate-manufacturing/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- CardVault (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F3C6;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/cardvault/">CardVault by Tom Brady</a></h2><p>12 locations, 338% growth, $510K MSA &mdash; collector intelligence, grading pipeline, cross-store CRM</p><span class="tag tag-domain">Collectibles</span></div>
-      <a class="card-brand" href="design/brandbook/cardvault/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- Wendt Group (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F3AA;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/wendt-group/">The Wendt Group</a></h2><p>ShowPig.com &mdash; 12K+ auctions, $156K MSA, first crossbred pedigree engine in the industry</p><span class="tag tag-domain">Livestock</span></div>
-      <a class="card-brand" href="design/brandbook/wendt-group/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- Monroe Livestock (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F404;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/monroe-livestock/">Monroe Livestock Auction</a></h2><p>Weekly livestock auction, Adams County &mdash; Swiss Amish corridor, $67.5K MSA, DVAuction-integrated</p><span class="tag tag-domain">Livestock</span></div>
-      <a class="card-brand" href="design/brandbook/monroe-livestock/" title="Brand Book">Brand</a>
-    </div>
-    <!-- SC Online Sales (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F3A4;</span>
-      <div class="card-text"><h2><a class="card-main" href="business/sc-online-sales/">SC Online Sales</a></h2><p>5-species livestock platform &mdash; 40K+ auctions, $135K MSA, cross-species buyer intelligence</p><span class="tag tag-domain">Livestock</span></div>
-      <a class="card-brand" href="design/brandbook/sc-online-sales/" title="Brand Book &amp; Design System">Brand</a>
-    </div>
-    <!-- LineLeap (domain only) -->
-    <a class="card card-domain" href="business/lineleap/">
-      <span class="icon">&#x1F378;</span>
-      <div class="card-text"><h2>LineLeap Agent</h2><p>Charlotte-powered bar management agent</p><span class="tag tag-domain">Human</span></div>
-    </a>
-    <!-- GesDate (domain only) -->
-    <a class="card card-domain" href="business/gesdate/">
-      <span class="icon">&#x1F437;</span>
-      <div class="card-text"><h2>GesDate Agent</h2><p>Charlotte-powered herd management agent</p><span class="tag tag-domain">Biological</span></div>
-    </a>
-    <!-- Sea Lion (domain + brand) -->
-    <div class="card card-domain card-duo">
-      <span class="icon">&#x1F9AD;</span>
-      <div class="card-text"><h2><a class="card-main" href="references/sealion/">Sea Lion</a></h2><p>Ocean science &amp; marine biology research</p><span class="tag tag-domain">Marine</span></div>
-      <a class="card-brand" href="design/brandbook/sea-lion/" title="Brand Book">Brand</a>
-    </div>
-    <!-- Maestro (domain only) -->
-    <a class="card card-domain" href="tools/maestro/">
-      <span class="icon">&#x1F4CA;</span>
-      <div class="card-text"><h2>Maestro</h2><p>3-year strategy deployment quad matrix</p><span class="tag tag-domain">Strategy</span></div>
-    </a>
-    <!-- Gantt (domain only) -->
-    <a class="card card-domain" href="tools/gantt/">
-      <span class="icon">&#x1F4C5;</span>
-      <div class="card-text"><h2>Gantt</h2><p>Charlotte OS demo sprint &mdash; 12-day plan to Feb 23</p><span class="tag tag-domain">Sprint</span></div>
-    </a>
-    <!-- Serengeti (brand book only) -->
-    <a class="card card-domain" href="design/brandbook/serengeti/">
-      <span class="icon">&#x1F981;</span>
-      <div class="card-text"><h2>Serengeti</h2><p>Generational retirement pool &mdash; savanna gold, earth tones</p><span class="tag tag-domain">Brand</span></div>
-    </a>
-    <!-- Apple iOS 26 (reference brand book) -->
-    <a class="card" href="design/brandbook/apple/">
-      <span class="icon">&#xF8FF;</span>
-      <div class="card-text"><h2>Apple iOS 26</h2><p>Liquid Glass design system baseline reference</p><span class="tag tag-reference">Reference</span></div>
-    </a>
   </div>
 </div>
 
-<!-- ═══════════ CONVEX HULL — REFERENCE LIBRARY ═══════════ -->
-<div class="section-group">
-  <div class="section-label reference"><h2>Convex Hull &mdash; Reference Library</h2><span class="count">25 references</span></div>
-  <div class="grid">
-    <a class="card" href="references/knowledge/">
-      <span class="icon">&#x1F4D6;</span>
-      <div class="card-text"><h2>Knowledge Primitives</h2><p>Structural, declarative, procedural, heuristic &amp; meta knowledge</p><span class="tag tag-reference">Convex Hull</span></div>
-    </a>
-    <a class="card" href="references/formal-logic/">
-      <span class="icon">&forall;</span>
-      <div class="card-text"><h2>Formal Logic</h2><p>Propositional logic, FOL, lambda calculus &amp; Lisp</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/graph-theory/">
-      <span class="icon">&#x229B;</span>
-      <div class="card-text"><h2>Graph Theory</h2><p>Knowledge graphs, ontologies &amp; graph databases</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/topology/">
-      <span class="icon">&#x25CE;</span>
-      <div class="card-text"><h2>Topology</h2><p>Algebraic topology, TDA &amp; higher dimensions</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/cognitive-science/">
-      <span class="icon">&#x1F9E0;</span>
-      <div class="card-text"><h2>Cognitive Science</h2><p>Predictive coding, Bayesian brain &amp; resonance</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/signal-processing/">
-      <span class="icon">&#x3030;</span>
-      <div class="card-text"><h2>Signal Processing</h2><p>Time series, frequency domain &amp; drift detection</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/temporal-databases/">
-      <span class="icon">&#x23F1;</span>
-      <div class="card-text"><h2>Temporal Databases</h2><p>Event sourcing, bitemporal modeling &amp; CQRS</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/spatial-computing/">
-      <span class="icon">&#x1F30D;</span>
-      <div class="card-text"><h2>Spatial Computing</h2><p>GIS, spatial databases &amp; geospatial algorithms</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/systems-architecture/">
-      <span class="icon">&#x1F3D7;</span>
-      <div class="card-text"><h2>Systems Architecture</h2><p>Distributed systems, DDD &amp; event-driven design</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/game-theory/">
-      <span class="icon">&#x265F;</span>
-      <div class="card-text"><h2>Game Theory</h2><p>Nash equilibrium, mechanism design &amp; evolutionary strategy</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/neuroscience/">
-      <span class="icon">&#x1F9EC;</span>
-      <div class="card-text"><h2>Neuroscience</h2><p>Neural geometry reference hub</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/nature-inspired-algorithms/">
-      <span class="icon">&#x1F9EC;</span>
-      <div class="card-text"><h2>Nature-Inspired Algorithms</h2><p>Evolutionary computation &amp; swarm intelligence</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/livestock-science/">
-      <span class="icon">&#x1F404;</span>
-      <div class="card-text"><h2>Livestock Science</h2><p>Genetics, breeding, reproduction &amp; show industry</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/biomimicry/">
-      <span class="icon">&#x1F33F;</span>
-      <div class="card-text"><h2>Biomimicry</h2><p>Principles, methodology &amp; case studies</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/bio-architecture/">
-      <span class="icon">&#x1F3DB;</span>
-      <div class="card-text"><h2>Bio-Architecture</h2><p>Termite ventilation, shells &amp; tensegrity</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/bio-inspired-robotics/">
-      <span class="icon">&#x1F916;</span>
-      <div class="card-text"><h2>Bio-Inspired Robotics</h2><p>Soft robotics, legged robots &amp; swarm systems</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/bio-locomotion/">
-      <span class="icon">&#x1F98E;</span>
-      <div class="card-text"><h2>Bio-Locomotion</h2><p>Flight, swimming &amp; collective motion</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/bio-optics-photonics/">
-      <span class="icon">&#x1F52C;</span>
-      <div class="card-text"><h2>Bio-Optics &amp; Photonics</h2><p>Structural color, bioluminescence &amp; camouflage</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/bio-surfaces/">
-      <span class="icon">&#x1F9EB;</span>
-      <div class="card-text"><h2>Bio-Surfaces</h2><p>Superhydrophobicity, gecko adhesion &amp; shark skin</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/biomimetic-materials/">
-      <span class="icon">&#x1F9EA;</span>
-      <div class="card-text"><h2>Biomimetic Materials</h2><p>Self-healing, shape memory &amp; hierarchical composites</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/structural-biomimetics/">
-      <span class="icon">&#x1F9B4;</span>
-      <div class="card-text"><h2>Structural Biomimetics</h2><p>Natural composites, silk, nacre &amp; bone</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/spider-silk/">
-      <span class="icon">&#x1F577;</span>
-      <div class="card-text"><h2>Spider Silk</h2><p>Silk biology, biomaterials &amp; husbandry</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/ecological-systems-design/">
-      <span class="icon">&#x267B;</span>
-      <div class="card-text"><h2>Ecological Systems Design</h2><p>Circular economy &amp; regenerative design</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/entomology/">
-      <span class="icon">&#x1F41B;</span>
-      <div class="card-text"><h2>Entomology</h2><p>Insect biology, pollination &amp; biomimicry</p><span class="tag tag-reference">Reference</span></div>
-    </a>
-    <a class="card" href="references/atomic-design/">
-      <span class="icon">&#x269B;</span>
-      <div class="card-text"><h2>Atomic Design</h2><p>Component hierarchy &amp; design systems</p><span class="tag tag-reference">Reference</span></div>
-    </a>
+<hr class="divider">
+
+<!-- ═══════════ CHARLOTTE CHARTS SHOWCASE ═══════════ -->
+<div class="charts-section">
+  <div class="charts-header">
+    <h2>Charlotte Charts</h2>
+    <select id="charts-theme" class="charts-theme-select">
+      <option value="someai">SomeAI</option>
+      <option value="platform">Platform</option>
+      <option value="sounder">Sounder</option>
+      <option value="isg">ISG</option>
+      <option value="richard">Richard Ent.</option>
+      <option value="allstate">All State</option>
+    </select>
   </div>
+  <div class="charts-grid" id="charts-grid"></div>
 </div>
 
-<!-- ═══════════ RESEARCH INSTRUMENTS ═══════════ -->
-<div class="section-group">
-  <div class="section-label research"><h2>Research Instruments</h2><span class="count">25 modules</span></div>
-  <div class="grid">
-    <a class="card card-research" href="math/swarm-intelligence/">
-      <span class="icon">&#x1F41D;</span>
-      <div class="card-text"><h2>Swarm Intelligence</h2><p>Northwestern 2019 curriculum, boids lab &amp; multi-agent systems</p><span class="tag tag-research">Research</span></div>
-    </a>
-    <a class="card" href="math/chaostheory/">
-      <span class="icon">&#x1F300;</span>
-      <div class="card-text"><h2>Chaos Theory</h2><p>Strange attractors &amp; dynamical systems</p><span class="tag tag-instrument">Simulation</span></div>
-    </a>
-    <a class="card" href="math/fourier/">
-      <span class="icon">&#x3030;</span>
-      <div class="card-text"><h2>Fourier</h2><p>Fourier transform visualization</p><span class="tag tag-instrument">Math</span></div>
-    </a>
-    <a class="card" href="math/cnn/">
-      <span class="icon">&#x1F9E0;</span>
-      <div class="card-text"><h2>CNN</h2><p>Convolutional neural network visualizer</p><span class="tag tag-instrument">ML</span></div>
-    </a>
-    <a class="card" href="math/neuralplayground/">
-      <span class="icon">&#x1F52E;</span>
-      <div class="card-text"><h2>Neural Playground</h2><p>Interactive neural network playground</p><span class="tag tag-instrument">ML</span></div>
-    </a>
-    <a class="card" href="math/sacred-geometry/">
-      <span class="icon">&#x2721;</span>
-      <div class="card-text"><h2>Sacred Geometry</h2><p>Geometric pattern generator</p><span class="tag tag-instrument">Math</span></div>
-    </a>
-    <a class="card" href="math/tsp-algorithm-visualizer/">
-      <span class="icon">&#x1F5FA;</span>
-      <div class="card-text"><h2>TSP Visualizer</h2><p>Traveling salesman algorithm visualizer</p><span class="tag tag-instrument">Algorithm</span></div>
-    </a>
-    <a class="card card-research" href="zeus-car-kit/">
-      <span class="icon">&#x1F697;</span>
-      <div class="card-text"><h2>Zeus Car Kit</h2><p>3D spatial mapper &mdash; ultrasonic, IR &amp; dead reckoning</p><span class="tag tag-research">Robotics</span></div>
-    </a>
-    <a class="card" href="games/hexgrid/">
-      <span class="icon">&#x2B21;</span>
-      <div class="card-text"><h2>Hex Grid</h2><p>Hexagonal grid system</p><span class="tag tag-instrument">Tool</span></div>
-    </a>
-    <a class="card" href="games/isometric/">
-      <span class="icon">&#x1F4D0;</span>
-      <div class="card-text"><h2>Isometric</h2><p>Isometric grid builder</p><span class="tag tag-instrument">Tool</span></div>
-    </a>
-    <a class="card" href="games/aseprite/">
-      <span class="icon">&#x1F3A8;</span>
-      <div class="card-text"><h2>Aseprite</h2><p>Pixel art sprite editor</p><span class="tag tag-instrument">Tool</span></div>
-    </a>
-    <a class="card" href="games/chess/">
-      <span class="icon">&#x265F;</span>
-      <div class="card-text"><h2>Chess</h2><p>Chess game with AI opponent</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/go/">
-      <span class="icon">&#x26AB;</span>
-      <div class="card-text"><h2>Go</h2><p>The ancient board game of Go</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/against-the-storm/">
-      <span class="icon">&#x1F3F0;</span>
-      <div class="card-text"><h2>Against the Storm</h2><p>Settlement management companion</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/maplestory/">
-      <span class="icon">&#x1F41F;</span>
-      <div class="card-text"><h2>MapleStory Bazaar</h2><p>Fish market vendor simulation</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/somelocks/">
-      <span class="icon">&#x1F510;</span>
-      <div class="card-text"><h2>SomeLocks</h2><p>2048-level lockpicking puzzle &mdash; hex grid, $3.99 IAP, first consumer revenue product</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/starfield/">
-      <span class="icon">&#x2728;</span>
-      <div class="card-text"><h2>Starfield / BITWISE</h2><p>Binary lockpicking puzzle game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/2048/">
-      <span class="icon">&#x1F522;</span>
-      <div class="card-text"><h2>2048</h2><p>Sliding tile puzzle game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/tetris/">
-      <span class="icon">&#x1F7E6;</span>
-      <div class="card-text"><h2>Tetris</h2><p>Falling block puzzle game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/minesweeper/">
-      <span class="icon">&#x1F4A3;</span>
-      <div class="card-text"><h2>Minesweeper</h2><p>Classic mine-sweeping puzzle</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/sudoku/">
-      <span class="icon">&#x1F532;</span>
-      <div class="card-text"><h2>Sudoku</h2><p>Number placement puzzle</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/solitaire-glass/">
-      <span class="icon">&#x1F0CF;</span>
-      <div class="card-text"><h2>Solitaire Glass</h2><p>Glassmorphism solitaire card game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/snake/">
-      <span class="icon">&#x1F40D;</span>
-      <div class="card-text"><h2>Snake</h2><p>Classic snake game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/pong/">
-      <span class="icon">&#x1F3D3;</span>
-      <div class="card-text"><h2>Pong</h2><p>Classic paddle ball game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/tic-tac-toe/">
-      <span class="icon">&#x274C;</span>
-      <div class="card-text"><h2>Tic-Tac-Toe</h2><p>Classic X and O game</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-    <a class="card" href="games/block-dude/">
-      <span class="icon">&#x1F9F1;</span>
-      <div class="card-text"><h2>Block Dude</h2><p>Block-pushing puzzle platformer</p><span class="tag tag-instrument">Game</span></div>
-    </a>
-  </div>
-</div>
-
+<!-- ═══════════ Charlotte Charts Library ═══════════ -->
+<script src="charlotte/charts/us-states.js"></script>
+<script src="charlotte/charts/charlotte-charts.js"></script>
 
 <!-- ═══════════ Master Animation Script ═══════════ -->
 <script>
@@ -1353,22 +1018,19 @@
   var IS_MOBILE = window.innerWidth < 700;
   var animating = true;
 
-  // Pause animations when tab is hidden (Layer 6)
   document.addEventListener('visibilitychange', function() {
     animating = !document.hidden;
   });
 
-  // If reduced motion, make everything visible immediately and bail
   if (REDUCED_MOTION) {
-    var allEls = document.querySelectorAll('.card, .thesis-card, .thesis-wide, .abstract, .primitives-section, #force-graph');
+    var allEls = document.querySelectorAll('.card, .chart-card, #force-graph');
     for (var i = 0; i < allEls.length; i++) allEls[i].classList.add('visible');
     return;
   }
 
   // === LAYER 5: Scroll-Triggered Card Entrances ===
-  var scrollElements = document.querySelectorAll('.card, .thesis-card, .thesis-wide, .abstract, .primitives-section, #force-graph');
+  var scrollElements = document.querySelectorAll('.card, .chart-card, #force-graph');
 
-  // Calculate stagger delays per parent container
   var parents = new Map();
   for (var i = 0; i < scrollElements.length; i++) {
     var el = scrollElements[i];
@@ -1396,25 +1058,18 @@
   }
 
   // === LAYER 1: Neural Synapse Web Animation ===
-  // 27 junction positions: outer(0-8), middle(9-17), inner(18-26)
   var junctions = [
-    // Outer ring
     [0,-108],[65,-87],[103,-33],[95,50],[40,100],[-40,100],[-95,50],[-103,-33],[-65,-87],
-    // Middle ring
     [0,-70],[42,-56],[67,-21],[62,32],[26,65],[-26,65],[-62,32],[-67,-21],[-42,-56],
-    // Inner ring
     [0,-38],[23,-30],[36,-11],[34,18],[14,35],[-14,35],[-34,18],[-36,-11],[-23,-30]
   ];
 
-  // Adjacency: radial connections (inner↔middle↔outer per spoke) + ring connections
   var adjList = [];
   for (var i = 0; i < 27; i++) adjList.push([]);
-  // Radial connections: spoke i connects outer[i], middle[i+9], inner[i+18]
   for (var i = 0; i < 9; i++) {
-    adjList[i].push(i + 9); adjList[i + 9].push(i);       // outer ↔ middle
-    adjList[i + 9].push(i + 18); adjList[i + 18].push(i + 9); // middle ↔ inner
+    adjList[i].push(i + 9); adjList[i + 9].push(i);
+    adjList[i + 9].push(i + 18); adjList[i + 18].push(i + 9);
   }
-  // Ring connections: adjacent nodes on same ring
   for (var ring = 0; ring < 3; ring++) {
     var base = ring * 9;
     for (var i = 0; i < 9; i++) {
@@ -1427,8 +1082,8 @@
   var junctionEls = document.querySelectorAll('#neural-junctions .junction');
   var pulseEls = document.querySelectorAll('#neural-pulses .npulse');
   var MAX_SIGNALS = IS_MOBILE ? 3 : 6;
-  var signals = []; // active signal chains
-  var junctionFlashes = []; // {idx, opacity, decay}
+  var signals = [];
+  var junctionFlashes = [];
   var nextFireTime = 1000 + Math.random() * 2000;
   var fireAccum = 0;
 
@@ -1448,7 +1103,6 @@
   }
 
   function updateNeuralWeb(dt) {
-    // Fire new signals periodically
     fireAccum += dt;
     if (fireAccum >= nextFireTime) {
       fireAccum = 0;
@@ -1456,7 +1110,6 @@
       fireNewSignal();
     }
 
-    // Allocate pulse elements to signals
     var usedPulses = new Set();
     for (var i = 0; i < signals.length; i++) {
       if (signals[i].pulseIdx >= 0) usedPulses.add(signals[i].pulseIdx);
@@ -1473,44 +1126,33 @@
       }
     }
 
-    // Update signals
     for (var i = signals.length - 1; i >= 0; i--) {
       var s = signals[i];
       s.t += s.speed * dt;
 
       if (s.t >= 1) {
-        // Arrived at destination junction — flash it
         junctionFlashes.push({ idx: s.to, opacity: 0.8, decay: 0.001 });
         s.hops++;
         s.intensity *= 0.75;
 
-        // Die if too many hops or too dim
         if (s.hops >= s.maxHops || s.intensity < 0.15) {
-          if (s.pulseIdx >= 0) {
-            pulseEls[s.pulseIdx].setAttribute('opacity', '0');
-          }
+          if (s.pulseIdx >= 0) pulseEls[s.pulseIdx].setAttribute('opacity', '0');
           signals.splice(i, 1);
           continue;
         }
 
-        // Branch chance: 20% to spawn a second signal
         if (Math.random() < 0.2 && signals.length < MAX_SIGNALS) {
           var branchNeighbors = adjList[s.to].filter(function(n) { return n !== s.from; });
           if (branchNeighbors.length > 0) {
             signals.push({
               from: s.to,
               to: branchNeighbors[Math.floor(Math.random() * branchNeighbors.length)],
-              t: 0,
-              speed: s.speed,
-              intensity: s.intensity * 0.7,
-              hops: s.hops,
-              maxHops: s.maxHops,
-              pulseIdx: -1
+              t: 0, speed: s.speed, intensity: s.intensity * 0.7,
+              hops: s.hops, maxHops: s.maxHops, pulseIdx: -1
             });
           }
         }
 
-        // Move to next junction
         var neighbors = adjList[s.to].filter(function(n) { return n !== s.from; });
         if (neighbors.length === 0) {
           if (s.pulseIdx >= 0) pulseEls[s.pulseIdx].setAttribute('opacity', '0');
@@ -1522,7 +1164,6 @@
         s.t = 0;
       }
 
-      // Interpolate position
       if (s.pulseIdx >= 0 && s.pulseIdx < pulseEls.length) {
         var fromJ = junctions[s.from];
         var toJ = junctions[s.to];
@@ -1535,7 +1176,6 @@
       }
     }
 
-    // Update junction flashes
     for (var i = junctionFlashes.length - 1; i >= 0; i--) {
       var f = junctionFlashes[i];
       f.opacity -= f.decay * dt;
@@ -1549,23 +1189,14 @@
   }
 
   // === LAYER 2: Micro-Graph Particle Network ===
-  // Floating clusters of small node-edge graphs that interact when near each other
   var canvas = document.getElementById('particle-canvas');
   var microGraphs = [];
   var allNodes = [];
   var ctx, W, H;
   var pTime = 0;
 
-  // Red swatch — primary 100 through 800
   var NODE_COLORS = [
-    '#FED7D7', // 100
-    '#FEB2B2', // 200
-    '#FC8181', // 300
-    '#F56565', // 400
-    '#E53E3E', // 500
-    '#C53030', // 600
-    '#9B2C2C', // 700
-    '#822727', // 800
+    '#FED7D7','#FEB2B2','#FC8181','#F56565','#E53E3E','#C53030','#9B2C2C','#822727',
   ];
 
   if (canvas && !IS_MOBILE) {
@@ -1582,13 +1213,12 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Build 256 micro-graphs, each a small cluster of 3-6 nodes
     var GRAPH_COUNT = 256;
     for (var g = 0; g < GRAPH_COUNT; g++) {
       var cx = Math.random() * (W || 800);
       var cy = Math.random() * (H || 400);
-      var nodeCount = 3 + Math.floor(Math.random() * 4); // 3-6 nodes
-      var spread = 18 + Math.random() * 14; // cluster radius
+      var nodeCount = 3 + Math.floor(Math.random() * 4);
+      var spread = 18 + Math.random() * 14;
       var baseColor = NODE_COLORS[Math.floor(Math.random() * NODE_COLORS.length)];
       var graph = {
         cx: cx, cy: cy,
@@ -1596,13 +1226,11 @@
         vy: (Math.random() - 0.5) * 0.3,
         rot: Math.random() * 6.2832,
         rotSpeed: (Math.random() - 0.5) * 0.003,
-        nodes: [],
-        edges: [],
+        nodes: [], edges: [],
         baseColor: baseColor,
-        pulse: Math.random() * 6.2832 // phase offset for breathing
+        pulse: Math.random() * 6.2832
       };
 
-      // Create nodes at offsets from center
       for (var n = 0; n < nodeCount; n++) {
         var angle = (n / nodeCount) * 6.2832 + (Math.random() - 0.5) * 0.8;
         var dist = spread * (0.4 + Math.random() * 0.6);
@@ -1610,26 +1238,21 @@
           ? NODE_COLORS[Math.floor(Math.random() * NODE_COLORS.length)]
           : baseColor;
         var node = {
-          ox: Math.cos(angle) * dist, // offset from graph center
+          ox: Math.cos(angle) * dist,
           oy: Math.sin(angle) * dist,
           r: 1.5 + Math.random() * 2.5,
           color: useColor,
           graphIdx: g,
-          wx: 0, wy: 0 // world position (computed each frame)
+          wx: 0, wy: 0
         };
         graph.nodes.push(node);
         allNodes.push(node);
       }
 
-      // Create internal edges (connect nodes within the cluster)
-      // Each node connects to 1-2 neighbors + hub node connects to most
       var hubIdx = Math.floor(Math.random() * nodeCount);
       for (var n = 0; n < nodeCount; n++) {
-        if (n !== hubIdx) {
-          graph.edges.push([hubIdx, n]);
-        }
+        if (n !== hubIdx) graph.edges.push([hubIdx, n]);
       }
-      // Add 1-2 extra edges for triangulation
       var extras = 1 + Math.floor(Math.random() * 2);
       for (var e = 0; e < extras; e++) {
         var a = Math.floor(Math.random() * nodeCount);
@@ -1639,27 +1262,21 @@
 
       microGraphs.push(graph);
     }
-
   }
 
   function drawParticles() {
     if (!ctx || !W || !H) return;
-    // Dark fill — prevents white flash between frames
     ctx.globalAlpha = 1;
     ctx.fillStyle = '#141414';
     ctx.fillRect(0, 0, W, H);
     pTime += 0.016;
 
-    // === Update all graph positions + compute world coords ===
     for (var g = 0; g < microGraphs.length; g++) {
       var mg = microGraphs[g];
-      mg.cx += mg.vx;
-      mg.cy += mg.vy;
-      mg.vx *= 0.9995;
-      mg.vy *= 0.9995;
+      mg.cx += mg.vx; mg.cy += mg.vy;
+      mg.vx *= 0.9995; mg.vy *= 0.9995;
       mg.rot += mg.rotSpeed;
 
-      // Wrap at viewport edges
       if (mg.cx < -60) mg.cx = W + 60;
       if (mg.cx > W + 60) mg.cx = -60;
       if (mg.cy < -60) mg.cy = H + 60;
@@ -1675,8 +1292,6 @@
       }
     }
 
-    // === Draw inter-graph edges + signal dots ===
-    // Check graph center distances (256*255/2 = 32K — cheap)
     var LINK_DIST = 140;
     var LINK_DIST2 = LINK_DIST * LINK_DIST;
     ctx.lineWidth = 0.4;
@@ -1690,11 +1305,9 @@
         var d = Math.sqrt(d2);
         var fade = 1 - d / LINK_DIST;
 
-        // Connect hub nodes (index 0) of each graph
         var na = microGraphs[g].nodes[0];
         var nb = microGraphs[g2].nodes[0];
 
-        // Edge line
         ctx.beginPath();
         ctx.moveTo(na.wx, na.wy);
         ctx.lineTo(nb.wx, nb.wy);
@@ -1702,7 +1315,6 @@
         ctx.globalAlpha = fade * 0.12;
         ctx.stroke();
 
-        // Signal dot traveling along the edge
         var speed = 0.3 + (g % 5) * 0.08;
         var phase = (g * 7 + g2 * 13) % 100 / 100;
         var t = ((pTime * speed + phase) % 1);
@@ -1717,11 +1329,9 @@
       }
     }
 
-    // === Draw internal edges + nodes per graph ===
     for (var g = 0; g < microGraphs.length; g++) {
       var mg = microGraphs[g];
 
-      // Internal edges
       ctx.strokeStyle = mg.baseColor;
       ctx.lineWidth = 0.6;
       for (var e = 0; e < mg.edges.length; e++) {
@@ -1735,16 +1345,13 @@
         ctx.stroke();
       }
 
-      // Nodes
       for (var n = 0; n < mg.nodes.length; n++) {
         var nd = mg.nodes[n];
         ctx.fillStyle = nd.color;
-        // Glow
         ctx.beginPath();
         ctx.arc(nd.wx, nd.wy, nd.r * 2.2, 0, 6.2832);
         ctx.globalAlpha = 0.04;
         ctx.fill();
-        // Core
         ctx.beginPath();
         ctx.arc(nd.wx, nd.wy, nd.r, 0, 6.2832);
         ctx.globalAlpha = 0.55;
@@ -1781,26 +1388,22 @@
     var fctx = fgCanvas.getContext('2d');
     var B = '';
 
-    // Category colors: fill, stroke, text
     var CC = {
       anchor:     { s: '#E53E3E', t: '#E53E3E' },
       parent:     { s: '#F59E0B', t: '#F59E0B' },
       engine:     { s: '#E53E3E', t: '#F56565' },
       kernel:     { s: '#E53E3E', t: '#F56565' },
       domain:     { s: '#68D391', t: '#68D391' },
-      reference:  { s: '#6B4F4F', t: '#C4A8A8' },
       research:   { s: '#F59E0B', t: '#F59E0B' },
       instrument: { s: '#444',   t: '#999' }
     };
 
-    // Node definitions: id, name, icon, url, category, radius, parent
-    // p = parent id (edges auto-generated), r = node radius
     var N = [
       // === Anchors ===
       {id:'someai',n:'SomeAI',i:'\u2B21',u:B+'design/brandbook/someai/',c:'anchor',r:22,p:null},
       {id:'re',n:'Richard Enterprises',i:'\u{1F981}',u:B+'design/brandbook/richard-enterprises/',c:'parent',r:14,p:'someai'},
       {id:'charlotte',n:'Charlotte',i:'\u{1F578}',u:null,c:'engine',r:18,p:'someai'},
-      // === Clients (→ SomeAI) ===
+      // === Clients (-> SomeAI) ===
       {id:'sounder',n:'Sounder',i:'\u{1F417}',u:B+'business/sounder/',c:'domain',r:9,p:'someai'},
       {id:'isg',n:'ISG',i:'\u{1F3ED}',u:B+'business/industrial-service-group/',c:'domain',r:9,p:'someai'},
       {id:'ppp',n:'PPP Instruments',i:'\u{1F3BB}',u:B+'business/violins/',c:'domain',r:8,p:'someai'},
@@ -1813,25 +1416,19 @@
       {id:'lineleap',n:'LineLeap',i:'\u{1F378}',u:B+'business/lineleap/',c:'domain',r:7,p:'someai'},
       {id:'gesdate',n:'GesDate',i:'\u{1F437}',u:B+'business/gesdate/',c:'domain',r:7,p:'someai'},
       {id:'sealion',n:'Sea Lion',i:'\u{1F9AD}',u:B+'references/sealion/',c:'domain',r:7,p:'someai'},
-      // === Tools (→ SomeAI) ===
-      {id:'maestro',n:'Maestro',i:'\u{1F3BC}',u:B+'tools/maestro/',c:'domain',r:8,p:'someai'},
-      {id:'gantt',n:'Gantt',i:'\u{1F4C5}',u:B+'tools/gantt/',c:'domain',r:7,p:'someai'},
-      {id:'geoparticles',n:'GeoParticles',i:'\u2728',u:B+'tools/geoparticles/',c:'instrument',r:8,p:'someai'},
-      {id:'ants',n:'Foraging Ants',i:'\u{1F41C}',u:B+'tools/geoparticles/ants.html',c:'instrument',r:7,p:'someai'},
-      // === Kernel (→ Charlotte) ===
+      // === Kernel (-> Charlotte) ===
       {id:'researchlab',n:'Research Lab',i:'\u{1F9E0}',u:B+'research-lab/',c:'kernel',r:9,p:'charlotte'},
       {id:'kg',n:'Knowledge Graph',i:'\u{1F4DA}',u:B+'knowledge-graph/',c:'kernel',r:8,p:'charlotte'},
       {id:'cos',n:'Charlotte OS',i:'\u2699',u:B+'charlotte-os/',c:'kernel',r:9,p:'charlotte'},
       {id:'temporal',n:'Temporal Spine',i:'\u{1F553}',u:B+'charlotte/temporal/',c:'kernel',r:8,p:'charlotte'},
       {id:'spatial',n:'Spatial',i:'\u{1F5FA}',u:B+'charlotte/spatial/',c:'kernel',r:8,p:'charlotte'},
       {id:'papers',n:'Papers',i:'\u{1F4C4}',u:B+'papers/',c:'kernel',r:7,p:'charlotte'},
-      {id:'workbench',n:'Workbench',i:'\u{1F3A8}',u:B+'workbench/',c:'kernel',r:7,p:'charlotte'},
       {id:'pitcheng',n:'Pitch Engine',i:'\u{1F4CA}',u:B+'tools/pitch-engine/',c:'kernel',r:8,p:'charlotte'},
-      {id:'pitchdecks',n:'Pitch Decks',i:'\u{1F4BD}',u:B+'tools/pitch-engine/decks/',c:'kernel',r:6,p:'pitcheng'},
+      {id:'pitchdecks',n:'Pitch Decks',i:'\u{1F4BD}',u:B+'tools/pitch-engine/decks/index.html',c:'kernel',r:6,p:'pitcheng'},
       {id:'charts',n:'Charts',i:'\u{1F4C9}',u:B+'charlotte/charts/showcase/',c:'kernel',r:7,p:'charlotte'},
       {id:'pipeline',n:'Pipeline',i:'\u{1F4C8}',u:B+'business/forecast.html',c:'kernel',r:7,p:'charlotte'},
       {id:'bizkrf',n:'Biz Model KRF',i:'\u{1F4BE}',u:B+'charlotte/docs/artifacts/business_model.krf',c:'kernel',r:6,p:'charlotte'},
-      // === Math / Research (→ Charlotte) ===
+      // === Math / Research (-> Charlotte) ===
       {id:'cnn',n:'CNN',i:'\u{1F9E0}',u:B+'math/cnn/',c:'instrument',r:6,p:'charlotte'},
       {id:'neuralplay',n:'Neural Play',i:'\u{1F52E}',u:B+'math/neuralplayground/',c:'instrument',r:6,p:'charlotte'},
       {id:'chaos',n:'Chaos Theory',i:'\u{1F300}',u:B+'math/chaostheory/',c:'instrument',r:6,p:'charlotte'},
@@ -1840,54 +1437,8 @@
       {id:'tsp',n:'TSP',i:'\u{1F5FA}',u:B+'math/tsp-algorithm-visualizer/',c:'instrument',r:6,p:'charlotte'},
       {id:'swarm',n:'Swarm Intel',i:'\u{1F41D}',u:B+'math/swarm-intelligence/',c:'research',r:7,p:'charlotte'},
       {id:'zeuscar',n:'Zeus Car',i:'\u{1F697}',u:B+'zeus-car-kit/',c:'research',r:6,p:'charlotte'},
-      // === References (→ Charlotte) ===
-      {id:'rknowledge',n:'Knowledge',i:'\u{1F4D6}',u:B+'references/knowledge/',c:'reference',r:5,p:'charlotte'},
-      {id:'rformallogic',n:'Formal Logic',i:'\u2200',u:B+'references/formal-logic/',c:'reference',r:5,p:'charlotte'},
-      {id:'rgraphtheory',n:'Graph Theory',i:'\u229B',u:B+'references/graph-theory/',c:'reference',r:5,p:'charlotte'},
-      {id:'rtopology',n:'Topology',i:'\u25CE',u:B+'references/topology/',c:'reference',r:5,p:'charlotte'},
-      {id:'rcogscience',n:'Cog Science',i:'\u{1F9E0}',u:B+'references/cognitive-science/',c:'reference',r:5,p:'charlotte'},
-      {id:'rsignalproc',n:'Signal Proc',i:'\u3030',u:B+'references/signal-processing/',c:'reference',r:5,p:'charlotte'},
-      {id:'rtemporaldb',n:'Temporal DB',i:'\u23F1',u:B+'references/temporal-databases/',c:'reference',r:5,p:'charlotte'},
-      {id:'rspatial',n:'Spatial Comp',i:'\u{1F30D}',u:B+'references/spatial-computing/',c:'reference',r:5,p:'charlotte'},
-      {id:'rsysarch',n:'Systems Arch',i:'\u{1F3D7}',u:B+'references/systems-architecture/',c:'reference',r:5,p:'charlotte'},
-      {id:'rgametheory',n:'Game Theory',i:'\u265F',u:B+'references/game-theory/',c:'reference',r:5,p:'charlotte'},
-      {id:'rneuro',n:'Neuroscience',i:'\u{1F9EC}',u:B+'references/neuroscience/',c:'reference',r:5,p:'charlotte'},
-      {id:'rnaturealgo',n:'Nature Algo',i:'\u{1F9EC}',u:B+'references/nature-inspired-algorithms/',c:'reference',r:5,p:'charlotte'},
-      {id:'rlivestock',n:'Livestock',i:'\u{1F404}',u:B+'references/livestock-science/',c:'reference',r:5,p:'charlotte'},
-      {id:'rbiomimicry',n:'Biomimicry',i:'\u{1F33F}',u:B+'references/biomimicry/',c:'reference',r:5,p:'charlotte'},
-      {id:'rbioarch',n:'Bio-Arch',i:'\u{1F3DB}',u:B+'references/bio-architecture/',c:'reference',r:4,p:'charlotte'},
-      {id:'rbiorobot',n:'Bio-Robotics',i:'\u{1F916}',u:B+'references/bio-inspired-robotics/',c:'reference',r:4,p:'charlotte'},
-      {id:'rlocomotion',n:'Locomotion',i:'\u{1F98E}',u:B+'references/bio-locomotion/',c:'reference',r:4,p:'charlotte'},
-      {id:'rbiooptics',n:'Bio-Optics',i:'\u{1F52C}',u:B+'references/bio-optics-photonics/',c:'reference',r:4,p:'charlotte'},
-      {id:'rbiosurf',n:'Bio-Surfaces',i:'\u{1F9EB}',u:B+'references/bio-surfaces/',c:'reference',r:4,p:'charlotte'},
-      {id:'rbiomat',n:'Bio-Materials',i:'\u{1F9EA}',u:B+'references/biomimetic-materials/',c:'reference',r:4,p:'charlotte'},
-      {id:'rstructbio',n:'Struct Bio',i:'\u{1F9B4}',u:B+'references/structural-biomimetics/',c:'reference',r:4,p:'charlotte'},
-      {id:'rspidersilk',n:'Spider Silk',i:'\u{1F577}',u:B+'references/spider-silk/',c:'reference',r:4,p:'charlotte'},
-      {id:'recodesign',n:'Eco Design',i:'\u267B',u:B+'references/ecological-systems-design/',c:'reference',r:4,p:'charlotte'},
-      {id:'rentomology',n:'Entomology',i:'\u{1F41B}',u:B+'references/entomology/',c:'reference',r:4,p:'charlotte'},
-      {id:'ratomicdesign',n:'Atomic Design',i:'\u269B',u:B+'references/atomic-design/',c:'reference',r:4,p:'charlotte'},
-      // === Games (→ SomeAI) ===
-      {id:'hexgrid',n:'Hex Grid',i:'\u2B21',u:B+'games/hexgrid/',c:'instrument',r:5,p:'someai'},
-      {id:'isometric',n:'Isometric',i:'\u{1F4D0}',u:B+'games/isometric/',c:'instrument',r:5,p:'someai'},
-      {id:'aseprite',n:'Aseprite',i:'\u{1F3A8}',u:B+'games/aseprite/',c:'instrument',r:5,p:'someai'},
-      {id:'chess',n:'Chess',i:'\u265F',u:B+'games/chess/',c:'instrument',r:5,p:'someai'},
-      {id:'go',n:'Go',i:'\u26AB',u:B+'games/go/',c:'instrument',r:5,p:'someai'},
-      {id:'storm',n:'Storm',i:'\u{1F3F0}',u:B+'games/against-the-storm/',c:'instrument',r:5,p:'someai'},
-      {id:'maple',n:'MapleStory',i:'\u{1F41F}',u:B+'games/maplestory/',c:'instrument',r:5,p:'someai'},
-      {id:'starfield',n:'Starfield',i:'\u2728',u:B+'games/starfield/',c:'instrument',r:5,p:'someai'},
-      {id:'somelocks',n:'SomeLocks',i:'\u{1F510}',u:B+'games/somelocks/',c:'instrument',r:5,p:'someai'},
-      {id:'g2048',n:'2048',i:'\u{1F522}',u:B+'games/2048/',c:'instrument',r:5,p:'someai'},
-      {id:'tetris',n:'Tetris',i:'\u{1F7E6}',u:B+'games/tetris/',c:'instrument',r:5,p:'someai'},
-      {id:'minesweeper',n:'Minesweeper',i:'\u{1F4A3}',u:B+'games/minesweeper/',c:'instrument',r:5,p:'someai'},
-      {id:'sudoku',n:'Sudoku',i:'\u{1F532}',u:B+'games/sudoku/',c:'instrument',r:5,p:'someai'},
-      {id:'solitaire',n:'Solitaire',i:'\u{1F0CF}',u:B+'games/solitaire-glass/',c:'instrument',r:5,p:'someai'},
-      {id:'snake',n:'Snake',i:'\u{1F40D}',u:B+'games/snake/',c:'instrument',r:5,p:'someai'},
-      {id:'pong',n:'Pong',i:'\u{1F3D3}',u:B+'games/pong/',c:'instrument',r:5,p:'someai'},
-      {id:'tictactoe',n:'Tic-Tac-Toe',i:'\u274C',u:B+'games/tic-tac-toe/',c:'instrument',r:5,p:'someai'},
-      {id:'blockdude',n:'Block Dude',i:'\u{1F9F1}',u:B+'games/block-dude/',c:'instrument',r:5,p:'someai'}
     ];
 
-    // Build edges from parent relationships
     var edges = [];
     var idMap = {};
     for (var i = 0; i < N.length; i++) idMap[N[i].id] = i;
@@ -1897,7 +1448,6 @@
       }
     }
 
-    // Build adjacency for hover highlighting
     var adj = [];
     for (var i = 0; i < N.length; i++) adj[i] = [];
     for (var i = 0; i < edges.length; i++) {
@@ -1905,7 +1455,6 @@
       adj[edges[i][1]].push(edges[i][0]);
     }
 
-    // Initialize positions — spread nodes with Y bias
     var W, H;
     function sizeCanvas() {
       var containerW = fgCanvas.parentElement.offsetWidth;
@@ -1920,7 +1469,6 @@
     }
     sizeCanvas();
 
-    // Physics state
     var nodes = [];
     for (var i = 0; i < N.length; i++) {
       var nd = N[i];
@@ -1929,7 +1477,7 @@
       var yBias = 0;
       if (nd.id === 're') yBias = -180;
       else if (nd.id === 'charlotte') yBias = 140;
-      else if (nd.c === 'kernel' || nd.c === 'engine' || nd.c === 'reference' || nd.c === 'research') yBias = 60 + Math.random() * 100;
+      else if (nd.c === 'kernel' || nd.c === 'engine' || nd.c === 'research') yBias = 60 + Math.random() * 100;
       else if (nd.c === 'domain') yBias = -40 + Math.random() * 60 - 30;
       else if (nd.c === 'parent') yBias = -160;
       else yBias = Math.random() * 80 - 40;
@@ -1941,11 +1489,9 @@
         pinned: nd.id === 'someai'
       });
     }
-    // Pin SomeAI at center
     nodes[0].x = W/2;
     nodes[0].y = H/2;
 
-    // Force simulation step
     function simStep() {
       var REPULSION = 3000;
       var SPRING = 0.008;
@@ -1954,7 +1500,6 @@
       var DAMPING = 0.88;
       var Y_BIAS = 0.003;
 
-      // Repulsion (all pairs)
       for (var i = 0; i < nodes.length; i++) {
         for (var j = i + 1; j < nodes.length; j++) {
           var dx = nodes[j].x - nodes[i].x;
@@ -1970,7 +1515,6 @@
         }
       }
 
-      // Spring attraction (edges)
       for (var i = 0; i < edges.length; i++) {
         var a = nodes[edges[i][0]], b = nodes[edges[i][1]];
         var dx = b.x - a.x, dy = b.y - a.y;
@@ -1982,30 +1526,25 @@
         if (!b.pinned) { b.vx -= fx; b.vy -= fy; }
       }
 
-      // Center gravity + Y bias
       for (var i = 0; i < nodes.length; i++) {
         if (nodes[i].pinned) continue;
         nodes[i].vx += (W/2 - nodes[i].x) * GRAVITY;
         nodes[i].vy += (H/2 - nodes[i].y) * GRAVITY;
 
-        // Y bias for hierarchy
         var nd = N[i];
         if (nd.id === 're') nodes[i].vy += (H*0.15 - nodes[i].y) * Y_BIAS;
         else if (nd.id === 'charlotte') nodes[i].vy += (H*0.72 - nodes[i].y) * Y_BIAS;
         else if (nd.c === 'parent') nodes[i].vy += (H*0.12 - nodes[i].y) * Y_BIAS * 0.5;
         else if (nd.c === 'kernel' || nd.c === 'engine') nodes[i].vy += (H*0.7 - nodes[i].y) * Y_BIAS * 0.3;
-        else if (nd.c === 'reference') nodes[i].vy += (H*0.82 - nodes[i].y) * Y_BIAS * 0.3;
         else if (nd.c === 'domain') nodes[i].vy += (H*0.35 - nodes[i].y) * Y_BIAS * 0.2;
       }
 
-      // Integrate + damp + boundary
       for (var i = 0; i < nodes.length; i++) {
         if (nodes[i].pinned) { nodes[i].vx = 0; nodes[i].vy = 0; continue; }
         nodes[i].vx *= DAMPING;
         nodes[i].vy *= DAMPING;
         nodes[i].x += nodes[i].vx;
         nodes[i].y += nodes[i].vy;
-        // Soft boundary
         var pad = N[i].r + 4;
         if (nodes[i].x < pad) { nodes[i].x = pad; nodes[i].vx *= -0.5; }
         if (nodes[i].x > W - pad) { nodes[i].x = W - pad; nodes[i].vx *= -0.5; }
@@ -2014,20 +1553,17 @@
       }
     }
 
-    // Warm up simulation
     for (var s = 0; s < 300; s++) simStep();
 
-    // Rendering
     var fgHovered = -1;
     var fgDragging = -1;
 
     function drawGraph() {
       fctx.clearRect(0, 0, W, H);
 
-      // Edges
       for (var i = 0; i < edges.length; i++) {
         var a = nodes[edges[i][0]], b = nodes[edges[i][1]];
-        var aCat = N[edges[i][0]].c, bCat = N[edges[i][1]].c;
+        var bCat = N[edges[i][1]].c;
         var highlighted = (fgHovered === edges[i][0] || fgHovered === edges[i][1]);
         fctx.beginPath();
         fctx.moveTo(a.x, a.y);
@@ -2045,7 +1581,6 @@
         fctx.globalAlpha = 1;
       }
 
-      // Nodes
       for (var i = 0; i < N.length; i++) {
         var nd = N[i];
         var nx = nodes[i].x, ny = nodes[i].y;
@@ -2062,7 +1597,6 @@
         var r = nd.r * (IS_MOBILE ? 0.8 : 1);
         if (hov) r *= 1.3;
 
-        // Glow for anchors / hovered
         if ((nd.c === 'anchor' || nd.c === 'engine' || hov) && !dimmed) {
           fctx.save();
           fctx.shadowColor = col.s;
@@ -2074,7 +1608,6 @@
           fctx.restore();
         }
 
-        // Circle fill
         fctx.beginPath();
         fctx.arc(nx, ny, r, 0, Math.PI * 2);
         fctx.globalAlpha = dimmed ? 0.15 : 1;
@@ -2083,12 +1616,10 @@
                          nd.c === 'parent' ? 'rgba(245,158,11,0.2)' :
                          nd.c === 'kernel' ? 'rgba(229,62,62,0.12)' :
                          nd.c === 'domain' ? 'rgba(104,211,145,0.15)' :
-                         nd.c === 'reference' ? 'rgba(196,168,168,0.1)' :
                          nd.c === 'research' ? 'rgba(245,158,11,0.12)' :
                          'rgba(102,102,102,0.12)');
         fctx.fill();
 
-        // Circle stroke
         fctx.beginPath();
         fctx.arc(nx, ny, r, 0, Math.PI * 2);
         fctx.strokeStyle = col.s;
@@ -2097,7 +1628,6 @@
         fctx.stroke();
         fctx.globalAlpha = 1;
 
-        // Emoji icon (only if node big enough)
         if (r >= 5) {
           var emojiSize = Math.max(8, Math.round(r * 1.1));
           fctx.font = emojiSize + 'px serif';
@@ -2108,7 +1638,6 @@
           fctx.globalAlpha = 1;
         }
 
-        // Name label (only for bigger nodes or hovered)
         if (r >= 7 || hov) {
           var nameSize = Math.max(7, Math.round(r * 0.7));
           if (nd.c === 'anchor') nameSize = 11;
@@ -2124,7 +1653,6 @@
       }
     }
 
-    // Hit test
     function hitTest(mx, my) {
       for (var i = N.length - 1; i >= 0; i--) {
         var dx = mx - nodes[i].x, dy = my - nodes[i].y;
@@ -2134,7 +1662,6 @@
       return -1;
     }
 
-    // Mouse interaction
     var fgMouseX = 0, fgMouseY = 0;
     function getPos(e) {
       var rect = fgCanvas.getBoundingClientRect();
@@ -2177,7 +1704,6 @@
 
     fgCanvas.addEventListener('mouseup', function(e) {
       if (fgDragging >= 0) {
-        // If barely moved, treat as click
         var p = getPos(e);
         var dx = p.x - nodes[fgDragging].x, dy = p.y - nodes[fgDragging].y;
         if (dx*dx + dy*dy < 4 && N[fgDragging].u) {
@@ -2194,7 +1720,6 @@
       document.getElementById('fg-tooltip').classList.remove('show');
     });
 
-    // Touch support
     fgCanvas.addEventListener('touchstart', function(e) {
       var t = e.touches[0];
       var rect = fgCanvas.getBoundingClientRect();
@@ -2223,7 +1748,6 @@
       fgHovered = -1;
     });
 
-    // Animation loop (gentle continuous settling)
     var fgFrame;
     function fgLoop() {
       simStep();
@@ -2231,7 +1755,6 @@
       fgFrame = requestAnimationFrame(fgLoop);
     }
 
-    // Start when visible via IntersectionObserver
     var fgRunning = false;
     var fgObs = new IntersectionObserver(function(entries) {
       if (entries[0].isIntersecting && !fgRunning) {
@@ -2244,11 +1767,9 @@
     }, { threshold: 0.05 });
     fgObs.observe(fgCanvas);
 
-    // Resize
     window.addEventListener('resize', function() {
       var oldW = W, oldH = H;
       sizeCanvas();
-      // Rescale node positions
       var sx = W / oldW, sy = H / oldH;
       for (var i = 0; i < nodes.length; i++) {
         nodes[i].x *= sx;
@@ -2257,6 +1778,172 @@
     });
   })(); }
 
+})();
+</script>
+
+<!-- ═══════════ Charlotte Charts Showcase Renderer ═══════════ -->
+<script>
+(function() {
+  var CCharts = window.CharlotteCharts;
+  if (!CCharts) return;
+  var U = CCharts.utils;
+
+  // Synthetic data
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var revenue = [45, 52, 48, 61, 58, 72, 68, 85, 79, 92, 88, 105];
+  var costs = [32, 36, 35, 41, 39, 48, 46, 55, 52, 58, 56, 64];
+  var profit = revenue.map(function(r,i){ return r - costs[i]; });
+
+  var fwRadar = { axes: ['Speed','Memory','DX','Ecosystem','Perf','Bundle Size'], series: [
+    { name: 'React', values: [72,65,88,95,78,60], color: '#61dafb' },
+    { name: 'Vue', values: [80,72,92,75,82,75], color: '#42b883' },
+    { name: 'Svelte', values: [95,90,85,55,94,92], color: '#ff3e00' },
+    { name: 'Angular', values: [60,50,65,80,70,45], color: '#dd0031' },
+  ]};
+
+  var ohlc = [
+    {label:'Mon',open:142,high:148,low:139,close:146},{label:'Tue',open:146,high:152,low:143,close:144},
+    {label:'Wed',open:144,high:147,low:138,close:140},{label:'Thu',open:140,high:145,low:136,close:143},
+    {label:'Fri',open:143,high:155,low:141,close:153},{label:'Mon',open:153,high:158,low:150,close:156},
+    {label:'Tue',open:156,high:162,low:153,close:160},{label:'Wed',open:160,high:165,low:155,close:158},
+    {label:'Thu',open:158,high:163,low:152,close:155},{label:'Fri',open:155,high:170,low:154,close:168},
+    {label:'Mon',open:168,high:174,low:163,close:171},{label:'Tue',open:171,high:176,low:168,close:173},
+    {label:'Wed',open:173,high:178,low:166,close:169},{label:'Thu',open:169,high:175,low:165,close:174},
+    {label:'Fri',open:174,high:182,low:172,close:180},
+  ];
+  var closes = ohlc.map(function(c){return c.close;});
+  var volume = ohlc.map(function(c){return Math.abs(c.close-c.open)*100+Math.floor(Math.random()*500+200);});
+  var revCum = U.integral(revenue);
+
+  // Activity heatmap data
+  var activityCells = [];
+  for (var w = 0; w < 52; w++) {
+    for (var d = 0; d < 7; d++) {
+      var seasonal = Math.sin((w / 52) * Math.PI * 2 - Math.PI/2) * 0.3 + 0.5;
+      var dayBias = d < 5 ? 1 : 0.3;
+      activityCells.push({ value: Math.random() < 0.15 ? 0 : Math.max(0, Math.round((Math.random() * 10 + 2) * seasonal * dayBias)) });
+    }
+  }
+
+  // Network data
+  var netData = {
+    nodes: [
+      {id:'a',label:'SomeAI',group:0},{id:'b',label:'Charlotte',group:0},
+      {id:'c',label:'ISG',group:1},{id:'d',label:'Sounder',group:1},
+      {id:'e',label:'Pitch Engine',group:2},{id:'f',label:'Charts',group:2},
+      {id:'g',label:'Temporal',group:2},{id:'h',label:'Spatial',group:2},
+    ],
+    edges: [
+      {source:'a',target:'b'},{source:'a',target:'c'},{source:'a',target:'d'},
+      {source:'b',target:'e'},{source:'b',target:'f'},{source:'b',target:'g'},{source:'b',target:'h'},
+      {source:'c',target:'e'},{source:'d',target:'f'},
+    ]
+  };
+
+  var grid = document.getElementById('charts-grid');
+
+  function makeCard(tag, title, sub, wide) {
+    var el = document.createElement('div');
+    el.className = 'chart-card' + (wide ? ' wide' : '');
+    el.innerHTML = '<div class="chart-card-tag">' + tag + '</div>' +
+      '<div class="chart-card-head"><h3>' + title + '</h3><p>' + sub + '</p></div>' +
+      '<div class="chart-card-body"></div>';
+    grid.appendChild(el);
+    return el.querySelector('.chart-card-body');
+  }
+
+  function renderCharts(themeName) {
+    CCharts.setTheme(themeName);
+    grid.innerHTML = '';
+
+    var T = themeName;
+    var b;
+
+    // 1. Line
+    b = makeCard('line', 'Monthly Revenue & Cost', 'Raw time series');
+    CCharts.line(b, { labels: months, series: [
+      { name: 'Revenue', values: revenue },
+      { name: 'Cost', values: costs },
+      { name: 'Profit', values: profit, showArea: true }
+    ] }, { theme: T, showArea: false });
+
+    // 2. Bar (grouped)
+    b = makeCard('bar', 'Revenue vs Cost', 'Grouped comparison by month');
+    CCharts.bar(b, { labels: months, series: [
+      { name: 'Revenue', values: revenue },
+      { name: 'Cost', values: costs }
+    ] }, { theme: T, variant: 'grouped' });
+
+    // 3. Donut
+    b = makeCard('donut', 'Cost Breakdown', 'Where the money goes');
+    CCharts.donut(b, { segments: [
+      { label: 'COGS', value: 35 }, { label: 'R&D', value: 18 },
+      { label: 'Sales', value: 12 }, { label: 'G&A', value: 8 },
+    ], centerText: '73%', centerSub: 'of revenue' }, { theme: T });
+
+    // 4. Radar
+    b = makeCard('radar', 'Multi-Axis Profile', '6 dimensions at a glance');
+    CCharts.radar(b, fwRadar, { theme: T });
+
+    // 5. Candlestick
+    b = makeCard('candlestick', '15-Day OHLC', 'Green = bullish, red = bearish', true);
+    CCharts.candlestick(b, { candles: ohlc }, { theme: T });
+
+    // 6. Gauge
+    b = makeCard('gauge', 'Annual Target', '$900k goal');
+    CCharts.gauge(b, { value: revCum[11], max: 900, unit: 'k', label: 'of $900k target' }, { theme: T });
+
+    // 7. Network
+    b = makeCard('network', 'Project Graph', 'Entity relationships');
+    CCharts.network(b, netData, { theme: T });
+
+    // 8. Heatmap
+    var colLabels = [];
+    for (var w = 0; w < 52; w++) colLabels.push(w % 4 === 0 ? 'W' + (w+1) : '');
+    b = makeCard('heatmap', 'Activity Heatmap', '52 weeks of contribution data', true);
+    CCharts.heatmap(b, { cells: activityCells, rows: 7, cols: 52, colLabels: colLabels }, { theme: T, cellSize: 11, gap: 2 });
+
+    // 9. Waterfall
+    b = makeCard('waterfall', 'Revenue to Profit Bridge', 'P&L flow decomposition');
+    CCharts.waterfall(b, { items: [
+      { label: 'Revenue', value: revCum[11], total: true },
+      { label: 'COGS', value: -Math.round(revCum[11]*0.35) },
+      { label: 'R&D', value: -Math.round(revCum[11]*0.18) },
+      { label: 'S&M', value: -Math.round(revCum[11]*0.12) },
+      { label: 'G&A', value: -Math.round(revCum[11]*0.08) },
+      { label: 'Net', value: Math.round(revCum[11]*0.27), total: true },
+    ]}, { theme: T });
+
+    // 10. Choropleth (US map)
+    b = makeCard('choropleth', 'US Coverage Map', 'Client density by state', true);
+    CCharts.choropleth(b, { states: {CA:95,TX:82,NY:78,FL:71,IL:65,PA:60,OH:55,GA:52,NC:48,MI:45,NJ:43,VA:40,WA:38,AZ:35,MA:33,TN:30,IN:28,MO:25,MD:23,WI:20,CO:18,MN:16,SC:14,AL:12,LA:10,KY:9,OR:8,OK:7,CT:6,UT:5,IA:4,NV:3,AR:2,MS:1,KS:1,NE:1,NM:1,ID:1,WV:1,HI:2,NH:1,ME:1,MT:1,RI:1,DE:1,SD:1,ND:1,AK:2,VT:1,WY:1,DC:5} }, { theme: T, height: 380 });
+
+    // Re-observe for scroll animation
+    var chartCards = grid.querySelectorAll('.chart-card');
+    var chartObs = new IntersectionObserver(function(entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          entries[i].target.classList.add('visible');
+          chartObs.unobserve(entries[i].target);
+        }
+      }
+    }, { threshold: 0.08 });
+    for (var i = 0; i < chartCards.length; i++) {
+      chartCards[i].style.transitionDelay = (i * 50) + 'ms';
+      chartObs.observe(chartCards[i]);
+    }
+  }
+
+  // Initial render with SomeAI theme
+  renderCharts('someai');
+
+  // Theme switcher
+  var select = document.getElementById('charts-theme');
+  if (select) {
+    select.addEventListener('change', function() {
+      renderCharts(select.value);
+    });
+  }
 })();
 </script>
 

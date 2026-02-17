@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte — Thesis Draft</title>
+  <link rel="icon"href="design/brandbook/someai/assets/LOGO.png">
+  <link rel="apple-touch-icon" href="design/brandbook/someai/assets/LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* === Base Layout === */
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #141414;
+      color: #E8E0E0;
+      min-height: 100vh;
+      padding: 0 24px 48px;
+    }
+
+    /* === Spider Web Background (Layer 1) === */
+    #web-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    #web-bg svg {
+      width: 120vmax;
+      height: 120vmax;
+    }
+    .web-strands {
+      animation: neural-idle 12s ease-in-out infinite;
+    }
+    @keyframes neural-idle {
+      0%, 100% { opacity: 0.04; }
+      50% { opacity: 0.07; }
+    }
+    .junction { opacity: 0; transition: opacity 0.1s; }
+
+    /* === Hero (Layer 2) === */
+    #hero {
+      position: relative;
+      width: calc(100% + 48px);
+      margin: 0 -24px 48px;
+      height: 400px;
+      overflow: hidden;
+    }
+    /* === Micro-Graph Background (full page, behind everything) === */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-overlay h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+      text-align: center;
+      background: linear-gradient(135deg, #FFFFFF 0%, #C4A8A8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-overlay .subtitle {
+      text-align: center;
+      color: #666666;
+      font-size: 15px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* === Abstract === */
+    .abstract {
+      max-width: 800px;
+      margin: 0 auto 48px;
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(229,62,62,0.05) 0%, rgba(155,120,120,0.04) 100%);
+      border: 1px solid #333333;
+      border-radius: 16px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .abstract.visible { opacity: 1; transform: none; }
+    .abstract h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #E53E3E;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .abstract p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #999999;
+      margin-bottom: 12px;
+    }
+    .abstract p:last-child { margin-bottom: 0; }
+    .abstract strong { color: #E8E0E0; font-weight: 600; }
+    .abstract .highlight { color: #E53E3E; font-weight: 500; }
+
+    /* === Five Primitives (Layer 3) === */
+    .primitives-section {
+      max-width: 800px;
+      margin: 0 auto 48px;
+      padding: 0 4px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .primitives-section.visible { opacity: 1; transform: none; }
+    .primitives-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .primitives-header p {
+      font-size: 13px;
+      color: #666666;
+      margin-bottom: 32px;
+    }
+    .primitives-diagram {
+      margin-bottom: 32px;
+    }
+    .primitives-diagram svg {
+      width: 100%;
+      max-width: 800px;
+    }
+    .flow-arrow {
+      animation: dash-flow 1.5s linear infinite;
+    }
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -10; }
+    }
+    .primitives-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .primitive-card {
+      background: #1A1A1A;
+      border: 1px solid #333333;
+      border-radius: 12px;
+      padding: 20px 12px;
+      text-align: center;
+    }
+    .primitive-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .primitive-card h3 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .primitive-card p {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #999999;
+    }
+
+    /* === Divider === */
+    .divider {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      border: none;
+      border-top: 1px solid #333333;
+    }
+
+    /* === Investment Thesis Section === */
+    .thesis {
+      max-width: 960px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+    .thesis-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .thesis-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #E8E0E0;
+      margin-bottom: 6px;
+    }
+    .thesis-header .tagline {
+      font-size: 13px;
+      color: #666666;
+    }
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .thesis-card {
+      background: #1A1A1A;
+      border: 1px solid #333333;
+      border-radius: 14px;
+      padding: 24px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .thesis-card.visible { opacity: 1; transform: none; }
+    .thesis-card h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .thesis-card h3.blue { color: #F56565; }
+    .thesis-card h3.green { color: #68D391; }
+    .thesis-card h3.amber { color: #F59E0B; }
+    .thesis-card h3.purple { color: #C4A8A8; }
+    .thesis-card p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #999999;
+    }
+    .thesis-card strong { color: #E8E0E0; }
+    .thesis-card .val-highlight { font-weight: 500; }
+    .thesis-card .val-highlight.blue { color: #F56565; }
+    .thesis-card .val-highlight.green { color: #68D391; }
+    .thesis-card .val-highlight.amber { color: #F59E0B; }
+    .thesis-card .val-highlight.purple { color: #C4A8A8; }
+    .thesis-wide {
+      background: linear-gradient(135deg, rgba(229,62,62,0.06) 0%, rgba(155,120,120,0.04) 50%, rgba(107,79,79,0.04) 100%);
+      border: 1px solid #333333;
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .thesis-wide.visible { opacity: 1; transform: none; }
+    .thesis-wide h3 {
+      font-size: 14px;
+      color: #E53E3E;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    .thesis-wide p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #999999;
+      margin-bottom: 10px;
+    }
+    .thesis-wide p:last-child { margin-bottom: 0; }
+    .thesis-wide strong { color: #E8E0E0; }
+    .thesis-wide .hl { color: #E53E3E; font-weight: 500; }
+    .thesis-wide .gl { color: #68D391; font-weight: 500; }
+    .thesis-wide .al { color: #F59E0B; font-weight: 500; }
+
+    /* === Tables === */
+    .val-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 8px;
+      font-size: 12px;
+    }
+    .val-table th {
+      text-align: left;
+      color: #666666;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-bottom: 1px solid #333333;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-size: 10px;
+    }
+    .val-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(51,51,51,0.5);
+      color: #999999;
+    }
+    .val-table td:nth-child(2), .val-table td:nth-child(3) { color: #E8E0E0; font-weight: 600; }
+    .val-table tr:last-child td { border-bottom: none; }
+
+    /* === Live Badge === */
+    .live-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(229,62,62,0.12);
+      color: #E53E3E;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin-left: 8px;
+      animation: badge-pulse 2s ease-in-out infinite;
+    }
+    @keyframes badge-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(229,62,62,0.2); }
+      50% { box-shadow: 0 0 12px 2px rgba(229,62,62,0.15); }
+    }
+
+    /* === Reduced Motion === */
+    @media (prefers-reduced-motion: reduce) {
+      #web-bg { display: none !important; }
+      #particle-canvas { display: none !important; }
+      .thesis-card, .thesis-wide, .abstract, .primitives-section {
+        opacity: 1 !important;
+        transform: none !important;
+        transition-duration: 0s !important;
+      }
+      .flow-arrow { animation: none !important; }
+      .web-strands { animation: none !important; }
+      .junction, .npulse { display: none !important; }
+      .live-badge { animation: none !important; }
+      .hero-overlay h1 {
+        -webkit-text-fill-color: #E8E0E0;
+        background: none;
+      }
+    }
+
+    /* === Mobile === */
+    @media (max-width: 700px) {
+      #hero { height: auto; }
+      #particle-canvas { display: none; }
+      .hero-overlay {
+        position: relative;
+        padding: 48px 0 40px;
+      }
+      .hero-overlay h1 { font-size: 32px; letter-spacing: -1px; }
+      .hero-overlay .subtitle { font-size: 13px; padding: 0 12px; }
+      .primitives-diagram { display: none; }
+      .primitives-grid { grid-template-columns: repeat(2, 1fr); }
+      .thesis-grid { grid-template-columns: 1fr; }
+      .thesis-wide { padding: 20px; }
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 24px 0 0;
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+    }
+    .back-link:hover { color: #E53E3E; }
+  </style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">&larr; Back to SomeAI</a>
+
+<!-- ═══════════ LAYER 1: Neural Synapse Web Background ═══════════ -->
+<div id="web-bg">
+  <svg id="web-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+    <defs>
+      <filter id="synapse-glow" x="-200%" y="-200%" width="500%" height="500%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="junction-fire" x="-200%" y="-200%" width="500%" height="500%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <g class="web-strands" transform="translate(120,120)" stroke="#E53E3E" stroke-width="1.5" fill="none" stroke-opacity="0.08" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="0" y1="0" x2="0" y2="-108"/>
+      <line x1="0" y1="0" x2="65" y2="-87"/>
+      <line x1="0" y1="0" x2="103" y2="-33"/>
+      <line x1="0" y1="0" x2="95" y2="50"/>
+      <line x1="0" y1="0" x2="40" y2="100"/>
+      <line x1="0" y1="0" x2="-40" y2="100"/>
+      <line x1="0" y1="0" x2="-95" y2="50"/>
+      <line x1="0" y1="0" x2="-103" y2="-33"/>
+      <line x1="0" y1="0" x2="-65" y2="-87"/>
+      <path d="M 0,-108 Q 38,-105 65,-87 Q 92,-65 103,-33 Q 108,10 95,50 Q 78,82 40,100 Q 5,110 -40,100 Q -78,82 -95,50 Q -108,10 -103,-33 Q -92,-65 -65,-87 Q -38,-105 0,-108 Z"/>
+      <path d="M 0,-70 Q 24,-68 42,-56 Q 60,-42 67,-21 Q 70,7 62,32 Q 51,53 26,65 Q 3,72 -26,65 Q -51,53 -62,32 Q -70,7 -67,-21 Q -60,-42 -42,-56 Q -24,-68 0,-70 Z"/>
+      <path d="M 0,-38 Q 13,-37 23,-30 Q 33,-23 36,-11 Q 38,4 34,18 Q 28,29 14,35 Q 2,39 -14,35 Q -28,29 -34,18 Q -38,4 -36,-11 Q -33,-23 -23,-30 Q -13,-37 0,-38 Z"/>
+    </g>
+    <g id="neural-junctions" transform="translate(120,120)">
+      <circle class="junction" cx="0" cy="-108" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="65" cy="-87" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="103" cy="-33" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="95" cy="50" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="40" cy="100" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-40" cy="100" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-95" cy="50" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-103" cy="-33" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-65" cy="-87" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="0" cy="-70" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="42" cy="-56" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="67" cy="-21" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="62" cy="32" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="26" cy="65" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-26" cy="65" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-62" cy="32" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-67" cy="-21" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-42" cy="-56" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="0" cy="-38" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="23" cy="-30" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="36" cy="-11" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="34" cy="18" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="14" cy="35" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-14" cy="35" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-34" cy="18" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-36" cy="-11" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+      <circle class="junction" cx="-23" cy="-30" r="1.5" fill="#E53E3E" filter="url(#junction-fire)"/>
+    </g>
+    <g id="neural-pulses" transform="translate(120,120)">
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+      <circle class="npulse" r="2.5" fill="#E53E3E" opacity="0" filter="url(#synapse-glow)"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ═══════════ Hero Section ═══════════ -->
+<canvas id="particle-canvas"></canvas>
+
+<section id="hero">
+  <div class="hero-overlay">
+    <h1>Charlotte</h1>
+    <p class="subtitle">An operating system for operations &mdash; from research instruments to compiled instruction sets</p>
+  </div>
+</section>
+
+<!-- ═══════════ Abstract ═══════════ -->
+<div class="abstract">
+  <h2>Abstract</h2>
+  <p>
+    <span class="highlight">Charlotte</span> is the first layer of an <strong>infinite stack of operating systems</strong>. Every business that wants to be a business gets its own OS &mdash; custom-compiled to its own operations, its own vocabulary, its own rhythm. A pig farm runs on a different instruction set than a violin dealer, which runs on a different instruction set than a moving company. But because every OS is built on top of Charlotte, they are all <strong>interoperable by construction</strong>. They can all talk to each other. They can all learn from each other. The kernel never changes.
+  </p>
+  <p>
+    Charlotte is the universal layer: five primitives &mdash; <strong>Node, Edge, Metric, Signal, Protocol</strong> &mdash; and a temporal spine running from epoch to millisecond. The observer lives on this spine in Kd-space, placing signals on metric lines. Each domain OS stacked on top <strong>shrinks the convex hull</strong> of the knowledge space &mdash; restricting the vocabulary, tightening the instruction set, compiling a full end-to-end pipeline into the <strong>smallest possible encoding</strong> for that specific business. Layer 1 is universal. Layer N is bespoke. Every layer in between is just a tighter ontology.
+  </p>
+  <p>
+    The result is not one product. It is an <strong>infinite number of products</strong> &mdash; each one custom, each one small enough to be invisible, each one powerful enough to run an entire operation &mdash; all stacked on the same kernel, all sharing the same temporal spine, all speaking the same language at the bottom. The correct measure of technological progress is not how much technology people use. It is <strong>how little they notice</strong>.
+  </p>
+</div>
+
+<!-- ═══════════ LAYER 3: Five Primitives ═══════════ -->
+<section class="primitives-section">
+  <div class="primitives-header">
+    <h2>Five Primitives</h2>
+    <p>The universal kernel</p>
+  </div>
+
+  <div class="primitives-diagram">
+    <svg viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <defs>
+        <marker id="arrow-marker" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#444"/>
+        </marker>
+      </defs>
+      <line class="flow-arrow" x1="118" y1="60" x2="202" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
+      <line class="flow-arrow" x1="278" y1="60" x2="362" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
+      <line class="flow-arrow" x1="438" y1="60" x2="522" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
+      <line class="flow-arrow" x1="598" y1="60" x2="682" y2="60" stroke="#444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-marker)"/>
+      <circle cx="80" cy="60" r="38" stroke="#C4A8A8" stroke-width="1.5"/>
+      <text x="80" y="64" text-anchor="middle" fill="#C4A8A8" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">NODE</text>
+      <circle cx="240" cy="60" r="38" stroke="#9B7878" stroke-width="1.5"/>
+      <text x="240" y="64" text-anchor="middle" fill="#9B7878" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">EDGE</text>
+      <circle cx="400" cy="60" r="38" stroke="#F59E0B" stroke-width="1.5"/>
+      <text x="400" y="64" text-anchor="middle" fill="#F59E0B" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">METRIC</text>
+      <circle cx="560" cy="60" r="38" stroke="#E53E3E" stroke-width="1.5"/>
+      <text x="560" y="64" text-anchor="middle" fill="#E53E3E" font-size="11" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">SIGNAL</text>
+      <circle cx="720" cy="60" r="38" stroke="#68D391" stroke-width="1.5"/>
+      <text x="720" y="64" text-anchor="middle" fill="#68D391" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="0.5">PROTOCOL</text>
+    </svg>
+  </div>
+
+  <div class="primitives-grid">
+    <div class="primitive-card">
+      <div class="primitive-icon" style="color:#C4A8A8">&#x25CF;</div>
+      <h3 style="color:#C4A8A8">Node</h3>
+      <p>The identity. An observable entity that persists through time.</p>
+    </div>
+    <div class="primitive-card">
+      <div class="primitive-icon" style="color:#9B7878">&#x2194;</div>
+      <h3 style="color:#9B7878">Edge</h3>
+      <p>The relationship. A typed connection between two nodes.</p>
+    </div>
+    <div class="primitive-card">
+      <div class="primitive-icon" style="color:#F59E0B">&#x2261;</div>
+      <h3 style="color:#F59E0B">Metric</h3>
+      <p>The measure. A quantifiable dimension observed along.</p>
+    </div>
+    <div class="primitive-card">
+      <div class="primitive-icon" style="color:#E53E3E">&#x26A1;</div>
+      <h3 style="color:#E53E3E">Signal</h3>
+      <p>The event. A timestamped observation emitted on a metric.</p>
+    </div>
+    <div class="primitive-card">
+      <div class="primitive-icon" style="color:#68D391">&#x25C6;</div>
+      <h3 style="color:#68D391">Protocol</h3>
+      <p>The rule. A constraint governing signal propagation.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════ Investment Thesis ═══════════ -->
+<div class="thesis">
+  <div class="thesis-header">
+    <h2>Where We Are Going</h2>
+    <p class="tagline">Invisible infrastructure for the 33.2 million businesses technology forgot</p>
+  </div>
+
+  <div class="thesis-wide">
+    <h3>The 97% Thesis</h3>
+    <p>
+      There are <strong>33.2 million small businesses</strong> in the United States. <span class="al">97% were built before AI existed.</span> Most predate broadband internet. Many predate the personal computer. These businesses &mdash; corner-store libraries, family coffee shops, third-generation hardware stores &mdash; do not need more technology. They need the complexity of modernity to <strong>stop eroding them</strong> while they do what they were built to do.
+    </p>
+    <p>
+      Charlotte is <strong>titanium injected directly into the bone</strong>. The business does not change. The owner learns nothing new. No new screens. No new logins. No training. No migration. The substrate observes the signals the business already emits &mdash; transactions, schedules, inventory, deliveries &mdash; and converts them into structural intelligence. <span class="hl">Devices manage themselves. The infrastructure thinks so the owner doesn't have to.</span> The endgame is not a world with more technology everywhere. It is a world with <strong>less visible technology and more underlying intelligence</strong>.
+    </p>
+  </div>
+
+  <div class="thesis-wide">
+    <h3>First Revenue <span class="live-badge">Live Feb 23, 2026</span></h3>
+    <p>
+      The <strong>first industrial sector contract</strong> goes live February 23, 2026 &mdash; <span class="gl">$1.4M over 2 years</span> for Charlotte-powered equipment intelligence deployed into a major MRO platform across 42 locations. This is the PE beachhead &mdash; not the ceiling. Each deployment proves the substrate works across a new domain, reduces onboarding cost by 30&ndash;40%, and generates cross-client intelligence that makes every subsequent deployment faster. The pattern scales from PE portfolio companies (<span class="al">~26,000</span>) to mid-market (<span class="al">~200,000</span>) to the <strong>33 million businesses</strong> that have never had access to this kind of infrastructure and never should have needed to ask.
+    </p>
+  </div>
+
+  <div class="thesis-grid">
+    <div class="thesis-card">
+      <h3 class="blue">The Research Lab</h3>
+      <p>
+        <em>"If you want to go far, go together."</em> &mdash; <strong>35 people</strong> across 6 sensory pillars. Co-founders from Northwestern, Mizzou, and Rose-Hulman. <strong>3 physicians</strong> (Johns Hopkins psychiatry, Barrow/Neuralink radiology, family medicine). <strong>9 Rose-Hulman engineers</strong> spanning optical, mechanical, biomedical, chemical, civil, aerospace, and computer science. A chef trained under the #2 in the world (Albert Adria). A defense systems engineer from NSWC Crane. A Ford brake engineer. An Aurora/Boeing aerospace designer. Two Grainger analysts with 17 combined years in industrial distribution. Advisors include an <strong>IBM Fellow</strong> who invented Watson (Ferrucci), the <strong>inventor of augmented reality</strong> (Rosenberg), the <strong>founder of qualitative physics</strong> (Forbus), and the creator of <strong>Kilobots</strong> &mdash; a thousand-robot swarm published in <em>Science</em> (Rubenstein). Mentored by an <strong>AAAI Fellow</strong> who co-founded Narrative Science (Hammond). Production dataset: <span class="val-highlight blue">27,200 nodes</span>, <span class="val-highlight blue">46,100 edges</span> across <strong>eight domains</strong>.
+      </p>
+    </div>
+    <div class="thesis-card">
+      <h3 class="green">Serengeti Oasis</h3>
+      <p>
+        The endgame is a purpose-built <strong>50&ndash;200 acre property</strong> where dozens of businesses run side-by-side, each on its own compiled OS, all stacked on Charlotte. A coffee shop, a veterinary clinic, a co-working space, a logistics hub &mdash; each with a different instruction set, different metrics, different protocols &mdash; all sharing the same temporal spine, all visible to each other. Having them co-located allows real-time analysis of <strong>resonance between operating systems</strong>: how fast signals propagate across business boundaries, where patterns compound, what emerges when bespoke systems talk to each other. The village is simultaneously a revenue-generating commercial district, a live research environment, and a <strong>proof that infinite bespoke OSes can interoperate on one kernel</strong>.
+      </p>
+    </div>
+    <div class="thesis-card">
+      <h3 class="amber">The Absorption Model</h3>
+      <p>
+        The technology industry built one-size-fits-all software for the <strong>3% of businesses born digital</strong>. Charlotte builds an infinite number of bespoke operating systems for the other 97%. Each business gets its own OS &mdash; compiled from its own signals, shrunk to its own instruction set &mdash; without knowing it exists. The <strong>adoption tax</strong> disappears because there is nothing to adopt. The infrastructure observes what the business already does and compiles itself around it. At <span class="val-highlight amber">1% penetration</span> of American small businesses paying $1K&ndash;$10K/month for invisible infrastructure, the market generates <span class="val-highlight amber">$6B ARR</span> &mdash; exceeding Palantir, Snowflake, and MongoDB.
+      </p>
+    </div>
+    <div class="thesis-card">
+      <h3 class="purple">The PE Beachhead</h3>
+      <p>
+        PE firms manage <strong>~26,000 portfolio companies</strong> &mdash; 0.08% of all businesses. Charlotte eliminates <strong>$770K&ndash;$3.4M/year in integration tax</strong> per company. Post-acquisition integration drops from 12&ndash;24 months to <strong>hours</strong>. The fund deploys the infrastructure; portfolio companies never know it is there. From this beachhead, the same substrate extends to the <strong>33 million businesses</strong> that have never adopted enterprise software and never will. <strong>LTV:CAC exceeds 50:1.</strong> Churn is &lt;5% &mdash; not because switching is hard, but because there is nothing to switch from. The infrastructure is invisible. You cannot abandon what you never noticed.
+      </p>
+    </div>
+  </div>
+
+  <div class="thesis-wide">
+    <h3>Revenue Model: Three Layers</h3>
+    <table class="val-table">
+      <tr><th>Layer</th><th>Market</th><th>Price Point</th><th>1% Penetration ARR</th></tr>
+      <tr>
+        <td style="color:#C4A8A8;font-weight:600">PE Beachhead</td>
+        <td>~26,000 portfolio companies</td>
+        <td>$100K+/mo</td>
+        <td style="color:#C4A8A8">$312M</td>
+      </tr>
+      <tr>
+        <td style="color:#F56565;font-weight:600">Mid-Market Expansion</td>
+        <td>~200,000 companies ($10M&ndash;$1B rev)</td>
+        <td>$5K&ndash;$50K/mo</td>
+        <td style="color:#F56565">$780M</td>
+      </tr>
+      <tr>
+        <td style="color:#F59E0B;font-weight:600">The 97% &mdash; Small Business America</td>
+        <td>33,200,000 businesses</td>
+        <td>$500&ndash;$3K/mo (invisible)</td>
+        <td style="color:#F59E0B">$6.0B</td>
+      </tr>
+      <tr style="border-top:1px solid #333333">
+        <td style="color:#68D391;font-weight:700">Combined (1% penetration)</td>
+        <td></td>
+        <td></td>
+        <td style="color:#68D391;font-weight:700">$7.1B</td>
+      </tr>
+    </table>
+    <p style="margin-top:14px">
+      The 97% layer is the paradigm shift. These businesses do not buy software. They never have. Charlotte does not ask them to. The substrate observes what they already do and makes it legible &mdash; <strong>no screens, no logins, no training</strong>. At 1% penetration with invisible infrastructure pricing, the small business layer alone generates more ARR than Palantir's entire 2025 revenue.
+    </p>
+  </div>
+
+  <div class="thesis-wide">
+    <h3>Forecasted Valuation</h3>
+    <p>
+      Grounded in comparable company analysis against <strong>Palantir</strong> ($324B, 48&ndash;96x P/S), <strong>Databricks</strong> ($134B, 28x ARR), <strong>Snowflake</strong> ($75B, 12&ndash;17x), <strong>MongoDB</strong> ($34B), <strong>Toast</strong> ($20B), and <strong>Samsara</strong> ($14.5B). Charlotte's trajectory reflects a category-creating infrastructure company targeting the largest untapped market in enterprise technology &mdash; the 33 million businesses the industry has never served.
+    </p>
+    <table class="val-table">
+      <tr><th></th><th>Year 5</th><th>Year 10</th><th>Basis</th></tr>
+      <tr>
+        <td>Revenue (ARR)</td>
+        <td style="color:#68D391">$82M &ndash; $108M</td>
+        <td style="color:#68D391">$920M &ndash; $1.2B</td>
+        <td>PE + mid-market clusters &middot; 900&ndash;11K businesses</td>
+      </tr>
+      <tr>
+        <td>97% Layer (additive)</td>
+        <td style="color:#F59E0B">$0 &ndash; $500M</td>
+        <td style="color:#F59E0B">$1B &ndash; $6B</td>
+        <td>0.1%&ndash;1% small business penetration as absorption model scales</td>
+      </tr>
+      <tr>
+        <td>Gross Margin</td>
+        <td>74%</td>
+        <td>85%+</td>
+        <td>No onboarding, no training, no support tickets &mdash; pure observation</td>
+      </tr>
+      <tr>
+        <td style="color:#F56565;font-weight:600">Low-End Valuation</td>
+        <td style="color:#F56565;font-weight:700">$750M &ndash; $1.5B</td>
+        <td style="color:#F56565;font-weight:700">$4B &ndash; $16B</td>
+        <td>15&ndash;25x ARR &middot; PE + mid-market only</td>
+      </tr>
+      <tr>
+        <td style="color:#C4A8A8;font-weight:600">High-End Valuation</td>
+        <td style="color:#C4A8A8;font-weight:700">$3B &ndash; $6B</td>
+        <td style="color:#C4A8A8;font-weight:700">$25B &ndash; $50B+</td>
+        <td>30&ndash;50x ARR &middot; With 97% layer &middot; Category creation premium</td>
+      </tr>
+    </table>
+    <p style="margin-top:14px">
+      <strong>Pre-revenue seed valuation (today):</strong> <span class="hl">$25M&ndash;$50M</span> with PE network access. <span class="hl">$50M&ndash;$100M</span> with signed property LOI. The structural moat is not code &mdash; it is <strong>8 years of cross-domain research, 13 papers across 13 venues, 5 architectural innovations no competitor has replicated, and a substrate that serves 33.2 million businesses without asking a single one to change</strong>. The correct measure of technological progress is not how much technology people use. It is how little they notice.
+    </p>
+  </div>
+</div>
+
+<script>
+(function() {
+  var els = document.querySelectorAll('.thesis-card, .thesis-wide, .abstract, .primitives-section');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('visible');
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        entries[i].target.classList.add('visible');
+        observer.unobserve(entries[i].target);
+      }
+    }
+  }, { threshold: 0.08 });
+  for (var i = 0; i < els.length; i++) observer.observe(els[i]);
+})();
+</script>
+
+</body>
+</html>
