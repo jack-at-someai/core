@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compressed Air Market Intelligence — SomeAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #ef4444; --red-lt: #f87171; --red-dk: #991b1b;
+      --orange: #f97316; --yellow: #fbbf24; --green: #4ade80;
+      --blue: #38bdf8; --purple: #a78bfa; --cyan: #22d3ee;
+      --bg: #09090b; --surface: #18181b; --border: #27272a; --border-lt: #3f3f46;
+      --text: #fafafa; --text-2: #d4d4d8; --text-dim: #a1a1aa; --text-muted: #71717a;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.5);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, -apple-system, sans-serif; font-size: 10.5pt; line-height: 1.65; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
+    strong { color: var(--text); }
+    p { margin-bottom: 10px; color: var(--text-2); }
+
+    /* ── Page ──────────────────────────────────── */
+    .page { max-width: 8.5in; margin: 0 auto; padding: 0.6in 0.75in; }
+
+    /* ── Cover ─────────────────────────────────── */
+    .cover { display:flex; flex-direction:column; justify-content:center; min-height:100vh; padding:1.5in 0.75in; background: radial-gradient(ellipse 80% 60% at 70% 18%,rgba(239,68,68,.07) 0%,transparent 55%), radial-gradient(ellipse 50% 45% at 15% 85%,rgba(56,189,248,.04) 0%,transparent 50%), linear-gradient(168deg,#09090b,#0c0c0f 40%,#12090b); color:#fff; position:relative; overflow:hidden; }
+    .cover::before { content:''; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.01) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.01) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+    .cover::after { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--red),var(--red-lt) 40%,transparent); }
+    .cover>* { position:relative; z-index:1; }
+    .cover__badge { display:inline-flex; align-items:center; gap:8px; padding:6px 18px; font-size:10px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--red-lt); border:1px solid rgba(248,113,113,.25); border-radius:20px; margin-bottom:36px; background:rgba(239,68,68,.05); }
+    .cover__badge::before { content:''; width:6px;height:6px; border-radius:50%; background:var(--red); box-shadow:0 0 10px rgba(239,68,68,.6); }
+    .cover__title { font-size:46pt; font-weight:800; line-height:1.0; margin-bottom:16px; letter-spacing:-1.5px; }
+    .cover__title span { background:linear-gradient(135deg,var(--red-lt),#fca5a5); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .cover__subtitle { font-size:14pt; font-weight:400; color:rgba(255,255,255,.5); margin-bottom:56px; max-width:5.5in; line-height:1.55; }
+    .cover__meta { display:flex; margin-bottom:56px; }
+    .cover__stat { text-align:left; padding:0 30px; border-right:1px solid rgba(255,255,255,.06); }
+    .cover__stat:first-child { padding-left:0; }
+    .cover__stat:last-child { border-right:none; }
+    .cover__stat-value { font-size:28pt; font-weight:700; color:#fff; line-height:1.1; }
+    .cover__stat-label { font-size:8px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.32); margin-top:5px; }
+    .cover__footer { margin-top:auto; padding-top:40px; border-top:1px solid rgba(255,255,255,.05); display:flex; justify-content:space-between; align-items:center; }
+    .cover__logo { font-size:16pt; font-weight:800; letter-spacing:2px; background:linear-gradient(135deg,var(--red-lt),var(--red)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .cover__date { font-size:9.5pt; color:rgba(255,255,255,.3); }
+
+    /* ── Headings ──────────────────────────────── */
+    h1 { font-size:22pt; font-weight:700; margin:0 0 6px; padding-top:24px; letter-spacing:-.5px; }
+    h1 .sn { color:var(--red); font-weight:800; margin-right:8px; }
+    .rule { width:100%; height:2px; border:none; margin:10px 0 24px; background:linear-gradient(90deg,var(--red) 0%,var(--red-lt) 52px,var(--border) 52px); }
+    h2 { font-size:13pt; font-weight:700; margin:24px 0 10px; letter-spacing:-.2px; }
+
+    /* ── Stat grid ─────────────────────────────── */
+    .sr { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:16px 0; }
+    .sr--3 { grid-template-columns:repeat(3,1fr); }
+    .sb { padding:18px 16px 16px; border:1px solid var(--border); border-top:3px solid var(--red); border-radius:10px; text-align:center; background:var(--surface); box-shadow:var(--shadow-sm); }
+    .sb__v { font-size:21pt; font-weight:700; color:var(--red-lt); line-height:1.1; }
+    .sb__l { font-size:8px; font-weight:600; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-muted); margin-top:6px; }
+
+    /* ── Tables ─────────────────────────────────── */
+    table { width:100%; border-collapse:separate; border-spacing:0; font-size:9.5pt; margin:12px 0; border-radius:10px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-sm); }
+    thead { background:linear-gradient(180deg,#1e1e22,#18181b); }
+    th { padding:10px 12px; text-align:left; font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-dim); border-bottom:2px solid var(--border-lt); white-space:nowrap; }
+    td { padding:9px 12px; border-bottom:1px solid #222225; vertical-align:top; color:var(--text-2); }
+    tbody tr:last-child td { border-bottom:none; }
+    tbody tr:nth-child(even) { background:rgba(255,255,255,.012); }
+    .m { font-family:'SF Mono','Cascadia Code',monospace; font-size:9pt; }
+    .r { text-align:right; } .c { text-align:center; }
+    .tr { color:var(--red-lt); } .tb { color:var(--blue); } .td { color:var(--text-dim); }
+    .tg { color:var(--green); } .to { color:var(--orange); }
+    .b { font-weight:600; color:var(--text); }
+
+    /* ── Badges ─────────────────────────────────── */
+    .badge { display:inline-block; padding:3px 10px; font-size:8px; font-weight:700; border-radius:10px; text-transform:uppercase; letter-spacing:.5px; }
+    .badge--r { background:rgba(239,68,68,.12); color:#f87171; border:1px solid rgba(239,68,68,.22); }
+    .badge--o { background:rgba(249,115,22,.12); color:#fb923c; border:1px solid rgba(249,115,22,.22); }
+    .badge--y { background:rgba(251,191,36,.12); color:#fbbf24; border:1px solid rgba(251,191,36,.22); }
+    .badge--g { background:rgba(74,222,128,.12); color:#4ade80; border:1px solid rgba(74,222,128,.22); }
+    .badge--b { background:rgba(56,189,248,.12); color:#38bdf8; border:1px solid rgba(56,189,248,.22); }
+
+    /* ── Callout ────────────────────────────────── */
+    .co { padding:18px 22px; border-radius:10px; margin:18px 0; font-size:10pt; line-height:1.65; }
+    .co--r { background:rgba(239,68,68,.05); border:1px solid rgba(239,68,68,.12); border-left:4px solid var(--red); }
+    .co--b { background:rgba(56,189,248,.04); border:1px solid rgba(56,189,248,.12); border-left:4px solid var(--blue); }
+    .co strong { color:var(--red-lt); }
+    .co--b strong { color:var(--blue); }
+
+    /* ── Two column ────────────────────────────── */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:14px 0; }
+    .cc { padding:22px; border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow-sm); background:var(--surface); }
+    .cc--dk { background:linear-gradient(165deg,#131315,#0f0f11); border-color:#222225; }
+    .cc--hl { background:rgba(239,68,68,.04); border-color:rgba(239,68,68,.25); border-width:2px; }
+    .cc__t { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); margin-bottom:14px; }
+    .cc--hl .cc__t { color:var(--red-lt); }
+    .cc__v { font-size:24pt; font-weight:800; margin-bottom:8px; letter-spacing:-.5px; }
+    .cc--dk .cc__v { color:rgba(255,255,255,.35); text-decoration:line-through; text-decoration-color:rgba(255,255,255,.1); }
+    .cc--hl .cc__v { color:var(--red-lt); }
+    .cc__d { font-size:9.5pt; line-height:1.8; color:var(--text-dim); }
+
+    /* ── Chart wrapper ─────────────────────────── */
+    .cw { margin:16px 0; border:1px solid var(--border); border-radius:10px; background:var(--surface); padding:20px; box-shadow:var(--shadow-sm); overflow:hidden; }
+    .cw__label { font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); margin-bottom:14px; }
+    .cw svg { display:block; width:100%; height:auto; }
+    .chart-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+    .chart-pair .cw { margin:0; }
+
+    /* ── Horizontal bars ───────────────────────── */
+    .hb { margin:4px 0; }
+    .hb__row { display:flex; align-items:center; gap:10px; padding:5px 0; }
+    .hb__lbl { width:130px; font-size:9pt; font-weight:500; text-align:right; flex-shrink:0; color:var(--text-2); }
+    .hb__trk { flex:1; height:22px; background:rgba(255,255,255,.03); border-radius:6px; overflow:hidden; }
+    .hb__fill { height:100%; border-radius:6px; min-width:4px; }
+    .hb__val { width:56px; font-size:9pt; font-weight:600; font-family:'SF Mono','Cascadia Code',monospace; color:var(--text-dim); }
+
+    /* ── Donut legend ──────────────────────────── */
+    .dl { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 14px; margin-top:14px; }
+    .dl__i { display:flex; align-items:center; gap:5px; font-size:8.5pt; color:var(--text-dim); }
+    .dl__d { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+    /* ── Misc ───────────────────────────────────── */
+    .divider { border:none; height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:30px 0; }
+    .pb { page-break-before:always; }
+    .note { font-size:9pt; color:var(--text-dim); margin:6px 0 16px; }
+    .footer { margin-top:48px; padding-top:20px; border-top:2px solid transparent; border-image:linear-gradient(90deg,var(--red),var(--red-lt) 20%,var(--border) 20%) 1; display:flex; justify-content:space-between; align-items:center; font-size:9pt; color:var(--text-muted); }
+    .footer__logo { font-weight:800; color:var(--red-lt); letter-spacing:2px; }
+
+    /* ── TOC ────────────────────────────────────── */
+    .toc { list-style:none; padding:0; margin:22px 0; }
+    .toc li { padding:11px 14px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; border-radius:6px; }
+    .toc li span:first-child { font-weight:500; font-size:10.5pt; }
+    .toc li span:last-child { color:var(--text-muted); font-size:9pt; font-weight:500; }
+    .toc__n { display:inline-flex; align-items:center; justify-content:center; width:22px;height:22px; border-radius:6px; background:var(--red); color:#fff; font-size:9px; font-weight:700; margin-right:10px; }
+
+    /* ── Screen ─────────────────────────────────── */
+    @media screen {
+      .page { background:rgba(255,255,255,.008); border-left:1px solid var(--border); border-right:1px solid var(--border); }
+    }
+
+    /* ── Print ──────────────────────────────────── */
+    @media print {
+      :root { --bg:#fff; --surface:#f9f9f9; --border:#ddd; --border-lt:#ccc; --text:#111; --text-2:#333; --text-dim:#666; --text-muted:#999; --red:#dc2626; --red-lt:#b91c1c; }
+      body { font-size:10pt; background:#fff; color:#111; }
+      .page { padding:0; max-width:none; border:none; margin:0; background:none; }
+      .cover { min-height:auto; padding:.8in .5in; page-break-after:always; background:#f5f5f5; }
+      .cover::before,.cover::after { display:none; }
+      .cover,.cover .cover__title,.cover__subtitle,.cover__stat-value,.cover__stat-label,.cover__date { color:#111; }
+      .cover__title span { -webkit-text-fill-color:var(--red); }
+      .cover__logo { -webkit-text-fill-color:var(--red); }
+      .cover__stat { border-right-color:#ddd; }
+      .cover__badge { color:var(--red); border-color:#ddd; background:#eee; }
+      .cover__footer { border-top-color:#ddd; }
+      .pb { page-break-before:always; }
+      h1 { break-after:avoid; }
+      h2 { break-after:avoid; }
+      .sr { break-inside:avoid; }
+      .sb { box-shadow:none; border-color:#ddd; background:#f9f9f9; }
+      .sb__v { color:var(--red); }
+      table { box-shadow:none; border-color:#ddd; }
+      thead { background:#f5f5f5; display:table-header-group; }
+      th { border-bottom-color:#ccc; color:#666; }
+      td { border-bottom-color:#eee; color:#333; }
+      tr { break-inside:avoid; }
+      .co { break-inside:avoid; background:#f9f9f9; border-color:#ddd; }
+      .co--r { border-left-color:var(--red); }
+      .co--b { border-left-color:#2563eb; }
+      .cc { box-shadow:none; background:#f9f9f9; border-color:#ddd; }
+      .cc--dk { background:#f0f0f0; }
+      .cc--hl { background:rgba(220,38,38,.04); border-color:rgba(220,38,38,.3); }
+      .two-col { break-inside:avoid; }
+      .cw { box-shadow:none; background:#f9f9f9; border-color:#ddd; break-inside:avoid; }
+      .chart-pair { break-inside:avoid; }
+      .hb { break-inside:avoid; }
+      .hb__trk { background:#eee; }
+      .footer { border-image:none; border-top-color:#ddd; }
+      /* SVG print colors */
+      .svg-grid { stroke:#ddd; }
+      .svg-area { fill:rgba(220,38,38,.1); }
+      .svg-line { stroke:var(--red); }
+      .svg-dot { fill:var(--red); }
+      .svg-label { fill:#666; }
+      @page { size:letter; margin:.5in; }
+      @page:first { margin:0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover__badge">Market Intelligence</div>
+  <h1 class="cover__title">Compressed Air<br><span>Industry Analysis</span></h1>
+  <p class="cover__subtitle">ISG Compressor Vertical &mdash; Complete market analysis synthesized from 4 paid research studies, 457 pages, and $98K+ in acquisition cost.</p>
+  <div class="cover__meta">
+    <div class="cover__stat"><div class="cover__stat-value">$11.05B</div><div class="cover__stat-label">Global Market (2021)</div></div>
+    <div class="cover__stat"><div class="cover__stat-value">$14.45B</div><div class="cover__stat-label">2026 Forecast</div></div>
+    <div class="cover__stat"><div class="cover__stat-value">5.57%</div><div class="cover__stat-label">CAGR 2020&ndash;2026</div></div>
+    <div class="cover__stat"><div class="cover__stat-value">46%</div><div class="cover__stat-label">Top-3 Concentration</div></div>
+  </div>
+  <div class="cover__footer">
+    <div class="cover__logo">SomeAI</div>
+    <div class="cover__date">February 2026 &middot; Prepared for Industrial Service Group</div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="page pb">
+  <h1>Contents</h1><hr class="rule">
+  <ul class="toc">
+    <li><span><span class="toc__n">1</span> Executive Summary</span><span></span></li>
+    <li><span><span class="toc__n">2</span> Global Compressed Air Market</span><span></span></li>
+    <li><span><span class="toc__n">3</span> Competitive Landscape</span><span></span></li>
+    <li><span><span class="toc__n">4</span> Aftermarket &amp; Lifecycle Economics</span><span></span></li>
+    <li><span><span class="toc__n">5</span> Market Trends &amp; ISG Positioning</span><span></span></li>
+    <li><span><span class="toc__n">6</span> ISG Compressor Vertical Opportunity</span><span></span></li>
+    <li><span><span class="toc__n">7</span> Source Studies &amp; Methodology</span><span></span></li>
+  </ul>
+  <div class="co co--r" style="margin-top:36px;">
+    <strong>Report scope:</strong> This report synthesizes 4 paid market studies (457 pages, $98K+ acquisition cost) into a unified intelligence view of the global compressed air industry, with competitive positioning specific to ISG's 16-brand, $241M portfolio.
+  </div>
+</div>
+
+<!-- §1 EXECUTIVE SUMMARY -->
+<div class="page pb">
+  <h1><span class="sn">1</span> Executive Summary</h1><hr class="rule">
+  <p>The global industrial air compressor market reached <strong style="color:var(--red-lt)">$11.05 billion</strong> in 2021 and is projected to grow to $14.45B by 2026 at a 5.57% CAGR. The top three players (Atlas Copco, Ingersoll Rand, Kaeser) control 46% of global share, but the aftermarket and parts segment ($1.74B) remains highly fragmented &mdash; creating significant opportunity for multi-brand service platforms.</p>
+  <p>ISG's position as a 16-brand, 40+ location industrial service consolidator places it uniquely against OEM vertical integration trends. This analysis quantifies the opportunity across equipment, aftermarket, and energy consulting service lines.</p>
+  <div class="sr">
+    <div class="sb"><div class="sb__v">4</div><div class="sb__l">Source Studies</div></div>
+    <div class="sb"><div class="sb__v">457</div><div class="sb__l">Pages Analyzed</div></div>
+    <div class="sb"><div class="sb__v">$98K+</div><div class="sb__l">Research Cost</div></div>
+    <div class="sb"><div class="sb__v">20+</div><div class="sb__l">Market Segments</div></div>
+  </div>
+  <h2>Key Findings</h2>
+  <table>
+    <thead><tr><th>Category</th><th>Count</th><th>Highlights</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Market Segments</td><td>20+</td><td>By type, application, region, technology, parts category</td></tr>
+      <tr><td class="b">Company Profiles</td><td>9</td><td>Atlas Copco, IR, Kaeser, Sullair, Elgi, Quincy, FS Elliott, Sullivan Palatek</td></tr>
+      <tr><td class="b">Market Forecasts</td><td>11 years</td><td>$9.47B (2016) through $14.45B (2026 forecast)</td></tr>
+      <tr><td class="b">Pricing Benchmarks</td><td>35+</td><td>ASPs, margins, service rates, bundle pricing</td></tr>
+      <tr><td class="b">Market Trends</td><td>10</td><td>OEM integration, IoT, PE consolidation, Air-as-a-Service</td></tr>
+      <tr><td class="b">M&amp;A Events</td><td>3 major</td><td>Hitachi/Sullair ($1.245B), IR/Gardner Denver, Atlas distributor roll-up</td></tr>
+    </tbody>
+  </table>
+  <h2>Cost Equivalence</h2>
+  <div class="two-col">
+    <div class="cc cc--dk"><div class="cc__t">Traditional Consulting</div><div class="cc__v">$98K&ndash;$500K</div><div class="cc__d">3&ndash;6 months delivery<br>Static PDF output<br>Outdated on delivery<br>No cross-study integration<br>One-time snapshot</div></div>
+    <div class="cc cc--hl"><div class="cc__t">SomeAI Intelligence Platform</div><div class="cc__v">$0 marginal</div><div class="cc__d">Real-time generation<br>Interactive + exportable<br>Continuously updated<br>Multi-study synthesis<br>Unlimited reporting</div></div>
+  </div>
+</div>
+
+<!-- §2 GLOBAL MARKET — Page 1 -->
+<div class="page pb">
+  <h1><span class="sn">2</span> Global Compressed Air Market</h1><hr class="rule">
+  <div class="sr">
+    <div class="sb"><div class="sb__v">$11.05B</div><div class="sb__l">Global Market 2021</div></div>
+    <div class="sb"><div class="sb__v">$14.45B</div><div class="sb__l">2026 Forecast</div></div>
+    <div class="sb"><div class="sb__v">3.59M</div><div class="sb__l">Units Produced 2021</div></div>
+    <div class="sb"><div class="sb__v">$3,077</div><div class="sb__l">Avg. Selling Price</div></div>
+  </div>
+
+  <h2>2.1 Market Size Trajectory (2016&ndash;2026)</h2>
+  <div class="cw">
+    <div class="cw__label">Global Industrial Air Compressor Market ($B)</div>
+    <svg viewBox="0 0 660 230" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ef4444" stop-opacity=".25"/><stop offset="100%" stop-color="#ef4444" stop-opacity=".02"/></linearGradient></defs>
+      <!-- grid -->
+      <line x1="50" y1="200" x2="640" y2="200" class="svg-grid" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="50" y1="170" x2="640" y2="170" class="svg-grid" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="50" y1="140" x2="640" y2="140" class="svg-grid" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="50" y1="110" x2="640" y2="110" class="svg-grid" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="50" y1="80" x2="640" y2="80" class="svg-grid" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="50" y1="50" x2="640" y2="50" class="svg-grid" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <!-- y labels -->
+      <text x="44" y="204" text-anchor="end" class="svg-label" fill="#71717a" font-size="10" font-family="Inter,sans-serif">$9B</text>
+      <text x="44" y="174" text-anchor="end" class="svg-label" fill="#71717a" font-size="10" font-family="Inter,sans-serif">$10B</text>
+      <text x="44" y="144" text-anchor="end" class="svg-label" fill="#71717a" font-size="10" font-family="Inter,sans-serif">$11B</text>
+      <text x="44" y="114" text-anchor="end" class="svg-label" fill="#71717a" font-size="10" font-family="Inter,sans-serif">$12B</text>
+      <text x="44" y="84" text-anchor="end" class="svg-label" fill="#71717a" font-size="10" font-family="Inter,sans-serif">$13B</text>
+      <text x="44" y="54" text-anchor="end" class="svg-label" fill="#71717a" font-size="10" font-family="Inter,sans-serif">$14B</text>
+      <!-- forecast region -->
+      <rect x="404" y="20" width="236" height="180" fill="rgba(239,68,68,.04)" rx="4"/>
+      <text x="522" y="16" text-anchor="middle" fill="#71717a" font-size="9" font-family="Inter,sans-serif" font-weight="600" letter-spacing="1">FORECAST</text>
+      <!-- area -->
+      <path class="svg-area" d="M50,186 L109,174 L168,161 L227,153 L286,159 L345,139 L404,122 L463,104 L522,85 L581,62 L640,37 L640,200 L50,200 Z" fill="url(#ag)"/>
+      <!-- line -->
+      <polyline class="svg-line" points="50,186 109,174 168,161 227,153 286,159 345,139 404,122 463,104 522,85 581,62 640,37" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- dots + values -->
+      <circle cx="50" cy="186" r="3" class="svg-dot" fill="#f87171"/><text x="50" y="180" text-anchor="middle" fill="#a1a1aa" font-size="9" font-family="Inter,sans-serif">9.47</text>
+      <circle cx="168" cy="161" r="3" class="svg-dot" fill="#f87171"/>
+      <circle cx="286" cy="159" r="3" class="svg-dot" fill="#f87171"/><text x="286" y="153" text-anchor="middle" fill="#a1a1aa" font-size="9" font-family="Inter,sans-serif">10.38</text>
+      <circle cx="345" cy="139" r="3" class="svg-dot" fill="#f87171"/><text x="345" y="133" text-anchor="middle" fill="#f87171" font-size="10" font-weight="600" font-family="Inter,sans-serif">11.05</text>
+      <circle cx="463" cy="104" r="3" class="svg-dot" fill="#f87171"/>
+      <circle cx="640" cy="37" r="4" class="svg-dot" fill="#ef4444"/><text x="640" y="31" text-anchor="middle" fill="#f87171" font-size="10" font-weight="600" font-family="Inter,sans-serif">14.45</text>
+      <!-- x labels -->
+      <text x="50" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2016</text>
+      <text x="168" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2018</text>
+      <text x="286" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2020</text>
+      <text x="345" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2021</text>
+      <text x="463" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2023E</text>
+      <text x="581" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2025E</text>
+      <text x="640" y="218" text-anchor="middle" class="svg-label" fill="#71717a" font-size="9" font-family="Inter,sans-serif">2026F</text>
+    </svg>
+  </div>
+  <p class="note">Source: Maia Research, 2021. CAGR 5.57% (2020&ndash;2026). COVID dip visible in 2020.</p>
+
+  <h2>2.2 By Compressor Type</h2>
+  <table>
+    <thead><tr><th>Type</th><th>Share</th><th class="r">2021 Value</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Positive Displacement</td><td>88%</td><td class="r m">$9.73B</td><td>Rotary screw dominates; reciprocating for smaller applications</td></tr>
+      <tr><td class="b">Dynamic</td><td>12%</td><td class="r m">$1.32B</td><td>Centrifugal for large-capacity oil-free applications</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §2 continued — Page 2 -->
+<div class="page pb">
+  <h2>2.3 By Application</h2>
+  <div class="cw">
+    <div class="cw__label">Market Value by Application ($B, 2021)</div>
+    <div class="hb">
+      <div class="hb__row"><span class="hb__lbl">Manufacturing</span><div class="hb__trk"><div class="hb__fill" style="width:100%;background:var(--red)"></div></div><span class="hb__val">$2.87B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Oil &amp; Gas</span><div class="hb__trk"><div class="hb__fill" style="width:82%;background:var(--blue)"></div></div><span class="hb__val">$2.36B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Food &amp; Beverage</span><div class="hb__trk"><div class="hb__fill" style="width:56%;background:var(--green)"></div></div><span class="hb__val">$1.62B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Construction</span><div class="hb__trk"><div class="hb__fill" style="width:52%;background:var(--orange)"></div></div><span class="hb__val">$1.49B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Chemicals</span><div class="hb__trk"><div class="hb__fill" style="width:32%;background:var(--purple)"></div></div><span class="hb__val">$0.93B</span></div>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>Application</th><th class="r">2021 Value</th><th class="c">CAGR</th><th>Growth Note</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Manufacturing</td><td class="r m">$2.87B</td><td class="c">5.20%</td><td>Largest segment, broad industrial base</td></tr>
+      <tr><td class="b">Oil &amp; Gas</td><td class="r m">$2.36B</td><td class="c">4.80%</td><td>Upstream/downstream process applications</td></tr>
+      <tr><td class="b">Food &amp; Beverage</td><td class="r m">$1.62B</td><td class="c">5.90%</td><td>Oil-free requirement driving premium pricing</td></tr>
+      <tr><td class="b">Construction</td><td class="r m">$1.49B</td><td class="c tr b">7.18%</td><td>Fastest-growing segment</td></tr>
+      <tr><td class="b">Chemicals</td><td class="r m">$0.93B</td><td class="c">4.50%</td><td>Harsh environment, specialized applications</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2.4 By Region</h2>
+  <div class="cw">
+    <div class="cw__label">Market Value by Region ($B, 2021)</div>
+    <div class="hb">
+      <div class="hb__row"><span class="hb__lbl">Europe</span><div class="hb__trk"><div class="hb__fill" style="width:100%;background:var(--red)"></div></div><span class="hb__val">$2.77B</span></div>
+      <div class="hb__row"><span class="hb__lbl">North America</span><div class="hb__trk"><div class="hb__fill" style="width:83%;background:var(--blue)"></div></div><span class="hb__val">$2.30B</span></div>
+      <div class="hb__row"><span class="hb__lbl">China</span><div class="hb__trk"><div class="hb__fill" style="width:81%;background:var(--orange)"></div></div><span class="hb__val">$2.24B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Japan</span><div class="hb__trk"><div class="hb__fill" style="width:31%;background:var(--text-dim)"></div></div><span class="hb__val">$0.86B</span></div>
+      <div class="hb__row"><span class="hb__lbl">SE Asia</span><div class="hb__trk"><div class="hb__fill" style="width:15%;background:var(--cyan)"></div></div><span class="hb__val">$0.41B</span></div>
+      <div class="hb__row"><span class="hb__lbl">India</span><div class="hb__trk"><div class="hb__fill" style="width:14%;background:var(--green)"></div></div><span class="hb__val">$0.40B</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- §2 continued — Page 3 -->
+<div class="page pb">
+  <h2>2.5 US Market Structure</h2>
+  <p class="note">Source: Strategic Analytics ($98K primary research study, Sep 2021)</p>
+  <div class="sr sr--3">
+    <div class="sb"><div class="sb__v">70%</div><div class="sb__l">Replacement Sales</div></div>
+    <div class="sb"><div class="sb__v">70/30</div><div class="sb__l">Oil-Flooded / Oil-Free</div></div>
+    <div class="sb"><div class="sb__v">50&ndash;60%</div><div class="sb__l">Distributor Rev. = Aftermarket</div></div>
+  </div>
+  <div class="co co--r">
+    <strong>Key finding:</strong> 70% of US equipment sales are replacement, not new installations. ISG's installed base &mdash; 62,275 addressable facilities across six states &mdash; represents a renewable revenue engine. The replacement cycle (10-year average life / 100,000 hours) creates predictable demand patterns.
+  </div>
+
+  <h2>2.6 Regional CAGR Comparison</h2>
+  <table>
+    <thead><tr><th>Region</th><th class="r">2021 Value</th><th class="c">CAGR</th><th>Outlook</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Europe</td><td class="r m">$2.77B</td><td class="c">4.80%</td><td>Mature market, efficiency-driven growth</td></tr>
+      <tr><td class="b">North America</td><td class="r m">$2.30B</td><td class="c">5.10%</td><td>ISG's primary theater &mdash; replacement-heavy</td></tr>
+      <tr><td class="b">China</td><td class="r m">$2.24B</td><td class="c">5.80%</td><td>Rapid industrialization, domestic OEMs rising</td></tr>
+      <tr><td class="b">Japan</td><td class="r m">$0.86B</td><td class="c">&mdash;</td><td>Established market, limited growth</td></tr>
+      <tr><td class="b">Southeast Asia</td><td class="r m">$0.41B</td><td class="c tr b">6.37%</td><td>Fastest-growing region</td></tr>
+      <tr><td class="b">India</td><td class="r m">$0.40B</td><td class="c tr b">6.21%</td><td>Emerging manufacturing hub</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §3 COMPETITIVE LANDSCAPE -->
+<div class="page pb">
+  <h1><span class="sn">3</span> Competitive Landscape</h1><hr class="rule">
+  <div class="sr sr--3">
+    <div class="sb"><div class="sb__v">46%</div><div class="sb__l">CR3 &mdash; Top 3 Share</div></div>
+    <div class="sb"><div class="sb__v">31%</div><div class="sb__l">CR5 &mdash; Parts Market</div></div>
+    <div class="sb"><div class="sb__v">0.096</div><div class="sb__l">HHI &mdash; Parts (Low Conc.)</div></div>
+  </div>
+
+  <h2>3.1 Key Competitors by Revenue</h2>
+  <div class="cw">
+    <div class="cw__label">Competitor Revenue ($B, Global)</div>
+    <div class="hb">
+      <div class="hb__row"><span class="hb__lbl">Atlas Copco</span><div class="hb__trk"><div class="hb__fill" style="width:100%;background:var(--red)"></div></div><span class="hb__val">$15.0B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Ingersoll Rand</span><div class="hb__trk"><div class="hb__fill" style="width:46%;background:var(--orange)"></div></div><span class="hb__val">$6.9B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Kaeser</span><div class="hb__trk"><div class="hb__fill" style="width:24%;background:var(--yellow)"></div></div><span class="hb__val">$3.6B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Sullair (Hitachi)</span><div class="hb__trk"><div class="hb__fill" style="width:8%;background:var(--blue)"></div></div><span class="hb__val">$1.2B</span></div>
+      <div class="hb__row"><span class="hb__lbl">Elgi</span><div class="hb__trk"><div class="hb__fill" style="width:5%;background:var(--green)"></div></div><span class="hb__val">$400M</span></div>
+      <div class="hb__row"><span class="hb__lbl">Quincy</span><div class="hb__trk"><div class="hb__fill" style="width:4%;background:var(--purple)"></div></div><span class="hb__val">$300M</span></div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>Company</th><th class="r">Revenue</th><th class="c">Share</th><th class="c">Margin</th><th class="c">US Dist.</th><th>HQ</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Atlas Copco</td><td class="r m">$15.0B</td><td class="c">20%</td><td class="c">32.7%</td><td class="c">15&ndash;16</td><td>Stockholm, SE</td></tr>
+      <tr><td class="b">Ingersoll Rand</td><td class="r m">$6.9B</td><td class="c">14%</td><td class="c">31.5%</td><td class="c">~70</td><td>Davidson, NC</td></tr>
+      <tr><td class="b">Kaeser</td><td class="r m">$3.6B</td><td class="c">5%</td><td class="c">31.0%</td><td class="c">Direct</td><td>Coburg, DE</td></tr>
+      <tr><td class="b">Sullair (Hitachi)</td><td class="r m">$1.2B</td><td class="c">4%</td><td class="c">30.5%</td><td class="c">Mixed</td><td>Michigan City, IN</td></tr>
+      <tr><td class="b">Elgi</td><td class="r m">$400M</td><td class="c">2%</td><td class="c">30.8%</td><td class="c">Expanding</td><td>Coimbatore, IN</td></tr>
+      <tr><td class="b">Quincy</td><td class="r m">$300M</td><td class="c">1.5%</td><td class="c">&mdash;</td><td class="c">Atlas sub.</td><td>Bay Minette, AL</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §3 continued -->
+<div class="page pb">
+  <h2>3.2 US Distribution Channel</h2>
+  <table>
+    <thead><tr><th>Company</th><th class="r">NA Revenue</th><th class="c">US Distributors</th><th>Distribution Strategy</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Atlas Copco NA</td><td class="r m">~$1.2B</td><td class="c">15&ndash;16</td><td class="tr b">Acquiring distributors &mdash; 7 since 2015. Vertical integration play.</td></tr>
+      <tr><td class="b">IR + Gardner Denver</td><td class="r m">~$850M</td><td class="c">~70</td><td>Broad distribution network, less vertical integration</td></tr>
+    </tbody>
+  </table>
+
+  <div class="co co--r">
+    <strong>Strategic threat:</strong> Atlas Copco has acquired 7 US distributors since 2015. This vertical integration directly threatens ISG's independent distributor model. ISG's counter-position: multi-brand service breadth across 16 brands that no single OEM can replicate.
+  </div>
+
+  <h2>3.3 M&amp;A Activity</h2>
+  <table>
+    <thead><tr><th>Year</th><th>Event</th><th class="r">Value</th><th>Significance</th></tr></thead>
+    <tbody>
+      <tr><td class="b">2015&ndash;20</td><td>Atlas Copco acquires 7 US distributors</td><td class="r">&mdash;</td><td>Vertical integration of aftermarket channel</td></tr>
+      <tr><td class="b">2017</td><td>Hitachi acquires Sullair</td><td class="r m">$1.245B</td><td>Japanese OEM enters US compressor market</td></tr>
+      <tr><td class="b">2018</td><td>TJC LP forms ISG</td><td class="r">&mdash;</td><td>PE platform for industrial service consolidation</td></tr>
+      <tr><td class="b">2020</td><td>IR + Gardner Denver merger</td><td class="r">&mdash;</td><td>Created $6.9B industrial platform</td></tr>
+      <tr><td class="b tr">2026</td><td class="tr">ISG partners with SomeAI</td><td class="r m tr">$1.4M/2yr</td><td class="tr">Intelligence layer across 16 brands</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §4 AFTERMARKET — Page 1 -->
+<div class="page pb">
+  <h1><span class="sn">4</span> Aftermarket &amp; Lifecycle Economics</h1><hr class="rule">
+
+  <div class="sr sr--3">
+    <div class="sb"><div class="sb__v">$1.74B</div><div class="sb__l">Global Parts Market (2021)</div></div>
+    <div class="sb"><div class="sb__v">57.3M</div><div class="sb__l">Units Volume</div></div>
+    <div class="sb"><div class="sb__v">5.11%</div><div class="sb__l">CAGR</div></div>
+  </div>
+
+  <div class="chart-pair">
+    <div class="cw">
+      <div class="cw__label">Parts Market by Product (%)</div>
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <path d="M110,30 A80,80,0,0,1,186,135 L158,125 A50,50,0,0,0,110,60 Z" fill="#ef4444" stroke="#18181b" stroke-width="2"/>
+        <path d="M186,135 A80,80,0,0,1,115,190 L113,160 A50,50,0,0,0,158,125 Z" fill="#f97316" stroke="#18181b" stroke-width="2"/>
+        <path d="M115,190 A80,80,0,0,1,42,153 L68,137 A50,50,0,0,0,113,160 Z" fill="#fbbf24" stroke="#18181b" stroke-width="2"/>
+        <path d="M42,153 A80,80,0,0,1,31,95 L61,101 A50,50,0,0,0,68,137 Z" fill="#4ade80" stroke="#18181b" stroke-width="2"/>
+        <path d="M31,95 A80,80,0,0,1,110,30 L110,60 A50,50,0,0,0,61,101 Z" fill="#a78bfa" stroke="#18181b" stroke-width="2"/>
+        <text x="110" y="106" text-anchor="middle" fill="#fafafa" font-size="16" font-weight="700" font-family="Inter,sans-serif">$1.74B</text>
+        <text x="110" y="120" text-anchor="middle" fill="#a1a1aa" font-size="9" font-family="Inter,sans-serif">Global</text>
+      </svg>
+      <div class="dl">
+        <div class="dl__i"><span class="dl__d" style="background:#ef4444"></span>Hose Pipes 30%</div>
+        <div class="dl__i"><span class="dl__d" style="background:#f97316"></span>Air Filters 19%</div>
+        <div class="dl__i"><span class="dl__d" style="background:#fbbf24"></span>Gauges 17%</div>
+        <div class="dl__i"><span class="dl__d" style="background:#4ade80"></span>Hose Reels 12%</div>
+        <div class="dl__i"><span class="dl__d" style="background:#a78bfa"></span>Other 22%</div>
+      </div>
+    </div>
+    <div class="cw">
+      <div class="cw__label">Channel Split &mdash; OEM vs. Aftermarket</div>
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <path d="M110,30 A80,80,0,1,1,34,135 L62,125 A50,50,0,1,0,110,60 Z" fill="#38bdf8" stroke="#18181b" stroke-width="2"/>
+        <path d="M34,135 A80,80,0,0,1,110,30 L110,60 A50,50,0,0,0,62,125 Z" fill="#ef4444" stroke="#18181b" stroke-width="2"/>
+        <text x="110" y="106" text-anchor="middle" fill="#fafafa" font-size="16" font-weight="700" font-family="Inter,sans-serif">70/30</text>
+        <text x="110" y="120" text-anchor="middle" fill="#a1a1aa" font-size="9" font-family="Inter,sans-serif">Volume Split</text>
+      </svg>
+      <div class="dl">
+        <div class="dl__i"><span class="dl__d" style="background:#38bdf8"></span>OEM 70%</div>
+        <div class="dl__i"><span class="dl__d" style="background:#ef4444"></span>Aftermarket 30%</div>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>Product Segment</th><th class="c">Share</th><th class="r">Est. Value</th><th>ISG Relevance</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Hose Pipes</td><td class="c">30%</td><td class="r m">$522M</td><td>High volume, recurring replacement</td></tr>
+      <tr><td class="b">Air Filters</td><td class="c">19%</td><td class="r m">$331M</td><td>Maintenance contract staple</td></tr>
+      <tr><td class="b">Pressure Gauges</td><td class="c">17%</td><td class="r m">$296M</td><td>IoT sensor upgrade opportunity</td></tr>
+      <tr><td class="b">Hose Reels</td><td class="c">12%</td><td class="r m">$209M</td><td>Safety compliance driver</td></tr>
+      <tr><td class="b">Other</td><td class="c">22%</td><td class="r m">$383M</td><td>Long-tail accessories &amp; fittings</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §4 continued -->
+<div class="page pb">
+  <h2>4.2 Equipment Lifecycle</h2>
+  <div class="two-col">
+    <div class="cc"><div class="cc__t">Equipment Purchase</div><div class="cc__v" style="color:var(--blue);">$3,077</div><div class="cc__d">Average selling price per unit. Only <strong>12%</strong> of total lifetime cost.</div></div>
+    <div class="cc"><div class="cc__t">10-Year Aftermarket Spend</div><div class="cc__v" style="color:var(--red-lt);">~$3,077</div><div class="cc__d">~10% of purchase price/year over 10-year / 100K-hour life. <strong>Equals original cost.</strong></div></div>
+  </div>
+
+  <div class="co co--b">
+    <strong>DOE finding:</strong> 76% of compressor lifetime cost is <em>energy</em>. Only 12% is purchase and 12% is maintenance. A 50HP compressor at 85% load costs ~$30,000/year in electricity. VSD upgrade saves 25&ndash;35%. Industry-wide leak losses: 20&ndash;30%. Energy consulting is ISG's highest-margin opportunity (60&ndash;75%).
+  </div>
+
+  <h2>4.3 ISG Margin Architecture</h2>
+  <div class="cw">
+    <div class="cw__label">Gross Margin by Service Line (%)</div>
+    <div class="hb">
+      <div class="hb__row"><span class="hb__lbl">Energy Consulting</span><div class="hb__trk"><div class="hb__fill" style="width:90%;background:var(--red)"></div></div><span class="hb__val">60&ndash;75%</span></div>
+      <div class="hb__row"><span class="hb__lbl">Service Labor</span><div class="hb__trk"><div class="hb__fill" style="width:70%;background:var(--orange)"></div></div><span class="hb__val">45&ndash;60%</span></div>
+      <div class="hb__row"><span class="hb__lbl">Parts</span><div class="hb__trk"><div class="hb__fill" style="width:57%;background:var(--yellow)"></div></div><span class="hb__val">35&ndash;50%</span></div>
+      <div class="hb__row"><span class="hb__lbl">Bundled Agreements</span><div class="hb__trk"><div class="hb__fill" style="width:47%;background:var(--blue)"></div></div><span class="hb__val">30&ndash;40%</span></div>
+      <div class="hb__row"><span class="hb__lbl">Equipment</span><div class="hb__trk"><div class="hb__fill" style="width:33%;background:var(--text-dim)"></div></div><span class="hb__val">20&ndash;30%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- §5 MARKET TRENDS -->
+<div class="page pb">
+  <h1><span class="sn">5</span> Market Trends &amp; ISG Positioning</h1><hr class="rule">
+  <table>
+    <thead><tr><th>Trend</th><th class="c">Impact</th><th style="width:55%">ISG Strategic Position</th></tr></thead>
+    <tbody>
+      <tr><td class="b">OEM Vertical Integration</td><td class="c"><span class="badge badge--r">Very High</span></td><td>Atlas Copco acquiring distributors. ISG counters with multi-brand breadth no single OEM can replicate.</td></tr>
+      <tr><td class="b">IoT &amp; Predictive Maint.</td><td class="c"><span class="badge badge--o">High</span></td><td>Cross-brand fleet intelligence leapfrogs OEM-specific telemetry (SMARTLINK, Aircare).</td></tr>
+      <tr><td class="b">PE-Driven Consolidation</td><td class="c"><span class="badge badge--o">High</span></td><td>ISG <em>is</em> this trend. Intelligence-driven integration addresses post-acquisition challenges.</td></tr>
+      <tr><td class="b">Air-as-a-Service</td><td class="c"><span class="badge badge--o">High</span></td><td>ISG Total Care ($299&ndash;$399/mo) vs Atlas AIRplan, Kaeser SIGMA AIR UTILITY.</td></tr>
+      <tr><td class="b">Aging Infrastructure</td><td class="c"><span class="badge badge--o">High</span></td><td>70% replacement market. Proactive aging-unit identification across the installed base.</td></tr>
+      <tr><td class="b">DOE Energy Efficiency</td><td class="c"><span class="badge badge--y">Medium</span></td><td>76% lifetime cost = energy. Per-facility savings quantification enables 60&ndash;75% margin service.</td></tr>
+      <tr><td class="b">Skilled Labor Shortage</td><td class="c"><span class="badge badge--y">Medium</span></td><td>Intelligent dispatch optimization reduces wasted truck rolls, multiplies technician capacity.</td></tr>
+      <tr><td class="b">Oil-Free Growth</td><td class="c"><span class="badge badge--y">Medium</span></td><td>30% &rarr; 35%+ of market. Oil-free commands premium pricing. ISG services both types.</td></tr>
+      <tr><td class="b">Digital Twin Adoption</td><td class="c"><span class="badge badge--y">Medium</span></td><td>Equipment graph with temporal tracking provides digital twin capability for fleet management.</td></tr>
+      <tr><td class="b">Centrifugal Technology</td><td class="c"><span class="badge badge--g">Low</span></td><td>CTS and Turbomachinery brands service centrifugal &mdash; a niche most independents lack.</td></tr>
+    </tbody>
+  </table>
+  <div class="co co--r" style="margin-top:22px;">
+    <strong>Synthesis:</strong> Six of the top ten trends directly favor ISG's multi-brand, aftermarket-heavy model. The convergence of OEM vertical integration, aging infrastructure, and PE consolidation creates a window where ISG's breadth is maximally valuable &mdash; before OEMs close the channel.
+  </div>
+</div>
+
+<!-- §6 ISG OPPORTUNITY -->
+<div class="page pb">
+  <h1><span class="sn">6</span> ISG Compressor Vertical Opportunity</h1><hr class="rule">
+  <div class="sr">
+    <div class="sb"><div class="sb__v">62,275</div><div class="sb__l">Addressable Facilities</div></div>
+    <div class="sb"><div class="sb__v">$60.6M</div><div class="sb__l">3-Year Revenue Model</div></div>
+    <div class="sb"><div class="sb__v">18&ndash;26x</div><div class="sb__l">ROI on $480K Yr 1</div></div>
+    <div class="sb"><div class="sb__v">~2,350</div><div class="sb__l">Target Customers</div></div>
+  </div>
+  <h2>6.1 Three-Year Revenue Model</h2>
+  <table>
+    <thead><tr><th>Year</th><th class="r">New Customers</th><th class="r">Cumulative Rev.</th><th>Key Milestone</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Year 1</td><td class="r">477</td><td class="r m">$11.9M</td><td>Pricing intelligence + customer reactivation</td></tr>
+      <tr><td class="b">Year 2</td><td class="r">~788</td><td class="r m">$23.3M</td><td>Cross-sell automation, replacement pipeline online</td></tr>
+      <tr><td class="b">Year 3</td><td class="r">~692</td><td class="r m">$25.4M</td><td>Full intelligence layer, energy consulting at scale</td></tr>
+      <tr class="b"><td class="tr">Total</td><td class="r tr">~2,350</td><td class="r m tr">$60.6M</td><td></td></tr>
+    </tbody>
+  </table>
+  <h2>6.2 Intelligence-Driven Annual Uplift</h2>
+  <table>
+    <thead><tr><th>Module</th><th class="r">Annual Value</th><th>Delivery Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Replacement Pipeline</td><td class="r m">$3.0&ndash;$4.5M</td><td>Aging-unit identification from installed base tracking</td></tr>
+      <tr><td class="b">Dormant Reactivation</td><td class="r m">$2.4&ndash;$3.2M</td><td>60/90/180-day dormancy campaigns from CRM data</td></tr>
+      <tr><td class="b">Pricing Intelligence</td><td class="r m">$1.8&ndash;$2.7M</td><td>Real-time competitive pricing benchmarks</td></tr>
+      <tr><td class="b">Cross-Sell Automation</td><td class="r m">$1.5&ndash;$2.1M</td><td>Product relationship mapping (compressor → parts → service)</td></tr>
+      <tr class="b"><td class="tr">Total Uplift</td><td class="r m tr">$8.7&ndash;$12.5M/yr</td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- §6 continued -->
+<div class="page pb">
+  <h2>6.3 Metro Tier Prioritization</h2>
+  <table>
+    <thead><tr><th>Tier</th><th class="r">Facilities</th><th>Markets</th></tr></thead>
+    <tbody>
+      <tr><td class="b"><span class="badge badge--r">Tier 1</span></td><td class="r">23,850</td><td>Highest-density metros within ISG's 6-state territory</td></tr>
+      <tr><td class="b"><span class="badge badge--o">Tier 2</span></td><td class="r">19,200</td><td>Secondary markets with existing ISG brand presence</td></tr>
+      <tr><td class="b"><span class="badge badge--y">Tier 3</span></td><td class="r">9,175</td><td>Expansion markets for Year 2&ndash;3 growth</td></tr>
+    </tbody>
+  </table>
+  <div class="co co--r">
+    <strong>Contract context:</strong> ISG signed a $1.4M / 2-year engagement with SomeAI (February 2026). Year 1 implementation: $480K ($40K/mo). The intelligence-driven uplift of $8.7&ndash;$12.5M/yr represents an <strong>18&ndash;26x return</strong> on Year 1 investment. Launch: February 24, 2026. First value target: Week 8 (April 2026).
+  </div>
+</div>
+
+<!-- §7 SOURCE STUDIES -->
+<div class="page pb">
+  <h1><span class="sn">7</span> Source Studies &amp; Methodology</h1><hr class="rule">
+  <p>All data points in this report are traceable to one of four source studies. Confidence scores reflect the rigor of each study's research methodology.</p>
+  <table>
+    <thead><tr><th>Study</th><th>Publisher</th><th class="c">Date</th><th class="c">Pages</th><th class="r">Cost</th><th class="c">Confidence</th></tr></thead>
+    <tbody>
+      <tr><td class="b">US Air Compressor Market Study</td><td>Strategic Analytics</td><td class="c">Sep 2021</td><td class="c">58</td><td class="r m tr b">$98,000</td><td class="c"><span class="badge badge--r">0.95</span></td></tr>
+      <tr><td class="b">Global Compressor Parts &amp; Accessories</td><td>MMI Research</td><td class="c">2021</td><td class="c">96</td><td class="r td">Subscription</td><td class="c"><span class="badge badge--y">0.80</span></td></tr>
+      <tr><td class="b">Global Industrial Air Compressor Market</td><td>Maia Research</td><td class="c">2021</td><td class="c">175</td><td class="r td">Subscription</td><td class="c"><span class="badge badge--y">0.80</span></td></tr>
+      <tr><td class="b">Compressed Air Sourcebook</td><td>US DOE / LBNL</td><td class="c">2003</td><td class="c">128</td><td class="r tg">Free (gov.)</td><td class="c"><span class="badge badge--b">0.90</span></td></tr>
+      <tr class="b"><td class="tr">Total</td><td></td><td></td><td class="c tr">457</td><td class="r tr">$98,000+</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Confidence Scoring</h2>
+  <table>
+    <thead><tr><th>Source Type</th><th class="c">Score</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Premium Study (&gt;$50K)</td><td class="c">0.95</td><td>Primary research: distributor interviews, OEM surveys, proprietary data</td></tr>
+      <tr><td class="b">Government / DOE</td><td class="c">0.90</td><td>Peer-reviewed, authoritative technical reference</td></tr>
+      <tr><td class="b">Standard Market Report</td><td class="c">0.80</td><td>Secondary research with company profile verification</td></tr>
+      <tr><td class="b">Cross-Study Inference</td><td class="c">min(src)</td><td>Synthesized data inherits minimum confidence of contributing studies</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Methodology</h2>
+  <p>Each source study was decomposed into structured data: market sizes, company profiles, pricing benchmarks, segment breakdowns, and trend signals. Cross-study validation was performed where data overlapped &mdash; particularly between the Strategic Analytics US study and Maia Research global study. Discrepancies were resolved by giving precedence to the higher-confidence source.</p>
+  <p>ISG-specific projections (Section 6) combine study data with ISG's actual operational footprint: 16 brands, 40+ locations, 6-state territory, $241M consolidated revenue. Metro tier analysis uses SBA facility density data cross-referenced with ISG location coverage.</p>
+
+  <hr class="divider">
+  <div class="footer">
+    <div><span class="footer__logo">SomeAI</span></div>
+    <div>February 2026 &middot; Confidential</div>
+  </div>
+</div>
+
+</body>
+</html>

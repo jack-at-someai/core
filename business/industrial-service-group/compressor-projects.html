@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compressor Vertical — 13 Project Scopes | SomeAI + Charlotte</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red-50:  #FFF5F5;
+      --red-100: #FED7D7;
+      --red-200: #FEB2B2;
+      --red-300: #FC8181;
+      --red-400: #F56565;
+      --red-500: #E53E3E;
+      --red-600: #C53030;
+      --red-700: #9B2C2C;
+      --red-800: #5C1111;
+      --red-900: #3B0A0A;
+      --bg:      #141414;
+      --surface:  #1A1A1A;
+      --surface2: #222222;
+      --border:   #333333;
+      --text:     #E8E0E0;
+      --text-dim: #666666;
+      --mauve:    #9B7878;
+      --mauve-light: #C4A8A8;
+      --green:    #68D391;
+      --amber:    #F6AD55;
+      --cyan:     #22D3EE;
+      --font:     Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono:     'SF Mono', 'Cascadia Code', Consolas, monospace;
+      --radius:   16px;
+      --blur:     24px;
+      --blur-frost: 40px;
+      --fill:     0.12;
+      --border-a: 0.15;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(var(--blur-frost)) saturate(180%);
+      -webkit-backdrop-filter: blur(var(--blur-frost)) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,var(--border-a));
+    }
+    .nav__brand { display: flex; align-items: center; gap: 12px; }
+    .nav__logo { font-size: 18px; font-weight: 700; color: var(--red-400); letter-spacing: 1px; }
+    .nav__sep { color: var(--border); font-weight: 300; }
+    .nav__title { font-size: 14px; font-weight: 500; color: var(--text-dim); }
+    .nav__back { font-size: 13px; color: var(--red-400); text-decoration: none; transition: color .15s; }
+    .nav__back:hover { color: var(--red-200); }
+
+    /* ── Container ────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero { text-align: center; margin-bottom: 40px; }
+    .hero__label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--red-400);
+      margin-bottom: 12px;
+    }
+    .hero__title {
+      font-size: 36px; font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .hero__subtitle {
+      font-size: 16px; font-weight: 400;
+      color: var(--text-dim);
+      max-width: 680px; margin: 0 auto 20px;
+      line-height: 1.7;
+    }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      font-size: 12px; font-weight: 600;
+      color: var(--red-300);
+      background: rgba(229,62,62,0.12);
+      border: 1px solid rgba(229,62,62,0.25);
+      border-radius: 20px;
+    }
+
+    /* ── KPI Strip ────────────────────────────────────────────── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .kpi {
+      padding: 20px;
+      text-align: center;
+      background: rgba(255,255,255,var(--fill));
+      backdrop-filter: blur(var(--blur)) saturate(180%);
+      border: 1px solid rgba(255,255,255,var(--border-a));
+      border-radius: var(--radius);
+    }
+    .kpi__value {
+      font-size: 32px; font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+    .kpi__value--red { color: var(--red-400); }
+    .kpi__value--green { color: var(--green); }
+    .kpi__value--amber { color: var(--amber); }
+    .kpi__value--cyan { color: var(--cyan); }
+    .kpi__label {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    /* ── Section Headers ──────────────────────────────────────── */
+    .section { margin-bottom: 48px; }
+    .section__header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section__icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: #fff;
+    }
+    .section__icon--solve { background: linear-gradient(135deg, var(--red-700), var(--red-500)); }
+    .section__icon--enhance { background: linear-gradient(135deg, #9B7878, #C4A8A8); }
+    .section__title {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .section__count {
+      font-size: 12px; font-weight: 600;
+      color: var(--text-dim);
+      background: rgba(255,255,255,0.08);
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    /* ── Project Cards ────────────────────────────────────────── */
+    .projects { display: flex; flex-direction: column; gap: 16px; }
+
+    .card {
+      padding: 24px;
+      background: rgba(255,255,255,var(--fill));
+      backdrop-filter: blur(var(--blur)) saturate(180%);
+      -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+      border: 1px solid rgba(255,255,255,var(--border-a));
+      border-radius: var(--radius);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(229,62,62,0.35);
+    }
+
+    .card__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .card__number {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff;
+    }
+    .card__number--solve { background: var(--red-500); }
+    .card__number--enhance { background: var(--mauve); }
+
+    .card__title-area { flex: 1; }
+    .card__title {
+      font-size: 16px; font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .card__meta {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 4px;
+    }
+    .card__tag {
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .card__tag--owner {
+      color: var(--mauve-light);
+      background: rgba(155,120,120,0.2);
+      border: 1px solid rgba(155,120,120,0.3);
+    }
+    .card__tag--target {
+      color: var(--amber);
+      background: rgba(246,173,85,0.12);
+      border: 1px solid rgba(246,173,85,0.25);
+    }
+    .card__tag--note {
+      color: var(--cyan);
+      background: rgba(34,211,238,0.1);
+      border: 1px solid rgba(34,211,238,0.2);
+    }
+
+    .card__impact {
+      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: flex-end;
+    }
+    .card__impact-label {
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+    .card__impact-bar {
+      display: flex; gap: 3px;
+    }
+    .card__impact-pip {
+      width: 6px; height: 18px;
+      border-radius: 3px;
+      background: var(--border);
+    }
+    .card__impact-pip--active { background: var(--red-400); }
+    .card__impact-pip--enhance { background: var(--mauve-light); }
+
+    .card__body { margin-top: 8px; }
+    .card__what {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .card__what strong { color: var(--text); font-weight: 600; }
+
+    .card__charlotte {
+      padding: 14px 16px;
+      background: rgba(229,62,62,0.06);
+      border: 1px solid rgba(229,62,62,0.15);
+      border-radius: 12px;
+    }
+    .card--enhance .card__charlotte {
+      background: rgba(155,120,120,0.06);
+      border-color: rgba(155,120,120,0.2);
+    }
+    .card__charlotte-label {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--red-400);
+      margin-bottom: 6px;
+    }
+    .card--enhance .card__charlotte-label { color: var(--mauve-light); }
+    .card__charlotte-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .card__primitives {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 10px;
+    }
+    .primitive {
+      font-family: var(--mono);
+      font-size: 10px; font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: var(--red-300);
+      background: rgba(229,62,62,0.1);
+      border: 1px solid rgba(229,62,62,0.2);
+    }
+    .card--enhance .primitive {
+      color: var(--mauve-light);
+      background: rgba(155,120,120,0.12);
+      border-color: rgba(155,120,120,0.25);
+    }
+
+    /* ── Bottom Line ──────────────────────────────────────────── */
+    .bottom-line {
+      padding: 32px;
+      background: linear-gradient(135deg, var(--red-800), rgba(229,62,62,0.15));
+      border: 1px solid rgba(229,62,62,0.25);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    .bottom-line__title {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .bottom-line__text {
+      font-size: 15px;
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+      .hero__title { font-size: 28px; }
+      .card__top { flex-direction: column; }
+      .card__impact { align-items: flex-start; margin-top: 8px; }
+    }
+    @media (max-width: 480px) {
+      .kpi-strip { grid-template-columns: 1fr; }
+      .container { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ──────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav__brand">
+      <span class="nav__logo">SomeAI</span>
+      <span class="nav__sep">/</span>
+      <span class="nav__title">Compressor Vertical Strategy</span>
+    </div>
+    <a href="index.html" class="nav__back">ISG Home</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- ── Hero ──────────────────────────────────────────────── -->
+    <header class="hero">
+      <div class="hero__label">ISG Compressor Division</div>
+      <h1 class="hero__title">13 Project Scopes &times; Charlotte</h1>
+      <p class="hero__subtitle">
+        The compressor team mapped 13 manual initiatives across product data, pricing, inventory, and channel management. Charlotte collapses them into platform capabilities deployed simultaneously.
+      </p>
+      <div class="hero__badge">Charlotte&trade; &mdash; Strategic Acceleration Map</div>
+    </header>
+
+    <!-- ── KPI Strip ─────────────────────────────────────────── -->
+    <div class="kpi-strip">
+      <div class="kpi">
+        <div class="kpi__value kpi__value--red">13</div>
+        <div class="kpi__label">Total Projects</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__value kpi__value--green">6</div>
+        <div class="kpi__label">Charlotte Solves</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__value kpi__value--amber">7</div>
+        <div class="kpi__label">Charlotte Enhances</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__value kpi__value--cyan">0</div>
+        <div class="kpi__label">Untouched by Charlotte</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 1 — CHARLOTTE DIRECTLY SOLVES
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section__header">
+        <div class="section__icon section__icon--solve">S</div>
+        <h2 class="section__title">Charlotte Directly Solves</h2>
+        <span class="section__count">6 projects</span>
+      </div>
+
+      <div class="projects">
+
+        <!-- 1. Product Data Structure ──────────────────────────── -->
+        <div class="card">
+          <div class="card__top">
+            <div class="card__number card__number--solve">1</div>
+            <div class="card__title-area">
+              <div class="card__title">Define &amp; Document Product Data Structure (Governance)</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Bryan + Greg, Arlene, Tiffany, Chris, Jeff</span>
+                <span class="card__tag card__tag--target">Target: 3/6/2026</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Team spends months defining taxonomy, attributes, and governance rules in spreadsheets and documentation.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Replaces This</div>
+              <p class="card__charlotte-text">
+                Charlotte's knowledge graph <strong>is</strong> the product data structure. Instead of manually documenting governance rules, Charlotte ingests existing data from NetSuite and ecommerce platforms, maps relationships automatically, and enforces structure through the substrate. What they're planning as a multi-month governance project becomes Charlotte's deployment phase.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+              <span class="primitive">METRIC</span>
+              <span class="primitive">PROTOCOL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Categories / Families / Attributes ──────────────── -->
+        <div class="card">
+          <div class="card__top">
+            <div class="card__number card__number--solve">3</div>
+            <div class="card__title-area">
+              <div class="card__title">Define &amp; Populate Product Categories, Families, Attributes</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Compressor Team</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Manually assign categories, families, and attributes to thousands of SKUs across multiple product lines.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Replaces This</div>
+              <p class="card__charlotte-text">
+                Core knowledge graph functionality. Charlotte auto-classifies products, identifies attribute gaps, and populates categories based on manufacturer data and cross-references. Instead of someone manually categorizing thousands of SKUs, Charlotte does the heavy lift and humans validate.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+              <span class="primitive">SIGNAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Merge IAP and IAC Data ──────────────────────────── -->
+        <div class="card">
+          <div class="card__top">
+            <div class="card__number card__number--solve">4</div>
+            <div class="card__title-area">
+              <div class="card__title">Merge IAP &amp; IAC Existing Product Data into One</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--target">POC Top 35 by 3/20/2026</span>
+                <span class="card__tag card__tag--note">"Bigger project than it sounds"</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Reconcile overlapping product records across IAP and IAC divisions. Team flagged this as deceptively large scope with complex duplicates and conflicts.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Replaces This</div>
+              <p class="card__charlotte-text">
+                They're right that it's bigger than it sounds &mdash; <strong>if you do it manually.</strong> Charlotte's data integration layer is designed for exactly this. It normalizes data from multiple sources, identifies duplicates, reconciles conflicts, and creates a unified product record. Their POC of top 35 by 3/20/26 could be expanded to the full catalog on a similar timeline.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+              <span class="primitive">METRIC</span>
+              <span class="primitive">SIGNAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Pricing Strategy ────────────────────────────────── -->
+        <div class="card">
+          <div class="card__top">
+            <div class="card__number card__number--solve">6</div>
+            <div class="card__title-area">
+              <div class="card__title">Establish Pricing Strategy &amp; Methodology</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--note">Varies by product type</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Build static pricing rules per product type, manually track competitor pricing, periodically review margins.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Replaces This</div>
+              <p class="card__charlotte-text">
+                Charlotte's <strong>Pricing Intelligence Module</strong> handles competitive pricing tracking on your top 100 SKUs, margin opportunity identification, and price optimization recommendations. Instead of manually establishing pricing methodology that varies by product type, Charlotte does it dynamically and keeps it updated.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">METRIC</span>
+              <span class="primitive">SIGNAL</span>
+              <span class="primitive">PROTOCOL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Cross-Sell Pricing B2B + BigCommerce ────────────── -->
+        <div class="card">
+          <div class="card__top">
+            <div class="card__number card__number--solve">11</div>
+            <div class="card__title-area">
+              <div class="card__title">Configure Cross-Sell Pricing for B2B &amp; ISG in BigCommerce</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Ecommerce Team</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Manually set cross-sell rules and tiered pricing within BigCommerce for B2B and direct ISG channels.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Replaces This</div>
+              <p class="card__charlotte-text">
+                Charlotte's ecommerce platform integration and <strong>customer purchase pattern analysis</strong> directly power this. Cross-sell recommendations come from product affinity analysis in the knowledge graph, and pricing tiers are managed through the Pricing Intelligence Module. Rules stay dynamic instead of static.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">EDGE</span>
+              <span class="primitive">METRIC</span>
+              <span class="primitive">SIGNAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Define Role and Person ──────────────────────────── -->
+        <div class="card">
+          <div class="card__top">
+            <div class="card__number card__number--solve">8</div>
+            <div class="card__title-area">
+              <div class="card__title">Product Data Management &mdash; Define Role &amp; Person</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--note">Single items, bulk items, pricing updates, cost updates</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip card__impact-pip--active"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Assign dedicated personnel to handle single new items, bulk item loads, pricing updates, and cost updates across systems.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Reshapes This</div>
+              <p class="card__charlotte-text">
+                Charlotte automates the repetitive data management tasks &mdash; pricing updates, cost updates, new item population. The scope of this role <strong>shrinks dramatically.</strong> Instead of data entry, the role becomes Charlotte oversight and validation. Fewer people doing less manual work, more people making strategic decisions.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">PROTOCOL</span>
+              <span class="primitive">SIGNAL</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 2 — CHARLOTTE SIGNIFICANTLY ENHANCES
+         ═══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section__header">
+        <div class="section__icon section__icon--enhance">E</div>
+        <h2 class="section__title">Charlotte Significantly Enhances</h2>
+        <span class="section__count">7 projects</span>
+      </div>
+
+      <div class="projects">
+
+        <!-- 2. Current State vs Future State ───────────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">2</div>
+            <div class="card__title-area">
+              <div class="card__title">Systems &mdash; Current State vs. Future State</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--note">Team wrote: "No Change"</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Current assessment: The team wrote <strong>"No Change"</strong> &mdash; meaning they don't see a systems transformation ahead. They're thinking too small.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Changes the Conversation</div>
+              <p class="card__charlotte-text">
+                Charlotte <strong>is</strong> the future state. The current-vs-future conversation changes completely when you introduce an AI platform that integrates NetSuite, BigCommerce, and Amazon into a unified knowledge graph. "No Change" becomes "everything changes."
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+              <span class="primitive">PROTOCOL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Inventory & Availability ────────────────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">5</div>
+            <div class="card__title-area">
+              <div class="card__title">Inventory &amp; Availability Data Management and Logic</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Operations Team</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Build availability rules and inventory management logic manually within NetSuite and spreadsheets.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Accelerates This</div>
+              <p class="card__charlotte-text">
+                Charlotte's <strong>NetSuite ERP integration</strong> provides real-time inventory intelligence and can build availability logic far more sophisticated than manual rules. Predictive signals flag stock-outs before they happen.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">SIGNAL</span>
+              <span class="primitive">METRIC</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Anticipated Life ────────────────────────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">7</div>
+            <div class="card__title-area">
+              <div class="card__title">Populate Anticipated Life (Where Applicable)</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--note">Equipment lifecycle tracking</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Research and manually populate expected lifecycle data per product where applicable.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Accelerates This</div>
+              <p class="card__charlotte-text">
+                Charlotte can pull from the <strong>DOE Compressed Air Sourcebook</strong> data already in the substrate, plus manufacturer specs, to auto-populate lifecycle data and predict replacement timing &mdash; feeding directly into service agreement triggers.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">METRIC</span>
+              <span class="primitive">SIGNAL</span>
+              <span class="primitive">PROTOCOL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Centralized Purchasing ──────────────────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">9</div>
+            <div class="card__title-area">
+              <div class="card__title">Set Up Centralized Purchasing Across IAP &amp; IAC</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Purchasing</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Align purchasing workflows and vendor relationships across both divisions with shared processes and approvals.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Accelerates This</div>
+              <p class="card__charlotte-text">
+                Charlotte's <strong>unified data layer</strong> makes centralized purchasing possible by providing a single source of truth across both businesses. Vendor relationships, pricing history, and volume discounts become visible in one knowledge graph instead of two siloed systems.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+              <span class="primitive">METRIC</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Deploy Product Access All Brands ───────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">10</div>
+            <div class="card__title-area">
+              <div class="card__title">Deploy ISG Compressors Product Access for All Brands</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Brand Team</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Build out brand-specific product access pages and ensure all compressor brands are represented in the system.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Accelerates This</div>
+              <p class="card__charlotte-text">
+                Charlotte's knowledge graph becomes the <strong>master product database</strong> that feeds all brand access points. Add a brand, and its products are already categorized, priced, and connected to cross-sell relationships. One substrate powers every brand view.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Product Imagery ────────────────────────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">12</div>
+            <div class="card__title-area">
+              <div class="card__title">Add &amp; Expand Product Imagery</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--owner">Marketing / Data Team</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip"></div>
+                <div class="card__impact-pip"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Source, edit, upload, and tag product images across platforms one-by-one.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Accelerates This</div>
+              <p class="card__charlotte-text">
+                AI-assisted image sourcing, auto-tagging, and centralized management through the platform. Charlotte's substrate links each image asset to its product NODE, ensuring consistency across BigCommerce, Amazon, and internal catalogs.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">SIGNAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. PIM Channels ──────────────────────────────────── -->
+        <div class="card card--enhance">
+          <div class="card__top">
+            <div class="card__number card__number--enhance">13</div>
+            <div class="card__title-area">
+              <div class="card__title">Establish PIM Channel Integrations</div>
+              <div class="card__meta">
+                <span class="card__tag card__tag--note">Product Information Management</span>
+              </div>
+            </div>
+            <div class="card__impact">
+              <div class="card__impact-label">Impact</div>
+              <div class="card__impact-bar">
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+                <div class="card__impact-pip card__impact-pip--enhance"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card__body">
+            <p class="card__what">Manual plan: Evaluate and implement a traditional PIM system, then configure integrations to each sales channel independently.</p>
+            <div class="card__charlotte">
+              <div class="card__charlotte-label">Charlotte Becomes the PIM</div>
+              <p class="card__charlotte-text">
+                Charlotte <strong>is the PIM.</strong> It distributes product information to all channels from a single knowledge graph &mdash; NetSuite, BigCommerce, Amazon, and any future channel. No need to evaluate third-party PIM software. The substrate already holds every product relationship, attribute, and pricing tier.
+              </p>
+            </div>
+            <div class="card__primitives">
+              <span class="primitive">NODE</span>
+              <span class="primitive">EDGE</span>
+              <span class="primitive">METRIC</span>
+              <span class="primitive">SIGNAL</span>
+              <span class="primitive">PROTOCOL</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Bottom Line ───────────────────────────────────────── -->
+    <div class="bottom-line">
+      <h2 class="bottom-line__title">The Bottom Line</h2>
+      <p class="bottom-line__text">
+        The compressor team built a list of 13 separate projects they plan to attack with spreadsheets, manual effort, and a small team. Charlotte collapses many of these into platform capabilities deployed together. Instead of 13 sequential projects with different owners and timelines, you get <strong>one platform implementation</strong> that delivers most of these outcomes simultaneously.
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+;;; ================================================================
+;;; KNOWLEDGE / PROCEDURAL / MARKET INTELLIGENCE
+;;; Defines "Market Intelligence Report" as a Charlotte deliverable.
+;;; Reusable directive — any Charlotte instance can fire this for
+;;; any client's market analysis needs.
+;;; Extends storytelling.krf with market-intelligence-specific types.
+;;; ================================================================
+
+(in-microtheory CharlotteMarketIntelligenceMt)
+
+(isa CharlotteMarketIntelligenceMt Microtheory)
+(genlMt CharlotteMarketIntelligenceMt CharlotteProceduralMt)
+(genlMt CharlotteMarketIntelligenceMt CharlotteStorytellingMt)
+(comment CharlotteMarketIntelligenceMt
+  "Market intelligence directive. Defines the deliverable type, primitives,
+   report sections, generation protocol, provenance rules, and audience
+   adaptation for Charlotte-generated market intelligence reports.
+   A Charlotte-generated Market Intelligence Report is structurally
+   equivalent to a $100K-500K consulting engagement.")
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 1: DELIVERABLE TYPE TAXONOMY
+;;; The report types Charlotte can generate from substrate data.
+;;; ────────────────────────────────────────────────────────────────
+
+(isa DeliverableType Collection)
+(comment DeliverableType "A class of analytical output that Charlotte can generate from substrate data.")
+
+(isa MarketIntelligenceReport DeliverableType)
+(comment MarketIntelligenceReport
+  "A Charlotte-generated Market Intelligence Report is structurally equivalent
+   to a $100K-500K consulting engagement. It contains the same sections,
+   the same data depth, and the same analytical rigor — but is generated
+   from substrate data in seconds, not months. The dive line traces every
+   number back to its source study, sensor reading, or computed derivation.")
+
+(isa CompetitiveLandscapeReport DeliverableType)
+(comment CompetitiveLandscapeReport
+  "Focused competitive analysis — market share, threat matrix, positioning.
+   A subset of a full Market Intelligence Report.")
+
+(isa PricingBenchmarkReport DeliverableType)
+(comment PricingBenchmarkReport
+  "Pricing intelligence across a market — ASPs, margins, premium tiers.
+   Used for pricing strategy and competitive positioning.")
+
+(isa IndustryOverviewReport DeliverableType)
+(comment IndustryOverviewReport
+  "High-level market sizing, segmentation, and trend analysis.
+   The executive summary layer of a Market Intelligence Report.")
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 2: MARKET INTELLIGENCE PRIMITIVES
+;;; Extending Charlotte's five primitives with market-specific types.
+;;; ────────────────────────────────────────────────────────────────
+
+;; --- NODE extensions ---
+
+(isa MarketStudy Collection)
+(genls MarketStudy NODE)
+(comment MarketStudy
+  "A purchased or generated market research document. NODE type.
+   Carries provenance metadata: publisher, date, page count, cost,
+   methodology, scope, and confidence score.")
+
+(isa MarketSegment Collection)
+(genls MarketSegment NODE)
+(comment MarketSegment
+  "A sliceable dimension of a market — by geography, product type,
+   application, end-user, or technology. NODE type.")
+
+(isa CompanyProfile Collection)
+(genls CompanyProfile NODE)
+(comment CompanyProfile
+  "A competitor or peer with structured financials — revenue, share,
+   margin, manufacturing bases, distribution strategy. NODE type.")
+
+;; --- METRIC extensions ---
+
+(isa MarketForecast Collection)
+(genls MarketForecast METRIC)
+(comment MarketForecast
+  "A projected market value at a future date with CAGR. METRIC type.
+   Always carries a base year, forecast year, base value, forecast value,
+   and compound annual growth rate.")
+
+(isa PricingBenchmarkMetric Collection)
+(genls PricingBenchmarkMetric METRIC)
+(comment PricingBenchmarkMetric
+  "A range-based price point (low/mid/high) for a product or service
+   category. METRIC type. Used for pricing strategy and margin analysis.")
+
+;; --- SIGNAL extensions ---
+
+(isa MarketTrend Collection)
+(genls MarketTrend SIGNAL)
+(comment MarketTrend
+  "A detected directional change in market conditions. SIGNAL type.
+   Trends are observed patterns — not forecasts. They have direction
+   (accelerating/decelerating), impact level, and ISG positioning notes.")
+
+(isa IndustryDriver Collection)
+(genls IndustryDriver SIGNAL)
+(comment IndustryDriver
+  "A force accelerating market growth. SIGNAL type.
+   Drivers are external to any single company — they are macro forces.")
+
+(isa IndustryRestraint Collection)
+(genls IndustryRestraint SIGNAL)
+(comment IndustryRestraint
+  "A force decelerating market growth. SIGNAL type.
+   Restraints are headwinds that slow or cap market expansion.")
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 3: MARKET INTELLIGENCE PREDICATES
+;;; The vocabulary for encoding market data.
+;;; ────────────────────────────────────────────────────────────────
+
+(isa studyTitle Predicate)
+(arity studyTitle 2)
+(arg1Isa studyTitle MarketStudy)
+(comment studyTitle "(studyTitle ?Study ?Title)")
+
+(isa studyPublisher Predicate)
+(arity studyPublisher 2)
+(arg1Isa studyPublisher MarketStudy)
+(comment studyPublisher "(studyPublisher ?Study ?Publisher)")
+
+(isa studyDate Predicate)
+(arity studyDate 2)
+(arg1Isa studyDate MarketStudy)
+(comment studyDate "(studyDate ?Study ?DateString)")
+
+(isa studyPageCount Predicate)
+(arity studyPageCount 2)
+(arg1Isa studyPageCount MarketStudy)
+(comment studyPageCount "(studyPageCount ?Study ?Pages)")
+
+(isa studyCost Predicate)
+(arity studyCost 2)
+(arg1Isa studyCost MarketStudy)
+(comment studyCost "(studyCost ?Study ?USDAmount)")
+
+(isa studyMethodology Predicate)
+(arity studyMethodology 2)
+(arg1Isa studyMethodology MarketStudy)
+(comment studyMethodology "(studyMethodology ?Study ?Description)")
+
+(isa studyScope Predicate)
+(arity studyScope 2)
+(arg1Isa studyScope MarketStudy)
+(comment studyScope "(studyScope ?Study ?GeographicOrMarketScope)")
+
+(isa confidenceScore Predicate)
+(arity confidenceScore 2)
+(comment confidenceScore "(confidenceScore ?FactOrStudy ?Score) — 0.0 to 1.0")
+
+(isa derivedFrom Predicate)
+(arity derivedFrom 2)
+(comment derivedFrom "(derivedFrom ?Fact ?Source) — provenance trace")
+
+(isa marketValueUSD Predicate)
+(arity marketValueUSD 3)
+(comment marketValueUSD "(marketValueUSD ?Segment ?Year ?BillionUSD)")
+
+(isa marketCAGR Predicate)
+(arity marketCAGR 4)
+(comment marketCAGR "(marketCAGR ?Segment ?StartYear ?EndYear ?Pct)")
+
+(isa productionVolume Predicate)
+(arity productionVolume 3)
+(comment productionVolume "(productionVolume ?Segment ?Year ?Units)")
+
+(isa averageSellingPrice Predicate)
+(arity averageSellingPrice 3)
+(comment averageSellingPrice "(averageSellingPrice ?Segment ?Year ?USD)")
+
+(isa segmentSharePct Predicate)
+(arity segmentSharePct 3)
+(comment segmentSharePct "(segmentSharePct ?Parent ?Child ?Pct)")
+
+(isa companyRevenue Predicate)
+(arity companyRevenue 3)
+(comment companyRevenue "(companyRevenue ?Company ?Year ?USDMillions)")
+
+(isa companyMarketShare Predicate)
+(arity companyMarketShare 3)
+(comment companyMarketShare "(companyMarketShare ?Company ?Year ?Pct)")
+
+(isa companyGrossMargin Predicate)
+(arity companyGrossMargin 2)
+(comment companyGrossMargin "(companyGrossMargin ?Company ?Pct)")
+
+(isa companyHeadquarters Predicate)
+(arity companyHeadquarters 2)
+(comment companyHeadquarters "(companyHeadquarters ?Company ?Location)")
+
+(isa distributorCount Predicate)
+(arity distributorCount 2)
+(comment distributorCount "(distributorCount ?Company ?Count)")
+
+(isa acquisitionEvent Predicate)
+(arity acquisitionEvent 4)
+(comment acquisitionEvent "(acquisitionEvent ?Acquirer ?Target ?Year ?USDMillions)")
+
+(isa trendImpactLevel Predicate)
+(arity trendImpactLevel 2)
+(comment trendImpactLevel "(trendImpactLevel ?Trend ?Level) — High/Medium/Low")
+
+(isa trendISGPosition Predicate)
+(arity trendISGPosition 2)
+(comment trendISGPosition "(trendISGPosition ?Trend ?Description)")
+
+(isa concentrationRatio Predicate)
+(arity concentrationRatio 3)
+(comment concentrationRatio "(concentrationRatio ?Segment ?TopN ?Pct)")
+
+(isa herfindahlIndex Predicate)
+(arity herfindahlIndex 2)
+(comment herfindahlIndex "(herfindahlIndex ?Segment ?Score)")
+
+(isa replacementPct Predicate)
+(arity replacementPct 2)
+(comment replacementPct "(replacementPct ?Segment ?Pct) — % of sales that are replacement")
+
+(isa aftermarketRevenuePct Predicate)
+(arity aftermarketRevenuePct 2)
+(comment aftermarketRevenuePct "(aftermarketRevenuePct ?Channel ?Pct)")
+
+(isa equipmentLifeYears Predicate)
+(arity equipmentLifeYears 2)
+(comment equipmentLifeYears "(equipmentLifeYears ?Category ?Years)")
+
+(isa equipmentLifeHours Predicate)
+(arity equipmentLifeHours 2)
+(comment equipmentLifeHours "(equipmentLifeHours ?Category ?Hours)")
+
+(isa annualAftermarketSpendPct Predicate)
+(arity annualAftermarketSpendPct 2)
+(comment annualAftermarketSpendPct "(annualAftermarketSpendPct ?Category ?PctOfPurchasePrice)")
+
+(isa prettyName Predicate)
+(arity prettyName 2)
+(comment prettyName "(prettyName ?Entity ?DisplayString) — human-readable name for any entity")
+
+(isa portfolioStat Predicate)
+(arity portfolioStat 2)
+(comment portfolioStat "(portfolioStat ?Key ?Value) — aggregate portfolio-level statistic")
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 4: REPORT SECTIONS
+;;; Extending SlideType for market intelligence deliverables.
+;;; Each section maps to widgets from storytelling.krf.
+;;; ────────────────────────────────────────────────────────────────
+
+(isa ReportSectionType Collection)
+(comment ReportSectionType "A section type within a Market Intelligence Report.")
+
+(isa MarketOverviewSection ReportSectionType)
+(comment MarketOverviewSection "TAM/SAM/SOM with geographic breakdown. Uses MarketSizeWidget + StatGridWidget.")
+(slideUsesWidget MarketOverviewSection MarketSizeWidget)
+(slideUsesWidget MarketOverviewSection StatGridWidget)
+(slideUsesWidget MarketOverviewSection GrowthChartWidget)
+
+(isa MarketSegmentationSection ReportSectionType)
+(comment MarketSegmentationSection "By product type, application, geography, end-user. Uses PieChartWidget + BarChartWidget.")
+(slideUsesWidget MarketSegmentationSection PieChartWidget)
+(slideUsesWidget MarketSegmentationSection BarChartWidget)
+(slideUsesWidget MarketSegmentationSection StatGridWidget)
+
+(isa CompetitivePositioningSection ReportSectionType)
+(comment CompetitivePositioningSection "Market share, tier rankings, threat matrix. Uses ComparisonMatrixWidget.")
+(slideUsesWidget CompetitivePositioningSection ComparisonMatrixWidget)
+(slideUsesWidget CompetitivePositioningSection BarChartWidget)
+(slideUsesWidget CompetitivePositioningSection StatBlockWidget)
+
+(isa PricingIntelligenceSection ReportSectionType)
+(comment PricingIntelligenceSection "Benchmark ranges, margin analysis, pricing strategy. Uses PricingTableWidget.")
+(slideUsesWidget PricingIntelligenceSection PricingTableWidget)
+(slideUsesWidget PricingIntelligenceSection StatGridWidget)
+
+(isa ForecastSection ReportSectionType)
+(comment ForecastSection "CAGR projections, growth drivers, scenario modeling. Uses GrowthChartWidget.")
+(slideUsesWidget ForecastSection GrowthChartWidget)
+(slideUsesWidget ForecastSection StatBlockWidget)
+(slideUsesWidget ForecastSection BarChartWidget)
+
+(isa TrendAnalysisSection ReportSectionType)
+(comment TrendAnalysisSection "Macro trends, technology shifts, regulatory changes. Uses IconGridWidget.")
+(slideUsesWidget TrendAnalysisSection IconGridWidget)
+(slideUsesWidget TrendAnalysisSection BodyTextWidget)
+
+(isa SupplyChainSection ReportSectionType)
+(comment SupplyChainSection "OEM mapping, distribution channels, routes-to-market. Uses FlowDiagramWidget.")
+(slideUsesWidget SupplyChainSection FlowDiagramWidget)
+(slideUsesWidget SupplyChainSection ComparisonMatrixWidget)
+
+(isa AftermarketSection ReportSectionType)
+(comment AftermarketSection "Parts revenue, service revenue, lifecycle economics. Uses UnitEconomicsWidget.")
+(slideUsesWidget AftermarketSection UnitEconomicsWidget)
+(slideUsesWidget AftermarketSection PieChartWidget)
+(slideUsesWidget AftermarketSection StatGridWidget)
+
+(isa SourceProvenanceSection ReportSectionType)
+(comment SourceProvenanceSection "Study origins, methodology, confidence levels, cost of acquisition. Uses TwoColumnWidget.")
+(slideUsesWidget SourceProvenanceSection TwoColumnWidget)
+(slideUsesWidget SourceProvenanceSection StatBlockWidget)
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 5: REPORT GENERATION PROTOCOL
+;;; ────────────────────────────────────────────────────────────────
+
+(isa Protocol-GenerateMarketIntelligence PROTOCOL)
+(comment Protocol-GenerateMarketIntelligence
+  "Master protocol for generating a Market Intelligence Report.
+   Trigger: ManualInvocation (client requests market analysis).
+   Condition: Domain has MarketSegment NODEs and CompanyProfile NODEs.
+   Priority: 3.
+
+   Steps:
+   1. Aggregate all MarketForecast METRICs by segment
+   2. Rank CompanyProfiles by revenue and threat level
+   3. Compile PricingBenchmarkMetrics into comparison matrix
+   4. Detect MarketTrends from SIGNAL history
+   5. Generate report sections in canonical order:
+      MarketOverview → Segmentation → CompetitivePositioning →
+      PricingIntelligence → Forecast → TrendAnalysis →
+      SupplyChain → Aftermarket → SourceProvenance
+   6. Apply brand visual theme (SomeAI red for SomeAI deliverables,
+      client theme for client-branded versions)
+   7. Attach SourceProvenance for every data point — dive line
+      traces every number to its origin study or computation")
+
+;; Report section canonical ordering
+(isa reportSectionOrder Predicate)
+(arity reportSectionOrder 2)
+(arg1Isa reportSectionOrder ReportSectionType)
+(comment reportSectionOrder "(reportSectionOrder ?Section ?Position)")
+
+(reportSectionOrder MarketOverviewSection 1)
+(reportSectionOrder CompetitivePositioningSection 2)
+(reportSectionOrder MarketSegmentationSection 3)
+(reportSectionOrder AftermarketSection 4)
+(reportSectionOrder TrendAnalysisSection 5)
+(reportSectionOrder SourceProvenanceSection 6)
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 6: PROVENANCE RULES
+;;; Tracks the cost and quality of source data.
+;;; ────────────────────────────────────────────────────────────────
+
+(isa PremiumMarketStudy Collection)
+(genls PremiumMarketStudy MarketStudy)
+(comment PremiumMarketStudy
+  "A market study costing >$50,000. Premium studies carry higher
+   confidence scores because they involve primary research:
+   executive interviews, facility surveys, proprietary data.")
+
+;; Rule: Studies costing >$50K are premium
+(implies
+  (and (isa ?S MarketStudy)
+       (studyCost ?S ?Cost)
+       (greaterThan ?Cost 50000))
+  (isa ?S PremiumMarketStudy))
+
+;; Rule: Facts derived from premium studies get high confidence
+(implies
+  (and (derivedFrom ?Fact ?Study)
+       (isa ?Study PremiumMarketStudy))
+  (confidenceScore ?Fact 0.95))
+
+;; Rule: Facts derived from standard studies get moderate confidence
+(implies
+  (and (derivedFrom ?Fact ?Study)
+       (isa ?Study MarketStudy)
+       (not (isa ?Study PremiumMarketStudy)))
+  (confidenceScore ?Fact 0.80))
+
+;; Rule: Facts derived from government/DOE sources get high confidence
+(implies
+  (and (derivedFrom ?Fact ?Study)
+       (isa ?Study MarketStudy)
+       (studyPublisher ?Study "US Department of Energy"))
+  (confidenceScore ?Fact 0.90))
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 7: AUDIENCE ADAPTATION
+;;; Extending pitch-narratives.krf audience types with
+;;; market-intelligence-specific emphasis rules.
+;;; ────────────────────────────────────────────────────────────────
+
+(isa MarketIntelligenceAudience Collection)
+(genls MarketIntelligenceAudience AudienceType)
+
+;; PE Partner: market sizing, competitive positioning, margin analysis
+(audienceEmphasizes PEPartner MarketOverviewSection)
+(audienceEmphasizes PEPartner CompetitivePositioningSection)
+(audienceEmphasizes PEPartner PricingIntelligenceSection)
+
+;; Industry Partner: segment breakdown, pricing, supply chain, aftermarket
+(audienceEmphasizes IndustryPartner MarketSegmentationSection)
+(audienceEmphasizes IndustryPartner PricingIntelligenceSection)
+(audienceEmphasizes IndustryPartner SupplyChainSection)
+(audienceEmphasizes IndustryPartner AftermarketSection)
+
+;; Executive Buyer: overview, trends, competitive threats, actionable insights
+(audienceEmphasizes ExecutiveBuyer MarketOverviewSection)
+(audienceEmphasizes ExecutiveBuyer TrendAnalysisSection)
+(audienceEmphasizes ExecutiveBuyer CompetitivePositioningSection)
+
+;; Technical Buyer: segmentation, OEM mapping, specs, technology trends
+(audienceEmphasizes TechnicalBuyer MarketSegmentationSection)
+(audienceEmphasizes TechnicalBuyer SupplyChainSection)
+(audienceEmphasizes TechnicalBuyer TrendAnalysisSection)
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 8: DATA BINDING RULES
+;;; How Charlotte's primitives map to report sections.
+;;; ────────────────────────────────────────────────────────────────
+
+;; MarketSegment NODEs → Overview section
+(implies
+  (and (isa ?S MarketSegment)
+       (marketValueUSD ?S ?Year ?Value))
+  (canPopulate ?S MarketOverviewSection))
+
+;; CompanyProfile NODEs → Competitive positioning
+(implies
+  (and (isa ?C CompanyProfile)
+       (companyRevenue ?C ?Year ?Rev))
+  (canPopulate ?C CompetitivePositioningSection))
+
+;; MarketForecast METRICs → Forecast section
+(implies
+  (and (isa ?F MarketForecast)
+       (marketCAGR ?F ?Start ?End ?CAGR))
+  (canPopulate ?F ForecastSection))
+
+;; MarketTrend SIGNALs → Trend analysis
+(implies
+  (and (isa ?T MarketTrend)
+       (trendImpactLevel ?T ?Level))
+  (canPopulate ?T TrendAnalysisSection))
+
+;; PricingBenchmarkMetric → Pricing intelligence
+(implies
+  (isa ?P PricingBenchmarkMetric)
+  (canPopulate ?P PricingIntelligenceSection))
+
+;; MarketStudy NODEs → Source provenance
+(implies
+  (isa ?S MarketStudy)
+  (canPopulate ?S SourceProvenanceSection))
+
+
+;;; ────────────────────────────────────────────────────────────────
+;;; PART 9: COST EQUIVALENCE AXIOM
+;;; The argument that Charlotte replaces six-figure engagements.
+;;; ────────────────────────────────────────────────────────────────
+
+(isa CostEquivalenceAxiom MetaKnowledge)
+(comment CostEquivalenceAxiom
+  "Traditional market intelligence: $98K-500K per study, 3-6 months
+   delivery, static PDF, outdated on delivery, no dive line.
+   Charlotte market intelligence: $0 marginal cost per report,
+   real-time generation, interactive visualization, traceable dive
+   line from every number to its source study or sensor reading.
+   The structural equivalence is not approximate — a Charlotte report
+   contains the same sections, same data depth, same analytical rigor.
+   The difference is substrate: Charlotte generates from living data,
+   consultants generate from point-in-time interviews.")
+
+(portfolioStat traditionalStudyCostLow 98000)
+(portfolioStat traditionalStudyCostHigh 500000)
+(portfolioStat traditionalDeliveryMonths 6)
+(portfolioStat charlotteMarginalCost 0)
+(portfolioStat charlotteDeliverySeconds 30)
+
+
+;;; ================================================================
+;;; END — market-intelligence.krf
+;;; Deliverable types. Market primitives. Report sections.
+;;; Generation protocol. Provenance rules. Audience adaptation.
+;;; The directive is universal — the data is domain-bound.
+;;; ================================================================

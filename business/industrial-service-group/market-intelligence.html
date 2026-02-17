@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Intelligence Report | Charlotte OS</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Liquid Glass Design System — SomeAI Red Theme -->
+  <link rel="stylesheet" href="../../design/brandbook/someai/someai_theme.css">
+  <link rel="stylesheet" href="../../design/liquid-glass/liquid-glass.css">
+  <link rel="stylesheet" href="../../design/liquid-glass/liquid-glass-viz.css">
+
+  <!-- D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../../design/liquid-glass/liquid-glass.js" defer></script>
+  <script src="../../design/liquid-glass/liquid-glass-viz.js" defer></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--lg-bg, #141414);
+      color: var(--lg-text, #E8E0E0);
+      font-family: var(--lg-font-body, Inter, -apple-system, sans-serif);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* -- Sticky Nav -------------------------------------------------------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(var(--lg-blur-frosted, 40px)) saturate(var(--lg-saturation, 180%));
+      -webkit-backdrop-filter: blur(var(--lg-blur-frosted, 40px)) saturate(var(--lg-saturation, 180%));
+      border-bottom: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav__logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--lg-primary-400, #F56565);
+      letter-spacing: 1px;
+    }
+
+    .nav__title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--lg-text-dim, #666);
+    }
+
+    .nav__back {
+      font-size: 13px;
+      color: var(--lg-primary-400, #F56565);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav__back:hover { color: var(--lg-primary-200, #FEB2B2); }
+
+    /* -- Container --------------------------------------------------------- */
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* -- Header Hero ------------------------------------------------------- */
+    .hero {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .hero__title {
+      font-family: var(--lg-font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--lg-text, #E8E0E0);
+      margin-bottom: 4px;
+    }
+
+    .hero__subtitle {
+      font-size: 15px;
+      color: var(--lg-text-dim, #666);
+      margin-bottom: 12px;
+    }
+
+    .hero__provenance {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--lg-primary-300, #FC8181);
+      background: rgba(229, 62, 62, 0.12);
+      border: 1px solid rgba(229, 62, 62, 0.25);
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* -- KPI Stats Bar ----------------------------------------------------- */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, var(--lg-fill-opacity, 0.12));
+      backdrop-filter: blur(var(--lg-blur-standard, 24px)) saturate(var(--lg-saturation, 180%));
+      -webkit-backdrop-filter: blur(var(--lg-blur-standard, 24px)) saturate(var(--lg-saturation, 180%));
+      border: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md, 16px);
+    }
+
+    .stat-card__value {
+      font-family: var(--lg-font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--lg-text, #E8E0E0);
+      line-height: 1.1;
+    }
+
+    .stat-card__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--lg-text-dim, #666);
+      margin-top: 6px;
+    }
+
+    /* -- Tabs -------------------------------------------------------------- */
+    .tabs-wrap { margin-bottom: 24px; }
+    .tab-panels { margin-top: 20px; }
+    .tab-panel { display: none; }
+    .tab-panel--active { display: block; }
+
+    /* -- Viz containers ---------------------------------------------------- */
+    .viz-container { min-height: 380px; }
+
+    /* -- Section cards ----------------------------------------------------- */
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .section-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, var(--lg-fill-opacity, 0.12));
+      backdrop-filter: blur(var(--lg-blur-standard, 24px)) saturate(var(--lg-saturation, 180%));
+      -webkit-backdrop-filter: blur(var(--lg-blur-standard, 24px)) saturate(var(--lg-saturation, 180%));
+      border: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md, 16px);
+    }
+
+    .section-card__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--lg-text, #E8E0E0);
+      margin-bottom: 10px;
+    }
+
+    .section-card__stat {
+      font-family: var(--lg-font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--lg-primary-400, #F56565);
+      margin-bottom: 4px;
+    }
+
+    .section-card__desc {
+      font-size: 12px;
+      color: var(--lg-text-dim, #666);
+      line-height: 1.5;
+    }
+
+    .section-card--full {
+      grid-column: 1 / -1;
+    }
+
+    /* -- Legend row --------------------------------------------------------- */
+    .legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--lg-radius-sm, 10px);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--lg-text-dim, #666);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* -- Threat table ------------------------------------------------------ */
+    .threat-table-wrap { overflow-x: auto; }
+
+    .threat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .threat-table th {
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--lg-text-dim, #666);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+
+    .threat-table th:first-child { text-align: left; min-width: 140px; }
+
+    .threat-table td {
+      padding: 8px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    .threat-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--lg-text, #E8E0E0);
+    }
+
+    .threat-table tbody tr { transition: background 0.1s ease; }
+    .threat-table tbody tr:hover { background: rgba(255, 255, 255, 0.04); }
+
+    .revenue-col {
+      font-family: var(--lg-font-mono);
+      font-size: 11px;
+      color: var(--lg-text-dim, #666);
+      text-align: right !important;
+    }
+
+    .share-bar {
+      display: inline-block;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--lg-primary-500, #E53E3E);
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* -- Trend cards ------------------------------------------------------- */
+    .trend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .trend-card {
+      padding: 16px;
+      background: rgba(255, 255, 255, var(--lg-fill-opacity, 0.12));
+      border: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md, 16px);
+    }
+
+    .trend-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .trend-card__title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--lg-text, #E8E0E0);
+    }
+
+    .trend-card__impact {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .trend-card__impact--very-high { background: rgba(239, 68, 68, 0.2); color: #EF4444; }
+    .trend-card__impact--high { background: rgba(249, 115, 22, 0.2); color: #F97316; }
+    .trend-card__impact--medium { background: rgba(234, 179, 8, 0.2); color: #EAB308; }
+    .trend-card__impact--low { background: rgba(34, 197, 94, 0.2); color: #22C55E; }
+
+    .trend-card__desc {
+      font-size: 12px;
+      color: var(--lg-text-dim, #666);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .trend-card__isg {
+      font-size: 11px;
+      color: var(--lg-primary-300, #FC8181);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 6px;
+    }
+
+    /* -- Study cards (provenance) ------------------------------------------ */
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .study-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, var(--lg-fill-opacity, 0.12));
+      border: 1px solid rgba(255, 255, 255, var(--lg-border-opacity, 0.15));
+      border-radius: var(--lg-radius-md, 16px);
+    }
+
+    .study-card__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--lg-text, #E8E0E0);
+      margin-bottom: 4px;
+    }
+
+    .study-card__publisher {
+      font-size: 12px;
+      color: var(--lg-primary-400, #F56565);
+      margin-bottom: 8px;
+    }
+
+    .study-card__meta {
+      font-size: 11px;
+      color: var(--lg-text-dim, #666);
+      line-height: 1.6;
+    }
+
+    .study-card__meta strong { color: var(--lg-text, #E8E0E0); }
+
+    .study-card__cost {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+
+    .study-card__cost--premium {
+      background: rgba(229, 62, 62, 0.15);
+      color: var(--lg-primary-400, #F56565);
+    }
+
+    .study-card__cost--free {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22C55E;
+    }
+
+    .study-card__cost--standard {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--lg-text-dim, #666);
+    }
+
+    /* -- Comparison panel -------------------------------------------------- */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .comparison__side {
+      padding: 24px;
+      border-radius: var(--lg-radius-md, 16px);
+      text-align: center;
+    }
+
+    .comparison__side--traditional {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .comparison__side--charlotte {
+      background: rgba(229, 62, 62, 0.08);
+      border: 1px solid rgba(229, 62, 62, 0.25);
+    }
+
+    .comparison__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--lg-text-dim, #666);
+      margin-bottom: 12px;
+    }
+
+    .comparison__side--charlotte .comparison__label {
+      color: var(--lg-primary-400, #F56565);
+    }
+
+    .comparison__stat {
+      font-family: var(--lg-font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .comparison__side--traditional .comparison__stat { color: var(--lg-text-dim, #666); }
+    .comparison__side--charlotte .comparison__stat { color: var(--lg-primary-400, #F56565); }
+
+    .comparison__detail {
+      font-size: 12px;
+      color: var(--lg-text-dim, #666);
+      line-height: 1.8;
+    }
+
+    /* -- M&A timeline ------------------------------------------------------ */
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--lg-radius-md, 16px);
+      overflow-x: auto;
+    }
+
+    .timeline-item {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -1px;
+      width: 2px;
+      height: 40px;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-item:last-child::after { display: none; }
+
+    .timeline-item__year {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--lg-primary-400, #F56565);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-item__event {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--lg-text, #E8E0E0);
+      margin-top: 2px;
+    }
+
+    .timeline-item__detail {
+      font-size: 11px;
+      color: var(--lg-text-dim, #666);
+    }
+
+    /* -- Footer ------------------------------------------------------------ */
+    .footer {
+      margin-top: 48px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      font-size: 12px;
+      color: var(--lg-text-dim, #666);
+    }
+
+    .footer span { opacity: 0.6; }
+
+    /* -- Responsive -------------------------------------------------------- */
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-card__value { font-size: 22px; }
+      .container { padding: 16px; }
+      .nav { padding: 10px 16px; }
+      .nav__title { display: none; }
+      .section-grid, .trend-grid, .study-grid, .comparison { grid-template-columns: 1fr; }
+      .hero__title { font-size: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-bar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======= STICKY NAV ======= -->
+  <nav class="nav">
+    <div class="nav__brand">
+      <span class="nav__logo">SomeAI</span>
+      <span class="nav__title">Market Intelligence Report</span>
+    </div>
+    <a href="index.html" class="nav__back">&larr; Back to ISG</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- ======= HERO HEADER ======= -->
+    <section class="hero">
+      <h1 class="hero__title">Compressed Air Industry</h1>
+      <p class="hero__subtitle">ISG Competitive Analysis &mdash; Market Intelligence Report</p>
+      <div class="hero__provenance">
+        Source: 4 studies &middot; 457 pages &middot; $98K+ acquisition cost
+      </div>
+    </section>
+
+    <!-- ======= DASHBOARD STATS BAR ======= -->
+    <section class="stats-bar">
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">$11.05B</div>
+        <div class="stat-card__label">Global Market (2021)</div>
+      </div>
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">5.57%</div>
+        <div class="stat-card__label">CAGR 2020&ndash;2026</div>
+      </div>
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">46%</div>
+        <div class="stat-card__label">Top-3 Concentration</div>
+      </div>
+      <div class="stat-card lg-glass">
+        <div class="stat-card__value">$14.45B</div>
+        <div class="stat-card__label">2026 Forecast</div>
+      </div>
+    </section>
+
+    <!-- ======= TAB NAVIGATION ======= -->
+    <section class="tabs-wrap">
+      <div class="lg-tabs" id="main-tabs" role="tablist">
+        <button class="lg-tabs__tab lg-tabs__tab--active" data-tab="overview" role="tab" aria-selected="true">Market Overview</button>
+        <button class="lg-tabs__tab" data-tab="competitive" role="tab" aria-selected="false">Competitive Landscape</button>
+        <button class="lg-tabs__tab" data-tab="segments" role="tab" aria-selected="false">Segment Deep Dive</button>
+        <button class="lg-tabs__tab" data-tab="aftermarket" role="tab" aria-selected="false">Aftermarket &amp; Pricing</button>
+        <button class="lg-tabs__tab" data-tab="trends" role="tab" aria-selected="false">Trends &amp; Forecast</button>
+        <button class="lg-tabs__tab" data-tab="provenance" role="tab" aria-selected="false">Source Provenance</button>
+      </div>
+
+      <div class="tab-panels">
+
+        <!-- ═══ Tab 1: Market Overview ═══ -->
+        <div class="tab-panel tab-panel--active" id="panel-overview">
+          <div class="section-grid">
+            <div class="section-card section-card--full">
+              <div class="section-card__title">Global Industrial Air Compressor Market Size (2016&ndash;2026)</div>
+              <div id="area-chart-market" class="viz-container" style="min-height:320px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">By Compressor Type</div>
+              <div id="donut-type" style="min-height:280px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">By Application</div>
+              <div id="donut-application" style="min-height:280px;"></div>
+            </div>
+          </div>
+          <div class="section-grid" style="margin-top:16px;">
+            <div class="section-card">
+              <div class="section-card__stat">3.59M</div>
+              <div class="section-card__desc">Units produced globally in 2021</div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__stat">$3,077</div>
+              <div class="section-card__desc">Average selling price per unit (2021)</div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__stat">30.5&ndash;32.7%</div>
+              <div class="section-card__desc">Industry gross margin range</div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__stat">70%</div>
+              <div class="section-card__desc">Of US equipment sales are replacement</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Tab 2: Competitive Landscape ═══ -->
+        <div class="tab-panel" id="panel-competitive">
+          <div class="section-grid">
+            <div class="section-card section-card--full">
+              <div class="section-card__title">Top Competitors by Revenue &amp; Market Share</div>
+              <div id="bar-competitors" style="min-height:340px;"></div>
+            </div>
+          </div>
+          <div class="section-grid" style="margin-top:16px;">
+            <div class="section-card">
+              <div class="section-card__stat">46%</div>
+              <div class="section-card__desc">CR3 &mdash; top 3 companies hold 46% of global market (Atlas Copco, Ingersoll Rand, Kaeser)</div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__stat">0.096</div>
+              <div class="section-card__desc">HHI (Parts market) &mdash; low concentration, fragmented competitive landscape</div>
+            </div>
+            <div class="section-card section-card--full">
+              <div class="section-card__title">Market Share &amp; Distribution</div>
+              <div class="threat-table-wrap">
+                <table class="threat-table" id="share-table"></table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Tab 3: Segment Deep Dive ═══ -->
+        <div class="tab-panel" id="panel-segments">
+          <div class="section-grid">
+            <div class="section-card section-card--full">
+              <div class="section-card__title">Market Value by Application ($B, 2021)</div>
+              <div id="treemap-applications" style="min-height:340px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">CAGR by Segment (2020&ndash;2026)</div>
+              <div id="bar-cagr" style="min-height:280px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">Revenue by Region ($B, 2021)</div>
+              <div id="bar-regions" style="min-height:280px;"></div>
+            </div>
+          </div>
+          <div class="section-grid" style="margin-top:16px;">
+            <div class="section-card">
+              <div class="section-card__title">Technology Split (US Market)</div>
+              <div id="donut-technology" style="min-height:260px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">Oil-Free Subsegments</div>
+              <div id="donut-oilfree" style="min-height:260px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Tab 4: Aftermarket & Pricing ═══ -->
+        <div class="tab-panel" id="panel-aftermarket">
+          <div class="section-grid">
+            <div class="section-card">
+              <div class="section-card__stat">$1.74B</div>
+              <div class="section-card__desc">Global compressor parts &amp; accessories market (2021). Growing at 5.11% CAGR. North America = 30% ($522M).</div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__stat">50&ndash;60%</div>
+              <div class="section-card__desc">Of US distributor revenue comes from aftermarket parts and service &mdash; not equipment sales.</div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">Parts Market by Product</div>
+              <div id="donut-parts" style="min-height:260px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">OEM vs Aftermarket Channel</div>
+              <div id="donut-channel" style="min-height:260px;"></div>
+            </div>
+          </div>
+          <div class="section-grid" style="margin-top:16px;">
+            <div class="section-card section-card--full">
+              <div class="section-card__title">Lifecycle Economics &mdash; Equipment vs 10-Year Aftermarket</div>
+              <div class="section-grid" style="margin-top:8px; gap:12px;">
+                <div class="section-card" style="text-align:center;">
+                  <div class="section-card__stat" style="color:var(--lg-tertiary-400,#3BABE8);">$3,077</div>
+                  <div class="section-card__desc">Average equipment purchase price</div>
+                </div>
+                <div class="section-card" style="text-align:center;">
+                  <div class="section-card__stat">$3,077</div>
+                  <div class="section-card__desc">10-year aftermarket spend (~10%/yr of purchase price)</div>
+                </div>
+              </div>
+              <div style="padding:12px 0 0; font-size:12px; color:var(--lg-text-dim); line-height:1.6;">
+                Equipment life: <strong style="color:var(--lg-text)">10 years / 100,000 hours</strong>.
+                Aftermarket revenue over equipment life roughly equals original purchase cost.
+                76% of lifetime cost is energy (DOE), 12% purchase, 12% maintenance.
+              </div>
+            </div>
+            <div class="section-card section-card--full">
+              <div class="section-card__title">ISG Margin Architecture</div>
+              <div id="bar-margins" style="min-height:260px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Tab 5: Trends & Forecast ═══ -->
+        <div class="tab-panel" id="panel-trends">
+          <div class="trend-grid" id="trend-cards">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="section-grid" style="margin-top:24px;">
+            <div class="section-card section-card--full">
+              <div class="section-card__title">M&amp;A Activity Timeline</div>
+              <div class="timeline-row" id="ma-timeline">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">Fastest-Growing Regions (CAGR)</div>
+              <div id="bar-region-growth" style="min-height:240px;"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card__title">Fastest-Growing Segments (CAGR)</div>
+              <div id="bar-segment-growth" style="min-height:240px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Tab 6: Source Provenance ═══ -->
+        <div class="tab-panel" id="panel-provenance">
+          <div class="study-grid" id="study-cards">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="comparison" id="money-shot">
+            <div class="comparison__side comparison__side--traditional">
+              <div class="comparison__label">Traditional Consulting</div>
+              <div class="comparison__stat">$98K&ndash;$500K</div>
+              <div class="comparison__detail">
+                3&ndash;6 months delivery<br>
+                Static PDF output<br>
+                Outdated on delivery<br>
+                No dive line traceability
+              </div>
+            </div>
+            <div class="comparison__side comparison__side--charlotte">
+              <div class="comparison__label">Charlotte OS</div>
+              <div class="comparison__stat">$0 marginal</div>
+              <div class="comparison__detail">
+                Real-time generation<br>
+                Interactive visualization<br>
+                Living data &mdash; always current<br>
+                Dive line to every source
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======= FOOTER ======= -->
+    <footer class="footer">
+      <span>Generated 2026-02-16</span> &middot; Charlotte OS &middot; SomeAI &mdash; Infrastructure for Observable Reality
+    </footer>
+
+  </div><!-- /.container -->
+
+  <!-- ================================================================
+       INLINE DATA & VISUALIZATION SCRIPTS
+       ================================================================ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /* ── TAB SWITCHING ─────────────────────────────────────────── */
+    var tabs = document.querySelectorAll('.lg-tabs__tab');
+    var panels = document.querySelectorAll('.tab-panel');
+    var rendered = {};
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('lg-tabs__tab--active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(function (p) { p.classList.remove('tab-panel--active'); });
+
+        tab.classList.add('lg-tabs__tab--active');
+        tab.setAttribute('aria-selected', 'true');
+        var target = tab.getAttribute('data-tab');
+        document.getElementById('panel-' + target).classList.add('tab-panel--active');
+
+        if (!rendered[target]) { renderTab(target); rendered[target] = true; }
+      });
+    });
+
+    function renderTab(t) {
+      if (t === 'overview')     renderOverview();
+      if (t === 'competitive')  renderCompetitive();
+      if (t === 'segments')     renderSegments();
+      if (t === 'aftermarket')  renderAftermarket();
+      if (t === 'trends')       renderTrends();
+      if (t === 'provenance')   renderProvenance();
+    }
+
+    /* ── SHARED TOOLTIP ────────────────────────────────────────── */
+    var tipEl;
+    function showTip(html, event) {
+      if (!tipEl) {
+        tipEl = document.createElement('div');
+        tipEl.className = 'lg-viz-tooltip';
+        document.body.appendChild(tipEl);
+      }
+      tipEl.innerHTML = html;
+      tipEl.classList.add('lg-viz-tooltip--visible');
+      tipEl.style.left = (event.pageX + 14) + 'px';
+      tipEl.style.top  = (event.pageY - 12) + 'px';
+    }
+    function hideTip() { if (tipEl) tipEl.classList.remove('lg-viz-tooltip--visible'); }
+
+    /* ── COLORS ────────────────────────────────────────────────── */
+    var RED     = '#E53E3E';
+    var RED_LT  = '#F56565';
+    var MAUVE   = '#9B7878';
+    var BLUE    = '#1A94D5';
+    var GREEN   = '#22C55E';
+    var ORANGE  = '#F97316';
+    var YELLOW  = '#EAB308';
+    var PURPLE  = '#A855F7';
+    var CYAN    = '#06B6D4';
+    var PINK    = '#FC8181';
+
+    /* ── DATA ──────────────────────────────────────────────────── */
+    var marketTimeline = [
+      { label: '2016', value: 9.47 },
+      { label: '2017', value: 9.87 },
+      { label: '2018', value: 10.30 },
+      { label: '2019', value: 10.56 },
+      { label: '2020', value: 10.38 },
+      { label: '2021', value: 11.05 },
+      { label: '2022', value: 11.60 },
+      { label: '2023', value: 12.20 },
+      { label: '2024', value: 12.85 },
+      { label: '2025', value: 13.60 },
+      { label: '2026F', value: 14.45 }
+    ];
+
+    var applicationData = [
+      { label: 'Manufacturing', value: 2.87, color: RED },
+      { label: 'Oil & Gas',     value: 2.36, color: BLUE },
+      { label: 'Food & Bev',    value: 1.62, color: GREEN },
+      { label: 'Construction',   value: 1.49, color: ORANGE },
+      { label: 'Chemicals',      value: 0.928, color: PURPLE }
+    ];
+
+    var regionData = [
+      { label: 'Europe',  value: 2.77, color: RED },
+      { label: 'N. America', value: 2.30, color: BLUE },
+      { label: 'China',   value: 2.24, color: ORANGE },
+      { label: 'Japan',   value: 0.859, color: MAUVE },
+      { label: 'SE Asia', value: 0.411, color: CYAN },
+      { label: 'India',   value: 0.395, color: GREEN }
+    ];
+
+    var competitors = [
+      { name: 'Atlas Copco',     rev: 15000, share: 20,   margin: 32.7, dist: '15-16 US', hq: 'Stockholm, SE' },
+      { name: 'Ingersoll Rand',  rev: 6900,  share: 14,   margin: 31.5, dist: '~70 US', hq: 'Davidson, NC' },
+      { name: 'Kaeser',          rev: 3600,  share: 5,    margin: 31.0, dist: 'Direct', hq: 'Coburg, DE' },
+      { name: 'Sullair/Hitachi', rev: 1245,  share: 4,    margin: 30.5, dist: 'Mixed', hq: 'Michigan City, IN' },
+      { name: 'Elgi',            rev: 400,   share: 2,    margin: 30.8, dist: 'Expanding', hq: 'Coimbatore, IN' },
+      { name: 'Quincy',          rev: 300,   share: 1.5,  margin: null, dist: 'Atlas sub', hq: 'Bay Minette, AL' }
+    ];
+
+    var trends = [
+      { title: 'OEM Vertical Integration', impact: 'very-high', impactLabel: 'Very High',
+        desc: 'OEMs acquiring distributors to control aftermarket. Atlas Copco: 7 US acquisitions since 2015.',
+        isg: 'Existential threat. Counter: multi-brand breadth no single OEM can match.' },
+      { title: 'IoT & Predictive Maintenance', impact: 'high', impactLabel: 'High',
+        desc: 'Connected fleets enabling condition-based maintenance. SMARTLINK, IR Aircare lead.',
+        isg: 'Charlotte-powered ServiceIQ leapfrogs OEM telemetry with cross-brand intelligence.' },
+      { title: 'PE-Driven Consolidation', impact: 'high', impactLabel: 'High',
+        desc: 'Private equity acquiring and rolling up industrial service companies. 6+ major platforms since 2018.',
+        isg: 'ISG IS this trend. Charlotte enables post-acquisition integration PE portfolios struggle with.' },
+      { title: 'Air-as-a-Service (AaaS)', impact: 'high', impactLabel: 'High',
+        desc: 'Subscription model: pay per CFM or per month. Atlas Copco AIRplan, Kaeser SIGMA AIR UTILITY.',
+        isg: 'ISG Total Care Bundle at $299-$399/mo positioned against OEM-locked plans.' },
+      { title: 'Aging Infrastructure', impact: 'high', impactLabel: 'High',
+        desc: 'US has 10-30 year old fleets. 70% of equipment sales are replacement.',
+        isg: 'Replacement pipeline protocol identifies aging units approaching end-of-life.' },
+      { title: 'DOE Energy Efficiency', impact: 'medium', impactLabel: 'Medium',
+        desc: '76% of compressor lifetime cost is energy. VSD saves 25-35%. Audits becoming standard.',
+        isg: 'Energy consulting at 60-75% margin is ISG\'s highest-margin service line.' },
+      { title: 'Skilled Labor Shortage', impact: 'medium', impactLabel: 'Medium',
+        desc: 'Average technician age 48+. Retirement wave accelerating. Insufficient pipeline.',
+        isg: 'Charlotte prioritizes service calls, reducing wasted truck rolls.' },
+      { title: 'Oil-Free Growth', impact: 'medium', impactLabel: 'Medium',
+        desc: 'Oil-free growing faster, driven by F&B, pharma, semiconductor. 30% → 35%+.',
+        isg: 'ISG services both types. Oil-free commands premium pricing — margin expansion.' },
+      { title: 'Digital Twin Adoption', impact: 'medium', impactLabel: 'Medium',
+        desc: 'Virtual replicas for simulation and optimization. 15-20% adoption by 2028.',
+        isg: 'Charlotte substrate IS a digital twin — equipment graph with temporal spine.' },
+      { title: 'Centrifugal Technology', impact: 'low', impactLabel: 'Low',
+        desc: 'Centrifugal gaining in oil-free. Magnetic bearings reducing maintenance. 20-30% of oil-free.',
+        isg: 'CTS and Turbomachinery brands service centrifugal — niche most independents lack.' }
+    ];
+
+    var studies = [
+      { title: 'US Air Compressor Market Study', publisher: 'Strategic Analytics', date: 'Sep 2021',
+        pages: 58, cost: 98000, costClass: 'premium', confidence: 0.95,
+        method: 'Primary research: 20+ distributor interviews, 6+ OEM interviews, facility surveys.' },
+      { title: 'Global Compressor Parts & Accessories Market', publisher: 'MMI Research', date: '2021',
+        pages: 96, cost: null, costClass: 'standard', confidence: 0.80,
+        method: 'Secondary research with company profile verification. 9 company profiles.' },
+      { title: 'Global Industrial Air Compressor Market', publisher: 'Maia Research', date: '2021',
+        pages: 175, cost: null, costClass: 'standard', confidence: 0.80,
+        method: 'Secondary research with COVID-19 impact analysis. 9 regions, 6 applications.' },
+      { title: 'Compressed Air Sourcebook', publisher: 'US Dept. of Energy / LBNL', date: '2003',
+        pages: 128, cost: 0, costClass: 'free', confidence: 0.90,
+        method: 'Government technical reference. 12 fact sheets, energy efficiency standards.' }
+    ];
+
+    var maEvents = [
+      { year: '2015-2020', event: 'Atlas Copco acquires 7 US distributors', detail: 'Vertical integration' },
+      { year: '2017', event: 'Hitachi acquires Sullair', detail: '$1.245B' },
+      { year: '2018', event: 'TJC LP forms ISG', detail: 'PE platform' },
+      { year: '2020', event: 'IR + Gardner Denver merge', detail: '$6.9B platform' },
+      { year: '2026', event: 'ISG + Charlotte OS', detail: '$1.4M / 2yr' }
+    ];
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 1: MARKET OVERVIEW
+       ══════════════════════════════════════════════════════════════ */
+    function renderOverview() {
+      // Area chart — market size timeline
+      var container = document.getElementById('area-chart-market');
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var h = 300;
+      var margin = { top: 20, right: 20, bottom: 36, left: 52 };
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', width).attr('height', h)
+        .style('border-radius', 'var(--lg-radius-md, 16px)');
+
+      var x = d3.scaleLinear().domain([0, marketTimeline.length - 1]).range([margin.left, width - margin.right]);
+      var y = d3.scaleLinear().domain([8, 16]).range([h - margin.bottom, margin.top]);
+
+      // Gradient
+      var defs = svg.append('defs');
+      var grad = defs.append('linearGradient').attr('id', 'area-grad').attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',1);
+      grad.append('stop').attr('offset','0%').attr('stop-color', RED).attr('stop-opacity', 0.35);
+      grad.append('stop').attr('offset','100%').attr('stop-color', RED).attr('stop-opacity', 0.02);
+
+      // Forecast shading (from 2021 index=5 onward)
+      svg.append('rect')
+        .attr('x', x(5)).attr('y', margin.top)
+        .attr('width', x(10) - x(5)).attr('height', h - margin.top - margin.bottom)
+        .attr('fill', 'rgba(229, 62, 62, 0.06)');
+      svg.append('text')
+        .attr('x', x(7.5)).attr('y', margin.top + 14)
+        .attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', PINK)
+        .text('FORECAST');
+
+      // Grid
+      y.ticks(5).forEach(function(t) {
+        svg.append('line')
+          .attr('x1', margin.left).attr('x2', width - margin.right)
+          .attr('y1', y(t)).attr('y2', y(t))
+          .attr('stroke', 'rgba(255,255,255,0.04)').attr('stroke-dasharray', '2 3');
+      });
+
+      // Area
+      var area = d3.area()
+        .x(function(d, i) { return x(i); })
+        .y0(h - margin.bottom)
+        .y1(function(d) { return y(d.value); })
+        .curve(d3.curveMonotoneX);
+
+      svg.append('path').datum(marketTimeline)
+        .attr('d', area).attr('fill', 'url(#area-grad)');
+
+      // Line
+      var line = d3.line()
+        .x(function(d, i) { return x(i); })
+        .y(function(d) { return y(d.value); })
+        .curve(d3.curveMonotoneX);
+
+      svg.append('path').datum(marketTimeline)
+        .attr('d', line).attr('fill', 'none').attr('stroke', RED)
+        .attr('stroke-width', 2.5).attr('stroke-linecap', 'round');
+
+      // Dots + labels
+      svg.selectAll('.dot').data(marketTimeline).join('circle')
+        .attr('cx', function(d, i) { return x(i); })
+        .attr('cy', function(d) { return y(d.value); })
+        .attr('r', 4).attr('fill', RED).attr('stroke', '#141414').attr('stroke-width', 2)
+        .style('cursor', 'pointer')
+        .on('mousemove', function(event, d) {
+          showTip('<b>$' + d.value + 'B</b><br><span style="color:#666">' + d.label + '</span>', event);
+        })
+        .on('mouseleave', hideTip);
+
+      // X axis labels
+      marketTimeline.forEach(function(d, i) {
+        svg.append('text')
+          .attr('x', x(i)).attr('y', h - margin.bottom + 18)
+          .attr('text-anchor', 'middle').attr('font-size', 10)
+          .attr('fill', '#666').text(d.label);
+      });
+
+      // Y axis labels
+      y.ticks(5).forEach(function(t) {
+        svg.append('text')
+          .attr('x', margin.left - 8).attr('y', y(t))
+          .attr('text-anchor', 'end').attr('dominant-baseline', 'central')
+          .attr('font-size', 10).attr('fill', '#666').text('$' + t + 'B');
+      });
+
+      // Key value callouts
+      svg.append('text')
+        .attr('x', x(5)).attr('y', y(11.05) - 14)
+        .attr('text-anchor', 'middle').attr('font-size', 13).attr('font-weight', 700).attr('fill', RED_LT)
+        .text('$11.05B');
+      svg.append('text')
+        .attr('x', x(10)).attr('y', y(14.45) - 14)
+        .attr('text-anchor', 'middle').attr('font-size', 13).attr('font-weight', 700).attr('fill', RED_LT)
+        .text('$14.45B');
+
+      // Donut: By Type
+      renderDonut('donut-type', [
+        { label: 'Positive Displacement (88%)', value: 9.73, color: RED },
+        { label: 'Dynamic (12%)', value: 1.32, color: BLUE }
+      ], '$11.05B', '2021');
+
+      // Donut: By Application
+      renderDonut('donut-application', applicationData, '5 sectors', 'by revenue');
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 2: COMPETITIVE LANDSCAPE
+       ══════════════════════════════════════════════════════════════ */
+    function renderCompetitive() {
+      // Bar chart
+      var container = document.getElementById('bar-competitors');
+      if (!container) return;
+
+      var barData = competitors.map(function(c) {
+        return { label: c.name, value: c.rev, color: RED };
+      });
+
+      var width = container.clientWidth;
+      var h = 320;
+      var margin = { top: 10, right: 60, bottom: 10, left: 120 };
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', width).attr('height', h)
+        .style('border-radius', 'var(--lg-radius-md, 16px)')
+        .style('background', 'rgba(255,255,255,0.02)');
+
+      var x = d3.scaleLinear()
+        .domain([0, d3.max(barData, function(d) { return d.value; }) * 1.1])
+        .range([margin.left, width - margin.right]);
+
+      var yScale = d3.scaleBand()
+        .domain(barData.map(function(d) { return d.label; }))
+        .range([margin.top, h - margin.bottom])
+        .padding(0.35);
+
+      svg.selectAll('.bar').data(barData).join('rect')
+        .attr('x', margin.left)
+        .attr('y', function(d) { return yScale(d.label); })
+        .attr('width', function(d) { return x(d.value) - margin.left; })
+        .attr('height', yScale.bandwidth())
+        .attr('fill', RED).attr('fill-opacity', 0.7).attr('rx', 4)
+        .style('cursor', 'pointer')
+        .on('mousemove', function(event, d) {
+          var c = competitors.find(function(cc) { return cc.name === d.label; });
+          showTip(
+            '<b>' + d.label + '</b><br>' +
+            'Revenue: $' + d.value.toLocaleString() + 'M<br>' +
+            (c.share ? 'Share: ' + c.share + '%<br>' : '') +
+            (c.margin ? 'Margin: ' + c.margin + '%' : ''),
+            event);
+        })
+        .on('mouseleave', hideTip);
+
+      barData.forEach(function(d) {
+        svg.append('text')
+          .attr('x', margin.left - 8).attr('y', yScale(d.label) + yScale.bandwidth() / 2)
+          .attr('text-anchor', 'end').attr('dominant-baseline', 'central')
+          .attr('font-size', 12).attr('fill', '#E8E0E0').attr('font-weight', 500)
+          .text(d.label);
+        svg.append('text')
+          .attr('x', x(d.value) + 6).attr('y', yScale(d.label) + yScale.bandwidth() / 2)
+          .attr('dominant-baseline', 'central')
+          .attr('font-size', 11).attr('fill', '#666').attr('font-weight', 600)
+          .text('$' + (d.value >= 1000 ? (d.value / 1000).toFixed(1) + 'B' : d.value + 'M'));
+      });
+
+      // Share table
+      var table = document.getElementById('share-table');
+      if (!table) return;
+
+      var thead = '<thead><tr><th>Company</th><th>Revenue</th><th>Share</th><th style="min-width:100px">Share</th><th>Margin</th><th>US Distributors</th><th>HQ</th></tr></thead>';
+      var tbody = '<tbody>';
+      competitors.forEach(function(c) {
+        var shareW = c.share ? Math.round(c.share * 4) : 0;
+        tbody += '<tr>';
+        tbody += '<td>' + c.name + '</td>';
+        tbody += '<td class="revenue-col">$' + c.rev.toLocaleString() + 'M</td>';
+        tbody += '<td style="text-align:center">' + (c.share || 'N/A') + '%</td>';
+        tbody += '<td><span class="share-bar" style="width:' + shareW + 'px"></span></td>';
+        tbody += '<td style="text-align:center">' + (c.margin ? c.margin + '%' : 'N/A') + '</td>';
+        tbody += '<td style="text-align:center;color:#666">' + c.dist + '</td>';
+        tbody += '<td style="color:#666">' + c.hq + '</td>';
+        tbody += '</tr>';
+      });
+      tbody += '</tbody>';
+      table.innerHTML = thead + tbody;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 3: SEGMENT DEEP DIVE
+       ══════════════════════════════════════════════════════════════ */
+    function renderSegments() {
+      // Treemap — applications
+      var tmContainer = document.getElementById('treemap-applications');
+      if (tmContainer) {
+        var treeData = {
+          name: 'Applications',
+          children: applicationData.map(function(d) {
+            return { name: d.label, value: Math.round(d.value * 1000) };
+          })
+        };
+
+        var width = tmContainer.clientWidth;
+        var h = 320;
+
+        var root = d3.hierarchy(treeData)
+          .sum(function(d) { return d.value || 0; })
+          .sort(function(a, b) { return b.value - a.value; });
+
+        d3.treemap().size([width, h]).padding(4).round(true)(root);
+
+        var svg = d3.select(tmContainer).append('svg')
+          .attr('width', width).attr('height', h)
+          .style('border-radius', 'var(--lg-radius-md, 16px)')
+          .style('background', 'rgba(255,255,255,0.02)');
+
+        var appColors = {};
+        applicationData.forEach(function(d) { appColors[d.label] = d.color; });
+
+        var leaf = svg.selectAll('g').data(root.leaves()).join('g')
+          .attr('transform', function(d) { return 'translate(' + d.x0 + ',' + d.y0 + ')'; });
+
+        leaf.append('rect')
+          .attr('width', function(d) { return d.x1 - d.x0; })
+          .attr('height', function(d) { return d.y1 - d.y0; })
+          .attr('fill', function(d) { return appColors[d.data.name] || RED; })
+          .attr('fill-opacity', 0.65).attr('rx', 6)
+          .attr('stroke', '#141414').attr('stroke-width', 2)
+          .style('cursor', 'pointer')
+          .on('mousemove', function(event, d) {
+            showTip('<b>' + d.data.name + '</b><br>$' + (d.data.value / 1000).toFixed(2) + 'B', event);
+          })
+          .on('mouseleave', hideTip);
+
+        leaf.append('text').attr('x', 10).attr('y', 24)
+          .attr('fill', '#fff').attr('font-size', 14).attr('font-weight', 600)
+          .text(function(d) { return (d.x1 - d.x0) > 80 ? d.data.name : ''; });
+        leaf.append('text').attr('x', 10).attr('y', 42)
+          .attr('fill', 'rgba(255,255,255,0.7)').attr('font-size', 12)
+          .text(function(d) { return (d.x1 - d.x0) > 80 ? '$' + (d.data.value / 1000).toFixed(2) + 'B' : ''; });
+      }
+
+      // CAGR bar chart
+      var cagrData = [
+        { label: 'Construction', value: 7.18, color: ORANGE },
+        { label: 'Food & Bev',   value: 5.90, color: GREEN },
+        { label: 'Manufacturing', value: 5.20, color: RED },
+        { label: 'Oil & Gas',    value: 4.80, color: BLUE },
+        { label: 'Chemicals',    value: 4.50, color: PURPLE }
+      ];
+      renderHorizBar('bar-cagr', cagrData, '%', 260);
+
+      // Region bar chart
+      renderHorizBar('bar-regions', regionData, 'B', 260);
+
+      // Technology donut
+      renderDonut('donut-technology', [
+        { label: 'Oil-Flooded (70%)', value: 70, color: RED },
+        { label: 'Oil-Free (30%)', value: 30, color: BLUE }
+      ], '70/30', 'split');
+
+      // Oil-free subsegment donut
+      renderDonut('donut-oilfree', [
+        { label: 'Rotary Screw (72.5%)', value: 72.5, color: BLUE },
+        { label: 'Centrifugal (25%)', value: 25, color: CYAN },
+        { label: 'Other (2.5%)', value: 2.5, color: MAUVE }
+      ], '30%', 'of market');
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 4: AFTERMARKET & PRICING
+       ══════════════════════════════════════════════════════════════ */
+    function renderAftermarket() {
+      // Parts donut
+      renderDonut('donut-parts', [
+        { label: 'Hose Pipes (30%)', value: 30, color: RED },
+        { label: 'Air Filters (19%)', value: 19, color: BLUE },
+        { label: 'Pressure Gauges (17%)', value: 17, color: ORANGE },
+        { label: 'Hose Reels (12%)', value: 12, color: GREEN },
+        { label: 'Other (22%)', value: 22, color: MAUVE }
+      ], '$1.74B', 'global');
+
+      // Channel donut
+      renderDonut('donut-channel', [
+        { label: 'OEM Channel (70%)', value: 70, color: RED },
+        { label: 'Aftermarket (30%)', value: 30, color: BLUE }
+      ], '70/30', 'volume split');
+
+      // Margin bar chart
+      var marginData = [
+        { label: 'Energy Consulting', value: 67.5, color: RED },
+        { label: 'Service Labor',     value: 52.5, color: RED_LT },
+        { label: 'Parts',             value: 42.5, color: ORANGE },
+        { label: 'Bundled Agreements', value: 35, color: BLUE },
+        { label: 'Equipment',         value: 25, color: MAUVE }
+      ];
+      renderHorizBar('bar-margins', marginData, '%', 240);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 5: TRENDS & FORECAST
+       ══════════════════════════════════════════════════════════════ */
+    function renderTrends() {
+      var container = document.getElementById('trend-cards');
+      if (!container) return;
+
+      container.innerHTML = trends.map(function(t) {
+        return '<div class="trend-card">' +
+          '<div class="trend-card__header">' +
+            '<span class="trend-card__title">' + t.title + '</span>' +
+            '<span class="trend-card__impact trend-card__impact--' + t.impact + '">' + t.impactLabel + '</span>' +
+          '</div>' +
+          '<div class="trend-card__desc">' + t.desc + '</div>' +
+          '<div class="trend-card__isg">ISG: ' + t.isg + '</div>' +
+        '</div>';
+      }).join('');
+
+      // M&A Timeline
+      var timeline = document.getElementById('ma-timeline');
+      if (timeline) {
+        timeline.innerHTML = maEvents.map(function(e) {
+          return '<div class="timeline-item">' +
+            '<div class="timeline-item__year">' + e.year + '</div>' +
+            '<div class="timeline-item__event">' + e.event + '</div>' +
+            '<div class="timeline-item__detail">' + e.detail + '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      // Region growth CAGR
+      var regionGrowth = [
+        { label: 'SE Asia',     value: 6.37, color: CYAN },
+        { label: 'India',       value: 6.21, color: GREEN },
+        { label: 'China',       value: 5.80, color: ORANGE },
+        { label: 'N. America',  value: 5.10, color: BLUE },
+        { label: 'Europe',      value: 4.80, color: RED }
+      ];
+      renderHorizBar('bar-region-growth', regionGrowth, '%', 220);
+
+      // Segment growth CAGR
+      var segGrowth = [
+        { label: 'Construction', value: 7.18, color: ORANGE },
+        { label: 'Food & Bev',   value: 5.90, color: GREEN },
+        { label: 'Global Avg',   value: 5.57, color: MAUVE },
+        { label: 'Manufacturing', value: 5.20, color: RED },
+        { label: 'Parts Market',  value: 5.11, color: BLUE }
+      ];
+      renderHorizBar('bar-segment-growth', segGrowth, '%', 220);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 6: SOURCE PROVENANCE
+       ══════════════════════════════════════════════════════════════ */
+    function renderProvenance() {
+      var container = document.getElementById('study-cards');
+      if (!container) return;
+
+      container.innerHTML = studies.map(function(s) {
+        var costStr;
+        if (s.cost === 0) costStr = '<span class="study-card__cost study-card__cost--free">Free (Gov)</span>';
+        else if (s.cost) costStr = '<span class="study-card__cost study-card__cost--premium">$' + s.cost.toLocaleString() + '</span>';
+        else costStr = '<span class="study-card__cost study-card__cost--standard">Subscription</span>';
+
+        return '<div class="study-card">' +
+          '<div class="study-card__title">' + s.title + '</div>' +
+          '<div class="study-card__publisher">' + s.publisher + ' &middot; ' + s.date + '</div>' +
+          '<div class="study-card__meta">' +
+            '<strong>' + s.pages + '</strong> pages &middot; Confidence: <strong>' + (s.confidence * 100) + '%</strong><br>' +
+            s.method +
+          '</div>' +
+          costStr +
+        '</div>';
+      }).join('');
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SHARED RENDERERS
+       ══════════════════════════════════════════════════════════════ */
+    function renderDonut(id, data, centerValue, centerLabel) {
+      var container = document.getElementById(id);
+      if (!container) return;
+
+      var size = Math.min(container.clientWidth, 240);
+      var radius = size / 2;
+      var inner = radius - 36;
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', size).attr('height', size)
+        .style('display', 'block').style('margin', '0 auto');
+
+      var g = svg.append('g').attr('transform', 'translate(' + radius + ',' + radius + ')');
+
+      var pie = d3.pie().value(function(d) { return d.value; }).sort(null).padAngle(0.03);
+      var arc = d3.arc().innerRadius(inner).outerRadius(radius).cornerRadius(3);
+
+      g.selectAll('path').data(pie(data)).join('path')
+        .attr('d', arc)
+        .attr('fill', function(d) { return d.data.color || RED; })
+        .style('cursor', 'pointer')
+        .on('mousemove', function(event, d) {
+          showTip('<b>' + d.data.label + '</b><br>' + d.data.value.toLocaleString(), event);
+        })
+        .on('mouseleave', hideTip);
+
+      if (centerValue) {
+        g.append('text')
+          .attr('text-anchor', 'middle').attr('dy', centerLabel ? '-0.2em' : '0.1em')
+          .attr('font-size', 20).attr('font-weight', 700).attr('fill', '#E8E0E0')
+          .text(centerValue);
+      }
+      if (centerLabel) {
+        g.append('text')
+          .attr('text-anchor', 'middle').attr('dy', '1.3em')
+          .attr('font-size', 10).attr('fill', '#666')
+          .text(centerLabel);
+      }
+
+      // Legend below
+      var legend = document.createElement('div');
+      legend.style.cssText = 'display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:8px;';
+      data.forEach(function(d) {
+        legend.innerHTML += '<span class="legend-item"><span class="legend-dot" style="background:' + (d.color || RED) + '"></span>' + d.label + '</span>';
+      });
+      container.appendChild(legend);
+    }
+
+    function renderHorizBar(id, data, suffix, height) {
+      var container = document.getElementById(id);
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var h = height || 260;
+      var margin = { top: 10, right: 50, bottom: 10, left: 110 };
+
+      var svg = d3.select(container).append('svg')
+        .attr('width', width).attr('height', h)
+        .style('border-radius', 'var(--lg-radius-md, 16px)');
+
+      var x = d3.scaleLinear()
+        .domain([0, d3.max(data, function(d) { return d.value; }) * 1.15])
+        .range([margin.left, width - margin.right]);
+
+      var yScale = d3.scaleBand()
+        .domain(data.map(function(d) { return d.label; }))
+        .range([margin.top, h - margin.bottom])
+        .padding(0.35);
+
+      svg.selectAll('.bar').data(data).join('rect')
+        .attr('x', margin.left)
+        .attr('y', function(d) { return yScale(d.label); })
+        .attr('width', function(d) { return x(d.value) - margin.left; })
+        .attr('height', yScale.bandwidth())
+        .attr('fill', function(d) { return d.color || RED; })
+        .attr('fill-opacity', 0.7).attr('rx', 4)
+        .style('cursor', 'pointer')
+        .on('mousemove', function(event, d) {
+          showTip('<b>' + d.label + '</b><br>' + d.value + (suffix || ''), event);
+        })
+        .on('mouseleave', hideTip);
+
+      data.forEach(function(d) {
+        svg.append('text')
+          .attr('x', margin.left - 8).attr('y', yScale(d.label) + yScale.bandwidth() / 2)
+          .attr('text-anchor', 'end').attr('dominant-baseline', 'central')
+          .attr('font-size', 12).attr('fill', '#E8E0E0').attr('font-weight', 500)
+          .text(d.label);
+        svg.append('text')
+          .attr('x', x(d.value) + 6).attr('y', yScale(d.label) + yScale.bandwidth() / 2)
+          .attr('dominant-baseline', 'central')
+          .attr('font-size', 11).attr('fill', '#666').attr('font-weight', 600)
+          .text(d.value + (suffix || ''));
+      });
+    }
+
+    /* ── INITIAL RENDER ──────────────────────────────────────── */
+    renderOverview();
+    rendered.overview = true;
+
+  }); // end DOMContentLoaded
+  </script>
+
+</body>
+</html>
