@@ -1,0 +1,18 @@
+[Unit]
+Description=Charlotte Cloudflare Tunnel
+Documentation=https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jack
+Group=jack
+ExecStart=/usr/bin/cloudflared tunnel run charlotte-voice
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
