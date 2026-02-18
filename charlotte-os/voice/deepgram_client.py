@@ -42,13 +42,17 @@ class DeepgramStreamer:
         self._sample_rate = sample_rate
         self._ws = None
         self._running = False
+        self._ready = False
         self._receive_task = None
+        self._send_task = None
+        self._audio_queue = asyncio.Queue()
 
     async def connect(self):
         """Open WebSocket connection to Deepgram."""
         if Config.DEMO:
             log.info("DEMO: Deepgram connection simulated")
             self._running = True
+            self._ready = True
             return
 
         params = (
@@ -64,19 +68,46 @@ class DeepgramStreamer:
         url = f"{self.DEEPGRAM_WSS}?{params}"
         headers = {"Authorization": f"Token {Config.DEEPGRAM_API_KEY}"}
 
-        self._ws = await websockets.connect(url, additional_headers=headers)
+        self._ws = await websockets.connect(
+            url,
+            additional_headers=headers,
+            ping_interval=20,
+            ping_timeout=20,
+        )
         self._running = True
+        self._ready = True
         self._receive_task = asyncio.create_task(self._receive_loop())
+        self._send_task = asyncio.create_task(self._send_loop())
         log.info("Deepgram connected (%s @ %dHz)", self._encoding, self._sample_rate)
 
     async def send_audio(self, audio_bytes: bytes):
-        """Send raw audio bytes to Deepgram."""
-        if not self._running or not self._ws:
+        """Queue raw audio bytes for sending to Deepgram."""
+        if not self._running:
             return
         try:
-            await self._ws.send(audio_bytes)
+            self._audio_queue.put_nowait(audio_bytes)
+        except asyncio.QueueFull:
+            pass
+
+    async def _send_loop(self):
+        """Send queued audio to Deepgram as fast as possible."""
+        sent = 0
+        try:
+            while self._running and self._ws:
+                audio = await asyncio.wait_for(self._audio_queue.get(), timeout=30.0)
+                await self._ws.send(audio)
+                sent += 1
+                if sent == 1:
+                    log.info("First audio chunk sent to Deepgram")
+                elif sent % 500 == 0:
+                    log.info("Sent %d audio chunks to Deepgram", sent)
+        except asyncio.TimeoutError:
+            log.warning("Deepgram send loop: no audio for 5s, closing")
         except websockets.ConnectionClosed:
             log.warning("Deepgram connection closed during send")
+        except Exception:
+            log.exception("Deepgram send loop error")
+        finally:
             self._running = False
 
     async def _receive_loop(self):
@@ -136,6 +167,13 @@ class DeepgramStreamer:
             except Exception:
                 pass
             self._ws = None
+        if self._send_task:
+            self._send_task.cancel()
+            try:
+                await self._send_task
+            except asyncio.CancelledError:
+                pass
+            self._send_task = None
         if self._receive_task:
             self._receive_task.cancel()
             try:
