@@ -71,6 +71,7 @@ class DeepgramStreamer:
         self._ws = await websockets.connect(
             url,
             additional_headers=headers,
+            open_timeout=30,
             ping_interval=20,
             ping_timeout=20,
         )
@@ -93,69 +94,115 @@ class DeepgramStreamer:
         """Send queued audio to Deepgram as fast as possible."""
         sent = 0
         try:
-            while self._running and self._ws:
-                audio = await asyncio.wait_for(self._audio_queue.get(), timeout=30.0)
-                await self._ws.send(audio)
-                sent += 1
-                if sent == 1:
-                    log.info("First audio chunk sent to Deepgram")
-                elif sent % 500 == 0:
-                    log.info("Sent %d audio chunks to Deepgram", sent)
+            while self._running:
+                if not self._ws:
+                    await asyncio.sleep(0.1)
+                    continue
+                try:
+                    audio = await asyncio.wait_for(self._audio_queue.get(), timeout=30.0)
+                    await self._ws.send(audio)
+                    sent += 1
+                    if sent == 1:
+                        log.info("First audio chunk sent to Deepgram")
+                    elif sent % 500 == 0:
+                        log.info("Sent %d audio chunks to Deepgram", sent)
+                except websockets.ConnectionClosed:
+                    log.warning("Deepgram connection closed during send, waiting for reconnect")
+                    await asyncio.sleep(0.5)
         except asyncio.TimeoutError:
-            log.warning("Deepgram send loop: no audio for 5s, closing")
-        except websockets.ConnectionClosed:
-            log.warning("Deepgram connection closed during send")
+            log.warning("Deepgram send loop: no audio for 30s, closing")
         except Exception:
             log.exception("Deepgram send loop error")
         finally:
             self._running = False
 
     async def _receive_loop(self):
-        """Listen for transcription results from Deepgram."""
-        msg_count = 0
-        try:
-            async for msg in self._ws:
-                msg_count += 1
-                if isinstance(msg, bytes):
-                    log.debug("Deepgram binary message (%d bytes)", len(msg))
-                    continue
-                data = json.loads(msg)
-                msg_type = data.get("type", "")
+        """Listen for transcription results from Deepgram. Auto-reconnects on 1011."""
+        while self._running:
+            msg_count = 0
+            try:
+                async for msg in self._ws:
+                    msg_count += 1
+                    if isinstance(msg, bytes):
+                        log.debug("Deepgram binary message (%d bytes)", len(msg))
+                        continue
+                    data = json.loads(msg)
+                    msg_type = data.get("type", "")
 
-                if msg_count <= 2:
-                    log.info("Deepgram msg #%d: type=%s", msg_count, msg_type)
+                    if msg_count <= 2:
+                        log.info("Deepgram msg #%d: type=%s", msg_count, msg_type)
 
-                if msg_type == "Results":
-                    alt = data.get("channel", {}).get("alternatives", [{}])[0]
-                    text = alt.get("transcript", "").strip()
-                    is_final = data.get("is_final", False)
-                    speech_final = data.get("speech_final", False)
-                    if text:
-                        log.info("Deepgram transcript (final=%s, speech_final=%s): %s", is_final, speech_final, text)
-                        await self._on_transcript(text, is_final or speech_final)
-                    elif is_final:
-                        log.debug("Deepgram empty final result (silence)")
+                    if msg_type == "Results":
+                        alt = data.get("channel", {}).get("alternatives", [{}])[0]
+                        text = alt.get("transcript", "").strip()
+                        is_final = data.get("is_final", False)
+                        speech_final = data.get("speech_final", False)
+                        if text:
+                            log.info("Deepgram transcript (final=%s, speech_final=%s): %s", is_final, speech_final, text)
+                            await self._on_transcript(text, is_final or speech_final)
+                        elif is_final:
+                            log.debug("Deepgram empty final result (silence)")
 
-                elif msg_type == "SpeechStarted":
-                    log.info("Deepgram: speech started")
-                    if self._on_speech_started:
-                        await self._on_speech_started()
+                    elif msg_type == "SpeechStarted":
+                        log.info("Deepgram: speech started")
+                        if self._on_speech_started:
+                            await self._on_speech_started()
 
-                elif msg_type == "Metadata":
-                    log.info("Deepgram metadata: request_id=%s", data.get("request_id", "?"))
+                    elif msg_type == "Metadata":
+                        log.info("Deepgram metadata: request_id=%s", data.get("request_id", "?"))
 
-                elif msg_type == "Error":
-                    log.error("Deepgram error: %s", data.get("message", data))
+                    elif msg_type == "Error":
+                        log.error("Deepgram error: %s", data.get("message", data))
 
-                elif msg_type == "UtteranceEnd":
-                    log.debug("Deepgram: utterance end")
+                    elif msg_type == "UtteranceEnd":
+                        log.debug("Deepgram: utterance end")
 
-        except websockets.ConnectionClosed as e:
-            log.info("Deepgram WebSocket closed: code=%s reason=%s (after %d msgs)", e.code, e.reason, msg_count)
-        except Exception:
-            log.exception("Deepgram receive error (after %d msgs)", msg_count)
-        finally:
-            self._running = False
+            except websockets.ConnectionClosed as e:
+                if not self._running:
+                    break
+                log.warning("Deepgram closed: code=%s (after %d msgs) — reconnecting", e.code, msg_count)
+                await self._reconnect()
+            except Exception:
+                if not self._running:
+                    break
+                log.exception("Deepgram receive error (after %d msgs) — reconnecting", msg_count)
+                await self._reconnect()
+
+    async def _reconnect(self):
+        """Reconnect to Deepgram after a disconnect."""
+        self._ws = None
+        for attempt in range(5):
+            if not self._running:
+                return
+            wait = min(2 ** attempt, 10)
+            log.info("Deepgram reconnect attempt %d in %ds", attempt + 1, wait)
+            await asyncio.sleep(wait)
+            try:
+                params = (
+                    f"encoding={self._encoding}"
+                    f"&sample_rate={self._sample_rate}"
+                    f"&channels=1"
+                    f"&model=nova-2"
+                    f"&punctuate=true"
+                    f"&interim_results=true"
+                    f"&endpointing=300"
+                    f"&vad_events=true"
+                )
+                url = f"{self.DEEPGRAM_WSS}?{params}"
+                headers = {"Authorization": f"Token {Config.DEEPGRAM_API_KEY}"}
+                self._ws = await websockets.connect(
+                    url,
+                    additional_headers=headers,
+                    open_timeout=30,
+                    ping_interval=20,
+                    ping_timeout=20,
+                )
+                log.info("Deepgram reconnected successfully")
+                return
+            except Exception:
+                log.warning("Deepgram reconnect attempt %d failed", attempt + 1)
+        log.error("Deepgram reconnect failed after 5 attempts")
+        self._running = False
 
     async def close(self):
         """Gracefully close the Deepgram connection."""

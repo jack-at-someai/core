@@ -61,16 +61,18 @@ async def handle_twilio_media(request: web.Request) -> web.WebSocketResponse:
     deepgram = None
     tts = None
     is_speaking = False
-    pending_text = ""
+    current_task = None
 
     async def on_transcript(text: str, is_final: bool):
-        nonlocal pending_text
+        nonlocal current_task
         if not is_final:
             return
-        pending_text = text
         log.info("STT [twilio]: %s", text)
-        # Run in background so Twilio WebSocket keeps being serviced
-        asyncio.create_task(process_utterance(text))
+        # Cancel any in-flight response so we don't pile up
+        if current_task and not current_task.done():
+            current_task.cancel()
+            log.info("Cancelled previous response task")
+        current_task = asyncio.create_task(process_utterance(text))
 
     async def on_speech_started():
         nonlocal is_speaking
@@ -91,7 +93,11 @@ async def handle_twilio_media(request: web.Request) -> web.WebSocketResponse:
         async def on_tool_use(name, args):
             pass  # Could send a "thinking" tone
 
-        response_text = await agent.respond(messages, on_tool_use=on_tool_use)
+        try:
+            response_text = await agent.respond(messages, on_tool_use=on_tool_use)
+        except asyncio.CancelledError:
+            log.info("Response cancelled (new utterance arrived)")
+            return
         await store.save_message(session, "assistant", response_text)
         log.info("Claude [twilio]: %s", response_text[:200])
 
@@ -101,12 +107,16 @@ async def handle_twilio_media(request: web.Request) -> web.WebSocketResponse:
             tts_engine = DemoElevenLabsTTS(output_format="ulaw_8000")
         else:
             tts_engine = ElevenLabsTTS(output_format="ulaw_8000")
-        await tts_engine.connect()
         try:
+            await tts_engine.connect()
             async for audio_b64 in tts_engine.synthesize(response_text):
                 if not is_speaking:
                     break
                 await stream.send_audio(audio_b64)
+        except asyncio.CancelledError:
+            log.info("TTS cancelled (new utterance arrived)")
+        except Exception:
+            log.exception("TTS error")
         finally:
             await tts_engine.close()
             is_speaking = False

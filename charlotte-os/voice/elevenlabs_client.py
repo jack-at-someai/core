@@ -45,7 +45,12 @@ class ElevenLabsTTS:
             + f"&output_format={self._output_format}"
         )
 
-        self._ws = await websockets.connect(url)
+        self._ws = await websockets.connect(
+            url,
+            open_timeout=30,
+            ping_interval=20,
+            ping_timeout=20,
+        )
 
         # Send initial config (BOS — beginning of stream)
         await self._ws.send(json.dumps({
@@ -87,7 +92,7 @@ class ElevenLabsTTS:
 
             # Receive audio chunks until final
             while True:
-                msg = await asyncio.wait_for(self._ws.recv(), timeout=10.0)
+                msg = await asyncio.wait_for(self._ws.recv(), timeout=30.0)
                 data = json.loads(msg)
 
                 audio_b64 = data.get("audio")
