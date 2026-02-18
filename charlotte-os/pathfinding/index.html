@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A* + ACO Pathfinding — Charlotte OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --surface: #141414;
+      --surface-alt: #1A1A1A;
+      --surface-hover: #252525;
+      --border: #2A2A2A;
+      --border-light: #333;
+      --text: #E8E0E0;
+      --text-dim: #888;
+      --text-muted: #555;
+      --accent: #E53E3E;
+      --accent-glow: rgba(229, 62, 62, 0.3);
+      --purple: #7200CB;
+      --green: #68D391;
+      --teal: #38B2AC;
+      --amber: #F59E0B;
+      --blue: #4A9EE5;
+      --tan: #C4A8A8;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* === Header === */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-left a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .header-left a:hover { color: var(--accent); }
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .header-title span { color: var(--accent); }
+    .header-badge {
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(229, 62, 62, 0.1);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: #AAA;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--text); }
+    .btn.active { border-color: var(--accent); color: var(--accent); background: rgba(229,62,62,0.08); }
+    .speed-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #666;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    /* === Main Area === */
+    .content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* === Canvas === */
+    .canvas-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* === Sidebar === */
+    .sidebar {
+      width: 260px;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 14px;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .sb-section {
+      margin-bottom: 14px;
+    }
+    .sb-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sb-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Phase Indicator */
+    .phase-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .phase-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: phasePulse 1.5s ease-in-out infinite;
+    }
+    @keyframes phasePulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .phase-text {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .phase-pct {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    /* Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .metric-cell {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .metric-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .metric-label {
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Agent Grid — compact 2-col for 16 agents */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .agent-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 7px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .agent-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .agent-chip-name {
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .agent-chip-state {
+      margin-left: auto;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Sliders */
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .slider-label {
+      font-size: 10px;
+      color: #666;
+      width: 72px;
+      flex-shrink: 0;
+    }
+    .slider-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--accent);
+      width: 32px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Legend */
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      color: var(--text-dim);
+      padding: 1px 0;
+    }
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* === Footer === */
+    .footer {
+      padding: 5px 20px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #444;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1px 4px;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+
+<!-- === Header === -->
+<div class="header">
+  <div class="header-left">
+    <a href="../">&larr; Charlotte OS</a>
+    <div class="header-title"><span>A*</span> + ACO Pathfinding</div>
+    <div class="header-badge">SOMEAI</div>
+  </div>
+  <div class="header-controls">
+    <button class="btn active" id="btnPlay" onclick="togglePlay()">&#9654; Play</button>
+    <button class="btn" id="btnReset" onclick="resetSim()">Reset</button>
+    <button class="btn" id="btnDebug" onclick="toggleDebug()">A* Debug</button>
+    <div class="speed-display" id="speedDisp">1x</div>
+    <input type="range" min="1" max="5" value="1" id="speedSlider" style="width:60px" oninput="setSpeed(this.value)">
+  </div>
+</div>
+
+<!-- === Content === -->
+<div class="content">
+  <div class="canvas-wrap" id="canvasWrap">
+    <canvas id="cv"></canvas>
+  </div>
+
+  <div class="sidebar">
+    <!-- Phase -->
+    <div class="sb-section">
+      <div class="sb-title">Phase</div>
+      <div class="phase-indicator">
+        <div class="phase-dot" id="phaseDot"></div>
+        <div class="phase-text" id="phaseText">Exploring</div>
+        <div class="phase-pct" id="phasePct">0%</div>
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="sb-section">
+      <div class="sb-title">Metrics</div>
+      <div class="metrics-grid">
+        <div class="metric-cell"><div class="metric-val" id="mGoals">0/0</div><div class="metric-label">Goals</div></div>
+        <div class="metric-cell"><div class="metric-val" id="mSteps">0</div><div class="metric-label">Steps</div></div>
+        <div class="metric-cell"><div class="metric-val" id="mPhero">0%</div><div class="metric-label">Pheromone</div></div>
+        <div class="metric-cell"><div class="metric-val" id="mExplored">0%</div><div class="metric-label">Explored</div></div>
+      </div>
+    </div>
+
+    <!-- Agents -->
+    <div class="sb-section">
+      <div class="sb-title">Agents (16)</div>
+      <div class="agent-grid" id="agentList"></div>
+    </div>
+
+    <!-- Tuning -->
+    <div class="sb-section">
+      <div class="sb-title">Tuning</div>
+      <div class="slider-row">
+        <span class="slider-label">&alpha; Pheromone</span>
+        <input type="range" min="0" max="100" value="40" id="sliderAlpha" oninput="updateSlider('alpha', this.value)">
+        <span class="slider-val" id="valAlpha">0.40</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">&beta; Heuristic</span>
+        <input type="range" min="0" max="100" value="50" id="sliderBeta" oninput="updateSlider('beta', this.value)">
+        <span class="slider-val" id="valBeta">0.50</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">&gamma; Explore</span>
+        <input type="range" min="0" max="100" value="30" id="sliderGamma" oninput="updateSlider('gamma', this.value)">
+        <span class="slider-val" id="valGamma">0.30</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Evaporation</span>
+        <input type="range" min="990" max="999" value="995" id="sliderEvap" oninput="updateSlider('evap', this.value)">
+        <span class="slider-val" id="valEvap">0.995</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Sight radius</span>
+        <input type="range" min="2" max="16" value="6" id="sliderSight" oninput="updateSlider('sight', this.value)">
+        <span class="slider-val" id="valSight">6</span>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="sb-section">
+      <div class="sb-title">Legend</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#2A2A2A"></div>Obstacle</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#E53E3E"></div>Pheromone trail</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#7200CB"></div>A* frontier</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#68D391"></div>A* closed set</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#F59E0B"></div>Goal marker</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="sb-section">
+      <div class="sb-title">Controls</div>
+      <div style="font-size:9px;color:#555;line-height:2">
+        <kbd>Space</kbd> Play/Pause
+        <kbd>R</kbd> Reset
+        <kbd>G</kbd> Add Goal
+        <kbd>A</kbd> Add Agent
+        <kbd>D</kbd> A* Debug
+        <kbd>1-5</kbd> Speed
+        <kbd>Click</kbd> Place Goal
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === Footer === -->
+<div class="footer">
+  <span id="footerStatus">Initializing cave terrain...</span>
+  <span>A* + ACO Hybrid &mdash; someai / Charlotte OS</span>
+</div>
+
+<script>
+// =========================================================
+// A* + ACO Pathfinding — Charlotte OS / someai theme
+// =========================================================
+
+const COLS = 160, ROWS = 120;
+const NUM_AGENTS = 16;
+const NUM_GOALS = 10;
+
+const AGENT_COLORS = [
+  '#E53E3E', '#38B2AC', '#F6AD55', '#A855F7',
+  '#68D391', '#F687B3', '#4A9EE5', '#C4A8A8',
+  '#F59E0B', '#9F7AEA', '#FC8181', '#4FD1C5',
+  '#FBD38D', '#B794F4', '#9AE6B4', '#FBB6CE'
+];
+const AGENT_NAMES = [
+  'Jack', 'Joe', 'Jim', 'Ada',
+  'Eve', 'Max', 'Ray', 'Kit',
+  'Leo', 'Zoe', 'Hal', 'Mae',
+  'Rex', 'Ivy', 'Bo', 'Fay'
+];
+
+// someai theme palette (RGB for ImageData)
+const CLR_FOG      = [15, 15, 15];
+const CLR_OBS_VIS  = [26, 26, 26];
+const CLR_OBS_EXP  = [20, 20, 20];
+const CLR_OPEN_VIS = [18, 18, 18];
+const CLR_OPEN_EXP = [16, 16, 16];
+
+// --- State ---
+let cellW, cellH;
+let obstacles, pheromone, explored, visible, astarOpen, astarClosed;
+let agents = [];
+let goals = [];
+let totalSteps = 0;
+let goalsFound = 0;
+let running = true;
+let showDebug = false;
+let speed = 1;
+let tickCounter = 0;
+
+let params = {
+  alpha: 0.40,
+  beta: 0.50,
+  gamma: 0.30,
+  evap: 0.995,
+  sight: 6
+};
+
+// --- Canvas ---
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+let imgData, imgBuf;
+let canvasW, canvasH;
+let offscreen, offCtx;
+
+function resize() {
+  const wrap = document.getElementById('canvasWrap');
+  const dpr = window.devicePixelRatio || 1;
+  canvasW = wrap.clientWidth;
+  canvasH = wrap.clientHeight;
+  cv.width = canvasW * dpr;
+  cv.height = canvasH * dpr;
+  cv.style.width = canvasW + 'px';
+  cv.style.height = canvasH + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  cellW = canvasW / COLS;
+  cellH = canvasH / ROWS;
+  // Offscreen canvas for ImageData — avoids DPR mismatch with putImageData
+  offscreen = document.createElement('canvas');
+  offscreen.width = canvasW;
+  offscreen.height = canvasH;
+  offCtx = offscreen.getContext('2d');
+  imgData = offCtx.createImageData(canvasW, canvasH);
+  imgBuf = imgData.data;
+}
+window.addEventListener('resize', () => { resize(); });
+
+// =========================================================
+// MinHeap
+// =========================================================
+class MinHeap {
+  constructor() { this.d = []; }
+  push(n) { this.d.push(n); this._up(this.d.length - 1); }
+  pop() {
+    const t = this.d[0], l = this.d.pop();
+    if (this.d.length > 0) { this.d[0] = l; this._dn(0); }
+    return t;
+  }
+  get size() { return this.d.length; }
+  _up(i) {
+    while (i > 0) {
+      const p = (i - 1) >> 1;
+      if (this.d[i].f < this.d[p].f) { [this.d[i], this.d[p]] = [this.d[p], this.d[i]]; i = p; }
+      else break;
+    }
+  }
+  _dn(i) {
+    const n = this.d.length;
+    while (true) {
+      let s = i, l = 2*i+1, r = 2*i+2;
+      if (l < n && this.d[l].f < this.d[s].f) s = l;
+      if (r < n && this.d[r].f < this.d[s].f) s = r;
+      if (s !== i) { [this.d[i], this.d[s]] = [this.d[s], this.d[i]]; i = s; }
+      else break;
+    }
+  }
+}
+
+// =========================================================
+// Terrain — Cellular Automata
+// =========================================================
+function generateTerrain() {
+  const total = COLS * ROWS;
+  obstacles = new Uint8Array(total);
+  pheromone = new Float32Array(total);
+  explored = new Uint8Array(total);
+  visible = new Uint8Array(total);
+  astarOpen = new Uint8Array(total);
+  astarClosed = new Uint8Array(total);
+
+  for (let i = 0; i < total; i++) obstacles[i] = Math.random() < 0.42 ? 1 : 0;
+
+  for (let pass = 0; pass < 5; pass++) {
+    const next = new Uint8Array(total);
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        const idx = y * COLS + x;
+        if (x === 0 || y === 0 || x === COLS-1 || y === ROWS-1) { next[idx] = 1; continue; }
+        let walls = 0;
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (dx === 0 && dy === 0) continue;
+            const nx = x+dx, ny = y+dy;
+            if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) { walls++; continue; }
+            walls += obstacles[ny * COLS + nx];
+          }
+        }
+        next[idx] = walls >= 5 ? 1 : 0;
+      }
+    }
+    obstacles = next;
+  }
+}
+
+function floodFill() {
+  const total = COLS * ROWS;
+  const visited = new Uint8Array(total);
+  let bestRegion = [], bestSize = 0;
+
+  for (let y = 1; y < ROWS-1; y++) {
+    for (let x = 1; x < COLS-1; x++) {
+      const idx = y * COLS + x;
+      if (obstacles[idx] || visited[idx]) continue;
+      const region = [], queue = [idx];
+      visited[idx] = 1;
+      while (queue.length > 0) {
+        const ci = queue.shift();
+        region.push(ci);
+        const cx = ci % COLS, cy = (ci / COLS) | 0;
+        const dirs = [[-1,0],[1,0],[0,-1],[0,1]];
+        for (const [dx, dy] of dirs) {
+          const nx = cx+dx, ny = cy+dy;
+          if (nx < 1 || ny < 1 || nx >= COLS-1 || ny >= ROWS-1) continue;
+          const ni = ny * COLS + nx;
+          if (!obstacles[ni] && !visited[ni]) { visited[ni] = 1; queue.push(ni); }
+        }
+      }
+      if (region.length > bestSize) { bestSize = region.length; bestRegion = region; }
+    }
+  }
+
+  const inRegion = new Uint8Array(total);
+  for (const idx of bestRegion) inRegion[idx] = 1;
+  for (let i = 0; i < total; i++) {
+    if (!obstacles[i] && !inRegion[i]) obstacles[i] = 1;
+  }
+  return bestRegion;
+}
+
+function randomOpen() {
+  for (let t = 0; t < 10000; t++) {
+    const x = 2 + (Math.random() * (COLS - 4)) | 0;
+    const y = 2 + (Math.random() * (ROWS - 4)) | 0;
+    if (!obstacles[y * COLS + x]) return { x, y };
+  }
+  return { x: COLS >> 1, y: ROWS >> 1 };
+}
+
+// =========================================================
+// A* Pathfinding
+// =========================================================
+const DIR8 = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+const SQRT2 = Math.SQRT2;
+
+function octile(ax, ay, bx, by) {
+  const dx = Math.abs(ax - bx), dy = Math.abs(ay - by);
+  return Math.max(dx, dy) + (SQRT2 - 1) * Math.min(dx, dy);
+}
+
+function astar(sx, sy, gx, gy) {
+  if (obstacles[gy * COLS + gx]) return null;
+  const total = COLS * ROWS;
+  const gScore = new Float32Array(total).fill(Infinity);
+  const cameFrom = new Int32Array(total).fill(-1);
+  const closed = new Uint8Array(total);
+
+  const si = sy * COLS + sx;
+  gScore[si] = 0;
+  const heap = new MinHeap();
+  heap.push({ i: si, f: octile(sx, sy, gx, gy) });
+
+  astarOpen.fill(0);
+  astarClosed.fill(0);
+
+  let iter = 0;
+  while (heap.size > 0 && iter < 25000) {
+    iter++;
+    const curr = heap.pop();
+    const ci = curr.i;
+    if (closed[ci]) continue;
+    closed[ci] = 1;
+    astarClosed[ci] = 1;
+
+    const cx = ci % COLS, cy = (ci / COLS) | 0;
+    if (cx === gx && cy === gy) {
+      const path = [];
+      let pi = ci;
+      while (pi !== -1) { path.push({ x: pi % COLS, y: (pi / COLS) | 0 }); pi = cameFrom[pi]; }
+      path.reverse();
+      return path;
+    }
+
+    for (const [dy, dx] of DIR8) {
+      const nx = cx+dx, ny = cy+dy;
+      if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) continue;
+      const ni = ny * COLS + nx;
+      if (obstacles[ni] || closed[ni]) continue;
+      if (dx !== 0 && dy !== 0) {
+        if (obstacles[cy * COLS + (cx+dx)] && obstacles[(cy+dy) * COLS + cx]) continue;
+      }
+      const mc = (dx !== 0 && dy !== 0) ? SQRT2 : 1;
+      const ng = gScore[ci] + mc;
+      if (ng < gScore[ni]) {
+        gScore[ni] = ng;
+        cameFrom[ni] = ci;
+        heap.push({ i: ni, f: ng + octile(nx, ny, gx, gy) });
+        astarOpen[ni] = 1;
+      }
+    }
+  }
+  return null;
+}
+
+// =========================================================
+// Agent Class
+// =========================================================
+class Agent {
+  constructor(name, color, x, y) {
+    this.name = name;
+    this.color = color;
+    this.x = x;
+    this.y = y;
+    this.path = [];
+    this.pathIndex = 0;
+    this.goal = null;
+    this.state = 'exploring';
+    this.goalsFound = 0;
+    this.steps = 0;
+    this.celebrateTimer = 0;
+    this.pathRecalcTimer = 0;
+    this.visited = new Set();
+    this.visited.add(y * COLS + x);
+    // Parse color to RGB for rendering
+    this.rgb = hexToRGB(color);
+  }
+
+  assignGoal() {
+    let bestDist = Infinity, bestGoal = null;
+    for (const g of goals) {
+      if (g.found) continue;
+      const d = octile(this.x, this.y, g.x, g.y);
+      const otherCount = agents.filter(a => a !== this && a.goal === g).length;
+      const dist = d * (1 + otherCount * 0.5);
+      if (dist < bestDist) { bestDist = dist; bestGoal = g; }
+    }
+    if (bestGoal) {
+      this.goal = bestGoal;
+      this.state = 'pathfinding';
+      this.recalcPath();
+    } else {
+      this.goal = null;
+      this.state = 'exploring';
+    }
+  }
+
+  recalcPath() {
+    if (!this.goal) return;
+    const p = astar(this.x, this.y, this.goal.x, this.goal.y);
+    if (p) { this.path = p; this.pathIndex = 1; }
+    else { this.path = []; this.state = 'exploring'; }
+    this.pathRecalcTimer = 0;
+  }
+
+  tick() {
+    if (this.state === 'celebrating') {
+      this.celebrateTimer--;
+      if (this.celebrateTimer <= 0) this.assignGoal();
+      return;
+    }
+
+    this.pathRecalcTimer++;
+
+    if (this.state === 'pathfinding' && this.goal) {
+      if (this.goal.found) { this.assignGoal(); return; }
+      if (this.pathRecalcTimer > 40 || this.pathIndex >= this.path.length) this.recalcPath();
+
+      if (this.path.length > 0 && this.pathIndex < this.path.length) {
+        const next = this.path[this.pathIndex];
+        this.moveTo(next.x, next.y);
+        this.pathIndex++;
+        if (this.x === this.goal.x && this.y === this.goal.y) {
+          this.goal.found = true;
+          this.goalsFound++;
+          goalsFound++;
+          this.state = 'celebrating';
+          this.celebrateTimer = 30;
+          this.reinforcePath();
+          return;
+        }
+      } else {
+        this.exploreMove();
+      }
+    } else {
+      this.exploreMove();
+      if (this.pathRecalcTimer > 15) this.assignGoal();
+    }
+  }
+
+  exploreMove() {
+    const candidates = [];
+    for (const [dy, dx] of DIR8) {
+      const nx = this.x+dx, ny = this.y+dy;
+      if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) continue;
+      const ni = ny * COLS + nx;
+      if (obstacles[ni]) continue;
+      if (dx !== 0 && dy !== 0) {
+        if (obstacles[this.y * COLS + (this.x+dx)] && obstacles[(this.y+dy) * COLS + this.x]) continue;
+      }
+      const phero = pheromone[ni];
+      const exploreBonus = explored[ni] ? 0 : 1;
+      const visitBonus = this.visited.has(ni) ? 0 : 0.3;
+      const noise = Math.random() * 0.15;
+      candidates.push({ x: nx, y: ny, score: params.alpha * phero + params.gamma * (exploreBonus + visitBonus) + noise });
+    }
+    if (candidates.length === 0) return;
+    candidates.sort((a, b) => b.score - a.score);
+    const pick = candidates[Math.min((Math.random() * 3) | 0, candidates.length - 1)];
+    this.moveTo(pick.x, pick.y);
+  }
+
+  moveTo(nx, ny) {
+    this.x = nx; this.y = ny;
+    this.steps++;
+    totalSteps++;
+    const idx = ny * COLS + nx;
+    this.visited.add(idx);
+    pheromone[idx] = Math.min(pheromone[idx] + 0.15, 1.0);
+  }
+
+  reinforcePath() {
+    for (const p of this.path) {
+      const idx = p.y * COLS + p.x;
+      pheromone[idx] = Math.min(pheromone[idx] + 0.5, 1.0);
+    }
+  }
+}
+
+function hexToRGB(hex) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  return [r, g, b];
+}
+
+// =========================================================
+// Fog Reveal (for all agents at once)
+// =========================================================
+function revealFog() {
+  const r = params.sight;
+  const rSq = r * r;
+  visible.fill(0);
+  for (const agent of agents) {
+    for (let dy = -r; dy <= r; dy++) {
+      for (let dx = -r; dx <= r; dx++) {
+        if (dx * dx + dy * dy > rSq) continue;
+        const nx = agent.x + dx, ny = agent.y + dy;
+        if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) continue;
+        const ni = ny * COLS + nx;
+        // LOS check
+        let blocked = false;
+        const steps = Math.max(Math.abs(dx), Math.abs(dy));
+        for (let s = 1; s < steps; s++) {
+          const t = s / steps;
+          const cx = Math.round(agent.x + dx * t);
+          const cy = Math.round(agent.y + dy * t);
+          if (obstacles[cy * COLS + cx]) { blocked = true; break; }
+        }
+        if (!blocked) { explored[ni] = 1; visible[ni] = 1; }
+      }
+    }
+  }
+}
+
+// =========================================================
+// Rendering — ImageData for grid, Canvas for overlays
+// =========================================================
+function setPixel(x, y, r, g, b, a) {
+  if (x < 0 || y < 0 || x >= canvasW || y >= canvasH) return;
+  const i = (y * canvasW + x) * 4;
+  imgBuf[i] = r; imgBuf[i+1] = g; imgBuf[i+2] = b; imgBuf[i+3] = a;
+}
+
+function blendPixel(x, y, r, g, b, a) {
+  if (x < 0 || y < 0 || x >= canvasW || y >= canvasH) return;
+  const i = (y * canvasW + x) * 4;
+  const af = a / 255;
+  const inv = 1 - af;
+  imgBuf[i]   = (r * af + imgBuf[i]   * inv) | 0;
+  imgBuf[i+1] = (g * af + imgBuf[i+1] * inv) | 0;
+  imgBuf[i+2] = (b * af + imgBuf[i+2] * inv) | 0;
+  imgBuf[i+3] = 255;
+}
+
+function fillCellImg(cx, cy, r, g, b) {
+  const x0 = (cx * cellW) | 0;
+  const y0 = (cy * cellH) | 0;
+  const x1 = ((cx + 1) * cellW) | 0;
+  const y1 = ((cy + 1) * cellH) | 0;
+  for (let py = y0; py < y1 && py < canvasH; py++) {
+    for (let px = x0; px < x1 && px < canvasW; px++) {
+      const i = (py * canvasW + px) * 4;
+      imgBuf[i] = r; imgBuf[i+1] = g; imgBuf[i+2] = b; imgBuf[i+3] = 255;
+    }
+  }
+}
+
+function blendCellImg(cx, cy, r, g, b, a) {
+  const x0 = (cx * cellW) | 0;
+  const y0 = (cy * cellH) | 0;
+  const x1 = ((cx + 1) * cellW) | 0;
+  const y1 = ((cy + 1) * cellH) | 0;
+  const af = a / 255, inv = 1 - af;
+  for (let py = y0; py < y1 && py < canvasH; py++) {
+    for (let px = x0; px < x1 && px < canvasW; px++) {
+      const i = (py * canvasW + px) * 4;
+      imgBuf[i]   = (r * af + imgBuf[i]   * inv) | 0;
+      imgBuf[i+1] = (g * af + imgBuf[i+1] * inv) | 0;
+      imgBuf[i+2] = (b * af + imgBuf[i+2] * inv) | 0;
+    }
+  }
+}
+
+function render() {
+  // Fill background (fog color)
+  for (let i = 0; i < imgBuf.length; i += 4) {
+    imgBuf[i] = 15; imgBuf[i+1] = 15; imgBuf[i+2] = 15; imgBuf[i+3] = 255;
+  }
+
+  // --- Terrain + Fog + Pheromone in one pass ---
+  for (let cy = 0; cy < ROWS; cy++) {
+    for (let cx = 0; cx < COLS; cx++) {
+      const idx = cy * COLS + cx;
+      if (!explored[idx]) continue;
+
+      let r, g, b;
+      if (obstacles[idx]) {
+        if (visible[idx]) { r = 26; g = 26; b = 26; }
+        else { r = 20; g = 20; b = 20; }
+      } else {
+        if (visible[idx]) { r = 18; g = 18; b = 18; }
+        else { r = 16; g = 16; b = 16; }
+      }
+      fillCellImg(cx, cy, r, g, b);
+
+      // Pheromone overlay (red accent #E53E3E)
+      if (!obstacles[idx]) {
+        const p = pheromone[idx];
+        if (p > 0.01) {
+          const a = Math.min(p * 0.7, 0.6) * 255;
+          blendCellImg(cx, cy, 229, 62, 62, a | 0);
+        }
+      }
+    }
+  }
+
+  // --- A* debug overlay ---
+  if (showDebug) {
+    for (let cy = 0; cy < ROWS; cy++) {
+      for (let cx = 0; cx < COLS; cx++) {
+        const idx = cy * COLS + cx;
+        if (!explored[idx]) continue;
+        if (astarClosed[idx]) {
+          blendCellImg(cx, cy, 104, 211, 145, 30);
+        } else if (astarOpen[idx]) {
+          blendCellImg(cx, cy, 114, 0, 203, 60);
+        }
+      }
+    }
+  }
+
+  // Blit grid to offscreen, then draw onto main canvas (respects DPR transform)
+  offCtx.putImageData(imgData, 0, 0);
+  ctx.drawImage(offscreen, 0, 0, canvasW, canvasH);
+
+  // --- Canvas overlay: Goals + Agents ---
+  const time = performance.now() * 0.001;
+
+  // Goals
+  for (const g of goals) {
+    if (!explored[g.y * COLS + g.x]) continue;
+    const gx = (g.x + 0.5) * cellW, gy = (g.y + 0.5) * cellH;
+
+    if (g.found) {
+      ctx.fillStyle = 'rgba(245,158,11,0.15)';
+      ctx.beginPath();
+      ctx.arc(gx, gy, cellW * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      const pulse = 0.6 + 0.4 * Math.sin(time * 3 + g.x);
+      const radius = cellW * (0.5 + 0.2 * pulse);
+
+      // Glow
+      const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, cellW * 2.5);
+      grad.addColorStop(0, `rgba(245,158,11,${0.3 * pulse})`);
+      grad.addColorStop(1, 'rgba(245,158,11,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(gx - cellW * 2.5, gy - cellH * 2.5, cellW * 5, cellH * 5);
+
+      // Diamond
+      ctx.fillStyle = `rgba(245,158,11,${0.7 + 0.3 * pulse})`;
+      ctx.save();
+      ctx.translate(gx, gy);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillRect(-radius * 0.45, -radius * 0.45, radius * 0.9, radius * 0.9);
+      ctx.restore();
+    }
+  }
+
+  // Agent paths
+  for (const agent of agents) {
+    if (agent.state === 'pathfinding' && agent.path.length > 1 && agent.pathIndex < agent.path.length) {
+      ctx.strokeStyle = agent.color + '30';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([2, 2]);
+      ctx.beginPath();
+      ctx.moveTo((agent.x + 0.5) * cellW, (agent.y + 0.5) * cellH);
+      for (let i = agent.pathIndex; i < agent.path.length; i++) {
+        const p = agent.path[i];
+        ctx.lineTo((p.x + 0.5) * cellW, (p.y + 0.5) * cellH);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  // Agent dots
+  for (const agent of agents) {
+    const ax = (agent.x + 0.5) * cellW, ay = (agent.y + 0.5) * cellH;
+
+    // Sight glow
+    const sightPx = params.sight * cellW;
+    const sg = ctx.createRadialGradient(ax, ay, 0, ax, ay, sightPx);
+    sg.addColorStop(0, agent.color + '12');
+    sg.addColorStop(0.7, agent.color + '06');
+    sg.addColorStop(1, agent.color + '00');
+    ctx.fillStyle = sg;
+    ctx.beginPath();
+    ctx.arc(ax, ay, sightPx, 0, Math.PI * 2);
+    ctx.fill();
+
+    const agentR = Math.max(cellW * 0.5, 2.5);
+
+    if (agent.state === 'celebrating') {
+      const cp = 1 + 0.4 * Math.sin(time * 10);
+      ctx.fillStyle = agent.color;
+      ctx.beginPath();
+      ctx.arc(ax, ay, agentR * cp, 0, Math.PI * 2);
+      ctx.fill();
+      for (let ring = 1; ring <= 3; ring++) {
+        ctx.strokeStyle = agent.color + Math.round((0.3 - ring * 0.08) * 255).toString(16).padStart(2, '0');
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(ax, ay, agentR * (1 + ring * 0.7), 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    } else {
+      ctx.fillStyle = agent.color;
+      ctx.beginPath();
+      ctx.arc(ax, ay, agentR, 0, Math.PI * 2);
+      ctx.fill();
+      // Highlight
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.beginPath();
+      ctx.arc(ax - agentR * 0.2, ay - agentR * 0.2, agentR * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Name label (only render if cells are big enough)
+    if (cellW > 4) {
+      ctx.fillStyle = agent.color;
+      ctx.font = `600 ${Math.max(7, cellW * 0.9)|0}px "JetBrains Mono"`;
+      ctx.textAlign = 'center';
+      ctx.fillText(agent.name, ax, ay - cellH * 1.0);
+    }
+  }
+}
+
+// =========================================================
+// Simulation Tick
+// =========================================================
+function tick() {
+  const total = COLS * ROWS;
+  for (let i = 0; i < total; i++) {
+    pheromone[i] *= params.evap;
+    if (pheromone[i] < 0.001) pheromone[i] = 0;
+  }
+  for (const agent of agents) agent.tick();
+  revealFog();
+  tickCounter++;
+}
+
+// =========================================================
+// UI Updates
+// =========================================================
+function updateUI() {
+  const total = COLS * ROWS;
+  let openCells = 0, exploredCells = 0, pheroCells = 0;
+  for (let i = 0; i < total; i++) {
+    if (!obstacles[i]) {
+      openCells++;
+      if (explored[i]) exploredCells++;
+      if (pheromone[i] > 0.01) pheroCells++;
+    }
+  }
+
+  const exploredPct = openCells > 0 ? (exploredCells / openCells * 100) : 0;
+  const pheroPct = openCells > 0 ? (pheroCells / openCells * 100) : 0;
+  const totalGoals = goals.length;
+
+  document.getElementById('mGoals').textContent = goalsFound + '/' + totalGoals;
+  document.getElementById('mSteps').textContent = totalSteps > 9999 ? (totalSteps / 1000).toFixed(1) + 'k' : totalSteps;
+  document.getElementById('mPhero').textContent = pheroPct.toFixed(1) + '%';
+  document.getElementById('mExplored').textContent = exploredPct.toFixed(1) + '%';
+
+  let phase, phaseColor;
+  if (totalGoals > 0 && goalsFound === totalGoals) { phase = 'Complete'; phaseColor = '#68D391'; }
+  else if (exploredPct < 30) { phase = 'Exploring'; phaseColor = '#E53E3E'; }
+  else if (exploredPct < 70) { phase = 'Converging'; phaseColor = '#F59E0B'; }
+  else { phase = 'Exploiting'; phaseColor = '#A855F7'; }
+
+  document.getElementById('phaseText').textContent = phase;
+  document.getElementById('phasePct').textContent = exploredPct.toFixed(0) + '%';
+  document.getElementById('phaseDot').style.background = phaseColor;
+
+  // Agent grid
+  let html = '';
+  const stateColors = { exploring: '#E53E3E', pathfinding: '#7200CB', celebrating: '#68D391' };
+  for (const a of agents) {
+    const sc = stateColors[a.state] || '#E53E3E';
+    html += `<div class="agent-chip">
+      <div class="agent-chip-dot" style="background:${a.color}"></div>
+      <span class="agent-chip-name">${a.name}</span>
+      <div class="agent-chip-state" style="background:${sc}"></div>
+    </div>`;
+  }
+  document.getElementById('agentList').innerHTML = html;
+
+  document.getElementById('footerStatus').textContent =
+    `${agents.length} agents | ${totalGoals} goals | ${exploredPct.toFixed(0)}% explored | ${phase} | ${COLS}x${ROWS} grid`;
+}
+
+// =========================================================
+// Main Loop
+// =========================================================
+let lastFrame = 0;
+const BASE_INTERVAL = 40;
+
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (running) {
+    const interval = BASE_INTERVAL / speed;
+    if (ts - lastFrame >= interval) {
+      lastFrame = ts;
+      tick();
+      if (tickCounter % 5 === 0) updateUI();
+    }
+  }
+  render();
+}
+
+// =========================================================
+// Controls
+// =========================================================
+function togglePlay() {
+  running = !running;
+  const btn = document.getElementById('btnPlay');
+  btn.textContent = running ? '\u25B6 Play' : '\u23F8 Pause';
+  btn.classList.toggle('active', running);
+}
+
+function resetSim() {
+  generateTerrain();
+  floodFill();
+  agents = [];
+  goals = [];
+  totalSteps = 0;
+  goalsFound = 0;
+  tickCounter = 0;
+
+  for (let i = 0; i < NUM_GOALS; i++) addGoalRandom();
+  for (let i = 0; i < NUM_AGENTS; i++) addAgentRandom();
+  for (const a of agents) a.assignGoal();
+  revealFog();
+  updateUI();
+  document.getElementById('footerStatus').textContent = 'Simulation reset — 16 agents exploring cave terrain...';
+}
+
+function addGoalRandom() {
+  const pos = randomOpen();
+  goals.push({ x: pos.x, y: pos.y, found: false });
+}
+
+function addAgentRandom() {
+  const pos = randomOpen();
+  const idx = agents.length;
+  const name = AGENT_NAMES[idx % AGENT_NAMES.length];
+  const color = AGENT_COLORS[idx % AGENT_COLORS.length];
+  const agent = new Agent(name, color, pos.x, pos.y);
+  agents.push(agent);
+  agent.assignGoal();
+}
+
+function toggleDebug() {
+  showDebug = !showDebug;
+  document.getElementById('btnDebug').classList.toggle('active', showDebug);
+}
+
+function setSpeed(val) {
+  speed = parseInt(val);
+  document.getElementById('speedDisp').textContent = speed + 'x';
+}
+
+function updateSlider(param, val) {
+  switch(param) {
+    case 'alpha': params.alpha = val/100; document.getElementById('valAlpha').textContent = params.alpha.toFixed(2); break;
+    case 'beta': params.beta = val/100; document.getElementById('valBeta').textContent = params.beta.toFixed(2); break;
+    case 'gamma': params.gamma = val/100; document.getElementById('valGamma').textContent = params.gamma.toFixed(2); break;
+    case 'evap': params.evap = val/1000; document.getElementById('valEvap').textContent = params.evap.toFixed(3); break;
+    case 'sight': params.sight = parseInt(val); document.getElementById('valSight').textContent = params.sight; break;
+  }
+}
+
+// Canvas click to place goal
+document.getElementById('canvasWrap').addEventListener('click', function(e) {
+  const rect = cv.getBoundingClientRect();
+  const x = Math.floor((e.clientX - rect.left) / cellW);
+  const y = Math.floor((e.clientY - rect.top) / cellH);
+  if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return;
+  if (obstacles[y * COLS + x]) return;
+  goals.push({ x, y, found: false });
+  for (const a of agents) { if (a.state === 'exploring') a.assignGoal(); }
+  updateUI();
+});
+
+// Keyboard
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT') return;
+  switch(e.key.toLowerCase()) {
+    case ' ': e.preventDefault(); togglePlay(); break;
+    case 'r': resetSim(); break;
+    case 'g':
+      addGoalRandom();
+      for (const a of agents) { if (a.state === 'exploring') a.assignGoal(); }
+      updateUI();
+      break;
+    case 'a': addAgentRandom(); updateUI(); break;
+    case 'd': toggleDebug(); break;
+    case '1': case '2': case '3': case '4': case '5':
+      speed = parseInt(e.key);
+      document.getElementById('speedSlider').value = speed;
+      document.getElementById('speedDisp').textContent = speed + 'x';
+      break;
+  }
+});
+
+// =========================================================
+// Init
+// =========================================================
+resize();
+resetSim();
+requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>
