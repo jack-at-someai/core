@@ -383,7 +383,7 @@ class KRFIndex:
                  len(self.entity_primitive), len(genls_closure))
 
     def search_entity(self, query: str) -> list[str]:
-        """Find entities matching query. Exact first, then case-insensitive substring."""
+        """Find entities matching query. Exact first, then ranked fuzzy match."""
         # Exact match
         if query in self.by_entity:
             return [query]
@@ -394,22 +394,31 @@ class KRFIndex:
             if e.lower() == query_lower:
                 return [e]
 
-        # Substring (case-insensitive) — return up to 20 matches
-        matches = []
-        # Normalize query: remove spaces/hyphens for flexible matching
+        # Ranked fuzzy: collect all substring matches then sort by relevance
         query_norm = re.sub(r'[\s\-_]+', '', query_lower)
         if len(query_norm) < 3:
-            return matches  # Too short for fuzzy — avoid matching everything
+            return []  # Too short for fuzzy — avoid matching everything
+
+        candidates = []  # (score, entity)
         for e in self.by_entity:
             if len(e) < 3:
                 continue  # Skip tiny keys like "or", "an"
             e_norm = re.sub(r'[\s\-_]+', '', e.lower())
             if query_norm in e_norm:
-                matches.append(e)
-            if len(matches) >= 20:
-                break
+                # Score: lower is better
+                # - Exact norm match = 0
+                # - Starts with query = 1
+                # - Shorter names preferred (more likely the primary concept)
+                if e_norm == query_norm:
+                    score = 0
+                elif e_norm.startswith(query_norm):
+                    score = 1 + len(e_norm)
+                else:
+                    score = 100 + len(e_norm)
+                candidates.append((score, e))
 
-        return matches
+        candidates.sort(key=lambda x: x[0])
+        return [e for _, e in candidates[:20]]
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -547,6 +556,52 @@ async def load_domain(domain: str) -> str:
 # ═══════════════════════════════════════════════════════════════════════════
 # 5. QUERY ENGINE
 # ═══════════════════════════════════════════════════════════════════════════
+
+def _format_entity_mini(entity: str, idx: KRFIndex) -> str:
+    """Format a compact mini-profile for disambiguation results.
+
+    Includes enough context (type, collections, key attributes, relationships)
+    for Claude to answer without an additional round-trip.
+    """
+    lines = []
+    primitive = idx.entity_primitive.get(entity, "?")
+    collections = idx.isa_map.get(entity, set())
+    comment = idx.comments.get(entity, "")
+
+    header = f"  [{primitive}] {entity}"
+    if collections:
+        header += f" (isa: {', '.join(sorted(collections)[:3])})"
+    lines.append(header)
+    if comment:
+        lines.append(f"    {comment[:120]}")
+
+    # Key attributes (up to 8)
+    attrs = idx.attributes.get(entity, {})
+    shown = 0
+    for k, vals in sorted(attrs.items()):
+        for v in vals:
+            lines.append(f"    {k}: {v}")
+            shown += 1
+            if shown >= 8:
+                break
+        if shown >= 8:
+            remaining = sum(len(v) for v in attrs.values()) - shown
+            if remaining > 0:
+                lines.append(f"    ... ({remaining} more attributes)")
+            break
+
+    # Key relationships (up to 5)
+    edges = idx.edges_from.get(entity, [])
+    if edges:
+        for pred, args in edges[:5]:
+            targets = [a for a in args[1:] if isinstance(a, str) and not a.startswith("?")]
+            if targets:
+                lines.append(f"    {pred} -> {', '.join(targets)}")
+        if len(edges) > 5:
+            lines.append(f"    ... ({len(edges) - 5} more relationships)")
+
+    return "\n".join(lines)
+
 
 def _format_entity_profile(entity: str, idx: KRFIndex, attr_filter: str | None = None,
                            limit: int = 50) -> str:
@@ -729,16 +784,15 @@ def _query(entity: str | None = None, predicate: str | None = None,
         if len(matches) == 1:
             return _format_entity_profile(matches[0], idx, attr_filter=attribute, limit=limit)
 
-        # Multiple matches — show list
-        lines = [f"Multiple matches for '{entity}' ({len(matches)}):"]
-        for m in matches[:20]:
-            prim = idx.entity_primitive.get(m, "?")
-            comment = idx.comments.get(m, "")
-            desc = comment[:50] + "..." if len(comment) > 50 else comment
-            lines.append(f"  [{prim}] {m}" + (f" — {desc}" if desc else ""))
-        if len(matches) > 20:
-            lines.append(f"  ... ({len(matches) - 20} more)")
-        lines.append("\nRefine your query with the exact entity name.")
+        # Multiple matches — show mini-profiles for top 5, then list rest
+        lines = [f"Multiple matches for '{entity}' ({len(matches)}). Top results:"]
+        for i, m in enumerate(matches[:5]):
+            lines.append("")
+            lines.append(_format_entity_mini(m, idx))
+        if len(matches) > 5:
+            lines.append(f"\n--- {len(matches) - 5} more: " +
+                         ", ".join(matches[5:15]) +
+                         (" ..." if len(matches) > 15 else ""))
         return "\n".join(lines)
 
     # Primitive query — compact listing
