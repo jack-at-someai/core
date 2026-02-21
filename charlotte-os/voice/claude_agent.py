@@ -217,7 +217,7 @@ class ClaudeAgent:
         current_messages = list(messages)
         system_prompt = SYSTEM_PROMPTS.get(source, SYSTEM_PROMPT_VOICE) + style_hint
 
-        for _ in range(10):
+        for _ in range(Config.CLAUDE_MAX_TOOL_ROUNDS):
             try:
                 response = await self._client.messages.create(
                     model=Config.CLAUDE_MODEL,
@@ -315,7 +315,7 @@ class ClaudeAgent:
         system_prompt = SYSTEM_PROMPTS.get(source, SYSTEM_PROMPT_VOICE) + style_hint
         full_text_parts = []
 
-        for _ in range(10):  # Max tool rounds
+        for _ in range(Config.CLAUDE_MAX_TOOL_ROUNDS):  # Max tool rounds
             text_buffer = ""
 
             try:

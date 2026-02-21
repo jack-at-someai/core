@@ -59,6 +59,7 @@ class Config:
     CLAUDE_MAX_TOKENS: int = int(os.getenv("CLAUDE_MAX_TOKENS", "500"))
     CLAUDE_MAX_TOKENS_BRIEFING: int = int(os.getenv("CLAUDE_MAX_TOKENS_BRIEFING", "2000"))
     CLAUDE_MAX_TOKENS_SMS: int = int(os.getenv("CLAUDE_MAX_TOKENS_SMS", "250"))
+    CLAUDE_MAX_TOOL_ROUNDS: int = int(os.getenv("CLAUDE_MAX_TOOL_ROUNDS", "3"))
 
     # MQTT
     MQTT_HOST: str = os.getenv("MQTT_HOST", "localhost")

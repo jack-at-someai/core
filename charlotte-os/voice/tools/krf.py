@@ -681,20 +681,45 @@ def _format_fact_list(facts: list[Fact], label: str, limit: int = 50) -> str:
     return "\n".join(lines)
 
 
+def _resolve_predicate(predicate: str, idx: KRFIndex) -> tuple[str, list[Fact]]:
+    """Resolve a predicate name (case-insensitive) to its facts."""
+    facts = idx.by_predicate.get(predicate, [])
+    if facts:
+        return predicate, facts
+    for p, f_list in idx.by_predicate.items():
+        if p.lower() == predicate.lower():
+            return p, f_list
+    return predicate, []
+
+
+def _resolve_microtheory(microtheory: str, idx: KRFIndex) -> tuple[str, list[Fact]]:
+    """Resolve a microtheory name (case-insensitive) to its facts."""
+    facts = idx.by_microtheory.get(microtheory, [])
+    if facts:
+        return microtheory, facts
+    for mt, f_list in idx.by_microtheory.items():
+        if mt.lower() == microtheory.lower():
+            return mt, f_list
+    return microtheory, []
+
+
 def _query(entity: str | None = None, predicate: str | None = None,
            microtheory: str | None = None, primitive: str | None = None,
            attribute: str | None = None, limit: int = 50) -> str:
-    """Execute a query against the KRF index. Returns formatted text."""
+    """Execute a query against the KRF index. Returns formatted text.
+
+    Filters are intersected: if both predicate and microtheory are given,
+    only facts matching BOTH are returned.
+    """
     if _index is None:
         return "Error: KRF index not initialized. Server may still be starting."
 
     idx = _index
 
-    # Entity query — structured profile
+    # Entity query — structured profile (takes priority)
     if entity:
         matches = idx.search_entity(entity)
         if not matches:
-            # Suggest loaded domains if empty
             unloaded = [n for n in _TIERS if n not in idx.loaded_tiers and not _TIERS[n]["auto"]]
             hint = ""
             if unloaded:
@@ -704,7 +729,7 @@ def _query(entity: str | None = None, predicate: str | None = None,
         if len(matches) == 1:
             return _format_entity_profile(matches[0], idx, attr_filter=attribute, limit=limit)
 
-        # Multiple matches — show list with option to narrow
+        # Multiple matches — show list
         lines = [f"Multiple matches for '{entity}' ({len(matches)}):"]
         for m in matches[:20]:
             prim = idx.entity_primitive.get(m, "?")
@@ -723,55 +748,65 @@ def _query(entity: str | None = None, predicate: str | None = None,
             return f"Invalid primitive '{primitive}'. Must be one of: NODE, EDGE, METRIC, SIGNAL, PROTOCOL"
         return _format_primitive_listing(prim_upper, idx, limit=limit)
 
-    # Predicate query
-    if predicate:
-        facts = idx.by_predicate.get(predicate, [])
-        if not facts:
-            # Try case-insensitive
-            for p, f_list in idx.by_predicate.items():
-                if p.lower() == predicate.lower():
-                    facts = f_list
-                    predicate = p
-                    break
-        if not facts:
-            return f"No facts with predicate '{predicate}' found."
-        return _format_fact_list(facts, f"Predicate: {predicate}", limit=limit)
+    # ── Combined filter queries (predicate, microtheory, attribute intersect) ──
 
-    # Microtheory query
+    # Start with the broadest set, then narrow
+    facts = None
+    label_parts = []
+
     if microtheory:
-        facts = idx.by_microtheory.get(microtheory, [])
-        if not facts:
-            # Try case-insensitive
-            for mt, f_list in idx.by_microtheory.items():
-                if mt.lower() == microtheory.lower():
-                    facts = f_list
-                    microtheory = mt
-                    break
-        if not facts:
+        mt_name, mt_facts = _resolve_microtheory(microtheory, idx)
+        if not mt_facts:
             return f"No facts in microtheory '{microtheory}'. Use list_microtheories to see available scopes."
-        return _format_fact_list(facts, f"Microtheory: {microtheory}", limit=limit)
+        facts = mt_facts
+        label_parts.append(f"mt:{mt_name}")
 
-    # Attribute-only query (across all entities)
+    if predicate:
+        pred_name, pred_facts = _resolve_predicate(predicate, idx)
+        if not pred_facts:
+            return f"No facts with predicate '{predicate}' found."
+        if facts is not None:
+            # Intersect: keep only facts that match both
+            pred_set = set(id(f) for f in pred_facts)
+            facts = [f for f in facts if id(f) in pred_set]
+        else:
+            facts = pred_facts
+        label_parts.append(f"pred:{pred_name}")
+
     if attribute:
         attr_lower = attribute.lower()
-        lines = [f"=== Entities with attribute matching '{attribute}' ==="]
-        count = 0
-        for ent, attrs in idx.attributes.items():
-            for k, vals in attrs.items():
-                if attr_lower in k.lower():
-                    for v in vals:
-                        lines.append(f"  {ent} {k}: {v}")
-                        count += 1
-                        if count >= limit:
-                            break
+        if facts is not None:
+            # Filter existing facts to those with matching attribute
+            facts = [f for f in facts if f.predicate == "hasAttribute"
+                     and len(f.args) >= 2 and isinstance(f.args[1], str)
+                     and attr_lower in f.args[1].lower()]
+        else:
+            # Attribute-only query across all entities
+            lines = [f"=== Entities with attribute matching '{attribute}' ==="]
+            count = 0
+            for ent, attrs in idx.attributes.items():
+                for k, vals in attrs.items():
+                    if attr_lower in k.lower():
+                        for v in vals:
+                            lines.append(f"  {ent} {k}: {v}")
+                            count += 1
+                            if count >= limit:
+                                break
+                    if count >= limit:
+                        break
                 if count >= limit:
+                    lines.append(f"  ... (truncated at {limit})")
                     break
-            if count >= limit:
-                lines.append(f"  ... (truncated at {limit})")
-                break
-        if count == 0:
-            return f"No attributes matching '{attribute}' found."
-        return "\n".join(lines)
+            if count == 0:
+                return f"No attributes matching '{attribute}' found."
+            return "\n".join(lines)
+        label_parts.append(f"attr:{attribute}")
+
+    if facts is not None:
+        if not facts:
+            return f"No facts matching {' + '.join(label_parts)}."
+        label = " + ".join(label_parts)
+        return _format_fact_list(facts, label, limit=limit)
 
     return "Please provide at least one query parameter: entity, predicate, microtheory, primitive, or attribute."
 
